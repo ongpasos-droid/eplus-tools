@@ -77,6 +77,11 @@ const App = (() => {
       .toUpperCase()
       .slice(0, 2);
     document.getElementById('user-avatar').textContent = initials;
+
+    // Show admin nav only for admins
+    if (currentUser.role === 'admin') {
+      document.getElementById('admin-nav-item')?.classList.remove('hidden');
+    }
   }
 
   /* ── Auth tab switcher ─────────────────────────────────────── */
@@ -150,6 +155,7 @@ const App = (() => {
         Intake.init();
       }
     }
+    if (route === 'admin' && typeof Admin !== 'undefined') Admin.init();
   }
 
   /* ── Toggle sidebar (mobile) ───────────────────────────────── */
