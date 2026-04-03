@@ -104,7 +104,7 @@ const App = (() => {
   }
 
   /* ── SPA Navigation ────────────────────────────────────────── */
-  function navigate(route, pushHash = true) {
+  function navigate(route, pushHash = true, newProject = false) {
     currentRoute = route;
 
     // Update URL hash
@@ -141,6 +141,15 @@ const App = (() => {
       partners:   'Partners'
     };
     document.getElementById('topbar-title').textContent = titles[route] || 'E+ Tools';
+
+    // Initialize module when navigating to it
+    if (route === 'intake' && typeof Intake !== 'undefined') {
+      if (newProject) {
+        Intake.startNew();
+      } else {
+        Intake.init();
+      }
+    }
   }
 
   /* ── Toggle sidebar (mobile) ───────────────────────────────── */
@@ -205,5 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-toggle-sidebar')?.addEventListener('click', () => App.toggleSidebar());
 
   /* ── Dashboard "Create New Project" button ─────────────────── */
-  document.getElementById('btn-new-project')?.addEventListener('click', () => App.navigate('intake'));
+  document.getElementById('btn-new-project')?.addEventListener('click', () => {
+    App.navigate('intake', true, true);
+  });
 });
