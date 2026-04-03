@@ -5,17 +5,11 @@
 
 require('dotenv').config();
 
-const express      = require('express');
-const helmet       = require('helmet');
-const cors         = require('cors');
-const path         = require('path');
+const express  = require('express');
+const helmet   = require('helmet');
+const cors     = require('cors');
+const path     = require('path');
 const cookieParser = require('cookie-parser');
-
-const authRoutes           = require('./node/src/routes/auth');
-const projectRoutes        = require('./node/src/routes/projects');
-const partnerRoutes        = require('./node/src/routes/partners');
-const intakeProgramRoutes  = require('./node/src/routes/intake-programs');
-const apiPublicRoutes      = require('./node/src/routes/api-public');
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
@@ -48,30 +42,27 @@ app.use(cookieParser());
 /* ── Static files (SPA) ──────────────────────────────────────── */
 app.use(express.static(path.join(__dirname, 'public')));
 
-/* ── API Routes (v1) ──────────────────────────────────────────── */
-app.use('/v1/auth',             authRoutes);
-app.use('/v1/projects',         projectRoutes);
-app.use('/v1/partners',         partnerRoutes);
-app.use('/v1/intake-programs',  intakeProgramRoutes);
-app.use('/api/projects',        apiPublicRoutes);
+/* ── API Routes ───────────────────────────────────────────────── */
+app.use('/v1/auth', require('./node/src/modules/auth/routes'));
+app.use('/v1/intake', require('./node/src/modules/intake/routes'));
+app.use('/v1/calculator', require('./node/src/modules/calculator/routes'));
 
-/* ── Health check ─────────────────────────────────────────────── */
-app.get('/health', (_req, res) => {
-  res.json({ status: 'ok', module: 'eplus-tools', version: '0.2.0' });
-});
-
-/* ── 404 for unknown API routes ───────────────────────────────── */
-app.use('/v1/*', (_req, res) => {
-  res.status(404).json({ ok: false, error: { code: 'NOT_FOUND', message: 'Endpoint not found' } });
-});
+// Future modules:
+// app.use('/v1/planner',     require('./node/src/modules/planner/routes'));
+// app.use('/v1/developer',   require('./node/src/modules/developer/routes'));
+// app.use('/v1/evaluator',   require('./node/src/modules/evaluator/routes'));
+// app.use('/v1/partners-db', require('./node/src/modules/partners/routes'));
 
 /* ── SPA fallback — serve index.html for all non-API routes ─── */
-app.get('*', (_req, res) => {
+app.get('*', (req, res) => {
+  if (req.path.startsWith('/v1/')) {
+    return res.status(404).json({ ok: false, error: { code: 'NOT_FOUND', message: 'Endpoint not found' } });
+  }
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 /* ── Global error handler ─────────────────────────────────────── */
-app.use((err, _req, res, _next) => {
+app.use((err, req, res, _next) => {
   console.error('[ERROR]', err.message);
   res.status(err.status || 500).json({
     ok: false,
@@ -85,6 +76,6 @@ app.use((err, _req, res, _next) => {
 });
 
 /* ── Start ────────────────────────────────────────────────────── */
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, () => {
   console.log(`[E+ Tools] Server running on port ${PORT}`);
 });
