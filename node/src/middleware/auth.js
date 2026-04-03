@@ -1,46 +1,62 @@
 const jwt = require('jsonwebtoken');
 
-const SECRET = process.env.JWT_SECRET || 'dev-secret-change-me';
+const SECRET         = () => process.env.JWT_SECRET || 'dev-secret-change-me';
+const REFRESH_SECRET = () => process.env.JWT_REFRESH_SECRET || process.env.JWT_SECRET || 'dev-secret-change-me';
 
-/**
- * Middleware: verify JWT from Authorization header.
- * Sets req.user = { id, email, role, subscription }
- */
-function requireAuth(req, res, next) {
-  const header = req.headers.authorization;
-  if (!header || !header.startsWith('Bearer ')) {
-    return res.status(401).json({ ok: false, error: 'Token required' });
-  }
+/* ── Token helpers ────────────────────────────────────────────── */
 
-  try {
-    const token = header.slice(7);
-    const payload = jwt.verify(token, SECRET);
-    req.user = {
-      id: payload.sub,
-      email: payload.email,
-      role: payload.role,
-      subscription: payload.subscription,
-    };
-    next();
-  } catch (err) {
-    return res.status(401).json({ ok: false, error: 'Invalid or expired token' });
-  }
-}
-
-/**
- * Generate a JWT for a user.
- */
 function signToken(user) {
   return jwt.sign(
     {
-      sub: user.id,
-      email: user.email,
-      role: user.role,
-      subscription: user.subscription,
+      sub:          user.id,
+      email:        user.email,
+      name:         user.name,
+      role:         user.role || 'user',
+      subscription: user.subscription || 'free'
     },
-    SECRET,
-    { expiresIn: '7d' }
+    SECRET(),
+    { expiresIn: '1h' }
   );
 }
 
-module.exports = { requireAuth, signToken, SECRET };
+function signRefreshToken(user) {
+  return jwt.sign(
+    { sub: user.id },
+    REFRESH_SECRET(),
+    { expiresIn: '30d' }
+  );
+}
+
+function verifyRefreshToken(token) {
+  return jwt.verify(token, REFRESH_SECRET());
+}
+
+/* ── Express middleware — require valid access token ──────────── */
+
+function requireAuth(req, res, next) {
+  const header = req.headers.authorization;
+  if (!header || !header.startsWith('Bearer ')) {
+    return res.status(401).json({
+      ok: false, error: { code: 'UNAUTHORIZED', message: 'Token required' }
+    });
+  }
+
+  try {
+    const payload = jwt.verify(header.slice(7), SECRET());
+    req.user = {
+      id:           payload.sub,
+      email:        payload.email,
+      name:         payload.name,
+      role:         payload.role,
+      subscription: payload.subscription
+    };
+    next();
+  } catch (err) {
+    const code = err.name === 'TokenExpiredError' ? 'TOKEN_EXPIRED' : 'UNAUTHORIZED';
+    return res.status(401).json({
+      ok: false, error: { code, message: 'Invalid or expired token' }
+    });
+  }
+}
+
+module.exports = { requireAuth, signToken, signRefreshToken, verifyRefreshToken, SECRET };
