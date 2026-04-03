@@ -14,13 +14,16 @@ const cookieParser = require('cookie-parser');
 const app  = express();
 const PORT = process.env.PORT || 3000;
 
+/* ── Trust proxy (behind Nginx/Caddy) ─────────────────────────── */
+app.set('trust proxy', 1);
+
 /* ── Security ─────────────────────────────────────────────────── */
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc:  ["'self'"],
       scriptSrc:   ["'self'", "'unsafe-inline'", "https://cdn.tailwindcss.com", "https://accounts.google.com", "https://apis.google.com"],
-      styleSrc:    ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      styleSrc:    ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://accounts.google.com"],
       fontSrc:     ["'self'", "https://fonts.gstatic.com"],
       imgSrc:      ["'self'", "data:", "https:"],
       connectSrc:  ["'self'", "https://accounts.google.com"],
