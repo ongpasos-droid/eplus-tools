@@ -7,6 +7,7 @@ const authRoutes = require('./node/src/routes/auth');
 const projectRoutes = require('./node/src/routes/projects');
 const partnerRoutes = require('./node/src/routes/partners');
 const intakeProgramRoutes = require('./node/src/routes/intake-programs');
+const apiPublicRoutes = require('./node/src/routes/api-public');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -27,6 +28,9 @@ app.use('/v1/auth', authRoutes);
 app.use('/v1/projects', projectRoutes);
 app.use('/v1/partners', partnerRoutes);
 app.use('/v1/intake-programs', intakeProgramRoutes);
+
+// --- Public API (frontend, no auth) ---
+app.use('/api/projects', apiPublicRoutes);
 
 // --- Health check ---
 app.get('/health', (req, res) => {

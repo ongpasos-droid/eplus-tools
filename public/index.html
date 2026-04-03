@@ -401,12 +401,20 @@ tailwind.config = {
           <div class="font-headline text-sm font-bold text-primary mb-1">Guardar Intake</div>
           <div class="text-xs text-on-surface-variant leading-snug">Guarda el estado para continuar m&aacute;s tarde</div>
         </div>
-        <div class="border border-outline-variant rounded-xl p-5 text-center bg-white opacity-35 cursor-not-allowed">
-          <span class="material-symbols-outlined text-2xl text-on-surface-variant mb-2 block">picture_as_pdf</span>
-          <div class="font-headline text-sm font-bold text-on-surface mb-1">Resumen PDF</div>
-          <div class="text-xs text-on-surface-variant leading-snug">Pendiente de implementar</div>
+        <div class="border border-outline-variant rounded-xl p-5 text-center cursor-pointer bg-white hover:border-primary hover:bg-primary/5 hover:-translate-y-0.5 transition-all" onclick="saveToServer()">
+          <span class="material-symbols-outlined text-2xl text-primary mb-2 block">cloud_upload</span>
+          <div class="font-headline text-sm font-bold text-primary mb-1">Guardar en servidor</div>
+          <div class="text-xs text-on-surface-variant leading-snug">Guarda en base de datos MySQL</div>
         </div>
       </div>
+    </div>
+
+    <div class="mt-8 mb-4">
+      <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">
+        <span class="material-symbols-outlined text-sm">cloud_done</span>
+        <span>Proyectos guardados en servidor</span><div class="flex-1 h-px bg-outline-variant"></div>
+      </div>
+      <div id="server-projects"><p class="text-xs text-on-surface-variant">Cargando...</p></div>
     </div>
 
     <div class="flex justify-between items-center mt-10 pt-5 border-t border-outline-variant">
@@ -944,6 +952,91 @@ function toast(msg, type = 'ok') {
   el.textContent = msg; el.className = 'show ' + type;
   clearTimeout(el._t); el._t = setTimeout(() => el.className = '', 3000);
 }
+
+/* ─── DB SAVE / LOAD ────────────────────────────────────────────── */
+let currentProjectId = null;
+
+async function saveToServer() {
+  const json = buildIntakeJSON();
+  if (!json.fields.proj_name) { toast('Escribe un nombre de proyecto', 'err'); return; }
+  try {
+    const method = currentProjectId ? 'PUT' : 'POST';
+    const url = currentProjectId ? '/api/projects/' + currentProjectId : '/api/projects';
+    const resp = await fetch(url, {
+      method,
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(json),
+    });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || 'Error del servidor');
+    currentProjectId = data.id;
+    toast(method === 'PUT' ? 'Proyecto actualizado en servidor' : 'Proyecto guardado en servidor', 'ok');
+    loadProjectList();
+  } catch(e) { toast('Error: ' + e.message, 'err'); console.error(e); }
+}
+
+async function loadProjectList() {
+  try {
+    const resp = await fetch('/api/projects');
+    const result = await resp.json();
+    const projects = result.data || [];
+    const el = document.getElementById('server-projects');
+    if (!el) return;
+    if (projects.length === 0) { el.innerHTML = '<p class="text-xs text-on-surface-variant">No hay proyectos guardados</p>'; return; }
+    el.innerHTML = projects.map(p =>
+      '<div class="flex items-center justify-between p-3 rounded-lg border border-outline-variant bg-white hover:border-primary cursor-pointer transition-all mb-1.5" onclick="loadFromServer(\'' + p.id + '\')">' +
+        '<div><span class="text-sm font-bold text-primary">' + esc(p.name) + '</span>' +
+        '<span class="text-xs text-on-surface-variant ml-2">' + esc(p.type || '') + ' \u00b7 ' + (p.status || '') + '</span></div>' +
+        '<span class="text-[10px] text-on-surface-variant">' + fmtDate((p.created_at || '').slice(0,10)) + '</span>' +
+      '</div>'
+    ).join('');
+  } catch(e) { console.error('loadProjectList:', e); }
+}
+
+async function loadFromServer(id) {
+  try {
+    const resp = await fetch('/api/projects/' + id);
+    const result = await resp.json();
+    if (!resp.ok) throw new Error(result.error);
+    const data = result.data;
+    currentProjectId = data.id;
+    const restored = {
+      program: data.type,
+      fields: {
+        proj_name: data.name, proj_type: data.type,
+        proj_desc: data.description, proj_start: data.start_date ? data.start_date.slice(0,10) : '',
+        months: String(data.duration_months || ''), eu_grant: String(data.eu_grant || ''),
+        cofin_pct: String(data.cofin_pct || ''), indirect_pct: String(data.indirect_pct || ''),
+      },
+      partners: (data.partners || []).map(p => ({id: p.id, name: p.name, city: p.city || '', country: p.country, role: p.role, order_index: p.order_index})),
+      partnerCounter: (data.partners || []).length,
+      intake: {
+        idea: {
+          problem: data.intake ? data.intake.problem || '' : '',
+          target_groups: data.intake ? data.intake.target_groups || '' : '',
+          approach: data.intake ? data.intake.approach || '' : '',
+        },
+        objectives: { general: '', specific: [], outcomes: '' },
+        keywords: [],
+      }
+    };
+    restoreState(restored);
+    toast('Proyecto cargado: ' + data.name, 'ok');
+  } catch(e) { toast('Error: ' + e.message, 'err'); }
+}
+
+async function deleteFromServer(id) {
+  if (!confirm('\u00bfEliminar este proyecto del servidor?')) return;
+  try {
+    const resp = await fetch('/api/projects/' + id, { method: 'DELETE' });
+    if (!resp.ok) throw new Error((await resp.json()).error);
+    if (currentProjectId === id) currentProjectId = null;
+    toast('Proyecto eliminado', 'ok');
+    loadProjectList();
+  } catch(e) { toast('Error: ' + e.message, 'err'); }
+}
+
+document.addEventListener('DOMContentLoaded', loadProjectList);
 </script>
 </body>
 </html>
