@@ -157,9 +157,54 @@ async function deleteWorkerCategory(id) {
   await pool.query('DELETE FROM ref_worker_categories WHERE id=?', [id]);
 }
 
+/* ══ ref_entities ═════════════════════════════════════════════════ */
+
+async function listEntities(search) {
+  if (search) {
+    const like = `%${search}%`;
+    const [rows] = await pool.query(
+      'SELECT * FROM ref_entities WHERE name LIKE ? OR city LIKE ? OR pic_number LIKE ? ORDER BY name ASC',
+      [like, like, like]
+    );
+    return rows;
+  }
+  const [rows] = await pool.query('SELECT * FROM ref_entities ORDER BY name ASC');
+  return rows;
+}
+
+async function upsertEntity(data, id) {
+  if (id) {
+    await pool.query(
+      `UPDATE ref_entities SET
+        name=?, city=?, country_iso2=?, type=?,
+        pic_number=?, website=?, notes=?, active=?
+       WHERE id=?`,
+      [data.name, data.city || null, data.country_iso2, data.type || 'ngo',
+       data.pic_number || null, data.website || null, data.notes || null,
+       data.active ?? 1, id]
+    );
+    return id;
+  }
+  const newId = uuid();
+  await pool.query(
+    `INSERT INTO ref_entities
+      (id, name, city, country_iso2, type, pic_number, website, notes, active)
+     VALUES (?,?,?,?,?,?,?,?,?)`,
+    [newId, data.name, data.city || null, data.country_iso2, data.type || 'ngo',
+     data.pic_number || null, data.website || null, data.notes || null,
+     data.active ?? 1]
+  );
+  return newId;
+}
+
+async function deleteEntity(id) {
+  await pool.query('DELETE FROM ref_entities WHERE id=?', [id]);
+}
+
 module.exports = {
   listPrograms, upsertProgram, deleteProgram,
   listCountries, upsertCountry, deleteCountry,
   listPerdiem, upsertPerdiem, deletePerdiem,
-  listWorkerCategories, upsertWorkerCategory, deleteWorkerCategory
+  listWorkerCategories, upsertWorkerCategory, deleteWorkerCategory,
+  listEntities, upsertEntity, deleteEntity
 };

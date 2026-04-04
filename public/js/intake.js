@@ -439,8 +439,8 @@ const Intake = (() => {
     partners.forEach((p, i) => {
       const isApp = i === 0;
       const row = document.createElement('div');
-      row.className = 'grid gap-2 items-center py-2 border-b border-outline-variant/50';
-      row.style.gridTemplateColumns = '28px 1fr 100px 110px 80px 32px';
+      row.className = 'grid gap-2 items-center py-2 border-b border-outline-variant/50 relative';
+      row.style.gridTemplateColumns = '28px 1fr 100px 110px 32px 80px 32px';
       row.innerHTML = `
         <span class="text-xs font-bold text-on-surface-variant text-center">${i + 1}</span>
         <input type="text" placeholder="Nombre" value="${esc(p.name)}" data-idx="${i}" data-field="name"
@@ -449,6 +449,9 @@ const Intake = (() => {
           class="px-2.5 py-2 rounded-lg bg-white border border-outline-variant text-on-surface text-sm focus:border-primary focus:ring-2 focus:ring-secondary-fixed outline-none transition-all">
         <input type="text" placeholder="Pa\u00EDs" value="${esc(p.country)}" data-idx="${i}" data-field="country"
           class="px-2.5 py-2 rounded-lg bg-white border border-outline-variant text-on-surface text-sm focus:border-primary focus:ring-2 focus:ring-secondary-fixed outline-none transition-all">
+        <button type="button" class="intake-search-entity w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-colors" data-idx="${i}" title="Buscar entidad">
+          <span class="material-symbols-outlined text-base">search</span>
+        </button>
         <span class="text-[11px] font-bold uppercase tracking-wide px-2 py-1 rounded text-center ${isApp
           ? 'bg-secondary-fixed/20 text-primary-container border border-secondary-fixed-dim/40'
           : 'bg-surface-container-low text-on-surface-variant border border-outline-variant'
@@ -468,6 +471,14 @@ const Intake = (() => {
       });
     });
 
+    // Bind entity search
+    list.querySelectorAll('.intake-search-entity').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openEntitySearch(parseInt(btn.dataset.idx), btn);
+      });
+    });
+
     // Bind remove
     list.querySelectorAll('.intake-remove-partner').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -478,6 +489,86 @@ const Intake = (() => {
         renderPartners();
       });
     });
+  }
+
+  /* ── Entity search dropdown ─────────────────────────────────── */
+  let entityDropdown = null;
+  let entityDebounce = null;
+
+  function closeEntitySearch() {
+    if (entityDropdown) { entityDropdown.remove(); entityDropdown = null; }
+    document.removeEventListener('click', onDocClickEntity);
+  }
+
+  function onDocClickEntity(e) {
+    if (entityDropdown && !entityDropdown.contains(e.target)) closeEntitySearch();
+  }
+
+  function openEntitySearch(partnerIdx, anchorEl) {
+    closeEntitySearch();
+
+    const rect = anchorEl.getBoundingClientRect();
+    const dd = document.createElement('div');
+    dd.className = 'fixed z-50 bg-white rounded-xl border border-outline-variant shadow-lg p-3 w-80';
+    dd.style.top = (rect.bottom + 4) + 'px';
+    dd.style.left = Math.max(8, rect.left - 140) + 'px';
+    dd.innerHTML = `
+      <input type="text" placeholder="Buscar entidad..." autofocus
+        class="w-full px-3 py-2 rounded-lg bg-surface border border-outline-variant text-sm focus:border-primary focus:ring-2 focus:ring-secondary-fixed outline-none mb-2">
+      <div class="entity-results max-h-48 overflow-y-auto"></div>
+    `;
+    document.body.appendChild(dd);
+    entityDropdown = dd;
+
+    const input = dd.querySelector('input');
+    const results = dd.querySelector('.entity-results');
+
+    // Load all on open
+    searchAndRender('');
+
+    input.addEventListener('input', () => {
+      clearTimeout(entityDebounce);
+      entityDebounce = setTimeout(() => searchAndRender(input.value.trim()), 300);
+    });
+
+    async function searchAndRender(q) {
+      try {
+        const entities = await API.get('/intake/entities/search?q=' + encodeURIComponent(q));
+        if (!entities.length) {
+          results.innerHTML = '<p class="text-xs text-on-surface-variant py-2 text-center">Sin resultados</p>';
+          return;
+        }
+        results.innerHTML = entities.map(e => `
+          <div class="entity-pick flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5 cursor-pointer transition-colors" data-id="${e.id}">
+            <div class="flex-1 min-w-0">
+              <div class="text-sm font-semibold text-on-surface truncate">${esc(e.name)}</div>
+              <div class="text-xs text-on-surface-variant">${esc(e.city || '')}${e.city && e.country_name ? ', ' : ''}${esc(e.country_name || e.country_iso2)} &middot; <span class="font-mono">${esc(e.type)}</span></div>
+            </div>
+            <span class="material-symbols-outlined text-primary text-base">add_circle</span>
+          </div>
+        `).join('');
+
+        results.querySelectorAll('.entity-pick').forEach(el => {
+          el.addEventListener('click', () => {
+            const ent = entities.find(e => String(e.id) === el.dataset.id);
+            if (ent) {
+              partners[partnerIdx].name = ent.name;
+              partners[partnerIdx].city = ent.city || '';
+              partners[partnerIdx].country = ent.country_name || ent.country_iso2;
+              renderPartners();
+            }
+            closeEntitySearch();
+          });
+        });
+      } catch (err) {
+        results.innerHTML = '<p class="text-xs text-error py-2 text-center">Error al buscar</p>';
+      }
+    }
+
+    setTimeout(() => {
+      input.focus();
+      document.addEventListener('click', onDocClickEntity);
+    }, 50);
   }
 
   function addPartner() {

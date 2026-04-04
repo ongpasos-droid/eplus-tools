@@ -614,11 +614,12 @@ tailwind.config = {
             <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-4">
               <span>Consorcio</span><div class="flex-1 h-px bg-outline-variant"></div>
             </div>
-            <div class="grid gap-2 items-center mb-2 pb-2 border-b border-outline-variant" style="grid-template-columns:28px 1fr 100px 110px 80px 32px">
+            <div class="grid gap-2 items-center mb-2 pb-2 border-b border-outline-variant" style="grid-template-columns:28px 1fr 100px 110px 32px 80px 32px">
               <span></span>
               <span class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Organizaci&oacute;n</span>
               <span class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Ciudad</span>
               <span class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Pa&iacute;s</span>
+              <span></span>
               <span class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Rol</span>
               <span></span>
             </div>
@@ -770,6 +771,7 @@ tailwind.config = {
             <button data-section="countries" class="px-4 py-2.5 text-sm border-b-2 border-transparent text-on-surface-variant transition-colors hover:text-primary">Países</button>
             <button data-section="perdiem"   class="px-4 py-2.5 text-sm border-b-2 border-transparent text-on-surface-variant transition-colors hover:text-primary">Per Diem</button>
             <button data-section="workers"   class="px-4 py-2.5 text-sm border-b-2 border-transparent text-on-surface-variant transition-colors hover:text-primary">Personal</button>
+            <button data-section="entities"  class="px-4 py-2.5 text-sm border-b-2 border-transparent text-on-surface-variant transition-colors hover:text-primary">Entidades</button>
           </div>
 
           <!-- ── Convocatorias ─────────────────────────────────── -->
@@ -870,6 +872,32 @@ tailwind.config = {
                     </tr>
                   </thead>
                   <tbody id="admin-workers-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Entidades ──────────────────────────────────────── -->
+          <div id="admin-sec-entities" class="admin-section hidden">
+            <div class="bg-white rounded-xl border border-outline-variant/30 overflow-hidden">
+              <div class="px-5 py-4 border-b border-outline-variant/20 flex items-center justify-between">
+                <h2 class="font-semibold text-primary">Directorio de entidades</h2>
+                <span class="text-xs text-on-surface-variant">ref_entities</span>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                  <thead class="bg-surface-container-low text-xs text-on-surface-variant uppercase tracking-wide">
+                    <tr>
+                      <th class="px-4 py-3 text-left">Nombre</th>
+                      <th class="px-4 py-3 text-left">Ciudad</th>
+                      <th class="px-4 py-3 text-left">Pa&iacute;s</th>
+                      <th class="px-4 py-3 text-left">Tipo</th>
+                      <th class="px-4 py-3 text-left">PIC</th>
+                      <th class="px-4 py-3 text-left">Estado</th>
+                      <th class="px-4 py-3 text-right">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-entities-tbody"></tbody>
                 </table>
               </div>
             </div>

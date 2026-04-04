@@ -7,6 +7,9 @@ const ctrl = require('./controller');
 /* ── Programs (public endpoints) ────────────────────────────────── */
 router.get('/programs', ctrl.listPrograms);
 
+/* ── Entity search (authenticated) ────────────���────────────────── */
+router.get('/entities/search', requireAuth, ctrl.searchEntities);
+
 /* ── Projects (all authenticated) ──────────────────────────────── */
 router.get('/projects', requireAuth, ctrl.listProjects);
 router.get('/projects/:id', requireAuth, ctrl.getProject);

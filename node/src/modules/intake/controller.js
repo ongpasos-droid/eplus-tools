@@ -289,6 +289,16 @@ async function updateContext(req, res, next) {
   }
 }
 
+/* ── GET /v1/intake/entities/search?q=... ──────────────────────── */
+async function searchEntities(req, res, next) {
+  try {
+    const results = await model.searchEntities(req.query.q || '');
+    res.json({ ok: true, data: results });
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   listPrograms,
   listProjects,
@@ -302,5 +312,6 @@ module.exports = {
   deletePartner,
   reorderPartners,
   listContexts,
-  updateContext
+  updateContext,
+  searchEntities
 };

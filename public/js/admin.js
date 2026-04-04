@@ -39,6 +39,7 @@ const Admin = (() => {
       case 'countries': loadCountries(); break;
       case 'perdiem':   loadPerdiem(); break;
       case 'workers':   loadWorkers(); break;
+      case 'entities':  loadEntities(); break;
     }
   }
 
@@ -285,12 +286,52 @@ const Admin = (() => {
     } catch (e) { setError('admin-workers-tbody', 'Error: ' + e.message); }
   }
 
+  /* ══ ENTIDADES ═══════════════════════════════════════════════ */
+
+  async function loadEntities() {
+    setLoading('admin-entities-tbody');
+    try {
+      const rows = await API.get('/admin/data/entities');
+      const tbody = document.getElementById('admin-entities-tbody');
+      if (!rows.length) {
+        tbody.innerHTML = '<tr><td colspan="7" class="py-8 text-center text-on-surface-variant text-sm">Sin entidades</td></tr>';
+        return;
+      }
+      tbody.innerHTML = rows.map(r => `
+        <tr data-id="${r.id}" class="border-b border-outline-variant/30 hover:bg-surface-container-low/50 transition-colors">
+          <td class="px-4 py-3 font-medium">${r.name}</td>
+          <td class="px-4 py-3 text-sm text-on-surface-variant">${r.city || '—'}</td>
+          <td class="px-4 py-3 font-mono text-sm font-bold text-primary">${r.country_iso2}</td>
+          <td class="px-4 py-3 text-sm"><span class="px-2 py-0.5 rounded bg-primary/10 text-primary text-xs font-bold">${r.type}</span></td>
+          <td class="px-4 py-3 text-xs font-mono text-on-surface-variant">${r.pic_number || '—'}</td>
+          <td class="px-4 py-3">${badge(r.active)}</td>
+          <td class="px-4 py-3 text-right">${actionBtns(r.id, 'entities')}</td>
+        </tr>`).join('');
+
+      tbody.querySelectorAll('tr[data-id]').forEach(tr => {
+        const id = tr.dataset.id;
+        const row = rows.find(r => String(r.id) === id);
+        tr.querySelector('[onclick*="openEdit"]')?.addEventListener('click', e => {
+          e.preventDefault(); e.stopImmediatePropagation();
+          makeRowEditable(tr, [
+            { key: 'name',         type: 'text', tdIndex: 0, value: row.name },
+            { key: 'city',         type: 'text', tdIndex: 1, value: row.city },
+            { key: 'country_iso2', type: 'text', tdIndex: 2, value: row.country_iso2 },
+            { key: 'type',         type: 'text', tdIndex: 3, value: row.type },
+            { key: 'pic_number',   type: 'text', tdIndex: 4, value: row.pic_number },
+            { key: 'active',       type: 'bool', tdIndex: 5, value: row.active },
+          ], `/admin/data/entities/${id}`, loadEntities);
+        }, { once: true });
+      });
+    } catch (e) { setError('admin-entities-tbody', 'Error: ' + e.message); }
+  }
+
   /* ══ DELETE ══════════════════════════════════════════════════ */
 
   async function confirmDelete(section, id) {
     if (!confirm('¿Eliminar este registro? Esta acción no se puede deshacer.')) return;
     try {
-      const endpoints = { programs: 'programs', countries: 'countries', perdiem: 'perdiem', workers: 'workers' };
+      const endpoints = { programs: 'programs', countries: 'countries', perdiem: 'perdiem', workers: 'workers', entities: 'entities' };
       await API.del(`/admin/data/${endpoints[section]}/${id}`);
       Toast.show('Eliminado correctamente', 'ok');
       loadSection(section);

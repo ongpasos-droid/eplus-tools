@@ -37,4 +37,10 @@ router.post  ('/data/workers',         guard, ctrl.upsertWorker);
 router.patch ('/data/workers/:id',     guard, ctrl.upsertWorker);
 router.delete('/data/workers/:id',     guard, ctrl.deleteWorker);
 
+/* ── Entidades ───────────────────────────────────────────────── */
+router.get   ('/data/entities',        guard, ctrl.listEntities);
+router.post  ('/data/entities',        guard, ctrl.upsertEntity);
+router.patch ('/data/entities/:id',    guard, ctrl.upsertEntity);
+router.delete('/data/entities/:id',    guard, ctrl.deleteEntity);
+
 module.exports = router;

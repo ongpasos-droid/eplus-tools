@@ -409,6 +409,22 @@ async function updateContextFields(contextId, userId, updates) {
   return { id: contextId, ...fieldsToUpdate };
 }
 
+/* ── ENTITY SEARCH ─────────────────────────────────────────────── */
+
+async function searchEntities(query) {
+  const like = `%${query || ''}%`;
+  const sql = `
+    SELECT e.id, e.name, e.city, e.country_iso2, e.type, e.pic_number,
+           c.name_es AS country_name
+    FROM ref_entities e
+    LEFT JOIN ref_countries c ON c.iso2 = e.country_iso2
+    WHERE e.active = 1 AND (e.name LIKE ? OR e.city LIKE ? OR e.pic_number LIKE ?)
+    ORDER BY e.name ASC LIMIT 10
+  `;
+  const [rows] = await db.query(sql, [like, like, like]);
+  return rows;
+}
+
 module.exports = {
   findActivePrograms,
   createProject,
@@ -424,5 +440,6 @@ module.exports = {
   reorderPartners,
   findContextsByProjectId,
   findContextById,
-  updateContextFields
+  updateContextFields,
+  searchEntities
 };
