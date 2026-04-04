@@ -138,8 +138,7 @@ const App = (() => {
       planner:    'Planner',
       developer:  'Developer',
       evaluator:  'Evaluator',
-      partners:   'Partners',
-      funnel:     'Sales Funnel'
+      partners:   'Partners'
     };
     document.getElementById('topbar-title').textContent = titles[route] || 'E+ Tools';
 
@@ -214,8 +213,11 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── Mobile sidebar toggle ────────────────────────────────── */
   document.getElementById('btn-toggle-sidebar')?.addEventListener('click', () => App.toggleSidebar());
 
-  /* ── Dashboard "Create New Project" button ─────────────────── */
+  /* ── Dashboard "Create New Project" buttons ────────────────── */
   document.getElementById('btn-new-project')?.addEventListener('click', () => {
+    App.navigate('intake', true, true);
+  });
+  document.getElementById('btn-new-project-bottom')?.addEventListener('click', () => {
     App.navigate('intake', true, true);
   });
 });
