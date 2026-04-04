@@ -289,8 +289,7 @@ const Admin = (() => {
       // Inline edit per zone cell
       tbody.querySelectorAll('.zone-rate').forEach(span => {
         span.addEventListener('click', async () => {
-          const current = span.dataset.rate;
-          const val = prompt('Nueva tarifa (€/día):', current);
+          const val = await Modal.show('Nueva tarifa (€/día):', { input: true, defaultVal: span.dataset.rate });
           if (!val || isNaN(val) || Number(val) <= 0) return;
           try {
             await API.patch(`/admin/data/workers/zone/${span.dataset.zoneId}`, { rate_day: Number(val) });
@@ -305,7 +304,8 @@ const Admin = (() => {
   /* ══ DELETE ══════════════════════════════════════════════════ */
 
   async function confirmDelete(section, id) {
-    if (!confirm('¿Eliminar este registro? Esta acción no se puede deshacer.')) return;
+    const ok = await Modal.show('¿Eliminar este registro? Esta acción no se puede deshacer.');
+    if (!ok) return;
     try {
       const endpoints = { programs: 'programs', countries: 'countries', perdiem: 'perdiem', workers: 'workers' };
       await API.del(`/admin/data/${endpoints[section]}/${id}`);
