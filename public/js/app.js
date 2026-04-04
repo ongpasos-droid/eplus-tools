@@ -160,8 +160,13 @@ const App = (() => {
   }
 
   /* ── Toggle sidebar (mobile) ───────────────────────────────── */
-  function toggleSidebar() {
-    document.getElementById('sidebar').classList.toggle('open');
+  function toggleSidebar(forceClose) {
+    const sidebar  = document.getElementById('sidebar');
+    const overlay  = document.getElementById('sidebar-overlay');
+    const isOpen   = sidebar.classList.contains('open');
+    const open     = forceClose ? false : !isOpen;
+    sidebar.classList.toggle('open', open);
+    overlay?.classList.toggle('show', open);
   }
 
   /* ── Public API ────────────────────────────────────────────── */
@@ -219,6 +224,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ── Mobile sidebar toggle ────────────────────────────────── */
   document.getElementById('btn-toggle-sidebar')?.addEventListener('click', () => App.toggleSidebar());
+  document.getElementById('sidebar-overlay')?.addEventListener('click', () => App.toggleSidebar(true));
+
+  /* ── Close sidebar on nav link click (mobile) ──────────────── */
+  document.querySelectorAll('#sidebar-nav .nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 1024) App.toggleSidebar(true);
+    });
+  });
 
   /* ── Dashboard "Create New Project" button ─────────────────── */
   document.getElementById('btn-new-project')?.addEventListener('click', () => {
