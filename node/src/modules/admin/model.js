@@ -1,5 +1,5 @@
 /* ── Admin Model — reference data tables ─────────────────────────── */
-const { pool } = require('../../utils/db');
+const pool = require('../../utils/db');
 const uuid = require('../../utils/uuid');
 
 /* ══ intake_programs ═════════════════════════════════════════════ */
