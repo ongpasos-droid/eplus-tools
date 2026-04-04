@@ -43,4 +43,8 @@ router.post  ('/data/entities',        guard, ctrl.upsertEntity);
 router.patch ('/data/entities/:id',    guard, ctrl.upsertEntity);
 router.delete('/data/entities/:id',    guard, ctrl.deleteEntity);
 
+/* ── Elegibilidad Erasmus+ ────────────────────────────────────── */
+router.get('/data/eligibility',        guard, ctrl.listEligibility);
+router.get('/data/eligibility/regions',guard, ctrl.listRegions);
+
 module.exports = router;

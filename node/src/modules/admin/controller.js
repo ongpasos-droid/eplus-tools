@@ -29,3 +29,14 @@ exports.deleteWorker    = async (req, res) => { try { await m.deleteWorkerCatego
 exports.listEntities    = async (req, res) => { try { ok(res, await m.listEntities(req.query.q)); } catch(e) { err(res, e.message, 500); } };
 exports.upsertEntity    = async (req, res) => { try { const id = await m.upsertEntity(req.body, req.params.id || null); ok(res, { id }); } catch(e) { err(res, e.message, 500); } };
 exports.deleteEntity    = async (req, res) => { try { await m.deleteEntity(req.params.id); ok(res, null); } catch(e) { err(res, e.message, 500); } };
+
+/* ── Eligibility (countries by region) ────────────────────────── */
+exports.listEligibility = async (req, res) => {
+  try {
+    const { type, region } = req.query;
+    ok(res, await m.listEligibility({ type, region }));
+  } catch(e) { err(res, e.message, 500); }
+};
+exports.listRegions = async (req, res) => {
+  try { ok(res, await m.listRegions()); } catch(e) { err(res, e.message, 500); }
+};
