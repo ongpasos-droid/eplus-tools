@@ -77,6 +77,11 @@ const App = (() => {
       .toUpperCase()
       .slice(0, 2);
     document.getElementById('user-avatar').textContent = initials;
+
+    // Show admin nav only for admins
+    if (currentUser.role === 'admin') {
+      document.getElementById('admin-nav-item')?.classList.remove('hidden');
+    }
   }
 
   /* ── Auth tab switcher ─────────────────────────────────────── */
@@ -138,7 +143,8 @@ const App = (() => {
       planner:    'Planner',
       developer:  'Developer',
       evaluator:  'Evaluator',
-      partners:   'Partners'
+      partners:   'Partners',
+      admin:      'Admin — Data E+'
     };
     document.getElementById('topbar-title').textContent = titles[route] || 'E+ Tools';
 
@@ -150,6 +156,7 @@ const App = (() => {
         Intake.init();
       }
     }
+    if (route === 'admin' && typeof Admin !== 'undefined') Admin.init();
   }
 
   /* ── Toggle sidebar (mobile) ───────────────────────────────── */
