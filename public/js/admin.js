@@ -530,7 +530,8 @@ const Admin = (() => {
   /* ══ DELETE ══════════════════════════════════════════════════ */
 
   async function confirmDelete(section, id) {
-    if (!confirm('¿Eliminar este registro? Esta acción no se puede deshacer.')) return;
+    const ok = await Modal.show('¿Eliminar este registro? Esta acción no se puede deshacer.');
+    if (!ok) return;
     try {
       const endpoints = { programs: 'programs', countries: 'countries', perdiem: 'perdiem', workers: 'workers', entities: 'entities' };
       await API.del(`/admin/data/${endpoints[section]}/${id}`);
