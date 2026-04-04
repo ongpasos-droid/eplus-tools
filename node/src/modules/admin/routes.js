@@ -51,4 +51,21 @@ router.patch('/data/workers/zone/:id',     guard, ctrl.upsertWorkerZoneRate);
 router.get('/data/eligibility',        guard, ctrl.listEligibility);
 router.get('/data/eligibility/regions',guard, ctrl.listRegions);
 
+/* ── Call eligibility (per programme) ────────────────────────── */
+router.get  ('/data/eligibility/call/:programId', guard, ctrl.getCallEligibility);
+router.put  ('/data/eligibility/call/:programId', guard, ctrl.upsertCallEligibility);
+
+/* ── Evaluator (per program) ──────────────────────────────────── */
+router.get   ('/data/eval/:programId',             guard, ctrl.getEvalTree);
+router.post  ('/data/eval/:programId/import',      guard, ctrl.importEvalRules);
+router.post  ('/data/eval/sections',               guard, ctrl.upsertEvalSection);
+router.patch ('/data/eval/sections/:id',           guard, ctrl.upsertEvalSection);
+router.delete('/data/eval/sections/:id',           guard, ctrl.deleteEvalSection);
+router.post  ('/data/eval/questions',              guard, ctrl.upsertEvalQuestion);
+router.patch ('/data/eval/questions/:id',          guard, ctrl.upsertEvalQuestion);
+router.delete('/data/eval/questions/:id',          guard, ctrl.deleteEvalQuestion);
+router.post  ('/data/eval/criteria',               guard, ctrl.upsertEvalCriterion);
+router.patch ('/data/eval/criteria/:id',           guard, ctrl.upsertEvalCriterion);
+router.delete('/data/eval/criteria/:id',           guard, ctrl.deleteEvalCriterion);
+
 module.exports = router;

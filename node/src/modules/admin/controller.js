@@ -41,6 +41,24 @@ exports.listRegions = async (req, res) => {
   try { ok(res, await m.listRegions()); } catch(e) { err(res, e.message, 500); }
 };
 
+/* ── Call eligibility (per programme) ────────────────────────── */
+exports.getCallEligibility = async (req, res) => {
+  try { ok(res, await m.getCallEligibility(req.params.programId)); } catch(e) { err(res, e.message, 500); }
+};
+exports.upsertCallEligibility = async (req, res) => {
+  try { const id = await m.upsertCallEligibility(req.params.programId, req.body); ok(res, { id }); } catch(e) { err(res, e.message, 500); }
+};
+
 /* ── Worker matrix ────────────────────────────────────────────── */
 exports.listWorkerMatrix   = async (req, res) => { try { ok(res, await m.listWorkerMatrix()); } catch(e) { err(res, e.message, 500); } };
 exports.upsertWorkerZoneRate = async (req, res) => { try { await m.upsertWorkerZoneRate(req.params.id, req.body.rate_day); ok(res, null); } catch(e) { err(res, e.message, 500); } };
+
+/* ── Evaluator (per program) ──────────────────────────────────── */
+exports.getEvalTree         = async (req, res) => { try { ok(res, await m.getEvalTree(req.params.programId)); } catch(e) { err(res, e.message, 500); } };
+exports.upsertEvalSection   = async (req, res) => { try { const id = await m.upsertEvalSection(req.body, req.params.id || null); ok(res, { id }); } catch(e) { err(res, e.message, 500); } };
+exports.deleteEvalSection   = async (req, res) => { try { await m.deleteEvalSection(req.params.id); ok(res, null); } catch(e) { err(res, e.message, 500); } };
+exports.upsertEvalQuestion  = async (req, res) => { try { const id = await m.upsertEvalQuestion(req.body, req.params.id || null); ok(res, { id }); } catch(e) { err(res, e.message, 500); } };
+exports.deleteEvalQuestion  = async (req, res) => { try { await m.deleteEvalQuestion(req.params.id); ok(res, null); } catch(e) { err(res, e.message, 500); } };
+exports.upsertEvalCriterion = async (req, res) => { try { const id = await m.upsertEvalCriterion(req.body, req.params.id || null); ok(res, { id }); } catch(e) { err(res, e.message, 500); } };
+exports.deleteEvalCriterion = async (req, res) => { try { await m.deleteEvalCriterion(req.params.id); ok(res, null); } catch(e) { err(res, e.message, 500); } };
+exports.importEvalRules     = async (req, res) => { try { await m.importEvalRules(req.params.programId, req.body); ok(res, null); } catch(e) { err(res, e.message, 500); } };

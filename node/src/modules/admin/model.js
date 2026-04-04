@@ -93,28 +93,29 @@ async function deleteCountry(id) {
 
 async function listPerdiem() {
   const [rows] = await pool.query(
-    'SELECT * FROM ref_perdiem_rates ORDER BY zone ASC, valid_from DESC'
+    'SELECT * FROM ref_perdiem_rates ORDER BY zone ASC'
   );
   return rows;
 }
 
 async function upsertPerdiem(data, id) {
+  const accom = Number(data.amount_accommodation) || 0;
+  const subs  = Number(data.amount_subsistence)   || 0;
+  const total = +(accom + subs).toFixed(2);
   if (id) {
     await pool.query(
       `UPDATE ref_perdiem_rates SET
-        zone=?, amount_day=?, valid_from=?, valid_to=?, notes=?
+        zone=?, amount_day=?, amount_accommodation=?, amount_subsistence=?
        WHERE id=?`,
-      [data.zone, data.amount_day, data.valid_from,
-       data.valid_to || null, data.notes || null, id]
+      [data.zone, total, accom, subs, id]
     );
     return id;
   }
   const newId = uuid();
   await pool.query(
-    `INSERT INTO ref_perdiem_rates (id, zone, amount_day, valid_from, valid_to, notes)
-     VALUES (?,?,?,?,?,?)`,
-    [newId, data.zone, data.amount_day, data.valid_from,
-     data.valid_to || null, data.notes || null]
+    `INSERT INTO ref_perdiem_rates (id, zone, amount_day, amount_accommodation, amount_subsistence, valid_from)
+     VALUES (?,?,?,?,?,CURDATE())`,
+    [newId, data.zone, total, accom, subs]
   );
   return newId;
 }
@@ -150,6 +151,15 @@ async function upsertWorkerCategory(data, id) {
     [newId, data.code, data.name_es, data.name_en, data.rate_day,
      data.notes || null, data.active ?? 1]
   );
+  // Auto-create zone rates for A, B, C, D
+  const baseRate = Number(data.rate_day) || 0;
+  const zoneMultipliers = { A: 1.0, B: 0.88, C: 0.77, D: 0.66 };
+  for (const [zone, mult] of Object.entries(zoneMultipliers)) {
+    await pool.query(
+      'INSERT INTO ref_worker_zone_rates (id, category_id, zone, rate_day) VALUES (?,?,?,?)',
+      [uuid(), newId, zone, +(baseRate * mult).toFixed(2)]
+    );
+  }
   return newId;
 }
 
@@ -223,7 +233,7 @@ async function upsertWorkerZoneRate(zoneRateId, rate_day) {
   await pool.query('UPDATE ref_worker_zone_rates SET rate_day=? WHERE id=?', [rate_day, zoneRateId]);
 }
 
-/* ══ ref_erasmus_regions + eligibility ═══════════════════════════ */
+/* ══ ref_erasmus_regions + countries extended ═════════════════════ */
 
 async function listEligibility({ type, region } = {}) {
   let sql = `
@@ -247,12 +257,159 @@ async function listRegions() {
   return rows;
 }
 
+/* ══ call_eligibility (per-programme rules) ══════════════════════ */
+
+async function getCallEligibility(programId) {
+  const [rows] = await pool.query('SELECT * FROM call_eligibility WHERE program_id=?', [programId]);
+  return rows[0] || null;
+}
+
+async function upsertCallEligibility(programId, data) {
+  const existing = await getCallEligibility(programId);
+  const countryTypes   = JSON.stringify(data.eligible_country_types || []);
+  const entityTypes    = JSON.stringify(data.eligible_entity_types || []);
+  const activityTypes  = JSON.stringify(data.activity_location_types || []);
+
+  if (existing) {
+    await pool.query(
+      `UPDATE call_eligibility SET
+        eligible_country_types=?, eligible_entity_types=?,
+        min_partners=?, min_countries=?, max_coord_applications=?,
+        activity_location_types=?, additional_rules=?
+       WHERE program_id=?`,
+      [countryTypes, entityTypes,
+       data.min_partners || 1, data.min_countries || 1, data.max_coord_applications || null,
+       activityTypes, data.additional_rules || null, programId]
+    );
+    return existing.id;
+  }
+  const id = uuid();
+  await pool.query(
+    `INSERT INTO call_eligibility (id, program_id, eligible_country_types, eligible_entity_types,
+      min_partners, min_countries, max_coord_applications, activity_location_types, additional_rules)
+     VALUES (?,?,?,?,?,?,?,?,?)`,
+    [id, programId, countryTypes, entityTypes,
+     data.min_partners || 1, data.min_countries || 1, data.max_coord_applications || null,
+     activityTypes, data.additional_rules || null]
+  );
+  return id;
+}
+
+/* ══ Evaluator (eval rules per program/convocatoria) ═════════════ */
+
+async function getEvalTree(programId) {
+  const [sections] = await pool.query('SELECT * FROM eval_sections WHERE program_id=? ORDER BY sort_order', [programId]);
+  const sectionIds = sections.map(s => s.id);
+  let questions = [], criteria = [];
+  if (sectionIds.length) {
+    [questions] = await pool.query('SELECT * FROM eval_questions WHERE section_id IN (?) ORDER BY sort_order', [sectionIds]);
+    const qIds = questions.map(q => q.id);
+    if (qIds.length) {
+      [criteria] = await pool.query('SELECT * FROM eval_criteria WHERE question_id IN (?) ORDER BY sort_order', [qIds]);
+    }
+  }
+  const qMap = {};
+  questions.forEach(q => { q.criteria = []; qMap[q.id] = q; });
+  criteria.forEach(c => { if (qMap[c.question_id]) qMap[c.question_id].criteria.push(c); });
+  const sMap = {};
+  sections.forEach(s => { s.questions = []; sMap[s.id] = s; });
+  questions.forEach(q => { if (sMap[q.section_id]) sMap[q.section_id].questions.push(q); });
+  return sections;
+}
+
+async function upsertEvalSection(data, id) {
+  if (id) {
+    await pool.query('UPDATE eval_sections SET title=?, color=?, sort_order=? WHERE id=?',
+      [data.title, data.color || '#3b82f6', data.sort_order ?? 0, id]);
+    return id;
+  }
+  const newId = uuid();
+  await pool.query('INSERT INTO eval_sections (id, program_id, title, color, sort_order) VALUES (?,?,?,?,?)',
+    [newId, data.program_id, data.title, data.color || '#3b82f6', data.sort_order ?? 0]);
+  return newId;
+}
+
+async function deleteEvalSection(id) { await pool.query('DELETE FROM eval_sections WHERE id=?', [id]); }
+
+async function upsertEvalQuestion(data, id) {
+  const rules = data.general_rules ? JSON.stringify(data.general_rules) : null;
+  const caps = data.score_caps ? JSON.stringify(data.score_caps) : null;
+  if (id) {
+    await pool.query('UPDATE eval_questions SET code=?, title=?, prompt=?, max_score=?, threshold=?, general_rules=?, score_caps=?, sort_order=? WHERE id=?',
+      [data.code, data.title, data.prompt || null, data.max_score ?? 0, data.threshold ?? 0, rules, caps, data.sort_order ?? 0, id]);
+    return id;
+  }
+  const newId = uuid();
+  await pool.query('INSERT INTO eval_questions (id, section_id, code, title, prompt, max_score, threshold, general_rules, score_caps, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?)',
+    [newId, data.section_id, data.code, data.title, data.prompt || null, data.max_score ?? 0, data.threshold ?? 0, rules, caps, data.sort_order ?? 0]);
+  return newId;
+}
+
+async function deleteEvalQuestion(id) { await pool.query('DELETE FROM eval_questions WHERE id=?', [id]); }
+
+async function upsertEvalCriterion(data, id) {
+  if (id) {
+    await pool.query('UPDATE eval_criteria SET title=?, max_score=?, mandatory=?, meaning=?, structure=?, relations=?, rules=?, sort_order=? WHERE id=?',
+      [data.title, data.max_score ?? 1, data.mandatory ?? 0, data.meaning || null, data.structure || null, data.relations || null, data.rules || null, data.sort_order ?? 0, id]);
+    return id;
+  }
+  const newId = uuid();
+  await pool.query('INSERT INTO eval_criteria (id, question_id, title, max_score, mandatory, meaning, structure, relations, rules, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?)',
+    [newId, data.question_id, data.title, data.max_score ?? 1, data.mandatory ?? 0, data.meaning || null, data.structure || null, data.relations || null, data.rules || null, data.sort_order ?? 0]);
+  return newId;
+}
+
+async function deleteEvalCriterion(id) { await pool.query('DELETE FROM eval_criteria WHERE id=?', [id]); }
+
+async function importEvalRules(programId, jsonData) {
+  const conn = await pool.getConnection();
+  try {
+    await conn.beginTransaction();
+    // Clear existing rules for this program
+    const [existingSections] = await conn.query('SELECT id FROM eval_sections WHERE program_id=?', [programId]);
+    if (existingSections.length) {
+      await conn.query('DELETE FROM eval_sections WHERE program_id=?', [programId]);
+    }
+    const COLORS = ['#3b82f6', '#f59e0b', '#22c55e', '#8b5cf6', '#ef4444', '#06b6d4', '#ec4899', '#14b8a6'];
+    const sections = jsonData.sections || [];
+    for (let si = 0; si < sections.length; si++) {
+      const sec = sections[si];
+      const secId = uuid();
+      await conn.query('INSERT INTO eval_sections (id, program_id, title, color, sort_order) VALUES (?,?,?,?,?)',
+        [secId, programId, sec.title, COLORS[si % COLORS.length], si]);
+      const questions = sec.questions || [];
+      for (let qi = 0; qi < questions.length; qi++) {
+        const q = questions[qi];
+        const qId = uuid();
+        await conn.query('INSERT INTO eval_questions (id, section_id, code, title, prompt, max_score, threshold, general_rules, score_caps, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?)',
+          [qId, secId, q.code || `${si+1}.${qi+1}`, q.title, q.prompt || null,
+           q.maxScore ?? 0, q.threshold ?? 0,
+           q.generalRules ? JSON.stringify(q.generalRules) : null,
+           q.scoreCaps ? JSON.stringify(q.scoreCaps) : null, qi]);
+        const criteria = q.miniPoints || q.criteria || [];
+        for (let ci = 0; ci < criteria.length; ci++) {
+          const c = criteria[ci];
+          await conn.query('INSERT INTO eval_criteria (id, question_id, title, max_score, mandatory, meaning, structure, relations, rules, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?)',
+            [uuid(), qId, c.title, c.maxScore ?? 1, c.mandatory ? 1 : 0,
+             c.meaning || null, c.structure || null, c.relations || null, c.rules || null, ci]);
+        }
+      }
+    }
+    await conn.commit();
+  } catch (e) { await conn.rollback(); throw e; }
+  finally { conn.release(); }
+}
+
 module.exports = {
   listPrograms, upsertProgram, deleteProgram,
   listCountries, upsertCountry, deleteCountry,
   listPerdiem, upsertPerdiem, deletePerdiem,
   listWorkerCategories, upsertWorkerCategory, deleteWorkerCategory,
   listEntities, upsertEntity, deleteEntity,
-  listEligibility, listRegions,
-  listWorkerMatrix, upsertWorkerZoneRate
+  listEligibility, listRegions, getCallEligibility, upsertCallEligibility,
+  listWorkerMatrix, upsertWorkerZoneRate,
+  getEvalTree, upsertEvalSection, deleteEvalSection,
+  upsertEvalQuestion, deleteEvalQuestion,
+  upsertEvalCriterion, deleteEvalCriterion,
+  importEvalRules
 };

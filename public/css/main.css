@@ -71,6 +71,23 @@ input:focus, select:focus, textarea:focus {
   box-shadow: 0 0 0 3px rgba(6, 0, 62, 0.08);
 }
 
+/* ── Evaluator ───────────────────────────────────────────────── */
+.eval-sec-chip { transition: all .2s ease }
+.eval-sec-chip:hover { background: rgba(6,0,62,.06) }
+.eval-sec-chip.active { background: #06003e; color: #fff; font-weight: 700 }
+.eval-sec-chip.active .eval-sec-dot { background: #fff !important }
+.eval-q-item { transition: all .15s ease; border-left: 3px solid transparent }
+.eval-q-item:hover { background: rgba(6,0,62,.05) }
+.eval-q-item.active { border-left-color: #06003e; background: rgba(6,0,62,.08); font-weight: 600 }
+.eval-crit-card { transition: all .2s ease; border-left: 4px solid transparent }
+.eval-crit-card:hover { box-shadow: 0 2px 8px rgba(6,0,62,.06) }
+@keyframes critIn { from { opacity:0; transform:translateY(8px) } to { opacity:1; transform:translateY(0) } }
+.eval-crit-card { animation: critIn .25s ease }
+
+/* ── Per Diem cards ──────────────────────────────────────────── */
+.perdiem-card { transition: transform .2s ease, box-shadow .2s ease }
+.perdiem-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(6,0,62,.08) }
+
 /* ── Responsive sidebar ──────────────────────────────────────── */
 @media (max-width: 1023px) {
   #sidebar { transform: translateX(-100%); }
