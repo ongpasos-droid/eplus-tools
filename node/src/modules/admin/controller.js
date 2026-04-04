@@ -24,3 +24,14 @@ exports.deletePerdiem   = async (req, res) => { try { await m.deletePerdiem(req.
 exports.listWorkers     = async (req, res) => { try { ok(res, await m.listWorkerCategories()); } catch(e) { err(res, e.message, 500); } };
 exports.upsertWorker    = async (req, res) => { try { const id = await m.upsertWorkerCategory(req.body, req.params.id || null); ok(res, { id }); } catch(e) { err(res, e.message, 500); } };
 exports.deleteWorker    = async (req, res) => { try { await m.deleteWorkerCategory(req.params.id); ok(res, null); } catch(e) { err(res, e.message, 500); } };
+
+/* ── Eligibility (countries by region) ────────────────────────── */
+exports.listEligibility = async (req, res) => {
+  try {
+    const { type, region } = req.query;
+    ok(res, await m.listEligibility({ type, region }));
+  } catch(e) { err(res, e.message, 500); }
+};
+exports.listRegions = async (req, res) => {
+  try { ok(res, await m.listRegions()); } catch(e) { err(res, e.message, 500); }
+};

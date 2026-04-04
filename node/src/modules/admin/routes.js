@@ -37,4 +37,8 @@ router.post  ('/data/workers',         guard, ctrl.upsertWorker);
 router.patch ('/data/workers/:id',     guard, ctrl.upsertWorker);
 router.delete('/data/workers/:id',     guard, ctrl.deleteWorker);
 
+/* ── Elegibilidad Erasmus+ ────────────────────────────────────── */
+router.get('/data/eligibility',        guard, ctrl.listEligibility);
+router.get('/data/eligibility/regions',guard, ctrl.listRegions);
+
 module.exports = router;

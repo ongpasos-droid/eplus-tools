@@ -595,7 +595,8 @@ tailwind.config = {
             <button data-section="programs"  class="px-4 py-2.5 text-sm border-b-2 border-secondary-fixed text-primary font-bold transition-colors">Convocatorias</button>
             <button data-section="countries" class="px-4 py-2.5 text-sm border-b-2 border-transparent text-on-surface-variant transition-colors hover:text-primary">Países</button>
             <button data-section="perdiem"   class="px-4 py-2.5 text-sm border-b-2 border-transparent text-on-surface-variant transition-colors hover:text-primary">Per Diem</button>
-            <button data-section="workers"   class="px-4 py-2.5 text-sm border-b-2 border-transparent text-on-surface-variant transition-colors hover:text-primary">Personal</button>
+            <button data-section="workers"      class="px-4 py-2.5 text-sm border-b-2 border-transparent text-on-surface-variant transition-colors hover:text-primary">Personal</button>
+            <button data-section="eligibility" class="px-4 py-2.5 text-sm border-b-2 border-transparent text-on-surface-variant transition-colors hover:text-primary">Elegibilidad</button>
           </div>
 
           <!-- ── Convocatorias ─────────────────────────────────── -->
@@ -671,6 +672,41 @@ tailwind.config = {
                     </tr>
                   </thead>
                   <tbody id="admin-perdiem-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Elegibilidad Erasmus+ ─────────────────────────────── -->
+          <div id="admin-sec-eligibility" class="admin-section hidden">
+            <div class="bg-white rounded-xl border border-outline-variant/30 overflow-hidden">
+              <div class="px-5 py-4 border-b border-outline-variant/20 flex items-center justify-between flex-wrap gap-3">
+                <h2 class="font-semibold text-primary">Países elegibles Erasmus+</h2>
+                <div class="flex gap-2">
+                  <select id="eligibility-filter-type" class="text-xs border border-outline rounded px-2 py-1 bg-surface focus:outline-none focus:ring-1 focus:ring-primary">
+                    <option value="">Todos los tipos</option>
+                    <option value="eu_member">Miembros UE</option>
+                    <option value="associated">Países asociados</option>
+                    <option value="third_partial">Terceros países</option>
+                  </select>
+                  <select id="eligibility-filter-region" class="text-xs border border-outline rounded px-2 py-1 bg-surface focus:outline-none focus:ring-1 focus:ring-primary">
+                    <option value="">Todas las regiones</option>
+                  </select>
+                </div>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                  <thead class="bg-surface-container-low text-xs text-on-surface-variant uppercase tracking-wide">
+                    <tr>
+                      <th class="px-4 py-3 text-left">ISO</th>
+                      <th class="px-4 py-3 text-left">País</th>
+                      <th class="px-4 py-3 text-left">Tipo</th>
+                      <th class="px-4 py-3 text-left">Región</th>
+                      <th class="px-4 py-3 text-center">Zona per diem</th>
+                      <th class="px-4 py-3 text-center">Elegible</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-eligibility-tbody"></tbody>
                 </table>
               </div>
             </div>

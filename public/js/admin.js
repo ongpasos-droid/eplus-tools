@@ -35,10 +35,11 @@ const Admin = (() => {
     document.querySelectorAll('.admin-section').forEach(s => s.classList.add('hidden'));
     document.getElementById(`admin-sec-${section}`)?.classList.remove('hidden');
     switch (section) {
-      case 'programs':  loadPrograms(); break;
-      case 'countries': loadCountries(); break;
-      case 'perdiem':   loadPerdiem(); break;
-      case 'workers':   loadWorkers(); break;
+      case 'programs':    loadPrograms(); break;
+      case 'countries':   loadCountries(); break;
+      case 'perdiem':     loadPerdiem(); break;
+      case 'workers':     loadWorkers(); break;
+      case 'eligibility': loadEligibility(); break;
     }
   }
 
@@ -297,6 +298,71 @@ const Admin = (() => {
     } catch (e) {
       Toast.show('Error al eliminar: ' + e.message, 'error');
     }
+  }
+
+  /* ══ ELEGIBILIDAD ERASMUS+ ═══════════════════════════════════════ */
+
+  const TYPE_LABELS = {
+    eu_member:     '🇪🇺 Miembro UE',
+    associated:    '🤝 Asociado',
+    third_partial: '🌍 Tercero'
+  };
+  const TYPE_COLORS = {
+    eu_member:     'bg-blue-100 text-blue-700',
+    associated:    'bg-green-100 text-green-700',
+    third_partial: 'bg-amber-100 text-amber-700'
+  };
+
+  async function loadEligibility() {
+    setLoading('admin-eligibility-tbody');
+    try {
+      // Load regions for filter dropdown (once)
+      const regionSel = document.getElementById('eligibility-filter-region');
+      if (regionSel && regionSel.options.length <= 1) {
+        const regions = await API.get('/admin/data/eligibility/regions');
+        regions.forEach(r => {
+          const opt = document.createElement('option');
+          opt.value = r.id;
+          opt.textContent = `Región ${r.id} — ${r.name_es}`;
+          regionSel.appendChild(opt);
+        });
+        regionSel.addEventListener('change', loadEligibility);
+        document.getElementById('eligibility-filter-type')
+          ?.addEventListener('change', loadEligibility);
+      }
+
+      const type   = document.getElementById('eligibility-filter-type')?.value  || '';
+      const region = document.getElementById('eligibility-filter-region')?.value || '';
+      const qs     = new URLSearchParams();
+      if (type)   qs.set('type', type);
+      if (region) qs.set('region', region);
+
+      const rows = await API.get('/admin/data/eligibility' + (qs.toString() ? '?' + qs : ''));
+      const tbody = document.getElementById('admin-eligibility-tbody');
+
+      if (!rows.length) {
+        tbody.innerHTML = '<tr><td colspan="6" class="py-8 text-center text-on-surface-variant text-sm">Sin resultados</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = rows.map(r => `
+        <tr class="border-b border-outline-variant/30 hover:bg-surface-container-low/50 transition-colors">
+          <td class="px-4 py-2.5 font-mono text-sm font-bold text-primary">${r.iso2}</td>
+          <td class="px-4 py-2.5 font-medium">${r.name_es}</td>
+          <td class="px-4 py-2.5">
+            <span class="px-2 py-0.5 rounded-full text-xs font-semibold ${TYPE_COLORS[r.participation_type] || ''}">
+              ${TYPE_LABELS[r.participation_type] || r.participation_type}
+            </span>
+          </td>
+          <td class="px-4 py-2.5 text-sm text-on-surface-variant">
+            ${r.erasmus_region ? `R${r.erasmus_region} — ${r.region_name_es || ''}` : '—'}
+          </td>
+          <td class="px-4 py-2.5 text-center">
+            <span class="px-2 py-0.5 rounded bg-primary/10 text-primary text-xs font-bold">Zona ${r.perdiem_zone}</span>
+          </td>
+          <td class="px-4 py-2.5 text-center">${r.erasmus_eligible ? '✅' : '❌'}</td>
+        </tr>`).join('');
+    } catch (e) { setError('admin-eligibility-tbody', 'Error: ' + e.message); }
   }
 
   // kept for compatibility — now handled by inline listener

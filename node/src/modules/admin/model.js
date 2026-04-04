@@ -157,9 +157,34 @@ async function deleteWorkerCategory(id) {
   await pool.query('DELETE FROM ref_worker_categories WHERE id=?', [id]);
 }
 
+/* ══ ref_erasmus_regions + eligibility ═══════════════════════════ */
+
+async function listEligibility({ type, region } = {}) {
+  let sql = `
+    SELECT c.id, c.iso2, c.name_es, c.name_en,
+           c.eu_member, c.erasmus_eligible, c.perdiem_zone,
+           c.participation_type, c.erasmus_region, c.active,
+           r.name_es AS region_name_es
+    FROM ref_countries c
+    LEFT JOIN ref_erasmus_regions r ON r.id = c.erasmus_region
+    WHERE 1=1`;
+  const params = [];
+  if (type)   { sql += ' AND c.participation_type = ?'; params.push(type); }
+  if (region) { sql += ' AND c.erasmus_region = ?';     params.push(region); }
+  sql += ' ORDER BY c.participation_type ASC, c.erasmus_region ASC, c.name_es ASC';
+  const [rows] = await pool.query(sql, params);
+  return rows;
+}
+
+async function listRegions() {
+  const [rows] = await pool.query('SELECT * FROM ref_erasmus_regions ORDER BY id ASC');
+  return rows;
+}
+
 module.exports = {
   listPrograms, upsertProgram, deleteProgram,
   listCountries, upsertCountry, deleteCountry,
   listPerdiem, upsertPerdiem, deletePerdiem,
-  listWorkerCategories, upsertWorkerCategory, deleteWorkerCategory
+  listWorkerCategories, upsertWorkerCategory, deleteWorkerCategory,
+  listEligibility, listRegions
 };
