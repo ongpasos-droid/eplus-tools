@@ -2,23 +2,30 @@
 
 ## Protocolo de ramas
 
-Este repo tiene dos Claudes trabajando en paralelo:
+Este repo tiene dos Claudes trabajando en paralelo, cada uno en su rama:
 
 | Claude | Rama | Cuándo trabaja |
 |---|---|---|
-| Claude Local (PC) | `main` (directo) | Día, sesiones presenciales |
+| Claude Local (PC) | `dev-local` | Día, sesiones presenciales |
 | Claude VPS (Bot Telegram) | `dev-vps` | Noche, sesiones asíncronas |
 
+**`main` es solo para deploy.** Ningún Claude pushea directo a `main`.
+
 ### Reglas absolutas
-1. **NUNCA** hacer force push en ninguna rama
-2. **NUNCA** hacer rebase de ramas compartidas
-3. **SIEMPRE** hacer pull/fetch antes de empezar a trabajar
+1. **NUNCA** push directo a `main` — solo merge cuando Oscar lo indique
+2. **NUNCA** hacer force push en ninguna rama
+3. **NUNCA** hacer rebase de ramas compartidas
+4. **NUNCA** push a la rama del otro Claude
+5. **SIEMPRE** hacer pull/fetch antes de empezar a trabajar
 
 ### Proceso MERGE (cuando Oscar dice "MERGE")
-1. Commit cambios locales pendientes
-2. `git fetch origin` + `git merge origin/dev-vps`
-3. Resolver conflictos (mantener cambios de ambos lados)
-4. `git push origin main`
+1. Commit cambios locales pendientes en `dev-local`
+2. `git fetch origin`
+3. `git checkout main && git pull origin main`
+4. `git merge origin/dev-local` (y/o `git merge origin/dev-vps` si Oscar lo indica)
+5. Resolver conflictos (mantener cambios de ambos lados)
+6. `git push origin main`
+7. Sincronizar rama: `git checkout dev-local && git merge origin/main && git push origin dev-local`
 - Coolify despliega automáticamente cada push a `main`
 
 ### Resolución de conflictos
