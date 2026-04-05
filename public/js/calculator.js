@@ -417,7 +417,7 @@ const Calculator = (() => {
         <div id="calc-worker-rates">${buildWorkerRatesHTML()}</div>
       </div>
 
-      ${navButtons(null, 1, 'Routes →')}
+      ${_embeddedMode ? embeddedNavButtons(2, 4, 'Rutas \u2192') : navButtons(null, 1, 'Routes \u2192')}
     `;
   }
 
@@ -506,7 +506,7 @@ const Calculator = (() => {
         <p class="text-[11px] text-on-surface-variant mt-3">The <strong>Actual €</strong> amount is used in calculations. If left blank, the official rate applies.</p>
       </div>
 
-      ${navButtons(0, 2, 'Work Packages →')}
+      ${_embeddedMode ? embeddedNavButtons(3, 5, 'Work Packages \u2192') : navButtons(0, 2, 'Work Packages \u2192')}
     `;
   }
 
@@ -1105,7 +1105,7 @@ const Calculator = (() => {
         </div>
       </div>
 
-      ${navButtons(3, 5, 'Gantt →')}
+      ${_embeddedMode ? embeddedNavButtons(5, 7, 'Gantt \u2192') : navButtons(3, 5, 'Gantt \u2192')}
     `;
   }
 
@@ -1230,7 +1230,7 @@ const Calculator = (() => {
   function renderGantt(container) {
     const ps = getProjectStart();
     if (!ps) {
-      container.innerHTML = `<div class="text-center py-16 text-on-surface-variant">Set a project start date in Intake to see the Gantt chart.</div>${navButtons(4, null)}`;
+      container.innerHTML = `<div class="text-center py-16 text-on-surface-variant">Set a project start date in Intake to see the Gantt chart.</div>${_embeddedMode ? embeddedNavButtons(6, 8, 'Resumen \u2192') : navButtons(4, null)}`;
       return;
     }
 
@@ -1256,7 +1256,7 @@ const Calculator = (() => {
       <div id="calc-gantt-legend" class="flex flex-wrap gap-3 mt-3 text-xs"></div>
       <div id="calc-gantt-tooltip" class="calc-gantt-tip"></div>
 
-      ${navButtons(4, null)}
+      ${_embeddedMode ? embeddedNavButtons(6, 8, 'Resumen \u2192') : navButtons(4, null)}
     `;
     buildGanttChart();
   }
@@ -1558,9 +1558,175 @@ const Calculator = (() => {
     renderProjectSelector();
   }
 
+  /* ══════════════════════════════════════════════════════════════
+     LIBRARY API — used by Intake to embed calculator steps
+     ══════════════════════════════════════════════════════════════ */
+
+  let _embeddedMode = false;
+  let _navCallback = null;
+
+  /**
+   * Initialize Calculator state from Intake data, without rendering the shell/selector.
+   * @param {Object} projectData - project object {id, name, type, start_date, duration_months, eu_grant, cofin_pct, indirect_pct}
+   * @param {Array} partnerList - array of partner objects [{id, name, city, country, order_index, role}]
+   */
+  function initFromIntake(projectData, partnerList) {
+    _embeddedMode = true;
+    currentProjectId = projectData.id;
+    state.project = projectData;
+    state.partners = (partnerList || []).sort((a, b) => a.order_index - b.order_index);
+
+    // Init rates from partner countries
+    state.partnerRates = {};
+    state.workerRates = [];
+    state.wrCounter = 0;
+    state.partners.forEach(p => {
+      state.partnerRates[p.id] = getPerdiemRef(p.country);
+      const ref = getOfficialRate(p.country);
+      PROFILES.forEach(prof => {
+        state.workerRates.push({ id: ++state.wrCounter, pid: p.id, category: prof.label, rate: ref[prof.field] || 140 });
+      });
+    });
+
+    // Init routes
+    state.routes = {};
+    for (let i = 0; i < state.partners.length; i++)
+      for (let j = i + 1; j < state.partners.length; j++)
+        state.routes[routeKey(state.partners[i].id, state.partners[j].id)] = { km: 0, green: false, custom_rate: null };
+
+    // Init WPs (4 default)
+    state.wps = [];
+    state.actCounter = 0;
+    syncWPCount(4);
+
+    maxReached = 0;
+    console.log('[Calc] initFromIntake done —', state.partners.length, 'partners');
+  }
+
+  /** Set a callback for navigation buttons instead of Calculator._goTo */
+  function setNavCallback(fn) { _navCallback = fn; }
+
+  /** Build nav buttons that call the nav callback if set, or Calculator._goTo */
+  function embeddedNavButtons(prevStep, nextStep, nextLabel) {
+    const navFn = _navCallback ? 'Intake._calcNav' : 'Calculator._goTo';
+    return `<div class="flex justify-between mt-6">
+      ${prevStep !== null ? `<button onclick="${navFn}(${prevStep})" class="px-4 py-2 text-sm font-semibold text-on-surface-variant hover:text-on-surface border border-outline-variant rounded-lg transition-colors">\u2190 Back</button>` : '<span></span>'}
+      ${nextStep !== null ? `<button onclick="${navFn}(${nextStep})" class="px-5 py-2.5 text-sm font-bold bg-primary text-white rounded-lg hover:bg-primary-container transition-colors">${nextLabel || 'Next \u2192'}</button>` : ''}
+    </div>`;
+  }
+
+  /** Render Rates step into a container (for Intake embedding) */
+  function renderRatesInto(container) { renderRates(container); }
+
+  /** Render Routes step into a container */
+  function renderRoutesInto(container) { renderRoutes(container); }
+
+  /** Render merged WP + Activities into a single step */
+  function renderMergedWPs(container) {
+    // Ensure WP1 has mgmt
+    if (state.wps[0] && state.wps[0].activities.length === 0) {
+      state.wps[0].activities.push({
+        id: ++state.actCounter, type: 'mgmt', label: 'Project Management',
+        rate_applicant: 500, rate_partner: 250,
+        date_start: toISO(getProjectStart()), date_end: toISO(addMonths(getProjectStart() || new Date(), getProjectMonths()))
+      });
+    }
+
+    const directTotal = state.wps.reduce((s, wp) => s + wp.activities.reduce((ss, a) => ss + calcActivity(a).total, 0), 0);
+    const { total } = applyIndirectCosts(directTotal);
+    const { totalProject } = getFinancials();
+    const usePct = totalProject > 0 ? Math.min(total / totalProject * 100, 100).toFixed(1) : 0;
+
+    const nav = _embeddedMode ? embeddedNavButtons(4, 6, 'Presupuesto \u2192') : navButtons(1, 3, 'Activities \u2192');
+
+    container.innerHTML = `
+      <h2 class="font-headline text-lg font-bold mb-1">Work Packages & Activities</h2>
+      <p class="text-sm text-on-surface-variant mb-4">Define WPs and add activities to each one. 4 WPs pre-loaded.</p>
+
+      <!-- WP count -->
+      <div class="flex items-center gap-3 mb-4">
+        <label class="text-sm font-semibold text-on-surface-variant">Number of WPs</label>
+        <input type="number" id="calc-n-wps" value="${state.wps.length}" min="1" max="12" class="w-20 px-2 py-1.5 text-sm border border-outline-variant/30 rounded-lg text-center font-bold" onchange="Calculator._syncWPsMerged(parseInt(this.value))">
+      </div>
+
+      <!-- Summary bar -->
+      <div class="bg-primary text-white rounded-xl p-4 mb-5 flex items-center gap-5 flex-wrap">
+        <div class="flex-1 min-w-[120px]">
+          <div class="text-[10px] uppercase tracking-wider opacity-50 mb-1">Total calculated</div>
+          <div class="font-headline text-2xl font-bold" id="calc-live-total">${euros(total)}</div>
+        </div>
+        <div class="min-w-[90px]">
+          <div class="text-[10px] uppercase tracking-wider opacity-50 mb-1">Target</div>
+          <div class="text-sm font-mono">${euros(totalProject)}</div>
+        </div>
+        <div class="min-w-[90px]">
+          <div class="text-[10px] uppercase tracking-wider opacity-50 mb-1">Difference</div>
+          <div class="text-sm font-mono" id="calc-live-diff">${euros(totalProject - total)}</div>
+        </div>
+        <div class="flex-[2] min-w-[150px]">
+          <div class="text-[10px] opacity-40 mb-1">Budget usage</div>
+          <div class="h-1.5 rounded bg-white/20 overflow-hidden">
+            <div class="h-full rounded bg-white transition-all" id="calc-live-bar" style="width:${usePct}%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="calc-wps-container">
+        ${state.wps.map((wp, wi) => buildWPSection(wp, wi)).join('')}
+      </div>
+
+      ${nav}
+    `;
+
+    // Calculate all
+    state.wps.forEach((_, wi) => recalcWP(wi));
+  }
+
+  /** Render Results step into a container */
+  function renderResultsInto(container) { renderResults(container); }
+
+  /** Render Gantt step into a container */
+  function renderGanttInto(container) { renderGantt(container); }
+
+  /** Get current state for Intake summary */
+  function getCalcState() {
+    const directCosts = state.wps.reduce((s, wp) => s + wp.activities.reduce((ss, a) => ss + calcActivity(a).total, 0), 0);
+    const { indirectPct } = getFinancials();
+    const { indirect, total } = applyIndirectCosts(directCosts);
+    return {
+      directCosts,
+      indirect,
+      indirectPct,
+      total,
+      wps: state.wps,
+      partners: state.partners,
+      financials: getFinancials(),
+    };
+  }
+
+  /** Check if Calculator state is initialized */
+  function isInitialized() { return state.project !== null; }
+
+  /** Sync WPs and re-render merged view */
+  function syncWPsMerged(n) {
+    syncWPCount(n);
+    const container = document.getElementById('intake-calc-container');
+    if (container && _embeddedMode) renderMergedWPs(container);
+  }
+
   /* ── Public API ─────────────────────────────────────────────── */
   return {
     init,
+    // Library API for Intake embedding
+    initFromIntake,
+    setNavCallback,
+    renderRatesInto,
+    renderRoutesInto,
+    renderMergedWPs,
+    renderResultsInto,
+    renderGanttInto,
+    getCalcState,
+    isInitialized,
     // Exposed for onclick handlers (prefixed with _ to signal internal use)
     _loadProject: loadProject,
     _backToSelector: backToSelector,
@@ -1575,6 +1741,7 @@ const Calculator = (() => {
     _setWPCat: setWPCat,
     _applyWPTitle: applyWPTitle,
     _syncWPs: syncWPs,
+    _syncWPsMerged: syncWPsMerged,
     _addActivity: addActivity,
     _removeAct: removeAct,
     _setAct: setAct,

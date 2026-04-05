@@ -513,27 +513,9 @@ tailwind.config = {
             <input type="file" id="intake-file-in" accept=".json" class="hidden">
           </div>
 
-          <!-- Progress bar -->
-          <nav class="flex items-center mb-10" id="intake-step-nav">
-            <div class="flex items-center gap-2 cursor-pointer intake-progress-step" data-step="0">
-              <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold font-headline border-2 border-primary bg-primary text-white transition-all" id="intake-sd0">1</div>
-              <span class="font-headline text-xs font-bold uppercase tracking-widest text-primary transition-colors intake-progress-label" id="intake-sl0">Programa</span>
-            </div>
-            <div class="flex-1 h-px bg-outline-variant mx-2 transition-colors" id="intake-sc0"></div>
-            <div class="flex items-center gap-2 cursor-pointer intake-progress-step" data-step="1">
-              <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold font-headline border-2 border-outline-variant bg-surface text-on-surface-variant transition-all" id="intake-sd1">2</div>
-              <span class="font-headline text-xs font-bold uppercase tracking-widest text-on-surface-variant transition-colors intake-progress-label" id="intake-sl1">Proyecto</span>
-            </div>
-            <div class="flex-1 h-px bg-outline-variant mx-2 transition-colors" id="intake-sc1"></div>
-            <div class="flex items-center gap-2 cursor-pointer intake-progress-step" data-step="2">
-              <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold font-headline border-2 border-outline-variant bg-surface text-on-surface-variant transition-all" id="intake-sd2">3</div>
-              <span class="font-headline text-xs font-bold uppercase tracking-widest text-on-surface-variant transition-colors intake-progress-label" id="intake-sl2">Contexto</span>
-            </div>
-            <div class="flex-1 h-px bg-outline-variant mx-2 transition-colors" id="intake-sc2"></div>
-            <div class="flex items-center gap-2 cursor-pointer intake-progress-step" data-step="3">
-              <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold font-headline border-2 border-outline-variant bg-surface text-on-surface-variant transition-all" id="intake-sd3">4</div>
-              <span class="font-headline text-xs font-bold uppercase tracking-widest text-on-surface-variant transition-colors intake-progress-label" id="intake-sl3">Resumen</span>
-            </div>
+          <!-- Progress bar (rendered dynamically by intake.js — 9 steps) -->
+          <nav class="flex items-center mb-10 flex-wrap gap-y-2" id="intake-step-nav">
+            <!-- JS will populate this -->
           </nav>
 
           <!-- STEP 0: Programa -->
@@ -719,12 +701,19 @@ tailwind.config = {
                 <span class="material-symbols-outlined text-base">arrow_back</span> Anterior
               </button>
               <button type="button" class="intake-btn-next inline-flex items-center gap-2 px-8 py-4 rounded-md bg-secondary-fixed text-primary-container font-bold text-base shadow-[0_24px_48px_rgba(27,20,100,0.1)] hover:scale-[1.02] active:scale-95 transition-transform">
-                Ver resumen <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                Tarifas <span class="material-symbols-outlined text-lg">arrow_forward</span>
               </button>
             </div>
           </div>
 
-          <!-- STEP 3: Resumen -->
+          <!-- STEPS 3-7: Dynamic calculator steps (rendered by JS) -->
+          <div class="intake-step hidden" id="intake-dynamic">
+            <div id="intake-calc-container">
+              <!-- Calculator render functions inject content here -->
+            </div>
+          </div>
+
+          <!-- STEP 8: Resumen -->
           <div class="intake-step hidden" id="intake-p3">
             <h1 class="font-headline text-3xl font-extrabold tracking-tighter text-primary mb-1">Resumen</h1>
             <p class="text-on-surface-variant text-base mb-8">Revisa los datos antes de guardar.</p>
@@ -746,6 +735,13 @@ tailwind.config = {
                 <span>Contexto IA</span><div class="flex-1 h-px bg-outline-variant"></div>
               </div>
               <div id="intake-sum-ctx"></div>
+            </div>
+
+            <div class="mb-8 pb-8 border-b border-outline-variant">
+              <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">
+                <span>Presupuesto</span><div class="flex-1 h-px bg-outline-variant"></div>
+              </div>
+              <div id="intake-sum-budget"></div>
             </div>
 
             <div class="grid grid-cols-2 gap-3">
@@ -1149,6 +1145,22 @@ tailwind.config = {
           <!-- TAB: General -->
           <div id="myorg-tab-general" class="myorg-tab">
             <div class="bg-white rounded-xl border border-outline-variant/30 p-6">
+
+              <!-- Logo -->
+              <div class="flex items-center gap-5 mb-6 pb-6 border-b border-outline-variant/20">
+                <div id="myorg-logo-preview" class="w-20 h-20 rounded-xl border-2 border-dashed border-outline-variant/40 bg-surface-container-low flex items-center justify-center overflow-hidden flex-shrink-0">
+                  <span class="material-symbols-outlined text-3xl text-on-surface-variant/30" id="myorg-logo-placeholder">image</span>
+                </div>
+                <div>
+                  <div class="text-sm font-semibold text-on-surface mb-1">Logo de la organización</div>
+                  <p class="text-xs text-on-surface-variant mb-2">JPG, PNG o SVG. Máx. 2 MB.</p>
+                  <label class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-primary border border-primary/30 hover:bg-primary/5 cursor-pointer transition-colors">
+                    <span class="material-symbols-outlined text-base">upload</span> Subir logo
+                    <input type="file" id="myorg-logo-input" accept="image/*" class="hidden" />
+                  </label>
+                </div>
+              </div>
+
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="md:col-span-2">
                   <label class="block text-xs font-semibold text-on-surface-variant mb-1">Nombre de la organización *</label>
