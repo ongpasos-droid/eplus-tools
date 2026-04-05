@@ -226,11 +226,17 @@ tailwind.config = {
         <span class="material-symbols-outlined text-[20px]">fact_check</span>
         Evaluator
       </a>
-      <a href="#partners"
-        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium opacity-40 pointer-events-none"
-        data-route="partners">
-        <span class="material-symbols-outlined text-[20px]">groups</span>
-        Partners
+      <a href="#my-org"
+        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
+        data-route="my-org">
+        <span class="material-symbols-outlined text-[20px]">apartment</span>
+        Mi Organización
+      </a>
+      <a href="#organizations"
+        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
+        data-route="organizations">
+        <span class="material-symbols-outlined text-[20px]">corporate_fare</span>
+        Organizaciones
       </a>
 
       <!-- Library section -->
@@ -1117,6 +1123,392 @@ tailwind.config = {
         </div>
       </section>
 
+      <section id="panel-my-org" class="panel">
+        <div class="max-w-5xl mx-auto py-8 px-4">
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
+            <h1 class="font-headline text-2xl font-extrabold text-primary">Mi Organización</h1>
+            <div class="sm:ml-auto flex items-center gap-2">
+              <select id="myorg-org-select" class="border border-outline-variant rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary min-w-[200px]">
+                <option value="">Cargando...</option>
+              </select>
+              <button id="myorg-btn-new-org" class="inline-flex items-center gap-1 px-3 py-2 rounded-lg text-xs font-semibold text-primary border border-primary/30 hover:bg-primary/5 transition-colors">
+                <span class="material-symbols-outlined text-base">add</span> Nueva
+              </button>
+            </div>
+          </div>
+
+          <!-- Tab nav -->
+          <div id="myorg-tab-nav" class="flex gap-1 overflow-x-auto border-b border-outline-variant/30 mb-6 pb-0">
+            <button data-tab="general"    class="px-4 py-2.5 text-sm font-medium whitespace-nowrap border-b-2 border-secondary-fixed text-primary font-bold">Datos generales</button>
+            <button data-tab="representatives" class="px-4 py-2.5 text-sm font-medium whitespace-nowrap text-on-surface-variant">Representantes</button>
+            <button data-tab="experience" class="px-4 py-2.5 text-sm font-medium whitespace-nowrap text-on-surface-variant">Experiencia</button>
+            <button data-tab="accreditations" class="px-4 py-2.5 text-sm font-medium whitespace-nowrap text-on-surface-variant">Acreditaciones</button>
+            <button data-tab="stakeholders" class="px-4 py-2.5 text-sm font-medium whitespace-nowrap text-on-surface-variant">Stakeholders</button>
+          </div>
+
+          <!-- TAB: General -->
+          <div id="myorg-tab-general" class="myorg-tab">
+            <div class="bg-white rounded-xl border border-outline-variant/30 p-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="md:col-span-2">
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Nombre de la organización *</label>
+                  <input data-field="organization_name" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm" placeholder="Ej: Permacultura Cantabria">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Nombre legal completo (idioma nacional)</label>
+                  <input data-field="legal_name_national" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Nombre legal completo (caracteres latinos)</label>
+                  <input data-field="legal_name_latin" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Tipo de organización</label>
+                  <select data-field="org_type" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                    <option value="">— Seleccionar —</option>
+                    <option>NGO</option><option>University</option><option>School/Institute</option>
+                    <option>Research Centre</option><option>SME</option><option>Large Enterprise</option>
+                    <option>Public body</option><option>Foundation</option><option>Social enterprise</option><option>Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Acrónimo</label>
+                  <input data-field="acronym" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">PIC</label>
+                  <input data-field="pic" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm" placeholder="940435371">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">NIF / ID Nacional</label>
+                  <input data-field="national_id" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Fecha de fundación</label>
+                  <input data-field="foundation_date" type="date" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">País</label>
+                  <input data-field="country" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Región</label>
+                  <input data-field="region" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Ciudad</label>
+                  <input data-field="city" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Dirección</label>
+                  <input data-field="address" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Código postal</label>
+                  <input data-field="post_code" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">P.O. Box</label>
+                  <input data-field="po_box" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">CEDEX</label>
+                  <input data-field="cedex" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Web</label>
+                  <input data-field="website" type="url" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Email</label>
+                  <input data-field="email" type="email" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Teléfono 1</label>
+                  <input data-field="telephone1" type="tel" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Teléfono 2</label>
+                  <input data-field="telephone2" type="tel" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Fax</label>
+                  <input data-field="fax" type="tel" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div class="flex items-center gap-6 md:col-span-2">
+                  <label class="flex items-center gap-2 text-sm"><input data-field="is_public_body" type="checkbox" class="rounded border-outline-variant/40"> Public body</label>
+                  <label class="flex items-center gap-2 text-sm"><input data-field="is_non_profit" type="checkbox" class="rounded border-outline-variant/40"> Non-profit</label>
+                  <label class="flex items-center gap-2 text-sm"><input data-field="is_public" type="checkbox" class="rounded border-outline-variant/40" checked> Visible en directorio</label>
+                </div>
+              </div>
+              <div class="mt-6 flex justify-end">
+                <button onclick="Organizations.saveSection('myorg-tab-general')" class="bg-primary text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors">Guardar datos generales</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: Legal Representative -->
+          <!-- TAB: Representantes (legal rep + contact person + key staff) -->
+          <div id="myorg-tab-representatives" class="myorg-tab hidden">
+
+            <!-- Legal Representative -->
+            <div class="bg-white rounded-xl border border-outline-variant/30 p-6 mb-5" id="myorg-sec-legal-rep">
+              <h3 class="text-sm font-bold text-primary mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-lg">gavel</span> Representante legal
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Título</label>
+                  <select data-field="legal_rep_title" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                    <option value="">—</option><option>Mr.</option><option>Mrs.</option><option>Ms.</option><option>Dr.</option><option>Prof.</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Nombre</label>
+                  <input data-field="legal_rep_first_name" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Apellidos</label>
+                  <input data-field="legal_rep_family_name" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Cargo</label>
+                  <input data-field="legal_rep_position" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Email</label>
+                  <input data-field="legal_rep_email" type="email" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Teléfono</label>
+                  <input data-field="legal_rep_telephone1" type="tel" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Person -->
+            <div class="bg-white rounded-xl border border-outline-variant/30 p-6 mb-5" id="myorg-sec-contact">
+              <h3 class="text-sm font-bold text-primary mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-lg">contact_mail</span> Persona de contacto
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Título</label>
+                  <select data-field="cp_title" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                    <option value="">—</option><option>Mr.</option><option>Mrs.</option><option>Ms.</option><option>Dr.</option><option>Prof.</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Nombre</label>
+                  <input data-field="cp_first_name" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Apellidos</label>
+                  <input data-field="cp_family_name" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Cargo</label>
+                  <input data-field="cp_position" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Email</label>
+                  <input data-field="cp_email" type="email" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Teléfono</label>
+                  <input data-field="cp_telephone1" type="tel" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+                </div>
+              </div>
+            </div>
+
+            <!-- Key Staff -->
+            <div class="bg-white rounded-xl border border-outline-variant/30 overflow-hidden mb-5">
+              <div class="flex items-center justify-between px-5 py-3 border-b border-outline-variant/20">
+                <h3 class="text-sm font-bold text-primary flex items-center gap-2">
+                  <span class="material-symbols-outlined text-lg">badge</span> Personal clave
+                </h3>
+                <button onclick="Organizations.addChild('key-staff')" class="flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary/80">
+                  <span class="material-symbols-outlined text-[18px]">add_circle</span> Añadir
+                </button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                  <thead class="bg-surface-container-low text-xs text-on-surface-variant uppercase">
+                    <tr>
+                      <th class="px-3 py-2 text-left">Nombre</th>
+                      <th class="px-3 py-2 text-left">Cargo</th>
+                      <th class="px-3 py-2 text-left">Competencias y experiencia</th>
+                      <th class="px-3 py-2 text-right">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="org-key-staff-tbody">
+                    <tr><td colspan="4" class="py-4 text-center text-on-surface-variant text-sm">Cargando...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Save button for representatives -->
+            <div class="flex justify-end">
+              <button onclick="Organizations.saveSection('myorg-tab-representatives')" class="bg-primary text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors">Guardar representantes</button>
+            </div>
+          </div>
+
+          <!-- TAB: Experience -->
+          <div id="myorg-tab-experience" class="myorg-tab hidden">
+            <div class="bg-white rounded-xl border border-outline-variant/30 p-6 space-y-4">
+              <div>
+                <label class="block text-xs font-semibold text-on-surface-variant mb-1">Descripción de la organización</label>
+                <textarea data-field="description" rows="8" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm" placeholder="Tipo, tamaño, ámbito de trabajo, áreas de expertise, contexto social..."></textarea>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-on-surface-variant mb-1">Actividades y experiencia relevante</label>
+                <textarea data-field="activities_experience" rows="8" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm" placeholder="Actividades, experiencia y competencias del personal clave..."></textarea>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Tamaño staff (aprox.)</label>
+                  <input data-field="staff_size" type="number" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm" placeholder="40">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">Proyectos UE por año</label>
+                  <input data-field="annual_projects" type="number" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm" placeholder="3">
+                </div>
+                <div class="flex items-end">
+                  <label class="flex items-center gap-2 text-sm"><input data-field="has_training_facilities" type="checkbox" class="rounded border-outline-variant/40"> Instalaciones de formación</label>
+                </div>
+                <div class="flex items-end">
+                  <label class="flex items-center gap-2 text-sm"><input data-field="has_digital_infrastructure" type="checkbox" class="rounded border-outline-variant/40"> Infraestructura digital</label>
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-on-surface-variant mb-1">Áreas de expertise (separadas por comas)</label>
+                <input data-field="expertise_areas" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm" placeholder="Youth, Sustainability, Digital, Inclusion...">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-on-surface-variant mb-1">Roles Erasmus (separados por comas)</label>
+                <input data-field="erasmus_roles" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm" placeholder="Coordinator, Partner, Hosting organisation...">
+              </div>
+              <div class="flex items-center">
+                <label class="flex items-center gap-2 text-sm"><input data-field="has_eu_projects" type="checkbox" class="rounded border-outline-variant/40"> Ha participado en proyectos UE en los últimos 3 años</label>
+              </div>
+              <div class="flex justify-end">
+                <button onclick="Organizations.saveSection('myorg-tab-experience')" class="bg-primary text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors">Guardar experiencia</button>
+              </div>
+            </div>
+
+            <!-- EU Projects (inside Experience tab) -->
+            <div class="bg-white rounded-xl border border-outline-variant/30 overflow-hidden mt-5">
+              <div class="flex items-center justify-between px-5 py-3 border-b border-outline-variant/20">
+                <h3 class="text-sm font-bold text-primary flex items-center gap-2">
+                  <span class="material-symbols-outlined text-lg">public</span> Proyectos UE concedidos
+                </h3>
+                <button onclick="Organizations.addChild('eu-projects')" class="flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary/80">
+                  <span class="material-symbols-outlined text-[18px]">add_circle</span> Añadir
+                </button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                  <thead class="bg-surface-container-low text-xs text-on-surface-variant uppercase">
+                    <tr>
+                      <th class="px-3 py-2 text-left">Programa</th>
+                      <th class="px-3 py-2 text-left">Año</th>
+                      <th class="px-3 py-2 text-left">ID Contrato</th>
+                      <th class="px-3 py-2 text-left">Rol</th>
+                      <th class="px-3 py-2 text-left">Título</th>
+                      <th class="px-3 py-2 text-right">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="org-eu-projects-tbody">
+                    <tr><td colspan="6" class="py-4 text-center text-on-surface-variant text-sm">Cargando...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: Accreditations -->
+          <div id="myorg-tab-accreditations" class="myorg-tab hidden">
+            <div class="bg-white rounded-xl border border-outline-variant/30 overflow-hidden">
+              <div class="flex items-center justify-between px-4 py-3 border-b border-outline-variant/20">
+                <h3 class="text-sm font-semibold text-primary">Acreditaciones</h3>
+                <button onclick="Organizations.addChild('accreditations')" class="flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary/80">
+                  <span class="material-symbols-outlined text-[18px]">add_circle</span> Añadir
+                </button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                  <thead class="bg-surface-container-low text-xs text-on-surface-variant uppercase">
+                    <tr>
+                      <th class="px-3 py-2 text-left">Tipo de acreditación</th>
+                      <th class="px-3 py-2 text-left">Referencia</th>
+                      <th class="px-3 py-2 text-right">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="org-accreditations-tbody">
+                    <tr><td colspan="3" class="py-4 text-center text-on-surface-variant text-sm">Cargando...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: Stakeholders -->
+          <div id="myorg-tab-stakeholders" class="myorg-tab hidden">
+            <div class="bg-white rounded-xl border border-outline-variant/30 overflow-hidden">
+              <div class="flex items-center justify-between px-4 py-3 border-b border-outline-variant/20">
+                <h3 class="text-sm font-semibold text-primary">Stakeholders (entidades relacionadas)</h3>
+                <button onclick="Organizations.addChild('stakeholders')" class="flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary/80">
+                  <span class="material-symbols-outlined text-[18px]">add_circle</span> Añadir
+                </button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                  <thead class="bg-surface-container-low text-xs text-on-surface-variant uppercase">
+                    <tr>
+                      <th class="px-3 py-2 text-left">Entidad</th>
+                      <th class="px-3 py-2 text-left">Tipo relación</th>
+                      <th class="px-3 py-2 text-left">Descripción</th>
+                      <th class="px-3 py-2 text-right">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="org-stakeholders-tbody">
+                    <tr><td colspan="4" class="py-4 text-center text-on-surface-variant text-sm">Cargando...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ═══ PANEL: DIRECTORIO ORGANIZACIONES ═════════════════ -->
+      <section id="panel-organizations" class="panel">
+        <div class="max-w-6xl mx-auto py-8 px-4">
+          <h1 class="font-headline text-2xl font-extrabold text-primary mb-6">Directorio de Organizaciones</h1>
+
+          <!-- Filters -->
+          <div class="flex flex-wrap gap-3 mb-6">
+            <input id="org-dir-search" type="text" placeholder="Buscar por nombre, ciudad o PIC..."
+              class="flex-1 min-w-[200px] border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+            <input id="org-dir-country" type="text" placeholder="País"
+              class="w-36 border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+            <select id="org-dir-type" class="w-44 border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
+              <option value="">Todos los tipos</option>
+              <option>NGO</option><option>University</option><option>School/Institute</option>
+              <option>Research Centre</option><option>SME</option><option>Large Enterprise</option>
+              <option>Public body</option><option>Foundation</option><option>Social enterprise</option><option>Other</option>
+            </select>
+          </div>
+
+          <!-- Org cards grid -->
+          <div id="org-dir-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="col-span-full py-12 text-center text-on-surface-variant">Cargando organizaciones...</div>
+          </div>
+        </div>
+      </section>
+
     </main>
   </div>
 </div>
@@ -1131,6 +1523,7 @@ tailwind.config = {
 <script src="/js/intake.js"></script>
 <script src="/js/admin.js"></script>
 <script src="/js/calculator.js"></script>
+<script src="/js/organizations.js"></script>
 <script src="/js/documents.js"></script>
 
 <!-- ── Mini modal (reemplaza prompt/confirm nativos) ────────── -->
