@@ -117,7 +117,7 @@ const CHILD_TABLES = {
   accreditations:      { table: 'org_accreditations',      fields: ['accreditation_type','accreditation_reference'] },
   'eu-projects':       { table: 'org_eu_projects',         fields: ['programme','year','project_id_or_contract','role','beneficiary_name','title'] },
   'key-staff':         { table: 'org_key_staff',           fields: ['name','role','skills_summary'] },
-  stakeholders:        { table: 'org_stakeholders',        fields: ['related_org_id','entity_name','relationship_type','description'] },
+  stakeholders:        { table: 'org_stakeholders',        fields: ['related_org_id','entity_name','entity_type','relationship_type','description','contact_person','email'] },
   'associated-partners':{ table: 'org_associated_partners', fields: ['full_name','address','street_number','country','region','post_code','city','org_type','contact_person','email','phone','website','relation_to_project'] },
 };
 

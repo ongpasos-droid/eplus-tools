@@ -192,7 +192,10 @@ const Organizations = (() => {
     ],
     stakeholders: [
       { f:'entity_name', label:'Entidad', ph:'Nombre de la entidad' },
+      { f:'entity_type', label:'Tipo entidad', ph:'ONG, Universidad, Empresa...', select:['','NGO','University','School/Institute','Research Centre','SME','Large Enterprise','Public body','Foundation','Social enterprise','Other'] },
       { f:'relationship_type', label:'Relación', ph:'Partner, Funder, Beneficiary...' },
+      { f:'contact_person', label:'Persona de contacto', ph:'Nombre completo' },
+      { f:'email', label:'Email', ph:'email@ejemplo.com' },
       { f:'description', label:'Descripción', ph:'Descripción de la relación' },
     ],
   };
@@ -236,8 +239,17 @@ const Organizations = (() => {
     });
   }
 
+  function fieldHtml(col, val, attrName) {
+    const cls = 'w-full px-3 py-2 text-sm border border-outline-variant/40 rounded-lg bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors';
+    if (col.select) {
+      return `<select ${attrName}="${col.f}" class="${cls}">
+        ${col.select.map(opt => `<option value="${opt}" ${opt === (val || '') ? 'selected' : ''}>${opt || '— Seleccionar —'}</option>`).join('')}
+      </select>`;
+    }
+    return `<input type="${col.type || 'text'}" value="${esc(val)}" placeholder="${col.ph}" ${attrName}="${col.f}" class="${cls}" />`;
+  }
+
   function openEditForm(type, childId, row, afterTr) {
-    // Remove any existing edit form
     document.querySelectorAll('.child-edit-row').forEach(r => r.remove());
 
     const fields = CHILD_CONFIGS[type] || [];
@@ -249,9 +261,7 @@ const Organizations = (() => {
           ${fields.map(col => `
             <div>
               <label class="block text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">${col.label}</label>
-              <input type="${col.type || 'text'}" value="${esc(row[col.f])}" placeholder="${col.ph}"
-                data-edit-field="${col.f}"
-                class="w-full px-3 py-2 text-sm border border-outline-variant/40 rounded-lg bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" />
+              ${fieldHtml(col, row[col.f], 'data-edit-field')}
             </div>
           `).join('')}
         </div>
@@ -300,7 +310,7 @@ const Organizations = (() => {
       accreditations:  { accreditation_type: '', accreditation_reference: '' },
       'eu-projects':   { programme: 'Erasmus+', year: new Date().getFullYear(), project_id_or_contract: '', role: 'applicant', title: '' },
       'key-staff':     { name: '', role: '', skills_summary: '' },
-      stakeholders:    { entity_name: '', relationship_type: '', description: '' },
+      stakeholders:    { entity_name: '', entity_type: '', relationship_type: '', contact_person: '', email: '', description: '' },
     };
     const def = defaults[type] || {};
 
@@ -313,9 +323,7 @@ const Organizations = (() => {
           ${fields.map(col => `
             <div>
               <label class="block text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">${col.label}</label>
-              <input type="${col.type || 'text'}" value="${esc(def[col.f])}" placeholder="${col.ph}"
-                data-add-field="${col.f}"
-                class="w-full px-3 py-2 text-sm border border-outline-variant/40 rounded-lg bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" />
+              ${fieldHtml(col, def[col.f], 'data-add-field')}
             </div>
           `).join('')}
         </div>
