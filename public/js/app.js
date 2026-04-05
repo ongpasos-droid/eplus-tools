@@ -144,6 +144,7 @@ const App = (() => {
       developer:  'Developer',
       evaluator:  'Evaluator',
       partners:   'Partners',
+      'my-documents': 'My Documents',
       admin:      'Admin — Data E+'
     };
     document.getElementById('topbar-title').textContent = titles[route] || 'E+ Tools';
@@ -157,6 +158,8 @@ const App = (() => {
       }
     }
     if (route === 'admin' && typeof Admin !== 'undefined') Admin.init();
+    if (route === 'calculator' && typeof Calculator !== 'undefined') Calculator.init();
+    if (route === 'my-documents' && typeof Documents !== 'undefined') Documents.init();
   }
 
   /* ── Toggle sidebar (mobile) ───────────────────────────────── */
