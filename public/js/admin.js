@@ -740,6 +740,246 @@ const Admin = (() => {
   const EVAL_COLORS = ['#1e3a5f', '#2563eb', '#3b82f6', '#60a5fa', '#93c5fd', '#1e40af', '#1d4ed8', '#0369a1'];
   let ev = { programId: null, programName: '', sections: [], activeSectionIdx: 0, activeQuestionIdx: 0 };
 
+  /* ── Field info tooltip system ─────────────────────────────── */
+  const FIELD_HELP = {
+    // ── Question fields ──────────────────────────────────────
+    q_code: { title: 'Code (Question identifier)',
+      text: `<p>The unique identifier for this question within the evaluation form. Must match exactly what appears in the official call document or programme guide.</p>
+      <p>It helps evaluators, writers, and the system locate the exact section being evaluated. The code also appears in the sidebar navigation and in all reports.</p>
+      <div class="tip-example">Examples: "1.1", "2.3", "4.2"</div>
+      <p><strong>Important:</strong> Do not invent codes. Copy them from the official evaluation grid of the call.</p>` },
+
+    q_title: { title: 'Title (Question name)',
+      text: `<p>The official name of this evaluation question, exactly as it appears in the programme guide or call document.</p>
+      <p>Do not modify, paraphrase, or translate it. The AI writer and evaluator use this title to understand the scope of the answer.</p>
+      <div class="tip-example">Example: "Background, context and rationale" (not "Explain the context" or "Why is this project needed")</div>
+      <p><strong>Where to find it:</strong> In the Programme Guide, under the section "Award criteria" or "Evaluation grid" for your specific action type.</p>` },
+
+    q_description: { title: 'Description (What the question asks)',
+      text: `<p>A brief explanation of what this question is really asking for, based on the call guidelines. This is the context that the AI writer will use to understand what evaluators expect to read.</p>
+      <p>It should answer: <strong>What should the applicant demonstrate in this section?</strong></p>
+      <div class="tip-example">Example for 1.1: "To what extent is the proposal based on a sound and well-documented needs analysis? How clearly does it identify the problems and challenges to be addressed, considering the specific context of each partner country?"</div>
+      <p><strong>Tip:</strong> You can copy the guiding questions from the Programme Guide or the application form instructions. Keep it faithful to the original wording.</p>` },
+
+    q_word_limit: { title: 'Word limit',
+      text: `<p>Maximum number of words allowed for the answer to this question, as specified in the application form (usually in the eForm).</p>
+      <p>The AI writer will respect this limit when generating text, ensuring the output fits within the allowed space.</p>
+      <div class="tip-example">Common values: 3000 words, 5000 words, 10000 characters</div>
+      <p><strong>Leave empty</strong> if the call doesn't specify a word limit for this particular question. Some calls use page limits instead.</p>
+      <p><strong>Where to find it:</strong> In the application form (eForm) itself, each text field usually shows a character or word counter.</p>` },
+
+    q_page_limit: { title: 'Page limit',
+      text: `<p>Maximum number of pages allowed for this answer. Some calls (especially older formats or annexes) use pages instead of words.</p>
+      <p>Use decimals for half pages (e.g., 1.5). Leave empty if the call uses word limits instead.</p>
+      <div class="tip-example">Common values: 2 pages, 3 pages, 1.5 pages</div>
+      <p><strong>Note:</strong> When both word limit and page limit apply, fill in both. The AI writer will use whichever is more restrictive.</p>` },
+
+    q_writing_guidance: { title: 'Writing guidance (specific to this question)',
+      text: `<p>Specific writing instructions that apply ONLY to this question. Use this to adjust the tone, style, or approach for this particular answer.</p>
+      <p>This complements (or overrides) the global Writing Style defined in Call Data. Leave empty if the global rules are sufficient.</p>
+      <div class="tip-example">Examples:<br>
+      &bull; "Use a more narrative, storytelling tone here. Include real experiences from partner organizations."<br>
+      &bull; "Be very technical and data-driven. Include tables and statistics."<br>
+      &bull; "This section should read like a project management plan. Use bullet points, timelines, and deliverable lists."<br>
+      &bull; "Write from the consortium's perspective using 'we'. Mention each partner by name at least once."</div>
+      <p><strong>When to use it:</strong> When a question requires a different writing approach than the rest of the proposal. For example, the "Background" section needs narrative + data, while "Work plan" needs structured lists.</p>` },
+
+    q_scoring_logic: { title: 'Scoring logic',
+      text: `<p>Determines how the individual criteria scores are combined to calculate the final score for this question.</p>
+      <p><strong>Sum</strong> (most common): All criteria points are added together. If criteria are worth 2+2+3+3 = 10 pts total.<br>
+      <strong>Average</strong>: The mean of all criteria scores is used.<br>
+      <strong>Min</strong>: The lowest criterion score becomes the question score (strictest mode).</p>
+      <div class="tip-example">In 95% of cases, use "Sum". The EU evaluation grid works by adding up sub-scores.</div>
+      <p><strong>When in doubt:</strong> Use "Sum". Only use "Average" or "Min" if you have a specific reason to do so.</p>` },
+
+    q_max_score: { title: 'Max score (question points)',
+      text: `<p>Maximum points that can be awarded for this question. The sum of all question max scores within a section must equal the section's total (e.g., 30 pts for Relevance).</p>
+      <p>Also, the sum of all criteria max scores within this question should equal this number.</p>
+      <div class="tip-example">Example: Section "Relevance" = 30 pts, with 3 questions:<br>
+      &bull; 1.1 Background = 15 pts (50%)<br>
+      &bull; 1.2 Objectives = 8 pts (27%)<br>
+      &bull; 1.3 Target groups = 7 pts (23%)<br>
+      Total = 30 pts &#10004;</div>
+      <p><strong>How to decide:</strong> The EU doesn't always specify per-question scores — only per-section. Use your experience and knowledge of what evaluators prioritize to distribute the section score across questions.</p>` },
+
+    // ── Criterion fields ──────────────────────────────────────
+    c_title: { title: 'Criterion title',
+      text: `<p>Short, descriptive name that clearly identifies what specific aspect of the answer is being evaluated by this criterion.</p>
+      <p>It should be self-explanatory — someone reading just the title should understand what this criterion checks.</p>
+      <div class="tip-example">Good examples:<br>
+      &bull; "Evidence-based problem statement"<br>
+      &bull; "SMART general objectives"<br>
+      &bull; "Geographical balance of the consortium"<br>
+      &bull; "Risk management plan"<br><br>
+      Bad examples (too vague):<br>
+      &bull; "Quality" — quality of what?<br>
+      &bull; "Good description" — what makes it good?<br>
+      &bull; "Relevant" — relevant to what?</div>` },
+
+    c_meaning: { title: 'Meaning (what to look for)',
+      text: `<p>This is the most important field of the criterion. Explain <strong>what this criterion actually means</strong> and <strong>what type of evidence demonstrates that it has been met</strong>.</p>
+      <p>Think of it as: "If I'm an evaluator reading the proposal, what exactly am I looking for to give points here?"</p>
+      <p>Be as specific as possible. The AI writer will use this to know WHAT to write, and the AI evaluator will use it to know WHAT to check.</p>
+      <div class="tip-example">Example for "Evidence-based problem statement":<br><br>
+      "The proposal must present a clear, data-driven problem statement grounded in verifiable sources. The writer should include: (1) EU-level statistics from official sources like Eurostat, FRA, or WHO demonstrating the scale of the problem; (2) national-level data from each partner country showing how the problem manifests locally; (3) direct quotes or references from affected communities or target groups; (4) recent trends showing the problem is getting worse or needs urgent attention."</div>
+      <p><strong>Key question to ask yourself:</strong> "What would I need to read in the text to be convinced this criterion is fully met?"</p>` },
+
+    c_structure: { title: 'Structure (how to organize the content)',
+      text: `<p>Specifies how the content for this criterion should be organized within the answer. This tells the AI writer the <strong>format and layout</strong> to use.</p>
+      <p>Different criteria require different structures: some need narrative paragraphs, others need bullet points, tables, or diagrams.</p>
+      <div class="tip-example">Examples by type:<br><br>
+      <strong>Narrative:</strong> "Opening paragraph with EU-level data, followed by one paragraph per partner country with local context."<br><br>
+      <strong>Structured list:</strong> "List of 4-6 specific objectives, each with: (a) objective statement, (b) output indicator, (c) target value, (d) verification method."<br><br>
+      <strong>Table format:</strong> "RACI matrix showing each partner's role (Responsible, Accountable, Consulted, Informed) for each work package."<br><br>
+      <strong>Mixed:</strong> "Introductory paragraph explaining the approach, followed by a bullet-point list of risks with probability/impact/mitigation for each."</div>
+      <p><strong>Why it matters:</strong> A well-structured answer is easier for evaluators to read and score. The structure directly affects the perceived quality of the proposal.</p>` },
+
+    c_relations: { title: 'Relations (cross-references)',
+      text: `<p>What other parts of the project or proposal is this criterion connected to? The AI writer needs this to <strong>maintain coherence</strong> across sections and avoid contradictions.</p>
+      <p>Evaluators check for internal consistency — if you mention 5 objectives in section 1.2 but your work plan in 2.1 only covers 3, that's a red flag.</p>
+      <div class="tip-example">Examples:<br>
+      &bull; "Each objective must link back to a problem identified in 1.1 and forward to activities in 2.1"<br>
+      &bull; "Partner roles described here must match the budget allocation in 2.3"<br>
+      &bull; "The target groups must be consistent with the outreach strategy in 1.3 and the impact indicators in 4.1"<br>
+      &bull; "The methodology must reference the EU policy priorities mentioned in 1.2"</div>
+      <p><strong>Tip:</strong> Think about it as a web of connections. If an evaluator reads section 3.1 about partners, they'll expect to see those same partners mentioned consistently in the work plan, budget, and management structure.</p>` },
+
+    c_rules: { title: 'Rules (hard requirements)',
+      text: `<p>Non-negotiable constraints that MUST be met for this criterion. These are <strong>pass/fail requirements</strong> — if any rule is violated, the criterion cannot score full points.</p>
+      <p>Rules can come from the Programme Guide, the application form instructions, or from best practices in successful proposals.</p>
+      <div class="tip-example">Examples:<br>
+      &bull; "Must cite at least 3 independent data sources published within the last 3 years"<br>
+      &bull; "Must include specific data from ALL partner countries, not just the coordinator's country"<br>
+      &bull; "Each objective must have at least one quantifiable indicator with a target value"<br>
+      &bull; "Subcontracting must not exceed 30% of the total grant"<br>
+      &bull; "All outputs must be available in at least 2 EU languages"<br>
+      &bull; "Risk register must include minimum 5 risks with probability, impact, and mitigation"</div>
+      <p><strong>Important:</strong> Only include rules that are verifiable and objective. Subjective preferences like "should be well-written" belong in Writing Guidance, not here.</p>` },
+
+    c_red_flags: { title: 'Red flags (what to penalize)',
+      text: `<p>Common mistakes, bad practices, or disqualifying errors that the AI evaluator should actively check for. These are things that <strong>lower the score</strong> when found in the text.</p>
+      <p>Think of it as a checklist of "what NOT to do". This is based on experience with real EU evaluator feedback.</p>
+      <div class="tip-example">Examples:<br>
+      &bull; "Generic, vague statements without specific data or evidence (e.g., 'youth unemployment is a major problem in Europe')"<br>
+      &bull; "Copy-pasted text that clearly comes from another proposal or a different call"<br>
+      &bull; "Missing partner countries from the analysis — if there are 5 partners but only 3 countries are mentioned"<br>
+      &bull; "Outdated data (older than 5 years) presented as current"<br>
+      &bull; "Objectives that are not measurable (e.g., 'raise awareness' without specifying how it will be measured)"<br>
+      &bull; "Budget items without justification"<br>
+      &bull; "Activities that don't connect to any stated objective"<br>
+      &bull; "AI-generated patterns: 'Furthermore', 'It is worth noting', 'In today's rapidly changing world'"</div>
+      <p><strong>Why this matters:</strong> EU evaluators are trained to spot these patterns. A single red flag can drop a criterion score from 2 to 0.</p>` },
+
+    c_score_rubric: { title: 'Score rubric (scoring levels)',
+      text: `<p>A JSON object that defines exactly what each score level means. This is <strong>CRITICAL</strong> for consistent, objective evaluation.</p>
+      <p>Without a rubric, two evaluators (human or AI) would give different scores for the same text. The rubric removes subjectivity.</p>
+      <p><strong>Format:</strong> A JSON object where keys are score values (0, 1, 2...) and values describe what that score means.</p>
+      <div class="tip-example">Example for max_score = 2:<br>
+      {"0": "Not addressed at all, or only generic statements without any evidence or data", "1": "Partially addressed with some evidence but limited to 1-2 sources or only EU-level data without national context", "2": "Fully addressed with 3+ independent sources spanning EU and national levels from all partner countries"}<br><br>
+      Example for max_score = 1 (pass/fail):<br>
+      {"0": "Missing or does not meet the requirement", "1": "Present and clearly meets the requirement"}<br><br>
+      Example for max_score = 3:<br>
+      {"0": "Completely absent", "1": "Mentioned but superficially, without detail", "2": "Developed with some detail but incomplete or inconsistent", "3": "Comprehensive, specific, well-evidenced, and internally consistent"}</div>
+      <p><strong>Rules:</strong><br>
+      &bull; The number of levels must match max_score + 1 (e.g., max_score 2 = levels 0, 1, 2)<br>
+      &bull; Each level must be clearly distinguishable from the others<br>
+      &bull; Use observable, verifiable criteria — not subjective words like "good" or "adequate"</p>` },
+
+    c_max_score: { title: 'Max score (criterion points)',
+      text: `<p>Maximum points that can be awarded for this specific criterion. The sum of all criteria max scores within a question must equal that question's max score.</p>
+      <div class="tip-example">Common values and when to use them:<br>
+      &bull; <strong>1 point</strong> (pass/fail): For simple, binary criteria. Either it's there or it's not.<br>
+      &bull; <strong>2 points</strong> (3 levels): For criteria with nuance — absent/partial/complete.<br>
+      &bull; <strong>3 points</strong> (4 levels): For complex criteria that need finer granularity.<br>
+      &bull; <strong>4-5 points</strong>: Rarely used, only for very critical criteria that deserve extra weight.</div>
+      <p><strong>Tip:</strong> More important criteria should have higher max scores. For example, "Evidence-based problem statement" (core of the proposal) might be worth 3 pts, while "Timeliness" (nice to have) might be worth 1 pt.</p>
+      <p><strong>Verification:</strong> The Score Distribution bar above shows whether your criteria scores add up correctly to the question's max score.</p>` },
+
+    c_mandatory: { title: 'Mandatory criterion',
+      text: `<p>Determines whether this criterion is a <strong>must-have</strong> or a <strong>nice-to-have</strong>.</p>
+      <p><strong>Yes (mandatory):</strong> If this criterion scores 0, the entire question may be flagged as weak regardless of how well other criteria scored. Use this for requirements that are essential for the proposal to be considered valid.</p>
+      <p><strong>No (optional):</strong> A low score here can be compensated by high scores on other criteria. Use this for criteria that add quality but aren't strictly required.</p>
+      <div class="tip-example">Typically mandatory:<br>
+      &bull; Evidence-based problem statement<br>
+      &bull; Clear objectives<br>
+      &bull; Budget-activity coherence<br>
+      &bull; Partner roles and responsibilities<br><br>
+      Typically optional:<br>
+      &bull; Innovation dimension<br>
+      &bull; Previous cooperation experience<br>
+      &bull; Digital dissemination plan</div>
+      <p><strong>Rule of thumb:</strong> If the Programme Guide says "the proposal MUST..." or "applicants SHALL...", make it mandatory. If it says "where applicable" or "if relevant", make it optional.</p>` },
+
+    // ── Call Data fields ──────────────────────────────────────
+    cd_writing_style: { title: 'Writing style (global rules)',
+      text: `<p>Global writing rules that apply to <strong>ALL answers</strong> in this programme. These define the overall tone, voice, and style of the entire proposal.</p>
+      <p>The AI writer will follow these rules across every question. Individual questions can have additional guidance in their own "Writing guidance" field.</p>
+      <div class="tip-example">Example:<br><br>
+      "Write in formal but accessible academic English. Use third person ('the consortium will...') for general statements and first person plural ('we have identified...') for consortium-specific experiences. Vary sentence length between 10 and 30 words. Use active voice predominantly. Reference partner organizations by their full name the first time, then by acronym. Include specific numbers and dates rather than vague references. Avoid superlatives ('the best', 'the most innovative') — let the evidence speak for itself."</div>
+      <p><strong>Why it matters:</strong> A consistent writing style makes the proposal feel like one coherent document rather than sections written by different people (or by AI).</p>` },
+
+    cd_ai_rules: { title: 'AI detection rules',
+      text: `<p>Specific instructions to make the text sound authentically human and <strong>avoid AI detection</strong>. This is critical because EU evaluators actively reject proposals that appear AI-generated.</p>
+      <p>The European Commission has issued warnings about AI-generated applications, and some national agencies have started using detection tools.</p>
+      <div class="tip-example">Example:<br><br>
+      "FORBIDDEN PATTERNS (never use these):<br>
+      &bull; 'Furthermore', 'Moreover', 'Additionally' at the start of sentences<br>
+      &bull; 'It is worth noting that...', 'It should be noted that...'<br>
+      &bull; 'In conclusion', 'To summarize', 'In summary'<br>
+      &bull; 'In today's rapidly changing world/landscape'<br>
+      &bull; 'This is crucial/vital/essential for...'<br>
+      &bull; 'Leveraging', 'synergies', 'holistic approach'<br>
+      &bull; Lists where every item starts with the same grammatical structure<br><br>
+      REQUIRED PATTERNS (always include):<br>
+      &bull; Occasional short sentences (5-8 words) between longer ones<br>
+      &bull; Specific anecdotes or experiences from named partner staff<br>
+      &bull; Slightly imperfect transitions between paragraphs<br>
+      &bull; Vary paragraph length: some 2 sentences, some 5-6<br>
+      &bull; Use field-specific jargon that a real practitioner would use<br>
+      &bull; Reference specific local contexts, street names, institutions by name<br>
+      &bull; Include self-criticism: 'while our experience in X is limited, we compensate through...'"</div>
+      <p><strong>Impact:</strong> A proposal flagged as AI-generated can be rejected outright, regardless of quality. This field is as important as the content itself.</p>` },
+
+    // ── Section score ──────────────────────────────────────
+    sec_max_score: { title: 'Section max score (EU fixed)',
+      text: `<p>The total points allocated by the EU evaluation grid for this entire section/block. This value is <strong>fixed by the call</strong> and comes from the official Programme Guide.</p>
+      <div class="tip-example">Typical distribution for KA3 Youth Together:<br>
+      &bull; 1. Relevance = 30 pts<br>
+      &bull; 2. Quality of design = 30 pts<br>
+      &bull; 3. Partnership = 20 pts<br>
+      &bull; 4. Impact = 20 pts<br>
+      &bull; Total = 100 pts</div>
+      <p>The sum of all question scores within this section must equal this number. Use the Score Distribution bar to verify.</p>` },
+  };
+
+  function fieldInfo(key) {
+    return `<span class="field-info" data-help="${key}"><span class="material-symbols-outlined">info</span></span>`;
+  }
+
+  // Global click handler for field-info buttons
+  function closeFieldInfo() {
+    document.querySelectorAll('.field-info-popup, .field-info-overlay').forEach(p => p.remove());
+  }
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.field-info');
+    closeFieldInfo();
+    if (!btn) return;
+    e.stopPropagation();
+    const help = FIELD_HELP[btn.dataset.help];
+    if (!help) return;
+    // Overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'field-info-overlay';
+    overlay.addEventListener('click', closeFieldInfo);
+    document.body.appendChild(overlay);
+    // Popup
+    const popup = document.createElement('div');
+    popup.className = 'field-info-popup';
+    popup.innerHTML = `<button class="tip-close">&times;</button><h4>${help.title}</h4>${help.text}`;
+    document.body.appendChild(popup);
+    popup.querySelector('.tip-close').addEventListener('click', closeFieldInfo);
+  });
+
   function evalShowView(view) {
     document.querySelectorAll('#admin-sec-evaluator .eval-view').forEach(v => v.classList.add('hidden'));
     document.getElementById(`eval-view-${view}`)?.classList.remove('hidden');
@@ -858,24 +1098,73 @@ const Admin = (() => {
   /* ── New programme: create + seed template + open editor ────── */
   const EVAL_TEMPLATE = {
     sections: [
-      { title: '1. Relevance of the project', color: '#1e3a5f', questions: [
-        { code: '1.1', title: 'Background, context and rationale', maxScore: 10, threshold: 6 },
-        { code: '1.2', title: 'Objectives and EU added value', maxScore: 10, threshold: 6 },
-        { code: '1.3', title: 'Target groups and participants', maxScore: 10, threshold: 6 },
+      { title: '1. Relevance of the project', color: '#1e3a5f', maxScore: 30, evalNotes: `RELEVANCE OF THE PROJECT (max 30 points)
+
+The extent to which:
+• The proposal is relevant to the objectives and priorities of the Action. In addition, the proposal will be considered as highly relevant if it addresses one or more of the 'European Youth Together' specific priorities.
+• The proposal is based on a genuine and adequate needs analysis.
+• The proposal is innovative and complementary to other initiatives already carried out by the participating organisations.
+• The proposal brings added value at EU level through results that would not be attained by activities carried out in a single country.
+
+KEY EVALUATOR FOCUS:
+- Is the problem well-documented with data from multiple EU sources?
+- Does it clearly show why transnational cooperation is needed?
+- Are EU policy priorities explicitly referenced?
+- Is there genuine innovation beyond what already exists?`, questions: [
+        { code: '1.1', title: 'Background, context and rationale', weight: 40, maxScore: 12, threshold: 0 },
+        { code: '1.2', title: 'Objectives and EU added value', weight: 30, maxScore: 9, threshold: 0 },
+        { code: '1.3', title: 'Target groups and participants', weight: 30, maxScore: 9, threshold: 0 },
       ]},
-      { title: '2. Quality of the project design', color: '#2563eb', questions: [
-        { code: '2.1', title: 'Methodology and approach', maxScore: 10, threshold: 6 },
-        { code: '2.2', title: 'Work plan and activities', maxScore: 10, threshold: 6 },
-        { code: '2.3', title: 'Quality and risk management', maxScore: 10, threshold: 6 },
+      { title: '2. Quality of the project design', color: '#2563eb', maxScore: 30, evalNotes: `QUALITY OF PROJECT DESIGN AND IMPLEMENTATION (max 30 points)
+
+The extent to which:
+• The project objectives are clearly defined and realistic, and address issues relevant to the participating organisations and target groups.
+• The proposed methodology is clear, adequate and feasible, including appropriate phases for preparation, implementation, monitoring, evaluation and dissemination.
+• The work plan is coherent and effective, including appropriate phases for preparation, implementation, monitoring, evaluation and dissemination.
+• The project includes adequate quality and risk management measures.
+• The project is cost-effective and allocates appropriate resources to each activity.
+
+KEY EVALUATOR FOCUS:
+- Is there a clear logical framework (needs → objectives → activities → outputs → impact)?
+- Is the Gantt chart/timeline realistic with milestones?
+- Are quality assurance and risk management concrete?
+- Is the budget proportionate to activities?`, questions: [
+        { code: '2.1', title: 'Methodology and approach', weight: 34, maxScore: 10.2, threshold: 0 },
+        { code: '2.2', title: 'Work plan and activities', weight: 33, maxScore: 9.9, threshold: 0 },
+        { code: '2.3', title: 'Quality and risk management', weight: 33, maxScore: 9.9, threshold: 0 },
       ]},
-      { title: '3. Quality of the partnership', color: '#3b82f6', questions: [
-        { code: '3.1', title: 'Consortium composition and competence', maxScore: 10, threshold: 6 },
-        { code: '3.2', title: 'Cooperation and communication', maxScore: 10, threshold: 6 },
+      { title: '3. Quality of the partnership', color: '#3b82f6', maxScore: 20, evalNotes: `QUALITY OF THE PARTNERSHIP AND COOPERATION ARRANGEMENTS (max 20 points)
+
+The extent to which:
+• The project involves an appropriate mix of complementary participating organisations with the necessary profile, competence, experience and expertise to successfully deliver all aspects of the project.
+• The proposed distribution of responsibilities and tasks demonstrates the commitment and active contribution of all participating organisations.
+• The project involves effective mechanisms for coordination and communication between the participating organisations and with other relevant stakeholders.
+• The project involves newcomers and less experienced organisations to the Action.
+
+KEY EVALUATOR FOCUS:
+- Does each partner bring unique, complementary expertise?
+- Is the geographical spread meaningful (not just token partners)?
+- Are roles clearly distributed with a RACI matrix?
+- Is there a real partnership agreement with decision-making procedures?`, questions: [
+        { code: '3.1', title: 'Consortium composition and competence', weight: 50, maxScore: 10, threshold: 0 },
+        { code: '3.2', title: 'Cooperation and communication', weight: 50, maxScore: 10, threshold: 0 },
       ]},
-      { title: '4. Impact and dissemination', color: '#60a5fa', questions: [
-        { code: '4.1', title: 'Expected impact and sustainability', maxScore: 10, threshold: 6 },
-        { code: '4.2', title: 'Dissemination and exploitation of results', maxScore: 10, threshold: 6 },
-        { code: '4.3', title: 'Wider impact and policy contribution', maxScore: 10, threshold: 6 },
+      { title: '4. Impact and dissemination', color: '#60a5fa', maxScore: 20, evalNotes: `IMPACT, DISSEMINATION AND SUSTAINABILITY (max 20 points)
+
+The extent to which:
+• The project has a clear and convincing potential impact on its participants, participating organisations, target groups, and the wider community.
+• The proposal contains concrete and logical steps to integrate the results of the project activities into the regular work of the participating organisation.
+• The proposal contains concrete and effective steps to make known the results of the project within the participating organisations, to share the results with other organisations and the public, and to acknowledge EU funding.
+• The proposal describes concrete and effective steps to ensure the sustainability of the project: its capacity to continue to have an impact and to produce results after the EU grant has been used up.
+
+KEY EVALUATOR FOCUS:
+- Are impact indicators measurable with baselines and targets?
+- Is there a real sustainability plan (not just vague intentions)?
+- Are dissemination channels specific and appropriate for each audience?
+- Are multiplier events planned in partner countries?`, questions: [
+        { code: '4.1', title: 'Expected impact and sustainability', weight: 40, maxScore: 8, threshold: 0 },
+        { code: '4.2', title: 'Dissemination and exploitation of results', weight: 35, maxScore: 7, threshold: 0 },
+        { code: '4.3', title: 'Wider impact and policy contribution', weight: 25, maxScore: 5, threshold: 0 },
       ]},
     ]
   };
@@ -917,8 +1206,10 @@ const Admin = (() => {
       addSecBtn.addEventListener('click', async () => {
         const title = prompt('Section title (e.g. Relevance):');
         if (!title) return;
+        const maxStr = prompt('Max score for this section (EU fixed, e.g. 30):');
+        const maxScore = parseFloat(maxStr) || 0;
         try {
-          await API.post('/admin/data/eval/sections', { program_id: ev.programId, title, color: EVAL_COLORS[ev.sections.length % EVAL_COLORS.length], sort_order: ev.sections.length });
+          await API.post('/admin/data/eval/sections', { program_id: ev.programId, title, color: EVAL_COLORS[ev.sections.length % EVAL_COLORS.length], max_score: maxScore, sort_order: ev.sections.length });
           await evalReload();
           Toast.show('Section added', 'ok');
         } catch (e) { Toast.show('Error: ' + e.message, 'error'); }
@@ -1045,13 +1336,79 @@ const Admin = (() => {
     if (!q) { content.innerHTML = ''; return; }
     const criteria = q.criteria || [];
 
+    // ── Score verification calculations ──
+    const secMaxScore = parseFloat(sec.max_score) || 0;
+    const questionsInSec = sec.questions || [];
+    const qScoreSum = questionsInSec.reduce((s, qq) => s + parseFloat(qq.max_score || 0), 0);
+    const secOk = secMaxScore > 0 && Math.abs(qScoreSum - secMaxScore) < 0.1;
+    const critScoreSum = (q.criteria || []).reduce((s, cc) => s + parseFloat(cc.max_score || 0), 0);
+    const qMax = parseFloat(q.max_score) || 0;
+    const critOk = qMax > 0 && Math.abs(critScoreSum - qMax) < 0.1;
+
     content.innerHTML = `
-      <!-- Section + Question header -->
-      <div class="flex items-center gap-3 mb-5">
+      <!-- Section header -->
+      <div class="flex items-center gap-3 mb-4">
         <div class="w-2 h-10 rounded-full" style="background:${sec.color}"></div>
-        <div>
-          <div class="text-[11px] font-bold uppercase tracking-widest" style="color:${sec.color}">${sec.title}</div>
+        <div class="flex-1">
+          <div class="text-[11px] font-bold uppercase tracking-widest flex items-center gap-2" style="color:${sec.color}">
+            ${sec.title}
+            <span class="px-2 py-0.5 rounded-lg text-[10px] font-bold" style="background:${sec.color}15">${secMaxScore} pts</span>
+          </div>
           <h3 class="font-headline text-lg font-extrabold text-on-surface tracking-tight">${q.code} &mdash; ${q.title}</h3>
+        </div>
+      </div>
+
+      <!-- E+ Guide notes -->
+      <div class="rounded-xl border border-amber-200/60 mb-4 bg-amber-50/50 overflow-hidden">
+        <button id="eval-notes-toggle" class="w-full flex items-center gap-2 px-4 py-2.5 text-left hover:bg-amber-100/50 transition-colors">
+          <span class="material-symbols-outlined text-sm text-amber-600">menu_book</span>
+          <span class="text-[11px] font-bold uppercase tracking-widest text-amber-700">E+ Programme Guide notes</span>
+          <span class="material-symbols-outlined text-sm text-amber-400 ml-auto eval-notes-chevron transition-transform">expand_more</span>
+        </button>
+        <div id="eval-notes-body" class="hidden px-4 pb-3">
+          <div id="eval-notes-display" class="text-xs text-amber-900/80 leading-relaxed whitespace-pre-wrap mb-2">${sec.eval_notes || '<span class="text-amber-400 italic">No guide notes yet. Click Edit to add the evaluation criteria from the E+ Programme Guide for this section.</span>'}</div>
+          <div id="eval-notes-edit-wrap" class="hidden mb-2">
+            <textarea id="eval-notes-textarea" rows="6" class="w-full px-3 py-2 rounded-lg border border-amber-200 bg-white text-xs focus:border-amber-400 outline-none resize-vertical leading-relaxed" placeholder="Paste the evaluation criteria text from the E+ Programme Guide for this section...">${sec.eval_notes || ''}</textarea>
+          </div>
+          <div class="flex gap-2">
+            <button id="eval-notes-edit-btn" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[10px] font-bold text-amber-700 border border-amber-200 hover:bg-amber-100 transition-colors">
+              <span class="material-symbols-outlined text-xs">edit</span> Edit
+            </button>
+            <button id="eval-notes-save-btn" class="hidden inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[10px] font-bold text-white bg-amber-600 hover:bg-amber-700 transition-colors">
+              <span class="material-symbols-outlined text-xs">save</span> Save
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Score distribution bar -->
+      <div class="eval-score-dist rounded-xl border border-outline-variant/20 p-4 mb-5 bg-surface-container-lowest">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Score distribution</span>
+          <div class="flex items-center gap-1.5 text-[11px]">
+            <span class="dist-icon material-symbols-outlined text-sm ${secOk ? 'text-green-500' : 'text-red-500'}">${secOk ? 'check_circle' : 'error'}</span>
+            <span class="dist-label font-bold ${secOk ? 'text-green-600' : 'text-red-600'}">Total: ${qScoreSum} / ${secMaxScore || '?'} pts</span>
+          </div>
+        </div>
+        <div class="flex gap-2 items-end">
+          ${questionsInSec.map((qq, qi) => {
+            const pts = parseFloat(qq.max_score) || 0;
+            const pct = secMaxScore > 0 ? (pts / secMaxScore * 100) : 0;
+            const isThis = qi === ev.activeQuestionIdx;
+            return `<div class="flex-1 flex flex-col items-center gap-1 eval-score-q" data-qi="${qi}" data-qid="${qq.id}">
+              <input type="number" class="eval-score-input w-14 px-1 py-0.5 rounded-lg border text-center text-[11px] font-bold outline-none transition-all
+                ${isThis ? 'border-primary/40 bg-white' : 'border-transparent bg-transparent hover:border-outline-variant/40 hover:bg-white'}"
+                style="color:${isThis ? sec.color : '#787682'}"
+                value="${pts}" step="0.5" min="0" data-qid="${qq.id}" data-qi="${qi}">
+              <div class="w-full rounded-lg transition-all" style="height:${Math.max(pct * 0.6, 4)}px;background:${isThis ? sec.color : sec.color + '30'}"></div>
+              <span class="text-[10px] font-bold cursor-pointer ${isThis ? '' : 'text-on-surface-variant/40'}" style="${isThis ? 'color:'+sec.color : ''}">${qq.code}</span>
+              <span class="text-[9px] ${isThis ? 'font-bold' : 'text-on-surface-variant/40'}" style="${isThis ? 'color:'+sec.color : ''}">${pct.toFixed(0)}%</span>
+            </div>`;
+          }).join('')}
+        </div>
+        <div class="dist-msg ${!secOk && secMaxScore > 0 ? 'mt-2 px-3 py-1.5 rounded-lg bg-red-50 text-red-600 text-[11px] font-semibold flex items-center gap-1' : 'hidden'}">
+          ${!secOk && secMaxScore > 0 ? `<span class="material-symbols-outlined text-sm">error</span>
+          ${qScoreSum < secMaxScore ? 'Missing ' + (secMaxScore - qScoreSum) + ' pts. Add ' + (secMaxScore - qScoreSum) + ' pts.' : 'Excess ' + (qScoreSum - secMaxScore) + ' pts. Remove ' + (qScoreSum - secMaxScore) + ' pts.'}` : ''}
         </div>
       </div>
 
@@ -1063,32 +1420,40 @@ const Admin = (() => {
         </div>
         <div class="grid grid-cols-4 gap-3 mb-3">
           <div class="flex flex-col gap-1">
-            <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Code</label>
+            <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">Code ${fieldInfo('q_code')}</label>
             <input type="text" id="eq-code" value="${q.code}" class="px-3 py-2 rounded-lg border border-outline-variant text-sm font-mono font-bold focus:border-primary outline-none" style="color:${sec.color}">
           </div>
           <div class="col-span-3 flex flex-col gap-1">
-            <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Title</label>
+            <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">Title ${fieldInfo('q_title')}</label>
             <input type="text" id="eq-title" value="${q.title}" class="px-3 py-2 rounded-lg border border-outline-variant text-sm font-semibold focus:border-primary outline-none">
           </div>
         </div>
         <div class="flex flex-col gap-1 mb-3">
-          <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Prompt / Instruction for the evaluator</label>
-          <textarea id="eq-prompt" rows="3" class="px-3 py-2 rounded-lg border border-outline-variant text-sm focus:border-primary outline-none resize-vertical leading-relaxed">${q.prompt || ''}</textarea>
+          <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">Description ${fieldInfo('q_description')}</label>
+          <textarea id="eq-description" rows="3" class="px-3 py-2 rounded-lg border border-outline-variant text-sm focus:border-primary outline-none resize-vertical leading-relaxed">${q.description || ''}</textarea>
         </div>
-        <div class="grid grid-cols-2 gap-3 mb-4">
+        <div class="grid grid-cols-2 gap-3 mb-3">
           <div class="flex flex-col gap-1">
-            <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Max score</label>
-            <div class="flex items-center gap-2">
-              <input type="number" id="eq-max" value="${q.max_score}" step="0.5" min="0" class="w-24 px-3 py-2 rounded-lg border border-outline-variant text-sm font-bold focus:border-primary outline-none text-center" style="color:${sec.color}">
-              <span class="text-xs text-on-surface-variant">points</span>
-            </div>
+            <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">Word limit ${fieldInfo('q_word_limit')}</label>
+            <input type="number" id="eq-word-limit" value="${q.word_limit || ''}" min="0" class="w-full px-3 py-2 rounded-lg border border-outline-variant text-sm focus:border-primary outline-none text-center" placeholder="\u2014">
           </div>
           <div class="flex flex-col gap-1">
-            <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Threshold (min to pass)</label>
-            <div class="flex items-center gap-2">
-              <input type="number" id="eq-threshold" value="${q.threshold}" step="0.5" min="0" class="w-24 px-3 py-2 rounded-lg border border-outline-variant text-sm font-bold focus:border-primary outline-none text-center">
-              <span class="text-xs text-on-surface-variant">points</span>
-            </div>
+            <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">Page limit ${fieldInfo('q_page_limit')}</label>
+            <input type="number" id="eq-page-limit" value="${q.page_limit || ''}" step="0.5" min="0" class="w-full px-3 py-2 rounded-lg border border-outline-variant text-sm focus:border-primary outline-none text-center" placeholder="\u2014">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3 mb-3">
+          <div class="flex flex-col gap-1">
+            <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">Writing guidance ${fieldInfo('q_writing_guidance')}</label>
+            <textarea id="eq-writing-guidance" rows="2" class="px-3 py-2 rounded-lg border border-outline-variant text-sm focus:border-primary outline-none resize-vertical leading-relaxed" placeholder="e.g. Use narrative style, include partner experiences...">${q.writing_guidance || ''}</textarea>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">Scoring logic ${fieldInfo('q_scoring_logic')}</label>
+            <select id="eq-scoring-logic" class="px-3 py-2 rounded-lg border border-outline-variant text-sm focus:border-primary outline-none cursor-pointer">
+              <option value="sum" ${(q.scoring_logic || 'sum') === 'sum' ? 'selected' : ''}>Sum (add all criteria scores)</option>
+              <option value="average" ${q.scoring_logic === 'average' ? 'selected' : ''}>Average</option>
+              <option value="min" ${q.scoring_logic === 'min' ? 'selected' : ''}>Min (lowest criterion wins)</option>
+            </select>
           </div>
         </div>
         <div class="flex justify-end">
@@ -1110,6 +1475,34 @@ const Admin = (() => {
             <span class="material-symbols-outlined text-sm">add</span> Add criterion
           </button>
         </div>
+        <!-- Criteria score bar -->
+        <div class="eval-crit-score-bar rounded-xl border border-outline-variant/20 p-3 mb-3 bg-surface-container-lowest">
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-2 text-[11px]">
+              <span class="crit-bar-icon material-symbols-outlined text-sm ${critOk ? 'text-green-500' : 'text-red-500'}">${critOk ? 'check_circle' : 'error'}</span>
+              <span class="crit-bar-label font-bold ${critOk ? 'text-green-600' : 'text-red-600'}">Criteria: ${critScoreSum} / ${qMax} pts</span>
+              ${!critOk && qMax > 0 ? `<span class="crit-bar-diff text-[10px] font-semibold px-2 py-0.5 rounded-lg ${critScoreSum < qMax ? 'bg-red-50 text-red-500' : 'bg-amber-50 text-amber-600'}">${critScoreSum < qMax ? 'need ' + (qMax - critScoreSum) + ' more' : (critScoreSum - qMax) + ' excess'}</span>` : ''}
+            </div>
+            <span class="text-[10px] text-on-surface-variant/50">${criteria.length} ${criteria.length === 1 ? 'criterion' : 'criteria'}</span>
+          </div>
+          <div class="flex gap-1 h-3 rounded-full overflow-hidden bg-gray-100">
+            ${criteria.length === 0 ? '' : criteria.map((c, i) => {
+              const cPts = parseFloat(c.max_score) || 0;
+              const cPct = qMax > 0 ? (cPts / qMax * 100) : (100 / criteria.length);
+              return `<div class="rounded-full transition-all" style="width:${Math.max(cPct, 2)}%;background:${sec.color};opacity:${0.4 + (i % 2) * 0.3 + 0.3}"
+                title="Criterion ${i+1}: ${c.title} — ${cPts} pts"></div>`;
+            }).join('')}
+          </div>
+          ${criteria.length > 0 ? `<div class="flex gap-1 mt-1">
+            ${criteria.map((c, i) => {
+              const cPts = parseFloat(c.max_score) || 0;
+              const cPct = qMax > 0 ? (cPts / qMax * 100) : (100 / criteria.length);
+              return `<div class="text-center" style="width:${Math.max(cPct, 2)}%">
+                <span class="text-[8px] font-bold text-on-surface-variant/50">${cPts}</span>
+              </div>`;
+            }).join('')}
+          </div>` : ''}
+        </div>
         <div id="eval-crit-list" class="grid gap-3">
           ${criteria.length === 0 ? '<div class="rounded-2xl border-2 border-dashed border-outline-variant/40 py-10 text-center"><span class="material-symbols-outlined text-3xl text-outline-variant/30 mb-2">playlist_add</span><p class="text-xs text-on-surface-variant">No criteria yet. Add one to define how this question is scored.</p></div>' :
             criteria.map((c, i) => evalCriterionCard(c, i, sec.color)).join('')}
@@ -1122,13 +1515,80 @@ const Admin = (() => {
         await API.patch('/admin/data/eval/questions/' + q.id, {
           code: document.getElementById('eq-code').value,
           title: document.getElementById('eq-title').value,
-          prompt: document.getElementById('eq-prompt').value,
-          max_score: parseFloat(document.getElementById('eq-max').value) || 0,
-          threshold: parseFloat(document.getElementById('eq-threshold').value) || 0
+          description: document.getElementById('eq-description').value,
+          word_limit: parseInt(document.getElementById('eq-word-limit').value) || null,
+          page_limit: parseFloat(document.getElementById('eq-page-limit').value) || null,
+          writing_guidance: document.getElementById('eq-writing-guidance').value,
+          scoring_logic: document.getElementById('eq-scoring-logic').value
         });
         await evalReload();
         Toast.show('Saved', 'ok');
       } catch (e) { Toast.show('Error: ' + e.message, 'error'); }
+    });
+    // E+ Guide notes toggle/edit/save
+    document.getElementById('eval-notes-toggle')?.addEventListener('click', () => {
+      const body = document.getElementById('eval-notes-body');
+      const chevron = content.querySelector('.eval-notes-chevron');
+      body.classList.toggle('hidden');
+      if (chevron) chevron.style.transform = body.classList.contains('hidden') ? '' : 'rotate(180deg)';
+    });
+    document.getElementById('eval-notes-edit-btn')?.addEventListener('click', () => {
+      document.getElementById('eval-notes-display').classList.add('hidden');
+      document.getElementById('eval-notes-edit-wrap').classList.remove('hidden');
+      document.getElementById('eval-notes-save-btn').classList.remove('hidden');
+      document.getElementById('eval-notes-edit-btn').classList.add('hidden');
+      document.getElementById('eval-notes-textarea').focus();
+    });
+    document.getElementById('eval-notes-save-btn')?.addEventListener('click', async () => {
+      const notes = document.getElementById('eval-notes-textarea').value;
+      try {
+        await API.patch('/admin/data/eval/sections/' + sec.id, { eval_notes: notes });
+        await evalReload();
+        Toast.show('Guide notes saved', 'ok');
+      } catch (e) { Toast.show('Error: ' + e.message, 'error'); }
+    });
+
+    // Click on question code to navigate
+    content.querySelectorAll('.eval-score-q span[class*="cursor-pointer"]').forEach(el => {
+      el.addEventListener('click', () => {
+        const qi = parseInt(el.parentElement.dataset.qi);
+        ev.activeQuestionIdx = qi;
+        evalRenderSidebar();
+        evalRenderMain();
+      });
+    });
+    // Inline score edit in distribution bar — live update + save on blur
+    content.querySelectorAll('.eval-score-input').forEach(inp => {
+      // Live recalculate total as user types
+      inp.addEventListener('input', () => {
+        const bar = content.querySelector('.eval-score-dist');
+        if (!bar) return;
+        let sum = 0;
+        content.querySelectorAll('.eval-score-input').forEach(i => { sum += parseFloat(i.value) || 0; });
+        const ok = secMaxScore > 0 && Math.abs(sum - secMaxScore) < 0.1;
+        const icon = bar.querySelector('.dist-icon');
+        const label = bar.querySelector('.dist-label');
+        const msg = bar.querySelector('.dist-msg');
+        if (icon) { icon.textContent = ok ? 'check_circle' : 'error'; icon.className = `material-symbols-outlined text-sm ${ok ? 'text-green-500' : 'text-red-500'}`; }
+        if (label) { label.textContent = `Total: ${sum} / ${secMaxScore} pts`; label.className = `font-bold ${ok ? 'text-green-600' : 'text-red-600'}`; }
+        if (msg) {
+          if (ok) { msg.innerHTML = ''; msg.className = 'hidden'; }
+          else {
+            const diff = sum - secMaxScore;
+            msg.className = 'mt-2 px-3 py-1.5 rounded-lg bg-red-50 text-red-600 text-[11px] font-semibold flex items-center gap-1';
+            msg.innerHTML = `<span class="material-symbols-outlined text-sm">error</span> ${diff > 0 ? 'Excess ' + diff + ' pts. Remove ' + diff + ' pts.' : 'Missing ' + Math.abs(diff) + ' pts. Add ' + Math.abs(diff) + ' pts.'}`;
+          }
+        }
+      });
+      // Save on blur/change
+      inp.addEventListener('change', async () => {
+        const qid = inp.dataset.qid;
+        const newScore = parseFloat(inp.value) || 0;
+        try {
+          await API.patch('/admin/data/eval/questions/' + qid, { max_score: newScore });
+          await evalReload();
+        } catch (e) { Toast.show('Error: ' + e.message, 'error'); }
+      });
     });
     // Add criterion — creates empty one and reloads
     document.getElementById('eval-add-crit')?.addEventListener('click', async () => {
@@ -1142,10 +1602,13 @@ const Admin = (() => {
   }
 
   async function evalRenderCallData(content) {
-    // Fetch current program data
-    let programs;
+    // Fetch current program data + call eligibility (for writing rules)
+    let programs, elig;
     try { programs = await API.get('/admin/data/programs'); } catch { programs = []; }
+    try { elig = await API.get('/admin/data/eligibility/call/' + ev.programId); } catch { elig = null; }
     const prog = programs.find(p => p.id === ev.programId) || {};
+    prog._writing_style = elig?.writing_style || '';
+    prog._ai_detection_rules = elig?.ai_detection_rules || '';
     const fmtDate = d => d ? d.slice(0, 10) : '';
 
     content.innerHTML = `
@@ -1210,7 +1673,23 @@ const Admin = (() => {
             </select>
           </div>
         </div>
-        <div class="flex justify-end">
+        <div class="col-span-2 mt-2 border-t border-outline-variant/20 pt-4">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="material-symbols-outlined text-sm text-primary">edit_note</span>
+            <span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Writing rules (global)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="flex flex-col gap-1">
+              <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">Writing style ${fieldInfo('cd_writing_style')}</label>
+              <textarea id="cd-writing-style" rows="4" class="px-3 py-2.5 rounded-xl border border-outline-variant text-sm focus:border-primary outline-none resize-vertical leading-relaxed" placeholder="Tone, voice, sentence variety, formality level...">${prog._writing_style || ''}</textarea>
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">AI detection rules ${fieldInfo('cd_ai_rules')}</label>
+              <textarea id="cd-ai-rules" rows="4" class="px-3 py-2.5 rounded-xl border border-outline-variant text-sm focus:border-primary outline-none resize-vertical leading-relaxed" placeholder="Patterns to avoid, forbidden expressions...">${prog._ai_detection_rules || ''}</textarea>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-end mt-4">
           <button id="cd-save" class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-xs font-bold text-[#e7eb00] bg-[#1b1464] hover:bg-[#1b1464]/80 transition-colors shadow-sm">
             <span class="material-symbols-outlined text-sm">save</span> Save call data
           </button>
@@ -1232,6 +1711,12 @@ const Admin = (() => {
           duration_min_months: document.getElementById('cd-dur-min').value || null,
           duration_max_months: document.getElementById('cd-dur-max').value || null,
           active: parseInt(document.getElementById('cd-active').value)
+        });
+        // Also save writing rules to call_eligibility
+        await API.put('/admin/data/eligibility/call/' + ev.programId, {
+          ...elig,
+          writing_style: document.getElementById('cd-writing-style').value,
+          ai_detection_rules: document.getElementById('cd-ai-rules').value
         });
         ev.programName = document.getElementById('cd-name').value;
         document.getElementById('eval-program-name').textContent = ev.programName;
@@ -1271,36 +1756,46 @@ const Admin = (() => {
         <!-- Fields -->
         <div class="grid gap-3">
           <div class="flex flex-col gap-1">
-            <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Title</label>
+            <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">Title ${fieldInfo('c_title')}</label>
             <input type="text" data-field="title" value="${esc(c.title)}" class="ec-field px-3 py-2.5 rounded-xl border border-outline-variant/40 bg-white text-sm font-semibold focus:border-primary outline-none">
           </div>
           <div class="grid grid-cols-2 gap-3">
             <div class="flex flex-col gap-1">
-              <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Meaning</label>
+              <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">Meaning ${fieldInfo('c_meaning')}</label>
               <textarea data-field="meaning" rows="2" class="ec-field px-3 py-2 rounded-xl border border-outline-variant/40 bg-white text-xs focus:border-primary outline-none resize-vertical leading-relaxed">${esc(c.meaning)}</textarea>
             </div>
             <div class="flex flex-col gap-1">
-              <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Structure</label>
+              <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">Structure ${fieldInfo('c_structure')}</label>
               <textarea data-field="structure" rows="2" class="ec-field px-3 py-2 rounded-xl border border-outline-variant/40 bg-white text-xs focus:border-primary outline-none resize-vertical leading-relaxed">${esc(c.structure)}</textarea>
             </div>
           </div>
           <div class="grid grid-cols-2 gap-3">
             <div class="flex flex-col gap-1">
-              <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Relations</label>
+              <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">Relations ${fieldInfo('c_relations')}</label>
               <textarea data-field="relations" rows="2" class="ec-field px-3 py-2 rounded-xl border border-outline-variant/40 bg-white text-xs focus:border-primary outline-none resize-vertical leading-relaxed">${esc(c.relations)}</textarea>
             </div>
             <div class="flex flex-col gap-1">
-              <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Rules</label>
+              <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">Rules ${fieldInfo('c_rules')}</label>
               <textarea data-field="rules" rows="2" class="ec-field px-3 py-2 rounded-xl border border-outline-variant/40 bg-white text-xs focus:border-primary outline-none resize-vertical leading-relaxed">${esc(c.rules)}</textarea>
             </div>
           </div>
           <div class="grid grid-cols-2 gap-3">
             <div class="flex flex-col gap-1">
-              <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Max score</label>
+              <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-xs text-error/60">flag</span> Red flags ${fieldInfo('c_red_flags')}</label>
+              <textarea data-field="red_flags" rows="2" class="ec-field px-3 py-2 rounded-xl border border-outline-variant/40 bg-white text-xs focus:border-primary outline-none resize-vertical leading-relaxed" placeholder="What to penalize...">${esc(c.red_flags)}</textarea>
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-xs text-amber-500/60">scoreboard</span> Score rubric ${fieldInfo('c_score_rubric')}</label>
+              <textarea data-field="score_rubric" rows="2" class="ec-field px-3 py-2 rounded-xl border border-outline-variant/40 bg-white text-xs font-mono focus:border-primary outline-none resize-vertical leading-relaxed" placeholder='{"0":"Not addressed","1":"Partial","2":"Complete"}'>${c.score_rubric ? esc(JSON.stringify(c.score_rubric)) : ''}</textarea>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="flex flex-col gap-1">
+              <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">Max score ${fieldInfo('c_max_score')}</label>
               <input type="number" data-field="max_score" value="${c.max_score}" step="0.5" min="0" class="ec-field px-3 py-2 rounded-xl border border-outline-variant/40 bg-white text-sm font-bold focus:border-primary outline-none" style="color:${color}">
             </div>
             <div class="flex flex-col gap-1">
-              <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Mandatory</label>
+              <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">Mandatory ${fieldInfo('c_mandatory')}</label>
               <select data-field="mandatory" class="ec-field px-3 py-2 rounded-xl border border-outline-variant/40 bg-white text-sm focus:border-primary outline-none cursor-pointer">
                 <option value="1" ${c.mandatory ? 'selected' : ''}>Yes</option>
                 <option value="0" ${!c.mandatory ? 'selected' : ''}>No</option>
@@ -1315,18 +1810,23 @@ const Admin = (() => {
     // Save individual criterion
     container.querySelectorAll('.eval-save-crit').forEach(btn => {
       btn.addEventListener('click', async () => {
-        const card = btn.closest('.eval-crit-item');
+        const card = btn.closest('.eval-crit-card');
         const id = btn.dataset.id;
         const data = {};
         card.querySelectorAll('.ec-field').forEach(el => {
           const field = el.dataset.field;
           if (field === 'mandatory') data[field] = parseInt(el.value);
           else if (field === 'max_score') data[field] = parseFloat(el.value) || 0;
+          else if (field === 'score_rubric') {
+            try { data[field] = el.value ? JSON.parse(el.value) : null; }
+            catch { Toast.show('Invalid JSON in score rubric', 'err'); return; }
+          }
           else data[field] = el.value;
         });
         try {
           await API.patch('/admin/data/eval/criteria/' + id, data);
           Toast.show('Criterion saved', 'ok');
+          await evalReload();
         } catch (e) { Toast.show('Error: ' + e.message, 'error'); }
       });
     });

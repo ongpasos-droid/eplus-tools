@@ -155,13 +155,13 @@ const { v4: uuid } = require('uuid');
     for (let qi = 0; qi < sec.questions.length; qi++) {
       const q = sec.questions[qi];
       const qId = uuid();
-      await conn.query('INSERT INTO eval_questions (id, section_id, code, title, prompt, max_score, threshold, general_rules, score_caps, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?)',
+      await conn.query('INSERT INTO eval_questions (id, section_id, code, title, description, max_score, threshold, general_rules, score_caps, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?)',
         [qId, secId, q.code, q.title, q.prompt, q.maxScore, q.threshold, null, null, qi]);
       totalQ++;
       for (let ci = 0; ci < q.criteria.length; ci++) {
         const c = q.criteria[ci];
-        await conn.query('INSERT INTO eval_criteria (id, question_id, title, max_score, mandatory, meaning, structure, relations, rules, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?)',
-          [uuid(), qId, c.title, c.maxScore, c.mandatory, c.meaning, c.structure, c.relations, c.rules, ci]);
+        await conn.query('INSERT INTO eval_criteria (id, question_id, title, max_score, mandatory, meaning, structure, relations, rules, red_flags, score_rubric, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
+          [uuid(), qId, c.title, c.maxScore, c.mandatory, c.meaning, c.structure, c.relations, c.rules, c.redFlags || null, c.scoreRubric ? JSON.stringify(c.scoreRubric) : null, ci]);
         totalC++;
       }
     }

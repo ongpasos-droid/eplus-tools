@@ -94,6 +94,56 @@ input:focus, select:focus, textarea:focus {
 @keyframes critIn { from { opacity:0; transform:translateY(8px) } to { opacity:1; transform:translateY(0) } }
 .eval-crit-card { animation: critIn .25s ease }
 
+/* ── Field info tooltips ─────────────────────────────────────── */
+.field-info {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: rgba(6,0,62,.08); color: #787682;
+  cursor: pointer; transition: all .2s ease;
+  flex-shrink: 0; vertical-align: middle; margin-left: 4px;
+}
+.field-info:hover { background: #1b1464; color: #e7eb00 }
+.field-info .material-symbols-outlined { font-size: 12px; line-height: 1 }
+
+.field-info-overlay {
+  position: fixed; inset: 0; z-index: 9997;
+  background: rgba(0,0,0,.3);
+  animation: overlayIn .15s ease;
+}
+.field-info-popup {
+  position: fixed; z-index: 9998;
+  background: #1e293b; color: #f1f5f9;
+  border-radius: 14px; padding: 20px 24px;
+  font-size: 13px; line-height: 1.7;
+  box-shadow: 0 12px 40px rgba(0,0,0,.35);
+  max-width: 480px; min-width: 280px; width: 90vw;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  pointer-events: auto;
+  max-height: 80vh; overflow-y: auto;
+}
+.field-info-popup h4 {
+  font-size: 14px; font-weight: 700; color: #e7eb00;
+  margin: 0 0 10px 0; letter-spacing: .02em;
+  padding-right: 24px;
+}
+.field-info-popup p { margin: 0 0 8px 0; color: #cbd5e1 }
+.field-info-popup .tip-example {
+  margin: 8px 0; padding: 10px 14px;
+  background: rgba(255,255,255,.08); border-radius: 8px;
+  font-size: 12px; color: #94d3a2; font-style: italic;
+  border-left: 3px solid #22c55e;
+}
+.field-info-popup .tip-close {
+  position: absolute; top: 12px; right: 14px;
+  background: none; border: none; color: #94a3b8;
+  cursor: pointer; font-size: 18px; line-height: 1;
+  padding: 2px;
+}
+.field-info-popup .tip-close:hover { color: #fff }
+@keyframes overlayIn { from { opacity:0 } to { opacity:1 } }
+
 /* ── Per Diem cards ──────────────────────────────────────────── */
 .perdiem-card { transition: transform .2s ease, box-shadow .2s ease }
 .perdiem-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(6,0,62,.08) }

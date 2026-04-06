@@ -275,22 +275,26 @@ async function upsertCallEligibility(programId, data) {
       `UPDATE call_eligibility SET
         eligible_country_types=?, eligible_entity_types=?,
         min_partners=?, min_countries=?, max_coord_applications=?,
-        activity_location_types=?, additional_rules=?
+        activity_location_types=?, additional_rules=?,
+        writing_style=?, ai_detection_rules=?
        WHERE program_id=?`,
       [countryTypes, entityTypes,
        data.min_partners || 1, data.min_countries || 1, data.max_coord_applications || null,
-       activityTypes, data.additional_rules || null, programId]
+       activityTypes, data.additional_rules || null,
+       data.writing_style || null, data.ai_detection_rules || null, programId]
     );
     return existing.id;
   }
   const id = uuid();
   await pool.query(
     `INSERT INTO call_eligibility (id, program_id, eligible_country_types, eligible_entity_types,
-      min_partners, min_countries, max_coord_applications, activity_location_types, additional_rules)
-     VALUES (?,?,?,?,?,?,?,?,?)`,
+      min_partners, min_countries, max_coord_applications, activity_location_types, additional_rules,
+      writing_style, ai_detection_rules)
+     VALUES (?,?,?,?,?,?,?,?,?,?,?)`,
     [id, programId, countryTypes, entityTypes,
      data.min_partners || 1, data.min_countries || 1, data.max_coord_applications || null,
-     activityTypes, data.additional_rules || null]
+     activityTypes, data.additional_rules || null,
+     data.writing_style || null, data.ai_detection_rules || null]
   );
   return id;
 }
@@ -319,29 +323,61 @@ async function getEvalTree(programId) {
 
 async function upsertEvalSection(data, id) {
   if (id) {
-    await pool.query('UPDATE eval_sections SET title=?, color=?, sort_order=? WHERE id=?',
-      [data.title, data.color || '#3b82f6', data.sort_order ?? 0, id]);
+    const sets = [];
+    const params = [];
+    if ('title' in data) { sets.push('title=?'); params.push(data.title); }
+    if ('color' in data) { sets.push('color=?'); params.push(data.color); }
+    if ('max_score' in data) { sets.push('max_score=?'); params.push(data.max_score ?? 0); }
+    if ('eval_notes' in data) { sets.push('eval_notes=?'); params.push(data.eval_notes || null); }
+    if ('sort_order' in data) { sets.push('sort_order=?'); params.push(data.sort_order ?? 0); }
+    if (!sets.length) return id;
+    params.push(id);
+    await pool.query(`UPDATE eval_sections SET ${sets.join(', ')} WHERE id=?`, params);
     return id;
   }
   const newId = uuid();
-  await pool.query('INSERT INTO eval_sections (id, program_id, title, color, sort_order) VALUES (?,?,?,?,?)',
-    [newId, data.program_id, data.title, data.color || '#3b82f6', data.sort_order ?? 0]);
+  await pool.query('INSERT INTO eval_sections (id, program_id, title, color, max_score, sort_order) VALUES (?,?,?,?,?,?)',
+    [newId, data.program_id, data.title, data.color || '#3b82f6', data.max_score ?? 0, data.sort_order ?? 0]);
   return newId;
 }
 
 async function deleteEvalSection(id) { await pool.query('DELETE FROM eval_sections WHERE id=?', [id]); }
 
 async function upsertEvalQuestion(data, id) {
-  const rules = data.general_rules ? JSON.stringify(data.general_rules) : null;
-  const caps = data.score_caps ? JSON.stringify(data.score_caps) : null;
   if (id) {
-    await pool.query('UPDATE eval_questions SET code=?, title=?, prompt=?, max_score=?, threshold=?, general_rules=?, score_caps=?, sort_order=? WHERE id=?',
-      [data.code, data.title, data.prompt || null, data.max_score ?? 0, data.threshold ?? 0, rules, caps, data.sort_order ?? 0, id]);
+    // Partial update: only SET fields that are present in data
+    const sets = [];
+    const params = [];
+    const fieldMap = {
+      code: 'code', title: 'title', description: 'description',
+      word_limit: 'word_limit', page_limit: 'page_limit',
+      writing_guidance: 'writing_guidance', scoring_logic: 'scoring_logic',
+      weight: 'weight', max_score: 'max_score', threshold: 'threshold',
+      sort_order: 'sort_order'
+    };
+    for (const [key, col] of Object.entries(fieldMap)) {
+      if (key in data) { sets.push(`${col}=?`); params.push(data[key] ?? null); }
+    }
+    if ('general_rules' in data) { sets.push('general_rules=?'); params.push(data.general_rules ? JSON.stringify(data.general_rules) : null); }
+    if ('score_caps' in data) { sets.push('score_caps=?'); params.push(data.score_caps ? JSON.stringify(data.score_caps) : null); }
+    // Also support legacy "prompt" → description
+    if ('prompt' in data && !('description' in data)) { sets.push('description=?'); params.push(data.prompt || null); }
+    if (!sets.length) return id;
+    params.push(id);
+    await pool.query(`UPDATE eval_questions SET ${sets.join(', ')} WHERE id=?`, params);
     return id;
   }
+  const desc = data.description ?? data.prompt ?? null;
+  const rules = data.general_rules ? JSON.stringify(data.general_rules) : null;
+  const caps = data.score_caps ? JSON.stringify(data.score_caps) : null;
   const newId = uuid();
-  await pool.query('INSERT INTO eval_questions (id, section_id, code, title, prompt, max_score, threshold, general_rules, score_caps, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?)',
-    [newId, data.section_id, data.code, data.title, data.prompt || null, data.max_score ?? 0, data.threshold ?? 0, rules, caps, data.sort_order ?? 0]);
+  await pool.query(
+    `INSERT INTO eval_questions (id, section_id, code, title, description, word_limit, page_limit,
+     writing_guidance, scoring_logic, weight, max_score, threshold, general_rules, score_caps, sort_order)
+     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+    [newId, data.section_id, data.code, data.title, desc, data.word_limit || null, data.page_limit || null,
+     data.writing_guidance || null, data.scoring_logic || 'sum', data.weight ?? 0,
+     data.max_score ?? 0, data.threshold ?? 0, rules, caps, data.sort_order ?? 0]);
   return newId;
 }
 
@@ -349,13 +385,25 @@ async function deleteEvalQuestion(id) { await pool.query('DELETE FROM eval_quest
 
 async function upsertEvalCriterion(data, id) {
   if (id) {
-    await pool.query('UPDATE eval_criteria SET title=?, max_score=?, mandatory=?, meaning=?, structure=?, relations=?, rules=?, sort_order=? WHERE id=?',
-      [data.title, data.max_score ?? 1, data.mandatory ?? 0, data.meaning || null, data.structure || null, data.relations || null, data.rules || null, data.sort_order ?? 0, id]);
+    const sets = [];
+    const params = [];
+    const fields = ['title', 'max_score', 'mandatory', 'meaning', 'structure', 'relations', 'rules', 'red_flags', 'sort_order'];
+    for (const f of fields) {
+      if (f in data) { sets.push(`${f}=?`); params.push(data[f] ?? null); }
+    }
+    if ('score_rubric' in data) { sets.push('score_rubric=?'); params.push(data.score_rubric ? JSON.stringify(data.score_rubric) : null); }
+    if (!sets.length) return id;
+    params.push(id);
+    await pool.query(`UPDATE eval_criteria SET ${sets.join(', ')} WHERE id=?`, params);
     return id;
   }
+  const rubric = data.score_rubric ? JSON.stringify(data.score_rubric) : null;
   const newId = uuid();
-  await pool.query('INSERT INTO eval_criteria (id, question_id, title, max_score, mandatory, meaning, structure, relations, rules, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?)',
-    [newId, data.question_id, data.title, data.max_score ?? 1, data.mandatory ?? 0, data.meaning || null, data.structure || null, data.relations || null, data.rules || null, data.sort_order ?? 0]);
+  await pool.query(
+    `INSERT INTO eval_criteria (id, question_id, title, max_score, mandatory, meaning, structure,
+     relations, rules, red_flags, score_rubric, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`,
+    [newId, data.question_id, data.title, data.max_score ?? 1, data.mandatory ?? 0, data.meaning || null,
+     data.structure || null, data.relations || null, data.rules || null, data.red_flags || null, rubric, data.sort_order ?? 0]);
   return newId;
 }
 
@@ -375,23 +423,30 @@ async function importEvalRules(programId, jsonData) {
     for (let si = 0; si < sections.length; si++) {
       const sec = sections[si];
       const secId = uuid();
-      await conn.query('INSERT INTO eval_sections (id, program_id, title, color, sort_order) VALUES (?,?,?,?,?)',
-        [secId, programId, sec.title, COLORS[si % COLORS.length], si]);
+      await conn.query('INSERT INTO eval_sections (id, program_id, title, color, max_score, eval_notes, sort_order) VALUES (?,?,?,?,?,?,?)',
+        [secId, programId, sec.title, COLORS[si % COLORS.length], sec.maxScore ?? 0, sec.evalNotes || null, si]);
       const questions = sec.questions || [];
       for (let qi = 0; qi < questions.length; qi++) {
         const q = questions[qi];
         const qId = uuid();
-        await conn.query('INSERT INTO eval_questions (id, section_id, code, title, prompt, max_score, threshold, general_rules, score_caps, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?)',
-          [qId, secId, q.code || `${si+1}.${qi+1}`, q.title, q.prompt || null,
-           q.maxScore ?? 0, q.threshold ?? 0,
+        await conn.query(
+          `INSERT INTO eval_questions (id, section_id, code, title, description, word_limit, page_limit,
+           writing_guidance, scoring_logic, weight, max_score, threshold, general_rules, score_caps, sort_order)
+           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+          [qId, secId, q.code || `${si+1}.${qi+1}`, q.title, q.description || q.prompt || null,
+           q.wordLimit || null, q.pageLimit || null, q.writingGuidance || null, q.scoringLogic || 'sum',
+           q.weight ?? 0, q.maxScore ?? 0, q.threshold ?? 0,
            q.generalRules ? JSON.stringify(q.generalRules) : null,
            q.scoreCaps ? JSON.stringify(q.scoreCaps) : null, qi]);
         const criteria = q.miniPoints || q.criteria || [];
         for (let ci = 0; ci < criteria.length; ci++) {
           const c = criteria[ci];
-          await conn.query('INSERT INTO eval_criteria (id, question_id, title, max_score, mandatory, meaning, structure, relations, rules, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?)',
+          await conn.query(
+            `INSERT INTO eval_criteria (id, question_id, title, max_score, mandatory, meaning, structure,
+             relations, rules, red_flags, score_rubric, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`,
             [uuid(), qId, c.title, c.maxScore ?? 1, c.mandatory ? 1 : 0,
-             c.meaning || null, c.structure || null, c.relations || null, c.rules || null, ci]);
+             c.meaning || null, c.structure || null, c.relations || null, c.rules || null,
+             c.redFlags || null, c.scoreRubric ? JSON.stringify(c.scoreRubric) : null, ci]);
         }
       }
     }
