@@ -68,4 +68,15 @@ router.post  ('/data/eval/criteria',               guard, ctrl.upsertEvalCriteri
 router.patch ('/data/eval/criteria/:id',           guard, ctrl.upsertEvalCriterion);
 router.delete('/data/eval/criteria/:id',           guard, ctrl.deleteEvalCriterion);
 
+/* ── Form templates & instances ───────────────────────────────── */
+router.get   ('/data/forms/templates',              guard, ctrl.listFormTemplates);
+router.get   ('/data/forms/templates/:id',          guard, ctrl.getFormTemplate);
+router.get   ('/data/forms/instances',              guard, ctrl.listFormInstances);
+router.post  ('/data/forms/instances',              guard, ctrl.createFormInstance);
+router.get   ('/data/forms/instances/:id',          guard, ctrl.getFormInstance);
+router.get   ('/data/forms/instances/:id/values',   guard, ctrl.getFormValues);
+router.put   ('/data/forms/instances/:id/values',   guard, ctrl.saveFormValues);
+router.patch ('/data/forms/instances/:id',          guard, ctrl.updateFormInstance);
+router.delete('/data/forms/instances/:id',          guard, ctrl.deleteFormInstance);
+
 module.exports = router;

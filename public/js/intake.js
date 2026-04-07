@@ -16,7 +16,6 @@ const Intake = (() => {
 
   /* ── Step configuration (9 steps) ───────────────────────────── */
   const STEPS = [
-    { key: 'programa',     label: 'Programa',      icon: 'school',        panel: 'intake-p0' },
     { key: 'proyecto',     label: 'Proyecto',      icon: 'description',   panel: 'intake-p1' },
     { key: 'contexto',     label: 'Contexto',      icon: 'edit_note',     panel: 'intake-p2' },
     { key: 'tarifas',      label: 'Tarifas',       icon: 'euro',          panel: 'intake-dynamic', calc: 'rates' },
@@ -116,91 +115,20 @@ const Intake = (() => {
   async function loadPrograms() {
     try {
       programs = await API.get('/intake/programs', { noAuth: true });
-      renderProgramCards();
     } catch (err) {
       console.error('loadPrograms:', err);
     }
   }
 
-  function renderProgramCards() {
-    const list = document.getElementById('intake-prog-list');
-    if (!list) return;
-
-    list.innerHTML = programs.map((p, i) => `
-      <div class="intake-prog-card flex items-center gap-3 p-4 rounded-xl border-2 ${i === 0 ? 'border-primary bg-white' : 'border-outline-variant bg-white'} cursor-pointer transition-all hover:shadow-md" data-idx="${i}">
-        <div class="w-5 h-5 rounded-full border-2 ${i === 0 ? 'border-primary bg-primary' : 'border-outline-variant bg-surface'} flex items-center justify-center flex-shrink-0">
-          ${i === 0 ? '<div class="w-1.5 h-1.5 rounded-full bg-white"></div>' : ''}
-        </div>
-        <div class="flex-1 min-w-0">
-          <div class="font-headline text-base font-bold text-primary">${esc(p.name)}</div>
-          <div class="text-xs text-on-surface-variant mt-0.5">${esc(p.action_type)}</div>
-        </div>
-        <span class="text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded bg-secondary-fixed/20 text-primary-container border border-secondary-fixed-dim/40">Disponible</span>
-      </div>
-    `).join('');
-
-    // Bind click on cards
-    list.querySelectorAll('.intake-prog-card').forEach(card => {
-      card.addEventListener('click', () => {
-        const idx = parseInt(card.dataset.idx);
-        selectProgram(idx);
-      });
-    });
-
-    // Auto-select first
-    if (programs.length > 0 && !selectedProgram) {
-      selectProgram(0);
-    }
-  }
-
-  function selectProgram(idx) {
-    selectedProgram = programs[idx];
+  function selectProgram(id) {
+    selectedProgram = programs.find(p => p.id === id);
+    if (!selectedProgram) return;
     const p = selectedProgram;
 
-    // Update radio visual
-    document.querySelectorAll('.intake-prog-card').forEach((card, i) => {
-      const dot = card.querySelector('div > div:first-child');
-      if (i === idx) {
-        card.classList.remove('border-outline-variant'); card.classList.add('border-primary');
-        dot.classList.remove('border-outline-variant', 'bg-surface'); dot.classList.add('border-primary', 'bg-primary');
-        dot.innerHTML = '<div class="w-1.5 h-1.5 rounded-full bg-white"></div>';
-      } else {
-        card.classList.add('border-outline-variant'); card.classList.remove('border-primary');
-        dot.classList.add('border-outline-variant', 'bg-surface'); dot.classList.remove('border-primary', 'bg-primary');
-        dot.innerHTML = '';
-      }
-    });
-
-    // Show details
-    document.getElementById('intake-prog-details').classList.remove('hidden');
-    document.getElementById('intake-ro-dl').textContent = fmtDate(p.deadline);
-    document.getElementById('intake-ro-gr').textContent = p.eu_grant_max ? Number(p.eu_grant_max).toLocaleString('es-ES') + ' \u20AC' : '\u2014';
-    document.getElementById('intake-ro-co').textContent = p.cofin_pct ? p.cofin_pct + ' %' : '\u2014';
-    document.getElementById('intake-ro-in').textContent = p.indirect_pct ? p.indirect_pct + ' %' : '\u2014';
-    document.getElementById('intake-ro-sf').textContent = fmtDate(p.start_date_min);
-    document.getElementById('intake-ro-st').textContent = fmtDate(p.start_date_max);
-
-    // Set start date from program (fixed)
-    const startInput = document.getElementById('intake-f-start');
-    if (startInput) {
-      startInput.value = toDateStr(p.start_date_min);
-    }
-
-    // Duration (fixed from program)
-    const durHidden = document.getElementById('intake-f-dur');
-    const durDisplay = document.getElementById('intake-ro-dur');
-    if (p.duration_min_months && p.duration_max_months) {
-      const dur = p.duration_max_months;
-      if (durHidden) durHidden.value = dur;
-      if (durDisplay) {
-        durDisplay.textContent = p.duration_min_months === p.duration_max_months
-          ? dur + ' meses'
-          : p.duration_min_months + ' – ' + p.duration_max_months + ' meses';
-      }
-    }
-
-    // Action type
-    document.getElementById('intake-f-type').value = p.action_type || '';
+    const setVal = (elId, v) => { const el = document.getElementById(elId); if (el) el.value = v || ''; };
+    setVal('intake-f-start', p.start_date_min ? toDateStr(p.start_date_min) : '');
+    setVal('intake-f-dur', p.duration_max_months || '');
+    setVal('intake-f-type', p.action_type || '');
   }
 
   /* ── Server projects ─────────────────────────────────────────── */
@@ -257,21 +185,21 @@ const Intake = (() => {
 
       // Load project fields
       document.getElementById('intake-f-name').value = project.name || '';
+      const fullnameEl = document.getElementById('intake-f-fullname');
+      if (fullnameEl && !fullnameEl.value) fullnameEl.value = project.fullname || '';
       document.getElementById('intake-f-desc').value = project.description || '';
       document.getElementById('intake-f-start').value = toDateStr(project.start_date);
       document.getElementById('intake-f-type').value = project.type || '';
 
       if (project.duration_months) {
-        const durSel = document.getElementById('intake-f-dur');
-        for (const o of durSel.options) {
-          if (o.value == project.duration_months) { o.selected = true; break; }
-        }
+        const durEl = document.getElementById('intake-f-dur');
+        if (durEl) durEl.value = project.duration_months;
       }
 
       // Select matching program
       if (project.type && programs.length) {
-        const idx = programs.findIndex(p => p.action_type === project.type);
-        if (idx >= 0) selectProgram(idx);
+        const match = programs.find(p => p.action_type === project.type);
+        if (match) selectProgram(match.id);
       }
 
       // Load partners
@@ -304,7 +232,7 @@ const Intake = (() => {
       } catch (e) { console.error('loadContexts:', e); }
 
       renderPartners();
-      setStep(targetStep != null ? targetStep : 1);
+      setStep(targetStep != null ? targetStep : 0);
       Toast.show('Proyecto cargado: ' + project.name, 'ok');
     } catch (err) {
       Toast.show('Error al cargar: ' + (err.message || err), 'err');
@@ -902,8 +830,8 @@ const Intake = (() => {
 
     // Match program
     if (d.program && programs.length) {
-      const idx = programs.findIndex(p => p.program_id === d.program);
-      if (idx >= 0) selectProgram(idx);
+      const match = programs.find(p => p.program_id === d.program);
+      if (match) selectProgram(match.id);
     }
 
     const pl = d.partners || (d.state && d.state.partners);
@@ -988,32 +916,33 @@ const Intake = (() => {
     resetForm();
 
     // Select first program if available
-    if (programs.length > 0) selectProgram(0);
+    if (programs.length > 0) selectProgram(programs[0].id);
 
-    // Project data
+    // Project data — ARISE KA3-Youth
     document.getElementById('intake-f-name').value = 'ARISE';
     const fullName = document.getElementById('intake-f-fullname');
-    if (fullName) fullName.value = 'Action for Resilience and Innovation in Sustainable Education';
-    document.getElementById('intake-f-desc').value = 'A KA2 Cooperation Partnership fostering innovative pedagogical approaches to sustainability education across European secondary schools, combining digital tools, teacher training, and community engagement to build climate-resilient curricula.';
-    document.getElementById('intake-f-start').value = '2026-09-01';
-    const durSel = document.getElementById('intake-f-dur');
-    if (durSel) { for (const o of durSel.options) { if (o.value === '24') { o.selected = true; break; } } }
+    if (fullName) fullName.value = 'Advocacy and Research for Inclusion in Sport and Education';
+    document.getElementById('intake-f-desc').value = 'ARISE is a KA3 European Youth Together project that empowers young people aged 18\u201330 to become agents of social inclusion through sport and non-formal education. Through a network of 4 organisations in 4 countries, the project designs and tests innovative youth-led programmes combining physical activity, intercultural dialogue and digital storytelling to reach marginalised communities \u2014 particularly young migrants, NEETs and youth with fewer opportunities in rural and peri-urban areas. Over 24 months, ARISE will train 80 youth leaders, run 16 local pilot actions, organise 3 transnational youth exchanges and produce an open-access Youth Inclusion Toolkit validated by peer evaluation across all partner countries.';
+    document.getElementById('intake-f-start').value = '2027-03-01';
+    const durHidden = document.getElementById('intake-f-dur');
+    if (durHidden) durHidden.value = '24';
 
-    // 3 Partners
+    // 4 Partners — 4 countries
     partners = [
-      { _local: 1, _server: null, name: 'Fundaci\u00F3n EduForward',      city: 'Madrid',    country: 'Spain',   role: 'applicant', order_index: 1 },
-      { _local: 2, _server: null, name: 'Universit\u00E4t Hannover',       city: 'Hannover',  country: 'Germany', role: 'partner',   order_index: 2 },
-      { _local: 3, _server: null, name: 'Acad\u00E9mie de Bordeaux',       city: 'Bordeaux',  country: 'France',  role: 'partner',   order_index: 3 },
+      { _local: 1, _server: null, name: 'Asociaci\u00F3n Building Bridges',    city: 'Salamanca',    country: 'Spain',   role: 'applicant', order_index: 1 },
+      { _local: 2, _server: null, name: 'CESIE',                               city: 'Palermo',      country: 'Italy',   role: 'partner',   order_index: 2 },
+      { _local: 3, _server: null, name: 'Youth Express Network',               city: 'Strasbourg',   country: 'France',  role: 'partner',   order_index: 3 },
+      { _local: 4, _server: null, name: 'Aristotle University of Thessaloniki', city: 'Thessaloniki', country: 'Greece',  role: 'partner',   order_index: 4 },
     ];
-    pCounter = 3;
+    pCounter = 4;
     renderPartners();
 
     // Context
-    document.getElementById('intake-ctx-prob').value = 'Climate change and sustainability represent the defining challenge of our era, yet European secondary education systems remain largely unprepared to equip young people with the knowledge, skills and attitudes needed to respond. A 2024 Eurydice report found that only 23% of EU member states have integrated sustainability as a transversal competence across their national curricula. Teachers report feeling under-resourced: 68% cite a lack of training in sustainability pedagogy and 54% say they have no access to quality, localised teaching materials. Meanwhile, student surveys show growing eco-anxiety paired with a sense of helplessness, suggesting that current approaches fail to empower learners as agents of change. The gap between policy ambition (the EU GreenComp framework, the Council Recommendation on learning for the green transition) and classroom reality is widening rather than closing. Rural and disadvantaged schools are disproportionately affected, deepening educational inequality. Without targeted, transnational cooperation that develops scalable pedagogical models and supports teacher capacity, a generation of European students risks graduating without the foundational sustainability literacy the green transition demands.';
+    document.getElementById('intake-ctx-prob').value = 'Across Europe, young people from marginalised backgrounds \u2014 migrants, refugees, NEETs, rural youth and those with fewer opportunities \u2014 face persistent barriers to social participation and civic engagement. Eurostat (2025) reports that 11.2% of EU youth aged 15\u201329 are neither in employment, education nor training, with peaks above 18% in Southern and South-Eastern Europe. Meanwhile, sport and physical activity, widely recognised as powerful vehicles for inclusion (Council Recommendation 2024 on sport and social inclusion), remain under-exploited in youth work: only 14% of Erasmus+ youth projects combine sport with non-formal education methodologies. Existing initiatives tend to be local, short-lived and poorly documented, making replication difficult. Youth workers report a lack of structured, evidence-based toolkits that bridge sport, intercultural dialogue and digital competences. Without transnational cooperation to co-design, test and validate scalable models, the potential of sport as an inclusion lever for Europe\u2019s most vulnerable youth will continue to be under-realised, deepening inequalities at a time when cohesion is more critical than ever.';
 
-    document.getElementById('intake-ctx-tgt').value = 'The primary beneficiaries are secondary-school teachers (estimated 120 directly trained, 600+ reached through multiplier events and open resources) and their students aged 14\u201318 across Spain, Germany and France. Special attention will be given to educators in rural and under-served schools, where access to professional development is most limited. Indirect beneficiaries include school leadership teams who will receive policy toolkits, local communities engaged through student-led sustainability projects, and curriculum designers in national agencies who will access the project\u2019s validated methodology. The broader education research community will also benefit through openly published findings and a replicable framework adaptable to other EU countries.';
+    document.getElementById('intake-ctx-tgt').value = 'Primary: 80 youth leaders aged 18\u201330 trained directly through the programme (20 per country), including young people with migrant backgrounds, NEETs and youth from rural areas. They will gain competences in facilitation, intercultural mediation and digital storytelling. Secondary: 480+ young participants reached through 16 local pilot actions (4 per country), with priority given to those facing social, economic or geographic barriers. Indirect: 200+ youth workers and educators reached through 3 multiplier events and the open-access toolkit. Institutional: local authorities, sport federations and youth councils in each partner city, who will receive policy recommendations. The broader youth work community benefits from openly published research findings, the validated toolkit (CC BY-SA) and a replicable model transferable to other EU countries and youth-serving organisations.';
 
-    document.getElementById('intake-ctx-app').value = 'ARISE proposes a three-phase methodology combining co-design, piloting and scaling. In Phase 1 (M1\u201310), partners conduct a comparative needs analysis across the three countries, mapping existing sustainability content in curricula, teacher competence gaps and student perceptions. Building on GreenComp and the SDGs, an interdisciplinary team will co-create a modular Sustainability Teaching Toolkit comprising lesson plans, digital simulations and place-based learning activities adaptable to local contexts. In Phase 2 (M8\u201318), the toolkit is piloted in 12 schools (4 per country), accompanied by a blended teacher training programme (60 hours: 20 online + 40 face-to-face through LTTAs). Each school implements a student-led Community Sustainability Project, bridging classroom learning and real-world impact. Longitudinal data on student competence development and teacher self-efficacy is collected using validated instruments. In Phase 3 (M16\u201324), results are analysed, the toolkit is refined based on evidence, and a Sustainability Education Policy Brief is published to inform national stakeholders. Multiplier events in each country disseminate outcomes to at least 200 education professionals. All outputs are released under Creative Commons and hosted on a multilingual platform. The transnational dimension is essential: cross-country comparison enriches the methodology, joint LTTAs build a community of practice, and shared intellectual outputs achieve economies of scale impossible at national level.';
+    document.getElementById('intake-ctx-app').value = 'ARISE follows a participatory action-research cycle across three phases. Phase 1 \u2014 Co-Design (M1\u20138): Partners conduct a transnational needs assessment using surveys, focus groups and desk research in all 4 countries, mapping existing sport-for-inclusion practices, youth worker competence gaps and target group needs. Results feed into a co-creation workshop (LTTA, Salamanca) where youth leaders and experts jointly design the ARISE Youth Inclusion Toolkit: 12 modular session plans combining sport, intercultural dialogue and digital storytelling, adaptable to local contexts. Phase 2 \u2014 Piloting & Exchange (M6\u201318): Each partner runs 4 local pilot actions (8\u201312 sessions each) with groups of 30 young participants, testing the toolkit in real settings. Cross-country youth exchanges (Palermo M10, Strasbourg M14) enable peer learning and joint evaluation. Data on participant outcomes (inclusion, self-efficacy, intercultural competence) is collected using pre/post validated instruments. A mid-term review meeting (Thessaloniki M12) adjusts methodology based on evidence. Phase 3 \u2014 Validation & Scale (M16\u201324): Results are analysed, the toolkit is refined, and a Policy Brief with recommendations is published. Multiplier events in each country disseminate findings to 200+ professionals. All outputs are released under Creative Commons on a multilingual digital platform. The transnational dimension is indispensable: comparative data across 4 national contexts strengthens validity, joint exchanges build a lasting community of practice, and shared intellectual outputs achieve scale impossible at national level.';
 
     WC.forEach(c => updateWC(c));
 
@@ -1027,60 +956,104 @@ const Intake = (() => {
     const pts = cs.partners;
     const st = Calculator;
 
-    // Set some route distances
-    if (pts.length >= 3) {
-      // Madrid-Hannover ~1800km, Madrid-Bordeaux ~600km, Hannover-Bordeaux ~1000km
-      st._setRouteBand(pts[0].id, pts[1].id, 3); // 500-1999
-      st._setRouteBand(pts[0].id, pts[2].id, 3); // 500-1999
-      st._setRouteBand(pts[1].id, pts[2].id, 3); // 500-1999
+    // Routes (real approximate distances)
+    if (pts.length >= 4) {
+      st._setRouteBand(pts[0].id, pts[1].id, 3); // Salamanca\u2013Palermo ~1600km (500-1999)
+      st._setRouteBand(pts[0].id, pts[2].id, 3); // Salamanca\u2013Strasbourg ~1200km
+      st._setRouteBand(pts[0].id, pts[3].id, 4); // Salamanca\u2013Thessaloniki ~2400km (2000-2999)
+      st._setRouteBand(pts[1].id, pts[2].id, 3); // Palermo\u2013Strasbourg ~1400km
+      st._setRouteBand(pts[1].id, pts[3].id, 3); // Palermo\u2013Thessaloniki ~900km
+      st._setRouteBand(pts[2].id, pts[3].id, 4); // Strasbourg\u2013Thessaloniki ~2100km (2000-2999)
     }
 
-    // WPs already have 4 defaults. Let's add activities to each.
-    // WP1 (Management): already has mgmt activity by default after renderMergedWPs
-    // We need to trigger renderMergedWPs first to seed WP1's mgmt activity
+    // Extra destination: Brussels (EACEA)
+    st._addExtraDest();
+    const edState = Calculator.getCalcState();
+    if (edState.extraDests.length > 0) {
+      st._setExtraDest(0, 'name', 'Brussels (EACEA)');
+      st._setExtraDest(0, 'country', 'Belgium');
+      if (pts.length >= 4) {
+        st._setRouteBand(pts[0].id, edState.extraDests[0].id, 3); // Salamanca\u2013Brussels ~1500km
+        st._setRouteBand(pts[1].id, edState.extraDests[0].id, 3); // Palermo\u2013Brussels ~1700km
+        st._setRouteBand(pts[2].id, edState.extraDests[0].id, 2); // Strasbourg\u2013Brussels ~500km (100-499)
+        st._setRouteBand(pts[3].id, edState.extraDests[0].id, 4); // Thessaloniki\u2013Brussels ~2000km
+      }
+    }
+
+    // WPs & activities
     const tmpDiv = document.createElement('div');
     st.renderMergedWPs(tmpDiv);
 
-    // WP2: Add a Transnational Meeting + an IO
-    st._addActivity(1, 'meeting');  // Transnational Meeting in WP2
-    st._addActivity(1, 'io');       // Intellectual Output in WP2
+    st._setWP(0, 'desc', 'Project Management, Quality Assurance and Reporting');
+    st._setWP(1, 'name', 'WP2'); st._setWP(1, 'desc', 'Needs Assessment and Toolkit Co-Design');
+    st._setWP(2, 'name', 'WP3'); st._setWP(2, 'desc', 'Piloting, Youth Exchanges and Training');
+    st._setWP(3, 'name', 'WP4'); st._setWP(3, 'desc', 'Dissemination, Policy Impact and Sustainability');
 
-    // WP3: Add LTTA + local workshops
-    st._addActivity(2, 'ltta');     // LTTA mobility
-    st._addActivity(2, 'local_ws'); // Local workshops
+    // WP2: Co-design meeting + Toolkit (IO)
+    st._addActivity(1, 'meeting');
+    st._addActivity(1, 'io');
 
-    // WP4: Add Multiplier Event + Dissemination campaign
-    st._addActivity(3, 'me');       // Multiplier event
-    st._addActivity(3, 'campaign'); // Dissemination
+    // WP3: 2 youth exchanges (LTTA) + local pilot workshops
+    st._addActivity(2, 'ltta');
+    st._addActivity(2, 'ltta');
+    st._addActivity(2, 'local_ws');
 
-    // Set some labels
-    const wps = Calculator.getCalcState().wps;
-    st._setWP(0, 'desc', 'Project Management and Coordination');
-    st._setWP(1, 'name', 'WP2'); st._setWP(1, 'desc', 'Research, Analysis and Toolkit Development');
-    st._setWP(2, 'name', 'WP3'); st._setWP(2, 'desc', 'Piloting, Training and Community Projects');
-    st._setWP(3, 'name', 'WP4'); st._setWP(3, 'desc', 'Dissemination, Exploitation and Sustainability');
+    // WP4: Multiplier events + digital campaign
+    st._addActivity(3, 'me');
+    st._addActivity(3, 'campaign');
 
     // Label activities
+    const wps = Calculator.getCalcState().wps;
     if (wps[1] && wps[1].activities.length >= 2) {
-      st._setAct(1, wps[1].activities[0].id, 'label', 'Kick-off Meeting (Madrid)');
-      st._setAct(1, wps[1].activities[0].id, 'days', 3);
-      st._setAct(1, wps[1].activities[1].id, 'label', 'Sustainability Teaching Toolkit');
+      st._setAct(1, wps[1].activities[0].id, 'label', 'Co-Design Workshop (Salamanca)');
+      st._setAct(1, wps[1].activities[0].id, 'days', 4);
+      st._setAct(1, wps[1].activities[1].id, 'label', 'ARISE Youth Inclusion Toolkit');
     }
-    if (wps[2] && wps[2].activities.length >= 2) {
-      st._setAct(2, wps[2].activities[0].id, 'label', 'Teacher Training LTTA (Hannover)');
-      st._setAct(2, wps[2].activities[0].id, 'days', 5);
-      st._setAct(2, wps[2].activities[0].id, 'pax', 3);
-      st._setAct(2, wps[2].activities[1].id, 'label', 'Local Pilot Workshops (12 schools)');
+    if (wps[2] && wps[2].activities.length >= 3) {
+      st._setAct(2, wps[2].activities[0].id, 'label', 'Youth Exchange I (Palermo)');
+      st._setAct(2, wps[2].activities[0].id, 'days', 7);
+      st._setAct(2, wps[2].activities[0].id, 'pax', 5);
+      st._setAct(2, wps[2].activities[1].id, 'label', 'Youth Exchange II (Strasbourg)');
+      st._setAct(2, wps[2].activities[1].id, 'days', 7);
+      st._setAct(2, wps[2].activities[1].id, 'pax', 5);
+      st._setAct(2, wps[2].activities[2].id, 'label', 'Local Pilot Actions (16 sessions, 4/country)');
     }
     if (wps[3] && wps[3].activities.length >= 2) {
-      st._setAct(3, wps[3].activities[0].id, 'label', 'Multiplier Events (3 countries)');
-      st._setAct(3, wps[3].activities[1].id, 'label', 'Online Dissemination Campaign');
+      st._setAct(3, wps[3].activities[0].id, 'label', 'Multiplier Events (4 countries)');
+      st._setAct(3, wps[3].activities[1].id, 'label', 'Digital Dissemination Campaign');
     }
 
-    // Navigate to step 5 (WPs) to show the filled wizard
-    setStep(5);
-    Toast.show('Demo cargada: ARISE \u2014 3 socios, 4 WPs', 'ok');
+    setStep(0);
+    Toast.show('Demo cargada: ARISE KA3-Youth \u2014 4 socios, 4 WPs', 'ok');
   }
 
-  return { init, startNew, _calcNav: calcNav, _preloadDemo: preloadDemo, _loadProject: loadFromServer };
+  function openProject(id) {
+    // Initialize intake without resetting step
+    if (!initialized) {
+      initialized = true;
+      renderStepNav();
+      bindEvents();
+      loadPrograms();
+    }
+    // Show intake panel
+    document.querySelectorAll('#content-area .panel').forEach(p => p.classList.remove('active'));
+    const panel = document.getElementById('panel-intake');
+    if (panel) panel.classList.add('active');
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.classList.toggle('active', link.dataset.route === 'intake');
+    });
+    location.hash = 'intake';
+    document.getElementById('topbar-title').textContent = 'Intake';
+    // Load project and go to step 0 (Proyecto)
+    loadFromServer(id, 0);
+  }
+
+  function _setProgram(p) {
+    selectedProgram = p;
+    if (p) {
+      if (!programs.find(pr => pr.id === p.id)) programs.push(p);
+    }
+  }
+
+  return { init, startNew, openProject, _setProgram, _calcNav: calcNav, _preloadDemo: preloadDemo, _loadProject: loadFromServer };
 })();

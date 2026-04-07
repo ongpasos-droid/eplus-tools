@@ -300,6 +300,23 @@ async function searchEntities(req, res, next) {
   }
 }
 
+/* ── Parse Form Part B (DOCX upload) ─────────────────────────── */
+async function parseFormB(req, res, next) {
+  try {
+    if (!req.file) return res.status(400).json({ ok: false, error: { message: 'No file provided' } });
+
+    const ext = req.file.originalname.toLowerCase().split('.').pop();
+    if (ext !== 'docx') return res.status(400).json({ ok: false, error: { message: 'Only .docx files are supported' } });
+
+    const { parseFormB: parse } = require('../../services/parse-form-b');
+    const result = await parse(req.file.buffer);
+
+    res.json({ ok: true, data: result });
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   listPrograms,
   listProjects,
@@ -314,5 +331,6 @@ module.exports = {
   reorderPartners,
   listContexts,
   updateContext,
-  searchEntities
+  searchEntities,
+  parseFormB
 };

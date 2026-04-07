@@ -1,8 +1,11 @@
 /* ── Intake Routes — /v1/intake/* ─────────────────────────────────── */
 
 const router = require('express').Router();
+const multer  = require('multer');
 const { requireAuth } = require('../../middleware/auth');
 const ctrl = require('./controller');
+
+const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 30 * 1024 * 1024 } });
 
 /* ── Programs (public endpoints) ────────────────────────────────── */
 router.get('/programs', ctrl.listPrograms);
@@ -27,5 +30,8 @@ router.patch('/projects/:projectId/partners/reorder', requireAuth, ctrl.reorderP
 /* ── Intake Contexts ───────────────────────────────────────────── */
 router.get('/projects/:projectId/context', requireAuth, ctrl.listContexts);
 router.patch('/contexts/:id', requireAuth, ctrl.updateContext);
+
+/* ── Upload Form Part B (DOCX) ────────────────────────────────── */
+router.post('/parse-form-b', requireAuth, upload.single('file'), ctrl.parseFormB);
 
 module.exports = router;

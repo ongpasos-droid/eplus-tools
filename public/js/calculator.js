@@ -17,6 +17,8 @@ const Calculator = (() => {
     workerRates: [],
     wrCounter: 0,
     routes: {},         // "min_max" → { km, green, custom_rate }
+    extraDests: [],     // [{ id, name, country }]
+    extraDestCounter: 0,
     wps: [],
     actCounter: 0,
     mgmt: { rate_applicant: 500, rate_partner: 250 },
@@ -63,19 +65,19 @@ const Calculator = (() => {
   };
 
   const ACT_TYPES = {
-    mgmt:       { label:'Management',           icon:'settings',        color:'#474551', bg:'rgba(71,69,81,.08)',   mobility:false },
-    meeting:    { label:'Transnational Meeting', icon:'groups',          color:'#1D4ED8', bg:'rgba(29,78,216,.08)', mobility:true  },
-    ltta:       { label:'LTTA / Mobility',       icon:'flight_takeoff',  color:'#0F766E', bg:'rgba(15,118,110,.08)',mobility:true  },
-    io:         { label:'Intellectual Output',   icon:'menu_book',       color:'#7C3AED', bg:'rgba(124,58,237,.08)',mobility:false },
-    me:         { label:'Multiplier Event',      icon:'campaign',        color:'#BE185D', bg:'rgba(190,24,93,.08)', mobility:false },
-    local_ws:   { label:'Local Workshop',        icon:'school',          color:'#B45309', bg:'rgba(180,83,9,.08)',  mobility:false },
-    campaign:   { label:'Dissemination',         icon:'share',           color:'#065F46', bg:'rgba(6,95,70,.08)',   mobility:false },
-    website:    { label:'Website',               icon:'language',        color:'#1D4ED8', bg:'rgba(29,78,216,.08)', mobility:false },
-    artistic:   { label:'Artistic Fees',         icon:'palette',         color:'#BE185D', bg:'rgba(190,24,93,.08)', mobility:false },
-    equipment:  { label:'Equipment',             icon:'devices',         color:'#0369A1', bg:'rgba(3,105,161,.08)', mobility:false, depreciation:true },
-    goods:      { label:'Other Goods',           icon:'inventory_2',     color:'#7C3AED', bg:'rgba(124,58,237,.08)',mobility:false, depreciation:true },
-    consumables:{ label:'Consumables',           icon:'science',         color:'#0F766E', bg:'rgba(15,118,110,.08)',mobility:false, depreciation:true },
-    other:      { label:'Other Costs',           icon:'add_circle',      color:'#6B7280', bg:'rgba(107,114,128,.08)',mobility:false, depreciation:true },
+    mgmt:       { label:'Management',           icon:'settings',        color:'#474551', bg:'rgba(71,69,81,.08)',   mobility:false, descHint:'In your own words, tell us how you plan to coordinate the project. How will you organise internal communication, monitor progress and handle reporting?' },
+    meeting:    { label:'Transnational Meeting', icon:'groups',          color:'#1D4ED8', bg:'rgba(29,78,216,.08)', mobility:true,  descHint:'Tell us about this meeting in your own words. What do you want to achieve? Who will be there? What decisions or outcomes do you expect?' },
+    ltta:       { label:'LTTA / Mobility',       icon:'flight_takeoff',  color:'#0F766E', bg:'rgba(15,118,110,.08)',mobility:true,  descHint:'Describe this mobility in your own words. What will participants learn? What methodology will you use? Who is the target group and what skills will they develop?' },
+    io:         { label:'Intellectual Output',   icon:'menu_book',       color:'#7C3AED', bg:'rgba(124,58,237,.08)',mobility:false, descHint:'Tell us what you want to create. What kind of product is it (guide, toolkit, platform...)? How will you develop it and who will use it?' },
+    me:         { label:'Multiplier Event',      icon:'campaign',        color:'#BE185D', bg:'rgba(190,24,93,.08)', mobility:false, descHint:'Describe this event in your own words. What is it about? Who do you want to reach? What format are you thinking (conference, workshop, open day...)?' },
+    local_ws:   { label:'Local Workshop',        icon:'school',          color:'#B45309', bg:'rgba(180,83,9,.08)',  mobility:false, descHint:'Tell us about this local activity. What topics will you cover? Who will participate? What do you hope they will take away from it?' },
+    campaign:   { label:'Dissemination',         icon:'share',           color:'#065F46', bg:'rgba(6,95,70,.08)',   mobility:false, descHint:'How do you plan to spread the word? Which channels will you use? Who do you want to reach and what message do you want to convey?' },
+    website:    { label:'Website',               icon:'language',        color:'#1D4ED8', bg:'rgba(29,78,216,.08)', mobility:false, descHint:'Tell us about the website or platform you want to build. What is its purpose? What will users find there? In which languages?' },
+    artistic:   { label:'Artistic Fees',         icon:'palette',         color:'#BE185D', bg:'rgba(190,24,93,.08)', mobility:false, descHint:'What kind of artistic or creative work do you need? What is it for (video, design, performance...)? How does it connect to the project goals?' },
+    equipment:  { label:'Equipment',             icon:'devices',         color:'#0369A1', bg:'rgba(3,105,161,.08)', mobility:false, depreciation:true, descHint:'What equipment do you need to purchase? Why is it essential for the project? Which activities will use it?' },
+    goods:      { label:'Other Goods',           icon:'inventory_2',     color:'#7C3AED', bg:'rgba(124,58,237,.08)',mobility:false, depreciation:true, descHint:'What goods or services do you need? Why are they necessary for the project and which activities do they support?' },
+    consumables:{ label:'Consumables',           icon:'science',         color:'#0F766E', bg:'rgba(15,118,110,.08)',mobility:false, depreciation:true, descHint:'What materials or supplies do you need? What are they for and which project activities require them?' },
+    other:      { label:'Other Costs',           icon:'add_circle',      color:'#6B7280', bg:'rgba(107,114,128,.08)',mobility:false, depreciation:true, descHint:'Tell us about this cost. What does it cover, why is it needed and how did you estimate the amount?' },
   };
 
   const WP_TAXONOMY = [
@@ -417,7 +419,7 @@ const Calculator = (() => {
         <div id="calc-worker-rates">${buildWorkerRatesHTML()}</div>
       </div>
 
-      ${_embeddedMode ? embeddedNavButtons(2, 4, 'Rutas \u2192') : navButtons(null, 1, 'Routes \u2192')}
+      ${_embeddedMode ? embeddedNavButtons(1, 3, 'Rutas \u2192') : navButtons(null, 1, 'Routes \u2192')}
     `;
   }
 
@@ -436,8 +438,9 @@ const Calculator = (() => {
         <table class="calc-table">
           <tbody>
             ${rates.map(w => `<tr>
-              <td class="w-1/2"><input type="text" value="${w.category}" class="w-full px-2 py-1 text-sm border border-outline-variant/30 rounded" onchange="Calculator._setWorkerRate(${w.id},'category',this.value)"></td>
-              <td class="text-right"><input type="number" value="${w.rate}" min="0" onchange="Calculator._setWorkerRate(${w.id},'rate',this.value)"><span class="text-[11px] text-on-surface-variant ml-1">€/day</span></td>
+              <td class="w-5/12"><input type="text" value="${w.category}" class="w-full px-2 py-1 text-sm border border-outline-variant/30 rounded" onchange="Calculator._setWorkerRate(${w.id},'category',this.value)"></td>
+              <td class="text-right"><input type="number" value="${w.rate}" min="0" onchange="Calculator._setWorkerRate(${w.id},'rate',this.value)"><span class="text-[11px] text-on-surface-variant ml-1">\u20AC/day</span></td>
+              <td class="text-right"><span class="text-sm font-bold text-primary/70">\u20AC${(w.rate * 22).toLocaleString('en')}</span><span class="text-[10px] text-on-surface-variant/50 ml-1">/PM</span></td>
               <td class="w-8 text-center"><button onclick="Calculator._removeWorkerRate(${w.id})" class="text-error hover:text-error-container text-lg leading-none">&times;</button></td>
             </tr>`).join('')}
           </tbody>
@@ -453,12 +456,53 @@ const Calculator = (() => {
      STEP 1: ROUTES
      ══════════════════════════════════════════════════════════════ */
 
+  function routeLabel(p) {
+    const acronym = (p.name || '').split(/\s+/).map(w => w[0]).join('').toUpperCase().slice(0, 5);
+    const loc = [p.city, p.country].filter(Boolean).join(', ');
+    return `<span class="font-mono font-bold text-xs text-primary">${acronym}</span> <span class="text-xs text-on-surface-variant">${loc}</span>`;
+  }
+
+  function routeRowHTML(aId, aLabel, bId, bLabel) {
+    const k = routeKey(aId, bId);
+    const r = getRoute(aId, bId);
+    const bandIdx = DISTANCE_BANDS.findIndex(bd => r.km >= bd.min && r.km <= bd.max);
+    const selIdx = bandIdx >= 0 ? bandIdx : 0;
+    const band = DISTANCE_BANDS[selIdx];
+    const official = r.green ? band.green : band.std;
+    const custom = (r.custom_rate !== null && r.custom_rate !== undefined) ? r.custom_rate : '';
+    return `<tr>
+      <td>${aLabel} <span class="text-on-surface-variant mx-1">↔</span> ${bLabel}</td>
+      <td class="text-center">
+        <label class="flex items-center justify-center gap-1 cursor-pointer">
+          <input type="checkbox" ${r.green?'checked':''} class="w-3.5 h-3.5" onchange="Calculator._setRoute('${aId}','${bId}','green',this.checked)">
+          <span class="text-[10px] text-[#065F46] font-semibold">Eco</span>
+        </label>
+      </td>
+      <td>
+        <select class="text-xs px-2 py-1 border border-outline-variant/30 rounded" onchange="Calculator._setRouteBand('${aId}','${bId}',parseInt(this.value))">
+          ${DISTANCE_BANDS.map((bd,idx) => `<option value="${idx}" ${idx===selIdx?'selected':''}>${bd.label}</option>`).join('')}
+        </select>
+      </td>
+      <td class="text-right text-sm text-on-surface-variant" id="calc-route-off-${k}">€${official}</td>
+      <td class="text-right"><input type="number" value="${custom}" min="0" placeholder="—" class="w-24" onchange="Calculator._setRoute('${aId}','${bId}','custom_rate',this.value)" id="calc-route-custom-${k}"></td>
+    </tr>`;
+  }
+
   function renderRoutes(container) {
     const partners = state.partners;
     const pairs = [];
     for (let i = 0; i < partners.length; i++)
       for (let j = i+1; j < partners.length; j++)
         pairs.push([partners[i], partners[j]]);
+
+    // Extra destination routes: each partner ↔ each extra dest
+    const extraRows = [];
+    for (const p of partners) {
+      for (const d of state.extraDests) {
+        const dLabel = `<span class="font-mono font-bold text-xs text-amber-700">${(d.name||'').split(/[\s(]/)[0].toUpperCase().slice(0,5)}</span> <span class="text-xs text-on-surface-variant">${[d.name, d.country].filter(Boolean).join(', ')}</span>`;
+        extraRows.push(routeRowHTML(p.id, routeLabel(p), d.id, dLabel));
+      }
+    }
 
     container.innerHTML = `
       <h2 class="font-headline text-lg font-bold mb-1">Routes & Distances</h2>
@@ -475,38 +519,36 @@ const Calculator = (() => {
               <th class="text-right">Actual €</th>
             </tr></thead>
             <tbody>
-              ${pairs.map(([a, b]) => {
-                const k = routeKey(a.id, b.id);
-                const r = getRoute(a.id, b.id);
-                const bandIdx = DISTANCE_BANDS.findIndex(bd => r.km >= bd.min && r.km <= bd.max);
-                const selIdx = bandIdx >= 0 ? bandIdx : 0;
-                const band = DISTANCE_BANDS[selIdx];
-                const official = r.green ? band.green : band.std;
-                const custom = (r.custom_rate !== null && r.custom_rate !== undefined) ? r.custom_rate : '';
-                return `<tr>
-                  <td><span class="font-medium text-sm">${a.name||'P'+a.order_index}</span> <span class="text-on-surface-variant">↔</span> <span class="font-medium text-sm">${b.name||'P'+b.order_index}</span></td>
-                  <td class="text-center">
-                    <label class="flex items-center justify-center gap-1 cursor-pointer">
-                      <input type="checkbox" ${r.green?'checked':''} class="w-3.5 h-3.5" onchange="Calculator._setRoute('${a.id}','${b.id}','green',this.checked)">
-                      <span class="text-[10px] text-[#065F46] font-semibold">Eco</span>
-                    </label>
-                  </td>
-                  <td>
-                    <select class="text-xs px-2 py-1 border border-outline-variant/30 rounded" onchange="Calculator._setRouteBand('${a.id}','${b.id}',parseInt(this.value))">
-                      ${DISTANCE_BANDS.map((bd,idx) => `<option value="${idx}" ${idx===selIdx?'selected':''}>${bd.label}</option>`).join('')}
-                    </select>
-                  </td>
-                  <td class="text-right text-sm text-on-surface-variant" id="calc-route-off-${k}">€${official}</td>
-                  <td class="text-right"><input type="number" value="${custom}" min="0" placeholder="—" class="w-24" onchange="Calculator._setRoute('${a.id}','${b.id}','custom_rate',this.value)" id="calc-route-custom-${k}"></td>
-                </tr>`;
-              }).join('')}
+              ${pairs.map(([a, b]) => routeRowHTML(a.id, routeLabel(a), b.id, routeLabel(b))).join('')}
+              ${extraRows.length ? `<tr><td colspan="5" class="pt-4 pb-2"><span class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Otros destinos</span></td></tr>` + extraRows.join('') : ''}
             </tbody>
           </table>
         </div>
         <p class="text-[11px] text-on-surface-variant mt-3">The <strong>Actual €</strong> amount is used in calculations. If left blank, the official rate applies.</p>
       </div>
 
-      ${_embeddedMode ? embeddedNavButtons(3, 5, 'Work Packages \u2192') : navButtons(0, 2, 'Work Packages \u2192')}
+      <!-- Extra destinations -->
+      ${state.extraDests.length === 0 ? (state.extraDestCounter++, state.extraDests.push({ id: '_ed' + state.extraDestCounter, name: '', country: '' }), '') : ''}
+      <div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-5 mb-4">
+        <h3 class="font-headline text-sm font-bold mb-3">Otros destinos</h3>
+        <p class="text-xs text-on-surface-variant mb-3">Añade ciudades o sedes que no son socios pero donde se realizarán actividades (ej. Bruselas, sede de la agencia, etc.).</p>
+        <div id="calc-extra-dests">
+          ${state.extraDests.map((d, i) => `
+            <div class="flex items-center gap-2 mb-2">
+              <input type="text" value="${d.name}" placeholder="City (e.g. Brussels)" class="flex-1 px-3 py-2 rounded-lg border border-outline-variant text-sm" onchange="Calculator._setExtraDest(${i},'name',this.value)">
+              <input type="text" value="${d.country || ''}" placeholder="Country (e.g. Belgium)" class="w-36 px-3 py-2 rounded-lg border border-outline-variant text-sm" onchange="Calculator._setExtraDest(${i},'country',this.value)">
+              <button onclick="Calculator._removeExtraDest(${i})" class="w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-error/10 hover:text-error transition-colors">
+                <span class="material-symbols-outlined text-base">close</span>
+              </button>
+            </div>
+          `).join('')}
+        </div>
+        <button onclick="Calculator._addExtraDest()" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-primary hover:bg-primary/5 transition-colors mt-1">
+          <span class="material-symbols-outlined text-sm">add</span> Añadir destino
+        </button>
+      </div>
+
+      ${_embeddedMode ? embeddedNavButtons(2, 4, 'Work Packages \u2192') : navButtons(0, 2, 'Work Packages \u2192')}
     `;
   }
 
@@ -684,13 +726,9 @@ const Calculator = (() => {
         <input type="text" value="${act.label}" placeholder="Name..." class="flex-1 bg-transparent border-b border-outline-variant/30 px-1 py-0.5 text-sm font-semibold font-headline focus:outline-none focus:border-primary" onchange="Calculator._setAct(${wi},${act.id},'label',this.value)">
         <button onclick="Calculator._removeAct(${wi},${act.id})" class="text-error/60 hover:text-error text-lg leading-none ml-2">&times;</button>
       </div>
-      <div class="flex items-center gap-2 mb-2 px-2 py-1.5 rounded text-xs" style="background:${def.bg}">
-        <span class="material-symbols-outlined text-[14px]" style="color:${def.color}">calendar_month</span>
-        <label class="text-on-surface-variant">Start</label>
-        <input type="date" value="${act.date_start||''}" class="text-xs px-1.5 py-0.5 border border-outline-variant/20 rounded" onchange="Calculator._setAct(${wi},${act.id},'date_start',this.value)">
-        <span class="text-on-surface-variant">→</span>
-        <label class="text-on-surface-variant">End</label>
-        <input type="date" value="${act.date_end||''}" class="text-xs px-1.5 py-0.5 border border-outline-variant/20 rounded" onchange="Calculator._setAct(${wi},${act.id},'date_end',this.value)">
+      <div class="mb-2">
+        <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60 mb-1 block">Description</label>
+        <textarea rows="3" placeholder="${def.descHint || 'In your own words, tell us what this activity is about...'}" class="w-full px-3 py-2.5 text-sm bg-white border border-outline-variant/30 rounded-xl resize-vertical focus:outline-none focus:ring-2 focus:ring-primary/15 focus:border-primary/30 leading-relaxed" onchange="Calculator._setAct(${wi},${act.id},'desc',this.value)">${act.desc || ''}</textarea>
       </div>
       <div id="calc-act-fields-${act.id}">${buildActFields(act, wi)}</div>
       <div class="text-sm font-mono mt-2 pt-2 border-t border-outline-variant/10" style="color:${def.color}" id="calc-act-result-${act.id}">—</div>
@@ -758,7 +796,8 @@ const Calculator = (() => {
     if (act.local_transport === undefined) act.local_transport = 25;
     if (!act.participants) { act.participants = {}; state.partners.forEach(p => { if (p.id !== act.host) act.participants[p.id] = true; }); }
 
-    const hostOpts = state.partners.map(p => `<option value="${p.id}" ${p.id===act.host?'selected':''}>${p.name||'P'+p.order_index}</option>`).join('');
+    const hostOpts = state.partners.map(p => `<option value="${p.id}" ${p.id===act.host?'selected':''}>${p.name||'P'+p.order_index}</option>`).join('')
+      + (state.extraDests.length ? '<option disabled>───</option>' + state.extraDests.filter(d => d.name).map(d => `<option value="${d.id}" ${d.id===act.host?'selected':''}>${d.name}</option>`).join('') : '');
     const nonHost = state.partners.filter(p => p.id !== act.host);
 
     const rows = nonHost.map((p, i) => {
@@ -1105,7 +1144,7 @@ const Calculator = (() => {
         </div>
       </div>
 
-      ${_embeddedMode ? embeddedNavButtons(5, 7, 'Gantt \u2192') : navButtons(3, 5, 'Gantt \u2192')}
+      ${_embeddedMode ? embeddedNavButtons(4, 6, 'Gantt \u2192') : navButtons(3, 5, 'Gantt \u2192')}
     `;
   }
 
@@ -1230,7 +1269,7 @@ const Calculator = (() => {
   function renderGantt(container) {
     const ps = getProjectStart();
     if (!ps) {
-      container.innerHTML = `<div class="text-center py-16 text-on-surface-variant">Set a project start date in Intake to see the Gantt chart.</div>${_embeddedMode ? embeddedNavButtons(6, 8, 'Resumen \u2192') : navButtons(4, null)}`;
+      container.innerHTML = `<div class="text-center py-16 text-on-surface-variant">Set a project start date in Intake to see the Gantt chart.</div>${_embeddedMode ? embeddedNavButtons(5, 7, 'Resumen \u2192') : navButtons(4, null)}`;
       return;
     }
 
@@ -1256,7 +1295,7 @@ const Calculator = (() => {
       <div id="calc-gantt-legend" class="flex flex-wrap gap-3 mt-3 text-xs"></div>
       <div id="calc-gantt-tooltip" class="calc-gantt-tip"></div>
 
-      ${_embeddedMode ? embeddedNavButtons(6, 8, 'Resumen \u2192') : navButtons(4, null)}
+      ${_embeddedMode ? embeddedNavButtons(5, 7, 'Resumen \u2192') : navButtons(4, null)}
     `;
     buildGanttChart();
   }
@@ -1369,6 +1408,30 @@ const Calculator = (() => {
     state.workerRates = state.workerRates.filter(w => w.id !== id);
     const el = $('calc-worker-rates');
     if (el) el.innerHTML = buildWorkerRatesHTML();
+  }
+
+  /* ── Extra destinations ──────────────────────────────────────── */
+  function addExtraDest() {
+    state.extraDestCounter++;
+    state.extraDests.push({ id: '_ed' + state.extraDestCounter, name: '', country: '' });
+    renderRoutes(getRouteContainer());
+  }
+
+  function removeExtraDest(idx) {
+    const removed = state.extraDests.splice(idx, 1)[0];
+    if (removed) {
+      // Clean up routes referencing this dest
+      Object.keys(state.routes).forEach(k => {
+        if (k.includes(removed.id)) delete state.routes[k];
+      });
+    }
+    renderRoutes(getRouteContainer());
+  }
+
+  function setExtraDest(idx, field, value) {
+    if (state.extraDests[idx]) {
+      state.extraDests[idx][field] = value;
+    }
   }
 
   function setRouteBand(a, b, bandIdx) {
@@ -1562,7 +1625,7 @@ const Calculator = (() => {
     currentProjectId = null;
     currentStep = -1;
     maxReached = -1;
-    state = { project:null, partners:[], partnerRates:{}, workerRates:[], wrCounter:0, routes:{}, wps:[], actCounter:0, mgmt:{rate_applicant:500,rate_partner:250} };
+    state = { project:null, partners:[], partnerRates:{}, workerRates:[], wrCounter:0, routes:{}, extraDests:[], extraDestCounter:0, wps:[], actCounter:0, mgmt:{rate_applicant:500,rate_partner:250} };
     renderProjectSelector();
   }
 
@@ -1645,7 +1708,7 @@ const Calculator = (() => {
     const { totalProject } = getFinancials();
     const usePct = totalProject > 0 ? Math.min(total / totalProject * 100, 100).toFixed(1) : 0;
 
-    const nav = _embeddedMode ? embeddedNavButtons(4, 6, 'Presupuesto \u2192') : navButtons(1, 3, 'Activities \u2192');
+    const nav = _embeddedMode ? embeddedNavButtons(3, 5, 'Presupuesto \u2192') : navButtons(1, 3, 'Activities \u2192');
 
     container.innerHTML = `
       <h2 class="font-headline text-lg font-bold mb-1">Work Packages & Activities</h2>
@@ -1745,6 +1808,9 @@ const Calculator = (() => {
     _removeWorkerRate: removeWorkerRate,
     _setRouteBand: setRouteBand,
     _setRoute: setRoute,
+    _addExtraDest: addExtraDest,
+    _removeExtraDest: removeExtraDest,
+    _setExtraDest: setExtraDest,
     _setWP: setWP,
     _setWPCat: setWPCat,
     _applyWPTitle: applyWPTitle,

@@ -62,3 +62,14 @@ exports.deleteEvalQuestion  = async (req, res) => { try { await m.deleteEvalQues
 exports.upsertEvalCriterion = async (req, res) => { try { const id = await m.upsertEvalCriterion(req.body, req.params.id || null); ok(res, { id }); } catch(e) { err(res, e.message, 500); } };
 exports.deleteEvalCriterion = async (req, res) => { try { await m.deleteEvalCriterion(req.params.id); ok(res, null); } catch(e) { err(res, e.message, 500); } };
 exports.importEvalRules     = async (req, res) => { try { await m.importEvalRules(req.params.programId, req.body); ok(res, null); } catch(e) { err(res, e.message, 500); } };
+
+/* ── Form templates & instances ──────────────────────────────── */
+exports.listFormTemplates  = async (req, res) => { try { ok(res, await m.listFormTemplates()); } catch(e) { err(res, e.message, 500); } };
+exports.getFormTemplate    = async (req, res) => { try { ok(res, await m.getFormTemplate(req.params.id)); } catch(e) { err(res, e.message, 500); } };
+exports.listFormInstances  = async (req, res) => { try { ok(res, await m.listFormInstances(req.query)); } catch(e) { err(res, e.message, 500); } };
+exports.createFormInstance  = async (req, res) => { try { ok(res, await m.createFormInstance(req.body)); } catch(e) { err(res, e.message, 500); } };
+exports.getFormInstance     = async (req, res) => { try { ok(res, await m.getFormInstance(req.params.id)); } catch(e) { err(res, e.message, 500); } };
+exports.getFormValues       = async (req, res) => { try { ok(res, await m.getFormValues(req.params.id)); } catch(e) { err(res, e.message, 500); } };
+exports.saveFormValues      = async (req, res) => { try { await m.saveFormValues(req.params.id, req.body.values); ok(res, null); } catch(e) { err(res, e.message, 500); } };
+exports.updateFormInstance  = async (req, res) => { try { await m.updateFormInstance(req.params.id, req.body); ok(res, null); } catch(e) { err(res, e.message, 500); } };
+exports.deleteFormInstance  = async (req, res) => { try { await m.deleteFormInstance(req.params.id); ok(res, null); } catch(e) { err(res, e.message, 500); } };

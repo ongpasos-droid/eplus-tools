@@ -452,6 +452,119 @@ async function importEvalRules(programId, jsonData) {
   finally { conn.release(); }
 }
 
+/* ── Form templates & instances ──────────────────────────────── */
+
+async function listFormTemplates() {
+  const [rows] = await pool.query('SELECT id, name, slug, description, version, year, active, created_at FROM form_templates ORDER BY active DESC, name');
+  return rows;
+}
+
+async function getFormTemplate(id) {
+  const [rows] = await pool.query('SELECT * FROM form_templates WHERE id = ?', [id]);
+  if (!rows.length) throw new Error('Template not found');
+  const t = rows[0];
+  if (typeof t.template_json === 'string') {
+    try { t.template_json = JSON.parse(t.template_json); } catch(_) {}
+  }
+  return t;
+}
+
+async function listFormInstances(query) {
+  let sql = `SELECT fi.*, ft.name as template_name, ip.name as program_name
+             FROM form_instances fi
+             JOIN form_templates ft ON fi.template_id = ft.id
+             JOIN intake_programs ip ON fi.program_id = ip.id`;
+  const conditions = [];
+  const params = [];
+  if (query.program_id) { conditions.push('fi.program_id = ?'); params.push(query.program_id); }
+  if (query.template_id) { conditions.push('fi.template_id = ?'); params.push(query.template_id); }
+  if (conditions.length) sql += ' WHERE ' + conditions.join(' AND ');
+  sql += ' ORDER BY fi.updated_at DESC';
+  const [rows] = await pool.query(sql, params);
+  return rows;
+}
+
+async function createFormInstance({ template_id, program_id, project_id, title }) {
+  const id = uuid();
+  await pool.query(
+    'INSERT INTO form_instances (id, template_id, program_id, project_id, title) VALUES (?,?,?,?,?)',
+    [id, template_id, program_id, project_id || null, title || null]
+  );
+  return { id };
+}
+
+async function getFormInstance(id) {
+  const [rows] = await pool.query(
+    `SELECT fi.*, ft.name as template_name, ft.template_json,
+            ip.name as program_name
+     FROM form_instances fi
+     JOIN form_templates ft ON fi.template_id = ft.id
+     JOIN intake_programs ip ON fi.program_id = ip.id
+     WHERE fi.id = ?`, [id]);
+  if (!rows.length) throw new Error('Instance not found');
+  const inst = rows[0];
+  if (typeof inst.template_json === 'string') {
+    try { inst.template_json = JSON.parse(inst.template_json); } catch(_) {}
+  }
+  return inst;
+}
+
+async function getFormValues(instanceId) {
+  const [rows] = await pool.query(
+    'SELECT field_id, section_path, value_text, value_json FROM form_field_values WHERE instance_id = ?',
+    [instanceId]
+  );
+  const values = {};
+  for (const r of rows) {
+    const key = r.section_path ? `${r.section_path}.${r.field_id}` : r.field_id;
+    values[key] = r.value_json ? (typeof r.value_json === 'string' ? JSON.parse(r.value_json) : r.value_json) : r.value_text;
+  }
+  return values;
+}
+
+async function saveFormValues(instanceId, values) {
+  // values = { "field_id_or_path.field_id": value, ... }
+  if (!values || typeof values !== 'object') return;
+
+  for (const [fullKey, val] of Object.entries(values)) {
+    const lastDot = fullKey.lastIndexOf('.');
+    let sectionPath = null, fieldId = fullKey;
+    if (lastDot > 0) {
+      sectionPath = fullKey.substring(0, lastDot);
+      fieldId = fullKey.substring(lastDot + 1);
+    }
+
+    const isJson = typeof val === 'object' && val !== null;
+    const id = uuid();
+
+    await pool.query(
+      `INSERT INTO form_field_values (id, instance_id, field_id, section_path, value_text, value_json)
+       VALUES (?, ?, ?, ?, ?, ?)
+       ON DUPLICATE KEY UPDATE
+         value_text = VALUES(value_text),
+         value_json = VALUES(value_json),
+         updated_at = CURRENT_TIMESTAMP`,
+      [id, instanceId, fieldId, sectionPath, isJson ? null : (val ?? ''), isJson ? JSON.stringify(val) : null]
+    );
+  }
+
+  await pool.query("UPDATE form_instances SET status = 'in_progress', updated_at = CURRENT_TIMESTAMP WHERE id = ?", [instanceId]);
+}
+
+async function updateFormInstance(id, data) {
+  const fields = [];
+  const params = [];
+  if (data.title !== undefined) { fields.push('title = ?'); params.push(data.title); }
+  if (data.status !== undefined) { fields.push('status = ?'); params.push(data.status); }
+  if (!fields.length) return;
+  params.push(id);
+  await pool.query(`UPDATE form_instances SET ${fields.join(', ')} WHERE id = ?`, params);
+}
+
+async function deleteFormInstance(id) {
+  await pool.query('DELETE FROM form_instances WHERE id = ?', [id]);
+}
+
 module.exports = {
   listPrograms, upsertProgram, deleteProgram,
   listCountries, upsertCountry, deleteCountry,
@@ -463,5 +576,8 @@ module.exports = {
   getEvalTree, upsertEvalSection, deleteEvalSection,
   upsertEvalQuestion, deleteEvalQuestion,
   upsertEvalCriterion, deleteEvalCriterion,
-  importEvalRules
+  importEvalRules,
+  listFormTemplates, getFormTemplate,
+  listFormInstances, createFormInstance, getFormInstance,
+  getFormValues, saveFormValues, updateFormInstance, deleteFormInstance
 };

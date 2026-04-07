@@ -202,14 +202,14 @@ tailwind.config = {
         <span class="material-symbols-outlined text-[20px]">folder_shared</span>
         Mis Proyectos
       </a>
-      <a href="#intake"
+      <a href="#create"
         class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
-        data-route="intake">
+        data-route="create">
         <span class="material-symbols-outlined text-[20px]">add_circle</span>
         Crear Proyecto
       </a>
       <a href="#evaluator"
-        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium opacity-40 pointer-events-none"
+        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
         data-route="evaluator">
         <span class="material-symbols-outlined text-[20px]">fact_check</span>
         Evaluator
@@ -508,6 +508,69 @@ tailwind.config = {
         </div>
       </section>
 
+      <!-- Create Project panel -->
+      <section id="panel-create" class="panel">
+        <div class="max-w-3xl mx-auto">
+          <h1 class="font-headline text-3xl font-extrabold tracking-tighter text-primary mb-1">Create Project</h1>
+          <p class="text-on-surface-variant text-base mb-6">Select a call and start a new project, or upload an existing proposal.</p>
+
+          <!-- Upload existing proposal -->
+          <div class="bg-white rounded-2xl shadow-sm p-5 mb-6 border-2 border-dashed border-primary/20">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-[#1b1464] flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-[#e7eb00] text-xl">upload_file</span>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-sm font-bold text-primary">Upload existing proposal (Part B)</h3>
+                <p class="text-xs text-on-surface-variant mt-0.5">Upload your .docx Form Part B and we'll extract all the data automatically.</p>
+              </div>
+              <label class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-[#e7eb00] bg-[#1b1464] hover:bg-[#1b1464]/80 transition-colors cursor-pointer">
+                <span class="material-symbols-outlined text-sm">cloud_upload</span> Upload DOCX
+                <input type="file" id="create-upload-docx" accept=".docx" class="hidden">
+              </label>
+            </div>
+            <div id="create-upload-status" class="hidden mt-3"></div>
+          </div>
+
+          <!-- Filters -->
+          <div class="bg-white rounded-2xl shadow-sm p-4 mb-4 space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="relative flex-1">
+                <span class="material-symbols-outlined text-on-surface-variant/40 absolute left-3 top-1/2 -translate-y-1/2 text-lg">search</span>
+                <input type="text" id="create-prog-search" placeholder="Search by name or action type..."
+                  class="w-full pl-10 pr-4 py-2 rounded-xl border border-outline-variant/20 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 bg-gray-50">
+              </div>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap" id="create-prog-filters">
+              <span class="text-[10px] font-bold uppercase text-on-surface-variant/50">Filter:</span>
+              <button data-filter="open" class="create-filter-btn px-2.5 py-1 rounded-lg text-[10px] font-bold bg-blue-50 text-blue-600 border border-blue-100 transition-colors">Open calls</button>
+              <button data-filter="urgent" class="create-filter-btn px-2.5 py-1 rounded-lg text-[10px] font-bold bg-gray-50 text-gray-500 border border-gray-100 transition-colors">Urgent (&lt;30d)</button>
+              <button data-filter="ngo" class="create-filter-btn px-2.5 py-1 rounded-lg text-[10px] font-bold bg-gray-50 text-gray-500 border border-gray-100 transition-colors">NGOs</button>
+              <button data-filter="university" class="create-filter-btn px-2.5 py-1 rounded-lg text-[10px] font-bold bg-gray-50 text-gray-500 border border-gray-100 transition-colors">Universities</button>
+              <button data-filter="public_body" class="create-filter-btn px-2.5 py-1 rounded-lg text-[10px] font-bold bg-gray-50 text-gray-500 border border-gray-100 transition-colors">Public bodies</button>
+              <button data-filter="all" class="create-filter-btn px-2.5 py-1 rounded-lg text-[10px] font-bold bg-gray-50 text-gray-500 border border-gray-100 transition-colors">All</button>
+            </div>
+          </div>
+
+          <!-- Program cards -->
+          <div class="flex flex-col gap-2 mb-6" id="create-prog-list"></div>
+
+          <!-- Create button -->
+          <div class="flex justify-end">
+            <button type="button" id="create-btn-start" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#1b1464] text-[#e7eb00] font-bold text-base shadow-lg hover:bg-[#1b1464]/90 hover:scale-[1.02] active:scale-95 transition-all">
+              <span class="material-symbols-outlined text-lg">rocket_launch</span> Create Project
+            </button>
+          </div>
+
+          <!-- Hidden fields for selected program data -->
+          <div style="display:none!important">
+            <span id="create-ro-dl"></span><span id="create-ro-gr"></span><span id="create-ro-co"></span>
+            <span id="create-ro-in"></span><span id="create-ro-sf"></span><span id="create-ro-st"></span>
+            <span id="create-ro-dur"></span>
+          </div>
+        </div>
+      </section>
+
       <!-- Intake panel -->
       <section id="panel-intake" class="panel">
         <div class="max-w-3xl mx-auto">
@@ -524,69 +587,19 @@ tailwind.config = {
             <input type="file" id="intake-file-in" accept=".json" class="hidden">
           </div>
 
-          <!-- Progress bar (rendered dynamically by intake.js — 9 steps) -->
+          <!-- Progress bar (rendered dynamically by intake.js — 8 steps) -->
           <nav class="flex items-center mb-10 flex-wrap gap-y-2" id="intake-step-nav">
             <!-- JS will populate this -->
           </nav>
 
-          <!-- STEP 0: Programa -->
-          <div class="intake-step" id="intake-p0">
-            <h1 class="font-headline text-3xl font-extrabold tracking-tighter text-primary mb-1">Programa</h1>
-            <p class="text-on-surface-variant text-base mb-8">Selecciona la convocatoria Erasmus+ o abre un proyecto guardado.</p>
-
-            <!-- Program cards -->
-            <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">
-              <span>Tipo convocatoria</span><div class="flex-1 h-px bg-outline-variant"></div>
-            </div>
-            <div class="flex flex-col gap-2 mb-8" id="intake-prog-list"></div>
-
-            <!-- Program details -->
-            <div id="intake-prog-details" class="hidden">
-              <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">
-                <span>Datos de la convocatoria</span><div class="flex-1 h-px bg-outline-variant"></div>
-              </div>
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-6">
-                <div class="bg-surface-container-low border border-outline-variant/50 rounded-lg p-3">
-                  <div class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Plazo</div>
-                  <div class="font-headline text-sm font-bold text-primary" id="intake-ro-dl">&mdash;</div>
-                </div>
-                <div class="bg-surface-container-low border border-outline-variant/50 rounded-lg p-3">
-                  <div class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Subvenci&oacute;n m&aacute;x.</div>
-                  <div class="font-headline text-sm font-bold text-primary" id="intake-ro-gr">&mdash;</div>
-                </div>
-                <div class="bg-surface-container-low border border-outline-variant/50 rounded-lg p-3">
-                  <div class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Cofinanciaci&oacute;n UE</div>
-                  <div class="font-headline text-sm font-bold text-primary" id="intake-ro-co">&mdash;</div>
-                </div>
-                <div class="bg-surface-container-low border border-outline-variant/50 rounded-lg p-3">
-                  <div class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Costes indirectos</div>
-                  <div class="font-headline text-sm font-bold text-primary" id="intake-ro-in">&mdash;</div>
-                </div>
-                <div class="bg-surface-container-low border border-outline-variant/50 rounded-lg p-3">
-                  <div class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Inicio desde</div>
-                  <div class="font-headline text-sm font-bold text-primary" id="intake-ro-sf">&mdash;</div>
-                </div>
-                <div class="bg-surface-container-low border border-outline-variant/50 rounded-lg p-3">
-                  <div class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Inicio hasta</div>
-                  <div class="font-headline text-sm font-bold text-primary" id="intake-ro-st">&mdash;</div>
-                </div>
-              </div>
-              <div class="bg-surface-container-low border border-outline-variant/50 rounded-lg p-3">
-                <div class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Duraci&oacute;n</div>
-                <div class="font-headline text-sm font-bold text-primary" id="intake-ro-dur">&mdash;</div>
-              </div>
-              <input type="hidden" id="intake-f-start">
-              <input type="hidden" id="intake-f-dur">
-            </div>
-
-            <div class="flex justify-end mt-10 pt-5 border-t border-outline-variant">
-              <button type="button" class="intake-btn-next inline-flex items-center gap-2 px-8 py-4 rounded-md bg-secondary-fixed text-primary-container font-bold text-base shadow-[0_24px_48px_rgba(27,20,100,0.1)] hover:scale-[1.02] active:scale-95 transition-transform">
-                Siguiente <span class="material-symbols-outlined text-lg">arrow_forward</span>
-              </button>
-            </div>
+          <!-- Hidden fields for program data (populated by create.js) -->
+          <div style="display:none!important">
+            <input type="hidden" id="intake-f-start">
+            <input type="hidden" id="intake-f-dur">
+            <input type="hidden" id="intake-f-type">
           </div>
 
-          <!-- STEP 1: Proyecto -->
+          <!-- STEP 1: Proyecto (was step 2) -->
           <div class="intake-step hidden" id="intake-p1">
             <h1 class="font-headline text-3xl font-extrabold tracking-tighter text-primary mb-1">Project</h1>
             <p class="text-on-surface-variant text-base mb-8">Define your project identity and build the consortium.</p>
@@ -598,7 +611,6 @@ tailwind.config = {
               <div class="flex flex-col gap-1.5">
                 <label class="text-xs font-semibold text-on-surface-variant">Project name <span class="text-primary">*</span></label>
                 <input type="text" id="intake-f-fullname" placeholder="e.g. Action for Resilience and Innovation in Europe" class="w-full px-3 py-2.5 rounded-lg bg-white border border-outline-variant text-on-surface font-body text-sm focus:border-primary focus:ring-2 focus:ring-secondary-fixed outline-none transition-all">
-                <input type="hidden" id="intake-f-type">
               </div>
               <div class="flex flex-col gap-1.5">
                 <label class="text-xs font-semibold text-on-surface-variant">Acronym <span class="text-primary">*</span></label>
@@ -978,6 +990,90 @@ tailwind.config = {
         </div>
       </section>
 
+      <!-- ══ PANEL EVALUATOR ═════════════════════════════════════ -->
+      <section id="panel-evaluator" class="panel">
+        <div class="max-w-7xl mx-auto py-8 px-4">
+
+          <!-- Vista 1: Selección de convocatoria -->
+          <div id="eval-user-programs" class="eval-user-view">
+            <div class="mb-6">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
+                  <span class="material-symbols-outlined text-secondary-fixed text-xl">fact_check</span>
+                </div>
+                <div>
+                  <h2 class="font-headline text-xl font-extrabold text-primary tracking-tight">Evaluator</h2>
+                  <p class="text-xs text-on-surface-variant">Sube un proyecto y rellena automáticamente el formulario oficial.</p>
+                </div>
+              </div>
+            </div>
+            <div id="eval-user-program-list" class="grid gap-3"></div>
+          </div>
+
+          <!-- Vista 2: Editor de formulario -->
+          <div id="eval-user-editor" class="eval-user-view hidden">
+            <!-- Header con back + título + upload -->
+            <div class="flex items-center justify-between mb-4 flex-wrap gap-3">
+              <div class="flex items-center gap-3">
+                <button id="eval-user-back" class="text-xs text-primary hover:text-primary/70 font-semibold flex items-center gap-1 transition-colors">
+                  <span class="material-symbols-outlined text-sm">arrow_back</span> Todas las convocatorias
+                </button>
+                <h2 id="eval-user-title" class="font-headline text-lg font-extrabold text-primary truncate max-w-md"></h2>
+              </div>
+              <div class="flex items-center gap-3">
+                <div id="eval-parse-status" class="hidden items-center gap-2 text-xs text-on-surface-variant">
+                  <svg class="animate-spin h-4 w-4 text-primary" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+                  <span id="eval-parse-text">Analizando...</span>
+                </div>
+                <label id="eval-upload-label" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-[#e7eb00] bg-[#1b1464] hover:bg-[#1b1464]/80 cursor-pointer transition-colors shadow-md">
+                  <span class="material-symbols-outlined text-sm">upload_file</span> Subir Proyecto
+                  <input type="file" id="eval-upload-input" accept=".pdf,.docx" class="hidden">
+                </label>
+              </div>
+            </div>
+
+            <!-- Upload drop zone (visible cuando no hay doc) -->
+            <div id="eval-dropzone" class="mb-4 border-2 border-dashed border-primary/30 rounded-2xl p-8 text-center bg-primary/5 hover:bg-primary/10 transition-colors cursor-pointer">
+              <span class="material-symbols-outlined text-4xl text-primary/40 mb-2">cloud_upload</span>
+              <p class="text-sm font-bold text-primary/70">Arrastra tu propuesta aquí o haz clic para seleccionar</p>
+              <p class="text-xs text-on-surface-variant mt-1">PDF o DOCX — máx. 50 MB</p>
+            </div>
+
+            <!-- Progress bar (visible durante parsing) -->
+            <div id="eval-progress-bar" class="hidden mb-4">
+              <div class="flex items-center justify-between text-xs text-on-surface-variant mb-1">
+                <span id="eval-progress-label">Procesando sección 0 de 0...</span>
+                <span id="eval-progress-pct">0%</span>
+              </div>
+              <div class="w-full h-2 bg-outline-variant/20 rounded-full overflow-hidden">
+                <div id="eval-progress-fill" class="h-full bg-primary rounded-full transition-all duration-500" style="width:0%"></div>
+              </div>
+            </div>
+
+            <!-- Layout: sidebar + main -->
+            <div class="flex gap-0" style="min-height:70vh">
+              <!-- Sidebar secciones -->
+              <div id="eval-user-sidebar" class="w-64 flex-shrink-0 bg-[#edf2f9] rounded-l-2xl flex flex-col overflow-hidden border-r border-outline-variant/20">
+                <div class="px-4 py-3 border-b border-outline-variant/20">
+                  <div class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Secciones del formulario</div>
+                </div>
+                <div id="eval-user-sidebar-nav" class="flex-1 overflow-y-auto px-2 py-2"></div>
+              </div>
+              <!-- Main content -->
+              <div id="eval-user-main" class="flex-1 min-w-0 bg-white rounded-r-2xl border border-l-0 border-outline-variant/20">
+                <div id="eval-user-main-content" class="p-6">
+                  <div class="flex flex-col items-center justify-center py-16 text-center">
+                    <span class="material-symbols-outlined text-5xl text-outline-variant/40 mb-3">upload_file</span>
+                    <p class="text-sm text-on-surface-variant">Sube un documento para auto-rellenar o selecciona una sección para escribir manualmente.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       <!-- ══ PANEL ADMIN ══════════════════════════════════════════ -->
       <section id="panel-admin" class="panel">
         <div class="max-w-6xl mx-auto py-8 px-4">
@@ -1145,10 +1241,10 @@ tailwind.config = {
                     <tr>
                       <th class="px-4 py-3 text-left">Code</th>
                       <th class="px-4 py-3 text-left">Category</th>
-                      <th class="px-4 py-3 text-center">Zone A</th>
-                      <th class="px-4 py-3 text-center">Zone B</th>
-                      <th class="px-4 py-3 text-center">Zone C</th>
-                      <th class="px-4 py-3 text-center">Zone D</th>
+                      <th class="px-4 py-3 text-center">Zone A<br><span class="font-normal normal-case tracking-normal text-[9px] text-on-surface-variant/50">day / PM</span></th>
+                      <th class="px-4 py-3 text-center">Zone B<br><span class="font-normal normal-case tracking-normal text-[9px] text-on-surface-variant/50">day / PM</span></th>
+                      <th class="px-4 py-3 text-center">Zone C<br><span class="font-normal normal-case tracking-normal text-[9px] text-on-surface-variant/50">day / PM</span></th>
+                      <th class="px-4 py-3 text-center">Zone D<br><span class="font-normal normal-case tracking-normal text-[9px] text-on-surface-variant/50">day / PM</span></th>
                       <th class="px-4 py-3 text-left">Status</th>
                       <th class="px-4 py-3 text-right">Actions</th>
                     </tr>
@@ -1809,12 +1905,14 @@ tailwind.config = {
 <script src="/js/auth.js"></script>
 <script src="/js/app.js"></script>
 <script src="/js/my-projects.js"></script>
+<script src="/js/create.js"></script>
 <script src="/js/intake.js"></script>
 <script src="/js/admin.js"></script>
 <script src="/js/calculator.js"></script>
 <script src="/js/organizations.js"></script>
 <script src="/js/documents.js"></script>
 <script src="/js/research.js"></script>
+<script src="/js/evaluator.js"></script>
 
 <!-- ── Mini modal (reemplaza prompt/confirm nativos) ────────── -->
 <div id="mini-modal" class="hidden fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-black/40">

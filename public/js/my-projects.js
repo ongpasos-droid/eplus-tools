@@ -79,12 +79,9 @@ const MyProjects = (() => {
         card.addEventListener('click', (e) => {
           if (e.target.closest('.my-projects-delete')) return;
           const id = card.dataset.projectId;
-          App.navigate('intake');
-          setTimeout(() => {
-            if (typeof Intake !== 'undefined' && Intake._loadProject) {
-              Intake._loadProject(id, 1);
-            }
-          }, 100);
+          if (typeof Intake !== 'undefined') {
+            Intake.openProject(id);
+          }
         });
       });
 

@@ -139,6 +139,7 @@ const App = (() => {
     const titles = {
       dashboard:  'Dashboard',
       'my-projects': 'Mis Proyectos',
+      create:     'Crear Proyecto',
       intake:     'Intake',
       calculator: 'Calculator',
       planner:    'Planner',
@@ -155,12 +156,9 @@ const App = (() => {
 
     // Initialize module when navigating to it
     if (route === 'my-projects' && typeof MyProjects !== 'undefined') MyProjects.init();
+    if (route === 'create' && typeof CreateProject !== 'undefined') CreateProject.init();
     if (route === 'intake' && typeof Intake !== 'undefined') {
-      if (newProject) {
-        Intake.startNew();
-      } else {
-        Intake.init();
-      }
+      Intake.init();
     }
     if (route === 'admin' && typeof Admin !== 'undefined') Admin.init();
     if (route === 'calculator' && typeof Calculator !== 'undefined') Calculator.init();
@@ -168,6 +166,7 @@ const App = (() => {
     if (route === 'my-org' && typeof Organizations !== 'undefined') Organizations.initMyOrg();
     if (route === 'organizations' && typeof Organizations !== 'undefined') Organizations.initDirectory();
     if (route === 'research' && typeof Research !== 'undefined') Research.init();
+    if (route === 'evaluator' && typeof Evaluator !== 'undefined') Evaluator.init();
   }
 
   /* ── Toggle sidebar (mobile) ───────────────────────────────── */

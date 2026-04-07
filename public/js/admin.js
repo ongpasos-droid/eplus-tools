@@ -385,10 +385,14 @@ const Admin = (() => {
         <tr data-id="${r.id}" class="border-b border-outline-variant/30 hover:bg-surface-container-low/50 transition-colors worker-row">
           <td class="px-4 py-3 font-mono text-sm font-bold text-primary worker-code">${r.code}</td>
           <td class="px-4 py-3 font-medium worker-name">${r.name_es}</td>
-          ${['A','B','C','D'].map(z => `
-            <td class="px-4 py-2 text-center worker-zone" data-zone="${z}" data-zone-id="${r.zones[z]?.id || ''}" data-rate="${r.zones[z]?.rate_day ?? ''}">
-              <span class="font-bold text-primary text-sm">€${r.zones[z]?.rate_day ?? '—'}</span>
-            </td>`).join('')}
+          ${['A','B','C','D'].map(z => {
+            const rd = r.zones[z]?.rate_day;
+            const pm = rd != null ? (rd * 22).toFixed(0) : null;
+            return `<td class="px-4 py-2 text-center worker-zone" data-zone="${z}" data-zone-id="${r.zones[z]?.id || ''}" data-rate="${rd ?? ''}">
+              <span class="font-bold text-primary text-sm">\u20AC${rd ?? '\u2014'}</span>
+              ${pm != null ? `<br><span class="text-[10px] text-on-surface-variant/60">\u20AC${Number(pm).toLocaleString('en')}</span>` : ''}
+            </td>`;
+          }).join('')}
           <td class="px-4 py-3">${badge(r.active)}</td>
           <td class="px-4 py-3 text-right worker-actions">
             <button class="worker-edit-btn text-xs px-2 py-1 rounded border border-primary/20 text-primary hover:bg-primary/5 transition-colors" title="Edit">
@@ -994,38 +998,63 @@ const Admin = (() => {
     try {
       const programs = await API.get('/admin/data/programs');
       if (!programs.length) { list.innerHTML = '<p class="text-sm text-on-surface-variant py-8 text-center">No programmes found. Create one in the Convocatorias tab first.</p>'; return; }
-      list.innerHTML = `<div class="mb-4">
-        <button id="eval-new-program" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold text-[#e7eb00] bg-[#1b1464] hover:bg-[#1b1464]/80 transition-colors">
-          <span class="material-symbols-outlined text-sm">add</span> New call / programme
-        </button>
-      </div>` + programs.map(p => `
-        <div class="eval-prog-card group flex items-center gap-4 p-5 bg-white rounded-2xl border border-outline-variant/30 hover:border-primary hover:shadow-lg transition-all" data-id="${p.id}">
-          <div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center flex-shrink-0 group-hover:bg-secondary-fixed transition-colors cursor-pointer eval-prog-open">
-            <span class="material-symbols-outlined text-secondary-fixed group-hover:text-primary text-2xl transition-colors">description</span>
-          </div>
-          <div class="flex-1 min-w-0 cursor-pointer eval-prog-open">
-            <div class="font-headline font-bold text-on-surface group-hover:text-primary transition-colors">${p.name}</div>
-            <div class="text-xs text-on-surface-variant mt-0.5">${p.action_type || ''} &middot; Deadline: ${p.deadline ? p.deadline.slice(0,10) : '\u2014'}</div>
-          </div>
-          <div class="flex items-center gap-2">
-            <button class="eval-prog-del inline-flex items-center gap-1 px-3 py-2 rounded-xl text-[11px] font-semibold text-red-400 border border-red-200 hover:bg-red-50 hover:text-red-600 transition-colors" data-id="${p.id}" data-name="${p.name.replace(/"/g, '&quot;')}">
-              <span class="material-symbols-outlined text-sm">warning</span> Delete
-            </button>
-            <button class="eval-prog-open px-5 py-2 rounded-xl text-[11px] font-bold text-[#e7eb00] bg-[#1b1464] hover:bg-[#1b1464]/80 transition-colors inline-flex items-center gap-1.5">
-              <span class="material-symbols-outlined text-sm">settings</span> Configure
-            </button>
-          </div>
-        </div>`).join('');
+      // Sort by deadline (closest first, null at end)
+      programs.sort((a, b) => {
+        if (!a.deadline && !b.deadline) return 0;
+        if (!a.deadline) return 1;
+        if (!b.deadline) return -1;
+        return new Date(a.deadline) - new Date(b.deadline);
+      });
+
+      const fmtDeadline = d => {
+        if (!d) return null;
+        const dt = new Date(d);
+        const diff = Math.ceil((dt - new Date()) / 86400000);
+        const str = dt.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+        return { str, diff, urgent: diff >= 0 && diff <= 30, past: diff < 0 };
+      };
+      const fmtGrant = v => v ? '\u20AC ' + Number(v).toLocaleString('en') : null;
+
+      list.innerHTML = `
+        <div class="flex items-center justify-between mb-4">
+          <button id="eval-new-program" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold text-[#e7eb00] bg-[#1b1464] hover:bg-[#1b1464]/80 transition-colors">
+            <span class="material-symbols-outlined text-sm">add</span> New call
+          </button>
+          <span class="text-xs text-on-surface-variant">${programs.length} call${programs.length !== 1 ? 's' : ''} · sorted by deadline</span>
+        </div>
+        <div class="grid grid-cols-1 gap-2">
+        ${programs.map(p => {
+          const dl = fmtDeadline(p.deadline);
+          const grant = fmtGrant(p.eu_grant_max);
+          const dlBadge = dl
+            ? `<span class="px-2 py-1 rounded-lg text-[10px] font-bold ${dl.past ? 'bg-gray-100 text-gray-400' : dl.urgent ? 'bg-red-50 text-red-600' : 'bg-blue-50 text-blue-600'}">${dl.str}${dl.diff >= 0 ? ' (' + dl.diff + 'd)' : ''}</span>`
+            : '<span class="px-2 py-1 rounded-lg bg-gray-50 text-gray-400 text-[10px]">No deadline</span>';
+          return `
+          <div class="eval-prog-card group flex items-center gap-3 px-4 py-3 bg-white rounded-xl border border-outline-variant/20 hover:border-primary/40 hover:shadow-md transition-all cursor-pointer" data-id="${p.id}">
+            <div class="w-8 h-8 rounded-lg ${p.active ? 'bg-[#1b1464]' : 'bg-gray-300'} flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-white text-base">description</span>
+            </div>
+            <div class="flex-1 min-w-0 eval-prog-open">
+              <div class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors truncate">${p.name}</div>
+              <div class="text-[10px] text-on-surface-variant mt-0.5">${p.action_type || ''}</div>
+            </div>
+            <div class="flex items-center gap-2 flex-shrink-0">
+              ${grant ? `<span class="px-2 py-1 rounded-lg bg-green-50 text-green-700 text-[10px] font-bold">${grant}</span>` : ''}
+              ${dlBadge}
+              <button class="eval-prog-del text-on-surface-variant/30 hover:text-error transition-colors" data-id="${p.id}" data-name="${p.name.replace(/"/g, '&quot;')}">
+                <span class="material-symbols-outlined text-sm">delete</span>
+              </button>
+            </div>
+          </div>`;
+        }).join('')}
+        </div>`;
       document.getElementById('eval-new-program')?.addEventListener('click', () => evalNewProgram());
       list.querySelectorAll('.eval-prog-card').forEach(card => {
-        // Open programme on click (icon, name, configure)
-        card.querySelectorAll('.eval-prog-open').forEach(el => {
-          el.addEventListener('click', () => {
-            const prog = programs.find(p => p.id === card.dataset.id);
-            evalOpenProgram(prog.id, prog.name);
-          });
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('.eval-prog-del')) return;
+          const prog = programs.find(p => p.id === card.dataset.id);
+          evalOpenProgram(prog.id, prog.name);
         });
-        // Delete button
         card.querySelector('.eval-prog-del')?.addEventListener('click', e => {
           e.stopPropagation();
           evalDeleteProgram(e.currentTarget.dataset.id, e.currentTarget.dataset.name);
@@ -2587,6 +2616,22 @@ KEY EVALUATOR FOCUS:
       const secData = formsFindSection(fm.activeSection);
       if (secData) formsRenderSection(secData);
     } else if (view === 'docs') {
+      // Rebuild sidebar to just show hub items
+      const sidebar = document.getElementById('forms-sidebar');
+      sidebar.innerHTML = `<div class="space-y-0.5 sticky top-0">
+        <div class="forms-hub-item flex items-center gap-2 px-3 py-2.5 rounded-xl cursor-pointer text-primary/70 hover:bg-primary/5 text-xs" data-view="form">
+          <span class="material-symbols-outlined text-sm">article</span>
+          <span>View Form</span>
+        </div>
+        <div class="forms-hub-item flex items-center gap-2 px-3 py-2.5 rounded-xl cursor-pointer bg-[#1b1464] text-white font-bold text-xs" data-view="docs">
+          <span class="material-symbols-outlined text-sm">folder_open</span>
+          <span>Call Documents</span>
+        </div>
+      </div>`;
+      sidebar.querySelectorAll('.forms-hub-item').forEach(el => {
+        el.addEventListener('click', () => formsShowCallHub(tpl, el.dataset.view));
+      });
+
       content.innerHTML = `
         <div class="flex items-center gap-3 mb-5">
           <div class="w-2 h-10 rounded-full bg-primary"></div>
@@ -2595,13 +2640,120 @@ KEY EVALUATOR FOCUS:
             <h3 class="font-headline text-lg font-extrabold text-on-surface tracking-tight">Call Documents</h3>
           </div>
         </div>
-        <p class="text-sm text-on-surface-variant mb-4">Documents specific to this call type that will be used as the primary AI knowledge base for proposal writing and evaluation.</p>
-        <div class="rounded-xl border-2 border-dashed border-outline-variant/30 p-8 text-center">
-          <span class="material-symbols-outlined text-4xl text-outline-variant/30 mb-2">cloud_upload</span>
-          <p class="text-sm text-on-surface-variant">Document management coming soon</p>
-          <p class="text-xs text-on-surface-variant/60 mt-1">Programme Guide, Call documents, evaluation grids, etc.</p>
-        </div>`;
+        <p class="text-sm text-on-surface-variant mb-4">Documents uploaded here are vectorized and available as AI knowledge base. They also appear in Docs oficiales.</p>
+
+        <!-- Upload form -->
+        <div class="rounded-2xl border border-outline-variant/20 p-5 bg-surface-container-lowest mb-5">
+          <h4 class="text-xs font-bold uppercase text-on-surface-variant mb-3">Upload document</h4>
+          <form id="call-doc-upload-form" class="space-y-3">
+            <input type="file" id="call-doc-file" accept=".pdf,.docx,.txt,.csv,.xlsx" required
+              class="w-full text-sm file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-[#1b1464] file:text-[#e7eb00] file:cursor-pointer">
+            <div class="grid grid-cols-2 gap-3">
+              <input type="text" id="call-doc-title" placeholder="Title (optional, defaults to filename)"
+                class="px-3 py-2 rounded-xl border border-outline-variant/30 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
+              <input type="text" id="call-doc-tags" placeholder="Tags (comma separated)"
+                class="px-3 py-2 rounded-xl border border-outline-variant/30 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
+            </div>
+            <textarea id="call-doc-desc" rows="2" placeholder="Description..."
+              class="w-full px-3 py-2 rounded-xl border border-outline-variant/30 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"></textarea>
+            <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-[#e7eb00] bg-[#1b1464] hover:bg-[#1b1464]/80 transition-colors">
+              <span class="material-symbols-outlined text-sm">cloud_upload</span> Upload & vectorize
+            </button>
+          </form>
+        </div>
+
+        <!-- Document list -->
+        <div id="call-docs-list"><p class="text-sm text-on-surface-variant py-4"><span class="spinner"></span> Loading...</p></div>`;
+
+      // Load docs linked to programs using this template
+      formsLoadCallDocs();
+
+      // Bind upload
+      document.getElementById('call-doc-upload-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const fileInput = document.getElementById('call-doc-file');
+        const file = fileInput.files[0];
+        if (!file) return;
+
+        // Find first program linked to this template
+        const programs = await API.get('/admin/data/programs');
+        const linked = programs.find(p => p.form_template_id === fm.templateId);
+        if (!linked) { Toast.show('No programme linked to this template', 'error'); return; }
+
+        const fd = new FormData();
+        fd.append('file', file);
+        fd.append('title', document.getElementById('call-doc-title').value || file.name);
+        fd.append('description', document.getElementById('call-doc-desc').value);
+        fd.append('tags', document.getElementById('call-doc-tags').value);
+        fd.append('doc_type', 'call');
+        fd.append('program_id', linked.id);
+
+        try {
+          const res = await fetch('/v1/documents/official', {
+            method: 'POST',
+            headers: { 'Authorization': 'Bearer ' + API.getToken() },
+            body: fd
+          });
+          const json = await res.json();
+          if (!json.ok) throw new Error(json.error?.message || 'Upload failed');
+          Toast.show('Document uploaded & vectorizing...', 'ok');
+          document.getElementById('call-doc-upload-form').reset();
+          formsLoadCallDocs();
+        } catch (err) { Toast.show('Error: ' + err.message, 'error'); }
+      });
     }
+  }
+
+  async function formsLoadCallDocs() {
+    const container = document.getElementById('call-docs-list');
+    try {
+      const allDocs = await API.get('/documents/official');
+      // Filter to docs linked to programs using this template
+      const programs = await API.get('/admin/data/programs');
+      const linkedProgramIds = programs.filter(p => p.form_template_id === fm.templateId).map(p => p.id);
+
+      // Get program-doc links
+      const docs = allDocs.filter(d => d.doc_type === 'call');
+
+      if (!docs.length) {
+        container.innerHTML = `<div class="text-center py-8 text-on-surface-variant/50">
+          <span class="material-symbols-outlined text-4xl opacity-30">folder_off</span>
+          <p class="mt-2 text-sm">No documents yet. Upload Programme Guide, call documents, etc.</p>
+        </div>`;
+        return;
+      }
+
+      container.innerHTML = docs.map(d => {
+        const size = d.file_size_bytes ? `${(d.file_size_bytes / 1024).toFixed(0)} KB` : '';
+        const date = new Date(d.created_at).toLocaleDateString();
+        const statusIcon = d.status === 'active' ? 'check_circle' : d.status === 'processing' ? 'sync' : 'error';
+        const statusColor = d.status === 'active' ? 'text-green-500' : d.status === 'processing' ? 'text-blue-500' : 'text-red-500';
+        const tags = (d.tags || []).map(t => `<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-medium">${esc(t)}</span>`).join(' ');
+        return `<div class="flex items-center gap-4 p-4 rounded-xl bg-white border border-outline-variant/20 mb-2 hover:border-primary/30 transition-colors">
+          <span class="material-symbols-outlined text-2xl text-primary/50">description</span>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-bold text-on-surface truncate">${esc(d.title)}</p>
+            <p class="text-xs text-on-surface-variant">${d.file_type || ''} · ${size} · ${date}</p>
+            ${tags ? `<div class="flex gap-1 mt-1">${tags}</div>` : ''}
+          </div>
+          <span class="material-symbols-outlined ${statusColor}" title="${d.status}">${statusIcon}</span>
+          <button class="call-doc-delete text-on-surface-variant/30 hover:text-error transition-colors" data-id="${d.id}">
+            <span class="material-symbols-outlined text-lg">delete</span>
+          </button>
+        </div>`;
+      }).join('');
+
+      container.querySelectorAll('.call-doc-delete').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          if (!confirm('Delete this document?')) return;
+          try {
+            await API.del('/documents/official/' + btn.dataset.id);
+            Toast.show('Document deleted', 'ok');
+            formsLoadCallDocs();
+          } catch (e) { Toast.show('Error: ' + e.message, 'error'); }
+        });
+      });
+    } catch (e) { container.innerHTML = `<p class="text-red-500 text-sm">${e.message}</p>`; }
   }
 
   async function formsOpenEditor(instanceId) {
