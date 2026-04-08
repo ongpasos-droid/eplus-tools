@@ -183,7 +183,7 @@ const IntakeTasks = (() => {
   /* ── Activity → Task (stacked, full width) ─────────────────── */
   function renderActTask(act, wi, c) {
     const category = TYPE_MAP[act.type];
-    const sub = act.subtype_label || '';
+    const sub = act.subtype || '';
     const tmpl = findTemplate(category, sub);
     const icon = ACT_ICONS[act.type] || 'task';
 

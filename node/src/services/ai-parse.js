@@ -3,15 +3,19 @@
    Uses Claude API to parse document sections
    ═══════════════════════════════════════════════════════════════ */
 
-const Anthropic = require('@anthropic-ai/sdk');
+let Anthropic = null;
 const evalModel = require('../modules/evaluator/model');
 
 const MODEL = process.env.AI_MODEL || 'claude-sonnet-4-20250514';
 
-/* ── Initialize client ───────────────────────────────────────── */
+/* ── Initialize client (lazy load SDK) ───────────────────────── */
 function getClient() {
   if (!process.env.ANTHROPIC_API_KEY) {
     throw new Error('ANTHROPIC_API_KEY not configured');
+  }
+  if (!Anthropic) {
+    try { Anthropic = require('@anthropic-ai/sdk'); }
+    catch (e) { throw new Error('Anthropic SDK not installed. Run: npm install @anthropic-ai/sdk'); }
   }
   return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 }

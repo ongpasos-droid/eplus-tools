@@ -495,13 +495,33 @@ const Intake = (() => {
 
   function loadAriseActivities(pts) {
     const st = Calculator;
-    // Helper: month number to ISO date from project start
-    const ps = new Date(document.getElementById('intake-f-start')?.value || '2027-03-01');
-    function monthToISO(m) { const d = new Date(ps); d.setMonth(d.getMonth() + m - 1); return d.toISOString().split('T')[0]; }
-    function monthEndISO(m) { const d = new Date(ps); d.setMonth(d.getMonth() + m); d.setDate(d.getDate() - 1); return d.toISOString().split('T')[0]; }
+    // Helper: month number (1-based) to ISO date from project start
+    const psStr = document.getElementById('intake-f-start')?.value || '2027-03-01';
+    const psY = parseInt(psStr.split('-')[0]);
+    const psM = parseInt(psStr.split('-')[1]) - 1; // 0-based month
+
+    function monthStartISO(m) {
+      // Month 1 = project start month, Month 2 = next month, etc.
+      const y = psY + Math.floor((psM + m - 1) / 12);
+      const mo = (psM + m - 1) % 12;
+      return `${y}-${String(mo+1).padStart(2,'0')}-01`;
+    }
+    function monthEndISO(m) {
+      const y = psY + Math.floor((psM + m) / 12);
+      const mo = (psM + m) % 12;
+      const lastDay = new Date(y, mo, 0).getDate();
+      const my = psY + Math.floor((psM + m - 1) / 12);
+      const mm = (psM + m - 1) % 12;
+      return `${my}-${String(mm+1).padStart(2,'0')}-${String(lastDay).padStart(2,'0')}`;
+    }
     function setDates(wi, actId, startM, endM) {
       const act = Calculator.getCalcState().wps[wi]?.activities?.find(a => a.id === actId);
-      if (act) { act.date_start = monthToISO(startM); act.date_end = monthEndISO(endM); }
+      if (act) {
+        act.date_start = monthStartISO(startM);
+        act.date_end = monthEndISO(endM);
+        act._gantt_start = startM;
+        act._gantt_end = endM;
+      }
     }
 
     // WP1: Management rates

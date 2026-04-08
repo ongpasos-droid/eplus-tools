@@ -177,8 +177,9 @@ const IntakeGantt = (() => {
       // WP1 management tasks (from checklist in Tareas step)
       if (wi === 0) {
         const mgmtTasks = savedTasks.filter(x => x.category === 'project_management');
-        mgmtTasks.forEach((t, mi) => {
-          rows.push({ wi, color: c, icon: 'admin_panel_settings', activity: `Gestión ${mi+1}`, task: t.title,
+        mgmtTasks.forEach((t) => {
+          rows.push({ wi, color: c, icon: 'admin_panel_settings',
+            primary: t.title, secondary: 'Management',
             id: 'mgmt-'+t.id, start: t.start_month||0, end: t.end_month||0, taskId: t.id });
         });
       }
@@ -186,16 +187,20 @@ const IntakeGantt = (() => {
       for (const act of wp.activities) {
         if (act.type === 'mgmt') continue;
         const cat = TYPE_MAP[act.type];
-        const taskTitle = findTaskTitle(cat, act.subtype_label) || '';
-        const actLabel = act.subtype_label || act.label;
+        const subLabel = act.subtype || '';
+        const taskTitle = findTaskTitle(cat, subLabel);
+        const actLabel = subLabel || act.label;
+        // Task is primary, activity is secondary
         rows.push({ wi, color: c, icon: ACT_ICONS[act.type]||'task',
-          activity: actLabel, task: taskTitle ? shortTitle(taskTitle) : actLabel,
+          primary: taskTitle || actLabel,
+          secondary: taskTitle ? actLabel : '',
           id: 'act-'+act.id, start: act._gantt_start||0, end: act._gantt_end||0, actRef: act });
       }
 
       // Custom tasks
       for (const t of savedTasks.filter(x => x.category === 'custom' && parseInt(x.subtype) === wi)) {
-        rows.push({ wi, color: c, icon: 'edit_note', task: shortTitle(t.title || 'Sin título'), activity: 'Custom',
+        rows.push({ wi, color: c, icon: 'edit_note',
+          primary: t.title || 'Sin título', secondary: 'Personalizada',
           id: 'custom-'+t.id, start: t.start_month||0, end: t.end_month||0, taskId: t.id });
       }
     }
@@ -238,8 +243,8 @@ const IntakeGantt = (() => {
           <div class="flex items-start gap-1.5 pl-3">
             <span class="material-symbols-outlined text-[11px] mt-0.5" style="color:${row.color}">${row.icon}</span>
             <div class="min-w-0 flex-1">
-              <div class="text-[10px] font-bold text-on-surface truncate" title="${esc(row.activity)}">${esc(row.activity)}</div>
-              <div class="text-[9px] text-on-surface-variant/70 truncate" title="${esc(row.task)}">${esc(row.task)}</div>
+              <div class="text-[10px] font-bold text-on-surface truncate" title="${esc(row.primary)}">${esc(row.primary)}</div>
+              ${row.secondary ? `<div class="text-[9px] text-on-surface-variant/60 truncate" title="${esc(row.secondary)}">↳ ${esc(row.secondary)}</div>` : ''}
             </div>
           </div>
         </div>
