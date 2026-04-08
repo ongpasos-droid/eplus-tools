@@ -380,6 +380,27 @@ input:focus, select:focus, textarea:focus {
   box-shadow: 0 0 0 2px rgba(27,20,100,.1);
 }
 
+/* ── Larger text across intake & calculator ───────────────────── */
+#panel-intake,
+#intake-calc-container,
+.calc-wp-body {
+  font-size: 15px;
+}
+#panel-intake label,
+#intake-calc-container label,
+.calc-act label { font-size: 13px; }
+#panel-intake input,
+#panel-intake select,
+#panel-intake textarea,
+#intake-calc-container input,
+#intake-calc-container select,
+#intake-calc-container textarea,
+.calc-act input,
+.calc-act select,
+.calc-act textarea { font-size: 14px; }
+.calc-table { font-size: 14px; }
+.calc-table th { font-size: 12px; }
+
 @media (max-width: 639px) {
   .calc-table input[type="number"] { width: 70px; font-size: 14px }
 }

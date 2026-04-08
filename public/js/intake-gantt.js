@@ -1,13 +1,15 @@
 /* ═══════════════════════════════════════════════════════════════
-   IntakeGantt — Activity/Task timeline planner
-   Left: list of WP → activities/tasks with month selectors
-   Right: Gantt bars that update live as dates are set
+   IntakeGantt — Visual timeline (proportional bars, no scroll)
+   Duration comes from Calculator → state.project.duration_months
    ═══════════════════════════════════════════════════════════════ */
 
 const IntakeGantt = (() => {
 
   let container = null;
   let projectId = null;
+  let templates = null;
+  let savedTasks = [];
+  let totalMonths = 36;
 
   function esc(s) {
     if (!s) return '';
@@ -23,116 +25,271 @@ const IntakeGantt = (() => {
     equipment:'devices', goods:'inventory_2', consumables:'eco', other:'more_horiz',
   };
 
-  /* ── Main render ───────────────────────────────────────────── */
-  function render(el, pid) {
+  const TYPE_MAP = {
+    mgmt:'project_management', meeting:'transnational_meeting', ltta:'ltta_mobility',
+    io:'intellectual_output', me:'multiplier_event', local_ws:'local_workshop',
+    campaign:'dissemination', website:'website', artistic:'artistic_fees',
+    equipment:'equipment', goods:'other_goods', consumables:'consumables', other:'other_costs',
+  };
+
+  function findTaskTitle(category, subtypeLabel) {
+    if (!templates) return null;
+    const cat = templates.find(c => c.category === category);
+    if (!cat) return null;
+    if (!subtypeLabel) return cat.subtypes[0]?.title || null;
+    const norm = subtypeLabel.toLowerCase().trim();
+    return (cat.subtypes.find(s => s.label.toLowerCase().trim() === norm) || cat.subtypes[0])?.title || null;
+  }
+
+  /* ── Main ──────────────────────────────────────────────────── */
+  async function render(el, pid) {
     container = el;
     projectId = pid;
     if (!container) return;
+
+    if (!templates) {
+      try { templates = (await API.get('/intake/task-templates')).data; } catch (e) {}
+    }
+    if (projectId) {
+      try { savedTasks = (await API.get(`/intake/projects/${projectId}/tasks`)).data || []; } catch (e) { savedTasks = []; }
+    }
 
     const cs = (typeof Calculator !== 'undefined' && Calculator.isInitialized()) ? Calculator.getCalcState() : null;
     if (!cs || !cs.wps?.length) {
       container.innerHTML = `
         <h1 class="font-headline text-3xl font-extrabold tracking-tighter text-primary mb-1">Gantt del Proyecto</h1>
-        <p class="text-on-surface-variant text-base mb-8">Define primero los Work Packages y actividades.</p>
+        <p class="text-on-surface-variant text-sm mb-8">Define primero los Work Packages y actividades.</p>
         <div class="flex flex-col items-center justify-center py-16 text-center">
           <span class="material-symbols-outlined text-5xl text-outline-variant/40 mb-3">timeline</span>
-          <p class="text-sm text-on-surface-variant">Vuelve al paso WPs.</p>
-        </div>`;
+        </div>` + navHTML();
+      bindNav();
       return;
     }
 
-    const months = cs.financials?.indirectPct ? 36 : 36; // fallback
-    const projMonths = getProjectMonths(cs);
-    renderGantt(cs, projMonths);
+    // Get duration from calculator state
+    totalMonths = cs.projectMonths || 36;
+    renderGantt(cs);
   }
 
-  function getProjectMonths(cs) {
-    // Try to get from calculator state
-    if (typeof Calculator !== 'undefined') {
-      const s = Calculator.getCalcState();
-      // Access internal project data
-      try {
-        const dur = s.wps?.[0]?.activities?.[0]?.date_end;
-        // Estimate from project config
-      } catch (e) {}
-    }
-    return 36; // default
-  }
-
-  /* ── Render full Gantt ─────────────────────────────────────── */
-  function renderGantt(cs, totalMonths) {
+  /* ── Render ────────────────────────────────────────────────── */
+  function renderGantt(cs) {
     const wps = cs.wps;
+    const rows = buildRows(cs);
 
-    // Collect all rows: each WP + its activities
-    const rows = [];
-    for (let wi = 0; wi < wps.length; wi++) {
-      const wp = wps[wi];
-      const c = wpColor(wi);
-      rows.push({ type: 'wp', wi, name: wp.name || wp.desc || `Work Package ${wi+1}`, color: c, start: null, end: null });
-      for (const act of wp.activities) {
-        // Parse existing dates to month numbers
-        let startM = null, endM = null;
-        if (act.date_start && act.date_end) {
-          // Activities store ISO dates, convert to month offset
-          // For now, use act.start_month / act.end_month if available
-        }
-        // Use start_month/end_month from activity if present, else try to compute
-        startM = act._gantt_start ?? monthFromDate(act.date_start, cs);
-        endM = act._gantt_end ?? monthFromDate(act.date_end, cs);
-
-        rows.push({
-          type: 'act', wi, act,
-          name: act.label + (act.subtype_label ? ` — ${act.subtype_label}` : ''),
-          icon: ACT_ICONS[act.type] || 'task',
-          color: c,
-          start: startM,
-          end: endM,
-        });
-      }
-    }
-
-    // Month headers
-    const monthCols = [];
-    for (let m = 1; m <= totalMonths; m++) monthCols.push(m);
+    // Month ruler markers
+    const mw = (100 / totalMonths).toFixed(3);
 
     let html = `
-      <div class="mb-6">
+      <style>
+        .gantt-sel {
+          width: 32px;
+          padding: 3px 0;
+          font-size: 11px;
+          font-weight: 700;
+          text-align: center;
+          color: #1b1464;
+          background: #f8f9fa;
+          border: 1.5px solid #e0e0e0;
+          border-radius: 6px;
+          cursor: pointer;
+          outline: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          transition: all 0.15s;
+        }
+        .gantt-sel:focus {
+          border-color: #1b1464;
+          background: white;
+          box-shadow: 0 0 0 2px rgba(27,20,100,0.12);
+        }
+        .gantt-sel:hover { border-color: #1b1464; background: white; }
+        .gantt-sel option { font-size: 13px; }
+      </style>
+      <div class="mb-5">
         <h1 class="font-headline text-3xl font-extrabold tracking-tighter text-primary mb-1">Gantt del Proyecto</h1>
-        <p class="text-on-surface-variant text-sm">Define el mes de inicio y fin de cada actividad. La barra se actualiza en tiempo real.</p>
+        <p class="text-on-surface-variant text-sm">Duración: <strong>${totalMonths} meses</strong>. Asigna inicio y fin a cada tarea.</p>
       </div>
 
-      <div class="overflow-x-auto rounded-2xl border border-outline-variant/20 shadow-sm bg-white">
-        <table class="w-full border-collapse" style="min-width: ${300 + totalMonths * 32}px">
-          <thead>
-            <tr>
-              <th class="sticky left-0 z-10 bg-white text-left px-4 py-3 text-xs font-bold text-on-surface-variant border-b border-r border-outline-variant/20" style="min-width:280px">
-                Actividad
-              </th>
-              <th class="text-center px-1 py-3 text-[10px] font-bold text-on-surface-variant border-b border-outline-variant/20 w-16">Inicio</th>
-              <th class="text-center px-1 py-3 text-[10px] font-bold text-on-surface-variant border-b border-r border-outline-variant/20 w-16">Fin</th>
-              ${monthCols.map(m => `<th class="text-center px-0 py-3 text-[9px] font-bold border-b border-outline-variant/10 w-8 ${m%6===0?'border-r border-outline-variant/20':''}" style="color:${m%6===0?'#1b1464':'#9ca3af'}">${m}</th>`).join('')}
-            </tr>
-          </thead>
-          <tbody>`;
+      <div class="rounded-2xl border border-outline-variant/20 shadow-sm bg-white overflow-hidden">
+        <!-- Ruler -->
+        <div class="flex" style="height:28px">
+          <div class="flex-shrink-0 border-r border-outline-variant/20 flex items-center px-2" style="width:300px">
+            <span class="text-[9px] font-bold text-on-surface-variant uppercase tracking-wider">Actividad / Tarea</span>
+          </div>
+          <div class="flex-shrink-0 border-r border-outline-variant/20 flex items-center justify-center" style="width:90px">
+            <span class="text-[9px] font-bold text-on-surface-variant">Inicio → Fin</span>
+          </div>
+          <div class="flex-1 flex relative">
+            ${Array.from({length:totalMonths}, (_,i) => {
+              const m = i + 1;
+              const yr = m % 12 === 1;
+              const sem = m % 6 === 1;
+              return `<div class="flex items-center justify-center border-r ${yr ? 'border-primary/20' : sem ? 'border-outline-variant/15' : 'border-outline-variant/5'}" style="width:${mw}%">
+                <span class="text-[7px] ${yr ? 'font-extrabold text-primary' : sem ? 'font-bold text-on-surface-variant/70' : 'text-on-surface-variant/30'}">${m}</span>
+              </div>`;
+            }).join('')}
+          </div>
+        </div>`;
 
+    let curWi = -1;
     for (const row of rows) {
-      if (row.type === 'wp') {
-        html += renderWPRow(row, totalMonths);
-      } else {
-        html += renderActRow(row, totalMonths);
+      if (row.wi !== curWi) {
+        curWi = row.wi;
+        const wp = wps[row.wi];
+        const c = row.color;
+        html += `
+          <div class="flex items-center" style="background:${c}06; border-top:1.5px solid ${c}18">
+            <div class="flex-shrink-0 px-2 py-1.5 flex items-center gap-1.5" style="width:300px">
+              <span class="w-5 h-5 rounded flex items-center justify-center text-white text-[8px] font-bold" style="background:${c}">W${row.wi+1}</span>
+              <span class="text-[10px] font-bold truncate" style="color:${c}">${esc(wp.name || wp.desc || 'WP'+(row.wi+1))}</span>
+            </div>
+            <div class="flex-1"></div>
+          </div>`;
       }
+      html += renderRow(row, mw);
     }
 
-    html += '</tbody></table></div>';
+    if (!rows.length) {
+      html += '<div class="py-10 text-center text-xs text-on-surface-variant/50">No hay tareas configuradas.</div>';
+    }
 
-    // Legend
-    html += `
-      <div class="flex flex-wrap gap-4 mt-4 text-[10px] text-on-surface-variant">
-        ${wps.map((wp, wi) => `<span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded" style="background:${wpColor(wi)}"></span> WP${wi+1} ${esc(wp.name||wp.desc||'')}</span>`).join('')}
+    html += '</div>';
+
+    // Compact legend
+    html += `<div class="flex flex-wrap gap-3 mt-3 text-[9px] text-on-surface-variant">
+      ${wps.map((wp, wi) => `<span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm" style="background:${wpColor(wi)}"></span>WP${wi+1}</span>`).join('')}
+    </div>`;
+
+    html += navHTML();
+    container.innerHTML = html;
+    bindEvents(cs);
+    bindNav();
+  }
+
+  /* ── Build rows from WPs + tasks ───────────────────────────── */
+  function buildRows(cs) {
+    const rows = [];
+    for (let wi = 0; wi < cs.wps.length; wi++) {
+      const wp = cs.wps[wi];
+      const c = wpColor(wi);
+
+      // WP1 management tasks (from checklist in Tareas step)
+      if (wi === 0) {
+        const mgmtTasks = savedTasks.filter(x => x.category === 'project_management');
+        mgmtTasks.forEach((t, mi) => {
+          rows.push({ wi, color: c, icon: 'admin_panel_settings', activity: `Gestión ${mi+1}`, task: t.title,
+            id: 'mgmt-'+t.id, start: t.start_month||0, end: t.end_month||0, taskId: t.id });
+        });
+      }
+
+      for (const act of wp.activities) {
+        if (act.type === 'mgmt') continue;
+        const cat = TYPE_MAP[act.type];
+        const taskTitle = findTaskTitle(cat, act.subtype_label) || '';
+        const actLabel = act.subtype_label || act.label;
+        rows.push({ wi, color: c, icon: ACT_ICONS[act.type]||'task',
+          activity: actLabel, task: taskTitle ? shortTitle(taskTitle) : actLabel,
+          id: 'act-'+act.id, start: act._gantt_start||0, end: act._gantt_end||0, actRef: act });
+      }
+
+      // Custom tasks
+      for (const t of savedTasks.filter(x => x.category === 'custom' && parseInt(x.subtype) === wi)) {
+        rows.push({ wi, color: c, icon: 'edit_note', task: shortTitle(t.title || 'Sin título'), activity: 'Custom',
+          id: 'custom-'+t.id, start: t.start_month||0, end: t.end_month||0, taskId: t.id });
+      }
+    }
+    return rows;
+  }
+
+  function shortTitle(t) {
+    if (!t) return '';
+    // Shorten common prefixes
+    return t.replace(/^(Organisation of the |Implementation of the |Development of the |Delivery of the |Provision of |Production of |Acquisition of )/, '').trim();
+  }
+
+  /* ── Single row ────────────────────────────────────────────── */
+  function renderRow(row, mw) {
+    const s = row.start || 0;
+    const e = row.end || 0;
+
+    const opts = (val) => `<option value="">-</option>` + Array.from({length:totalMonths}, (_,i) =>
+      `<option value="${i+1}" ${i+1===val?'selected':''}>${i+1}</option>`
+    ).join('');
+
+    // Grid lines + bar
+    let barCSS = '';
+    if (s && e && s <= e) {
+      const left = ((s-1)/totalMonths*100).toFixed(2);
+      const width = ((e-s+1)/totalMonths*100).toFixed(2);
+      barCSS = `<div class="gantt-bar absolute top-1 bottom-1 rounded transition-all duration-300" style="left:${left}%;width:${width}%;background:${row.color};opacity:0.7"></div>`;
+    }
+
+    // Vertical grid
+    let grid = '';
+    for (let m = 1; m <= totalMonths; m++) {
+      if (m % 12 === 1) grid += `<div class="absolute top-0 bottom-0 border-l border-primary/10" style="left:${((m-1)/totalMonths*100).toFixed(2)}%"></div>`;
+      else if (m % 6 === 1) grid += `<div class="absolute top-0 bottom-0 border-l border-outline-variant/10" style="left:${((m-1)/totalMonths*100).toFixed(2)}%"></div>`;
+    }
+
+    return `
+      <div class="gantt-row flex items-center border-b border-outline-variant/6 hover:bg-primary/[0.02] transition-colors" data-rid="${row.id}">
+        <div class="flex-shrink-0 px-2 py-1.5 border-r border-outline-variant/10 overflow-hidden" style="width:300px">
+          <div class="flex items-start gap-1.5 pl-3">
+            <span class="material-symbols-outlined text-[11px] mt-0.5" style="color:${row.color}">${row.icon}</span>
+            <div class="min-w-0 flex-1">
+              <div class="text-[10px] font-bold text-on-surface truncate" title="${esc(row.activity)}">${esc(row.activity)}</div>
+              <div class="text-[9px] text-on-surface-variant/70 truncate" title="${esc(row.task)}">${esc(row.task)}</div>
+            </div>
+          </div>
+        </div>
+        <div class="flex-shrink-0 px-2 py-1 border-r border-outline-variant/10 flex items-center gap-1 justify-center" style="width:90px">
+          <select class="gantt-s gantt-sel" data-rid="${row.id}">${opts(s)}</select>
+          <span class="text-[10px] text-on-surface-variant/40">→</span>
+          <select class="gantt-e gantt-sel" data-rid="${row.id}">${opts(e)}</select>
+        </div>
+        <div class="flex-1 relative" style="height:22px">
+          ${grid}${barCSS}
+        </div>
       </div>`;
+  }
 
-    // Nav buttons
-    html += `
+  /* ── Events ────────────────────────────────────────────────── */
+  function bindEvents(cs) {
+    container.querySelectorAll('.gantt-s, .gantt-e').forEach(sel => {
+      sel.addEventListener('change', () => {
+        const row = sel.closest('.gantt-row');
+        const rid = row.dataset.rid;
+        let sVal = parseInt(row.querySelector('.gantt-s').value) || 0;
+        let eVal = parseInt(row.querySelector('.gantt-e').value) || 0;
+        if (sVal && eVal && eVal < sVal) { eVal = sVal; row.querySelector('.gantt-e').value = eVal; }
+
+        // Update bar
+        const barArea = row.querySelector('.flex-1.relative');
+        let bar = barArea?.querySelector('.gantt-bar');
+        if (sVal && eVal) {
+          const left = ((sVal-1)/totalMonths*100).toFixed(2)+'%';
+          const width = ((eVal-sVal+1)/totalMonths*100).toFixed(2)+'%';
+          const color = bar?.style.background || row.querySelector('.material-symbols-outlined')?.style.color || '#1b1464';
+          if (bar) { bar.style.left = left; bar.style.width = width; }
+          else barArea.insertAdjacentHTML('beforeend', `<div class="gantt-bar absolute top-1 bottom-1 rounded transition-all duration-300" style="left:${left};width:${width};background:${color};opacity:0.7"></div>`);
+        } else if (bar) { bar.remove(); }
+
+        // Persist
+        if (rid.startsWith('act-')) {
+          const actId = parseInt(rid.replace('act-',''));
+          for (const wp of cs.wps) { const a = wp.activities.find(x=>x.id===actId); if (a) { a._gantt_start=sVal||null; a._gantt_end=eVal||null; break; } }
+        } else {
+          const tid = rid.replace('mgmt-','').replace('custom-','');
+          if (projectId && tid) API.patch('/intake/tasks/'+tid, { start_month:sVal||null, end_month:eVal||null }).catch(()=>{});
+        }
+      });
+    });
+  }
+
+  /* ── Nav ────────────────────────────────────────────────────── */
+  function navHTML() {
+    return `
       <div class="flex justify-between items-center mt-10 pt-5 border-t border-outline-variant">
         <button data-goto="6" class="intake-step-nav-btn inline-flex items-center gap-2 px-5 py-3 rounded-md text-on-surface-variant font-semibold text-sm border border-outline-variant hover:bg-surface-container-low transition-colors">
           <span class="material-symbols-outlined text-base">arrow_back</span> Tareas
@@ -141,133 +298,13 @@ const IntakeGantt = (() => {
           Resumen <span class="material-symbols-outlined text-lg">arrow_forward</span>
         </button>
       </div>`;
+  }
 
-    container.innerHTML = html;
-    bindEvents(cs, totalMonths);
-
-    // Nav
+  function bindNav() {
     container.querySelectorAll('.intake-step-nav-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const step = parseInt(btn.dataset.goto);
-        if (typeof Intake !== 'undefined' && Intake._calcNav) Intake._calcNav(step);
+        if (typeof Intake !== 'undefined' && Intake._calcNav) Intake._calcNav(parseInt(btn.dataset.goto));
       });
-    });
-  }
-
-  /* ── WP header row ─────────────────────────────────────────── */
-  function renderWPRow(row, totalMonths) {
-    return `
-      <tr style="background:${row.color}06">
-        <td class="sticky left-0 z-10 px-4 py-2.5 border-b border-r border-outline-variant/20 font-bold text-xs" style="background:${row.color}06; color:${row.color}">
-          <div class="flex items-center gap-2">
-            <span class="w-6 h-6 rounded-lg flex items-center justify-center text-white text-[10px] font-bold" style="background:${row.color}">W${row.wi+1}</span>
-            ${esc(row.name)}
-          </div>
-        </td>
-        <td class="border-b border-outline-variant/20" colspan="${2 + totalMonths}" style="background:${row.color}04"></td>
-      </tr>`;
-  }
-
-  /* ── Activity row with month selectors + bar ───────────────── */
-  function renderActRow(row, totalMonths) {
-    const s = row.start || '';
-    const e = row.end || '';
-
-    // Build month options
-    const opts = '<option value="">—</option>' + Array.from({length:totalMonths}, (_,i) => `<option value="${i+1}" ${(i+1)==s?'selected':''}>${i+1}</option>`).join('');
-    const optsEnd = '<option value="">—</option>' + Array.from({length:totalMonths}, (_,i) => `<option value="${i+1}" ${(i+1)==e?'selected':''}>${i+1}</option>`).join('');
-
-    // Gantt cells
-    let cells = '';
-    for (let m = 1; m <= totalMonths; m++) {
-      const active = s && e && m >= s && m <= e;
-      const isStart = m == s;
-      const isEnd = m == e;
-      const radius = isStart && isEnd ? 'rounded-md' : isStart ? 'rounded-l-md' : isEnd ? 'rounded-r-md' : '';
-      cells += `<td class="px-0 py-2 border-b border-outline-variant/5 ${m%6===0?'border-r border-outline-variant/10':''}" data-m="${m}">
-        ${active ? `<div class="h-5 ${radius} shadow-sm" style="background:${row.color}; opacity:0.7"></div>` : ''}
-      </td>`;
-    }
-
-    return `
-      <tr class="gantt-row hover:bg-surface-container-lowest/50 transition-colors" data-wi="${row.wi}" data-aid="${row.act.id}">
-        <td class="sticky left-0 z-10 bg-white px-4 py-2 border-b border-r border-outline-variant/15 text-xs">
-          <div class="flex items-center gap-2 pl-4">
-            <span class="material-symbols-outlined text-xs" style="color:${row.color}">${row.icon}</span>
-            <span class="text-on-surface truncate max-w-[200px]">${esc(row.name)}</span>
-          </div>
-        </td>
-        <td class="border-b border-outline-variant/15 px-0.5 py-1">
-          <select class="gantt-start w-14 text-center text-[10px] px-1 py-1 rounded-lg border border-outline-variant/30 bg-white focus:border-primary outline-none" data-wi="${row.wi}" data-aid="${row.act.id}">${opts}</select>
-        </td>
-        <td class="border-b border-r border-outline-variant/15 px-0.5 py-1">
-          <select class="gantt-end w-14 text-center text-[10px] px-1 py-1 rounded-lg border border-outline-variant/30 bg-white focus:border-primary outline-none" data-wi="${row.wi}" data-aid="${row.act.id}">${optsEnd}</select>
-        </td>
-        ${cells}
-      </tr>`;
-  }
-
-  /* ── Parse date to month offset ────────────────────────────── */
-  function monthFromDate(dateStr, cs) {
-    if (!dateStr) return null;
-    // Try to get project start from calculator
-    let projStart = null;
-    try {
-      const ps = cs?.wps?.[0]?.activities?.[0]?.date_start;
-      // Actually use the project start date if available
-    } catch (e) {}
-
-    // For now, try to parse act dates and compute approximate month
-    // Activities store ISO dates like "2026-09-01"
-    // We don't have reliable project start here, so use relative dates
-    return null;
-  }
-
-  /* ── Bind events ───────────────────────────────────────────── */
-  function bindEvents(cs, totalMonths) {
-    container.querySelectorAll('.gantt-start, .gantt-end').forEach(sel => {
-      sel.addEventListener('change', () => {
-        const row = sel.closest('.gantt-row');
-        const wi = parseInt(row.dataset.wi);
-        const aid = parseInt(row.dataset.aid);
-        const startSel = row.querySelector('.gantt-start');
-        const endSel = row.querySelector('.gantt-end');
-        const s = parseInt(startSel.value) || 0;
-        const e = parseInt(endSel.value) || 0;
-
-        // Auto-correct: if start > end, swap
-        if (s && e && s > e) {
-          endSel.value = s;
-        }
-
-        // Update the activity dates in calculator state
-        const act = cs.wps[wi]?.activities?.find(a => a.id === aid);
-        if (act) {
-          act._gantt_start = parseInt(startSel.value) || null;
-          act._gantt_end = parseInt(endSel.value) || null;
-        }
-
-        // Re-render bars for this row
-        updateRowBars(row, parseInt(startSel.value)||0, parseInt(endSel.value)||0, wpColor(wi), totalMonths);
-      });
-    });
-  }
-
-  /* ── Update Gantt bars without full re-render ──────────────── */
-  function updateRowBars(row, s, e, color, totalMonths) {
-    const cells = row.querySelectorAll('td[data-m]');
-    cells.forEach(td => {
-      const m = parseInt(td.dataset.m);
-      const active = s && e && m >= s && m <= e;
-      const isStart = m === s;
-      const isEnd = m === e;
-      const radius = isStart && isEnd ? 'rounded-md' : isStart ? 'rounded-l-md' : isEnd ? 'rounded-r-md' : '';
-
-      if (active) {
-        td.innerHTML = `<div class="h-5 ${radius} shadow-sm" style="background:${color}; opacity:0.7"></div>`;
-      } else {
-        td.innerHTML = '';
-      }
     });
   }
 

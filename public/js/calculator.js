@@ -664,6 +664,7 @@ const Calculator = (() => {
       state.wps[0].activities.push({
         id: ++state.actCounter, type:'mgmt', label:'Project Management',
         rate_applicant:500, rate_partner:250,
+        desc: 'This work package covers the overall coordination and management of the project throughout its duration. It includes internal communication between partners, financial management, progress monitoring and quality assurance. The coordinator will organise regular online meetings and prepare interim and final reports. All partners contribute to administrative tasks, reporting and compliance with the grant agreement.',
         date_start: toISO(getProjectStart()), date_end: toISO(addMonths(getProjectStart()||new Date(), getProjectMonths()))
       });
     }
@@ -710,16 +711,19 @@ const Calculator = (() => {
     state.wps.forEach((_, wi) => recalcWP(wi));
   }
 
+  const WP_SECTION_BG = ['#eef2ff','#e8f0fe','#e0f2fe','#e0f7fa','#e8eaf6','#e3f2fd','#e1f5fe','#e0f2f1','#ede7f6','#e8eaf6','#f3e5f5','#fce4ec'];
+
   function buildWPSection(wp, wi) {
     const c = WP_COLORS[wi % WP_COLORS.length];
+    const bg = WP_SECTION_BG[wi % WP_SECTION_BG.length];
     return `
-    <div class="calc-wp open" id="calc-wp-${wi}">
-      <div class="calc-wp-head" onclick="Calculator._toggleWP(${wi})">
+    <div class="calc-wp open" id="calc-wp-${wi}" style="background:${bg};border-color:${c}30">
+      <div class="calc-wp-head" onclick="Calculator._toggleWP(${wi})" style="background:${c}12">
         <span class="w-9 h-9 rounded-full text-white text-[11px] font-extrabold flex items-center justify-center shrink-0" style="background:${c}">WP${wi+1}</span>
         <div class="flex-1 min-w-0">
           <div class="font-headline text-sm font-bold text-on-surface truncate">${wp.desc || wp.name || 'Untitled'}</div>
         </div>
-        <span class="text-sm font-mono text-on-surface-variant" id="calc-wp-total-${wi}">—</span>
+        <span class="text-sm font-mono font-bold" style="color:${c}" id="calc-wp-total-${wi}">\u2014</span>
         <span class="material-symbols-outlined calc-wp-chevron">expand_more</span>
       </div>
       <div class="calc-wp-body">
@@ -838,6 +842,7 @@ const Calculator = (() => {
 
     const pax = act.pax || 2;
     const days = act.days || 3;
+    const isOnline = !!act.online;
 
     // Ensure all partners have participation state
     if (!act.participants) { act.participants = {}; state.partners.forEach(p => { act.participants[p.id] = true; }); }
@@ -846,10 +851,10 @@ const Calculator = (() => {
     const rows = state.partners.map((p, i) => {
       const isHost = p.id === act.host;
       const active = act.participants[p.id] !== false;
-      const rate = isHost ? 0 : getRouteCost(p.id, act.host);
+      const rate = isHost || isOnline ? 0 : getRouteCost(p.id, act.host);
       const travelCost = active ? rate * pax : 0;
       const perdiem = getPartnerPerdiemTotal(p.id);
-      const accomCost = active ? perdiem * pax * days : 0;
+      const accomCost = active && !isOnline ? perdiem * pax * days : 0;
       const rowTotal = travelCost + accomCost;
 
       return `<tr style="opacity:${active?1:.4}">
@@ -869,15 +874,35 @@ const Calculator = (() => {
     }).join('');
 
     return `
-      <div class="grid grid-cols-3 gap-2 mb-3">
+      <!-- Online toggle -->
+      <div class="flex items-center gap-3 mb-3 px-3 py-2.5 rounded-xl ${isOnline ? 'bg-amber-50 border-2 border-amber-300' : 'bg-gray-50 border border-outline-variant/20'}">
+        <label class="flex items-center gap-2 cursor-pointer flex-1">
+          <input type="checkbox" ${isOnline ? 'checked' : ''} class="w-4 h-4 accent-amber-500" onchange="Calculator._setActOnline(${wi},${act.id},this.checked)">
+          <span class="material-symbols-outlined text-lg ${isOnline ? 'text-amber-600' : 'text-on-surface-variant/40'}">videocam</span>
+          <span class="text-sm font-bold ${isOnline ? 'text-amber-700' : 'text-on-surface-variant'}">ONLINE</span>
+          ${isOnline ? '<span class="text-[10px] text-amber-600 ml-1">No travel or accommodation costs</span>' : '<span class="text-[10px] text-on-surface-variant/50 ml-1">Mark as online to set budget to zero</span>'}
+        </label>
+      </div>
+      <div class="grid grid-cols-3 gap-2 mb-3 ${isOnline ? 'opacity-30 pointer-events-none' : ''}">
         <div><label class="text-[11px] text-on-surface-variant">Host</label><select class="w-full text-sm" onchange="Calculator._setActHost(${wi},${act.id},this.value)">${hostOpts}</select></div>
         <div><label class="text-[11px] text-on-surface-variant">Travellers/partner</label><input type="number" value="${act.pax}" min="0" class="w-full" onchange="Calculator._setAct(${wi},${act.id},'pax',this.value)"></div>
         <div><label class="text-[11px] text-on-surface-variant">Days</label><input type="number" value="${act.days}" min="0" class="w-full" onchange="Calculator._setAct(${wi},${act.id},'days',this.value)"></div>
       </div>
-      <div class="grid grid-cols-2 gap-2 mb-3 p-2 rounded bg-surface-container-low border border-outline-variant/10">
-        <div><label class="text-[11px] text-on-surface-variant">Local participants</label><input type="number" value="${act.local_pax||0}" min="0" class="w-full" onchange="Calculator._setAct(${wi},${act.id},'local_pax',this.value)"></div>
-        <div><label class="text-[11px] text-on-surface-variant">Local transport \u20AC/pax</label><input type="number" value="${act.local_transport||25}" min="0" class="w-full" onchange="Calculator._setAct(${wi},${act.id},'local_transport',this.value)"></div>
-      </div>
+      ${isOnline ? `<div class="mb-3 px-3 py-2 rounded-lg bg-amber-50 border border-amber-200 text-[11px] text-amber-700">
+        <span class="material-symbols-outlined text-xs align-middle mr-1">info</span>
+        This activity is marked as online. Travel and accommodation costs are set to zero. If you need budget for platform, technical support or other costs, add them as "Other Costs" in this work package.
+      </div>` : ''}
+      <details class="mb-3 rounded-lg bg-blue-50/50 border border-blue-100">
+        <summary class="flex items-center gap-2 px-3 py-2 cursor-pointer select-none text-xs">
+          <span class="material-symbols-outlined text-sm text-blue-400">info</span>
+          <span class="font-semibold text-blue-600">How mobility budgets work</span>
+        </summary>
+        <div class="px-3 pb-2 text-[11px] text-blue-800/70 space-y-1">
+          <p><strong>Travel:</strong> Based on distance bands between partner cities. Use the EC distance calculator to determine the correct band. Eco-travel rates apply when sustainable transport is used.</p>
+          <p><strong>Accommodation &amp; subsistence:</strong> Per diem rates based on the destination country. Covers hotel + daily expenses for each traveller for the duration of the activity.</p>
+          <p><strong>Other costs</strong> (organisation, local transport, venue, catering, etc.) should be added as separate "Other Costs" activities within the same work package if needed.</p>
+        </div>
+      </details>
       ${state.partners.length ? `<div class="overflow-x-auto"><table class="calc-table"><thead><tr>
         <th class="text-left">Partner</th>
         <th class="text-right">Travel rate</th>
@@ -1062,6 +1087,7 @@ const Calculator = (() => {
         return { total: app + partners, app, partners };
       }
       case 'meeting': case 'ltta': {
+        if (act.online) return { total: 0, viaje: 0, aloj: 0 };
         const pax = act.pax || 2;
         const days = act.days || 3;
         let travel = 0, aloj = 0;
@@ -1071,10 +1097,7 @@ const Calculator = (() => {
           if (!isHost) travel += getRouteCost(p.id, act.host) * pax;
           aloj += pax * days * getPartnerPerdiemTotal(p.id);
         });
-        const orgTotal = activePartners.length * pax * days * og;
-        const localPax = act.local_pax || 0;
-        const localCost = localPax * ((act.local_transport||25) + days * getPartnerPerdiemTotal(act.host));
-        return { total: travel + aloj + orgTotal + localCost, viaje: travel, aloj, org: orgTotal, localCost };
+        return { total: travel + aloj, viaje: travel, aloj };
       }
       case 'me': {
         if (!act.me_events) return { total:0 };
@@ -1159,8 +1182,6 @@ const Calculator = (() => {
         const lines = [];
         if (res.viaje) lines.push(`<div class="flex justify-between text-xs py-0.5"><span class="text-on-surface-variant">Travel</span><span class="font-mono">${euros(res.viaje)}</span></div>`);
         if (res.aloj) lines.push(`<div class="flex justify-between text-xs py-0.5"><span class="text-on-surface-variant">Accommodation & subsistence</span><span class="font-mono">${euros(res.aloj)}</span></div>`);
-        if (res.org) lines.push(`<div class="flex justify-between text-xs py-0.5"><span class="text-on-surface-variant">Organisation</span><span class="font-mono">${euros(res.org)}</span></div>`);
-        if (res.localCost) lines.push(`<div class="flex justify-between text-xs py-0.5"><span class="text-on-surface-variant">Local transport</span><span class="font-mono">${euros(res.localCost)}</span></div>`);
         el.innerHTML = lines.join('') + `<div class="flex justify-between text-sm font-bold pt-1 mt-1 border-t border-outline-variant/10" style="color:${color}"><span>Total</span><span>${euros(res.total)}</span></div>`;
 
       } else if (act.type === 'io' && act.io_staff) {
@@ -1778,6 +1799,16 @@ const Calculator = (() => {
     if (container) renderMergedWPs(container);
   }
 
+  function setActOnline(wi, actId, online) {
+    const act = state.wps[wi].activities.find(a => a.id === actId);
+    if (!act) return;
+    act.online = online;
+    // Re-render
+    const container = getRouteContainer()?.closest('#intake-calc-container') || $('calc-root');
+    if (container) renderMergedWPs(container);
+    recalcWP(wi);
+  }
+
   function setActDesc(wi, actId, value) {
     const act = state.wps[wi].activities.find(a => a.id === actId);
     if (!act) return;
@@ -2053,6 +2084,7 @@ const Calculator = (() => {
       wps: state.wps,
       partners: state.partners,
       financials: getFinancials(),
+      projectMonths: getProjectMonths(),
     };
   }
 
@@ -2100,6 +2132,7 @@ const Calculator = (() => {
     _addActivity: addActivity,
     _removeAct: removeAct,
     _setAct: setAct,
+    _setActOnline: setActOnline,
     _setActSubtype: setActSubtype,
     _setActDesc: setActDesc,
     _setActHost: setActHost,

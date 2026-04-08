@@ -76,7 +76,7 @@ const Intake = (() => {
       const stepEl = e.target.closest('[data-step]');
       if (!stepEl) return;
       const s = parseInt(stepEl.dataset.step);
-      if (s <= step) setStep(s);
+      setStep(s);
     });
 
     // Next/Prev buttons
@@ -95,7 +95,14 @@ const Intake = (() => {
       document.getElementById(c.ta)?.addEventListener('input', () => updateWC(c));
     });
 
-    // Duration is now fixed from program data (hidden input)
+    // Sync visible duration/start fields → hidden fields
+    document.getElementById('intake-f-dur-visible')?.addEventListener('change', (e) => {
+      const v = parseInt(e.target.value) || 24;
+      document.getElementById('intake-f-dur').value = v;
+    });
+    document.getElementById('intake-f-start-visible')?.addEventListener('change', (e) => {
+      document.getElementById('intake-f-start').value = e.target.value;
+    });
 
     // Save/Load file buttons
     document.getElementById('intake-btn-save-file')?.addEventListener('click', saveToFile);
@@ -128,8 +135,13 @@ const Intake = (() => {
 
     const setVal = (elId, v) => { const el = document.getElementById(elId); if (el) el.value = v || ''; };
     setVal('intake-f-start', p.start_date_min ? toDateStr(p.start_date_min) : '');
-    setVal('intake-f-dur', p.duration_max_months || '');
+    setVal('intake-f-dur', p.duration_max_months || 24);
     setVal('intake-f-type', p.action_type || '');
+
+    // Sync visible fields
+    setVal('intake-f-dur-visible', p.duration_max_months || 24);
+    setVal('intake-f-start-visible', p.start_date_min ? toDateStr(p.start_date_min) : '');
+    setVal('intake-f-type-visible', p.action_type || '');
   }
 
   /* ── Server projects ─────────────────────────────────────────── */
@@ -195,7 +207,15 @@ const Intake = (() => {
       if (project.duration_months) {
         const durEl = document.getElementById('intake-f-dur');
         if (durEl) durEl.value = project.duration_months;
+        const durVis = document.getElementById('intake-f-dur-visible');
+        if (durVis) durVis.value = project.duration_months;
       }
+
+      // Sync visible start/type fields
+      const startVis = document.getElementById('intake-f-start-visible');
+      if (startVis) startVis.value = toDateStr(project.start_date);
+      const typeVis = document.getElementById('intake-f-type-visible');
+      if (typeVis) typeVis.value = project.type || '';
 
       // Select matching program
       if (project.type && programs.length) {
@@ -463,6 +483,113 @@ const Intake = (() => {
     Calculator.setNavCallback(calcNav);
     calcInitialized = true;
     calcNeedsReinit = false;
+
+    // Auto-load ARISE demo activities if project is ARISE and no activities yet
+    const calcState = Calculator.getCalcState();
+    const acronym = document.getElementById('intake-f-name')?.value?.trim();
+    const hasActivities = calcState.wps.some(wp => wp.activities.length > 1);
+    if (acronym === 'ARISE' && !hasActivities && calcState.partners.length >= 4) {
+      loadAriseActivities(calcState.partners);
+    }
+  }
+
+  function loadAriseActivities(pts) {
+    const st = Calculator;
+    // Helper: month number to ISO date from project start
+    const ps = new Date(document.getElementById('intake-f-start')?.value || '2027-03-01');
+    function monthToISO(m) { const d = new Date(ps); d.setMonth(d.getMonth() + m - 1); return d.toISOString().split('T')[0]; }
+    function monthEndISO(m) { const d = new Date(ps); d.setMonth(d.getMonth() + m); d.setDate(d.getDate() - 1); return d.toISOString().split('T')[0]; }
+    function setDates(wi, actId, startM, endM) {
+      const act = Calculator.getCalcState().wps[wi]?.activities?.find(a => a.id === actId);
+      if (act) { act.date_start = monthToISO(startM); act.date_end = monthEndISO(endM); }
+    }
+
+    // WP1: Management rates
+    const wps = Calculator.getCalcState().wps;
+    if (wps[0]?.activities[0]) {
+      st._setAct(0, wps[0].activities[0].id, 'rate_applicant', 600);
+      st._setAct(0, wps[0].activities[0].id, 'rate_partner', 300);
+    }
+
+    // WP1: 4 Transnational meetings + Local workshop
+    st._addActivity(0, 'meeting'); st._addActivity(0, 'meeting'); st._addActivity(0, 'meeting');
+    st._addActivity(0, 'local_ws');
+
+    let cs = Calculator.getCalcState().wps;
+    if (cs[0]?.activities[1]) { st._setActSubtype(0, cs[0].activities[1].id, 'Kick-off meeting'); st._setAct(0, cs[0].activities[1].id, 'pax', 2); st._setAct(0, cs[0].activities[1].id, 'days', 4); }
+    if (cs[0]?.activities[2]) { st._setActSubtype(0, cs[0].activities[2].id, 'Mid-term meeting'); st._setAct(0, cs[0].activities[2].id, 'pax', 2); st._setAct(0, cs[0].activities[2].id, 'days', 4); if(pts[1]) st._setActHost(0, cs[0].activities[2].id, pts[1].id); }
+    if (cs[0]?.activities[3]) { st._setActSubtype(0, cs[0].activities[3].id, 'Mid-term meeting'); st._setAct(0, cs[0].activities[3].id, 'pax', 2); st._setAct(0, cs[0].activities[3].id, 'days', 4); if(pts[2]) st._setActHost(0, cs[0].activities[3].id, pts[2].id); }
+    if (cs[0]?.activities[4]) { st._setActSubtype(0, cs[0].activities[4].id, 'Final meeting'); st._setAct(0, cs[0].activities[4].id, 'pax', 2); st._setAct(0, cs[0].activities[4].id, 'days', 5); if(pts[3]) st._setActHost(0, cs[0].activities[4].id, pts[3].id); }
+
+    // WP2: 2 LTTA + 2 IO
+    st._addActivity(1, 'ltta'); st._addActivity(1, 'ltta');
+    st._addActivity(1, 'io'); st._addActivity(1, 'io');
+
+    cs = Calculator.getCalcState().wps;
+    if (cs[1]?.activities[0]) { st._setActSubtype(1, cs[1].activities[0].id, 'Training mobility'); st._setAct(1, cs[1].activities[0].id, 'pax', 4); st._setAct(1, cs[1].activities[0].id, 'days', 6); if(pts[1]) st._setActHost(1, cs[1].activities[0].id, pts[1].id); }
+    if (cs[1]?.activities[1]) { st._setActSubtype(1, cs[1].activities[1].id, 'Study visit mobility'); st._setAct(1, cs[1].activities[1].id, 'pax', 4); st._setAct(1, cs[1].activities[1].id, 'days', 6); if(pts[2]) st._setActHost(1, cs[1].activities[1].id, pts[2].id); }
+    if (cs[1]?.activities[2]) { st._setActSubtype(1, cs[1].activities[2].id, 'Toolkit'); }
+    if (cs[1]?.activities[3]) { st._setActSubtype(1, cs[1].activities[3].id, 'Methodological guide'); }
+
+    // IO staff: set days to match budget
+    cs = Calculator.getCalcState().wps;
+    if (cs[1]?.activities[2]?.io_staff) {
+      Object.keys(cs[1].activities[2].io_staff).forEach(pid => {
+        const staff = cs[1].activities[2].io_staff[pid].staff;
+        if (staff[0]) { staff[0].days = 20; }
+      });
+    }
+    if (cs[1]?.activities[3]?.io_staff) {
+      Object.keys(cs[1].activities[3].io_staff).forEach(pid => {
+        const staff = cs[1].activities[3].io_staff[pid].staff;
+        if (staff[0]) { staff[0].days = 60; }
+      });
+    }
+
+    // WP3: Training big + Training + Volunteering + ME + Community WS
+    st._addActivity(2, 'ltta'); st._addActivity(2, 'ltta'); st._addActivity(2, 'ltta');
+    st._addActivity(2, 'me'); st._addActivity(2, 'local_ws');
+
+    cs = Calculator.getCalcState().wps;
+    if (cs[2]?.activities[0]) { st._setActSubtype(2, cs[2].activities[0].id, 'Training mobility'); st._setAct(2, cs[2].activities[0].id, 'pax', 10); st._setAct(2, cs[2].activities[0].id, 'days', 8); }
+    if (cs[2]?.activities[1]) { st._setActSubtype(2, cs[2].activities[1].id, 'Training mobility'); st._setAct(2, cs[2].activities[1].id, 'pax', 4); st._setAct(2, cs[2].activities[1].id, 'days', 6); if(pts[3]) st._setActHost(2, cs[2].activities[1].id, pts[3].id); }
+    if (cs[2]?.activities[2]) { st._setActSubtype(2, cs[2].activities[2].id, 'Volunteering mobility'); st._setAct(2, cs[2].activities[2].id, 'pax', 8); st._setAct(2, cs[2].activities[2].id, 'days', 50); }
+    if (cs[2]?.activities[4]) { st._setActSubtype(2, cs[2].activities[4].id, 'Community workshop'); }
+
+    // WP4: Dissemination + Website + Group mobility
+    st._addActivity(3, 'campaign'); st._addActivity(3, 'website'); st._addActivity(3, 'ltta');
+
+    cs = Calculator.getCalcState().wps;
+    if (cs[3]?.activities[1]) { st._setActSubtype(3, cs[3].activities[1].id, 'Project website'); }
+    if (cs[3]?.activities[2]) { st._setActSubtype(3, cs[3].activities[2].id, 'Group mobility'); st._setAct(3, cs[3].activities[2].id, 'pax', 4); st._setAct(3, cs[3].activities[2].id, 'days', 3); }
+
+    // Set Gantt dates (month numbers)
+    cs = Calculator.getCalcState().wps;
+    // WP1: mgmt(1-24), kick-off(1-1), mid-term1(9-9), mid-term2(16-16), final(24-24), local_ws(auto)
+    if (cs[0]?.activities[0]) setDates(0, cs[0].activities[0].id, 1, 24);
+    if (cs[0]?.activities[1]) setDates(0, cs[0].activities[1].id, 1, 1);
+    if (cs[0]?.activities[2]) setDates(0, cs[0].activities[2].id, 9, 9);
+    if (cs[0]?.activities[3]) setDates(0, cs[0].activities[3].id, 16, 16);
+    if (cs[0]?.activities[4]) setDates(0, cs[0].activities[4].id, 24, 24);
+    if (cs[0]?.activities[5]) setDates(0, cs[0].activities[5].id, 2, 22);
+
+    // WP2: training(4-5), study(13-14), toolkit IO(6-16), method guide IO(10-20)
+    if (cs[1]?.activities[0]) setDates(1, cs[1].activities[0].id, 4, 5);
+    if (cs[1]?.activities[1]) setDates(1, cs[1].activities[1].id, 13, 14);
+    if (cs[1]?.activities[2]) setDates(1, cs[1].activities[2].id, 6, 16);
+    if (cs[1]?.activities[3]) setDates(1, cs[1].activities[3].id, 10, 20);
+
+    // WP3: training big(11-11), training2(20-20), volunteering(4-20), ME(21-24), community ws(18-23)
+    if (cs[2]?.activities[0]) setDates(2, cs[2].activities[0].id, 11, 11);
+    if (cs[2]?.activities[1]) setDates(2, cs[2].activities[1].id, 20, 20);
+    if (cs[2]?.activities[2]) setDates(2, cs[2].activities[2].id, 4, 20);
+    if (cs[2]?.activities[3]) setDates(2, cs[2].activities[3].id, 21, 24);
+    if (cs[2]?.activities[4]) setDates(2, cs[2].activities[4].id, 18, 23);
+
+    // WP4: dissemination(1-24), website(1-24), group mobility(23-23)
+    if (cs[3]?.activities[0]) setDates(3, cs[3].activities[0].id, 1, 24);
+    if (cs[3]?.activities[1]) setDates(3, cs[3].activities[1].id, 1, 24);
+    if (cs[3]?.activities[2]) setDates(3, cs[3].activities[2].id, 23, 23);
   }
 
   /* ── Partners ────────────────────────────────────────────────── */
@@ -929,10 +1056,10 @@ const Intake = (() => {
     // Select first program if available
     if (programs.length > 0) selectProgram(programs[0].id);
 
-    // Project data — ARISE KA3-Youth
+    // Project data — ARISE KA3-Youth (load from server if exists)
     document.getElementById('intake-f-name').value = 'ARISE';
     const fullName = document.getElementById('intake-f-fullname');
-    if (fullName) fullName.value = 'Advocacy and Research for Inclusion in Sport and Education';
+    if (fullName) fullName.value = 'Action for Resilience and Innovation in Social Europe';
     document.getElementById('intake-f-desc').value = 'ARISE is a KA3 European Youth Together project that empowers young people aged 18\u201330 to become agents of social inclusion through sport and non-formal education. Through a network of 4 organisations in 4 countries, the project designs and tests innovative youth-led programmes combining physical activity, intercultural dialogue and digital storytelling to reach marginalised communities \u2014 particularly young migrants, NEETs and youth with fewer opportunities in rural and peri-urban areas. Over 24 months, ARISE will train 80 youth leaders, run 16 local pilot actions, organise 3 transnational youth exchanges and produce an open-access Youth Inclusion Toolkit validated by peer evaluation across all partner countries.';
     document.getElementById('intake-f-start').value = '2027-03-01';
     const durHidden = document.getElementById('intake-f-dur');
@@ -995,44 +1122,66 @@ const Intake = (() => {
     const tmpDiv = document.createElement('div');
     st.renderMergedWPs(tmpDiv);
 
-    st._setWP(0, 'desc', 'Project Management, Quality Assurance and Reporting');
-    st._setWP(1, 'name', 'WP2'); st._setWP(1, 'desc', 'Needs Assessment and Toolkit Co-Design');
-    st._setWP(2, 'name', 'WP3'); st._setWP(2, 'desc', 'Piloting, Youth Exchanges and Training');
-    st._setWP(3, 'name', 'WP4'); st._setWP(3, 'desc', 'Dissemination, Policy Impact and Sustainability');
-
-    // WP2: Co-design meeting + Toolkit (IO)
-    st._addActivity(1, 'meeting');
-    st._addActivity(1, 'io');
-
-    // WP3: 2 youth exchanges (LTTA) + local pilot workshops
-    st._addActivity(2, 'ltta');
-    st._addActivity(2, 'ltta');
-    st._addActivity(2, 'local_ws');
-
-    // WP4: Multiplier events + digital campaign
-    st._addActivity(3, 'me');
-    st._addActivity(3, 'campaign');
-
-    // Label activities
+    // WP1: Management
     const wps = Calculator.getCalcState().wps;
-    if (wps[1] && wps[1].activities.length >= 2) {
-      st._setAct(1, wps[1].activities[0].id, 'label', 'Co-Design Workshop (Salamanca)');
-      st._setAct(1, wps[1].activities[0].id, 'days', 4);
-      st._setAct(1, wps[1].activities[1].id, 'label', 'ARISE Youth Inclusion Toolkit');
+    if (wps[0] && wps[0].activities[0]) {
+      st._setAct(0, wps[0].activities[0].id, 'rate_applicant', 600);
+      st._setAct(0, wps[0].activities[0].id, 'rate_partner', 300);
     }
-    if (wps[2] && wps[2].activities.length >= 3) {
-      st._setAct(2, wps[2].activities[0].id, 'label', 'Youth Exchange I (Palermo)');
-      st._setAct(2, wps[2].activities[0].id, 'days', 7);
-      st._setAct(2, wps[2].activities[0].id, 'pax', 5);
-      st._setAct(2, wps[2].activities[1].id, 'label', 'Youth Exchange II (Strasbourg)');
-      st._setAct(2, wps[2].activities[1].id, 'days', 7);
-      st._setAct(2, wps[2].activities[1].id, 'pax', 5);
-      st._setAct(2, wps[2].activities[2].id, 'label', 'Local Pilot Actions (16 sessions, 4/country)');
-    }
-    if (wps[3] && wps[3].activities.length >= 2) {
-      st._setAct(3, wps[3].activities[0].id, 'label', 'Multiplier Events (4 countries)');
-      st._setAct(3, wps[3].activities[1].id, 'label', 'Digital Dissemination Campaign');
-    }
+    // WP1: 4 Transnational meetings
+    st._addActivity(0, 'meeting'); st._addActivity(0, 'meeting'); st._addActivity(0, 'meeting');
+    // WP1: Local workshops
+    st._addActivity(0, 'local_ws');
+
+    let cs2 = Calculator.getCalcState().wps;
+    // Kick-off (idx 1 in WP1 activities, after mgmt)
+    if (cs2[0]?.activities[1]) { const a = cs2[0].activities[1]; st._setActSubtype(0, a.id, 'Kick-off meeting'); st._setAct(0, a.id, 'pax', 2); st._setAct(0, a.id, 'days', 4); }
+    // Mid-term 1 (idx 2)
+    if (cs2[0]?.activities[2]) { const a = cs2[0].activities[2]; st._setActSubtype(0, a.id, 'Mid-term meeting'); st._setAct(0, a.id, 'pax', 2); st._setAct(0, a.id, 'days', 4); st._setActHost(0, a.id, pts[1]?.id); }
+    // Mid-term 2 (idx 3)
+    if (cs2[0]?.activities[3]) { const a = cs2[0].activities[3]; st._setActSubtype(0, a.id, 'Mid-term meeting'); st._setAct(0, a.id, 'pax', 2); st._setAct(0, a.id, 'days', 4); st._setActHost(0, a.id, pts[2]?.id); }
+    // Final (idx 4)
+    if (cs2[0]?.activities[4]) { const a = cs2[0].activities[4]; st._setActSubtype(0, a.id, 'Final meeting'); st._setAct(0, a.id, 'pax', 2); st._setAct(0, a.id, 'days', 5); st._setActHost(0, a.id, pts[3]?.id); }
+    // Local Workshop WP1 (idx 5)
+    // leave default (8 pax, 6 sessions, 50€)
+
+    // WP2: LTTA Training + Study visit + IO Toolkit + IO Methodological guide
+    st._addActivity(1, 'ltta'); st._addActivity(1, 'ltta');
+    st._addActivity(1, 'io'); st._addActivity(1, 'io');
+
+    cs2 = Calculator.getCalcState().wps;
+    // Training mobility (idx 0 of WP2)
+    if (cs2[1]?.activities[0]) { const a = cs2[1].activities[0]; st._setActSubtype(1, a.id, 'Training mobility'); st._setAct(1, a.id, 'pax', 4); st._setAct(1, a.id, 'days', 6); st._setActHost(1, a.id, pts[1]?.id); }
+    // Study visit (idx 1)
+    if (cs2[1]?.activities[1]) { const a = cs2[1].activities[1]; st._setActSubtype(1, a.id, 'Study visit mobility'); st._setAct(1, a.id, 'pax', 4); st._setAct(1, a.id, 'days', 6); st._setActHost(1, a.id, pts[2]?.id); }
+    // Toolkit IO (idx 2)
+    if (cs2[1]?.activities[2]) { st._setActSubtype(1, cs2[1].activities[2].id, 'Toolkit'); }
+    // Methodological guide IO (idx 3)
+    if (cs2[1]?.activities[3]) { st._setActSubtype(1, cs2[1].activities[3].id, 'Methodological guide'); }
+
+    // WP3: Training mobility (big) + Training mobility + Volunteering + ME + Local WS
+    st._addActivity(2, 'ltta'); st._addActivity(2, 'ltta'); st._addActivity(2, 'ltta');
+    st._addActivity(2, 'me'); st._addActivity(2, 'local_ws');
+
+    cs2 = Calculator.getCalcState().wps;
+    // Training mobility big (idx 0 of WP3)
+    if (cs2[2]?.activities[0]) { const a = cs2[2].activities[0]; st._setActSubtype(2, a.id, 'Training mobility'); st._setAct(2, a.id, 'pax', 10); st._setAct(2, a.id, 'days', 8); }
+    // Training mobility 2 (idx 1)
+    if (cs2[2]?.activities[1]) { const a = cs2[2].activities[1]; st._setActSubtype(2, a.id, 'Training mobility'); st._setAct(2, a.id, 'pax', 4); st._setAct(2, a.id, 'days', 6); st._setActHost(2, a.id, pts[3]?.id); }
+    // Volunteering (idx 2)
+    if (cs2[2]?.activities[2]) { const a = cs2[2].activities[2]; st._setActSubtype(2, a.id, 'Volunteering mobility'); st._setAct(2, a.id, 'pax', 8); st._setAct(2, a.id, 'days', 50); }
+    // ME (idx 3) - 30 local pax per partner
+    // Local WS community (idx 4)
+    if (cs2[2]?.activities[4]) { st._setActSubtype(2, cs2[2].activities[4].id, 'Community workshop'); }
+
+    // WP4: Dissemination + Website + Group mobility
+    st._addActivity(3, 'campaign'); st._addActivity(3, 'website'); st._addActivity(3, 'ltta');
+
+    cs2 = Calculator.getCalcState().wps;
+    // Website (idx 1 of WP4)
+    if (cs2[3]?.activities[1]) { st._setActSubtype(3, cs2[3].activities[1].id, 'Project website'); }
+    // Group mobility (idx 2)
+    if (cs2[3]?.activities[2]) { const a = cs2[3].activities[2]; st._setActSubtype(3, a.id, 'Group mobility'); st._setAct(3, a.id, 'pax', 4); st._setAct(3, a.id, 'days', 3); }
 
     setStep(0);
     Toast.show('Demo cargada: ARISE KA3-Youth \u2014 4 socios, 4 WPs', 'ok');

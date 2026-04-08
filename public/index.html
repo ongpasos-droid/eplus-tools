@@ -492,7 +492,7 @@ tailwind.config = {
 
       <!-- My Projects panel -->
       <section id="panel-my-projects" class="panel">
-        <div class="max-w-3xl mx-auto">
+        <div class="max-w-6xl mx-auto">
           <div class="flex items-center justify-between mb-8">
             <div>
               <h1 class="font-headline text-3xl font-extrabold tracking-tighter text-primary mb-1">Mis Proyectos</h1>
@@ -509,7 +509,7 @@ tailwind.config = {
 
       <!-- Create Project panel -->
       <section id="panel-create" class="panel">
-        <div class="max-w-5xl mx-auto">
+        <div class="max-w-6xl mx-auto">
           <h1 class="font-headline text-3xl font-extrabold tracking-tighter text-primary mb-1">Start a project</h1>
           <p class="text-on-surface-variant text-base mb-8">Choose how you want to begin.</p>
 
@@ -581,7 +581,7 @@ tailwind.config = {
 
       <!-- Intake panel -->
       <section id="panel-intake" class="panel">
-        <div class="max-w-3xl mx-auto">
+        <div class="max-w-6xl mx-auto">
 
           <!-- Top actions -->
           <div class="flex items-center gap-2 mb-6">
@@ -603,7 +603,7 @@ tailwind.config = {
           <!-- Hidden fields for program data (populated by create.js) -->
           <div style="display:none!important">
             <input type="hidden" id="intake-f-start">
-            <input type="hidden" id="intake-f-dur">
+            <input type="hidden" id="intake-f-dur" value="24">
             <input type="hidden" id="intake-f-type">
           </div>
 
@@ -625,9 +625,24 @@ tailwind.config = {
                 <input type="text" id="intake-f-name" placeholder="e.g. ARISE" maxlength="20" class="w-full px-3 py-2.5 rounded-lg bg-white border border-outline-variant text-on-surface font-body text-sm focus:border-primary focus:ring-2 focus:ring-secondary-fixed outline-none transition-all">
               </div>
             </div>
-            <div class="flex flex-col gap-1.5 mb-8">
+            <div class="flex flex-col gap-1.5 mb-4">
               <label class="text-xs font-semibold text-on-surface-variant">Short description</label>
               <textarea id="intake-f-desc" rows="3" placeholder="Briefly describe the project goals and expected impact (2-3 sentences)." class="w-full px-3 py-2.5 rounded-lg bg-white border border-outline-variant text-on-surface font-body text-sm focus:border-primary focus:ring-2 focus:ring-secondary-fixed outline-none transition-all resize-vertical leading-relaxed"></textarea>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+              <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-semibold text-on-surface-variant">Duración del proyecto (meses)</label>
+                <input type="number" id="intake-f-dur-visible" value="24" min="6" max="60" step="1" class="w-full px-3 py-2.5 rounded-lg bg-white border border-outline-variant text-on-surface font-body text-sm focus:border-primary focus:ring-2 focus:ring-secondary-fixed outline-none transition-all font-bold">
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-semibold text-on-surface-variant">Fecha de inicio</label>
+                <input type="date" id="intake-f-start-visible" class="w-full px-3 py-2.5 rounded-lg bg-white border border-outline-variant text-on-surface font-body text-sm focus:border-primary focus:ring-2 focus:ring-secondary-fixed outline-none transition-all">
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-semibold text-on-surface-variant">Tipo de acción</label>
+                <input type="text" id="intake-f-type-visible" readonly class="w-full px-3 py-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/50 text-on-surface-variant font-body text-sm outline-none cursor-default">
+              </div>
             </div>
 
             <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-4">
@@ -802,14 +817,14 @@ tailwind.config = {
 
       <!-- ══ PANEL CALCULATOR ═══════════════════════════════════════ -->
       <section id="panel-calculator" class="panel">
-        <div id="calc-root" class="max-w-5xl mx-auto py-8 px-4">
+        <div id="calc-root" class="max-w-6xl mx-auto py-8 px-4">
           <!-- Calculator content rendered by calculator.js -->
         </div>
       </section>
 
       <!-- ══ PANEL MY DOCUMENTS ════════════════════════════════════ -->
       <section id="panel-my-documents" class="panel">
-        <div class="max-w-5xl mx-auto py-8 px-4">
+        <div class="max-w-6xl mx-auto py-8 px-4">
 
           <!-- Header -->
           <div class="flex items-center justify-between mb-6">
@@ -1012,7 +1027,7 @@ tailwind.config = {
 
       <!-- ══ PANEL DEVELOPER (Write) ═══════════════════════════════ -->
       <section id="panel-developer" class="panel">
-        <div class="max-w-4xl mx-auto py-8 px-4">
+        <div class="max-w-6xl mx-auto py-8 px-4">
           <div class="flex items-center gap-3 mb-8">
             <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center">
               <span class="material-symbols-outlined text-purple-600 text-2xl">edit_document</span>
@@ -1610,7 +1625,7 @@ tailwind.config = {
       </section>
 
       <section id="panel-my-org" class="panel">
-        <div class="max-w-5xl mx-auto py-8 px-4">
+        <div class="max-w-6xl mx-auto py-8 px-4">
           <div class="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
             <h1 class="font-headline text-2xl font-extrabold text-primary">Mi Organización</h1>
             <div class="sm:ml-auto flex items-center gap-2">
