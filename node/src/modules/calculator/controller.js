@@ -1,91 +1,54 @@
 const model = require('./model');
 const db = require('../../utils/db');
 
-// Helper: verify project ownership
-async function verifyProjectOwnership(projectId, userId) {
-  const sql = `
-    SELECT p.id
-    FROM projects p
-    WHERE p.id = ? AND p.user_id = ?
-  `;
-  const [rows] = await db.execute(sql, [projectId, userId]);
+// Genérico: verifica que un recurso con project_id directo pertenece al usuario
+async function verifyViaProject(table, id, userId) {
+  const [rows] = await db.execute(
+    `SELECT t.id FROM \`${table}\` t JOIN projects p ON p.id = t.project_id WHERE t.id = ? AND p.user_id = ?`,
+    [id, userId]
+  );
   return rows.length > 0;
 }
 
-// Helper: verify partner-rate belongs to user's project
-async function verifyPartnerRateOwnership(partnerRateId, userId) {
-  const sql = `
-    SELECT pr.id
-    FROM partner_rates pr
-    JOIN partners p ON p.id = pr.partner_id
-    JOIN project_partners pp ON pp.partner_id = p.id
-    JOIN projects proj ON proj.id = pp.project_id
-    WHERE pr.id = ? AND proj.user_id = ?
-  `;
-  const [rows] = await db.execute(sql, [partnerRateId, userId]);
+// Alias semánticos sobre verifyViaProject
+const verifyProjectOwnership    = (id, userId) => db.execute('SELECT id FROM projects WHERE id = ? AND user_id = ?', [id, userId]).then(([r]) => r.length > 0);
+const verifyRouteOwnership      = (id, userId) => verifyViaProject('routes', id, userId);
+const verifyExtraDestinationOwnership = (id, userId) => verifyViaProject('extra_destinations', id, userId);
+const verifyWorkPackageOwnership = (id, userId) => verifyViaProject('work_packages', id, userId);
+
+// Joins más complejos (no tienen project_id directo)
+async function verifyPartnerRateOwnership(id, userId) {
+  const [rows] = await db.execute(
+    `SELECT pr.id FROM partner_rates pr
+     JOIN partners p ON p.id = pr.partner_id
+     JOIN project_partners pp ON pp.partner_id = p.id
+     JOIN projects proj ON proj.id = pp.project_id
+     WHERE pr.id = ? AND proj.user_id = ?`,
+    [id, userId]
+  );
   return rows.length > 0;
 }
 
-// Helper: verify worker-rate belongs to user's project
-async function verifyWorkerRateOwnership(workerRateId, userId) {
-  const sql = `
-    SELECT wr.id
-    FROM worker_rates wr
-    JOIN partners p ON p.id = wr.partner_id
-    JOIN project_partners pp ON pp.partner_id = p.id
-    JOIN projects proj ON proj.id = pp.project_id
-    WHERE wr.id = ? AND proj.user_id = ?
-  `;
-  const [rows] = await db.execute(sql, [workerRateId, userId]);
+async function verifyWorkerRateOwnership(id, userId) {
+  const [rows] = await db.execute(
+    `SELECT wr.id FROM worker_rates wr
+     JOIN partners p ON p.id = wr.partner_id
+     JOIN project_partners pp ON pp.partner_id = p.id
+     JOIN projects proj ON proj.id = pp.project_id
+     WHERE wr.id = ? AND proj.user_id = ?`,
+    [id, userId]
+  );
   return rows.length > 0;
 }
 
-// Helper: verify route belongs to user's project
-async function verifyRouteOwnership(routeId, userId) {
-  const sql = `
-    SELECT r.id
-    FROM routes r
-    JOIN projects p ON p.id = r.project_id
-    WHERE r.id = ? AND p.user_id = ?
-  `;
-  const [rows] = await db.execute(sql, [routeId, userId]);
-  return rows.length > 0;
-}
-
-// Helper: verify extra-destination belongs to user's project
-async function verifyExtraDestinationOwnership(destId, userId) {
-  const sql = `
-    SELECT ed.id
-    FROM extra_destinations ed
-    JOIN projects p ON p.id = ed.project_id
-    WHERE ed.id = ? AND p.user_id = ?
-  `;
-  const [rows] = await db.execute(sql, [destId, userId]);
-  return rows.length > 0;
-}
-
-// Helper: verify work-package belongs to user's project
-async function verifyWorkPackageOwnership(wpId, userId) {
-  const sql = `
-    SELECT wp.id
-    FROM work_packages wp
-    JOIN projects p ON p.id = wp.project_id
-    WHERE wp.id = ? AND p.user_id = ?
-  `;
-  const [rows] = await db.execute(sql, [wpId, userId]);
-  return rows.length > 0;
-}
-
-// Helper: verify activity belongs to user's project (through WP)
-async function verifyActivityOwnership(activityId, userId) {
-  const sql = `
-    SELECT a.id
-    FROM activities a
-    JOIN work_packages wp ON wp.id = a.wp_id
-    JOIN projects p ON p.id = wp.project_id
-    WHERE a.id = ? AND p.user_id = ?
-  `;
-  const [rows] = await db.execute(sql, [activityId, userId]);
+async function verifyActivityOwnership(id, userId) {
+  const [rows] = await db.execute(
+    `SELECT a.id FROM activities a
+     JOIN work_packages wp ON wp.id = a.wp_id
+     JOIN projects p ON p.id = wp.project_id
+     WHERE a.id = ? AND p.user_id = ?`,
+    [id, userId]
+  );
   return rows.length > 0;
 }
 
