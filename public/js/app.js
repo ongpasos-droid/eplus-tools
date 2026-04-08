@@ -138,6 +138,17 @@ const App = (() => {
 
   /* ── SPA Navigation ────────────────────────────────────────── */
   function navigate(route, pushHash = true, newProject = false) {
+    // Aviso si hay cambios sin guardar en Intake
+    if (currentRoute === 'intake' && route !== 'intake') {
+      if (typeof Intake !== 'undefined' && Intake.hasUnsavedChanges && Intake.hasUnsavedChanges()) {
+        const leave = window.confirm('Tienes cambios sin guardar en Intake. ¿Salir de todos modos?');
+        if (!leave) {
+          // Revertir hash si lo cambió el usuario
+          if (pushHash) location.hash = 'intake';
+          return;
+        }
+      }
+    }
     currentRoute = route;
 
     // Update URL hash

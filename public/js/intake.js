@@ -7,6 +7,7 @@ const Intake = (() => {
   let initialized = false;
   let step = 0;
   let selectedProgram = null;
+  let _dirty = false;
   let programs = [];
   let partners = [{ _local: 1, name: '', city: '', country: '', role: 'applicant', order_index: 1 }];
   let pCounter = 1;
@@ -58,10 +59,14 @@ const Intake = (() => {
     // Add partner
     document.getElementById('intake-btn-add-partner')?.addEventListener('click', addPartner);
 
-    // Word counters
+    // Word counters — marcar dirty al editar
     WC.forEach(c => {
-      document.getElementById(c.ta)?.addEventListener('input', () => updateWC(c));
+      document.getElementById(c.ta)?.addEventListener('input', () => { updateWC(c); _dirty = true; });
     });
+
+    // Marcar dirty en cualquier campo del formulario
+    document.querySelectorAll('#panel-intake input, #panel-intake select, #panel-intake textarea')
+      .forEach(el => el.addEventListener('input', () => { _dirty = true; }));
 
     // Duration select
     const sel = document.getElementById('intake-f-dur');
@@ -330,6 +335,7 @@ const Intake = (() => {
           saves.push(API.patch('/intake/contexts/' + contexts[0].id, contextData));
         }
         await Promise.all(saves);
+        _dirty = false;
         Toast.show('Proyecto actualizado', 'ok');
       } else {
         // Crear nuevo proyecto
@@ -350,6 +356,7 @@ const Intake = (() => {
           ops.push(API.patch('/intake/contexts/' + contexts[0].id, contextData));
         }
         if (ops.length) await Promise.all(ops);
+        _dirty = false;
         Toast.show('Proyecto guardado en servidor', 'ok');
       }
       loadServerProjects();
@@ -697,5 +704,7 @@ const Intake = (() => {
     return `${d}/${m}/${y}`;
   }
 
-  return { init, startNew };
+  function hasUnsavedChanges() { return _dirty; }
+
+  return { init, startNew, hasUnsavedChanges };
 })();

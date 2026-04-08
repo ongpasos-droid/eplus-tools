@@ -21,10 +21,17 @@ const API = (() => {
     if (body && method !== 'GET') config.body = JSON.stringify(body);
 
     let res;
-    try {
-      res = await fetch(url, config);
-    } catch (err) {
-      throw { code: 'NETWORK_ERROR', message: 'No se puede conectar con el servidor' };
+    // Retry hasta 2 veces en errores de red
+    for (let attempt = 0; attempt <= 2; attempt++) {
+      try {
+        res = await fetch(url, config);
+        break;
+      } catch (err) {
+        if (attempt === 2) {
+          throw { code: 'NETWORK_ERROR', message: 'No se puede conectar con el servidor. Comprueba tu conexión.' };
+        }
+        await new Promise(r => setTimeout(r, 800 * (attempt + 1)));
+      }
     }
 
     // Auto-refresh on 401
