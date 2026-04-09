@@ -14,6 +14,13 @@ const Intake = (() => {
   let currentProjectId = null;
   let calcInitialized = false;
   let calcNeedsReinit = false;
+  let _intakeSaveTimer = null;
+
+  function scheduleIntakeSave() {
+    if (!currentProjectId) return;
+    clearTimeout(_intakeSaveTimer);
+    _intakeSaveTimer = setTimeout(() => saveToServer(true), 3000);
+  }
 
   /* ── Step configuration (9 steps) ───────────────────────────── */
   const STEPS = [
@@ -93,23 +100,23 @@ const Intake = (() => {
 
     // Word counters — marcar dirty al editar
     WC.forEach(c => {
-      document.getElementById(c.ta)?.addEventListener('input', () => { updateWC(c); _dirty = true; });
+      document.getElementById(c.ta)?.addEventListener('input', () => { updateWC(c); _dirty = true; scheduleIntakeSave(); });
     });
 
     // Sync visible duration/start fields → hidden fields
     document.getElementById('intake-f-dur-visible')?.addEventListener('change', (e) => {
       const v = parseInt(e.target.value) || 24;
       document.getElementById('intake-f-dur').value = v;
-      _dirty = true;
+      _dirty = true; scheduleIntakeSave();
     });
     document.getElementById('intake-f-start-visible')?.addEventListener('change', (e) => {
       document.getElementById('intake-f-start').value = e.target.value;
-      _dirty = true;
+      _dirty = true; scheduleIntakeSave();
     });
 
-    // Marcar dirty en cualquier otro campo del formulario
+    // Marcar dirty y autosave en cualquier campo del formulario
     document.querySelectorAll('#panel-intake input, #panel-intake select, #panel-intake textarea')
-      .forEach(el => el.addEventListener('input', () => { _dirty = true; }));
+      .forEach(el => el.addEventListener('input', () => { _dirty = true; scheduleIntakeSave(); }));
 
     // Save/Load file buttons
     document.getElementById('intake-btn-save-file')?.addEventListener('click', saveToFile);
@@ -159,7 +166,7 @@ const Intake = (() => {
       const result = await API.get('/intake/projects');
       const projects = Array.isArray(result) ? result : (result.data || result);
       if (!projects || projects.length === 0) {
-        el.innerHTML = '<div class="py-6 text-center"><span class="material-symbols-outlined text-3xl text-outline-variant block mb-2">folder_open</span><p class="text-xs text-on-surface-variant mb-2">Aún no tienes proyectos guardados</p><button onclick="document.getElementById('intake-btn-save-server')?.click()" class="text-xs font-semibold text-primary hover:underline">Guardar el actual</button></div>';
+        el.innerHTML = '<div class="py-6 text-center"><span class="material-symbols-outlined text-3xl text-outline-variant block mb-2">folder_open</span><p class="text-xs text-on-surface-variant mb-2">Aún no tienes proyectos guardados</p><button onclick="document.getElementById(&apos;intake-btn-save-server&apos;)?.click()" class="text-xs font-semibold text-primary hover:underline">Guardar el actual</button></div>';
         return;
       }
       el.innerHTML = projects.map(p => `
@@ -279,9 +286,9 @@ const Intake = (() => {
     }
   }
 
-  async function saveToServer() {
+  async function saveToServer(silent) {
     const name = document.getElementById('intake-f-name').value.trim();
-    if (!name) { Toast.show('Escribe un nombre de proyecto', 'err'); return; }
+    if (!name) { if (!silent) Toast.show('Escribe un nombre de proyecto', 'err'); return; }
 
     try {
       const projectData = {
@@ -309,7 +316,7 @@ const Intake = (() => {
         }
         await Promise.all(saves);
         _dirty = false;
-        Toast.show('Proyecto actualizado', 'ok');
+        if (!silent) Toast.show('Proyecto actualizado', 'ok');
       } else {
         // Crear nuevo proyecto
         const project = await API.post('/intake/projects', projectData);
@@ -330,11 +337,11 @@ const Intake = (() => {
         }
         if (ops.length) await Promise.all(ops);
         _dirty = false;
-        Toast.show('Proyecto guardado en servidor', 'ok');
+        if (!silent) Toast.show('Proyecto guardado en servidor', 'ok');
       }
-      loadServerProjects();
+      if (!silent) loadServerProjects();
     } catch (err) {
-      Toast.show('Error: ' + (err.message || err), 'err');
+      if (!silent) Toast.show('Error: ' + (err.message || err), 'err');
     }
   }
 
@@ -354,17 +361,7 @@ const Intake = (() => {
 
     // If it's a calculator step, render into the dynamic container
     if (cfg.calc) {
-      ensureCalcInit();
-      const container = document.getElementById('intake-calc-container');
-      if (container) {
-        switch (cfg.calc) {
-          case 'rates':     Calculator.renderRatesInto(container); break;
-          case 'routes':    Calculator.renderRoutesInto(container); break;
-          case 'mergedWPs': Calculator.renderMergedWPs(container); break;
-          case 'results':   Calculator.renderResultsInto(container); break;
-          case 'gantt':     Calculator.renderGanttInto(container); break;
-        }
-      }
+      renderCalcStep(cfg.calc);
     }
 
     // If going to gantt step, render gantt UI
@@ -462,7 +459,7 @@ const Intake = (() => {
   }
 
   /* ── Calculator lazy init ───────────────────────────────────── */
-  function ensureCalcInit() {
+  async function ensureCalcInit() {
     if (calcInitialized && !calcNeedsReinit) return;
 
     // Build project data from form fields
@@ -487,7 +484,7 @@ const Intake = (() => {
       role: i === 0 ? 'applicant' : 'partner',
     }));
 
-    Calculator.initFromIntake(projectData, partnerList);
+    await Calculator.initFromIntake(projectData, partnerList);
     Calculator.setNavCallback(calcNav);
     calcInitialized = true;
     calcNeedsReinit = false;
@@ -498,6 +495,20 @@ const Intake = (() => {
     const hasActivities = calcState.wps.some(wp => wp.activities.length > 1);
     if (acronym === 'ARISE' && !hasActivities && calcState.partners.length >= 4) {
       loadAriseActivities(calcState.partners);
+    }
+  }
+
+  async function renderCalcStep(calcType) {
+    await ensureCalcInit();
+    const container = document.getElementById('intake-calc-container');
+    if (container) {
+      switch (calcType) {
+        case 'rates':     Calculator.renderRatesInto(container); break;
+        case 'routes':    Calculator.renderRoutesInto(container); break;
+        case 'mergedWPs': Calculator.renderMergedWPs(container); break;
+        case 'results':   Calculator.renderResultsInto(container); break;
+        case 'gantt':     Calculator.renderGanttInto(container); break;
+      }
     }
   }
 
@@ -1077,7 +1088,7 @@ const Intake = (() => {
   }
 
   /* ── Demo preload ────────────────────────────────────────────── */
-  function preloadDemo() {
+  async function preloadDemo() {
     init();
     resetForm();
 
@@ -1115,7 +1126,7 @@ const Intake = (() => {
     // Init calculator with demo data
     calcInitialized = false;
     calcNeedsReinit = false;
-    ensureCalcInit();
+    await ensureCalcInit();
 
     // Now populate Calculator state with activities
     const cs = Calculator.getCalcState();
@@ -1215,13 +1226,15 @@ const Intake = (() => {
     Toast.show('Demo cargada: ARISE KA3-Youth \u2014 4 socios, 4 WPs', 'ok');
   }
 
-  function openProject(id) {
+  async function openProject(id) {
     // Initialize intake without resetting step
     if (!initialized) {
       initialized = true;
       renderStepNav();
       bindEvents();
-      loadPrograms();
+      await loadPrograms();
+    } else if (!programs.length) {
+      await loadPrograms();
     }
     // Show intake panel
     document.querySelectorAll('#content-area .panel').forEach(p => p.classList.remove('active'));

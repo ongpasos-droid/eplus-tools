@@ -695,3 +695,33 @@ exports.getBudgetSummary = async (req, res) => {
     });
   }
 };
+
+// ============ BULK SAVE / LOAD ============
+
+exports.saveFullState = async (req, res) => {
+  try {
+    const { projectId } = req.params;
+    const isOwner = await verifyProjectOwnership(projectId, req.user.id);
+    if (!isOwner) return res.status(403).json({ ok: false, error: { code: 'FORBIDDEN', message: 'No access' } });
+
+    await model.saveFullState(projectId, req.body);
+    res.json({ ok: true, data: { saved: true } });
+  } catch (err) {
+    console.error('saveFullState error:', err);
+    res.status(500).json({ ok: false, error: { code: 'INTERNAL_ERROR', message: 'Failed to save calculator state' } });
+  }
+};
+
+exports.loadFullState = async (req, res) => {
+  try {
+    const { projectId } = req.params;
+    const isOwner = await verifyProjectOwnership(projectId, req.user.id);
+    if (!isOwner) return res.status(403).json({ ok: false, error: { code: 'FORBIDDEN', message: 'No access' } });
+
+    const data = await model.loadFullState(projectId);
+    res.json({ ok: true, data });
+  } catch (err) {
+    console.error('loadFullState error:', err);
+    res.status(500).json({ ok: false, error: { code: 'INTERNAL_ERROR', message: 'Failed to load calculator state' } });
+  }
+};

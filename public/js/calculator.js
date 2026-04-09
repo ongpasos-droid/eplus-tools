@@ -24,6 +24,56 @@ const Calculator = (() => {
     mgmt: { rate_applicant: 500, rate_partner: 250 },
   };
 
+  /* ── Autosave ─────────────────────────────────────────────── */
+  let _saving = false;
+  let _saveQueued = false;
+
+  function serializeState() {
+    return {
+      partnerRates: state.partnerRates,
+      workerRates: state.workerRates,
+      routes: state.routes,
+      extraDests: state.extraDests,
+      wps: state.wps,
+    };
+  }
+
+  async function doSave() {
+    if (!currentProjectId || _saving) { _saveQueued = true; return; }
+    _saving = true;
+    showSaveStatus('saving');
+    try {
+      await API.put('/calculator/projects/' + currentProjectId + '/state', serializeState());
+      showSaveStatus('saved');
+    } catch (err) {
+      console.error('[Calc] autosave error:', err);
+      showSaveStatus('error');
+    } finally {
+      _saving = false;
+      if (_saveQueued) { _saveQueued = false; scheduleSave(); }
+    }
+  }
+
+  function scheduleSave() {
+    if (!currentProjectId) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(doSave, 2000);
+  }
+
+  function showSaveStatus(status) {
+    let el = document.getElementById('calc-save-status');
+    if (!el) {
+      el = document.createElement('span');
+      el.id = 'calc-save-status';
+      el.className = 'text-[10px] font-medium ml-2 transition-opacity duration-500';
+      const topbar = document.getElementById('topbar-title');
+      if (topbar) topbar.parentElement.appendChild(el);
+    }
+    if (status === 'saving') { el.textContent = 'Guardando...'; el.style.color = '#9ca3af'; el.style.opacity = '1'; }
+    else if (status === 'saved') { el.textContent = 'Guardado'; el.style.color = '#22c55e'; el.style.opacity = '1'; setTimeout(() => { el.style.opacity = '0'; }, 2000); }
+    else if (status === 'error') { el.textContent = 'Error al guardar'; el.style.color = '#ef4444'; el.style.opacity = '1'; }
+  }
+
   /* ── Constants ──────────────────────────────────────────────── */
   const WP_COLORS = ['#1D4ED8','#B45309','#7C3AED','#0F766E','#BE185D','#065F46','#9A3412','#1E40AF','#6B21A8','#0E7490','#4D7C0F','#7F1D1D'];
   const WP_BG     = ['rgba(29,78,216,.06)','rgba(180,83,9,.06)','rgba(124,58,237,.06)','rgba(15,118,110,.06)','rgba(190,24,93,.06)','rgba(6,95,70,.06)','rgba(154,52,18,.06)','rgba(30,64,175,.06)','rgba(107,33,168,.06)','rgba(14,116,144,.06)','rgba(77,124,15,.06)','rgba(127,29,29,.06)'];
@@ -92,15 +142,49 @@ const Calculator = (() => {
       subtypes: ['Translation / interpretation costs','External expert / trainer costs','Venue / space rental costs','Hosting / software / platform costs','Travel / accommodation support costs','Evaluation / administrative support costs'] },
   };
 
+  const WP1_TITLES = [
+    'Project Management and Coordination',
+    'Project Coordination, Management and Monitoring',
+    'Project Governance, Coordination and Administration',
+    'Project Management, Quality Assurance and Internal Communication',
+    'Strategic Project Management and Partnership Coordination',
+    'Project Leadership, Coordination and Operational Management',
+  ];
+
+  const LAST_WP_TITLES = [
+    'Dissemination, Evaluation and Sustainability',
+    'Impact, Dissemination and Sustainability',
+    'Dissemination, Exploitation and Sustainability of Results',
+    'Communication, Dissemination and Impact Maximisation',
+    'Evaluation, Quality Assurance and Dissemination',
+    'Impact, Evaluation and Long-term Sustainability',
+  ];
+
   const WP_TAXONOMY = [
-    { cat:'Management & Coordination', titles:['Project Management and Coordination','Consortium Management and Coordination','Administrative and Financial Management'] },
-    { cat:'Research & Methodology', titles:['Research, Analysis and Methodology','Needs Analysis and Research','Methodological Framework Development'] },
-    { cat:'Content & Tools', titles:['Content Development and Tools','Resource Development and Pilot Delivery','Digital Tools and Learning Resources'] },
-    { cat:'Training & Capacity', titles:['Training and Capacity Building','Training Delivery and Skills Development','Learning Programme Implementation'] },
-    { cat:'Implementation & Pilot', titles:['Implementation and Pilot Activities','Pilot Activities and Validation','Testing and Pilot Delivery'] },
-    { cat:'Quality & Monitoring', titles:['Quality Assurance and Monitoring','Monitoring and Internal Evaluation','Quality Management and Risk Monitoring'] },
-    { cat:'Dissemination & Visibility', titles:['Communication, Dissemination and Visibility','Dissemination and Outreach Activities','Awareness Raising and Dissemination'] },
-    { cat:'Impact & Sustainability', titles:['Impact, Exploitation and Sustainability','Evaluation, Dissemination and Sustainability','Long-term Impact and Sustainability'] },
+    { cat:'Research / Mapping / Diagnosis', titles:[
+      'Research, Mapping and Needs Analysis',
+      'Context Analysis, Diagnosis and Stakeholder Mapping',
+      'Needs Assessment and Baseline Research',
+      'Territorial Mapping and Contextual Diagnosis',
+    ]},
+    { cat:'Methodology / Framework Development', titles:[
+      'Methodology and Educational Framework Development',
+      'Pedagogical Framework and Intervention Design',
+      'Conceptual Model and Methodological Design',
+      'Project Methodology and Learning Framework',
+    ]},
+    { cat:'Content / Tools / Training Resources', titles:[
+      'Content Development and Training Resources',
+      'Educational Materials, Tools and Learning Resources',
+      'Toolkit and Capacity Building Resources Development',
+      'Training Content and Practical Tools Production',
+    ]},
+    { cat:'Pilot / Implementation / Validation', titles:[
+      'Pilot Implementation and Validation',
+      'Testing, Implementation and Evaluation of the Model',
+      'Pilot Actions, Field Testing and Validation',
+      'Practical Implementation and Methodology Validation',
+    ]},
   ];
 
   /* ── Helpers ────────────────────────────────────────────────── */
@@ -583,15 +667,30 @@ const Calculator = (() => {
      ══════════════════════════════════════════════════════════════ */
 
   function syncWPCount(n) {
+    // If old last WP had a dissemination title, reset it (it's no longer last)
+    if (state.wps.length > 1 && n > state.wps.length) {
+      const oldLast = state.wps[state.wps.length - 1];
+      if (LAST_WP_TITLES.includes(oldLast.name)) {
+        oldLast.name = `WP${state.wps.length}`;
+        oldLast.desc = '';
+      }
+    }
     while (state.wps.length < n) {
       const wi = state.wps.length;
       const defaultLeader = state.partners[wi]?.id || state.partners[0]?.id || null;
       let name = `WP${wi+1}`;
-      if (wi === 0) name = 'Project Management and Coordination';
-      else if (wi === n-1 && n > 1) name = 'Impact, Exploitation and Sustainability';
+      if (wi === 0) name = WP1_TITLES[0];
+      else if (wi === n-1 && n > 1) name = LAST_WP_TITLES[0];
       state.wps.push({ name, desc: '', leader: defaultLeader, activities: [] });
     }
     state.wps = state.wps.slice(0, n);
+    // Ensure last WP has a dissemination title if it was just assigned a generic name
+    if (n > 1) {
+      const last = state.wps[n - 1];
+      if (last.name === `WP${n}` && !last._cat) {
+        last.name = LAST_WP_TITLES[0];
+      }
+    }
   }
 
   function renderWorkPackages(container) {
@@ -611,31 +710,41 @@ const Calculator = (() => {
   }
 
   function buildWPListHTML() {
+    const lastWi = state.wps.length - 1;
     return state.wps.map((wp, wi) => {
       const c = WP_COLORS[wi % WP_COLORS.length];
       const leaderOpts = state.partners.map(p => `<option value="${p.id}" ${p.id===wp.leader?'selected':''}>${p.name||'Partner '+p.order_index}</option>`).join('');
-      const catOpts = (wi === 0
-        ? '<option selected>Management & Coordination</option>'
-        : '<option value="">— Category —</option>' + WP_TAXONOMY.map(g => `<option value="${g.cat}" ${g.cat===wp._cat?'selected':''}>${g.cat}</option>`).join(''));
-      const titleOpts = wp._cat
-        ? (WP_TAXONOMY.find(g=>g.cat===wp._cat)?.titles||[]).map(t => `<option value="${t}" ${t===wp.desc?'selected':''}>${t}</option>`).join('')
-        : '';
 
-      return `
-      <div class="border border-outline-variant/20 rounded-xl overflow-hidden">
-        <div class="flex items-center gap-3 px-4 py-3 border-b border-outline-variant/10" style="background:${WP_BG[wi%WP_BG.length]}">
-          <span class="w-8 h-8 rounded-full text-white text-xs font-extrabold flex items-center justify-center shrink-0" style="background:${c}">WP${wi+1}</span>
-          <input type="text" value="${wp.name}" placeholder="WP name..." class="flex-1 bg-transparent border-none font-headline font-bold text-sm focus:outline-none" style="color:${c}" onchange="Calculator._setWP(${wi},'name',this.value)">
-          <div class="flex items-center gap-1 shrink-0">
-            <span class="text-[11px] text-on-surface-variant">Leader:</span>
-            <select class="text-xs px-1.5 py-1 border border-outline-variant/20 rounded font-medium" style="color:${c}" onchange="Calculator._setWP(${wi},'leader',this.value)">${leaderOpts}</select>
-          </div>
-        </div>
-        <div class="p-4 bg-surface-container-lowest space-y-2">
+      const isFirst = wi === 0;
+      const isLast  = wi === lastWi && state.wps.length > 1;
+      const isMid   = !isFirst && !isLast;
+
+      // Title selector: direct list for WP1 and last, category+title for middle
+      let titleSelectHTML = '';
+      if (isFirst) {
+        const opts = WP1_TITLES.map(t => `<option value="${t}" ${t===wp.name?'selected':''}>${t}</option>`).join('');
+        titleSelectHTML = `
+          <div>
+            <label class="text-[11px] font-semibold text-on-surface-variant uppercase">Title</label>
+            <select class="text-xs w-full px-2 py-1.5 border border-outline-variant/30 rounded" onchange="Calculator._applyWPTitle(${wi},this.value)">${opts}</select>
+          </div>`;
+      } else if (isLast) {
+        const opts = LAST_WP_TITLES.map(t => `<option value="${t}" ${t===wp.name?'selected':''}>${t}</option>`).join('');
+        titleSelectHTML = `
+          <div>
+            <label class="text-[11px] font-semibold text-on-surface-variant uppercase">Title</label>
+            <select class="text-xs w-full px-2 py-1.5 border border-outline-variant/30 rounded" onchange="Calculator._applyWPTitle(${wi},this.value)">${opts}</select>
+          </div>`;
+      } else {
+        const catOpts = '<option value="">— Category —</option>' + WP_TAXONOMY.map(g => `<option value="${g.cat}" ${g.cat===wp._cat?'selected':''}>${g.cat}</option>`).join('');
+        const titleOpts = wp._cat
+          ? (WP_TAXONOMY.find(g=>g.cat===wp._cat)?.titles||[]).map(t => `<option value="${t}" ${t===wp.name?'selected':''}>${t}</option>`).join('')
+          : '';
+        titleSelectHTML = `
           <div class="grid grid-cols-2 gap-2">
             <div>
               <label class="text-[11px] font-semibold text-on-surface-variant uppercase">Category</label>
-              <select class="text-xs w-full px-2 py-1.5 border border-outline-variant/30 rounded" ${wi===0?'disabled':''} onchange="Calculator._setWPCat(${wi},this.value)">${catOpts}</select>
+              <select class="text-xs w-full px-2 py-1.5 border border-outline-variant/30 rounded" onchange="Calculator._setWPCat(${wi},this.value)">${catOpts}</select>
             </div>
             <div>
               <label class="text-[11px] font-semibold text-on-surface-variant uppercase">Suggested title</label>
@@ -644,11 +753,21 @@ const Calculator = (() => {
                 ${titleOpts}
               </select>
             </div>
+          </div>`;
+      }
+
+      return `
+      <div class="border border-outline-variant/20 rounded-xl overflow-hidden">
+        <div class="flex items-center gap-3 px-4 py-3 border-b border-outline-variant/10" style="background:${WP_BG[wi%WP_BG.length]}">
+          <span class="w-8 h-8 rounded-full text-white text-xs font-extrabold flex items-center justify-center shrink-0" style="background:${c}">WP${wi+1}</span>
+          <span class="flex-1 font-headline font-bold text-sm" style="color:${c}">${wp.name || 'WP'+(wi+1)}</span>
+          <div class="flex items-center gap-1 shrink-0">
+            <span class="text-[11px] text-on-surface-variant">Leader:</span>
+            <select class="text-xs px-1.5 py-1 border border-outline-variant/20 rounded font-medium" style="color:${c}" onchange="Calculator._setWP(${wi},'leader',this.value)">${leaderOpts}</select>
           </div>
-          <div>
-            <label class="text-[11px] font-semibold text-on-surface-variant uppercase">Full title</label>
-            <input type="text" value="${wp.desc||''}" placeholder="e.g. Development of digital tools..." class="w-full text-sm px-2 py-1.5 border border-outline-variant/30 rounded" onchange="Calculator._setWP(${wi},'desc',this.value)">
-          </div>
+        </div>
+        <div class="p-4 bg-surface-container-lowest space-y-2">
+          ${titleSelectHTML}
         </div>
       </div>`;
     }).join('');
@@ -713,15 +832,36 @@ const Calculator = (() => {
 
   const WP_SECTION_BG = ['#eef2ff','#e8f0fe','#e0f2fe','#e0f7fa','#e8eaf6','#e3f2fd','#e1f5fe','#e0f2f1','#ede7f6','#e8eaf6','#f3e5f5','#fce4ec'];
 
+  function buildWPTitleOpts(wi, wp) {
+    const lastWi = state.wps.length - 1;
+    const isFirst = wi === 0;
+    const isLast  = wi === lastWi && state.wps.length > 1;
+    const current = wp.name || '';
+    if (isFirst) {
+      return WP1_TITLES.map(t => `<option value="${t}" ${t===current?'selected':''}>${t}</option>`).join('');
+    }
+    if (isLast) {
+      return LAST_WP_TITLES.map(t => `<option value="${t}" ${t===current?'selected':''}>${t}</option>`).join('');
+    }
+    let opts = '';
+    for (const g of WP_TAXONOMY) {
+      opts += `<optgroup label="${g.cat}">`;
+      for (const t of g.titles) opts += `<option value="${t}" ${t===current?'selected':''}>${t}</option>`;
+      opts += '</optgroup>';
+    }
+    return opts;
+  }
+
   function buildWPSection(wp, wi) {
     const c = WP_COLORS[wi % WP_COLORS.length];
     const bg = WP_SECTION_BG[wi % WP_SECTION_BG.length];
+    const titleOpts = buildWPTitleOpts(wi, wp);
     return `
     <div class="calc-wp open" id="calc-wp-${wi}" style="background:${bg};border-color:${c}30">
       <div class="calc-wp-head" onclick="Calculator._toggleWP(${wi})" style="background:${c}12">
         <span class="w-9 h-9 rounded-full text-white text-[11px] font-extrabold flex items-center justify-center shrink-0" style="background:${c}">WP${wi+1}</span>
         <div class="flex-1 min-w-0">
-          <div class="font-headline text-sm font-bold text-on-surface truncate">${wp.desc || wp.name || 'Untitled'}</div>
+          <select class="font-headline text-sm font-bold text-on-surface bg-transparent border-none cursor-pointer focus:outline-none w-full" onclick="event.stopPropagation()" onchange="event.stopPropagation();Calculator._applyWPTitle(${wi},this.value)">${titleOpts}</select>
         </div>
         <span class="text-sm font-mono font-bold" style="color:${c}" id="calc-wp-total-${wi}">\u2014</span>
         <span class="material-symbols-outlined calc-wp-chevron">expand_more</span>
@@ -761,7 +901,9 @@ const Calculator = (() => {
         </span>
         ${subtypeSelect}
         <input type="text" value="${act.label}" placeholder="Name..." class="flex-1 bg-transparent border-b border-outline-variant/30 px-1 py-0.5 text-sm font-semibold font-headline focus:outline-none focus:border-primary" onchange="Calculator._setAct(${wi},${act.id},'label',this.value)">
-        <button onclick="Calculator._removeAct(${wi},${act.id})" class="text-error/60 hover:text-error text-lg leading-none ml-2">&times;</button>
+        <button onclick="Calculator._moveAct(${wi},${act.id},-1)" class="text-on-surface-variant/40 hover:text-primary text-base leading-none" title="Mover arriba"><span class="material-symbols-outlined text-[16px]">expand_less</span></button>
+        <button onclick="Calculator._moveAct(${wi},${act.id},1)" class="text-on-surface-variant/40 hover:text-primary text-base leading-none" title="Mover abajo"><span class="material-symbols-outlined text-[16px]">expand_more</span></button>
+        <button onclick="Calculator._removeAct(${wi},${act.id})" class="text-error/60 hover:text-error text-lg leading-none ml-1">&times;</button>
       </div>
       <div class="mb-2">
         <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60 mb-1 block">Description</label>
@@ -1621,6 +1763,7 @@ const Calculator = (() => {
   }
   function applyWPTitle(wi, title) {
     if (!title) return;
+    state.wps[wi].name = title;
     state.wps[wi].desc = title;
     const el = $('calc-wp-list');
     if (el) el.innerHTML = buildWPListHTML();
@@ -1672,6 +1815,21 @@ const Calculator = (() => {
     const actContainer = $(`calc-wp-acts-${wi}`);
     if (actContainer) actContainer.insertAdjacentHTML('beforeend', buildActivityCard(act, wi));
     recalcWP(wi);
+  }
+
+  function moveAct(wi, actId, dir) {
+    const acts = state.wps[wi].activities;
+    const idx = acts.findIndex(a => a.id === actId);
+    if (idx < 0) return;
+    const newIdx = idx + dir;
+    if (newIdx < 0 || newIdx >= acts.length) return;
+    [acts[idx], acts[newIdx]] = [acts[newIdx], acts[idx]];
+    // Re-render the WP activities
+    const container = $(`calc-wp-acts-${wi}`);
+    if (container) {
+      container.innerHTML = acts.map(a => buildActivityCard(a, wi)).join('');
+      recalcWP(wi);
+    }
   }
 
   function removeAct(wi, actId) {
@@ -1953,13 +2111,13 @@ const Calculator = (() => {
    * @param {Object} projectData - project object {id, name, type, start_date, duration_months, eu_grant, cofin_pct, indirect_pct}
    * @param {Array} partnerList - array of partner objects [{id, name, city, country, order_index, role}]
    */
-  function initFromIntake(projectData, partnerList) {
+  async function initFromIntake(projectData, partnerList) {
     _embeddedMode = true;
     currentProjectId = projectData.id;
     state.project = projectData;
     state.partners = (partnerList || []).sort((a, b) => a.order_index - b.order_index);
 
-    // Init rates from partner countries
+    // Init default rates from partner countries
     state.partnerRates = {};
     state.workerRates = [];
     state.wrCounter = 0;
@@ -1971,16 +2129,47 @@ const Calculator = (() => {
       });
     });
 
-    // Init routes
+    // Init default routes
     state.routes = {};
     for (let i = 0; i < state.partners.length; i++)
       for (let j = i + 1; j < state.partners.length; j++)
         state.routes[routeKey(state.partners[i].id, state.partners[j].id)] = { km: 0, green: false, custom_rate: null };
 
-    // Init WPs (4 default)
+    // Init default WPs (4)
     state.wps = [];
     state.actCounter = 0;
     syncWPCount(4);
+
+    // Try to load saved state from server (overlays defaults)
+    if (currentProjectId && !currentProjectId.startsWith('intake-temp-')) {
+      try {
+        const saved = await API.get('/calculator/projects/' + currentProjectId + '/state');
+        if (saved) {
+          if (saved.partnerRates && Object.keys(saved.partnerRates).length) state.partnerRates = saved.partnerRates;
+          if (saved.workerRates && saved.workerRates.length) {
+            state.workerRates = saved.workerRates.map((wr, i) => ({ id: i + 1, ...wr }));
+            state.wrCounter = state.workerRates.length;
+          }
+          if (saved.routes && Object.keys(saved.routes).length) state.routes = { ...state.routes, ...saved.routes };
+          if (saved.extraDests && saved.extraDests.length) {
+            state.extraDests = saved.extraDests.map((ed, i) => ({ id: '_ed' + (i + 1), ...ed }));
+            state.extraDestCounter = saved.extraDests.length;
+          }
+          if (saved.wps && saved.wps.length) {
+            // Restore WPs with sequential activity IDs
+            let actId = 0;
+            state.wps = saved.wps.map(wp => ({
+              ...wp,
+              activities: (wp.activities || []).map(a => ({ ...a, id: ++actId }))
+            }));
+            state.actCounter = actId;
+          }
+          console.log('[Calc] loaded saved state from server');
+        }
+      } catch (err) {
+        console.log('[Calc] no saved state found, using defaults');
+      }
+    }
 
     maxReached = 0;
     console.log('[Calc] initFromIntake done —', state.partners.length, 'partners');
@@ -2011,6 +2200,7 @@ const Calculator = (() => {
       state.wps[0].activities.push({
         id: ++state.actCounter, type: 'mgmt', label: 'Project Management',
         rate_applicant: 500, rate_partner: 250,
+        desc: 'This work package covers the overall coordination and management of the project throughout its duration. It includes internal communication between partners, financial management, progress monitoring and quality assurance. The coordinator will organise regular online meetings and prepare interim and final reports. All partners contribute to administrative tasks, reporting and compliance with the grant agreement.',
         date_start: toISO(getProjectStart()), date_end: toISO(addMonths(getProjectStart() || new Date(), getProjectMonths()))
       });
     }
@@ -2115,36 +2305,40 @@ const Calculator = (() => {
     _loadProject: loadProject,
     _backToSelector: backToSelector,
     _goTo: goToStep,
-    _setPerdiem: setPerdiem,
-    _setWorkerRate: setWorkerRate,
-    _addWorkerRate: addWorkerRate,
-    _removeWorkerRate: removeWorkerRate,
-    _setRouteBand: setRouteBand,
-    _setRoute: setRoute,
-    _addExtraDest: addExtraDest,
-    _removeExtraDest: removeExtraDest,
-    _setExtraDest: setExtraDest,
-    _setWP: setWP,
-    _setWPCat: setWPCat,
-    _applyWPTitle: applyWPTitle,
-    _syncWPs: syncWPs,
-    _syncWPsMerged: syncWPsMerged,
-    _addActivity: addActivity,
-    _removeAct: removeAct,
-    _setAct: setAct,
-    _setActOnline: setActOnline,
-    _setActSubtype: setActSubtype,
-    _setActDesc: setActDesc,
-    _setActHost: setActHost,
-    _setParticipant: setParticipant,
-    _setIOStaff: setIOStaff,
-    _addIOStaff: addIOStaff,
-    _removeIOStaff: removeIOStaff,
-    _setIOPartnerActive: setIOPartnerActive,
-    _setIODays: setIODays,
-    _setIOProfile: setIOProfile,
-    _setME: setME,
-    _setPartnerDetail: setPartnerDetail,
+    _setPerdiem: (...a) => { setPerdiem(...a); scheduleSave(); },
+    _setWorkerRate: (...a) => { setWorkerRate(...a); scheduleSave(); },
+    _addWorkerRate: (...a) => { addWorkerRate(...a); scheduleSave(); },
+    _removeWorkerRate: (...a) => { removeWorkerRate(...a); scheduleSave(); },
+    _setRouteBand: (...a) => { setRouteBand(...a); scheduleSave(); },
+    _setRoute: (...a) => { setRoute(...a); scheduleSave(); },
+    _addExtraDest: (...a) => { addExtraDest(...a); scheduleSave(); },
+    _removeExtraDest: (...a) => { removeExtraDest(...a); scheduleSave(); },
+    _setExtraDest: (...a) => { setExtraDest(...a); scheduleSave(); },
+    WP1_TITLES,
+    LAST_WP_TITLES,
+    WP_TAXONOMY,
+    _setWP: (...a) => { setWP(...a); scheduleSave(); },
+    _setWPCat: (...a) => { setWPCat(...a); scheduleSave(); },
+    _applyWPTitle: (...a) => { applyWPTitle(...a); scheduleSave(); },
+    _syncWPs: (...a) => { syncWPs(...a); scheduleSave(); },
+    _syncWPsMerged: (...a) => { syncWPsMerged(...a); scheduleSave(); },
+    _addActivity: (...a) => { addActivity(...a); scheduleSave(); },
+    _moveAct: (...a) => { moveAct(...a); scheduleSave(); },
+    _removeAct: (...a) => { removeAct(...a); scheduleSave(); },
+    _setAct: (...a) => { setAct(...a); scheduleSave(); },
+    _setActOnline: (...a) => { setActOnline(...a); scheduleSave(); },
+    _setActSubtype: (...a) => { setActSubtype(...a); scheduleSave(); },
+    _setActDesc: (...a) => { setActDesc(...a); scheduleSave(); },
+    _setActHost: (...a) => { setActHost(...a); scheduleSave(); },
+    _setParticipant: (...a) => { setParticipant(...a); scheduleSave(); },
+    _setIOStaff: (...a) => { setIOStaff(...a); scheduleSave(); },
+    _addIOStaff: (...a) => { addIOStaff(...a); scheduleSave(); },
+    _removeIOStaff: (...a) => { removeIOStaff(...a); scheduleSave(); },
+    _setIOPartnerActive: (...a) => { setIOPartnerActive(...a); scheduleSave(); },
+    _setIODays: (...a) => { setIODays(...a); scheduleSave(); },
+    _setIOProfile: (...a) => { setIOProfile(...a); scheduleSave(); },
+    _setME: (...a) => { setME(...a); scheduleSave(); },
+    _setPartnerDetail: (...a) => { setPartnerDetail(...a); scheduleSave(); },
     _toggleWP: toggleWP,
     _switchResTab: switchResTab,
     _setGanttView: setGanttView,

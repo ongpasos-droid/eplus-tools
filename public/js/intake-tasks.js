@@ -85,7 +85,10 @@ const IntakeTasks = (() => {
     renderAll(cs);
   }
 
+  let totalWPs = 0;
+
   function renderAll(cs) {
+    totalWPs = cs.wps.length;
     let html = `
       <div class="mb-8">
         <h1 class="font-headline text-3xl font-extrabold tracking-tighter text-primary mb-1">Tareas del Proyecto</h1>
@@ -99,6 +102,29 @@ const IntakeTasks = (() => {
     bindNav();
   }
 
+  function buildWPTitleSelect(wi, currentName, color) {
+    const isFirst = wi === 0;
+    const isLast  = wi === totalWPs - 1 && totalWPs > 1;
+    let titles = [];
+    if (isFirst) {
+      titles = Calculator.WP1_TITLES || [];
+    } else if (isLast) {
+      titles = Calculator.LAST_WP_TITLES || [];
+    } else {
+      // Middle WPs: flat list grouped by category
+      const tax = Calculator.WP_TAXONOMY || [];
+      let opts = '';
+      for (const g of tax) {
+        opts += `<optgroup label="${esc(g.cat)}">`;
+        for (const t of g.titles) opts += `<option value="${esc(t)}" ${t===currentName?'selected':''}>${esc(t)}</option>`;
+        opts += '</optgroup>';
+      }
+      return `<select class="wp-title-select text-sm font-bold bg-transparent border-none focus:outline-none cursor-pointer max-w-full" style="color:${color}" data-wi="${wi}">${opts}</select>`;
+    }
+    const opts = titles.map(t => `<option value="${esc(t)}" ${t===currentName?'selected':''}>${esc(t)}</option>`).join('');
+    return `<select class="wp-title-select text-sm font-bold bg-transparent border-none focus:outline-none cursor-pointer max-w-full" style="color:${color}" data-wi="${wi}">${opts}</select>`;
+  }
+
   /* ── WP Block ──────────────────────────────────────────────── */
   function renderWP(wp, wi) {
     const c = wpColor(wi);
@@ -107,13 +133,15 @@ const IntakeTasks = (() => {
     const custs = customTasks[wi] || [];
     const total = acts.length + custs.length + (wi === 0 ? mgmtEnabled.size : 0);
 
+    const titleSelect = buildWPTitleSelect(wi, wp.name || wp.desc || '', c);
+
     let h = `
     <div class="mb-10">
       <!-- WP Header -->
       <div class="flex items-center gap-4 mb-4">
         <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-extrabold text-base shadow-lg" style="background:linear-gradient(135deg,${c},${c}bb)">WP${n}</div>
         <div class="flex-1">
-          <h2 class="text-lg font-extrabold tracking-tight" style="color:${c}">${esc(wp.name || wp.desc || 'Work Package ' + n)}</h2>
+          ${titleSelect}
           <div class="flex items-center gap-3 mt-0.5 text-[11px] text-on-surface-variant">
             <span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-xs" style="color:${c}">task_alt</span> ${total} tarea${total!==1?'s':''}</span>
             <span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-xs" style="color:${c}">bolt</span> ${acts.length} actividad${acts.length!==1?'es':''}</span>
@@ -288,6 +316,14 @@ const IntakeTasks = (() => {
     // Delete custom
     container.querySelectorAll('.delete-custom').forEach(btn => {
       btn.addEventListener('click', () => delCustom(parseInt(btn.dataset.wi), parseInt(btn.dataset.ci), btn.dataset.tid));
+    });
+
+    // WP title select
+    container.querySelectorAll('.wp-title-select').forEach(sel => {
+      sel.addEventListener('change', () => {
+        const wi = parseInt(sel.dataset.wi);
+        Calculator._applyWPTitle(wi, sel.value);
+      });
     });
   }
 

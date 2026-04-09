@@ -43,4 +43,8 @@ router.patch('/activities/:id/detail', requireAuth, controller.updateActivityDet
 // ============ BUDGET SUMMARY ============
 router.get('/projects/:projectId/budget-summary', requireAuth, controller.getBudgetSummary);
 
+// ============ BULK STATE (autosave) ============
+router.put('/projects/:projectId/state', requireAuth, controller.saveFullState);
+router.get('/projects/:projectId/state', requireAuth, controller.loadFullState);
+
 module.exports = router;

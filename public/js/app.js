@@ -207,6 +207,7 @@ const App = (() => {
     if (route === 'my-org' && typeof Organizations !== 'undefined') Organizations.initMyOrg();
     if (route === 'organizations' && typeof Organizations !== 'undefined') Organizations.initDirectory();
     if (route === 'research' && typeof Research !== 'undefined') Research.init();
+    if (route === 'developer' && typeof Developer !== 'undefined') Developer.init();
     if (route === 'evaluator' && typeof Evaluator !== 'undefined') Evaluator.init();
     if (route === 'budget' && typeof Budget !== 'undefined') Budget.init();
   }
