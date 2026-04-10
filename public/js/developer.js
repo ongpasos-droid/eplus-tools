@@ -16,7 +16,7 @@ const Developer = (() => {
   let evalCriteria = [];
   let _saveTimer = null;
   let _typingTimer = null;
-  let prepSubTab = 'analisis'; // default sub-tab in Prep Studio
+  let prepSubTab = 'consorcio'; // default sub-tab in Prep Studio
   let prepCache = {};          // cached data per sub-tab to avoid re-fetching
 
   function esc(s) {
@@ -911,8 +911,8 @@ const Developer = (() => {
         }
       </style>`;
 
-    // Tips and typing start only when user clicks "Escribir borrador"
-    // Wait for user to click — don't auto-start
+    // Tips rotation
+    let tipIdx = 0;
     _tipTimer = setInterval(() => {
       tipIdx = (tipIdx + 1) % TIPS.length;
       const tipEl = document.getElementById('dev-gen-tip');
@@ -958,18 +958,6 @@ const Developer = (() => {
         else if (idx > word.length + 3) { idx = 0; el.textContent = ''; }
       }, 150);
     })();
-
-    // Start tip rotation
-    let tipIdx = 0;
-    _tipTimer = setInterval(() => {
-      tipIdx = (tipIdx + 1) % TIPS.length;
-      const tipEl = document.getElementById('dev-gen-tip');
-      if (tipEl) {
-        tipEl.style.opacity = '0';
-        setTimeout(() => { tipEl.textContent = TIPS[tipIdx]; tipEl.style.opacity = '1'; }, 300);
-        tipEl.style.transition = 'opacity 0.3s';
-      }
-    }, 4000);
 
     const total = flatSections.length;
     const bar = document.getElementById('dev-gen-bar');

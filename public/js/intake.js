@@ -298,10 +298,10 @@ const Intake = (() => {
         type: document.getElementById('intake-f-type').value || null,
         description: document.getElementById('intake-f-desc').value.trim() || null,
         start_date: document.getElementById('intake-f-start').value || null,
-        duration_months: parseInt(document.getElementById('intake-f-dur').value) || null,
+        duration_months: parseInt(document.getElementById('intake-f-dur').value) || 24,
         eu_grant: selectedProgram ? Number(selectedProgram.eu_grant_max) : 0,
-        cofin_pct: selectedProgram ? selectedProgram.cofin_pct : 0,
-        indirect_pct: selectedProgram ? Number(selectedProgram.indirect_pct) : 0,
+        cofin_pct: selectedProgram ? (selectedProgram.cofin_pct || 80) : 80,
+        indirect_pct: selectedProgram ? (Number(selectedProgram.indirect_pct) || 7) : 7,
       };
       const contextData = {
         problem: document.getElementById('intake-ctx-prob').value.trim(),
@@ -384,6 +384,16 @@ const Intake = (() => {
   /* ── Step navigation ─────────────────────────────────────────── */
   function setStep(s) {
     if (s < 0 || s >= STEPS.length) return;
+
+    // Auto-save when changing steps (don't lose work)
+    if (_dirty && currentProjectId) {
+      saveToServer(true);
+    } else if (_dirty && !currentProjectId) {
+      // First save: create the project if we have at least a name
+      const name = document.getElementById('intake-f-name')?.value?.trim();
+      if (name) saveToServer(true);
+    }
+
     const cfg = STEPS[s];
 
     // Hide all static panels
@@ -1023,9 +1033,12 @@ const Intake = (() => {
   }
 
   async function launchProject() {
+    // Auto-save if not saved yet
     if (!currentProjectId) {
-      Toast.show('Guarda el proyecto primero', 'err');
-      return;
+      const name = document.getElementById('intake-f-name')?.value?.trim();
+      if (!name) { Toast.show('Escribe un nombre de proyecto antes de continuar', 'err'); return; }
+      await saveToServer(true);
+      if (!currentProjectId) { Toast.show('Error guardando el proyecto', 'err'); return; }
     }
 
     // Save current state first
