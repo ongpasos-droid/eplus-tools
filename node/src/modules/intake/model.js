@@ -72,8 +72,8 @@ async function createProject(userId, projectData) {
  */
 async function findProjectById(projectId, userId) {
   const sql = `
-    SELECT id, user_id, name, type, description, start_date, duration_months,
-           deadline, eu_grant, cofin_pct, indirect_pct, status, created_at, updated_at
+    SELECT id, user_id, name, full_name, type, description, start_date, duration_months,
+           deadline, eu_grant, cofin_pct, indirect_pct, status, calc_state, created_at, updated_at
     FROM projects
     WHERE id = ? AND user_id = ?
   `;
@@ -93,7 +93,7 @@ async function findProjectsByUserId(userId, page = 1, perPage = 20) {
   const total = countRows[0].total;
 
   const sql = `
-    SELECT id, user_id, name, type, description, start_date, duration_months,
+    SELECT id, user_id, name, full_name, type, description, start_date, duration_months,
            deadline, eu_grant, cofin_pct, indirect_pct, status, created_at, updated_at
     FROM projects
     WHERE user_id = ?
@@ -122,8 +122,8 @@ async function updateProjectFields(projectId, userId, updates) {
 
   // Allowed fields for update
   const allowedFields = [
-    'name', 'type', 'description', 'start_date', 'duration_months',
-    'deadline', 'eu_grant', 'cofin_pct', 'indirect_pct', 'status'
+    'name', 'full_name', 'type', 'description', 'start_date', 'duration_months',
+    'deadline', 'eu_grant', 'cofin_pct', 'indirect_pct', 'status', 'calc_state'
   ];
 
   const fieldsToUpdate = {};

@@ -96,7 +96,7 @@ const IntakeTasks = (() => {
       </div>`;
     for (let wi = 0; wi < cs.wps.length; wi++) html += renderWP(cs.wps[wi], wi);
 
-    html += navButtons(5, 7, 'Gantt');
+    html += navButtons(3, 5, 'Gantt');
     container.innerHTML = html;
     bindEvents();
     bindNav();
@@ -413,8 +413,13 @@ const IntakeTasks = (() => {
     }, 500);
   }
 
-  /* ── Nav buttons ────────────────────────────────────────────── */
+  /* ── Nav buttons (hidden when inside Writer Prep Studio) ────── */
+  function isInsideWriter() {
+    return container && !!container.closest('#panel-developer');
+  }
+
   function navButtons(prevStep, nextStep, nextLabel) {
+    if (isInsideWriter()) return '';
     return `
       <div class="flex justify-between items-center mt-10 pt-5 border-t border-outline-variant">
         ${prevStep !== null ? `<button data-goto="${prevStep}" class="intake-step-nav-btn inline-flex items-center gap-2 px-5 py-3 rounded-md text-on-surface-variant font-semibold text-sm border border-outline-variant hover:bg-surface-container-low transition-colors">
@@ -427,6 +432,7 @@ const IntakeTasks = (() => {
   }
 
   function bindNav() {
+    if (isInsideWriter()) return;
     container.querySelectorAll('.intake-step-nav-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const step = parseInt(btn.dataset.goto);

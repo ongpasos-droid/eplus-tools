@@ -278,6 +278,8 @@ const Developer = (() => {
     { id: 'presupuesto',  label: 'Presupuesto',  icon: 'account_balance' },
     { id: 'relevancia',   label: 'Relevancia',   icon: 'lightbulb' },
     { id: 'actividades',  label: 'Actividades',  icon: 'task_alt' },
+    { id: 'tareas',       label: 'Tareas',       icon: 'checklist' },
+    { id: 'cronograma',   label: 'Cronograma',   icon: 'timeline' },
     { id: 'analisis',     label: 'Analisis',     icon: 'analytics' },
   ];
 
@@ -361,6 +363,8 @@ const Developer = (() => {
         case 'presupuesto':  await renderPrepPresupuesto(el); break;
         case 'relevancia':   await renderPrepRelevancia(el); break;
         case 'actividades':  await renderPrepActividades(el); break;
+        case 'tareas':       await renderPrepTareas(el); break;
+        case 'cronograma':   await renderPrepCronograma(el); break;
         case 'analisis':     await renderPrepAnalisis(el); break;
       }
     } catch (err) {
@@ -700,6 +704,76 @@ const Developer = (() => {
         }, 1500);
       });
     });
+  }
+
+  /* ── Sub-tab: Tareas ────────────────────────────────────────────── */
+  async function renderPrepTareas(el) {
+    const pid = currentProject.id;
+    el.innerHTML = `
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="font-headline text-base font-bold">Tareas del proyecto</h3>
+            <p class="text-xs text-on-surface-variant">Desglose de tareas, entregables y milestones por actividad.</p>
+          </div>
+        </div>
+        <div id="prep-tasks-container"></div>
+      </div>`;
+
+    // Render tasks using IntakeTasks module
+    if (typeof IntakeTasks !== 'undefined') {
+      // Ensure Calculator is initialized with project data
+      if (typeof Calculator !== 'undefined') {
+        try {
+          const projData = await API.get('/intake/projects/' + pid);
+          const partnerList = await API.get('/intake/projects/' + pid + '/partners');
+          await Calculator.initFromIntake(projData, partnerList || []);
+        } catch (e) { console.error('tasks calc init:', e); }
+      }
+      IntakeTasks.render(document.getElementById('prep-tasks-container'), pid);
+    } else {
+      el.querySelector('#prep-tasks-container').innerHTML = `
+        <div class="bg-amber-50 rounded-2xl border border-amber-200 p-8 text-center">
+          <span class="material-symbols-outlined text-4xl text-amber-400 mb-2">checklist</span>
+          <h3 class="font-headline text-base font-bold text-amber-800 mb-1">Tareas no disponibles</h3>
+          <p class="text-sm text-amber-700">Define Work Packages y actividades en el Intake primero.</p>
+        </div>`;
+    }
+  }
+
+  /* ── Sub-tab: Cronograma ────────────────────────────────────────── */
+  async function renderPrepCronograma(el) {
+    const pid = currentProject.id;
+    el.innerHTML = `
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="font-headline text-base font-bold">Cronograma del proyecto</h3>
+            <p class="text-xs text-on-surface-variant">Timeline visual de WPs y actividades. Ajusta fechas arrastrando las barras.</p>
+          </div>
+        </div>
+        <div id="prep-gantt-container"></div>
+      </div>`;
+
+    // Render the Gantt chart using the IntakeGantt module
+    if (typeof IntakeGantt !== 'undefined') {
+      // Ensure Calculator is initialized with project data for the Gantt
+      if (typeof Calculator !== 'undefined') {
+        try {
+          const projData = await API.get('/intake/projects/' + pid);
+          const partnerList = await API.get('/intake/projects/' + pid + '/partners');
+          await Calculator.initFromIntake(projData, partnerList || []);
+        } catch (e) { console.error('gantt calc init:', e); }
+      }
+      IntakeGantt.render(document.getElementById('prep-gantt-container'), pid);
+    } else {
+      el.querySelector('#prep-gantt-container').innerHTML = `
+        <div class="bg-amber-50 rounded-2xl border border-amber-200 p-8 text-center">
+          <span class="material-symbols-outlined text-4xl text-amber-400 mb-2">timeline</span>
+          <h3 class="font-headline text-base font-bold text-amber-800 mb-1">Gantt no disponible</h3>
+          <p class="text-sm text-amber-700">Define Work Packages y actividades en el Intake primero.</p>
+        </div>`;
+    }
   }
 
   /* ── Sub-tab: Analisis ─────────────────────────────────────────── */

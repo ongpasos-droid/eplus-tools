@@ -17,30 +17,20 @@ const Intake = (() => {
   let _intakeSaveTimer = null;
 
   function scheduleIntakeSave() {
-    if (!currentProjectId) return;
     clearTimeout(_intakeSaveTimer);
-    _intakeSaveTimer = setTimeout(() => saveToServer(true), 3000);
+    _intakeSaveTimer = setTimeout(() => {
+      const name = document.getElementById('intake-f-name')?.value?.trim();
+      if (name) saveToServer(true);
+    }, 3000);
   }
 
-  /* ── Step configuration (9 steps) ───────────────────────────── */
+  /* ── Step configuration (5 steps — contexto, tareas, gantt moved to Writer) */
   const STEPS = [
     { key: 'proyecto',     label: 'Proyecto',      icon: 'description',   panel: 'intake-p1' },
-    { key: 'contexto',     label: 'Contexto',      icon: 'edit_note',     panel: 'intake-p2' },
     { key: 'tarifas',      label: 'Tarifas',       icon: 'euro',          panel: 'intake-dynamic', calc: 'rates' },
-    { key: 'rutas',        label: 'Rutas',         icon: 'route',         panel: 'intake-dynamic', calc: 'routes' },
     { key: 'wps',          label: 'WPs',           icon: 'account_tree',  panel: 'intake-dynamic', calc: 'mergedWPs' },
     { key: 'presupuesto',  label: 'Budget',        icon: 'payments',      panel: 'intake-dynamic', calc: 'results' },
-    { key: 'tareas',       label: 'Tareas',        icon: 'task_alt',      panel: 'intake-tasks' },
-    { key: 'gantt',        label: 'Gantt',         icon: 'timeline',      panel: 'intake-gantt' },
-    { key: 'resumen',      label: 'Resumen',       icon: 'summarize',     panel: 'intake-p3' },
-    { key: 'lanzar',       label: 'Lanzar',        icon: 'rocket_launch', panel: 'intake-launch' },
-  ];
-
-  /* ── Word counter config ─────────────────────────────────────── */
-  const WC = [
-    { ta: 'intake-ctx-prob', bar: 'intake-wb-prob', badge: 'intake-wc-prob', min: 200, max: 500 },
-    { ta: 'intake-ctx-tgt',  bar: 'intake-wb-tgt',  badge: 'intake-wc-tgt',  min: 150, max: 400 },
-    { ta: 'intake-ctx-app',  bar: 'intake-wb-app',  badge: 'intake-wc-app',  min: 200, max: 500 },
+    { key: 'resumen',      label: 'Resumen',       icon: 'rocket_launch', panel: 'intake-p3' },
   ];
 
   /* ── Init ────────────────────────────────────────────────────── */
@@ -99,10 +89,7 @@ const Intake = (() => {
     // Add partner
     document.getElementById('intake-btn-add-partner')?.addEventListener('click', addPartner);
 
-    // Word counters — marcar dirty al editar
-    WC.forEach(c => {
-      document.getElementById(c.ta)?.addEventListener('input', () => { updateWC(c); _dirty = true; scheduleIntakeSave(); });
-    });
+    // (Context word counters removed — context moved to Writer Prep Studio)
 
     // Sync visible duration/start fields → hidden fields
     document.getElementById('intake-f-dur-visible')?.addEventListener('change', (e) => {
@@ -214,7 +201,7 @@ const Intake = (() => {
       // Load project fields
       document.getElementById('intake-f-name').value = project.name || '';
       const fullnameEl = document.getElementById('intake-f-fullname');
-      if (fullnameEl && !fullnameEl.value) fullnameEl.value = project.fullname || '';
+      if (fullnameEl) fullnameEl.value = project.full_name || '';
       document.getElementById('intake-f-desc').value = project.description || '';
       document.getElementById('intake-f-start').value = toDateStr(project.start_date);
       document.getElementById('intake-f-type').value = project.type || '';
@@ -256,18 +243,6 @@ const Intake = (() => {
         }
       } catch (e) { console.error('loadPartners:', e); }
 
-      // Load context
-      try {
-        const contexts = await API.get('/intake/projects/' + id + '/context');
-        if (contexts && contexts.length > 0) {
-          const ctx = contexts[0];
-          document.getElementById('intake-ctx-prob').value = ctx.problem || '';
-          document.getElementById('intake-ctx-tgt').value = ctx.target_groups || '';
-          document.getElementById('intake-ctx-app').value = ctx.approach || '';
-          WC.forEach(c => updateWC(c));
-        }
-      } catch (e) { console.error('loadContexts:', e); }
-
       renderPartners();
       setStep(targetStep != null ? targetStep : 0);
       Toast.show('Proyecto cargado: ' + project.name, 'ok');
@@ -295,6 +270,7 @@ const Intake = (() => {
     try {
       const projectData = {
         name,
+        full_name: document.getElementById('intake-f-fullname')?.value?.trim() || null,
         type: document.getElementById('intake-f-type').value || null,
         description: document.getElementById('intake-f-desc').value.trim() || null,
         start_date: document.getElementById('intake-f-start').value || null,
@@ -303,20 +279,9 @@ const Intake = (() => {
         cofin_pct: selectedProgram ? (selectedProgram.cofin_pct || 80) : 80,
         indirect_pct: selectedProgram ? (Number(selectedProgram.indirect_pct) || 7) : 7,
       };
-      const contextData = {
-        problem: document.getElementById('intake-ctx-prob').value.trim(),
-        target_groups: document.getElementById('intake-ctx-tgt').value.trim(),
-        approach: document.getElementById('intake-ctx-app').value.trim(),
-      };
-
       if (currentProjectId) {
-        // Guardar proyecto y contexto en paralelo
-        const saves = [API.patch('/intake/projects/' + currentProjectId, projectData)];
-        const contexts = await API.get('/intake/projects/' + currentProjectId + '/context');
-        if (contexts && contexts.length > 0) {
-          saves.push(API.patch('/intake/contexts/' + contexts[0].id, contextData));
-        }
-        await Promise.all(saves);
+        // Guardar proyecto
+        await API.patch('/intake/projects/' + currentProjectId, projectData);
 
         // Sync partners: update existing, create new, delete removed
         const serverPartners = await API.get('/intake/projects/' + currentProjectId + '/partners');
@@ -364,14 +329,17 @@ const Intake = (() => {
             ops.push(API.post('/intake/projects/' + currentProjectId + '/partners', {
               name: pt.name.trim(), city: pt.city || null, country: pt.country || null,
               organization_id: pt.organization_id || null
-            }));
+            }).then(created => { if (created) pt._server = created.id; }));
           }
         }
-        const contexts = await API.get('/intake/projects/' + currentProjectId + '/context');
-        if (contexts && contexts.length > 0) {
-          ops.push(API.patch('/intake/contexts/' + contexts[0].id, contextData));
-        }
         if (ops.length) await Promise.all(ops);
+
+        // Sync Calculator's project ID so its auto-save works
+        if (calcInitialized && typeof Calculator !== 'undefined') {
+          calcNeedsReinit = true;
+          await ensureCalcInit();
+        }
+
         _dirty = false;
         if (!silent) Toast.show('Proyecto guardado en servidor', 'ok');
       }
@@ -410,25 +378,22 @@ const Intake = (() => {
       renderCalcStep(cfg.calc);
     }
 
-    // If going to gantt step, render gantt UI (ensure calc is init first)
+    // If going to gantt step, render gantt UI
     if (cfg.key === 'gantt' && typeof IntakeGantt !== 'undefined') {
       ensureCalcInit().then(() => {
         IntakeGantt.render(document.getElementById('intake-gantt-container'), currentProjectId);
       });
     }
 
-    // If going to tasks step, render tasks UI (ensure calc is init first)
+    // If going to tasks step, render tasks UI
     if (cfg.key === 'tareas' && typeof IntakeTasks !== 'undefined') {
       ensureCalcInit().then(() => {
         IntakeTasks.render(document.getElementById('intake-tasks-container'), currentProjectId);
       });
     }
 
-    // If going to summary, build it with budget data
-    if (cfg.key === 'resumen') buildSummary();
-
-    // If going to launch step, populate stats
-    if (cfg.key === 'lanzar') renderLaunchStep();
+    // If going to summary, build it with budget data + launch stats
+    if (cfg.key === 'resumen') { buildSummary(); renderLaunchStep(); }
 
     // Update nav dots
     for (let i = 0; i < STEPS.length; i++) {
@@ -473,38 +438,15 @@ const Intake = (() => {
   function validate(s) {
     if (s === 0) {
       if (!selectedProgram) { Toast.show('Selecciona un programa', 'err'); return false; }
-      return true;
-    }
-    if (s === 1) {
       if (!document.getElementById('intake-f-name').value.trim()) {
         Toast.show('El nombre del proyecto es obligatorio', 'err');
         document.getElementById('intake-f-name').focus();
         return false;
       }
-      return true;
-    }
-    // Validate before entering calculator steps: need >=2 partners with country
-    if (s === 2) {
       const validPartners = partners.filter(p => p.name && p.country);
       if (validPartners.length < 2) {
         Toast.show('Necesitas al menos 2 socios con nombre y pa\u00EDs para continuar', 'err');
         return false;
-      }
-      const labels = { 'intake-ctx-prob': 'Problema / Necesidad', 'intake-ctx-tgt': 'Grupos destinatarios', 'intake-ctx-app': 'Enfoque y propuesta' };
-      for (const c of WC) {
-        const ta = document.getElementById(c.ta);
-        if (!ta) continue;
-        const n = ta.value.trim().split(/\s+/).filter(Boolean).length;
-        if (n < c.min) {
-          Toast.show(`"${labels[c.ta]}": mínimo ${c.min} palabras (tienes ${n})`, 'err');
-          ta.focus();
-          return false;
-        }
-        if (n > c.max) {
-          Toast.show(`"${labels[c.ta]}": máximo ${c.max} palabras (tienes ${n})`, 'err');
-          ta.focus();
-          return false;
-        }
       }
       return true;
     }
@@ -552,16 +494,20 @@ const Intake = (() => {
   }
 
   async function renderCalcStep(calcType) {
-    await ensureCalcInit();
+    try {
+      await ensureCalcInit();
+    } catch (err) {
+      console.error('[Intake] ensureCalcInit failed:', err);
+    }
     const container = document.getElementById('intake-calc-container');
-    if (container) {
+    if (container && typeof Calculator !== 'undefined' && Calculator.isInitialized()) {
       switch (calcType) {
         case 'rates':     Calculator.renderRatesInto(container); break;
-        case 'routes':    Calculator.renderRoutesInto(container); break;
         case 'mergedWPs': Calculator.renderMergedWPs(container); break;
         case 'results':   Calculator.renderResultsInto(container); break;
-        case 'gantt':     Calculator.renderGanttInto(container); break;
       }
+    } else if (container) {
+      container.innerHTML = '<div class="text-center py-16 text-on-surface-variant">Vuelve a Proyecto, completa los datos b\u00E1sicos y a\u00F1ade al menos 2 socios para ver esta secci\u00F3n.</div>';
     }
   }
 
@@ -721,6 +667,7 @@ const Intake = (() => {
       input.addEventListener('input', () => {
         const idx = parseInt(input.dataset.idx);
         partners[idx][input.dataset.field] = input.value;
+        _dirty = true; scheduleIntakeSave();
       });
     });
 
@@ -740,7 +687,9 @@ const Intake = (() => {
         partners.splice(idx, 1);
         partners.forEach((p, j) => { p.order_index = j + 1; p.role = j === 0 ? 'applicant' : 'partner'; });
         calcNeedsReinit = true;
+        _dirty = true;
         renderPartners();
+        scheduleIntakeSave();
       });
     });
   }
@@ -879,7 +828,9 @@ const Intake = (() => {
               partners[partnerIdx].country = org.country || '';
               partners[partnerIdx].organization_id = org.id;
               calcNeedsReinit = true;
+              _dirty = true;
               renderPartners();
+              scheduleIntakeSave();
             }
             closeEntitySearch();
           });
@@ -896,6 +847,7 @@ const Intake = (() => {
     pCounter++;
     partners.push({ _local: pCounter, name: '', city: '', country: '', role: 'partner', order_index: partners.length + 1 });
     calcNeedsReinit = true;
+    _dirty = true;
     renderPartners();
   }
 
@@ -938,7 +890,15 @@ const Intake = (() => {
       <div class="flex flex-col gap-0.5"><span class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Inicio previsto</span><span class="text-sm font-medium text-on-surface">${fmtDate(start)}</span></div>
       <div class="flex flex-col gap-0.5"><span class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Duraci\u00F3n</span><span class="text-sm font-medium text-on-surface">${dur} meses</span></div>
       ${selectedProgram ? `<div class="flex flex-col gap-0.5"><span class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Subvenci\u00F3n m\u00E1x.</span><span class="text-sm font-medium text-on-surface">${Number(selectedProgram.eu_grant_max).toLocaleString('es-ES')} \u20AC</span></div>` : ''}
-      ${desc ? `<div class="flex flex-col gap-0.5 col-span-2"><span class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Descripci\u00F3n</span><span class="text-sm font-medium text-on-surface">${esc(desc)}</span></div>` : ''}
+      ${desc ? `<div class="col-span-2">
+        <details class="group">
+          <summary class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant cursor-pointer select-none flex items-center gap-1">
+            Descripci\u00F3n
+            <span class="material-symbols-outlined text-xs transition-transform group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="text-sm font-medium text-on-surface leading-relaxed mt-1">${esc(desc)}</div>
+        </details>
+      </div>` : ''}
     `;
 
     document.getElementById('intake-sum-partners').innerHTML = partners.map((pt, i) => `
@@ -951,18 +911,7 @@ const Intake = (() => {
       </div>
     `).join('');
 
-    document.getElementById('intake-sum-ctx').innerHTML = [
-      { lbl: 'Problema / necesidad', id: 'intake-ctx-prob' },
-      { lbl: 'Grupos destinatarios', id: 'intake-ctx-tgt' },
-      { lbl: 'Enfoque y propuesta',  id: 'intake-ctx-app' },
-    ].map(r => {
-      const v = document.getElementById(r.id).value.trim();
-      return `<div class="mb-4">
-        <span class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">${r.lbl}</span>
-        ${v ? `<div class="text-sm text-on-surface-variant leading-relaxed mt-1">${esc(v.substring(0, 300) + (v.length > 300 ? '\u2026' : ''))}</div>`
-            : `<div class="text-sm text-on-surface-variant italic mt-1">Sin rellenar</div>`}
-      </div>`;
-    }).join('');
+    // Context summary removed — context is now in Writer Prep Studio
 
     // Budget summary (from Calculator state)
     const budgetEl = document.getElementById('intake-sum-budget');
@@ -1078,14 +1027,7 @@ const Intake = (() => {
         cofin_pct:    selectedProgram ? String(selectedProgram.cofin_pct) : '0',
         indirect_pct: selectedProgram ? String(selectedProgram.indirect_pct) : '0',
       },
-      partners: partners.map(pt => ({ name: pt.name, city: pt.city, country: pt.country, role: pt.role, order_index: pt.order_index })),
-      intake: {
-        idea: {
-          problem:       document.getElementById('intake-ctx-prob').value.trim(),
-          target_groups: document.getElementById('intake-ctx-tgt').value.trim(),
-          approach:      document.getElementById('intake-ctx-app').value.trim()
-        }
-      }
+      partners: partners.map(pt => ({ name: pt.name, city: pt.city, country: pt.country, role: pt.role, order_index: pt.order_index }))
     };
   }
 
@@ -1142,11 +1084,6 @@ const Intake = (() => {
       renderPartners();
     }
 
-    const idea = (d.intake && d.intake.idea) || {};
-    if (idea.problem) { document.getElementById('intake-ctx-prob').value = idea.problem; updateWC(WC[0]); }
-    if (idea.target_groups) { document.getElementById('intake-ctx-tgt').value = idea.target_groups; updateWC(WC[1]); }
-    if (idea.approach) { document.getElementById('intake-ctx-app').value = idea.approach; updateWC(WC[2]); }
-
     currentProjectId = null;
     setStep(0);
   }
@@ -1178,13 +1115,9 @@ const Intake = (() => {
     document.getElementById('intake-f-name').value = '';
     document.getElementById('intake-f-desc').value = '';
     document.getElementById('intake-f-start').value = '';
-    document.getElementById('intake-ctx-prob').value = '';
-    document.getElementById('intake-ctx-tgt').value = '';
-    document.getElementById('intake-ctx-app').value = '';
     partners = [{ _local: 1, name: '', city: '', country: '', role: 'applicant', order_index: 1 }];
     pCounter = 1;
     renderPartners();
-    WC.forEach(c => updateWC(c));
   }
 
   /* ── Helpers ─────────────────────────────────────────────────── */
@@ -1234,15 +1167,6 @@ const Intake = (() => {
     ];
     pCounter = 4;
     renderPartners();
-
-    // Context
-    document.getElementById('intake-ctx-prob').value = 'Across Europe, young people from marginalised backgrounds \u2014 migrants, refugees, NEETs, rural youth and those with fewer opportunities \u2014 face persistent barriers to social participation and civic engagement. Eurostat (2025) reports that 11.2% of EU youth aged 15\u201329 are neither in employment, education nor training, with peaks above 18% in Southern and South-Eastern Europe. Meanwhile, sport and physical activity, widely recognised as powerful vehicles for inclusion (Council Recommendation 2024 on sport and social inclusion), remain under-exploited in youth work: only 14% of Erasmus+ youth projects combine sport with non-formal education methodologies. Existing initiatives tend to be local, short-lived and poorly documented, making replication difficult. Youth workers report a lack of structured, evidence-based toolkits that bridge sport, intercultural dialogue and digital competences. Without transnational cooperation to co-design, test and validate scalable models, the potential of sport as an inclusion lever for Europe\u2019s most vulnerable youth will continue to be under-realised, deepening inequalities at a time when cohesion is more critical than ever.';
-
-    document.getElementById('intake-ctx-tgt').value = 'Primary: 80 youth leaders aged 18\u201330 trained directly through the programme (20 per country), including young people with migrant backgrounds, NEETs and youth from rural areas. They will gain competences in facilitation, intercultural mediation and digital storytelling. Secondary: 480+ young participants reached through 16 local pilot actions (4 per country), with priority given to those facing social, economic or geographic barriers. Indirect: 200+ youth workers and educators reached through 3 multiplier events and the open-access toolkit. Institutional: local authorities, sport federations and youth councils in each partner city, who will receive policy recommendations. The broader youth work community benefits from openly published research findings, the validated toolkit (CC BY-SA) and a replicable model transferable to other EU countries and youth-serving organisations.';
-
-    document.getElementById('intake-ctx-app').value = 'ARISE follows a participatory action-research cycle across three phases. Phase 1 \u2014 Co-Design (M1\u20138): Partners conduct a transnational needs assessment using surveys, focus groups and desk research in all 4 countries, mapping existing sport-for-inclusion practices, youth worker competence gaps and target group needs. Results feed into a co-creation workshop (LTTA, Salamanca) where youth leaders and experts jointly design the ARISE Youth Inclusion Toolkit: 12 modular session plans combining sport, intercultural dialogue and digital storytelling, adaptable to local contexts. Phase 2 \u2014 Piloting & Exchange (M6\u201318): Each partner runs 4 local pilot actions (8\u201312 sessions each) with groups of 30 young participants, testing the toolkit in real settings. Cross-country youth exchanges (Palermo M10, Strasbourg M14) enable peer learning and joint evaluation. Data on participant outcomes (inclusion, self-efficacy, intercultural competence) is collected using pre/post validated instruments. A mid-term review meeting (Thessaloniki M12) adjusts methodology based on evidence. Phase 3 \u2014 Validation & Scale (M16\u201324): Results are analysed, the toolkit is refined, and a Policy Brief with recommendations is published. Multiplier events in each country disseminate findings to 200+ professionals. All outputs are released under Creative Commons on a multilingual digital platform. The transnational dimension is indispensable: comparative data across 4 national contexts strengthens validity, joint exchanges build a lasting community of practice, and shared intellectual outputs achieve scale impossible at national level.';
-
-    WC.forEach(c => updateWC(c));
 
     // Init calculator with demo data
     calcInitialized = false;

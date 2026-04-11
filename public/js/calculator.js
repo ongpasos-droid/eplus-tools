@@ -9,6 +9,8 @@ const Calculator = (() => {
   let maxReached = -1;
   let saveTimer = null;
 
+  function esc(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = String(s); return d.innerHTML; }
+
   /* ── State ──────────────────────────────────────────────────── */
   let state = {
     project: null,
@@ -444,6 +446,7 @@ const Calculator = (() => {
 
     // Render step content
     const container = $('calc-step-container');
+    if (!container) return; // embedded mode — navigation handled by Intake
     switch(n) {
       case 0: renderRates(container); break;
       case 1: renderRoutes(container); break;
@@ -468,8 +471,8 @@ const Calculator = (() => {
 
   function renderRates(container) {
     container.innerHTML = `
-      <h2 class="font-headline text-lg font-bold mb-1">Per diem & Worker Rates</h2>
-      <p class="text-sm text-on-surface-variant mb-5">Accommodation, subsistence and staff costs per partner. Auto-filled from Erasmus+ reference rates — editable.</p>
+      <h2 class="font-headline text-lg font-bold mb-1">Rates, Costs & Routes</h2>
+      <p class="text-sm text-on-surface-variant mb-5">Per diem, staff costs and travel distances per partner. Auto-filled from Erasmus+ reference rates — editable.</p>
 
       <!-- Per diem -->
       <div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-5 mb-4">
@@ -520,7 +523,9 @@ const Calculator = (() => {
         <div id="calc-worker-rates">${buildWorkerRatesHTML()}</div>
       </div>
 
-      ${_embeddedMode ? embeddedNavButtons(1, 3, 'Rutas \u2192') : navButtons(null, 1, 'Routes \u2192')}
+      ${buildRoutesSection()}
+
+      ${_embeddedMode ? embeddedNavButtons(0, 2, 'Work Packages \u2192') : navButtons(null, 1, 'Work Packages \u2192')}
     `;
   }
 
@@ -589,7 +594,7 @@ const Calculator = (() => {
     </tr>`;
   }
 
-  function renderRoutes(container) {
+  function buildRoutesSection() {
     // Auto-fix routes with km=0 to default band (500-1999km eco)
     const defBand = DISTANCE_BANDS[3];
     const defKm = Math.round((defBand.min + defBand.max) / 2);
@@ -617,11 +622,15 @@ const Calculator = (() => {
       }
     }
 
-    container.innerHTML = `
-      <h2 class="font-headline text-lg font-bold mb-1">Routes & Distances</h2>
-      <p class="text-sm text-on-surface-variant mb-5">Set distance bands between partners. Use the <a href="https://erasmus-plus.ec.europa.eu/resources-and-tools/distance-calculator" target="_blank" class="text-primary font-semibold hover:underline">EC distance calculator ↗</a>.</p>
+    // No auto-creation of empty slots — user adds them via button
 
+    return `
+      <!-- Routes & Distances -->
       <div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-5 mb-4">
+        <h3 class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-3 flex items-center gap-2">
+          <span class="material-symbols-outlined text-[16px]">route</span> Routes & Distances
+        </h3>
+        <p class="text-xs text-on-surface-variant mb-3">Set distance bands between partners. Use the <a href="https://erasmus-plus.ec.europa.eu/resources-and-tools/distance-calculator" target="_blank" class="text-primary font-semibold hover:underline">EC distance calculator ↗</a>.</p>
         <div class="overflow-x-auto">
           <table class="calc-table">
             <thead><tr>
@@ -641,15 +650,16 @@ const Calculator = (() => {
       </div>
 
       <!-- Extra destinations -->
-      ${state.extraDests.length === 0 ? (state.extraDestCounter++, state.extraDests.push({ id: '_ed' + state.extraDestCounter, name: '', country: '' }), '') : ''}
       <div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-5 mb-4">
-        <h3 class="font-headline text-sm font-bold mb-3">Otros destinos</h3>
+        <h3 class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-3 flex items-center gap-2">
+          <span class="material-symbols-outlined text-[16px]">add_location</span> Otros destinos
+        </h3>
         <p class="text-xs text-on-surface-variant mb-3">Añade ciudades o sedes que no son socios pero donde se realizarán actividades (ej. Bruselas, sede de la agencia, etc.).</p>
         <div id="calc-extra-dests">
           ${state.extraDests.map((d, i) => `
-            <div class="flex items-center gap-2 mb-2">
-              <input type="text" value="${d.name}" placeholder="City (e.g. Brussels)" class="flex-1 px-3 py-2 rounded-lg border border-outline-variant text-sm" onchange="Calculator._setExtraDest(${i},'name',this.value)">
-              <input type="text" value="${d.country || ''}" placeholder="Country (e.g. Belgium)" class="w-36 px-3 py-2 rounded-lg border border-outline-variant text-sm" onchange="Calculator._setExtraDest(${i},'country',this.value)">
+            <div class="flex items-center gap-2 mb-2" data-ed-idx="${i}">
+              <input type="text" value="${esc(d.name)}" placeholder="City (e.g. Brussels)" class="flex-1 px-3 py-2 rounded-lg border border-outline-variant text-sm" oninput="Calculator._setExtraDest(${i},'name',this.value)" onblur="Calculator._refreshRoutes()">
+              <input type="text" value="${esc(d.country || '')}" placeholder="Country (e.g. Belgium)" class="w-36 px-3 py-2 rounded-lg border border-outline-variant text-sm" oninput="Calculator._setExtraDest(${i},'country',this.value)" onblur="Calculator._refreshRoutes()">
               <button onclick="Calculator._removeExtraDest(${i})" class="w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-error/10 hover:text-error transition-colors">
                 <span class="material-symbols-outlined text-base">close</span>
               </button>
@@ -660,8 +670,15 @@ const Calculator = (() => {
           <span class="material-symbols-outlined text-sm">add</span> Añadir destino
         </button>
       </div>
+    `;
+  }
 
-      ${_embeddedMode ? embeddedNavButtons(2, 4, 'Work Packages \u2192') : navButtons(0, 2, 'Work Packages \u2192')}
+  function renderRoutes(container) {
+    container.innerHTML = `
+      <h2 class="font-headline text-lg font-bold mb-1">Per diem, Worker Rates & Routes</h2>
+      <p class="text-sm text-on-surface-variant mb-5">All cost parameters in one place.</p>
+      ${buildRoutesSection()}
+      ${navButtons(null, 1, 'Work Packages \u2192')}
     `;
   }
 
@@ -1511,7 +1528,7 @@ const Calculator = (() => {
 
       <!-- Financing bar is now integrated in the hero above -->
 
-      ${_embeddedMode ? embeddedNavButtons(4, 6, 'Gantt \u2192') : navButtons(3, 5, 'Gantt \u2192')}
+      ${_embeddedMode ? embeddedNavButtons(2, 4, 'Resumen \u2192') : navButtons(2, 4, 'Resumen \u2192')}
     `;
   }
 
@@ -1637,7 +1654,7 @@ const Calculator = (() => {
   function renderGantt(container) {
     const ps = getProjectStart();
     if (!ps) {
-      container.innerHTML = `<div class="text-center py-16 text-on-surface-variant">Set a project start date in Intake to see the Gantt chart.</div>${_embeddedMode ? embeddedNavButtons(5, 7, 'Resumen \u2192') : navButtons(4, null)}`;
+      container.innerHTML = `<div class="text-center py-16 text-on-surface-variant">Set a project start date in Intake to see the Gantt chart.</div>${_embeddedMode ? embeddedNavButtons(4, 6, 'Resumen \u2192') : navButtons(3, null)}`;
       return;
     }
 
@@ -1663,7 +1680,7 @@ const Calculator = (() => {
       <div id="calc-gantt-legend" class="flex flex-wrap gap-3 mt-3 text-xs"></div>
       <div id="calc-gantt-tooltip" class="calc-gantt-tip"></div>
 
-      ${_embeddedMode ? embeddedNavButtons(5, 7, 'Resumen \u2192') : navButtons(4, null)}
+      ${_embeddedMode ? embeddedNavButtons(4, 6, 'Resumen \u2192') : navButtons(3, null)}
     `;
     buildGanttChart();
   }
@@ -1783,16 +1800,21 @@ const Calculator = (() => {
     state.extraDestCounter++;
     state.extraDests.push({ id: '_ed' + state.extraDestCounter, name: '', country: '' });
     renderRoutes(getRouteContainer());
+    // Focus the new city input
+    const inputs = document.querySelectorAll('#calc-extra-dests input[placeholder*="City"]');
+    if (inputs.length) inputs[inputs.length - 1].focus();
   }
 
   function removeExtraDest(idx) {
-    const removed = state.extraDests.splice(idx, 1)[0];
+    const removed = state.extraDests[idx];
     if (removed) {
       // Clean up routes referencing this dest
       Object.keys(state.routes).forEach(k => {
         if (k.includes(removed.id)) delete state.routes[k];
       });
+      state.extraDests.splice(idx, 1);
     }
+    // Full re-render to update route table and reindex
     renderRoutes(getRouteContainer());
   }
 
@@ -1800,6 +1822,20 @@ const Calculator = (() => {
     if (state.extraDests[idx]) {
       state.extraDests[idx][field] = value;
     }
+  }
+
+  let _routeRefreshTimer = null;
+  function refreshRoutes() {
+    clearTimeout(_routeRefreshTimer);
+    _routeRefreshTimer = setTimeout(() => {
+      const container = getRouteContainer();
+      if (!container) return;
+      if (_embeddedMode) {
+        renderRates(container);
+      } else {
+        renderRoutes(container);
+      }
+    }, 600);
   }
 
   function setRouteBand(a, b, bandIdx) {
@@ -2224,10 +2260,20 @@ const Calculator = (() => {
       try {
         const saved = await API.get('/calculator/projects/' + currentProjectId + '/state');
         if (saved) {
-          if (saved.partnerRates && Object.keys(saved.partnerRates).length) state.partnerRates = saved.partnerRates;
+          if (saved.partnerRates && Object.keys(saved.partnerRates).length) {
+            // Merge: saved rates + defaults for new partners
+            state.partnerRates = { ...state.partnerRates, ...saved.partnerRates };
+          }
           if (saved.workerRates && saved.workerRates.length) {
-            state.workerRates = saved.workerRates.map((wr, i) => ({ id: i + 1, ...wr }));
-            state.wrCounter = state.workerRates.length;
+            // Restore saved worker rates
+            const restoredRates = saved.workerRates.map((wr, i) => ({ id: i + 1, ...wr }));
+            let maxId = restoredRates.length;
+            // Keep default rates for new partners not in saved state
+            const savedPids = new Set(restoredRates.map(w => w.pid));
+            const newPartnerRates = state.workerRates.filter(w => !savedPids.has(w.pid));
+            newPartnerRates.forEach(w => { w.id = ++maxId; });
+            state.workerRates = [...restoredRates, ...newPartnerRates];
+            state.wrCounter = maxId;
           }
           if (saved.routes && Object.keys(saved.routes).length) state.routes = { ...state.routes, ...saved.routes };
           if (saved.extraDests && saved.extraDests.length) {
@@ -2289,7 +2335,7 @@ const Calculator = (() => {
     const { totalProject } = getFinancials();
     const usePct = totalProject > 0 ? Math.min(total / totalProject * 100, 100).toFixed(1) : 0;
 
-    const nav = _embeddedMode ? embeddedNavButtons(3, 5, 'Presupuesto \u2192') : navButtons(1, 3, 'Activities \u2192');
+    const nav = _embeddedMode ? embeddedNavButtons(1, 3, 'Presupuesto \u2192') : navButtons(0, 2, 'Activities \u2192');
 
     container.innerHTML = `
       <h2 class="font-headline text-lg font-bold mb-1">Work Packages & Activities</h2>
@@ -2401,6 +2447,7 @@ const Calculator = (() => {
     _addExtraDest: (...a) => { addExtraDest(...a); scheduleSave(); },
     _removeExtraDest: (...a) => { removeExtraDest(...a); scheduleSave(); },
     _setExtraDest: (...a) => { setExtraDest(...a); scheduleSave(); },
+    _refreshRoutes: () => { refreshRoutes(); },
     WP1_TITLES,
     LAST_WP_TITLES,
     WP_TAXONOMY,

@@ -740,11 +740,16 @@ tailwind.config = {
             </div>
           </div>
 
-          <!-- STEPS 3-7: Dynamic calculator steps (rendered by JS) -->
+          <!-- STEPS: Dynamic calculator steps (rendered by JS) -->
           <div class="intake-step hidden" id="intake-dynamic">
             <div id="intake-calc-container">
               <!-- Calculator render functions inject content here -->
             </div>
+          </div>
+
+          <!-- STEP: Tareas -->
+          <div class="intake-step hidden" id="intake-tasks">
+            <div id="intake-tasks-container"></div>
           </div>
 
           <!-- STEP: Gantt -->
@@ -752,122 +757,111 @@ tailwind.config = {
             <div id="intake-gantt-container"></div>
           </div>
 
-          <!-- STEP: Tareas -->
-          <div class="intake-step hidden" id="intake-tasks">
-            <div id="intake-tasks-container">
-              <!-- Tasks module renders here -->
-            </div>
-          </div>
-
-          <!-- STEP 8: Resumen -->
+          <!-- STEP: Resumen & Lanzar (unified) -->
           <div class="intake-step hidden" id="intake-p3">
-            <h1 class="font-headline text-3xl font-extrabold tracking-tighter text-primary mb-1">Resumen</h1>
-            <p class="text-on-surface-variant text-base mb-8">Revisa los datos antes de guardar.</p>
 
-            <div class="mb-8 pb-8 border-b border-outline-variant">
+            <!-- ── Hero: Launch section ──────────────────────────── -->
+            <div class="text-center mb-10">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary-fixed mx-auto mb-5 flex items-center justify-center shadow-lg">
+                <span class="material-symbols-outlined text-3xl text-white">celebration</span>
+              </div>
+              <h1 class="font-headline text-3xl font-extrabold tracking-tighter text-primary mb-2">Tu proyecto esta listo para escribirse</h1>
+              <p class="text-on-surface-variant text-sm mb-6 leading-relaxed max-w-lg mx-auto">
+                Has completado la fase de <strong>Diseno</strong>. Revisa el resumen y lanza la escritura cuando estes listo.
+              </p>
+
+              <!-- Summary stats -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6" id="intake-launch-stats"></div>
+
+              <!-- CTA -->
+              <button type="button" id="intake-btn-launch" class="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-primary to-primary/80 text-white font-bold text-base shadow-[0_24px_48px_rgba(27,20,100,0.15)] hover:scale-[1.03] hover:shadow-[0_28px_56px_rgba(27,20,100,0.2)] active:scale-95 transition-all mb-4">
+                <span class="material-symbols-outlined text-xl">rocket_launch</span>
+                Comenzar a escribir este proyecto
+              </button>
+
+              <!-- What comes next (collapsed by default) -->
+              <details class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl text-left max-w-2xl mx-auto">
+                <summary class="font-headline text-sm font-bold text-primary p-4 cursor-pointer flex items-center gap-2 select-none">
+                  <span class="material-symbols-outlined text-lg">arrow_forward</span> Que viene ahora
+                </summary>
+                <div class="px-4 pb-4">
+                  <ul class="space-y-3 text-sm text-on-surface-variant">
+                    <li class="flex items-start gap-3">
+                      <span class="material-symbols-outlined text-base text-primary mt-0.5">edit_note</span>
+                      <span><strong>Escribir la propuesta</strong> — Responder a cada pregunta del formulario oficial con ayuda de IA</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                      <span class="material-symbols-outlined text-base text-primary mt-0.5">payments</span>
+                      <span><strong>Presupuesto detallado</strong> — Generar el presupuesto real del proyecto en formato EACEA</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                      <span class="material-symbols-outlined text-base text-primary mt-0.5">verified</span>
+                      <span><strong>Evaluar y mejorar</strong> — Validar la propuesta contra los criterios de evaluacion oficiales</span>
+                    </li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+
+            <!-- ── Divider ───────────────────────────────────────── -->
+            <div class="flex items-center gap-3 mb-8">
+              <div class="flex-1 h-px bg-outline-variant"></div>
+              <span class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Resumen del proyecto</span>
+              <div class="flex-1 h-px bg-outline-variant"></div>
+            </div>
+
+            <!-- ── Summary: Proyecto ─────────────────────────────── -->
+            <div class="mb-6 pb-6 border-b border-outline-variant/50">
               <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">
-                <span>Proyecto</span><div class="flex-1 h-px bg-outline-variant"></div>
+                <span class="material-symbols-outlined text-sm">description</span>
+                <span>Proyecto</span><div class="flex-1 h-px bg-outline-variant/50"></div>
               </div>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="intake-sum-proj"></div>
             </div>
-            <div class="mb-8 pb-8 border-b border-outline-variant">
+
+            <!-- ── Summary: Consorcio ────────────────────────────── -->
+            <div class="mb-6 pb-6 border-b border-outline-variant/50">
               <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">
-                <span>Consorcio</span><div class="flex-1 h-px bg-outline-variant"></div>
+                <span class="material-symbols-outlined text-sm">groups</span>
+                <span>Consorcio</span><div class="flex-1 h-px bg-outline-variant/50"></div>
               </div>
               <div id="intake-sum-partners"></div>
             </div>
-            <div class="mb-8 pb-8 border-b border-outline-variant">
-              <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">
-                <span>Contexto IA</span><div class="flex-1 h-px bg-outline-variant"></div>
-              </div>
-              <div id="intake-sum-ctx"></div>
-            </div>
 
-            <div class="mb-8 pb-8 border-b border-outline-variant">
+            <!-- ── Summary: Presupuesto ──────────────────────────── -->
+            <div class="mb-8 pb-6 border-b border-outline-variant/50">
               <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">
-                <span>Presupuesto</span><div class="flex-1 h-px bg-outline-variant"></div>
+                <span class="material-symbols-outlined text-sm">payments</span>
+                <span>Presupuesto</span><div class="flex-1 h-px bg-outline-variant/50"></div>
               </div>
               <div id="intake-sum-budget"></div>
             </div>
 
-            <div class="grid grid-cols-2 gap-3">
-              <button type="button" id="intake-btn-save-server" class="border border-outline-variant rounded-xl p-5 text-center cursor-pointer bg-white hover:border-primary hover:bg-primary/5 hover:-translate-y-0.5 transition-all">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block">cloud_upload</span>
-                <div class="font-headline text-sm font-bold text-primary mb-1">Guardar en servidor</div>
-                <div class="text-xs text-on-surface-variant leading-snug">Guarda en base de datos</div>
+            <!-- ── Actions ───────────────────────────────────────── -->
+            <div class="grid grid-cols-2 gap-3 mb-6">
+              <button type="button" id="intake-btn-save-server" class="border border-outline-variant rounded-xl p-4 text-center cursor-pointer bg-white hover:border-primary hover:bg-primary/5 hover:-translate-y-0.5 transition-all">
+                <span class="material-symbols-outlined text-xl text-primary mb-1 block">cloud_upload</span>
+                <div class="font-headline text-sm font-bold text-primary mb-0.5">Guardar en servidor</div>
+                <div class="text-[11px] text-on-surface-variant leading-snug">Guarda en base de datos</div>
               </button>
-              <button type="button" id="intake-btn-export-wizard" class="border border-outline-variant rounded-xl p-5 text-center cursor-pointer bg-white hover:border-primary hover:bg-primary/5 hover:-translate-y-0.5 transition-all">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block">bolt</span>
-                <div class="font-headline text-sm font-bold text-primary mb-1">Exportar para Wizard</div>
-                <div class="text-xs text-on-surface-variant leading-snug">JSON listo para Calculator</div>
+              <button type="button" id="intake-btn-export-wizard" class="border border-outline-variant rounded-xl p-4 text-center cursor-pointer bg-white hover:border-primary hover:bg-primary/5 hover:-translate-y-0.5 transition-all">
+                <span class="material-symbols-outlined text-xl text-primary mb-1 block">bolt</span>
+                <div class="font-headline text-sm font-bold text-primary mb-0.5">Exportar para Wizard</div>
+                <div class="text-[11px] text-on-surface-variant leading-snug">JSON listo para Calculator</div>
               </button>
             </div>
 
-            <div class="flex justify-between items-center mt-10 pt-5 border-t border-outline-variant">
+            <!-- ── Note ──────────────────────────────────────────── -->
+            <p class="text-[11px] text-on-surface-variant/70 text-center mb-6">
+              <span class="material-symbols-outlined text-[11px] align-middle mr-1">info</span>
+              Tu diseno se queda guardado en <strong>Intake</strong> para futuras modificaciones. Siempre puedes volver a ajustar partners, WPs o presupuesto.
+            </p>
+
+            <!-- ── Nav ───────────────────────────────────────────── -->
+            <div class="flex justify-start items-center pt-5 border-t border-outline-variant">
               <button type="button" class="intake-btn-prev inline-flex items-center gap-2 px-5 py-3 rounded-md text-on-surface-variant font-semibold text-sm border border-outline-variant hover:bg-surface-container-low transition-colors">
                 <span class="material-symbols-outlined text-base">arrow_back</span> Editar
               </button>
-              <button type="button" class="intake-btn-next inline-flex items-center gap-2 px-8 py-4 rounded-md bg-primary text-white font-bold text-base shadow-[0_24px_48px_rgba(27,20,100,0.1)] hover:scale-[1.02] active:scale-95 transition-transform">
-                Siguiente <span class="material-symbols-outlined text-lg">arrow_forward</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- ── STEP 10: Launch / Transition to Write ──────────── -->
-          <div class="intake-step hidden" id="intake-launch">
-            <div class="max-w-2xl mx-auto text-center py-8">
-              <!-- Celebration icon -->
-              <div class="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-secondary-fixed mx-auto mb-6 flex items-center justify-center shadow-lg">
-                <span class="material-symbols-outlined text-4xl text-white">celebration</span>
-              </div>
-
-              <h1 class="font-headline text-3xl font-extrabold tracking-tighter text-primary mb-3">Tu proyecto esta listo para escribirse</h1>
-              <p class="text-on-surface-variant text-base mb-8 leading-relaxed max-w-lg mx-auto">
-                Has completado la fase de <strong>Diseno</strong> de tu propuesta. Con este borrador ya tienes la estructura, el consorcio, el presupuesto y las actividades definidas.
-              </p>
-
-              <!-- Summary stats -->
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10" id="intake-launch-stats"></div>
-
-              <!-- What comes next -->
-              <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-6 mb-8 text-left">
-                <h3 class="font-headline text-sm font-bold text-primary mb-4 flex items-center gap-2">
-                  <span class="material-symbols-outlined text-lg">arrow_forward</span> Que viene ahora
-                </h3>
-                <ul class="space-y-3 text-sm text-on-surface-variant">
-                  <li class="flex items-start gap-3">
-                    <span class="material-symbols-outlined text-base text-primary mt-0.5">edit_note</span>
-                    <span><strong>Escribir la propuesta</strong> — Responder a cada pregunta del formulario oficial con ayuda de IA</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="material-symbols-outlined text-base text-primary mt-0.5">payments</span>
-                    <span><strong>Presupuesto detallado</strong> — Generar el presupuesto real del proyecto en formato EACEA</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="material-symbols-outlined text-base text-primary mt-0.5">verified</span>
-                    <span><strong>Evaluar y mejorar</strong> — Validar la propuesta contra los criterios de evaluacion oficiales</span>
-                  </li>
-                </ul>
-              </div>
-
-              <!-- Note -->
-              <p class="text-xs text-on-surface-variant/70 mb-8">
-                <span class="material-symbols-outlined text-xs align-middle mr-1">info</span>
-                Tu diseno se queda guardado en <strong>Intake</strong> para futuras modificaciones. Siempre puedes volver a ajustar partners, WPs o presupuesto.
-              </p>
-
-              <!-- CTA -->
-              <button type="button" id="intake-btn-launch" class="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-gradient-to-r from-primary to-primary/80 text-white font-bold text-lg shadow-[0_24px_48px_rgba(27,20,100,0.15)] hover:scale-[1.03] hover:shadow-[0_28px_56px_rgba(27,20,100,0.2)] active:scale-95 transition-all">
-                <span class="material-symbols-outlined text-2xl">rocket_launch</span>
-                Comenzar a escribir este proyecto
-              </button>
-
-              <!-- Back -->
-              <div class="mt-8">
-                <button type="button" class="intake-btn-prev inline-flex items-center gap-2 px-5 py-3 rounded-md text-on-surface-variant font-semibold text-sm border border-outline-variant hover:bg-surface-container-low transition-colors">
-                  <span class="material-symbols-outlined text-base">arrow_back</span> Volver al resumen
-                </button>
-              </div>
             </div>
           </div>
 

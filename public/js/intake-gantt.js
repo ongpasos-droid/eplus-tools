@@ -320,20 +320,26 @@ const IntakeGantt = (() => {
     });
   }
 
-  /* ── Nav ────────────────────────────────────────────────────── */
+  /* ── Nav (only shown inside Intake, not in Writer Prep Studio) ── */
+  function isInsideWriter() {
+    return container && !!container.closest('#panel-developer');
+  }
+
   function navHTML() {
+    if (isInsideWriter()) return '';
     return `
       <div class="flex justify-between items-center mt-10 pt-5 border-t border-outline-variant">
-        <button data-goto="6" class="intake-step-nav-btn inline-flex items-center gap-2 px-5 py-3 rounded-md text-on-surface-variant font-semibold text-sm border border-outline-variant hover:bg-surface-container-low transition-colors">
+        <button data-goto="4" class="intake-step-nav-btn inline-flex items-center gap-2 px-5 py-3 rounded-md text-on-surface-variant font-semibold text-sm border border-outline-variant hover:bg-surface-container-low transition-colors">
           <span class="material-symbols-outlined text-base">arrow_back</span> Tareas
         </button>
-        <button data-goto="8" class="intake-step-nav-btn inline-flex items-center gap-2 px-8 py-4 rounded-md bg-secondary-fixed text-primary-container font-bold text-base shadow-[0_24px_48px_rgba(27,20,100,0.1)] hover:scale-[1.02] active:scale-95 transition-transform">
+        <button data-goto="6" class="intake-step-nav-btn inline-flex items-center gap-2 px-8 py-4 rounded-md bg-secondary-fixed text-primary-container font-bold text-base shadow-[0_24px_48px_rgba(27,20,100,0.1)] hover:scale-[1.02] active:scale-95 transition-transform">
           Resumen <span class="material-symbols-outlined text-lg">arrow_forward</span>
         </button>
       </div>`;
   }
 
   function bindNav() {
+    if (isInsideWriter()) return;
     container.querySelectorAll('.intake-step-nav-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         if (typeof Intake !== 'undefined' && Intake._calcNav) Intake._calcNav(parseInt(btn.dataset.goto));
