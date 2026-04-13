@@ -107,12 +107,31 @@
   <div class="progress-bar" id="progress"></div>
 </div>
 
+<audio id="narration" src="/leccion-01-audio.mp3" preload="auto"></audio>
+
 <div class="controls">
   <button class="btn" onclick="location.reload()">↺ Repetir</button>
+  <button class="btn" id="btn-play" onclick="togglePlay()">▶ Play</button>
   <span class="timer" id="timer">0:00 / 0:20</span>
 </div>
 
 <script>
+  const audio = document.getElementById('narration');
+  const btnPlay = document.getElementById('btn-play');
+  let started = false;
+
+  function togglePlay() {
+    if (!started) {
+      startLesson();
+    } else if (audio.paused) {
+      audio.play();
+      btnPlay.textContent = '⏸ Pausa';
+    } else {
+      audio.pause();
+      btnPlay.textContent = '▶ Play';
+    }
+  }
+
   const DURATION = 20000; // ms total
 
   const TIMELINE = [
@@ -128,16 +147,23 @@
   function show(id) { document.getElementById(id).classList.add('active'); }
   function hide(id) { document.getElementById(id).classList.remove('active'); }
 
-  // Schedule timeline
-  TIMELINE.forEach(({ t, fn }) => setTimeout(fn, t));
+  function startLesson() {
+    if (started) return;
+    started = true;
+    btnPlay.textContent = '⏸ Pausa';
+    audio.play().catch(() => {});
+    TIMELINE.forEach(({ t, fn }) => setTimeout(fn, t));
+    requestAnimationFrame(tick);
+  }
 
   // Progress bar + timer
   const timerEl = document.getElementById('timer');
   const progressEl = document.getElementById('progress');
-  const start = performance.now();
+  let startTime = null;
 
   function tick(now) {
-    const elapsed = Math.min(now - start, DURATION);
+    if (!startTime) startTime = now;
+    const elapsed = Math.min(now - startTime, DURATION);
     const pct = (elapsed / DURATION) * 100;
     progressEl.style.width = pct + '%';
 
@@ -147,8 +173,6 @@
 
     if (elapsed < DURATION) requestAnimationFrame(tick);
   }
-
-  requestAnimationFrame(tick);
 </script>
 </body>
 </html>
