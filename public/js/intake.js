@@ -917,8 +917,54 @@ const Intake = (() => {
     const budgetEl = document.getElementById('intake-sum-budget');
     if (calcInitialized && typeof Calculator !== 'undefined' && Calculator.isInitialized()) {
       const cs = Calculator.getCalcState();
+      const pb = Calculator.getPartnerBudgets();
       const fmt = n => '\u20AC' + Math.round(n).toLocaleString('es-ES');
+      const fmtN = n => n ? Math.round(n).toLocaleString('es-ES') : '\u2014';
 
+      // --- Helper: render EACEA line items (activities within a budget line) ---
+      function renderLineItems(items) {
+        if (!items.length) return '';
+        return items.map(it => `
+          <tr class="bgt-item">
+            <td class="pl-12 py-0.5 text-on-surface-variant">${it.wp} <span class="text-on-surface">${it.label}</span></td>
+            <td class="text-right font-mono">${fmtN(it.units)}</td>
+            <td class="text-right font-mono">${fmtN(it.rate)}</td>
+            <td class="text-right font-mono">${fmt(it.total)}</td>
+          </tr>
+        `).join('');
+      }
+
+      // --- Helper: render a sub-line (e.g. "Travel", "Accommodation") with expandable detail ---
+      function subLine(label, items, indent) {
+        const total = items.reduce((s, it) => s + it.total, 0);
+        const units = items.reduce((s, it) => s + it.units, 0);
+        const avgRate = units > 0 ? total / units : 0;
+        const id = 'bgt-' + Math.random().toString(36).slice(2, 8);
+        const hasItems = items.length > 0;
+        return `
+          <tr class="border-b border-outline-variant/5 ${hasItems ? 'cursor-pointer hover:bg-surface-container-low' : ''}" ${hasItems ? `onclick="document.querySelectorAll('.${id}').forEach(r=>r.classList.toggle('hidden'))"` : ''}>
+            <td class="py-1 ${indent}" style="padding-left:${indent === 'pl-10' ? '2.5rem' : '2rem'}">
+              ${hasItems ? '<span class="material-symbols-outlined text-[11px] align-middle mr-0.5 text-on-surface-variant">expand_more</span>' : '<span class="inline-block w-3"></span>'}
+              ${label}
+            </td>
+            <td class="text-right font-mono">${hasItems ? fmtN(units) : '\u2014'}</td>
+            <td class="text-right font-mono">${hasItems && avgRate ? fmtN(avgRate) : '\u2014'}</td>
+            <td class="text-right font-mono font-medium">${total > 0 ? fmt(total) : '\u2014'}</td>
+          </tr>
+          ${items.map(it => `
+            <tr class="${id} hidden border-b border-outline-variant/3">
+              <td class="py-0.5 text-[10px] text-on-surface-variant" style="padding-left:3.5rem">
+                <span class="font-semibold" style="color:${(pb.wpColors && pb.wpColors[it.wpIdx]) || '#666'}">${it.wp}</span> ${it.label}
+              </td>
+              <td class="text-right font-mono text-[10px]">${fmtN(it.units)}</td>
+              <td class="text-right font-mono text-[10px]">${fmtN(it.rate)}</td>
+              <td class="text-right font-mono text-[10px]">${fmt(it.total)}</td>
+            </tr>
+          `).join('')}
+        `;
+      }
+
+      // --- Header: total budget ---
       let budgetHTML = `
         <div class="bg-primary text-white rounded-xl p-4 mb-4">
           <div class="text-[10px] uppercase tracking-wider opacity-50 mb-1">Total presupuesto</div>
@@ -929,17 +975,180 @@ const Intake = (() => {
             <span>Target: <strong>${fmt(cs.financials.totalProject)}</strong></span>
           </div>
         </div>
-        <div class="space-y-1">
-          ${cs.wps.map((wp, i) => `
-            <div class="flex justify-between py-1.5 text-sm border-b border-outline-variant/10">
-              <span class="font-medium text-on-surface">WP${i+1} \u00B7 ${esc(wp.desc || wp.name || 'Sin t\u00EDtulo')}</span>
-            </div>
-          `).join('')}
+
+        <!-- Tabs: Resumen | Por Socio -->
+        <div class="flex gap-0 border-b-2 border-outline-variant/20 mb-4">
+          <button class="intake-budget-tab px-4 py-2 text-xs font-bold uppercase tracking-wide border-b-2 -mb-[2px] cursor-pointer transition-colors border-primary text-primary" data-tab="summary" onclick="window._intakeBudgetTab('summary')">Resumen</button>
+          <button class="intake-budget-tab px-4 py-2 text-xs font-bold uppercase tracking-wide border-b-2 -mb-[2px] cursor-pointer transition-colors border-transparent text-on-surface-variant hover:text-primary" data-tab="partners" onclick="window._intakeBudgetTab('partners')">Por Socio</button>
+        </div>
+
+        <!-- Tab: Resumen -->
+        <div id="intake-budget-summary">
+          <div class="space-y-1">
+            ${cs.wps.map((wp, i) => {
+              const wpDirect = wp.activities.reduce((s, a) => s + (a.total || 0), 0);
+              return `<div class="flex justify-between py-1.5 text-sm border-b border-outline-variant/10">
+                <span class="font-medium text-on-surface">WP${i+1} \u00B7 ${esc(wp.desc || wp.name || 'Sin t\u00EDtulo')}</span>
+                <span class="font-mono text-on-surface-variant">${fmt(wpDirect)}</span>
+              </div>`;
+            }).join('')}
+          </div>
+          <div class="flex justify-between py-2 text-sm font-bold border-t border-outline-variant/30 mt-2">
+            <span>Costes directos</span><span class="font-mono">${fmt(cs.directCosts)}</span>
+          </div>
+          <div class="flex justify-between py-1 text-xs text-on-surface-variant">
+            <span>+ Indirecto ${cs.indirectPct}%</span><span class="font-mono">+ ${fmt(cs.indirect)}</span>
+          </div>
+          <div class="flex justify-between py-2 text-sm font-bold bg-primary/5 rounded px-2 mt-1">
+            <span>TOTAL</span><span class="font-mono">${fmt(cs.total)}</span>
+          </div>
+        </div>
+
+        <!-- Tab: Por Socio (EACEA official structure) -->
+        <div id="intake-budget-partners" style="display:none">
+          ${pb.partners.map((p, pi) => {
+            const b = p.budget;
+            const indAmt = b.directTotal * pb.indirectPct / 100;
+            const grandTotal = b.directTotal + indAmt;
+            const pctOfTotal = cs.total > 0 ? (grandTotal / cs.total * 100).toFixed(1) : '0';
+            const sum = key => b.lines[key].reduce((s, it) => s + it.total, 0);
+
+            return `
+            <div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 mb-4 overflow-hidden" style="border-top:3px solid ${p.color}">
+              <!-- Partner header (always visible) -->
+              <div class="flex items-center gap-2 px-4 py-3 cursor-pointer select-none" onclick="this.nextElementSibling.classList.toggle('hidden');this.querySelector('.expand-icon').classList.toggle('rotate-180')">
+                <span class="w-7 h-7 rounded-full text-white text-[11px] font-bold flex items-center justify-center flex-shrink-0" style="background:${p.color}">BE${String(pi+1).padStart(2,'0')}</span>
+                <div class="flex-1 min-w-0">
+                  <div class="font-headline text-sm font-bold truncate">${esc(p.name)}</div>
+                  <div class="text-[10px] text-on-surface-variant">${p.country || ''}${p.isApplicant ? ' \u00B7 Coordinador' : ''}</div>
+                </div>
+                <div class="text-right flex-shrink-0">
+                  <div class="font-mono text-sm font-bold" style="color:${p.color}">${fmt(grandTotal)}</div>
+                  <div class="text-[10px] text-on-surface-variant">${pctOfTotal}% del total</div>
+                </div>
+                <span class="material-symbols-outlined text-base text-on-surface-variant expand-icon transition-transform">expand_more</span>
+              </div>
+
+              <!-- EACEA Budget Table (collapsed by default) -->
+              <div class="hidden">
+                <div class="overflow-x-auto">
+                  <table class="w-full text-[11px] border-collapse">
+                    <thead>
+                      <tr class="text-[9px] uppercase tracking-wider text-on-surface-variant border-b border-outline-variant/30" style="background:${p.color}08">
+                        <th class="text-left py-1.5 px-3 font-bold">Concepto</th>
+                        <th class="text-right py-1.5 px-2 font-bold w-16">Units</th>
+                        <th class="text-right py-1.5 px-2 font-bold w-20">Cost/Unit</th>
+                        <th class="text-right py-1.5 px-3 font-bold w-24">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- ═══ A. DIRECT PERSONNEL COSTS ═══ -->
+                      <tr class="font-bold border-b border-outline-variant/20" style="background:${p.color}06">
+                        <td class="py-1.5 px-3" colspan="3">A. DIRECT PERSONNEL COSTS</td>
+                        <td class="text-right py-1.5 px-3 font-mono">${b.A > 0 ? fmt(b.A) : '\u2014'}</td>
+                      </tr>
+                      <!-- A.1 Employees -->
+                      <tr class="border-b border-outline-variant/10 font-semibold">
+                        <td class="py-1 pl-5">A.1 Employees (or equivalent)</td>
+                        <td class="text-right font-mono" colspan="2">person months</td>
+                        <td class="text-right font-mono px-3">${b.A1 > 0 ? fmt(b.A1) : '\u2014'}</td>
+                      </tr>
+                      ${subLine('Project Coordinator', b.lines.A1_coord, 'pl-10')}
+                      ${subLine('Other Staff (IOs)', b.lines.A1_staff, 'pl-10')}
+                      <!-- A.2-A.5 (empty) -->
+                      <tr class="border-b border-outline-variant/5 text-on-surface-variant/50"><td class="py-0.5 pl-5">A.2 Natural persons under direct contract</td><td colspan="3" class="text-right px-3">\u2014</td></tr>
+                      <tr class="border-b border-outline-variant/5 text-on-surface-variant/50"><td class="py-0.5 pl-5">A.3 Seconded persons</td><td colspan="3" class="text-right px-3">\u2014</td></tr>
+                      <tr class="border-b border-outline-variant/5 text-on-surface-variant/50"><td class="py-0.5 pl-5">A.4 SME Owners without salary</td><td colspan="3" class="text-right px-3">\u2014</td></tr>
+                      <tr class="border-b border-outline-variant/10 text-on-surface-variant/50"><td class="py-0.5 pl-5">A.5 Volunteers</td><td colspan="3" class="text-right px-3">\u2014</td></tr>
+
+                      <!-- ═══ B. SUBCONTRACTING ═══ -->
+                      <tr class="font-bold border-b border-outline-variant/20 text-on-surface-variant/60" style="background:${p.color}06">
+                        <td class="py-1.5 px-3" colspan="3">B. Subcontracting costs</td>
+                        <td class="text-right py-1.5 px-3 font-mono">\u2014</td>
+                      </tr>
+
+                      <!-- ═══ C. PURCHASE COSTS ═══ -->
+                      <tr class="font-bold border-b border-outline-variant/20" style="background:${p.color}06">
+                        <td class="py-1.5 px-3" colspan="3">C. Purchase costs</td>
+                        <td class="text-right py-1.5 px-3 font-mono">${b.C > 0 ? fmt(b.C) : '\u2014'}</td>
+                      </tr>
+                      <!-- C.1 Travel and subsistence -->
+                      <tr class="border-b border-outline-variant/10 font-semibold">
+                        <td class="py-1 pl-5">C.1 Travel and subsistence</td>
+                        <td class="text-right font-mono" colspan="2">per travel or day</td>
+                        <td class="text-right font-mono px-3">${b.C1 > 0 ? fmt(b.C1) : '\u2014'}</td>
+                      </tr>
+                      ${subLine('Travel', b.lines.C1_travel, 'pl-10')}
+                      ${subLine('Accommodation', b.lines.C1_accom, 'pl-10')}
+                      ${subLine('Subsistence', b.lines.C1_subs, 'pl-10')}
+                      <!-- C.2 Equipment -->
+                      <tr class="border-b border-outline-variant/10 font-semibold">
+                        <td class="py-1 pl-5">C.2 Equipment</td>
+                        <td colspan="2"></td>
+                        <td class="text-right font-mono px-3">${b.C2 > 0 ? fmt(b.C2) : '\u2014'}</td>
+                      </tr>
+                      ${b.lines.C2.length ? subLine('Equipment items', b.lines.C2, 'pl-10') : ''}
+                      <!-- C.3 Other goods, works and services -->
+                      <tr class="border-b border-outline-variant/10 font-semibold">
+                        <td class="py-1 pl-5">C.3 Other goods, works and services</td>
+                        <td colspan="2"></td>
+                        <td class="text-right font-mono px-3">${b.C3 > 0 ? fmt(b.C3) : '\u2014'}</td>
+                      </tr>
+                      ${subLine('Consumables', b.lines.C3_cons, 'pl-10')}
+                      ${subLine('Services: Meetings, Seminars', b.lines.C3_meet, 'pl-10')}
+                      ${subLine('Services: Communication / Dissemination', b.lines.C3_comms, 'pl-10')}
+                      ${subLine('Website', b.lines.C3_web, 'pl-10')}
+                      ${subLine('Artistic Fees', b.lines.C3_art, 'pl-10')}
+                      ${subLine('Other', b.lines.C3_other, 'pl-10')}
+
+                      <!-- ═══ D. OTHER COST CATEGORIES ═══ -->
+                      <tr class="font-bold border-b border-outline-variant/20 text-on-surface-variant/60" style="background:${p.color}06">
+                        <td class="py-1.5 px-3" colspan="3">D. Other cost categories</td>
+                        <td class="text-right py-1.5 px-3 font-mono">\u2014</td>
+                      </tr>
+                      <tr class="border-b border-outline-variant/10 text-on-surface-variant/50"><td class="py-0.5 pl-5">D.1 Financial support to third parties</td><td colspan="3" class="text-right px-3">\u2014</td></tr>
+
+                      <!-- ═══ TOTALS ═══ -->
+                      <tr class="font-bold border-b-2 border-outline-variant/30" style="background:${p.color}0c">
+                        <td class="py-2 px-3" colspan="3">TOTAL DIRECT COSTS (A+B+C+D)</td>
+                        <td class="text-right py-2 px-3 font-mono">${fmt(b.directTotal)}</td>
+                      </tr>
+                      <tr class="border-b border-outline-variant/20">
+                        <td class="py-1.5 px-3 font-semibold" colspan="3">E. Indirect costs ${pb.indirectPct}%</td>
+                        <td class="text-right py-1.5 px-3 font-mono font-semibold">${fmt(indAmt)}</td>
+                      </tr>
+                      <tr class="font-bold text-white" style="background:${p.color}">
+                        <td class="py-2 px-3 rounded-bl-lg" colspan="3">TOTAL COSTS (A+B+C+D+E)</td>
+                        <td class="text-right py-2 px-3 font-mono rounded-br-lg">${fmt(grandTotal)}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- Progress bar -->
+              <div class="h-1" style="background:${p.color}15"><div class="h-full transition-all" style="width:${pctOfTotal}%;background:${p.color}"></div></div>
+            </div>`;
+          }).join('')}
+          <div class="bg-primary text-white rounded-xl p-3 flex justify-between items-center">
+            <span class="font-headline font-bold text-sm">TOTAL PROYECTO</span>
+            <span class="font-mono text-lg font-bold">${fmt(cs.total)}</span>
+          </div>
         </div>`;
 
       if (budgetEl) {
         budgetEl.innerHTML = budgetHTML;
       }
+
+      // Tab switcher
+      window._intakeBudgetTab = function(tab) {
+        document.getElementById('intake-budget-summary').style.display = tab === 'summary' ? '' : 'none';
+        document.getElementById('intake-budget-partners').style.display = tab === 'partners' ? '' : 'none';
+        document.querySelectorAll('.intake-budget-tab').forEach(btn => {
+          const active = btn.dataset.tab === tab;
+          btn.className = 'intake-budget-tab px-4 py-2 text-xs font-bold uppercase tracking-wide border-b-2 -mb-[2px] cursor-pointer transition-colors ' +
+            (active ? 'border-primary text-primary' : 'border-transparent text-on-surface-variant hover:text-primary');
+        });
+      };
     } else if (budgetEl) {
       budgetEl.innerHTML = '<p class="text-sm text-on-surface-variant italic">No se ha configurado el presupuesto a\u00FAn</p>';
     }
@@ -993,9 +1202,10 @@ const Intake = (() => {
     // Save current state first (project + partners)
     await saveToServer(true);
 
-    // Force save Calculator state (WPs, activities, routes) to database
-    if (typeof Calculator !== 'undefined' && Calculator.isInitialized()) {
+    // Ensure Calculator is initialized before saving (user may have skipped WP steps)
+    if (typeof Calculator !== 'undefined') {
       try {
+        await ensureCalcInit();
         await Calculator.forceSave();
         console.log('[Intake] Calculator state saved before launch');
       } catch (err) {

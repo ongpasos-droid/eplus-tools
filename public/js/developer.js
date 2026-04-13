@@ -181,6 +181,7 @@ const Developer = (() => {
   function renderPhaseTabs(active) {
     const tabs = [
       { id: 1, label: 'Contexto', icon: 'checklist' },
+      { id: 11, label: 'Cronograma', icon: 'timeline' },
       { id: 12, label: 'Presupuesto', icon: 'account_balance' },
       { id: 15, label: 'Prep Studio', icon: 'psychology' },
       { id: 2, label: 'Generar', icon: 'auto_awesome' },
@@ -269,6 +270,55 @@ const Developer = (() => {
           </button>
         </div>
       </div>`;
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     PHASE 1.1: Gantt / Cronograma (standalone top-level tab)
+     ══════════════════════════════════════════════════════════════ */
+  async function renderGanttPhase() {
+    phase = 11;
+    const pid = currentProject.id;
+    const el = document.getElementById('developer-content');
+
+    el.innerHTML = renderPhaseTabs(11) + `
+      <div class="max-w-5xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1b1464]/10 flex items-center justify-center">
+            <span class="material-symbols-outlined text-xl text-[#1b1464]">timeline</span>
+          </div>
+          <div>
+            <h2 class="font-headline text-lg font-bold">Cronograma del proyecto</h2>
+            <p class="text-xs text-on-surface-variant">Timeline visual de WPs y actividades. Asigna inicio y fin (mes) a cada tarea.</p>
+          </div>
+        </div>
+        <div id="writer-gantt-container" class="min-h-[200px]">
+          <div class="flex items-center justify-center py-16 text-on-surface-variant">
+            <span class="material-symbols-outlined animate-spin mr-2">progress_activity</span> Cargando cronograma...
+          </div>
+        </div>
+      </div>`;
+
+    // Init Calculator with project data and render Gantt
+    if (typeof IntakeGantt !== 'undefined') {
+      if (typeof Calculator !== 'undefined') {
+        try {
+          const projData = await API.get('/intake/projects/' + pid);
+          const partnerList = await API.get('/intake/projects/' + pid + '/partners');
+          console.log('[Writer Gantt] projData:', projData?.id, 'partners:', partnerList?.length);
+          await Calculator.initFromIntake(projData, partnerList || []);
+          const cs = Calculator.getCalcState();
+          console.log('[Writer Gantt] after init — wps:', cs.wps?.length, 'total acts:', cs.wps?.reduce((s,w) => s + w.activities.length, 0));
+        } catch (e) { console.error('[Writer Gantt] calc init failed:', e); }
+      }
+      IntakeGantt.render(document.getElementById('writer-gantt-container'), pid);
+    } else {
+      document.getElementById('writer-gantt-container').innerHTML = `
+        <div class="bg-amber-50 rounded-2xl border border-amber-200 p-8 text-center">
+          <span class="material-symbols-outlined text-4xl text-amber-400 mb-2">timeline</span>
+          <h3 class="font-headline text-base font-bold text-amber-800 mb-1">Gantt no disponible</h3>
+          <p class="text-sm text-amber-700">Define Work Packages y actividades en el Intake primero.</p>
+        </div>`;
+    }
   }
 
   /* ══════════════════════════════════════════════════════════════
@@ -797,8 +847,9 @@ const Developer = (() => {
         try {
           const projData = await API.get('/intake/projects/' + pid);
           const partnerList = await API.get('/intake/projects/' + pid + '/partners');
+          console.log('[Prep Gantt] projData:', projData?.id, 'partners:', partnerList?.length);
           await Calculator.initFromIntake(projData, partnerList || []);
-        } catch (e) { console.error('gantt calc init:', e); }
+        } catch (e) { console.error('[Prep Gantt] calc init failed:', e); }
       }
       IntakeGantt.render(document.getElementById('prep-gantt-container'), pid);
     } else {
@@ -1481,6 +1532,7 @@ const Developer = (() => {
   function goPhase(p) {
     switch (p) {
       case 1: renderPhase1(); break;
+      case 11: renderGanttPhase(); break;
       case 12: renderBudgetPhase(); break;
       case 15: renderPrepStudio(); break;
       case 2: renderPhase2(); break;

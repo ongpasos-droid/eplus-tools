@@ -913,9 +913,9 @@ const Calculator = (() => {
         <span class="w-9 h-9 rounded-full text-white text-[11px] font-extrabold flex items-center justify-center shrink-0" style="background:${c}">WP${wi+1}</span>
         <div class="flex-1 min-w-0">
           <select class="font-headline text-sm font-bold text-on-surface bg-transparent border-none cursor-pointer focus:outline-none w-full" onclick="event.stopPropagation()" onchange="event.stopPropagation();Calculator._applyWPTitle(${wi},this.value)">${titleOpts}</select>
-          <div class="flex items-center gap-1.5 mt-0.5" onclick="event.stopPropagation()">
-            <span class="text-[10px] text-on-surface-variant/60 font-medium">Leader:</span>
-            <select class="text-[11px] text-on-surface-variant bg-transparent border-none cursor-pointer focus:outline-none" onchange="Calculator._setWPLeader(${wi},this.value)">${leaderOpts}</select>
+          <div class="flex items-center gap-1 mt-0.5" onclick="event.stopPropagation()">
+            <span class="text-[9px] text-on-surface-variant/40">Leader:</span>
+            <select class="text-[9px] text-on-surface-variant/50 bg-transparent border-none cursor-pointer focus:outline-none" onchange="Calculator._setWPLeader(${wi},this.value)">${leaderOpts}</select>
           </div>
         </div>
         <span class="text-sm font-mono font-bold" style="color:${c}" id="calc-wp-total-${wi}">\u2014</span>
@@ -949,7 +949,7 @@ const Calculator = (() => {
         ${subtypes.map(s => `<option value="${s}" ${act.subtype === s ? 'selected' : ''}>${s}</option>`).join('')}
       </select>` : '';
     return `
-    <div class="calc-act" id="calc-act-${act.id}">
+    <div class="calc-act" id="calc-act-${act.id}" style="--act-color:${def.color}">
       <div class="flex items-center gap-2 mb-2">
         <span class="calc-act-badge" style="background:${def.bg};color:${def.color}">
           <span class="material-symbols-outlined text-[12px] align-middle mr-0.5">${def.icon}</span> ${def.label}
@@ -1545,14 +1545,14 @@ const Calculator = (() => {
 
       <!-- Tabs -->
       <div class="flex gap-0 border-b-2 border-outline-variant/20 mb-5">
-        <button class="calc-res-tab active" onclick="Calculator._switchResTab('summary')">Summary</button>
+        <button class="calc-res-tab active" onclick="Calculator._switchResTab('partner')">By Partner</button>
         <button class="calc-res-tab" onclick="Calculator._switchResTab('wp')">By WP</button>
-        <button class="calc-res-tab" onclick="Calculator._switchResTab('partner')">By Partner</button>
+        <button class="calc-res-tab" onclick="Calculator._switchResTab('summary')">Summary</button>
       </div>
 
-      <div id="calc-res-summary">${buildResSummary(wpResults, directCosts, indirect, subtotal, totalProject, indirectPct)}</div>
+      <div id="calc-res-partner">${buildResPartner(wpResults, directCosts, indirect, subtotal, totalProject, indirectPct)}</div>
       <div id="calc-res-wp" style="display:none">${buildResWP(wpResults, directCosts, indirect, subtotal, indirectPct)}</div>
-      <div id="calc-res-partner" style="display:none">${buildResPartner(wpResults, directCosts, indirect, subtotal, totalProject, indirectPct)}</div>
+      <div id="calc-res-summary" style="display:none">${buildResSummary(wpResults, directCosts, indirect, subtotal, totalProject, indirectPct)}</div>
 
       <!-- Financing bar is now integrated in the hero above -->
 
@@ -1613,36 +1613,40 @@ const Calculator = (() => {
   }
 
   function buildResPartner(wpR, direct, indirect, subtotal, target, indPct) {
-    const n = state.partners.length;
     const mo = getProjectMonths();
+    const dash = '\u2014';
+    const fmtN = n => n ? Number(n).toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2}) : dash;
 
-    // ── Build EACEA budget breakdown per partner ──
-    // Returns { categories: [{key, label, icon, total, wps: [{wpLabel, wpColor, items: [{label, amount, detail}]}]}] }
-    function partnerBudget(pi) {
+    // ── Build EACEA data per partner (units, rate, total) ──
+    function partnerEACEA(pi) {
       const p = state.partners[pi];
-      if (!p) return { categories: [] };
+      if (!p) return { lines:{}, A1:0, A:0, C1:0, C2:0, C3:0, C:0, directTotal:0 };
       const pd = getPartnerPerdiem(p.id);
+      const L = { A1_workers:{}, A2:[], A3:[], A4:[], A5:[], B:[],
+                  C1_travel:[], C1_accom:[], C1_subs:[], C2:[], C3_cons:[], C3_meet:[],
+                  C3_comms:[], C3_web:[], C3_art:[], C3_other:[], D1:[] };
 
-      // Category accumulators: key → { wpIdx → [{label, amount, detail}] }
-      const cats = {
-        'A_coord':   { label:'A. Project Coordinator',                          icon:'person',    items:{} },
-        'A_empl':    { label:'A.1 Employees',                                   icon:'groups',    items:{} },
-        'C_travel':  { label:'C.1 Travel',                                      icon:'flight',    items:{} },
-        'C_accom':   { label:'C.1 Accommodation',                               icon:'hotel',     items:{} },
-        'C_subs':    { label:'C.1 Subsistence',                                 icon:'restaurant',items:{} },
-        'C_equip':   { label:'C.2 Equipment',                                   icon:'devices',   items:{} },
-        'C_meet':    { label:'C.3 Services: meetings & seminars',               icon:'groups',    items:{} },
-        'C_comms':   { label:'C.3 Services: communication & dissemination',     icon:'campaign',  items:{} },
-        'C_web':     { label:'C.3 Website',                                     icon:'language',  items:{} },
-        'C_art':     { label:'C.3 Artistic Fees',                               icon:'palette',   items:{} },
-        'C_cons':    { label:'C.3 Consumables',                                 icon:'science',   items:{} },
-        'C_other':   { label:'C.3 Other',                                       icon:'more_horiz',items:{} },
-      };
+      // Initialize a bucket for each worker category this partner has
+      const partnerRates = state.workerRates.filter(w => w.pid === p.id);
+      partnerRates.forEach(wr => { L.A1_workers[wr.id] = { category: wr.category, rate: wr.rate, items: [] }; });
 
-      function add(catKey, wi, label, amount, detail) {
-        if (!amount || amount <= 0) return;
-        if (!cats[catKey].items[wi]) cats[catKey].items[wi] = [];
-        cats[catKey].items[wi].push({ label, amount, detail: detail || '' });
+      function add(k, wi, label, units, rate, total) {
+        if (!total || total <= 0) return;
+        L[k].push({ label, units, rate: Math.round(rate*100)/100, total: Math.round(total*100)/100,
+                     wp: wpLabel(wpR[wi], wi), wpColor: wpR[wi].color });
+      }
+
+      function addWorker(profileId, wi, label, units, rate, total) {
+        if (!total || total <= 0) return;
+        const entry = { label, units, rate: Math.round(rate*100)/100, total: Math.round(total*100)/100,
+                        wp: wpLabel(wpR[wi], wi), wpColor: wpR[wi].color };
+        if (L.A1_workers[profileId]) {
+          L.A1_workers[profileId].items.push(entry);
+        } else {
+          // Fallback: create a bucket for unknown profiles
+          if (!L.A1_workers['_other']) L.A1_workers['_other'] = { category: 'Other Staff', rate: 0, items: [] };
+          L.A1_workers['_other'].items.push(entry);
+        }
       }
 
       wpR.forEach((wp, wi) => {
@@ -1650,24 +1654,26 @@ const Calculator = (() => {
           switch (act.type) {
             case 'mgmt': {
               const rate = pi === 0 ? (act.rate_applicant||500) : (act.rate_partner||250);
-              add('A_coord', wi, act.label, rate * mo, `${rate}/mo × ${mo}mo`);
+              // Assign mgmt cost to the first worker category (coordinator-like)
+              const firstProfile = partnerRates[0];
+              if (firstProfile) {
+                addWorker(firstProfile.id, wi, act.label, mo, rate, rate * mo);
+              } else {
+                addWorker('_other', wi, act.label, mo, rate, rate * mo);
+              }
               break;
             }
             case 'meeting': case 'ltta': {
               if (act.online) break;
               const pax = act.pax||2, days = act.days||3;
               const isHost = p.id === act.host;
-              const excluded = (act.participants||{})[p.id] === false;
-              if (excluded) break;
-              // Travel (non-host only)
+              if ((act.participants||{})[p.id] === false) break;
               if (!isHost) {
-                const travel = getRouteCost(p.id, act.host) * pax;
-                add('C_travel', wi, act.label, travel, `${pax} pax × €${getRouteCost(p.id, act.host)}`);
+                const rc = getRouteCost(p.id, act.host);
+                add('C1_travel', wi, act.label, pax, rc, rc * pax);
               }
-              // Accommodation
-              add('C_accom', wi, act.label, pax * days * (pd.aloj||0), `${pax} pax × ${days}d × €${pd.aloj||0}/d`);
-              // Subsistence
-              add('C_subs', wi, act.label, pax * days * (pd.mant||0), `${pax} pax × ${days}d × €${pd.mant||0}/d`);
+              add('C1_accom', wi, act.label, pax * days, pd.aloj||0, pax * days * (pd.aloj||0));
+              add('C1_subs',  wi, act.label, pax * days, pd.mant||0, pax * days * (pd.mant||0));
               break;
             }
             case 'io': {
@@ -1675,100 +1681,197 @@ const Calculator = (() => {
               if (!ps?.active) break;
               ps.staff.forEach(st => {
                 const rate = getPartnerDayRate(p.id, st.profileId);
-                const profileName = state.workerRates.find(w => w.id === st.profileId)?.category || 'Staff';
-                add('A_empl', wi, `${act.label} — ${profileName}`, (st.days||0) * rate, `${st.days||0}d × €${rate}/d`);
+                addWorker(st.profileId, wi, act.label, st.days||0, rate, (st.days||0)*rate);
               });
               break;
             }
             case 'me': {
-              const ev = act.me_events?.[p.id];
-              if (!ev?.active) break;
-              const total = (ev.local_pax||0)*(ev.local_rate||0) + (ev.intl_pax||0)*(ev.intl_rate||0);
-              add('C_comms', wi, act.label, total, `${ev.local_pax||0} local + ${ev.intl_pax||0} intl`);
+              const ev = act.me_events?.[p.id]; if (!ev?.active) break;
+              const tot = (ev.local_pax||0)*(ev.local_rate||0) + (ev.intl_pax||0)*(ev.intl_rate||0);
+              const tPax = (ev.local_pax||0) + (ev.intl_pax||0);
+              add('C3_comms', wi, act.label, tPax, tPax>0?tot/tPax:0, tot);
               break;
             }
             case 'campaign': {
-              const c = act.camp_partners?.[p.id];
-              if (!c?.active) break;
-              add('C_comms', wi, act.label, (c.monthly||0)*(c.months||0), `€${c.monthly||0}/mo × ${c.months||0}mo`);
+              const c = act.camp_partners?.[p.id]; if (!c?.active) break;
+              add('C3_comms', wi, act.label, c.months||0, c.monthly||0, (c.monthly||0)*(c.months||0));
               break;
             }
             case 'local_ws': {
-              const w = act.ws_partners?.[p.id];
-              if (!w?.active) break;
-              add('C_meet', wi, act.label, (w.ws_pax||0)*(w.ws_n||0)*(w.ws_cost||0), `${w.ws_pax||0} pax × ${w.ws_n||0} sessions × €${w.ws_cost||0}`);
+              const w = act.ws_partners?.[p.id]; if (!w?.active) break;
+              const u = (w.ws_pax||0)*(w.ws_n||0);
+              add('C3_meet', wi, act.label, u, w.ws_cost||0, u*(w.ws_cost||0));
               break;
             }
-            case 'website':    { const np = act.note_partners?.[p.id]; if (np?.active) add('C_web',   wi, act.label, np.amount||0, ''); break; }
-            case 'artistic':   { const np = act.note_partners?.[p.id]; if (np?.active) add('C_art',   wi, act.label, np.amount||0, ''); break; }
-            case 'equipment':  { const np = act.note_partners?.[p.id]; if (np?.active) add('C_equip', wi, act.label, calcDepreciation(np), ''); break; }
-            case 'consumables':{ const np = act.note_partners?.[p.id]; if (np?.active) add('C_cons',  wi, act.label, calcDepreciation(np), ''); break; }
+            case 'website':    { const np = act.note_partners?.[p.id]; if (np?.active) add('C3_web',   wi, act.label, 1, np.amount||0, np.amount||0); break; }
+            case 'artistic':   { const np = act.note_partners?.[p.id]; if (np?.active) add('C3_art',   wi, act.label, 1, np.amount||0, np.amount||0); break; }
+            case 'equipment':  { const np = act.note_partners?.[p.id]; if (np?.active) add('C2',       wi, act.label, 1, calcDepreciation(np), calcDepreciation(np)); break; }
+            case 'consumables':{ const np = act.note_partners?.[p.id]; if (np?.active) add('C3_cons',  wi, act.label, 1, calcDepreciation(np), calcDepreciation(np)); break; }
             case 'goods': case 'other': {
-              const np = act.note_partners?.[p.id]; if (np?.active) add('C_other', wi, act.label, calcDepreciation(np), ''); break;
+              const np = act.note_partners?.[p.id]; if (np?.active) add('C3_other', wi, act.label, 1, calcDepreciation(np), calcDepreciation(np)); break;
             }
           }
         });
       });
 
-      // Build final array with only non-empty categories
-      const result = [];
-      for (const [key, cat] of Object.entries(cats)) {
-        const wpEntries = [];
-        let catTotal = 0;
-        wpR.forEach((wp, wi) => {
-          const items = cat.items[wi] || [];
-          if (!items.length) return;
-          const wpTotal = items.reduce((s, it) => s + it.amount, 0);
-          catTotal += wpTotal;
-          wpEntries.push({ wpLabel: wpLabel(wp, wi), wpColor: wp.color, items, total: wpTotal });
-        });
-        if (catTotal > 0) result.push({ key, label: cat.label, icon: cat.icon, total: catTotal, wps: wpEntries });
-      }
-      return { categories: result, grand: result.reduce((s, c) => s + c.total, 0) };
+      const sm = k => L[k].reduce((s, it) => s + it.total, 0);
+      const A1 = Object.values(L.A1_workers).reduce((s, w) => s + w.items.reduce((ss, it) => ss + it.total, 0), 0);
+      const A = A1;
+      const C1 = sm('C1_travel') + sm('C1_accom') + sm('C1_subs');
+      const C2 = sm('C2');
+      const C3 = sm('C3_cons') + sm('C3_meet') + sm('C3_comms') + sm('C3_web') + sm('C3_art') + sm('C3_other');
+      const C = C1 + C2 + C3;
+      return { lines:L, A1, A, C1, C2, C3, C, directTotal: A + C };
     }
 
-    // ── Render ──
+    // ── Render helper: expandable sub-line with activity detail ──
+    function subRow(label, items, pColor) {
+      const total = items.reduce((s,it) => s+it.total, 0);
+      const units = items.reduce((s,it) => s+it.units, 0);
+      const avgRate = units > 0 ? total / units : 0;
+      const uid = 'bp-' + Math.random().toString(36).slice(2,8);
+      const has = items.length > 0;
+      return `
+        <tr class="border-b border-outline-variant/8 ${has?'cursor-pointer hover:bg-surface-container-low':''}"
+            ${has ? `onclick="document.querySelectorAll('.${uid}').forEach(r=>r.classList.toggle('hidden'))"` : ''}>
+          <td class="py-1" style="padding-left:2.5rem">
+            ${has ? '<span class="material-symbols-outlined text-[10px] align-middle mr-0.5 text-on-surface-variant">expand_more</span>' : ''}
+            ${label}
+          </td>
+          <td class="text-right font-mono px-2">${has ? fmtN(units) : dash}</td>
+          <td class="text-right font-mono px-2">${has && avgRate ? fmtN(avgRate) : dash}</td>
+          <td class="text-right font-mono px-3 font-medium">${total > 0 ? euros(total) : dash}</td>
+        </tr>
+        ${items.map(it => `
+          <tr class="${uid} hidden border-b border-outline-variant/4 text-[10px]">
+            <td class="py-0.5 text-on-surface-variant" style="padding-left:3.5rem">
+              <span class="font-semibold" style="color:${it.wpColor}">${it.wp}</span>
+              <span class="ml-1">${it.label}</span>
+            </td>
+            <td class="text-right font-mono px-2">${fmtN(it.units)}</td>
+            <td class="text-right font-mono px-2">${fmtN(it.rate)}</td>
+            <td class="text-right font-mono px-3">${euros(it.total)}</td>
+          </tr>
+        `).join('')}`;
+    }
+
+    // ── Render each partner as EACEA table ──
     return state.partners.map((p, i) => {
-      const budget = partnerBudget(i);
-      const grand = budget.grand;
+      const b = partnerEACEA(i);
       const c = WP_COLORS[i%WP_COLORS.length];
-      const grandPct = target > 0 ? (grand / target * 100).toFixed(1) : '0';
+      const indAmt = b.directTotal * indPct / 100;
+      const grandTotal = b.directTotal + indAmt;
+      const grandPct = target > 0 ? (grandTotal / target * 100).toFixed(1) : '0';
+      const sm = k => b.lines[k].reduce((s,it) => s+it.total, 0);
 
-      const catHTML = budget.categories.map(cat => `
-        <div class="mb-3">
-          <div class="flex items-center justify-between py-1.5 px-2 rounded-lg" style="background:${c}0a">
-            <span class="text-xs font-bold flex items-center gap-1.5" style="color:${c}">
-              <span class="material-symbols-outlined text-[14px]">${cat.icon}</span> ${cat.label}
-            </span>
-            <span class="font-mono text-xs font-bold" style="color:${c}">${euros(cat.total)}</span>
+      return `
+      <div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 mb-4 overflow-hidden" style="border-top:3px solid ${c}">
+        <!-- Header -->
+        <div class="flex items-center gap-2 px-4 py-3 cursor-pointer select-none" onclick="this.nextElementSibling.classList.toggle('hidden');this.querySelector('.bp-arrow').classList.toggle('rotate-180')">
+          <span class="w-8 h-8 rounded-full text-white text-[10px] font-bold flex items-center justify-center flex-shrink-0" style="background:${c}">BE${String(i+1).padStart(2,'0')}</span>
+          <div class="flex-1 min-w-0">
+            <div class="font-headline font-bold truncate">${p.name||'Partner '+(i+1)}</div>
+            <div class="text-[10px] text-on-surface-variant">${p.country || ''}${i===0 ? ' \u00B7 Coordinator' : ''}</div>
           </div>
-          ${cat.wps.map(wp => `
-            <div class="ml-3 mt-1">
-              ${wp.items.map(it => `
-                <div class="flex justify-between py-0.5 text-[11px] border-b border-outline-variant/5">
-                  <span>
-                    <span class="font-semibold" style="color:${wp.wpColor}">${wp.wpLabel}</span>
-                    <span class="text-on-surface-variant ml-1">${it.label}</span>
-                    ${it.detail ? `<span class="text-on-surface-variant/50 ml-1">(${it.detail})</span>` : ''}
-                  </span>
-                  <span class="font-mono text-on-surface-variant">${euros(it.amount)}</span>
-                </div>`).join('')}
-            </div>`).join('')}
-        </div>`).join('');
-
-      return `<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-4 mb-3" style="border-top:3px solid ${c}">
-        <div class="flex items-center gap-2 mb-3">
-          <span class="w-7 h-7 rounded-full text-white text-[11px] font-bold flex items-center justify-center" style="background:${c}">${i+1}</span>
-          <span class="font-headline font-bold">${p.name||'Partner '+(i+1)}</span>
-          ${i===0?'<span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-semibold">applicant</span>':''}
-          <span class="ml-auto font-mono font-bold" style="color:${c}">${euros(grand)}</span>
-          <span class="text-xs text-on-surface-variant">${grandPct}%</span>
+          <div class="text-right flex-shrink-0">
+            <div class="font-mono font-bold" style="color:${c}">${euros(grandTotal)}</div>
+            <div class="text-[10px] text-on-surface-variant">${grandPct}% of total</div>
+          </div>
+          <span class="material-symbols-outlined text-base text-on-surface-variant bp-arrow transition-transform">expand_more</span>
         </div>
-        ${catHTML}
-        <div class="flex justify-between py-2 font-bold text-sm mt-1 border-t border-outline-variant/20"><span>Direct costs</span><span class="font-mono">${euros(grand)}</span></div>
-        <div class="flex justify-between py-1 text-xs text-on-surface-variant"><span>+ Indirect ${indPct}%</span><span class="font-mono">+ ${euros(grand*indPct/100)}</span></div>
-        <div class="flex justify-between py-2 font-bold text-sm rounded px-2 mt-1" style="background:${WP_BG[i%WP_BG.length]};color:${c}"><span>TOTAL (with indirect)</span><span class="font-mono">${euros(grand*(1+indPct/100))}</span></div>
-        <div class="h-1 rounded bg-surface-container-high mt-2"><div class="h-full rounded" style="width:${grandPct}%;background:${c}"></div></div>
+
+        <!-- EACEA Table -->
+        <div class="hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-[11px] border-collapse">
+              <thead>
+                <tr class="text-[9px] uppercase tracking-wider text-on-surface-variant border-y border-outline-variant/30" style="background:${c}08">
+                  <th class="text-left py-2 px-3 font-bold"></th>
+                  <th class="text-right py-2 px-2 font-bold w-20">Units</th>
+                  <th class="text-right py-2 px-2 font-bold w-20">Cost/Unit</th>
+                  <th class="text-right py-2 px-3 font-bold w-28">Beneficiary<br>Total Costs</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- ═══ A. DIRECT PERSONNEL COSTS ═══ -->
+                <tr class="font-bold border-b border-outline-variant/20" style="background:${c}06">
+                  <td class="py-2 px-3" colspan="3">A. DIRECT PERSONNEL COSTS</td>
+                  <td class="text-right py-2 px-3 font-mono">${b.A > 0 ? euros(b.A) : dash}</td>
+                </tr>
+                <tr class="border-b border-outline-variant/10 font-semibold">
+                  <td class="py-1 pl-5">A.1 Employees (or equivalent)</td>
+                  <td class="text-right font-mono px-2 text-on-surface-variant text-[9px]" colspan="2">person months</td>
+                  <td class="text-right font-mono px-3">${b.A1 > 0 ? euros(b.A1) : dash}</td>
+                </tr>
+                ${Object.values(b.lines.A1_workers).map(w => subRow(w.category + (w.rate ? ' <span class="text-[9px] text-on-surface-variant/50 font-normal">(' + euros(w.rate) + '/day)</span>' : ''), w.items, c)).join('')}
+                <tr class="border-b border-outline-variant/5 text-on-surface-variant/50"><td class="py-0.5 pl-5">A.2 Natural persons under direct contract</td><td class="text-right px-2">${dash}</td><td class="text-right px-2">${dash}</td><td class="text-right px-3">${dash}</td></tr>
+                <tr class="border-b border-outline-variant/5 text-on-surface-variant/50"><td class="py-0.5 pl-5">A.3 Seconded persons</td><td class="text-right px-2">${dash}</td><td class="text-right px-2">${dash}</td><td class="text-right px-3">${dash}</td></tr>
+                <tr class="border-b border-outline-variant/5 text-on-surface-variant/50"><td class="py-0.5 pl-5">A.4 SME Owners without salary</td><td class="text-right px-2">${dash}</td><td class="text-right px-2">${dash}</td><td class="text-right px-3">${dash}</td></tr>
+                <tr class="border-b border-outline-variant/10 text-on-surface-variant/50"><td class="py-0.5 pl-5">A.5 Volunteers</td><td class="text-right px-2">${dash}</td><td class="text-right px-2">${dash}</td><td class="text-right px-3">${dash}</td></tr>
+
+                <!-- ═══ B. SUBCONTRACTING ═══ -->
+                <tr class="font-bold border-b border-outline-variant/20 text-on-surface-variant/60" style="background:${c}06">
+                  <td class="py-2 px-3" colspan="3">B. Subcontracting costs</td>
+                  <td class="text-right py-2 px-3 font-mono">${dash}</td>
+                </tr>
+
+                <!-- ═══ C. PURCHASE COSTS ═══ -->
+                <tr class="font-bold border-b border-outline-variant/20" style="background:${c}06">
+                  <td class="py-2 px-3" colspan="3">C. Purchase costs</td>
+                  <td class="text-right py-2 px-3 font-mono">${b.C > 0 ? euros(b.C) : dash}</td>
+                </tr>
+                <tr class="border-b border-outline-variant/10 font-semibold">
+                  <td class="py-1 pl-5">C.1 Travel and subsistence</td>
+                  <td class="text-right font-mono px-2 text-on-surface-variant text-[9px]" colspan="2">per travel or day</td>
+                  <td class="text-right font-mono px-3">${b.C1 > 0 ? euros(b.C1) : dash}</td>
+                </tr>
+                ${subRow('Travel', b.lines.C1_travel, c)}
+                ${subRow('Accommodation', b.lines.C1_accom, c)}
+                ${subRow('Subsistence', b.lines.C1_subs, c)}
+                <tr class="border-b border-outline-variant/10 font-semibold">
+                  <td class="py-1 pl-5">C.2 Equipment</td>
+                  <td colspan="2"></td>
+                  <td class="text-right font-mono px-3">${b.C2 > 0 ? euros(b.C2) : dash}</td>
+                </tr>
+                ${b.lines.C2.length ? subRow('Equipment items', b.lines.C2, c) : ''}
+                <tr class="border-b border-outline-variant/10 font-semibold">
+                  <td class="py-1 pl-5">C.3 Other goods, works and services</td>
+                  <td colspan="2"></td>
+                  <td class="text-right font-mono px-3">${b.C3 > 0 ? euros(b.C3) : dash}</td>
+                </tr>
+                ${subRow('Consumables', b.lines.C3_cons, c)}
+                ${subRow('Services for Meetings, Seminars', b.lines.C3_meet, c)}
+                ${subRow('Services for communication/dissemination', b.lines.C3_comms, c)}
+                ${subRow('Website', b.lines.C3_web, c)}
+                ${subRow('Artistic Fees', b.lines.C3_art, c)}
+                ${subRow('Other', b.lines.C3_other, c)}
+
+                <!-- ═══ D. OTHER ═══ -->
+                <tr class="font-bold border-b border-outline-variant/20 text-on-surface-variant/60" style="background:${c}06">
+                  <td class="py-2 px-3" colspan="3">D. Other cost categories</td>
+                  <td class="text-right py-2 px-3 font-mono">${dash}</td>
+                </tr>
+                <tr class="border-b border-outline-variant/10 text-on-surface-variant/50"><td class="py-0.5 pl-5">D.1 Financial support to third parties</td><td class="text-right px-2">${dash}</td><td class="text-right px-2">${dash}</td><td class="text-right px-3">${dash}</td></tr>
+
+                <!-- ═══ TOTALS ═══ -->
+                <tr class="font-bold border-y-2 border-outline-variant/30" style="background:${c}0c">
+                  <td class="py-2 px-3" colspan="3">TOTAL DIRECT COSTS (A+B+C+D)</td>
+                  <td class="text-right py-2 px-3 font-mono">${euros(b.directTotal)}</td>
+                </tr>
+                <tr class="border-b border-outline-variant/20">
+                  <td class="py-2 px-3 font-semibold" colspan="3">E. Indirect costs ${indPct}%</td>
+                  <td class="text-right py-2 px-3 font-mono font-semibold">${euros(indAmt)}</td>
+                </tr>
+                <tr class="font-bold text-white" style="background:${c}">
+                  <td class="py-2.5 px-3" colspan="3">TOTAL COSTS (A+B+C+D+E)</td>
+                  <td class="text-right py-2.5 px-3 font-mono">${euros(grandTotal)}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Progress bar -->
+        <div class="h-1.5" style="background:${c}15"><div class="h-full transition-all" style="width:${grandPct}%;background:${c}"></div></div>
       </div>`;
     }).join('') + `
       <div class="bg-primary text-white rounded-xl p-4 flex justify-between items-center">
@@ -2419,11 +2522,23 @@ const Calculator = (() => {
             }));
             state.actCounter = actId;
           }
-          console.log('[Calc] loaded saved state from server');
+          console.log('[Calc] loaded saved state from server — wps:', state.wps.length, 'total acts:', state.wps.reduce((s,w)=>s+w.activities.length,0));
         }
       } catch (err) {
+        console.error('[Calc] loadFullState error:', err);
         console.log('[Calc] no saved state found, using defaults');
       }
+    }
+
+    // Ensure WP1 always has a mgmt activity (same as renderMergedWPs does)
+    if (state.wps[0] && state.wps[0].activities.length === 0) {
+      state.wps[0].activities.push({
+        id: ++state.actCounter, type: 'mgmt', label: 'Project Management',
+        rate_applicant: 500, rate_partner: 250,
+        desc: 'This work package covers the overall coordination and management of the project throughout its duration.',
+        date_start: toISO(getProjectStart()), date_end: toISO(addMonths(getProjectStart() || new Date(), getProjectMonths()))
+      });
+      scheduleSave();
     }
 
     maxReached = 0;
@@ -2516,6 +2631,140 @@ const Calculator = (() => {
   /** Render Gantt step into a container */
   function renderGanttInto(container) { renderGantt(container); }
 
+  /** Get partner budget breakdowns for Intake summary — EACEA official structure */
+  function getPartnerBudgets() {
+    state.wps.forEach((_, wi) => recalcWP(wi));
+    const wpResults = state.wps.map((wp, wi) => {
+      const acts = wp.activities.map(a => ({ ...a, ...calcActivity(a) }));
+      const total = acts.reduce((s, a) => s + a.total, 0);
+      return { ...wp, acts, total, color: WP_COLORS[wi%WP_COLORS.length], bg: WP_BG[wi%WP_BG.length] };
+    });
+    const { indirectPct } = getFinancials();
+    const mo = getProjectMonths();
+
+    function partnerBudgetEACEA(pi) {
+      const p = state.partners[pi];
+      if (!p) return { lines: {}, grand: 0 };
+      const pd = getPartnerPerdiem(p.id);
+
+      // Each EACEA line accumulates items: {label, units, rate, total, wp}
+      const lines = {
+        A1_coord:    [], // Project Coordinator
+        A1_staff:    [], // Other employees (IO staff)
+        A2: [], A3: [], A4: [], A5: [],
+        B:  [],
+        C1_travel:   [],
+        C1_accom:    [],
+        C1_subs:     [],
+        C2:          [],
+        C3_cons:     [],
+        C3_meet:     [],
+        C3_comms:    [],
+        C3_web:      [],
+        C3_art:      [],
+        C3_other:    [],
+        D1:          [],
+      };
+
+      function add(lineKey, wi, label, units, rate, total) {
+        if (!total || total <= 0) return;
+        const wpL = wpLabel(wpResults[wi], wi);
+        lines[lineKey].push({ label, units, rate: Math.round(rate*100)/100, total: Math.round(total*100)/100, wp: wpL, wpIdx: wi });
+      }
+
+      wpResults.forEach((wp, wi) => {
+        wp.acts.forEach(act => {
+          switch (act.type) {
+            case 'mgmt': {
+              const rate = pi === 0 ? (act.rate_applicant||500) : (act.rate_partner||250);
+              add('A1_coord', wi, act.label, mo, rate, rate * mo);
+              break;
+            }
+            case 'meeting': case 'ltta': {
+              if (act.online) break;
+              const pax = act.pax||2, days = act.days||3;
+              const isHost = p.id === act.host;
+              const excluded = (act.participants||{})[p.id] === false;
+              if (excluded) break;
+              if (!isHost) {
+                const routeCost = getRouteCost(p.id, act.host);
+                add('C1_travel', wi, act.label, pax, routeCost, routeCost * pax);
+              }
+              add('C1_accom', wi, act.label, pax * days, pd.aloj||0, pax * days * (pd.aloj||0));
+              add('C1_subs',  wi, act.label, pax * days, pd.mant||0, pax * days * (pd.mant||0));
+              break;
+            }
+            case 'io': {
+              const ps = act.io_staff?.[p.id];
+              if (!ps?.active) break;
+              ps.staff.forEach(st => {
+                const rate = getPartnerDayRate(p.id, st.profileId);
+                const profileName = state.workerRates.find(w => w.id === st.profileId)?.category || 'Staff';
+                add('A1_staff', wi, `${act.label} — ${profileName}`, st.days||0, rate, (st.days||0) * rate);
+              });
+              break;
+            }
+            case 'me': {
+              const ev = act.me_events?.[p.id];
+              if (!ev?.active) break;
+              const total = (ev.local_pax||0)*(ev.local_rate||0) + (ev.intl_pax||0)*(ev.intl_rate||0);
+              const totalPax = (ev.local_pax||0) + (ev.intl_pax||0);
+              add('C3_comms', wi, act.label, totalPax, totalPax > 0 ? total/totalPax : 0, total);
+              break;
+            }
+            case 'campaign': {
+              const c = act.camp_partners?.[p.id];
+              if (!c?.active) break;
+              add('C3_comms', wi, act.label, c.months||0, c.monthly||0, (c.monthly||0)*(c.months||0));
+              break;
+            }
+            case 'local_ws': {
+              const w = act.ws_partners?.[p.id];
+              if (!w?.active) break;
+              const units = (w.ws_pax||0)*(w.ws_n||0);
+              add('C3_meet', wi, act.label, units, w.ws_cost||0, units*(w.ws_cost||0));
+              break;
+            }
+            case 'website':    { const np = act.note_partners?.[p.id]; if (np?.active) add('C3_web',   wi, act.label, 1, np.amount||0, np.amount||0); break; }
+            case 'artistic':   { const np = act.note_partners?.[p.id]; if (np?.active) add('C3_art',   wi, act.label, 1, np.amount||0, np.amount||0); break; }
+            case 'equipment':  { const np = act.note_partners?.[p.id]; if (np?.active) add('C2',       wi, act.label, 1, calcDepreciation(np), calcDepreciation(np)); break; }
+            case 'consumables':{ const np = act.note_partners?.[p.id]; if (np?.active) add('C3_cons',  wi, act.label, 1, calcDepreciation(np), calcDepreciation(np)); break; }
+            case 'goods': case 'other': {
+              const np = act.note_partners?.[p.id]; if (np?.active) add('C3_other', wi, act.label, 1, calcDepreciation(np), calcDepreciation(np)); break;
+            }
+          }
+        });
+      });
+
+      // Compute section totals
+      const sum = key => lines[key].reduce((s, it) => s + it.total, 0);
+      const A1 = sum('A1_coord') + sum('A1_staff');
+      const A = A1; // A2-A5 are always 0 in our tool
+      const C1 = sum('C1_travel') + sum('C1_accom') + sum('C1_subs');
+      const C2 = sum('C2');
+      const C3 = sum('C3_cons') + sum('C3_meet') + sum('C3_comms') + sum('C3_web') + sum('C3_art') + sum('C3_other');
+      const C = C1 + C2 + C3;
+      const directTotal = A + C;
+
+      return { lines, A1, A, C1, C2, C3, C, directTotal };
+    }
+
+    return {
+      partners: state.partners.map((p, i) => ({
+        id: p.id,
+        name: p.name || 'Partner ' + (i+1),
+        acronym: p.acronym || '',
+        country: p.country || '',
+        isApplicant: i === 0,
+        budget: partnerBudgetEACEA(i),
+        color: WP_COLORS[i % WP_COLORS.length],
+      })),
+      indirectPct,
+      wpLabels: wpResults.map((wp, wi) => wpLabel(wp, wi)),
+      wpColors: wpResults.map((wp, wi) => WP_COLORS[wi % WP_COLORS.length]),
+    };
+  }
+
   /** Get current state for Intake summary */
   function getCalcState() {
     const directCosts = state.wps.reduce((s, wp) => s + wp.activities.reduce((ss, a) => ss + calcActivity(a).total, 0), 0);
@@ -2563,6 +2812,7 @@ const Calculator = (() => {
     renderResultsInto,
     renderGanttInto,
     getCalcState,
+    getPartnerBudgets,
     isInitialized,
     forceSave: doSave,
     // Exposed for onclick handlers (prefixed with _ to signal internal use)

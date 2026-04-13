@@ -290,9 +290,12 @@ input:focus, select:focus, textarea:focus {
 
 /* ── Activity cards ──────────────────────────────────────────── */
 .calc-act {
-  border: 1px solid rgba(120,118,130,.12); border-radius: 6px;
-  padding: 12px 14px; margin-bottom: 8px; background: #f7f9fb;
+  border: 2px solid rgba(120,118,130,.25); border-radius: 10px;
+  border-left: 5px solid var(--act-color, #787682);
+  border-bottom: 4px solid var(--act-color, #787682);
+  padding: 14px 16px; margin-bottom: 16px; background: #f7f9fb;
   position: relative;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
 }
 .calc-act-badge {
   font-size: 10px; font-weight: 700; padding: 2px 8px;

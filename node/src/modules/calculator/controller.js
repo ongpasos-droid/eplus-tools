@@ -720,6 +720,7 @@ exports.loadFullState = async (req, res) => {
     if (!isOwner) return res.status(403).json({ ok: false, error: { code: 'FORBIDDEN', message: 'No access' } });
 
     const data = await model.loadFullState(projectId);
+    console.log('[loadFullState]', projectId, '→ wps:', data?.wps?.length, 'acts:', data?.wps?.reduce((s, w) => s + (w.activities?.length || 0), 0));
     res.json({ ok: true, data });
   } catch (err) {
     console.error('loadFullState error:', err);
