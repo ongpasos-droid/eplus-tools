@@ -134,13 +134,26 @@ async function deleteProject(req, res, next) {
 async function launchProject(req, res, next) {
   try {
     const db = require('../../utils/db');
+    const projectId = req.params.id;
+    const userId = req.user.id;
+
     const [result] = await db.execute(
       'UPDATE projects SET status = ? WHERE id = ? AND user_id = ?',
-      ['writing', req.params.id, req.user.id]
+      ['writing', projectId, userId]
     );
     if (result.affectedRows === 0) {
       return res.status(404).json({ ok: false, error: { code: 'NOT_FOUND', message: 'Project not found' } });
     }
+
+    // Always (re)create budget from intake data
+    try {
+      const budgetModel = require('../budget/model');
+      await budgetModel.createFromIntake(userId, projectId);
+      console.log('[Launch] Budget created/recreated for project', projectId);
+    } catch (budgetErr) {
+      console.warn('[Launch] Budget creation warning:', budgetErr.message);
+    }
+
     res.json({ ok: true, data: { status: 'writing' } });
   } catch (err) {
     next(err);

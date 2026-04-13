@@ -91,29 +91,45 @@ const Calculator = (() => {
     { min:8000, max:Infinity, label:'≥ 8000 km',  green:1735, std:1735 },
   ];
 
-  const ERASMUS_REF_RATES = [
-    { label:'Grupo A', countries:['dinamarca','irlanda','luxemburgo','países bajos','austria','suecia','liechtenstein','noruega','denmark','ireland','luxembourg','netherlands','sweden'],
-      manager:294, trainer:241, tech:190, admin:157 },
-    { label:'Grupo B', countries:['bélgica','belgica','alemania','francia','italia','finlandia','islandia','belgium','germany','france','italy','finland','iceland'],
-      manager:280, trainer:214, tech:162, admin:131 },
-    { label:'Grupo C', countries:['república checa','grecia','españa','chipre','malta','portugal','eslovenia','czech','greece','spain','cyprus','slovenia'],
-      manager:164, trainer:137, tech:102, admin:78 },
-    { label:'Grupo D', countries:['bulgaria','estonia','croacia','letonia','lituania','hungría','polonia','rumanía','serbia','eslovaquia','macedonia','turquía','croatia','latvia','lithuania','hungary','poland','romania','slovakia','turkey'],
-      manager:88, trainer:74, tech:55, admin:47 },
-  ];
+  /* ── Reference staff rates (loaded from Data E+ via API) ────── */
+  let REF_STAFF_CATEGORIES = []; // [{code, name_en, zones:{A:{rate_day},B:{rate_day},...}}]
+  let REF_COUNTRY_ZONES = {};    // { "spain":"B", "germany":"A", ... }
+  let _refRatesLoaded = false;
 
-  const PROFILES = [
-    { key:'manager',  label:'Manager',                        field:'manager'  },
-    { key:'trainer',  label:'Trainer/Researcher/Youth worker', field:'trainer'  },
-    { key:'tech',     label:'Technician',                     field:'tech'     },
-    { key:'admin',    label:'Administrative',                 field:'admin'    },
-  ];
+  async function loadRefRates() {
+    if (_refRatesLoaded) return;
+    try {
+      const res = await API.get('/calculator/ref/staff-rates');
+      console.log('[Calc] ref/staff-rates raw response:', JSON.stringify(res).slice(0, 500));
+      if (res && res.categories && res.categories.length) {
+        REF_STAFF_CATEGORIES = res.categories.filter(c => c.active);
+        REF_COUNTRY_ZONES = res.countryZones || {};
+        if (res.perdiem && Object.keys(res.perdiem).length) {
+          PERDIEM_DEFAULTS = res.perdiem;
+        }
+        _refRatesLoaded = true;
+        console.log('[Calc] Loaded', REF_STAFF_CATEGORIES.length, 'staff categories from Data E+');
+        console.log('[Calc] Categories:', REF_STAFF_CATEGORIES.map(c => c.code + ':' + c.name_en).join(', '));
+        console.log('[Calc] Country zones sample:', Object.entries(REF_COUNTRY_ZONES).slice(0, 5).map(([k,v]) => k+'='+v).join(', '));
+      } else {
+        console.error('[Calc] ref/staff-rates returned empty or invalid data:', res);
+      }
+    } catch (err) {
+      console.error('[Calc] FAILED to load ref staff rates:', err);
+    }
+  }
 
-  const PERDIEM_DEFAULTS = {
-    'Grupo A': { aloj:125, mant:55 },
-    'Grupo B': { aloj:115, mant:45 },
-    'Grupo C': { aloj:105, mant:40 },
-    'Grupo D': { aloj:95,  mant:35 },
+  function getCountryZone(country) {
+    if (!country) return 'C';
+    return REF_COUNTRY_ZONES[country.toLowerCase().trim()] || 'C';
+  }
+
+  /* Per diem defaults — overridden by Data E+ when available */
+  let PERDIEM_DEFAULTS = {
+    'A': { aloj:108, mant:72 },
+    'B': { aloj:96,  mant:64 },
+    'C': { aloj:84,  mant:56 },
+    'D': { aloj:72,  mant:48 },
   };
 
   const ACT_TYPES = {
@@ -195,24 +211,35 @@ const Calculator = (() => {
   const $ = id => document.getElementById(id);
   const debounce = (fn, ms = 1500) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
 
-  function getGroupForCountry(country) {
-    if (!country) return null;
-    const c = country.toLowerCase().trim();
-    return ERASMUS_REF_RATES.find(g => g.countries.some(x => c.includes(x) || x.includes(c.split(/[ ,]/)[0]))) || null;
+  function getCountryZoneLabel(country) {
+    const zone = getCountryZone(country);
+    return 'Zone ' + zone;
   }
-  function getOfficialRate(country) {
-    const g = getGroupForCountry(country);
-    return g || { manager:164, trainer:137, tech:102, admin:78 };
+  function getStaffRatesForCountry(country) {
+    const zone = getCountryZone(country);
+    return REF_STAFF_CATEGORIES.map(cat => ({
+      code: cat.code,
+      label: cat.name_es || cat.name_en,
+      rate: cat.zones[zone] ? Number(cat.zones[zone].rate_day) : 100
+    }));
   }
   function getPerdiemRef(country) {
-    const g = getGroupForCountry(country);
-    return (g && PERDIEM_DEFAULTS[g.label]) ? { ...PERDIEM_DEFAULTS[g.label] } : { aloj:105, mant:40 };
+    const zone = getCountryZone(country);
+    return PERDIEM_DEFAULTS[zone] ? { ...PERDIEM_DEFAULTS[zone] } : { aloj:84, mant:56 };
   }
   function getPartnerPerdiem(pid) { return state.partnerRates[pid] || { aloj:105, mant:40 }; }
   function getPartnerPerdiemTotal(pid) { const r = getPartnerPerdiem(pid); return (r.aloj||0) + (r.mant||0); }
   function getBand(km) { return DISTANCE_BANDS.find(b => km >= b.min && km <= b.max) || DISTANCE_BANDS[0]; }
   function routeKey(a, b) { return a < b ? a + '_' + b : b + '_' + a; }
-  function getRoute(a, b) { return state.routes[routeKey(a,b)] || { km:0, green:false, custom_rate:null }; }
+  function getRoute(a, b) {
+    const k = routeKey(a, b);
+    if (!state.routes[k]) {
+      // Auto-create with default band (2000-2999km eco)
+      const defBand = DISTANCE_BANDS[4];
+      state.routes[k] = { km: 2500, green: true, custom_rate: defBand.green };
+    }
+    return state.routes[k];
+  }
   function getRouteCost(a, b) {
     const r = getRoute(a, b);
     return (r.custom_rate !== null && r.custom_rate !== undefined && r.custom_rate !== '') ? parseFloat(r.custom_rate)||0 : (r.green ? getBand(r.km).green : getBand(r.km).std);
@@ -346,27 +373,28 @@ const Calculator = (() => {
       const [projRes, partnersRes] = await Promise.all([
         API.get(`/intake/projects/${projectId}`),
         API.get(`/intake/projects/${projectId}/partners`),
+        loadRefRates(),
       ]);
       console.log('[Calc] projRes:', projRes);
       console.log('[Calc] partnersRes:', partnersRes);
       state.project = projRes;
       state.partners = (partnersRes || []).sort((a,b) => a.order_index - b.order_index);
 
-      // Init rates from partner countries
+      // Init rates from partner countries (using Data E+ reference rates)
       state.partnerRates = {};
       state.workerRates = [];
       state.wrCounter = 0;
       state.partners.forEach(p => {
         state.partnerRates[p.id] = getPerdiemRef(p.country);
-        const ref = getOfficialRate(p.country);
-        PROFILES.forEach(prof => {
-          state.workerRates.push({ id: ++state.wrCounter, pid: p.id, category: prof.label, rate: ref[prof.field] || 140 });
+        const staffRates = getStaffRatesForCountry(p.country);
+        staffRates.forEach(sr => {
+          state.workerRates.push({ id: ++state.wrCounter, pid: p.id, category: sr.label, rate: sr.rate });
         });
       });
 
-      // Init routes — default to 500-1999km band with eco travel
+      // Init routes — default to 2000-2999km band with eco travel
       state.routes = {};
-      const defaultBand = DISTANCE_BANDS[3]; // 500-1999 km
+      const defaultBand = DISTANCE_BANDS[4]; // 2000-2999 km
       const defaultKm = Math.round((defaultBand.min + defaultBand.max) / 2);
       for (let i = 0; i < state.partners.length; i++)
         for (let j = i+1; j < state.partners.length; j++)
@@ -491,7 +519,7 @@ const Calculator = (() => {
             <tbody>
               ${state.partners.map((p, i) => {
                 const r = state.partnerRates[p.id] || getPerdiemRef(p.country);
-                const g = getGroupForCountry(p.country);
+                const zLabel = getCountryZoneLabel(p.country);
                 const total = (r.aloj||0) + (r.mant||0);
                 const c = WP_COLORS[i % WP_COLORS.length];
                 return `<tr>
@@ -504,7 +532,7 @@ const Calculator = (() => {
                       </div>
                     </div>
                   </td>
-                  <td><span class="text-[11px] bg-surface-container-high px-2 py-0.5 rounded-full">${g ? g.label : '—'}</span></td>
+                  <td><span class="text-[11px] bg-surface-container-high px-2 py-0.5 rounded-full">${zLabel}</span></td>
                   <td class="text-right"><input type="number" value="${r.aloj}" min="0" onchange="Calculator._setPerdiem('${p.id}','aloj',this.value)"></td>
                   <td class="text-right"><input type="number" value="${r.mant}" min="0" onchange="Calculator._setPerdiem('${p.id}','mant',this.value)"></td>
                   <td class="text-right font-bold" style="color:${c}" id="calc-pd-total-${p.id}">${euros(total)}</td>
@@ -532,14 +560,14 @@ const Calculator = (() => {
   function buildWorkerRatesHTML() {
     return state.partners.map((p, pi) => {
       const rates = state.workerRates.filter(w => w.pid === p.id);
-      const g = getGroupForCountry(p.country);
+      const zoneLabel = getCountryZoneLabel(p.country);
       const c = WP_COLORS[pi % WP_COLORS.length];
       return `
       <div class="border border-outline-variant/20 rounded-lg mb-3 overflow-hidden">
         <div class="flex items-center gap-2 px-3 py-2 border-b border-outline-variant/10" style="background:${WP_BG[pi % WP_BG.length]}">
           <span class="w-5 h-5 rounded-full text-white text-[10px] font-bold flex items-center justify-center" style="background:${c}">${pi+1}</span>
           <span class="font-semibold text-sm" style="color:${c}">${p.name || 'Partner '+(pi+1)}</span>
-          <span class="text-xs text-on-surface-variant ml-1">${g ? g.label : '—'}</span>
+          <span class="text-xs text-on-surface-variant ml-1">${zoneLabel}</span>
         </div>
         <table class="calc-table">
           <tbody>
@@ -595,8 +623,8 @@ const Calculator = (() => {
   }
 
   function buildRoutesSection() {
-    // Auto-fix routes with km=0 to default band (500-1999km eco)
-    const defBand = DISTANCE_BANDS[3];
+    // Auto-fix routes with km=0 to default band (2000-2999km eco)
+    const defBand = DISTANCE_BANDS[4];
     const defKm = Math.round((defBand.min + defBand.max) / 2);
     Object.keys(state.routes).forEach(k => {
       const r = state.routes[k];
@@ -850,7 +878,7 @@ const Calculator = (() => {
     state.wps.forEach((_, wi) => recalcWP(wi));
   }
 
-  const WP_SECTION_BG = ['#eef2ff','#e8f0fe','#e0f2fe','#e0f7fa','#e8eaf6','#e3f2fd','#e1f5fe','#e0f2f1','#ede7f6','#e8eaf6','#f3e5f5','#fce4ec'];
+  const WP_SECTION_BG = ['rgba(29,78,216,.08)','rgba(180,83,9,.08)','rgba(124,58,237,.08)','rgba(15,118,110,.08)','rgba(190,24,93,.08)','rgba(6,95,70,.08)','rgba(154,52,18,.08)','rgba(30,64,175,.08)','rgba(107,33,168,.08)','rgba(14,116,144,.08)','rgba(77,124,15,.08)','rgba(127,29,29,.08)'];
 
   function buildWPTitleOpts(wi, wp) {
     const lastWi = state.wps.length - 1;
@@ -880,8 +908,8 @@ const Calculator = (() => {
       `<option value="${p.id}" ${wp.leader === p.id ? 'selected' : ''}>${p.name || 'Partner ' + (state.partners.indexOf(p)+1)}</option>`
     ).join('');
     return `
-    <div class="calc-wp open" id="calc-wp-${wi}" style="background:${bg};border-color:${c}30">
-      <div class="calc-wp-head" onclick="Calculator._toggleWP(${wi})" style="background:${c}12">
+    <div class="calc-wp open" id="calc-wp-${wi}" style="--wp-color:${c};background:${bg};border-color:${c}30">
+      <div class="calc-wp-head" onclick="Calculator._toggleWP(${wi})" style="background:${c}18">
         <span class="w-9 h-9 rounded-full text-white text-[11px] font-extrabold flex items-center justify-center shrink-0" style="background:${c}">WP${wi+1}</span>
         <div class="flex-1 min-w-0">
           <select class="font-headline text-sm font-bold text-on-surface bg-transparent border-none cursor-pointer focus:outline-none w-full" onclick="event.stopPropagation()" onchange="event.stopPropagation();Calculator._applyWPTitle(${wi},this.value)">${titleOpts}</select>
@@ -1840,7 +1868,7 @@ const Calculator = (() => {
 
   function setRouteBand(a, b, bandIdx) {
     const k = routeKey(a, b);
-    if (!state.routes[k]) state.routes[k] = { km:0, green:false, custom_rate:null };
+    if (!state.routes[k]) state.routes[k] = { km:2500, green:true, custom_rate:DISTANCE_BANDS[4].green };
     const band = DISTANCE_BANDS[bandIdx] || DISTANCE_BANDS[0];
     state.routes[k].km = band.max === Infinity ? 8000 : Math.round((band.min + band.max) / 2);
     const official = state.routes[k].green ? band.green : band.std;
@@ -1857,7 +1885,7 @@ const Calculator = (() => {
 
   function setRoute(a, b, field, value) {
     const k = routeKey(a, b);
-    if (!state.routes[k]) state.routes[k] = { km:0, green:false, custom_rate:null };
+    if (!state.routes[k]) state.routes[k] = { km:2500, green:true, custom_rate:DISTANCE_BANDS[4].green };
     if (field === 'green') {
       const r = state.routes[k];
       r.green = !!value;
@@ -2232,23 +2260,28 @@ const Calculator = (() => {
     state.project = projectData;
     state.partners = (partnerList || []).sort((a, b) => a.order_index - b.order_index);
 
-    // Init default rates from partner countries
+    // Load reference rates from Data E+
+    await loadRefRates();
+
+    // Init default rates from partner countries (using Data E+ reference rates)
     state.partnerRates = {};
     state.workerRates = [];
     state.wrCounter = 0;
     state.partners.forEach(p => {
       state.partnerRates[p.id] = getPerdiemRef(p.country);
-      const ref = getOfficialRate(p.country);
-      PROFILES.forEach(prof => {
-        state.workerRates.push({ id: ++state.wrCounter, pid: p.id, category: prof.label, rate: ref[prof.field] || 140 });
+      const staffRates = getStaffRatesForCountry(p.country);
+      staffRates.forEach(sr => {
+        state.workerRates.push({ id: ++state.wrCounter, pid: p.id, category: sr.label, rate: sr.rate });
       });
     });
 
     // Init default routes
     state.routes = {};
+    const defaultBand2 = DISTANCE_BANDS[4]; // 2000-2999 km
+    const defaultKm2 = Math.round((defaultBand2.min + defaultBand2.max) / 2);
     for (let i = 0; i < state.partners.length; i++)
       for (let j = i + 1; j < state.partners.length; j++)
-        state.routes[routeKey(state.partners[i].id, state.partners[j].id)] = { km: 0, green: false, custom_rate: null };
+        state.routes[routeKey(state.partners[i].id, state.partners[j].id)] = { km: defaultKm2, green: true, custom_rate: defaultBand2.green };
 
     // Init default WPs (4)
     state.wps = [];
@@ -2264,17 +2297,9 @@ const Calculator = (() => {
             // Merge: saved rates + defaults for new partners
             state.partnerRates = { ...state.partnerRates, ...saved.partnerRates };
           }
-          if (saved.workerRates && saved.workerRates.length) {
-            // Restore saved worker rates
-            const restoredRates = saved.workerRates.map((wr, i) => ({ id: i + 1, ...wr }));
-            let maxId = restoredRates.length;
-            // Keep default rates for new partners not in saved state
-            const savedPids = new Set(restoredRates.map(w => w.pid));
-            const newPartnerRates = state.workerRates.filter(w => !savedPids.has(w.pid));
-            newPartnerRates.forEach(w => { w.id = ++maxId; });
-            state.workerRates = [...restoredRates, ...newPartnerRates];
-            state.wrCounter = maxId;
-          }
+          // Worker rates: always use fresh Data E+ categories
+          // Ignore saved workerRates entirely — they may contain stale categories
+          // (Data E+ is the single source of truth for staff categories and zone rates)
           if (saved.routes && Object.keys(saved.routes).length) state.routes = { ...state.routes, ...saved.routes };
           if (saved.extraDests && saved.extraDests.length) {
             state.extraDests = saved.extraDests.map((ed, i) => ({ id: '_ed' + (i + 1), ...ed }));
@@ -2434,6 +2459,7 @@ const Calculator = (() => {
     renderGanttInto,
     getCalcState,
     isInitialized,
+    forceSave: doSave,
     // Exposed for onclick handlers (prefixed with _ to signal internal use)
     _loadProject: loadProject,
     _backToSelector: backToSelector,

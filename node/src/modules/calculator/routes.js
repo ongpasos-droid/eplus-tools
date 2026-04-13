@@ -3,6 +3,9 @@ const router = express.Router();
 const { requireAuth } = require('../../middleware/auth');
 const controller = require('./controller');
 
+// ============ REFERENCE DATA (from Data E+) ============
+router.get('/ref/staff-rates', requireAuth, controller.getRefStaffRates);
+
 // ============ PARTNER RATES ============
 router.get('/projects/:projectId/partner-rates', requireAuth, controller.getPartnerRates);
 router.patch('/partner-rates/:id', requireAuth, controller.updatePartnerRate);

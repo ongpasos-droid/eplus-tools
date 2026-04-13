@@ -260,9 +260,14 @@ async function createFromIntake(userId, projectId) {
     const [[proj]] = await conn.query('SELECT * FROM projects WHERE id = ?', [projectId]);
     if (!proj) throw new Error('Proyecto no encontrado');
 
-    // 2. Check if budget already exists for this project
+    // 2. If budget already exists, delete it to recreate fresh from intake
     const [[existing]] = await conn.query('SELECT id FROM budget_projects WHERE project_id = ?', [projectId]);
-    if (existing) throw new Error('Este proyecto ya tiene un presupuesto');
+    if (existing) {
+      await conn.query('DELETE FROM budget_costs WHERE budget_id = ?', [existing.id]);
+      await conn.query('DELETE FROM budget_work_packages WHERE budget_id = ?', [existing.id]);
+      await conn.query('DELETE FROM budget_beneficiaries WHERE budget_id = ?', [existing.id]);
+      await conn.query('DELETE FROM budget_projects WHERE id = ?', [existing.id]);
+    }
 
     // 3. Create budget with project data
     const budgetId = uuid();
@@ -366,6 +371,19 @@ async function createFromIntake(userId, projectId) {
     }
 
     // 8. Pre-fill cost lines from intake activities
+    // Mapping rules (see memory: project_budget_mapping_intake_writer.md):
+    //   mgmt         → A/A1 Project Coordinator
+    //   meeting/ltta → C/C1 Travel + Accommodation + Subsistence (summed if both in same WP)
+    //   io           → A/A1 Employees by worker category (coordinator costs → Project Coordinator)
+    //   me           → C/C3 Services for communication/promotion/dissemination
+    //   campaign     → C/C3 Services for communication/promotion/dissemination (same line as me)
+    //   local_ws     → C/C3 Services for Meetings, Seminars
+    //   website      → C/C3 Website
+    //   artistic     → C/C3 Artistic Fees
+    //   equipment    → C/C2 Equipment
+    //   goods        → C/C3 Other (other goods)
+    //   consumables  → C/C3 Consumables
+    //   other        → C/C3 Other
     for (const wp of wps) {
       const bwpId = wpToBudgetWp[wp.id];
       const [activities] = await conn.query(
@@ -375,21 +393,23 @@ async function createFromIntake(userId, projectId) {
       for (const act of activities) {
         switch (act.type) {
 
-          case 'management': {
+          // ── Management → A/A1 Project Coordinator ──────────────
+          // Calculator: applicant = rate_applicant × months, each partner = rate_partner × months
+          case 'mgmt': {
             const [mgmt] = await conn.query('SELECT * FROM activity_management WHERE activity_id = ?', [act.id]);
-            const [mgmtParts] = await conn.query('SELECT * FROM activity_management_partners WHERE activity_id = ? AND active = 1', [act.id]);
             if (mgmt[0]) {
-              for (const mp of mgmtParts) {
-                const benId = partnerToBen[mp.partner_id];
+              const months = proj.duration_months || 24;
+              for (const p of partners) {
+                const benId = partnerToBen[p.id];
                 if (!benId) continue;
-                const partner = partners.find(p => p.id === mp.partner_id);
-                const rate = partner?.role === 'applicant' ? Number(mgmt[0].rate_applicant) : Number(mgmt[0].rate_partner);
-                await addToCostLine(conn, budgetId, benId, bwpId, 'A', 'A1', 'Project Coordinator', 1, rate);
+                const monthlyRate = p.role === 'applicant' ? Number(mgmt[0].rate_applicant) : Number(mgmt[0].rate_partner);
+                await addToCostLine(conn, budgetId, benId, bwpId, 'A', 'A1', 'Project Coordinator', months, monthlyRate);
               }
             }
             break;
           }
 
+          // ── Meetings + LTTAs → C/C1 Travel + Accommodation + Subsistence ──
           case 'meeting':
           case 'ltta': {
             const [mob] = await conn.query('SELECT * FROM activity_mobility WHERE activity_id = ?', [act.id]);
@@ -400,7 +420,6 @@ async function createFromIntake(userId, projectId) {
             const days = Number(mob[0].duration_days) || 0;
             const isOnline = act.online === 1;
 
-            // ALL partners participate (guests from DB + host always included)
             const activePartnerIds = new Set(mobParts.map(mp => mp.partner_id));
             if (hostId && partnerToBen[hostId]) activePartnerIds.add(hostId);
 
@@ -409,14 +428,15 @@ async function createFromIntake(userId, projectId) {
               if (!benId) continue;
               const isHost = partnerId === hostId;
 
+              // Travel (only non-host, non-online)
               if (!isOnline && !isHost) {
                 const routeCost = getRouteCost(partnerId, hostId);
                 if (routeCost > 0) {
                   await addToCostLine(conn, budgetId, benId, bwpId, 'C', 'C1', 'Travel', pax, routeCost);
                 }
               }
+              // Accommodation + Subsistence (all partners, non-online)
               if (!isOnline) {
-                // ALL partners (including host) pay per diem of their own country
                 const pd = perdiem[partnerId] || { accom: 0, subs: 0 };
                 if (pd.accom > 0) await addToCostLine(conn, budgetId, benId, bwpId, 'C', 'C1', 'Accommodation', pax * days, pd.accom);
                 if (pd.subs > 0) await addToCostLine(conn, budgetId, benId, bwpId, 'C', 'C1', 'Subsistence', pax * days, pd.subs);
@@ -425,25 +445,23 @@ async function createFromIntake(userId, projectId) {
             break;
           }
 
+          // ── Intellectual Output → A/A1 Employees by worker category ──
           case 'io': {
             const [ios] = await conn.query('SELECT * FROM activity_intellectual_outputs WHERE activity_id = ?', [act.id]);
             for (const io of ios) {
               const benId = partnerToBen[io.partner_id];
               if (!benId) continue;
               const days = Number(io.days) || 0;
-              // Use average worker rate for the partner (matches Calculator behavior)
-              const partnerRates = workerByPartner[io.partner_id] || [];
-              const avgRate = partnerRates.length > 0
-                ? Math.round(partnerRates.reduce((s, w) => s + Number(w.rate), 0) / partnerRates.length)
-                : 0;
-              // Map category for budget line item
               const wr = workerRateByCounter[io.worker_category];
+              const rate = wr ? Number(wr.rate) : 0;
               const lineItem = wr ? mapWorkerToLineItem(wr.category) : 'Other';
-              await addToCostLine(conn, budgetId, benId, bwpId, 'A', 'A1', lineItem, days, avgRate);
+              // If mapped to Project Coordinator, it goes to management line
+              await addToCostLine(conn, budgetId, benId, bwpId, 'A', 'A1', lineItem, days, rate);
             }
             break;
           }
 
+          // ── Multiplier Event → C/C3 Services communication/promotion/dissemination ──
           case 'me': {
             const [mes] = await conn.query('SELECT * FROM activity_multiplier_events WHERE activity_id = ? AND active = 1', [act.id]);
             for (const me of mes) {
@@ -451,12 +469,12 @@ async function createFromIntake(userId, projectId) {
               if (!benId) continue;
               const localTotal = (me.local_pax || 0) * Number(me.local_rate || 0);
               const intlTotal = (me.intl_pax || 0) * Number(me.intl_rate || 0);
-              // Store as single lump in the cost line
               await addToCostLine(conn, budgetId, benId, bwpId, 'C', 'C3', 'Services for communication/promotion/dissemination', 1, localTotal + intlTotal);
             }
             break;
           }
 
+          // ── Dissemination/Campaign → C/C3 Services communication/promotion/dissemination ──
           case 'campaign': {
             const [camps] = await conn.query('SELECT * FROM activity_campaigns WHERE activity_id = ? AND active = 1', [act.id]);
             for (const c of camps) {
@@ -467,6 +485,7 @@ async function createFromIntake(userId, projectId) {
             break;
           }
 
+          // ── Local Workshop → C/C3 Services for Meetings, Seminars ──
           case 'local_ws': {
             const [wss] = await conn.query('SELECT * FROM activity_local_workshops WHERE activity_id = ? AND active = 1', [act.id]);
             for (const ws of wss) {
@@ -478,6 +497,7 @@ async function createFromIntake(userId, projectId) {
             break;
           }
 
+          // ── Website → C/C3 Website ──
           case 'website': {
             const [gcosts] = await conn.query('SELECT * FROM activity_generic_costs WHERE activity_id = ? AND active = 1', [act.id]);
             for (const gc of gcosts) {
@@ -488,13 +508,47 @@ async function createFromIntake(userId, projectId) {
             break;
           }
 
-          case 'generic_costs': {
+          // ── Artistic Fees → C/C3 Artistic Fees ──
+          case 'artistic': {
             const [gcosts] = await conn.query('SELECT * FROM activity_generic_costs WHERE activity_id = ? AND active = 1', [act.id]);
             for (const gc of gcosts) {
               const benId = partnerToBen[gc.partner_id];
               if (!benId) continue;
-              const mapping = mapGenericCost(act.subtype);
-              await addToCostLine(conn, budgetId, benId, bwpId, mapping.category, mapping.subcategory, mapping.line_item, 1, Number(gc.amount || 0));
+              await addToCostLine(conn, budgetId, benId, bwpId, 'C', 'C3', 'Artistic Fees', 1, Number(gc.amount || 0));
+            }
+            break;
+          }
+
+          // ── Equipment → C/C2 Equipment ──
+          case 'equipment': {
+            const [gcosts] = await conn.query('SELECT * FROM activity_generic_costs WHERE activity_id = ? AND active = 1', [act.id]);
+            for (const gc of gcosts) {
+              const benId = partnerToBen[gc.partner_id];
+              if (!benId) continue;
+              await addToCostLine(conn, budgetId, benId, bwpId, 'C', 'C2', 'Equipment', 1, Number(gc.amount || 0));
+            }
+            break;
+          }
+
+          // ── Consumables → C/C3 Consumables ──
+          case 'consumables': {
+            const [gcosts] = await conn.query('SELECT * FROM activity_generic_costs WHERE activity_id = ? AND active = 1', [act.id]);
+            for (const gc of gcosts) {
+              const benId = partnerToBen[gc.partner_id];
+              if (!benId) continue;
+              await addToCostLine(conn, budgetId, benId, bwpId, 'C', 'C3', 'Consumables', 1, Number(gc.amount || 0));
+            }
+            break;
+          }
+
+          // ── Other Goods + Other Costs → C/C3 Other ──
+          case 'goods':
+          case 'other': {
+            const [gcosts] = await conn.query('SELECT * FROM activity_generic_costs WHERE activity_id = ? AND active = 1', [act.id]);
+            for (const gc of gcosts) {
+              const benId = partnerToBen[gc.partner_id];
+              if (!benId) continue;
+              await addToCostLine(conn, budgetId, benId, bwpId, 'C', 'C3', 'Other', 1, Number(gc.amount || 0));
             }
             break;
           }

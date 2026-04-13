@@ -990,8 +990,18 @@ const Intake = (() => {
       if (!currentProjectId) { Toast.show('Error guardando el proyecto', 'err'); return; }
     }
 
-    // Save current state first
+    // Save current state first (project + partners)
     await saveToServer(true);
+
+    // Force save Calculator state (WPs, activities, routes) to database
+    if (typeof Calculator !== 'undefined' && Calculator.isInitialized()) {
+      try {
+        await Calculator.forceSave();
+        console.log('[Intake] Calculator state saved before launch');
+      } catch (err) {
+        console.warn('[Intake] Calculator save warning:', err);
+      }
+    }
 
     try {
       await API.patch('/intake/projects/' + currentProjectId + '/launch', {});
