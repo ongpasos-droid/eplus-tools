@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KA3 — Lección 01 · EU Funding School</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -14,7 +16,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: 'Montserrat', 'Segoe UI', system-ui, sans-serif;
 }
 
 /* ── PLAYER ── */
@@ -150,16 +152,35 @@ body {
 
 .content-sidebar {
   width: 28%;
-  background: linear-gradient(180deg, #141880 0%, #0d1160 100%);
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
   padding: clamp(24px, 4vh, 48px) clamp(16px, 3vw, 36px);
   border-right: 3px solid #e8eb00;
+  overflow: hidden;
   opacity: 0; transform: translateX(-30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
+.content-sidebar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80');
+  background-size: cover;
+  background-position: center top;
+  filter: saturate(0.4) brightness(0.35);
+  z-index: 0;
+}
+.content-sidebar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20,24,128,0.6) 0%, rgba(13,17,96,0.85) 100%);
+  z-index: 1;
+}
+.content-sidebar > * { position: relative; z-index: 2; }
 .slide-content.active .content-sidebar { opacity: 1; transform: translateX(0); }
 
 .sidebar-logo { font-size: clamp(10px, 1.3vw, 15px); }
@@ -453,12 +474,56 @@ body {
 </div>
 
 <script>
+  /* ── Sound effects (Web Audio API) ── */
+  let sfxCtx = null;
+  function getSfxCtx() {
+    if (!sfxCtx) sfxCtx = new (window.AudioContext || window.webkitAudioContext)();
+    return sfxCtx;
+  }
+
+  function playWhoosh() {
+    try {
+      const ctx = getSfxCtx();
+      const buf = ctx.createBuffer(1, ctx.sampleRate * 0.35, ctx.sampleRate);
+      const d = buf.getChannelData(0);
+      for (let i = 0; i < d.length; i++) {
+        d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 1.8) * 0.25;
+      }
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      const f = ctx.createBiquadFilter();
+      f.type = 'bandpass'; f.frequency.value = 1800; f.Q.value = 0.4;
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0, ctx.currentTime);
+      g.gain.linearRampToValueAtTime(1, ctx.currentTime + 0.04);
+      g.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.35);
+      src.connect(f); f.connect(g); g.connect(ctx.destination);
+      src.start();
+    } catch(e) {}
+  }
+
+  function playPop() {
+    try {
+      const ctx = getSfxCtx();
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      osc.connect(g); g.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(900, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(500, ctx.currentTime + 0.12);
+      g.gain.setValueAtTime(0.12, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
+      osc.start(); osc.stop(ctx.currentTime + 0.18);
+    } catch(e) {}
+  }
+
   const audio     = document.getElementById('narration');
   const btnPlay   = document.getElementById('btn-play');
   const progressEl= document.getElementById('progress');
   const timerEl   = document.getElementById('timer');
 
   let started = false;
+  let currentSlide = 0;
   const shown = new Set();
 
   /* ── State helpers ── */
@@ -472,6 +537,7 @@ body {
     if (!shown.has(id)) {
       shown.add(id);
       document.getElementById(id).classList.add('visible');
+      playPop();
     }
   }
 
@@ -479,22 +545,16 @@ body {
   audio.addEventListener('timeupdate', () => {
     const t = audio.currentTime;
 
-    // Slides
+    // Slides (con whoosh en transiciones)
     if (t < 7.5) {
-      show('s0');
-      hide('s1');
-      hide('s2');
+      if (currentSlide !== 0) { currentSlide = 0; show('s0'); hide('s1'); hide('s2'); }
     } else if (t < 33) {
-      hide('s0');
-      show('s1');
-      hide('s2');
+      if (currentSlide !== 1) { currentSlide = 1; playWhoosh(); hide('s0'); show('s1'); hide('s2'); }
     } else {
-      hide('s0');
-      hide('s1');
-      show('s2');
+      if (currentSlide !== 2) { currentSlide = 2; playWhoosh(); hide('s0'); hide('s1'); show('s2'); }
     }
 
-    // Content points (ajustados al audio generado)
+    // Content points con pop
     if (t >= 9.5)  showPoint('p0');
     if (t >= 15.5) showPoint('p1');
     if (t >= 21)   showPoint('p2');
@@ -535,6 +595,7 @@ body {
 
   function restart() {
     shown.clear();
+    currentSlide = 0;
     ['p0','p1','p2','p3'].forEach(id => document.getElementById(id).classList.remove('visible'));
     hide('s1'); hide('s2'); hide('s0');
     audio.currentTime = 0;
