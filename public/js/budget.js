@@ -203,9 +203,11 @@ const Budget = (() => {
     }
     tabs.push({ id: 'summary', label: 'Resumen', icon: 'summarize' });
 
+    // Wrap in pill-style container matching Prep Studio
+    el.className = 'flex items-center gap-1 mb-6 bg-surface-container-lowest rounded-xl border border-outline-variant/20 p-1.5 overflow-x-auto';
     el.innerHTML = tabs.map(t => `
-      <button class="budget-tab flex items-center gap-1.5 px-4 py-2 text-xs font-bold whitespace-nowrap border-b-2 transition-colors
-        ${activeTab === t.id ? 'text-primary border-primary' : 'text-on-surface-variant/60 border-transparent hover:text-primary/70'}"
+      <button class="budget-tab flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold whitespace-nowrap transition-all
+        ${activeTab === t.id ? 'bg-[#1b1464] text-[#e7eb00] shadow-md' : 'text-on-surface-variant hover:bg-surface-container-low'}"
         data-tab="${t.id}">
         <span class="material-symbols-outlined text-sm">${t.icon}</span> ${esc(t.label)}
       </button>`).join('');
@@ -656,16 +658,12 @@ const Budget = (() => {
   async function openInContainer(budgetId, containerEl) {
     // Inject the editor HTML structure into the container
     containerEl.innerHTML = `
-      <div class="flex items-center justify-between mb-4 flex-wrap gap-3">
-        <div class="flex items-center gap-3">
-          <div class="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center">
-            <span class="material-symbols-outlined text-amber-600 text-lg">receipt_long</span>
-          </div>
-          <h2 id="budget-title" class="font-headline text-base font-extrabold text-primary truncate max-w-md"></h2>
-        </div>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="material-symbols-outlined text-xl text-[#1b1464]">receipt_long</span>
+        <h2 id="budget-title" class="font-headline text-base font-extrabold text-on-surface truncate max-w-md"></h2>
       </div>
-      <div id="budget-config" class="flex items-center gap-4 mb-4 p-4 rounded-2xl bg-amber-50/50 border border-amber-200/50 flex-wrap"></div>
-      <div id="budget-tabs" class="flex items-center gap-1 mb-4 overflow-x-auto pb-1 border-b border-outline-variant/20"></div>
+      <div id="budget-config" class="flex items-center gap-4 mb-4 p-4 rounded-2xl bg-surface-container-lowest border border-outline-variant/20 flex-wrap"></div>
+      <div id="budget-tabs"></div>
       <div id="budget-tab-content" class="min-h-[40vh]"></div>`;
 
     try {

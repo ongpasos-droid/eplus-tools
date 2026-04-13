@@ -181,6 +181,7 @@ const Developer = (() => {
   function renderPhaseTabs(active) {
     const tabs = [
       { id: 1, label: 'Contexto', icon: 'checklist' },
+      { id: 12, label: 'Presupuesto', icon: 'account_balance' },
       { id: 15, label: 'Prep Studio', icon: 'psychology' },
       { id: 2, label: 'Generar', icon: 'auto_awesome' },
       { id: 3, label: 'Editar', icon: 'edit_note' },
@@ -271,11 +272,46 @@ const Developer = (() => {
   }
 
   /* ══════════════════════════════════════════════════════════════
+     PHASE 1.2: Budget (standalone, same style as Prep Studio)
+     ══════════════════════════════════════════════════════════════ */
+  async function renderBudgetPhase() {
+    phase = 12;
+    const el = document.getElementById('developer-content');
+
+    el.innerHTML = renderPhaseTabs(12) + `
+      <div class="max-w-5xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1b1464]/10 flex items-center justify-center">
+            <span class="material-symbols-outlined text-xl text-[#1b1464]">account_balance</span>
+          </div>
+          <div>
+            <h2 class="font-headline text-lg font-bold">Presupuesto</h2>
+            <p class="text-xs text-on-surface-variant">Presupuesto detallado del proyecto por beneficiario y paquete de trabajo</p>
+          </div>
+        </div>
+        <div id="budget-phase-content">
+          <div class="text-center py-8"><div class="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full mx-auto"></div><p class="text-sm text-on-surface-variant mt-2">Cargando presupuesto...</p></div>
+        </div>
+        <div class="flex justify-between items-center mt-8">
+          <button onclick="Developer._phase(1)" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-on-surface-variant border border-outline-variant hover:bg-surface-container-low transition-colors">
+            <span class="material-symbols-outlined text-sm">arrow_back</span> Contexto
+          </button>
+          <button onclick="Developer._phase(15)" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold bg-primary text-white hover:bg-primary/90 transition-colors shadow-sm">
+            Prep Studio <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </button>
+        </div>
+      </div>`;
+
+    // Load budget into container
+    const container = document.getElementById('budget-phase-content');
+    await renderPrepPresupuesto(container);
+  }
+
+  /* ══════════════════════════════════════════════════════════════
      PHASE 1.5: Prep Studio — 5 Sub-tabs
      ══════════════════════════════════════════════════════════════ */
   const PREP_TABS = [
     { id: 'consorcio',    label: 'Consorcio',    icon: 'groups' },
-    { id: 'presupuesto',  label: 'Presupuesto',  icon: 'account_balance' },
     { id: 'relevancia',   label: 'Relevancia',   icon: 'lightbulb' },
     { id: 'actividades',  label: 'Actividades',  icon: 'task_alt' },
     { id: 'tareas',       label: 'Tareas',       icon: 'checklist' },
@@ -337,8 +373,8 @@ const Developer = (() => {
       ? `<button onclick="Developer._prepTab('${prevTab.id}')" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-on-surface-variant border border-outline-variant hover:bg-surface-container-low transition-colors">
           <span class="material-symbols-outlined text-sm">arrow_back</span> ${prevTab.label}
         </button>`
-      : `<button onclick="Developer._phase(1)" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-on-surface-variant border border-outline-variant hover:bg-surface-container-low transition-colors">
-          <span class="material-symbols-outlined text-sm">arrow_back</span> Contexto
+      : `<button onclick="Developer._phase(12)" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-on-surface-variant border border-outline-variant hover:bg-surface-container-low transition-colors">
+          <span class="material-symbols-outlined text-sm">arrow_back</span> Presupuesto
         </button>`;
 
     const nextBtn = isLast
@@ -360,7 +396,6 @@ const Developer = (() => {
     try {
       switch (tab) {
         case 'consorcio':    await renderPrepConsorcio(el); break;
-        case 'presupuesto':  await renderPrepPresupuesto(el); break;
         case 'relevancia':   await renderPrepRelevancia(el); break;
         case 'actividades':  await renderPrepActividades(el); break;
         case 'tareas':       await renderPrepTareas(el); break;
@@ -1446,6 +1481,7 @@ const Developer = (() => {
   function goPhase(p) {
     switch (p) {
       case 1: renderPhase1(); break;
+      case 12: renderBudgetPhase(); break;
       case 15: renderPrepStudio(); break;
       case 2: renderPhase2(); break;
       case 3: renderPhase3(); break;
