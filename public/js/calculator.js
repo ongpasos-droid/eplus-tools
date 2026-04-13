@@ -284,7 +284,7 @@ const Calculator = (() => {
     if (!iso) return '—';
     return new Date(iso).toLocaleDateString('es-ES',{day:'2-digit',month:'short',year:'numeric'});
   }
-  function calcDepreciation(np) { return (np.amount||0) * ((np.project_pct||100)/100) * ((np.lifetime_pct||100)/100); }
+  function calcDepreciation(np) { return (parseFloat(np.amount)||0) * ((parseFloat(np.project_pct)||100)/100) * ((parseFloat(np.lifetime_pct)||100)/100); }
 
   /* ── Save indicator ─────────────────────────────────────────── */
   function showSave(status) {
@@ -1223,9 +1223,16 @@ const Calculator = (() => {
   /* ── Depreciation fields ────────────────────────────────────── */
 
   function buildDepreciationFields(act, wi) {
-    if (!act.note_partners) { act.note_partners = {}; state.partners.forEach(p => { act.note_partners[p.id] = { active:true, note:'', amount:0, project_pct:100, lifetime_pct:100 }; }); }
+    if (!act.note_partners) act.note_partners = {};
+    // Ensure all partners have entries with proper defaults
+    state.partners.forEach(p => {
+      if (!act.note_partners[p.id]) act.note_partners[p.id] = { active:true, note:'', amount:0, project_pct:100, lifetime_pct:100 };
+      const np = act.note_partners[p.id];
+      if (np.project_pct == null) np.project_pct = 100;
+      if (np.lifetime_pct == null) np.lifetime_pct = 100;
+    });
     const rows = state.partners.map((p, i) => {
-      const np = act.note_partners[p.id] || { active:true, note:'', amount:0, project_pct:100, lifetime_pct:100 };
+      const np = act.note_partners[p.id];
       const charged = np.active ? calcDepreciation(np) : 0;
       return `<tr style="opacity:${np.active?1:.4}">
         <td><label class="flex items-center gap-2 cursor-pointer">
@@ -1236,7 +1243,7 @@ const Calculator = (() => {
         <td class="text-right"><input type="number" value="${np.amount||''}" min="0" class="w-20" ${!np.active?'disabled':''} onchange="Calculator._setPartnerDetail(${wi},${act.id},'note_partners','${p.id}','amount',this.value)"></td>
         <td class="text-right"><input type="number" value="${np.project_pct??100}" min="0" max="100" class="w-16" ${!np.active?'disabled':''} onchange="Calculator._setPartnerDetail(${wi},${act.id},'note_partners','${p.id}','project_pct',this.value)"></td>
         <td class="text-right"><input type="number" value="${np.lifetime_pct??100}" min="0" max="100" class="w-16" ${!np.active?'disabled':''} onchange="Calculator._setPartnerDetail(${wi},${act.id},'note_partners','${p.id}','lifetime_pct',this.value)"></td>
-        <td class="text-right font-mono font-semibold text-sm">${np.active && charged ? euros(charged) : '—'}</td>
+        <td class="text-right font-mono font-semibold text-sm">${charged > 0 ? euros(charged) : '—'}</td>
       </tr>`;
     }).join('');
 
@@ -1633,13 +1640,13 @@ const Calculator = (() => {
       function add(k, wi, label, units, rate, total) {
         if (!total || total <= 0) return;
         L[k].push({ label, units, rate: Math.round(rate*100)/100, total: Math.round(total*100)/100,
-                     wp: wpLabel(wpR[wi], wi), wpColor: wpR[wi].color });
+                     wp: wpLabel(wpR[wi], wi), wpColor: wpR[wi].color, wpIdx: wi });
       }
 
       function addWorker(profileId, wi, label, units, rate, total) {
         if (!total || total <= 0) return;
         const entry = { label, units, rate: Math.round(rate*100)/100, total: Math.round(total*100)/100,
-                        wp: wpLabel(wpR[wi], wi), wpColor: wpR[wi].color };
+                        wp: wpLabel(wpR[wi], wi), wpColor: wpR[wi].color, wpIdx: wi };
         if (L.A1_workers[profileId]) {
           L.A1_workers[profileId].items.push(entry);
         } else {
@@ -1653,14 +1660,10 @@ const Calculator = (() => {
         wp.acts.forEach(act => {
           switch (act.type) {
             case 'mgmt': {
+              // Mgmt cost: distribute to the FIRST profile (coordinator) using mgmt flat rate
               const rate = pi === 0 ? (act.rate_applicant||500) : (act.rate_partner||250);
-              // Assign mgmt cost to the first worker category (coordinator-like)
-              const firstProfile = partnerRates[0];
-              if (firstProfile) {
-                addWorker(firstProfile.id, wi, act.label, mo, rate, rate * mo);
-              } else {
-                addWorker('_other', wi, act.label, mo, rate, rate * mo);
-              }
+              const coordProfile = partnerRates[0];
+              addWorker(coordProfile ? coordProfile.id : '_other', wi, 'Project Management', mo, rate, rate * mo);
               break;
             }
             case 'meeting': case 'ltta': {
@@ -1681,7 +1684,8 @@ const Calculator = (() => {
               if (!ps?.active) break;
               ps.staff.forEach(st => {
                 const rate = getPartnerDayRate(p.id, st.profileId);
-                addWorker(st.profileId, wi, act.label, st.days||0, rate, (st.days||0)*rate);
+                const pName = state.workerRates.find(w => w.id === st.profileId)?.category || 'Staff';
+                addWorker(st.profileId, wi, `${act.label} — ${pName}`, st.days||0, rate, (st.days||0)*rate);
               });
               break;
             }
@@ -1755,19 +1759,164 @@ const Calculator = (() => {
         `).join('')}`;
     }
 
-    // ── Render each partner as EACEA table ──
+    // ── Helper: filter items by WP index ──
+    function filterByWP(items, wi) { return items.filter(it => it.wpIdx === wi); }
+    function filterWorkersByWP(workers, wi) {
+      const result = {};
+      Object.entries(workers).forEach(([id, w]) => {
+        result[id] = { ...w, items: w.items.filter(it => it.wpIdx === wi) };
+      });
+      return result;
+    }
+    function sumWorkers(workers) { return Object.values(workers).reduce((s, w) => s + w.items.reduce((ss, it) => ss + it.total, 0), 0); }
+    function sumItems(items) { return items.reduce((s, it) => s + it.total, 0); }
+
+    // ── Render EACEA table body for a given set of lines ──
+    function eaceaTableBody(lines, c, indPctVal) {
+      const A1 = sumWorkers(lines.A1_workers);
+      const A = A1;
+      const C1 = sumItems(lines.C1_travel) + sumItems(lines.C1_accom) + sumItems(lines.C1_subs);
+      const C2 = sumItems(lines.C2);
+      const C3 = sumItems(lines.C3_cons) + sumItems(lines.C3_meet) + sumItems(lines.C3_comms) + sumItems(lines.C3_web) + sumItems(lines.C3_art) + sumItems(lines.C3_other);
+      const C = C1 + C2 + C3;
+      const directTotal = A + C;
+      const indAmt = directTotal * indPctVal / 100;
+      const grandTotal = directTotal + indAmt;
+
+      return `
+                <tr class="font-bold border-b border-outline-variant/20" style="background:${c}06">
+                  <td class="py-2 px-3" colspan="3">A. DIRECT PERSONNEL COSTS</td>
+                  <td class="text-right py-2 px-3 font-mono">${A > 0 ? euros(A) : dash}</td>
+                </tr>
+                <tr class="border-b border-outline-variant/10 font-semibold">
+                  <td class="py-1 pl-5">A.1 Employees (or equivalent)</td>
+                  <td class="text-right font-mono px-2 text-on-surface-variant text-[9px]" colspan="2">person months</td>
+                  <td class="text-right font-mono px-3">${A1 > 0 ? euros(A1) : dash}</td>
+                </tr>
+                ${Object.values(lines.A1_workers).map(w => subRow(w.category + (w.rate ? ' <span class="text-[9px] text-on-surface-variant/50 font-normal">(' + euros(w.rate) + '/day)</span>' : ''), w.items, c)).join('')}
+                <tr class="border-b border-outline-variant/5 text-on-surface-variant/50"><td class="py-0.5 pl-5">A.2 Natural persons under direct contract</td><td class="text-right px-2">${dash}</td><td class="text-right px-2">${dash}</td><td class="text-right px-3">${dash}</td></tr>
+                <tr class="border-b border-outline-variant/5 text-on-surface-variant/50"><td class="py-0.5 pl-5">A.3 Seconded persons</td><td class="text-right px-2">${dash}</td><td class="text-right px-2">${dash}</td><td class="text-right px-3">${dash}</td></tr>
+                <tr class="border-b border-outline-variant/5 text-on-surface-variant/50"><td class="py-0.5 pl-5">A.4 SME Owners without salary</td><td class="text-right px-2">${dash}</td><td class="text-right px-2">${dash}</td><td class="text-right px-3">${dash}</td></tr>
+                <tr class="border-b border-outline-variant/10 text-on-surface-variant/50"><td class="py-0.5 pl-5">A.5 Volunteers</td><td class="text-right px-2">${dash}</td><td class="text-right px-2">${dash}</td><td class="text-right px-3">${dash}</td></tr>
+                <tr class="font-bold border-b border-outline-variant/20 text-on-surface-variant/60" style="background:${c}06">
+                  <td class="py-2 px-3" colspan="3">B. Subcontracting costs</td>
+                  <td class="text-right py-2 px-3 font-mono">${dash}</td>
+                </tr>
+                <tr class="font-bold border-b border-outline-variant/20" style="background:${c}06">
+                  <td class="py-2 px-3" colspan="3">C. Purchase costs</td>
+                  <td class="text-right py-2 px-3 font-mono">${C > 0 ? euros(C) : dash}</td>
+                </tr>
+                <tr class="border-b border-outline-variant/10 font-semibold">
+                  <td class="py-1 pl-5">C.1 Travel and subsistence</td>
+                  <td class="text-right font-mono px-2 text-on-surface-variant text-[9px]" colspan="2">per travel or day</td>
+                  <td class="text-right font-mono px-3">${C1 > 0 ? euros(C1) : dash}</td>
+                </tr>
+                ${subRow('Travel', lines.C1_travel, c)}
+                ${subRow('Accommodation', lines.C1_accom, c)}
+                ${subRow('Subsistence', lines.C1_subs, c)}
+                <tr class="border-b border-outline-variant/10 font-semibold">
+                  <td class="py-1 pl-5">C.2 Equipment</td>
+                  <td colspan="2"></td>
+                  <td class="text-right font-mono px-3">${C2 > 0 ? euros(C2) : dash}</td>
+                </tr>
+                ${lines.C2.length ? subRow('Equipment items', lines.C2, c) : ''}
+                <tr class="border-b border-outline-variant/10 font-semibold">
+                  <td class="py-1 pl-5">C.3 Other goods, works and services</td>
+                  <td colspan="2"></td>
+                  <td class="text-right font-mono px-3">${C3 > 0 ? euros(C3) : dash}</td>
+                </tr>
+                ${subRow('Consumables', lines.C3_cons, c)}
+                ${subRow('Services for Meetings, Seminars', lines.C3_meet, c)}
+                ${subRow('Services for communication/dissemination', lines.C3_comms, c)}
+                ${subRow('Website', lines.C3_web, c)}
+                ${subRow('Artistic Fees', lines.C3_art, c)}
+                ${subRow('Other', lines.C3_other, c)}
+                <tr class="font-bold border-b border-outline-variant/20 text-on-surface-variant/60" style="background:${c}06">
+                  <td class="py-2 px-3" colspan="3">D. Other cost categories</td>
+                  <td class="text-right py-2 px-3 font-mono">${dash}</td>
+                </tr>
+                <tr class="border-b border-outline-variant/10 text-on-surface-variant/50"><td class="py-0.5 pl-5">D.1 Financial support to third parties</td><td class="text-right px-2">${dash}</td><td class="text-right px-2">${dash}</td><td class="text-right px-3">${dash}</td></tr>
+                <tr class="font-bold border-y-2 border-outline-variant/30" style="background:${c}0c">
+                  <td class="py-2 px-3" colspan="3">TOTAL DIRECT COSTS (A+B+C+D)</td>
+                  <td class="text-right py-2 px-3 font-mono">${euros(directTotal)}</td>
+                </tr>
+                <tr class="border-b border-outline-variant/20">
+                  <td class="py-2 px-3 font-semibold" colspan="3">E. Indirect costs ${indPctVal}%</td>
+                  <td class="text-right py-2 px-3 font-mono font-semibold">${euros(indAmt)}</td>
+                </tr>
+                <tr class="font-bold text-white" style="background:${c}">
+                  <td class="py-2.5 px-3" colspan="3">TOTAL COSTS (A+B+C+D+E)</td>
+                  <td class="text-right py-2.5 px-3 font-mono">${euros(grandTotal)}</td>
+                </tr>`;
+    }
+
+    // ── Render each partner with WP breakdown ──
     return state.partners.map((p, i) => {
       const b = partnerEACEA(i);
       const c = WP_COLORS[i%WP_COLORS.length];
       const indAmt = b.directTotal * indPct / 100;
       const grandTotal = b.directTotal + indAmt;
       const grandPct = target > 0 ? (grandTotal / target * 100).toFixed(1) : '0';
-      const sm = k => b.lines[k].reduce((s,it) => s+it.total, 0);
+      const partnerId = 'bp-partner-' + i;
+
+      // Build WP sub-tables
+      const wpTables = wpR.map((wp, wi) => {
+        const wc = WP_COLORS[wi%WP_COLORS.length];
+        const wpLines = {
+          A1_workers: filterWorkersByWP(b.lines.A1_workers, wi),
+          C1_travel: filterByWP(b.lines.C1_travel, wi),
+          C1_accom: filterByWP(b.lines.C1_accom, wi),
+          C1_subs: filterByWP(b.lines.C1_subs, wi),
+          C2: filterByWP(b.lines.C2, wi),
+          C3_cons: filterByWP(b.lines.C3_cons, wi),
+          C3_meet: filterByWP(b.lines.C3_meet, wi),
+          C3_comms: filterByWP(b.lines.C3_comms, wi),
+          C3_web: filterByWP(b.lines.C3_web, wi),
+          C3_art: filterByWP(b.lines.C3_art, wi),
+          C3_other: filterByWP(b.lines.C3_other, wi),
+        };
+        const wpDirect = sumWorkers(wpLines.A1_workers) + sumItems(wpLines.C1_travel) + sumItems(wpLines.C1_accom) + sumItems(wpLines.C1_subs) + sumItems(wpLines.C2) + sumItems(wpLines.C3_cons) + sumItems(wpLines.C3_meet) + sumItems(wpLines.C3_comms) + sumItems(wpLines.C3_web) + sumItems(wpLines.C3_art) + sumItems(wpLines.C3_other);
+        if (wpDirect === 0) return '';
+
+        const wpIndAmt = wpDirect * indPct / 100;
+        const wpTotal = wpDirect + wpIndAmt;
+        const wpUid = 'bp-wp-' + i + '-' + wi;
+
+        return `
+          <div class="border-b border-outline-variant/15">
+            <div class="flex items-center gap-2 px-4 py-2 cursor-pointer select-none hover:bg-surface-container-low" onclick="document.getElementById('${wpUid}').classList.toggle('hidden');this.querySelector('.wp-arr').classList.toggle('rotate-180')">
+              <span class="w-6 h-6 rounded-full text-white text-[9px] font-bold flex items-center justify-center flex-shrink-0" style="background:${wc}">WP${wi+1}</span>
+              <span class="text-xs font-bold flex-1 truncate" style="color:${wc}">${wpLabel(wp, wi)}</span>
+              <span class="text-xs font-mono font-bold" style="color:${wc}">${euros(wpTotal)}</span>
+              <span class="material-symbols-outlined text-sm text-on-surface-variant wp-arr transition-transform">expand_more</span>
+            </div>
+            <div id="${wpUid}" class="hidden">
+              <div class="overflow-x-auto">
+                <table class="w-full text-[11px] border-collapse">
+                  <thead>
+                    <tr class="text-[9px] uppercase tracking-wider text-on-surface-variant border-y border-outline-variant/20" style="background:${wc}06">
+                      <th class="text-left py-1.5 px-3 font-bold"></th>
+                      <th class="text-right py-1.5 px-2 font-bold w-20">Units</th>
+                      <th class="text-right py-1.5 px-2 font-bold w-20">Cost/Unit</th>
+                      <th class="text-right py-1.5 px-3 font-bold w-28">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${eaceaTableBody(wpLines, wc, indPct)}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+
+      // Partner total EACEA table (all WPs combined)
+      const totalUid = 'bp-total-' + i;
 
       return `
       <div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 mb-4 overflow-hidden" style="border-top:3px solid ${c}">
-        <!-- Header -->
-        <div class="flex items-center gap-2 px-4 py-3 cursor-pointer select-none" onclick="this.nextElementSibling.classList.toggle('hidden');this.querySelector('.bp-arrow').classList.toggle('rotate-180')">
+        <!-- Partner Header -->
+        <div class="flex items-center gap-2 px-4 py-3 cursor-pointer select-none" onclick="document.getElementById('${partnerId}').classList.toggle('hidden');this.querySelector('.bp-arrow').classList.toggle('rotate-180')">
           <span class="w-8 h-8 rounded-full text-white text-[10px] font-bold flex items-center justify-center flex-shrink-0" style="background:${c}">BE${String(i+1).padStart(2,'0')}</span>
           <div class="flex-1 min-w-0">
             <div class="font-headline font-bold truncate">${p.name||'Partner '+(i+1)}</div>
@@ -1780,94 +1929,36 @@ const Calculator = (() => {
           <span class="material-symbols-outlined text-base text-on-surface-variant bp-arrow transition-transform">expand_more</span>
         </div>
 
-        <!-- EACEA Table -->
-        <div class="hidden">
-          <div class="overflow-x-auto">
-            <table class="w-full text-[11px] border-collapse">
-              <thead>
-                <tr class="text-[9px] uppercase tracking-wider text-on-surface-variant border-y border-outline-variant/30" style="background:${c}08">
-                  <th class="text-left py-2 px-3 font-bold"></th>
-                  <th class="text-right py-2 px-2 font-bold w-20">Units</th>
-                  <th class="text-right py-2 px-2 font-bold w-20">Cost/Unit</th>
-                  <th class="text-right py-2 px-3 font-bold w-28">Beneficiary<br>Total Costs</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- ═══ A. DIRECT PERSONNEL COSTS ═══ -->
-                <tr class="font-bold border-b border-outline-variant/20" style="background:${c}06">
-                  <td class="py-2 px-3" colspan="3">A. DIRECT PERSONNEL COSTS</td>
-                  <td class="text-right py-2 px-3 font-mono">${b.A > 0 ? euros(b.A) : dash}</td>
-                </tr>
-                <tr class="border-b border-outline-variant/10 font-semibold">
-                  <td class="py-1 pl-5">A.1 Employees (or equivalent)</td>
-                  <td class="text-right font-mono px-2 text-on-surface-variant text-[9px]" colspan="2">person months</td>
-                  <td class="text-right font-mono px-3">${b.A1 > 0 ? euros(b.A1) : dash}</td>
-                </tr>
-                ${Object.values(b.lines.A1_workers).map(w => subRow(w.category + (w.rate ? ' <span class="text-[9px] text-on-surface-variant/50 font-normal">(' + euros(w.rate) + '/day)</span>' : ''), w.items, c)).join('')}
-                <tr class="border-b border-outline-variant/5 text-on-surface-variant/50"><td class="py-0.5 pl-5">A.2 Natural persons under direct contract</td><td class="text-right px-2">${dash}</td><td class="text-right px-2">${dash}</td><td class="text-right px-3">${dash}</td></tr>
-                <tr class="border-b border-outline-variant/5 text-on-surface-variant/50"><td class="py-0.5 pl-5">A.3 Seconded persons</td><td class="text-right px-2">${dash}</td><td class="text-right px-2">${dash}</td><td class="text-right px-3">${dash}</td></tr>
-                <tr class="border-b border-outline-variant/5 text-on-surface-variant/50"><td class="py-0.5 pl-5">A.4 SME Owners without salary</td><td class="text-right px-2">${dash}</td><td class="text-right px-2">${dash}</td><td class="text-right px-3">${dash}</td></tr>
-                <tr class="border-b border-outline-variant/10 text-on-surface-variant/50"><td class="py-0.5 pl-5">A.5 Volunteers</td><td class="text-right px-2">${dash}</td><td class="text-right px-2">${dash}</td><td class="text-right px-3">${dash}</td></tr>
+        <!-- WP breakdown + Total -->
+        <div id="${partnerId}" class="hidden">
+          <!-- Per-WP sub-tables -->
+          ${wpTables}
 
-                <!-- ═══ B. SUBCONTRACTING ═══ -->
-                <tr class="font-bold border-b border-outline-variant/20 text-on-surface-variant/60" style="background:${c}06">
-                  <td class="py-2 px-3" colspan="3">B. Subcontracting costs</td>
-                  <td class="text-right py-2 px-3 font-mono">${dash}</td>
-                </tr>
-
-                <!-- ═══ C. PURCHASE COSTS ═══ -->
-                <tr class="font-bold border-b border-outline-variant/20" style="background:${c}06">
-                  <td class="py-2 px-3" colspan="3">C. Purchase costs</td>
-                  <td class="text-right py-2 px-3 font-mono">${b.C > 0 ? euros(b.C) : dash}</td>
-                </tr>
-                <tr class="border-b border-outline-variant/10 font-semibold">
-                  <td class="py-1 pl-5">C.1 Travel and subsistence</td>
-                  <td class="text-right font-mono px-2 text-on-surface-variant text-[9px]" colspan="2">per travel or day</td>
-                  <td class="text-right font-mono px-3">${b.C1 > 0 ? euros(b.C1) : dash}</td>
-                </tr>
-                ${subRow('Travel', b.lines.C1_travel, c)}
-                ${subRow('Accommodation', b.lines.C1_accom, c)}
-                ${subRow('Subsistence', b.lines.C1_subs, c)}
-                <tr class="border-b border-outline-variant/10 font-semibold">
-                  <td class="py-1 pl-5">C.2 Equipment</td>
-                  <td colspan="2"></td>
-                  <td class="text-right font-mono px-3">${b.C2 > 0 ? euros(b.C2) : dash}</td>
-                </tr>
-                ${b.lines.C2.length ? subRow('Equipment items', b.lines.C2, c) : ''}
-                <tr class="border-b border-outline-variant/10 font-semibold">
-                  <td class="py-1 pl-5">C.3 Other goods, works and services</td>
-                  <td colspan="2"></td>
-                  <td class="text-right font-mono px-3">${b.C3 > 0 ? euros(b.C3) : dash}</td>
-                </tr>
-                ${subRow('Consumables', b.lines.C3_cons, c)}
-                ${subRow('Services for Meetings, Seminars', b.lines.C3_meet, c)}
-                ${subRow('Services for communication/dissemination', b.lines.C3_comms, c)}
-                ${subRow('Website', b.lines.C3_web, c)}
-                ${subRow('Artistic Fees', b.lines.C3_art, c)}
-                ${subRow('Other', b.lines.C3_other, c)}
-
-                <!-- ═══ D. OTHER ═══ -->
-                <tr class="font-bold border-b border-outline-variant/20 text-on-surface-variant/60" style="background:${c}06">
-                  <td class="py-2 px-3" colspan="3">D. Other cost categories</td>
-                  <td class="text-right py-2 px-3 font-mono">${dash}</td>
-                </tr>
-                <tr class="border-b border-outline-variant/10 text-on-surface-variant/50"><td class="py-0.5 pl-5">D.1 Financial support to third parties</td><td class="text-right px-2">${dash}</td><td class="text-right px-2">${dash}</td><td class="text-right px-3">${dash}</td></tr>
-
-                <!-- ═══ TOTALS ═══ -->
-                <tr class="font-bold border-y-2 border-outline-variant/30" style="background:${c}0c">
-                  <td class="py-2 px-3" colspan="3">TOTAL DIRECT COSTS (A+B+C+D)</td>
-                  <td class="text-right py-2 px-3 font-mono">${euros(b.directTotal)}</td>
-                </tr>
-                <tr class="border-b border-outline-variant/20">
-                  <td class="py-2 px-3 font-semibold" colspan="3">E. Indirect costs ${indPct}%</td>
-                  <td class="text-right py-2 px-3 font-mono font-semibold">${euros(indAmt)}</td>
-                </tr>
-                <tr class="font-bold text-white" style="background:${c}">
-                  <td class="py-2.5 px-3" colspan="3">TOTAL COSTS (A+B+C+D+E)</td>
-                  <td class="text-right py-2.5 px-3 font-mono">${euros(grandTotal)}</td>
-                </tr>
-              </tbody>
-            </table>
+          <!-- Partner Total (all WPs) -->
+          <div class="border-t-2 border-outline-variant/30">
+            <div class="flex items-center gap-2 px-4 py-2 cursor-pointer select-none" style="background:${c}08" onclick="document.getElementById('${totalUid}').classList.toggle('hidden');this.querySelector('.wp-arr').classList.toggle('rotate-180')">
+              <span class="material-symbols-outlined text-sm" style="color:${c}">functions</span>
+              <span class="text-xs font-bold flex-1" style="color:${c}">TOTAL ${p.name||'Partner '+(i+1)}</span>
+              <span class="text-sm font-mono font-bold" style="color:${c}">${euros(grandTotal)}</span>
+              <span class="material-symbols-outlined text-sm text-on-surface-variant wp-arr transition-transform">expand_more</span>
+            </div>
+            <div id="${totalUid}" class="hidden">
+              <div class="overflow-x-auto">
+                <table class="w-full text-[11px] border-collapse">
+                  <thead>
+                    <tr class="text-[9px] uppercase tracking-wider text-on-surface-variant border-y border-outline-variant/30" style="background:${c}08">
+                      <th class="text-left py-2 px-3 font-bold"></th>
+                      <th class="text-right py-2 px-2 font-bold w-20">Units</th>
+                      <th class="text-right py-2 px-2 font-bold w-20">Cost/Unit</th>
+                      <th class="text-right py-2 px-3 font-bold w-28">Beneficiary<br>Total Costs</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${eaceaTableBody(b.lines, c, indPct)}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
         <!-- Progress bar -->
@@ -2423,6 +2514,11 @@ const Calculator = (() => {
       if (el) el.innerHTML = buildActFields(act, wi);
     } else {
       act[stateKey][pid][field] = ['note'].includes(field) ? value : (parseFloat(value)||0);
+      // Re-render fields for depreciation types so CHARGED column updates live
+      if (stateKey === 'note_partners' && ['amount','project_pct','lifetime_pct'].includes(field)) {
+        const el = $('calc-act-fields-' + actId);
+        if (el) el.innerHTML = buildActFields(act, wi);
+      }
     }
     recalcWP(wi);
   }
