@@ -620,7 +620,16 @@ const Developer = (() => {
           <h4 class="font-headline text-sm font-bold text-primary mb-1 flex items-center gap-2">
             <span class="material-symbols-outlined text-lg">upload_file</span> Documentos de investigacion
           </h4>
-          <p class="text-xs text-on-surface-variant mb-3">Estudios, informes o articulos. Se vectorizan para que la IA los use como evidencia.</p>
+          <p class="text-xs text-on-surface-variant mb-3">Sube documentos que respalden tu propuesta. La IA los usara como evidencia primaria en cada seccion relevante.</p>
+          <div class="bg-primary/5 border border-primary/10 rounded-lg p-3 mb-3">
+            <div class="text-[10px] font-bold uppercase tracking-wider text-primary mb-1.5">Que tipo de documentos subir</div>
+            <div class="grid grid-cols-1 gap-1 text-[11px] text-on-surface-variant">
+              <div class="flex items-start gap-1.5"><span class="text-primary font-bold">1.1</span> Informes sobre el problema, estadisticas (Eurostat, OECD, informes nacionales)</div>
+              <div class="flex items-start gap-1.5"><span class="text-primary font-bold">1.2</span> Analisis de necesidades, encuestas, datos locales de los paises del consorcio</div>
+              <div class="flex items-start gap-1.5"><span class="text-primary font-bold">1.3</span> Buenas practicas, proyectos similares, benchmarking, estado del arte</div>
+              <div class="flex items-start gap-1.5"><span class="text-primary font-bold">3.x</span> Estrategias de difusion, estudios de impacto, planes de sostenibilidad</div>
+            </div>
+          </div>
 
           <div class="flex items-center gap-3 mb-3">
             <label class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-[#1b1464] text-[#e7eb00] cursor-pointer hover:bg-[#1b1464]/90 transition-colors">

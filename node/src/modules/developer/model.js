@@ -612,6 +612,46 @@ ${actBlock || 'No activities defined'}
 ${interviewBlock ? `═══ COORDINATOR'S OWN WORDS ═══${interviewBlock}` : ''}`;
 }
 
+// ── Smart RAG query builder per section ───────────────────────
+
+async function buildSectionRagQuery(sectionId, sectionTitle, projectId) {
+  // Load project context for enriching the query
+  let projectName = '', problem = '', approach = '', countries = '';
+  if (projectId) {
+    try {
+      const [pRows] = await db.execute('SELECT name, description FROM projects WHERE id = ?', [projectId]);
+      const [cRows] = await db.execute('SELECT problem, target_groups, approach FROM intake_contexts WHERE project_id = ? LIMIT 1', [projectId]);
+      const [ptRows] = await db.execute('SELECT DISTINCT country FROM partners WHERE project_id = ? AND country IS NOT NULL', [projectId]);
+      projectName = pRows[0]?.name || '';
+      problem = (cRows[0]?.problem || '').substring(0, 200);
+      approach = (cRows[0]?.approach || '').substring(0, 200);
+      countries = ptRows.map(r => r.country).join(', ');
+    } catch (e) { /* non-critical, fall back to generic query */ }
+  }
+
+  // Section-specific query strategies
+  const queryMap = {
+    'summary_text': `${projectName} project summary objectives methodology expected results`,
+    's1_1_text': `background context ${problem} challenges statistics European policy ${projectName}`,
+    's1_2_text': `needs analysis target groups ${problem} evidence gaps ${countries} specific objectives indicators`,
+    's1_3_text': `innovation added value complementarity existing solutions state of art European cooperation ${approach} ${projectName}`,
+    's2_1_1_text': `methodology concept approach activities implementation ${approach} pedagogical framework`,
+    's2_1_2_text': `project management quality assurance monitoring evaluation risk management coordination`,
+    's2_1_4_text': `cost effectiveness financial management budget allocation value for money resources`,
+    's2_2_1_text': `consortium partnership cooperation complementary expertise ${countries} partner selection`,
+    's2_2_2_text': `consortium management decision making governance communication conflict resolution`,
+    's3_1_text': `impact ambition expected results target groups outcomes long-term change ${problem}`,
+    's3_2_text': `dissemination communication visibility strategy stakeholders multiplier exploitation`,
+    's3_3_text': `sustainability continuation mainstreaming financial sustainability after funding institutionalisation`,
+    's4_1_text': `work plan overview work packages timeline implementation schedule milestones`,
+    's4_2_text': `work packages activities deliverables resources timing responsibilities`,
+    's5_1_text': `ethics data protection GDPR informed consent vulnerable groups ethical considerations`,
+    's5_2_text': `security classified information EU classified sensitive data protection`,
+  };
+
+  return queryMap[sectionId] || sectionTitle;
+}
+
 // ── RAG: Retrieve relevant document chunks ──────────────────
 
 async function retrieveRelevantChunks(query, programId, topK = 8) {
@@ -773,13 +813,16 @@ async function generateSection(instanceId, sectionId, projectContext, programId,
   const [instRow] = await db.execute('SELECT project_id FROM form_instances WHERE id = ?', [instanceId]);
   const projId = instRow[0]?.project_id;
 
+  // Build section-specific RAG query using project context for smarter retrieval
+  const ragQuery = await buildSectionRagQuery(sectionId, sectionTitle, projId);
+
   // Gather all context in parallel (interview answers already in projectContext via buildEnrichedContext)
   const [ragChunks, writingRules, evalGuidance, previousSections, researchChunks] = await Promise.all([
-    programId ? retrieveRelevantChunks(sectionTitle, programId, 8) : Promise.resolve(''),
+    programId ? retrieveRelevantChunks(ragQuery, programId, 8) : Promise.resolve(''),
     programId ? getWritingRules(programId) : Promise.resolve({}),
     getEvalGuidanceForSection(sectionId),
     getPreviousSections(instanceId, sectionId),
-    projId ? retrieveResearchChunks(sectionTitle, projId, 6) : Promise.resolve(''),
+    projId ? retrieveResearchChunks(ragQuery, projId, 6) : Promise.resolve(''),
   ]);
 
   console.log(`[Writer] writingRules loaded: style=${writingRules.writing_style ? writingRules.writing_style.length + ' chars' : 'NULL'}, ai=${writingRules.ai_detection_rules ? writingRules.ai_detection_rules.length + ' chars' : 'NULL'}, evalGuidance=${evalGuidance ? evalGuidance.length + ' chars' : 'NONE'}, RAG=${ragChunks ? ragChunks.length + ' chars' : 'NONE'}, prevSections=${previousSections ? previousSections.length + ' chars' : 'NONE'}`);
