@@ -2611,6 +2611,15 @@ KEY EVALUATOR FOCUS:
         </div>
         <div class="col-span-2 mt-2 border-t border-outline-variant/20 pt-4">
           <div class="flex items-center gap-2 mb-3">
+            <span class="material-symbols-outlined text-sm text-primary">info</span>
+            <span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Call summary (visible in Intake)</span>
+          </div>
+          <div class="flex flex-col gap-1 mb-4">
+            <textarea id="cd-call-summary" rows="4" class="px-3 py-2.5 rounded-xl border border-outline-variant text-sm focus:border-primary outline-none resize-vertical leading-relaxed" placeholder="Brief description of this call: what type of projects, budget range, thematic focus, target audience... This will be shown to users in the Intake form.">${prog.call_summary || ''}</textarea>
+          </div>
+        </div>
+        <div class="col-span-2 mt-2 border-t border-outline-variant/20 pt-4">
+          <div class="flex items-center gap-2 mb-3">
             <span class="material-symbols-outlined text-sm text-primary">edit_note</span>
             <span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Writing rules (global)</span>
           </div>
@@ -2650,7 +2659,8 @@ KEY EVALUATOR FOCUS:
           start_date_max: document.getElementById('cd-start-max').value || null,
           duration_min_months: document.getElementById('cd-dur-min').value || null,
           duration_max_months: document.getElementById('cd-dur-max').value || null,
-          active: parseInt(document.getElementById('cd-active').value)
+          active: parseInt(document.getElementById('cd-active').value),
+          call_summary: document.getElementById('cd-call-summary').value || null
         });
         // Also save writing rules to call_eligibility
         await API.put('/admin/data/eligibility/call/' + ev.programId, {

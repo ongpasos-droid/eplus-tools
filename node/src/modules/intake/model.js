@@ -12,7 +12,7 @@ async function findActivePrograms() {
   const sql = `
     SELECT id, program_id, name, action_type, deadline, start_date_min, start_date_max,
            duration_min_months, duration_max_months, eu_grant_max, cofin_pct, indirect_pct,
-           min_partners, notes, created_at
+           min_partners, notes, call_summary, created_at
     FROM intake_programs
     WHERE active = 1
     ORDER BY name ASC
@@ -34,9 +34,9 @@ async function createProject(userId, projectData) {
 
   const sql = `
     INSERT INTO projects (
-      id, user_id, name, type, description, start_date, duration_months,
+      id, user_id, name, type, description, proposal_lang, national_agency, start_date, duration_months,
       deadline, eu_grant, cofin_pct, indirect_pct, status, created_at, updated_at
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'draft', ?, ?)
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'draft', ?, ?)
   `;
 
   const params = [
@@ -45,6 +45,8 @@ async function createProject(userId, projectData) {
     projectData.name,
     projectData.type || null,
     projectData.description || null,
+    projectData.proposal_lang || 'en',
+    projectData.national_agency || null,
     projectData.start_date || null,
     projectData.duration_months || null,
     projectData.deadline || null,
@@ -72,7 +74,7 @@ async function createProject(userId, projectData) {
  */
 async function findProjectById(projectId, userId) {
   const sql = `
-    SELECT id, user_id, name, full_name, type, description, start_date, duration_months,
+    SELECT id, user_id, name, full_name, type, description, proposal_lang, national_agency, start_date, duration_months,
            deadline, eu_grant, cofin_pct, indirect_pct, status, calc_state, created_at, updated_at
     FROM projects
     WHERE id = ? AND user_id = ?
@@ -93,7 +95,7 @@ async function findProjectsByUserId(userId, page = 1, perPage = 20) {
   const total = countRows[0].total;
 
   const sql = `
-    SELECT id, user_id, name, full_name, type, description, start_date, duration_months,
+    SELECT id, user_id, name, full_name, type, description, proposal_lang, start_date, duration_months,
            deadline, eu_grant, cofin_pct, indirect_pct, status, created_at, updated_at
     FROM projects
     WHERE user_id = ?
@@ -122,7 +124,7 @@ async function updateProjectFields(projectId, userId, updates) {
 
   // Allowed fields for update
   const allowedFields = [
-    'name', 'full_name', 'type', 'description', 'start_date', 'duration_months',
+    'name', 'full_name', 'type', 'description', 'proposal_lang', 'national_agency', 'start_date', 'duration_months',
     'deadline', 'eu_grant', 'cofin_pct', 'indirect_pct', 'status', 'calc_state'
   ];
 

@@ -288,6 +288,28 @@ input:focus, select:focus, textarea:focus {
 .calc-wp-chevron { transition: transform .2s; font-size: 18px; color: #787682 }
 .calc-wp.open .calc-wp-chevron { transform: rotate(180deg) }
 
+/* ── WP title suggestion menu ────────────────────────────────── */
+.wp-title-menu {
+  position: absolute; top: 100%; right: 0; margin-top: 4px; z-index: 200;
+  background: #1e293b; border-radius: 10px; padding: 6px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
+  min-width: 280px; max-height: 320px; overflow-y: auto;
+  animation: panelIn .15s ease;
+}
+.wp-title-group {
+  padding: 8px 12px 4px; font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .06em;
+  color: #94a3b8; border-top: 1px solid rgba(255,255,255,.06);
+}
+.wp-title-group:first-child { border-top: none }
+.wp-title-item {
+  display: block; width: 100%; text-align: left;
+  padding: 7px 12px; border: none; background: transparent;
+  color: #e2e8f0; font-size: 13px; font-family: Manrope, sans-serif;
+  cursor: pointer; border-radius: 6px; transition: background .12s;
+}
+.wp-title-item:hover { background: rgba(255,255,255,.1); color: #fff }
+
 /* ── Activity cards ──────────────────────────────────────────── */
 .calc-act {
   border: 2px solid rgba(120,118,130,.25); border-radius: 10px;
@@ -406,4 +428,79 @@ input:focus, select:focus, textarea:focus {
 
 @media (max-width: 639px) {
   .calc-table input[type="number"] { width: 70px; font-size: 14px }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Voice Input — Dictation button on textareas
+   ═══════════════════════════════════════════════════════════════ */
+
+.voice-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.voice-wrap textarea {
+  padding-right: 44px;
+}
+
+/* Mic button */
+.voice-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(120,118,130,.2);
+  background: #f7f9fb;
+  color: #787682;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all .2s ease;
+  padding: 0;
+}
+.voice-btn:hover {
+  background: #06003e;
+  color: #e7eb00;
+  border-color: #06003e;
+}
+.voice-btn .material-symbols-outlined {
+  font-size: 18px;
+}
+
+/* Active recording state */
+.voice-btn.voice-active {
+  background: #ba1a1a;
+  border-color: #ba1a1a;
+  color: #fff;
+  animation: voicePulse 1.5s ease-in-out infinite;
+}
+.voice-btn.voice-active .material-symbols-outlined {
+  font-size: 20px;
+  font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 24;
+}
+
+textarea.voice-recording {
+  border-color: #ba1a1a !important;
+  box-shadow: 0 0 0 2px rgba(186,26,26,.15) !important;
+}
+
+@keyframes voicePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(186,26,26,.4); }
+  50%      { box-shadow: 0 0 0 8px rgba(186,26,26,0); }
+}
+
+/* Loading state (transcribing) */
+.voice-btn.voice-loading {
+  background: #f7f9fb;
+  border-color: #06003e;
+  color: #06003e;
+  cursor: wait;
+  pointer-events: none;
+}
+.voice-spin {
+  animation: spin .8s linear infinite;
 }

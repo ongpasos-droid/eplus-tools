@@ -205,6 +205,99 @@ const Calculator = (() => {
     ]},
   ];
 
+  /* ── Auto-generated WP summaries per title ──────────────────── */
+  const WP_SUMMARIES = {
+    // WP1 titles
+    'Project Management and Coordination':
+      'We will coordinate all project activities and ensure smooth collaboration among consortium partners. We will set up operational planning tools, establish internal communication protocols (shared drive, mailing lists, project management platform), oversee the budget execution, and track progress against milestones. The coordinator will lead regular steering committee meetings, manage timelines, and produce all required reports for the funding agency. All partners will contribute to risk management, administrative duties, and quality control throughout the project lifecycle.',
+
+    'Project Coordination, Management and Monitoring':
+      'We will establish the governance and operational framework for the entire project. We will define roles and responsibilities, set up coordination mechanisms, manage the partnership agreement, and implement a continuous monitoring system with clear indicators and targets. The coordinator will organise periodic consortium meetings, produce management reports, oversee budget execution, and take corrective actions when deviations are identified. We will develop a dedicated quality assurance plan to guide all monitoring activities.',
+
+    'Project Governance, Coordination and Administration':
+      'We will define the governance structure and administrative procedures for the entire project. We will establish decision-making bodies (steering committee, advisory board), set up communication workflows, create financial management protocols, and ensure contractual compliance across the consortium. The coordinator will guarantee transparent reporting, efficient resource allocation, and timely resolution of administrative issues.',
+
+    'Project Management, Quality Assurance and Internal Communication':
+      'We will integrate project management with a structured quality assurance framework and a proactive internal communication strategy. We will oversee the work plan, review deliverable quality at each stage, identify and mitigate risks, and set up digital collaboration tools (Slack, Teams, shared workspace) for continuous partner engagement. We will run regular quality checkpoints and peer-review cycles to ensure all outputs meet agreed standards before dissemination.',
+
+    'Strategic Project Management and Partnership Coordination':
+      'We will provide strategic oversight of the project and strengthen the consortium partnership beyond day-to-day management. We will organise strategic alignment sessions, plan stakeholder engagement, map synergies with complementary initiatives, and coordinate cross-cutting priorities such as inclusion, sustainability, and digital transformation. The coordinator will facilitate strategic retreats and maintain a living roadmap that adapts to emerging opportunities and challenges.',
+
+    'Project Leadership, Coordination and Operational Management':
+      'We will provide the operational backbone of the project through strong leadership and structured coordination. We will handle detailed work planning, resource allocation, partner capacity assessment, logistics coordination for all transnational activities, and systematic progress reporting. The project leader will maintain an operational dashboard, chair monthly coordination calls, and produce consolidated reports for the funding agency.',
+
+    // Research / Mapping / Diagnosis
+    'Research, Mapping and Needs Analysis':
+      'We will conduct a comprehensive research and mapping exercise to understand the current landscape, identify existing gaps, and establish a solid evidence base for the project. We will collect and analyse quantitative and qualitative data from all partner countries through desk research, surveys, interviews with key stakeholders, and focus groups with target beneficiaries. We will map existing practices, policies, and resources relevant to the project topic, identify best practices and transferable models, and produce a comparative needs analysis report that will inform the design and implementation of all subsequent work packages.',
+
+    'Context Analysis, Diagnosis and Stakeholder Mapping':
+      'We will analyse the context in each partner country and map relevant stakeholders to build a comprehensive understanding of the environment in which the project operates. We will examine the policy landscape, institutional frameworks, and local conditions through desk research and targeted consultations. We will identify and engage key stakeholders — practitioners, policy-makers, beneficiaries, and multipliers — creating a stakeholder map with engagement strategies. The diagnosis will produce a structured report highlighting common challenges, country-specific needs, and actionable recommendations that will guide the design of the project methodology and activities.',
+
+    'Needs Assessment and Baseline Research':
+      'We will carry out a structured needs assessment and baseline study to establish the starting point for measuring project impact. We will design and distribute surveys, conduct interviews and focus groups, and review existing literature and data sources in each partner country. The baseline research will measure current knowledge levels, skills, attitudes, and practices among target groups, and identify specific gaps that the project will address. We will produce a baseline report with clear indicators and benchmarks against which progress and impact will be measured throughout and after the project.',
+
+    'Territorial Mapping and Contextual Diagnosis':
+      'We will map the territorial and institutional context in each partner region to understand local dynamics, resources, and barriers. We will conduct field visits, stakeholder interviews, and community consultations alongside desk research on regional policies and programmes. We will identify territorial assets, social infrastructure, and existing networks that can support the project, as well as structural challenges and underserved areas. The resulting territorial diagnosis will provide a differentiated, place-based foundation for tailoring project activities to the specific realities of each partner context.',
+
+    // Methodology / Framework Development
+    'Methodology and Educational Framework Development':
+      'We will design the overarching methodology and educational framework that will guide all project activities. We will draw on the findings from the research phase, review relevant pedagogical theories and best practices, and co-create with partners and stakeholders a coherent methodological approach adapted to the needs of target groups. The framework will define learning objectives, competence profiles, pedagogical principles, and assessment criteria. We will produce a comprehensive methodology guide that all partners will use to ensure consistency and quality across all implementation activities.',
+
+    'Pedagogical Framework and Intervention Design':
+      'We will develop a pedagogical framework and design the specific interventions that form the core of the project. Building on the needs analysis, we will define learning outcomes, select appropriate pedagogical approaches (non-formal education, experiential learning, peer learning), and design structured intervention protocols. We will co-design activities with practitioners and target groups to ensure relevance and accessibility. The framework will include facilitation guides, session plans, and quality standards, providing a clear and replicable blueprint for implementation across all partner countries.',
+
+    'Conceptual Model and Methodological Design':
+      'We will develop the conceptual model underpinning the project and translate it into a practical methodological design. We will synthesise theoretical foundations, empirical findings from the research phase, and practitioner expertise to build an innovative and coherent model. The methodological design will specify the phases of intervention, roles and responsibilities, tools and instruments, and quality assurance mechanisms. We will validate the model through expert review and stakeholder feedback before piloting, ensuring it is robust, adaptable, and aligned with the project objectives.',
+
+    'Project Methodology and Learning Framework':
+      'We will create the project methodology and learning framework that integrates all educational and operational components. We will define the pedagogical approach, learning pathways, competence development stages, and assessment methods. The framework will address diverse learning styles and needs, incorporate digital tools and blended learning strategies, and include guidelines for inclusive and accessible delivery. We will produce a methodology handbook for trainers and facilitators, and organise a capacity-building session to ensure all partners can implement the framework effectively.',
+
+    // Content / Tools / Training Resources
+    'Content Development and Training Resources':
+      'We will develop the educational content and training resources needed to implement the project methodology. We will create curriculum modules, training manuals, facilitator guides, participant workbooks, and multimedia learning materials. All content will be designed following the pedagogical framework, ensuring alignment with learning objectives and competence profiles. We will involve practitioners and target groups in content co-creation and review cycles. Materials will be produced in multiple languages and formats (print, digital, interactive) to ensure accessibility and broad reach.',
+
+    'Educational Materials, Tools and Learning Resources':
+      'We will design and produce a comprehensive set of educational materials, practical tools, and learning resources. We will develop toolkits, handbooks, interactive digital resources, video tutorials, and assessment instruments based on the project methodology. All materials will be tested with sample groups from partner countries and refined based on feedback. We will ensure materials are inclusive, culturally sensitive, and available in accessible formats. The complete resource package will be published under open-access licence to maximise reuse and sustainability.',
+
+    'Toolkit and Capacity Building Resources Development':
+      'We will produce a practical toolkit and capacity building resources designed for practitioners, trainers, and organisations working with the target groups. The toolkit will include step-by-step implementation guides, training session templates, evaluation instruments, case studies, and ready-to-use facilitation materials. We will conduct capacity building workshops with partners to ensure they can effectively use and adapt the toolkit. All resources will be designed for easy replication and will be made available as an open-access digital toolkit with downloadable and editable formats.',
+
+    'Training Content and Practical Tools Production':
+      'We will create training content and practical tools that translate the project methodology into concrete, usable resources. We will develop structured training programmes, practical exercises, real-world case studies, simulation activities, and digital learning modules. Each tool will include clear instructions, time allocations, material requirements, and facilitation tips. We will pilot all training content during the implementation phase and incorporate feedback for final refinement. The complete set of tools will be published on the project platform for free access and download.',
+
+    // Pilot / Implementation / Validation
+    'Pilot Implementation and Validation':
+      'We will pilot the project methodology, tools, and training resources in real-world settings across all partner countries. We will organise pilot activities with target groups, applying the developed framework and materials under controlled conditions. We will collect systematic feedback from participants, facilitators, and stakeholders using structured evaluation instruments. The pilot results will be analysed to identify strengths, weaknesses, and areas for improvement. We will validate the approach through cross-partner comparison and produce a validation report with evidence-based recommendations for scaling and mainstreaming.',
+
+    'Testing, Implementation and Evaluation of the Model':
+      'We will test and implement the project model in each partner context and evaluate its effectiveness through rigorous assessment. We will conduct structured pilot actions following the methodology guide, track participation and engagement metrics, and collect qualitative and quantitative data on learning outcomes and behavioural change. We will organise peer observation visits between partners to exchange implementation insights. The evaluation will combine formative assessment (during implementation) and summative assessment (post-implementation), producing a comprehensive evaluation report with recommendations for model refinement.',
+
+    'Pilot Actions, Field Testing and Validation':
+      'We will carry out pilot actions and field testing of all project outputs in diverse real-world contexts across partner countries. We will recruit and engage target group participants, implement the designed activities and training programmes, and systematically collect data on process quality, participant satisfaction, and learning outcomes. We will organise feedback sessions and validation workshops with participants and stakeholders to assess relevance, quality, and impact. The field testing results will directly inform the final revision of all project outputs before their wider dissemination.',
+
+    'Practical Implementation and Methodology Validation':
+      'We will implement the project activities in practice and validate the methodology through evidence-based assessment. We will deliver the training programmes, workshops, and other planned activities with target groups in each partner country, following the methodological framework developed in the previous phase. We will monitor implementation quality through observation protocols, participant diaries, and facilitator reports. Validation will be based on triangulated data from multiple sources, ensuring the methodology is effective, replicable, and adaptable to different national and institutional contexts.',
+
+    // LAST WP titles
+    'Dissemination, Evaluation and Sustainability':
+      'We will design and execute a comprehensive dissemination strategy using the project website, social media campaigns, publications, and multiplier events to reach the widest possible audience. We will implement an internal and external evaluation framework with quantitative and qualitative indicators to measure real impact. We will develop a detailed sustainability plan that identifies concrete pathways — institutional commitments, licensing, open-access publication — for the continuation, transfer, and scaling of results after the funding period ends.',
+
+    'Impact, Dissemination and Sustainability':
+      'We will maximise the societal and institutional impact of the project through targeted dissemination and long-term sustainability planning. We will map key stakeholders for each dissemination channel, produce policy briefs and practice guidelines, organise multiplier events in each partner country, and develop a sustainability roadmap with concrete institutional commitments. We will measure impact using quantitative and qualitative indicators aligned with the programme objectives.',
+
+    'Dissemination, Exploitation and Sustainability of Results':
+      'We will make all project results accessible, usable, and long-lasting. We will create an exploitation plan for each intellectual output, publish materials under open-access licences, run targeted dissemination campaigns for policy-makers, practitioners, and end-users, and negotiate institutional commitments with each partner to sustain and update results after the funding concludes. Every output will include clear usage guidelines and sustainability provisions.',
+
+    'Communication, Dissemination and Impact Maximisation':
+      'We will develop a multi-channel communication strategy to maximise visibility, engagement, and impact. We will create a project brand identity, produce digital content (videos, infographics, social media campaigns), manage press relations, present at conferences, and run targeted outreach to underrepresented communities. All partners will act as dissemination ambassadors within their national networks. We will track communication KPIs monthly and adjust our strategy based on performance data.',
+
+    'Evaluation, Quality Assurance and Dissemination':
+      'We will combine continuous quality assurance with a robust evaluation methodology and strategic dissemination. We will design internal quality standards for all deliverables, conduct formative and summative evaluation using mixed methods (surveys, interviews, focus groups, analytics), produce an evaluation report with actionable recommendations, and disseminate both process and outcome findings to relevant stakeholders through targeted channels.',
+
+    'Impact, Evaluation and Long-term Sustainability':
+      'We will assess the real-world impact of the project and establish the conditions for its long-term sustainability. We will conduct baseline and endline studies, implement beneficiary feedback loops, commission an independent external evaluation, develop exploitation agreements among partners, and produce a detailed sustainability plan with financial, institutional, and technical provisions for the post-project period. All evaluation data will be published transparently.',
+  };
+
   /* ── Helpers ────────────────────────────────────────────────── */
   const euros = n => '€' + Math.round(n).toLocaleString('es-ES');
   const pct   = (n, t) => t > 0 ? (n / t * 100).toFixed(1) + '%' : '0%';
@@ -729,7 +822,7 @@ const Calculator = (() => {
       let name = `WP${wi+1}`;
       if (wi === 0) name = WP1_TITLES[0];
       else if (wi === n-1 && n > 1) name = LAST_WP_TITLES[0];
-      state.wps.push({ name, desc: '', leader: defaultLeader, activities: [] });
+      state.wps.push({ name, desc: '', summary: '', leader: defaultLeader, activities: [] });
     }
     state.wps = state.wps.slice(0, n);
     // Ensure last WP has a dissemination title if it was just assigned a generic name
@@ -804,6 +897,8 @@ const Calculator = (() => {
           </div>`;
       }
 
+      const summaryVal = (wp.summary || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
       return `
       <div class="border border-outline-variant/20 rounded-xl overflow-hidden">
         <div class="flex items-center gap-3 px-4 py-3 border-b border-outline-variant/10" style="background:${WP_BG[wi%WP_BG.length]}">
@@ -814,8 +909,12 @@ const Calculator = (() => {
             <select class="text-xs px-1.5 py-1 border border-outline-variant/20 rounded font-medium" style="color:${c}" onchange="Calculator._setWP(${wi},'leader',this.value)">${leaderOpts}</select>
           </div>
         </div>
-        <div class="p-4 bg-surface-container-lowest space-y-2">
+        <div class="p-4 bg-surface-container-lowest space-y-3">
           ${titleSelectHTML}
+          <div>
+            <label class="text-[11px] font-semibold text-on-surface-variant uppercase">Summary — what is this WP about?</label>
+            <textarea rows="2" class="w-full mt-1 px-2.5 py-2 text-xs border border-outline-variant/30 rounded-lg resize-vertical leading-relaxed" placeholder="Briefly describe the purpose and main activities of this work package..." onchange="Calculator._setWP(${wi},'summary',this.value)" oninput="Calculator._setWP(${wi},'summary',this.value)">${summaryVal}</textarea>
+          </div>
         </div>
       </div>`;
     }).join('');
@@ -831,7 +930,7 @@ const Calculator = (() => {
       state.wps[0].activities.push({
         id: ++state.actCounter, type:'mgmt', label:'Project Management',
         rate_applicant:500, rate_partner:250,
-        desc: 'This work package covers the overall coordination and management of the project throughout its duration. It includes internal communication between partners, financial management, progress monitoring and quality assurance. The coordinator will organise regular online meetings and prepare interim and final reports. All partners contribute to administrative tasks, reporting and compliance with the grant agreement.',
+        desc: 'We will coordinate and manage all project operations throughout its full duration. We will handle internal communication between partners, financial oversight, progress monitoring against milestones, and quality assurance. The coordinator will organise regular online meetings and prepare interim and final reports. All partners will contribute to administrative tasks, reporting, and compliance with the grant agreement.',
         date_start: toISO(getProjectStart()), date_end: toISO(addMonths(getProjectStart()||new Date(), getProjectMonths()))
       });
     }
@@ -900,6 +999,27 @@ const Calculator = (() => {
     return opts;
   }
 
+  function buildWPTitleMenu(wi, wp) {
+    const lastWi = state.wps.length - 1;
+    const isFirst = wi === 0;
+    const isLast  = wi === lastWi && state.wps.length > 1;
+    const esc = t => t.replace(/'/g, "\\'");
+    let items = '';
+    if (isFirst) {
+      items = WP1_TITLES.map(t => `<button type="button" class="wp-title-item" onclick="Calculator._applyWPTitle(${wi},'${esc(t)}');this.closest('.wp-title-menu').remove()">${t}</button>`).join('');
+    } else if (isLast) {
+      items = LAST_WP_TITLES.map(t => `<button type="button" class="wp-title-item" onclick="Calculator._applyWPTitle(${wi},'${esc(t)}');this.closest('.wp-title-menu').remove()">${t}</button>`).join('');
+    } else {
+      for (const g of WP_TAXONOMY) {
+        items += `<div class="wp-title-group">${g.cat}</div>`;
+        for (const t of g.titles) {
+          items += `<button type="button" class="wp-title-item" onclick="Calculator._applyWPTitle(${wi},'${esc(t)}');this.closest('.wp-title-menu').remove()">${t}</button>`;
+        }
+      }
+    }
+    return items;
+  }
+
   function buildWPSection(wp, wi) {
     const c = WP_COLORS[wi % WP_COLORS.length];
     const bg = WP_SECTION_BG[wi % WP_SECTION_BG.length];
@@ -907,19 +1027,35 @@ const Calculator = (() => {
     const leaderOpts = state.partners.map(p =>
       `<option value="${p.id}" ${wp.leader === p.id ? 'selected' : ''}>${p.name || 'Partner ' + (state.partners.indexOf(p)+1)}</option>`
     ).join('');
+    const sumVal = (wp.summary || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    // Calculate textarea rows based on content length
+    const sumRows = Math.max(3, Math.ceil((wp.summary || '').length / 90));
     return `
     <div class="calc-wp open" id="calc-wp-${wi}" style="--wp-color:${c};background:${bg};border-color:${c}30">
       <div class="calc-wp-head" onclick="Calculator._toggleWP(${wi})" style="background:${c}18">
         <span class="w-9 h-9 rounded-full text-white text-[11px] font-extrabold flex items-center justify-center shrink-0" style="background:${c}">WP${wi+1}</span>
         <div class="flex-1 min-w-0">
-          <select class="font-headline text-sm font-bold text-on-surface bg-transparent border-none cursor-pointer focus:outline-none w-full" onclick="event.stopPropagation()" onchange="event.stopPropagation();Calculator._applyWPTitle(${wi},this.value)">${titleOpts}</select>
-          <div class="flex items-center gap-1 mt-0.5" onclick="event.stopPropagation()">
-            <span class="text-[9px] text-on-surface-variant/40">Leader:</span>
-            <select class="text-[9px] text-on-surface-variant/50 bg-transparent border-none cursor-pointer focus:outline-none" onchange="Calculator._setWPLeader(${wi},this.value)">${leaderOpts}</select>
+          <div class="flex items-center gap-1" onclick="event.stopPropagation()">
+            <input type="text" value="${(wp.name||'WP'+(wi+1)).replace(/"/g,'&quot;')}" class="font-headline text-sm font-bold text-on-surface bg-transparent border-none focus:outline-none flex-1 min-w-0 px-0" onchange="Calculator._setWPName(${wi},this.value)" onkeydown="if(event.key==='Enter')this.blur()">
+            <div class="relative shrink-0">
+              <button type="button" class="w-6 h-6 rounded flex items-center justify-center hover:bg-white/40 transition-colors" onclick="event.stopPropagation();Calculator._showWPTitleMenu(${wi},this)" title="Suggested titles">
+                <span class="material-symbols-outlined text-base" style="color:${c}">expand_more</span>
+              </button>
+            </div>
           </div>
         </div>
         <span class="text-sm font-mono font-bold" style="color:${c}" id="calc-wp-total-${wi}">\u2014</span>
         <span class="material-symbols-outlined calc-wp-chevron">expand_more</span>
+      </div>
+      <div class="px-4 py-3 border-b border-outline-variant/10" style="background:${c}10" onclick="event.stopPropagation()">
+        <div class="flex items-center justify-between mb-2">
+          <label class="text-[11px] font-semibold uppercase tracking-wide" style="color:${c}">WP Summary</label>
+          <div class="flex items-center gap-2">
+            <span class="text-[11px] text-on-surface-variant font-semibold">Leader:</span>
+            <select class="text-sm px-2.5 py-1.5 border border-outline-variant/20 rounded-lg bg-white font-semibold min-w-[140px]" style="color:${c}" onchange="Calculator._setWPLeader(${wi},this.value)">${leaderOpts}</select>
+          </div>
+        </div>
+        <textarea rows="${sumRows}" class="w-full px-3 py-2.5 text-sm border rounded-lg leading-relaxed bg-white focus:ring-2 outline-none transition-all" style="border-color:${c}30;--tw-ring-color:${c}40;min-height:80px" placeholder="Briefly describe the purpose and main activities of this work package..." onchange="Calculator._setWP(${wi},'summary',this.value)" oninput="Calculator._setWP(${wi},'summary',this.value);this.style.height='auto';this.style.height=this.scrollHeight+'px'">${sumVal}</textarea>
       </div>
       <div class="calc-wp-body">
         <div id="calc-wp-acts-${wi}">
@@ -2207,6 +2343,23 @@ const Calculator = (() => {
     if (!title) return;
     state.wps[wi].name = title;
     state.wps[wi].desc = title;
+    // Auto-fill summary if a predefined one exists and user hasn't written their own
+    if (WP_SUMMARIES[title]) {
+      const current = (state.wps[wi].summary || '').trim();
+      // Only auto-fill if empty or if it matches another predefined summary (user hasn't customised)
+      const isPredefined = !current || Object.values(WP_SUMMARIES).some(s => s === current);
+      if (isPredefined) {
+        state.wps[wi].summary = WP_SUMMARIES[title];
+      }
+    }
+    // Update the text input and summary textarea in the WP header without full re-render
+    const wpEl = document.getElementById('calc-wp-' + wi);
+    if (wpEl) {
+      const inp = wpEl.querySelector('input[type="text"]');
+      if (inp) inp.value = title;
+      const ta = wpEl.querySelector('textarea');
+      if (ta && state.wps[wi].summary) ta.value = state.wps[wi].summary;
+    }
     const el = $('calc-wp-list');
     if (el) el.innerHTML = buildWPListHTML();
   }
@@ -2290,95 +2443,106 @@ const Calculator = (() => {
 
   const SUBTYPE_DESC = {
     // Transnational Meetings
-    'Kick-off meeting': 'This meeting marks the official start of the project and brings partners together to align on objectives, roles, and expectations. It is used to clarify the work plan, timeline, and communication methods. It helps create a shared understanding of the project from the beginning.',
-    'Mid-term meeting': 'This meeting takes place during the implementation phase to review progress and assess the development of planned activities. Partners identify achievements, discuss challenges, and adjust the work plan if necessary. It helps maintain coordination and improve project quality.',
-    'Final meeting': 'This meeting is held at the end of the project to review achievements, assess final results, and reflect on lessons learned. It also supports discussion on sustainability, follow-up actions, and future cooperation. It ensures proper closure and consolidation of outcomes.',
-    'Coordination meeting': 'This meeting focuses on the day-to-day coordination of the project among partners. It is used to monitor activities, clarify responsibilities, and solve implementation issues. It supports smooth project management and effective internal communication.',
-    'Technical working meeting': 'This meeting is dedicated to specific technical aspects of the project, such as developing outputs, tools, or methodologies. Partners work together on content, problem-solving, and practical decisions. It helps ensure consistency and technical quality across results.',
-    'Strategic planning meeting': 'This meeting focuses on the long-term direction of the project and on strategic decisions for the consortium. Partners reflect on impact, sustainability, positioning, and future opportunities. It helps connect current work with broader project goals.',
+    'Kick-off meeting': 'We will bring all consortium partners together for the official launch of the project. During this meeting we will finalise roles and responsibilities, validate the work plan and timeline, set up communication tools (shared drive, project management platform, mailing lists), and agree on quality standards and reporting procedures. Each partner will present their institutional capacity and confirm their commitment to specific deliverables.',
+    'Mid-term meeting': 'We will organise a face-to-face review session at the midpoint of the project to assess progress against milestones, analyse budget execution, and address any implementation challenges. Partners will present the status of their activities, share preliminary results, and collectively decide on any necessary adjustments to the work plan, calendar, or resource allocation for the remaining period.',
+    'Final meeting': 'We will hold a closing consortium meeting to consolidate all project results, review the achievement of objectives and indicators, discuss lessons learned, and formalise the sustainability plan. Partners will sign off on final deliverables, agree on exploitation commitments, and plan any follow-up actions or spin-off initiatives beyond the project funding period.',
+    'Coordination meeting': 'We will run a focused working session among partners to resolve specific operational issues, synchronise ongoing tasks, clarify deadlines, and redistribute workload where needed. This meeting will address practical coordination matters such as logistics for upcoming activities, document preparation, and internal communication improvements.',
+    'Technical working meeting': 'We will dedicate this meeting to the hands-on development of specific project outputs, tools, or methodologies. Partners will work in task groups to co-develop content, review drafts, solve technical problems, and ensure consistency and quality across intellectual outputs. The meeting will produce concrete deliverables or validated prototypes.',
+    'Strategic planning meeting': 'We will convene a high-level session to evaluate the project strategic direction, assess external opportunities and risks, plan synergies with other initiatives, and make decisions on dissemination positioning, policy engagement, and long-term partnership development. This meeting will connect day-to-day work with the broader impact goals of the consortium.',
+
     // LTTA / Mobility
-    'Training mobility': 'This mobility activity is designed to provide participants with structured learning on a specific topic. It includes workshops, practical sessions, and collaborative learning experiences. It supports capacity building and the development of relevant skills and competences.',
-    'Study visit mobility': 'This activity allows participants to visit organisations, initiatives, or projects related to the project theme. It focuses on learning from real practices and gaining inspiration from different contexts. It strengthens understanding through direct observation and exchange.',
-    'Group mobility': 'This mobility brings together participants from different countries for a shared learning experience. It encourages collaboration, intercultural dialogue, and collective problem-solving. It helps strengthen group dynamics and European cooperation.',
-    'Youth exchange mobility': 'This activity involves young participants from different countries in non-formal learning experiences. It combines workshops, group activities, and intercultural exchange. It promotes participation, mutual understanding, and the development of key competences.',
-    'Staff mobility': 'This mobility is aimed at professionals or staff members involved in the project. It focuses on exchange of practices, professional development, and organisational learning. It strengthens the skills of staff and improves cooperation between organisations.',
-    'Job shadowing mobility': 'This activity allows participants to observe the daily work of a host organisation. It focuses on learning through observation, dialogue, and exchange with professionals. It supports knowledge transfer and helps participants understand practical working methods.',
-    'Peer learning mobility': 'This mobility is based on the exchange of knowledge, experiences, and practices among participants. It promotes horizontal learning and mutual support between peers. It helps generate collective knowledge and encourages collaborative reflection.',
-    'Blended mobility': 'This activity combines online and face-to-face components to strengthen the learning process. Participants take part in preparatory or follow-up activities in addition to the physical mobility. It supports continuity, flexibility, and deeper engagement.',
-    'Pilot mobility': 'This mobility is designed to test and validate tools, methods, or approaches developed within the project. Participants take part in structured activities that help assess effectiveness and collect feedback. It supports innovation and practical improvement of results.',
-    'Volunteering mobility': 'This activity involves participants in community-based actions that combine learning and service. It promotes solidarity, engagement, and active citizenship through practical contribution. It connects personal development with social or community impact.',
-    'Expert mobility': 'This mobility involves the participation of experts who contribute specialised knowledge to the project. Experts may provide training, mentoring, advice, or validation. It enhances the quality of activities and supports more advanced learning outcomes.',
-    'Community immersion mobility': 'This activity allows participants to engage directly with a local community or context. Learning takes place through participation, interaction, and real-life experience. It helps participants better understand social, cultural, or environmental realities.',
+    'Training mobility': 'We will deliver a structured training programme for participants travelling to the host country. The programme will combine expert-led sessions, hands-on workshops, group exercises, and real-case scenarios. Participants will acquire specific competences directly applicable to their professional practice, and each will produce a personal action plan for transferring the learning to their home organisation.',
+    'Study visit mobility': 'We will organise guided visits to relevant organisations, institutions, or initiatives in the host country. Participants will observe working methods, interview practitioners, and document good practices through structured observation protocols. The visit findings will be compiled into a comparative report that feeds into the project methodology.',
+    'Group mobility': 'We will bring together a mixed group of participants from all partner countries for an intensive collaborative learning experience. The programme will include team challenges, intercultural workshops, joint production sessions, and reflection activities. The aim is to build a shared knowledge base and strengthen the transnational dimension of the project.',
+    'Youth exchange mobility': 'We will organise a non-formal learning programme for young participants from different countries. The programme will use participatory methods such as group dynamics, creative workshops, debates, cultural activities, and peer-to-peer exchange. Participants will develop key competences including teamwork, communication, intercultural awareness, and active citizenship.',
+    'Staff mobility': 'We will send staff members to a partner organisation for professional development and exchange of practices. Participants will take part in job-related activities, attend internal training sessions, and collaborate with the host team on project-related tasks. The mobility will strengthen institutional cooperation and bring back concrete improvements to the sending organisation.',
+    'Job shadowing mobility': 'We will embed participants in the daily operations of a host organisation to observe and learn from their working methods, internal processes, and professional culture. Participants will follow specific colleagues through their routines, attend meetings, and document insights. The experience will generate a structured reflection report with transferable recommendations.',
+    'Peer learning mobility': 'We will facilitate a horizontal exchange where participants from different organisations share their expertise, challenges, and solutions around a common theme. The programme will use peer coaching, case clinics, fishbowl discussions, and collaborative problem-solving. Each participant will contribute their experience and leave with practical ideas tested by peers.',
+    'Blended mobility': 'We will combine an online preparatory phase with a physical mobility and a follow-up phase. Participants will complete pre-arrival learning modules, engage in intensive face-to-face activities during the mobility, and then apply and reflect on their learning through post-mobility online tasks. This structure maximises learning depth and ensures continuity.',
+    'Pilot mobility': 'We will use this mobility to field-test tools, methods, or approaches developed earlier in the project. Participants will run structured pilot sessions, collect quantitative and qualitative feedback through evaluation forms and focus groups, and produce a validation report with specific improvement recommendations for the final versions of the outputs.',
+    'Volunteering mobility': 'We will place participants in community-based settings where they will contribute to local initiatives while developing personal and professional skills. Activities will combine practical service (supporting workshops, assisting events, community outreach) with structured reflection sessions. Participants will document their experience in a learning portfolio.',
+    'Expert mobility': 'We will invite subject-matter experts to travel to a partner location and deliver specialised input — training sessions, technical reviews, mentoring, or quality assessment of project outputs. The expert will work directly with the local team and provide a written report with recommendations. This ensures high-level technical quality in specific project areas.',
+    'Community immersion mobility': 'We will immerse participants in a local community context where they will engage directly with residents, local organisations, and grassroots initiatives. Activities will include participatory observation, interviews, joint workshops, and collaborative reflection. Participants will produce an immersion diary and a set of community-validated insights for the project.',
+
     // Intellectual Outputs
-    'Educational manual': 'This output is a structured educational resource designed to support learning and practice on a specific topic. It usually combines concepts, activities, and practical guidance. It helps transfer knowledge in a clear and usable way.',
-    'Methodological guide': 'This output presents a method, approach, or process that can be applied by organisations, educators, or practitioners. It explains how to implement a specific methodology step by step. It supports replication and quality in project activities.',
-    'Training course / module': 'This output consists of a structured learning programme or unit focused on a specific topic or competence area. It may include sessions, activities, and learning materials. It is designed to support training delivery and participant development.',
-    'Toolkit': 'This output is a practical collection of tools, templates, resources, or activities that users can apply directly. It is usually action-oriented and easy to use in different contexts. It supports implementation and hands-on work.',
-    'Research report / needs analysis': 'This output gathers evidence, findings, or analysis related to the project topic or target groups. It helps identify needs, challenges, and opportunities that justify the project approach. It provides a knowledge base for decision-making and design.',
-    'Digital platform / interactive tool': 'This output is a digital resource created to support learning, participation, access to materials, or project interaction. It may include online tools, interactive content, or user-based features. It helps extend the project\'s usability and reach.',
+    'Educational manual': 'We will produce a comprehensive educational manual that combines theoretical foundations, practical activities, case studies, and facilitation guidelines. The manual will be structured in modules, tested with real users during pilot phases, and published in multiple languages. It will serve as the primary reference resource for trainers and educators using the project methodology.',
+    'Methodological guide': 'We will develop a step-by-step methodological guide that documents the approach, processes, and tools created by the project. The guide will include implementation instructions, quality criteria, adaptation tips for different contexts, and real examples from the pilot phase. It will enable any organisation to replicate the methodology independently.',
+    'Training course / module': 'We will design a complete training programme with learning objectives, session plans, activities, assessment methods, and supporting materials. The course will be structured in self-contained modules that can be delivered together or independently. It will be validated through pilot delivery and refined based on participant and trainer feedback.',
+    'Toolkit': 'We will create a practical, ready-to-use toolkit containing templates, checklists, activity cards, decision frameworks, and facilitation resources. Each tool will include clear instructions and real-world examples. The toolkit will be designed for practitioners who need to act quickly and effectively without extensive prior training.',
+    'Research report / needs analysis': 'We will conduct primary and secondary research including surveys, interviews, focus groups, and desk analysis to map the current situation, identify gaps, and establish an evidence base for the project approach. The report will include data analysis, key findings, comparative country perspectives, and actionable recommendations that directly inform the next project phases.',
+    'Digital platform / interactive tool': 'We will build a web-based platform or interactive digital tool that serves the project target groups. The platform will include user accounts, content management, interactive features (quizzes, forums, resource libraries), and multilingual support. It will be developed iteratively with user testing at each stage and designed for sustainability beyond the project period.',
+
     // Multiplier Events
-    'Launch event': 'This event is organised to introduce the project, its aims, and its expected results to relevant audiences. It helps create visibility and attract early interest from stakeholders and participants. It is useful for setting the public starting point of the project.',
-    'Dissemination conference': 'This event is designed to present project activities, findings, or outputs to a wider audience. It supports visibility, stakeholder engagement, and knowledge sharing. It helps disseminate results in a structured and professional format.',
-    'Final conference': 'This event takes place towards the end of the project to showcase achievements, results, and impact. It allows partners to present final outputs and share lessons learned. It also supports sustainability and future uptake of project outcomes.',
-    'Stakeholder event': 'This event brings together relevant actors connected to the project theme, such as institutions, professionals, community groups, or decision-makers. It creates space for dialogue, feedback, and collaboration. It helps strengthen relevance and external engagement.',
-    'Networking event': 'This event is designed to connect participants, organisations, and stakeholders interested in the project topic. It supports partnership building, exchange of contacts, and future cooperation. It helps expand the project\'s ecosystem and visibility.',
-    'Public presentation event': 'This event focuses on presenting a project result, process, or achievement to a broader audience. It can be used to explain the value of the project and encourage interest or participation. It supports communication, transparency, and outreach.',
+    'Launch event': 'We will organise a public event to officially present the project to key stakeholders, potential beneficiaries, media, and institutional partners. The event will include project presentations, panel discussions, networking sessions, and distribution of promotional materials. We aim to generate media coverage and secure early engagement commitments from external organisations.',
+    'Dissemination conference': 'We will host a conference to present project activities, interim or final results, and key outputs to a targeted professional audience. The programme will include keynote presentations, thematic workshops, poster sessions, and open Q&A. We will produce a conference report and distribute it through our networks to multiply the reach of our findings.',
+    'Final conference': 'We will organise a high-profile closing event to showcase all project achievements, present final outputs, and demonstrate impact with concrete data and testimonials. The conference will feature partner presentations, beneficiary stories, policy recommendations, and a formal handover of sustainability commitments. We will invite institutional representatives and media.',
+    'Stakeholder event': 'We will convene key stakeholders — policy-makers, practitioners, institutional representatives, and community leaders — for a structured dialogue session around the project theme. The event will include presentations of project findings, working group discussions, and the co-production of recommendations. We will publish the outcomes as a stakeholder brief.',
+    'Networking event': 'We will facilitate a structured networking session connecting project participants with external organisations, potential collaborators, and sector professionals. The event will use speed networking, thematic roundtables, and collaboration mapping exercises to create concrete connections. Each participant will leave with a minimum of five new professional contacts and potential follow-up actions.',
+    'Public presentation event': 'We will present a specific project output or achievement to the general public through an open event combining live demonstrations, interactive exhibits, short talks, and audience participation. The event will be designed to be accessible and engaging for non-specialist audiences, with clear messaging about the project value and how people can benefit from or contribute to the results.',
+
     // Local Workshops
-    'Training workshop': 'This workshop is designed to develop specific knowledge, skills, or competences among participants. It includes practical activities, guided learning, and interaction. It helps build capacity at local level in relation to the project theme.',
-    'Participatory workshop': 'This workshop is based on active involvement, dialogue, and contribution from participants. It encourages people to share ideas, experiences, and reflections in a collaborative setting. It supports inclusion and collective learning.',
-    'Awareness workshop': 'This workshop aims to raise understanding and sensitivity around a specific topic or social challenge. It introduces key concepts and encourages reflection and discussion. It helps engage participants and increase interest in the issue addressed.',
-    'Co-creation workshop': 'This workshop is designed to generate ideas, materials, or solutions collaboratively with participants. It supports joint creation and active contribution to the project process. It is useful for developing outputs, activities, or community-based responses.',
-    'Community workshop': 'This workshop involves local participants and focuses on issues relevant to a specific community or territory. It encourages local engagement, shared reflection, and practical participation. It helps connect the project with real local contexts and needs.',
-    'Testing / pilot workshop': 'This workshop is used to test an activity, tool, or methodology before finalising it. Participants provide feedback through direct experience and reflection. It helps improve quality and validate project results in practice.',
+    'Training workshop': 'We will deliver a hands-on training workshop for local participants focused on building specific skills and competences related to the project theme. The workshop will combine expert input, practical exercises, group work, and individual reflection. Each participant will complete a pre- and post-assessment to measure learning progress.',
+    'Participatory workshop': 'We will run a collaborative workshop where participants actively contribute their knowledge, experiences, and ideas. Using facilitation techniques such as world café, open space, and dotmocracy, we will ensure every voice is heard. The workshop outputs will be documented and directly integrated into the project development process.',
+    'Awareness workshop': 'We will organise an interactive session to raise awareness about the core issues addressed by the project. The workshop will use storytelling, data visualisation, group discussion, and reflective exercises to help participants understand the problem, its impact, and possible responses. We will measure awareness change through pre/post questionnaires.',
+    'Co-creation workshop': 'We will facilitate a collaborative production session where participants jointly develop content, tools, or solutions for the project. Using design thinking, brainstorming, prototyping, and iterative feedback, participants will produce tangible draft outputs. The results will be refined by the project team and credited to the co-creation group.',
+    'Community workshop': 'We will engage local community members in a workshop that connects the project theme with their lived experiences and local context. Activities will include community mapping, storytelling circles, group problem-solving, and action planning. The workshop will produce community-validated recommendations that ground the project in real local needs.',
+    'Testing / pilot workshop': 'We will run a controlled test session where participants experience a draft tool, method, or activity exactly as it would be delivered in its final form. We will collect structured feedback through observation, questionnaires, and group debriefing. The results will produce a detailed validation report with specific revision points for the final version.',
+
     // Dissemination
-    'Social media dissemination': 'This type of dissemination uses social media channels to share project activities, results, and messages with wider audiences. It supports visibility, engagement, and regular communication in accessible formats. It is especially useful for reaching diverse and online-based audiences.',
-    'Newsletter dissemination': 'This type of dissemination uses newsletters to provide updates on project progress, results, and upcoming actions. It helps maintain communication with interested audiences over time. It is useful for structured and recurring outreach.',
-    'Press / media dissemination': 'This type of dissemination uses newspapers, magazines, radio, digital press, or other media channels to increase project visibility. It helps reach audiences beyond the project\'s direct network. It supports public awareness and external recognition.',
-    'Video dissemination': 'This type of dissemination uses video content to explain, present, or promote project activities and results. It is useful for storytelling, visibility, and accessible communication. It helps make the project more attractive and easier to understand.',
-    'Community / stakeholder dissemination': 'This type of dissemination focuses on sharing project information with local communities, organisations, institutions, or relevant stakeholders. It helps build connections, encourage participation, and strengthen local relevance. It supports meaningful outreach beyond online promotion.',
-    'Printed dissemination': 'This type of dissemination uses physical materials such as brochures, posters, flyers, or other printed resources. It is useful in events, community spaces, and face-to-face activities. It supports visibility in contexts where physical communication is important.',
+    'Social media dissemination': 'We will run targeted social media campaigns across TikTok, Instagram, Facebook, LinkedIn, and X (Twitter) to disseminate project activities, results, and calls to action. We will produce platform-specific content — short videos, reels, carousels, infographics, and stories — following a monthly editorial calendar. We will track engagement metrics (reach, impressions, clicks, shares) and adjust our strategy quarterly.',
+    'Newsletter dissemination': 'We will produce and distribute a periodic newsletter (monthly or quarterly) to a curated mailing list of stakeholders, participants, and interested organisations. Each issue will include project updates, partner highlights, upcoming events, resource links, and calls for engagement. We will use an email marketing platform to track open rates, click-throughs, and subscriber growth.',
+    'Press / media dissemination': 'We will engage traditional and digital media through press releases, media kits, journalist briefings, and opinion articles placed in relevant outlets. We will target sector-specific publications, regional newspapers, radio stations, and online news platforms. Each major project milestone will be accompanied by a media outreach action with measurable coverage targets.',
+    'Video dissemination': 'We will produce professional video content — project trailers, activity highlights, beneficiary testimonials, explainer animations, and event recaps — to communicate our work in the most engaging format. Videos will be optimised for social media, embedded on the project website, and submitted to relevant video platforms and conferences. We will subtitle all content in the consortium languages.',
+    'Community / stakeholder dissemination': 'We will carry out direct outreach to local communities, professional networks, institutional partners, and sector stakeholders through targeted presentations, information sessions, printed materials, and personal invitations. We will attend external events, contribute to partner newsletters, and establish a referral network to ensure our results reach the people who can use them most.',
+    'Printed dissemination': 'We will design and produce high-quality printed materials — brochures, posters, flyers, factsheets, and executive summaries — for distribution at events, partner premises, public institutions, and community spaces. All materials will follow the project brand guidelines and include EU co-funding acknowledgement. We will print in the languages of the consortium countries.',
+
     // Website
-    'Project website': 'This website serves as the main online space for the project. It presents key information, objectives, activities, and updates in one accessible place. It supports visibility, transparency, and public communication.',
-    'Landing page': 'This type of web page is designed to present a specific message, activity, or call to action in a clear and focused way. It is usually simple, direct, and visually targeted. It helps attract attention and guide users quickly.',
-    'Resource website': 'This website is designed to host and share project materials, publications, and practical resources. It helps users easily access and download outputs. It supports usability, dissemination, and long-term access to results.',
-    'Learning platform': 'This website provides a digital space for training, learning content, or educational interaction. It may include modules, materials, exercises, or user access areas. It supports structured learning processes within the project.',
-    'Community platform': 'This website is designed to connect participants, partners, or users through interaction and shared content. It may include forums, profiles, internal communication, or collaborative tools. It supports engagement and continuity beyond single activities.',
-    'Results repository': 'This website is focused on collecting, organising, and presenting the main outputs and results of the project. It helps ensure that outcomes remain accessible after project completion. It supports sustainability and exploitation of results.',
+    'Project website': 'We will build and maintain a professional project website that serves as the central hub for all public information. The site will include project description, partner profiles, news and blog, event calendar, downloadable resources, contact form, and EU visibility requirements. We will optimise it for SEO, mobile responsiveness, and accessibility (WCAG 2.1 AA).',
+    'Landing page': 'We will create a focused single-page site designed to drive a specific action — event registration, resource download, survey participation, or newsletter sign-up. The page will use clear messaging, a strong call-to-action, and integrated analytics to measure conversion rates. We will create multiple landing pages for different campaign purposes throughout the project.',
+    'Resource website': 'We will develop a dedicated online space where all project outputs, publications, tools, and multimedia resources can be browsed, previewed, and downloaded. The site will include search and filter functionality, metadata tags, and multilingual support. It will be designed for long-term hosting to ensure post-project availability of results.',
+    'Learning platform': 'We will develop an online learning environment where users can access training modules, complete exercises, track their progress, and obtain certificates. The platform will support multimedia content, interactive assessments, discussion forums, and learner profiles. We will use an open-source LMS (e.g. Moodle) or build a custom solution depending on project needs.',
+    'Community platform': 'We will create an interactive online space where project participants, alumni, and stakeholders can connect, share resources, participate in discussions, and collaborate on follow-up initiatives. The platform will include user profiles, messaging, content sharing, and group spaces. It will be designed to sustain the project community beyond the funding period.',
+    'Results repository': 'We will build a structured online repository that catalogues, organises, and makes permanently accessible all project deliverables, datasets, reports, and tools. Each entry will include metadata, version history, licensing information, and usage guidelines. The repository will be hosted on a sustainable infrastructure to guarantee availability for at least five years after the project ends.',
+
     // Artistic Fees
-    'Graphic design': 'This service covers the visual design of materials such as brochures, reports, presentations, or communication assets. It helps create a professional and coherent visual identity for the project. It supports clarity, attractiveness, and visibility.',
-    'Video production / editing': 'This service involves the creation or editing of video materials related to the project. It may include interviews, promotional videos, documentation, or educational content. It helps communicate results in an engaging and accessible format.',
-    'Photography': 'This service covers the professional documentation of project activities through photographs. It helps capture key moments, support dissemination, and create visual records. It is useful for communication, reporting, and visibility.',
-    'Illustration / branding': 'This service focuses on custom illustrations, visual concepts, or brand elements for the project. It helps give the project a distinctive and attractive identity. It supports communication and recognition across materials and outputs.',
-    'Audio / podcast production': 'This service includes the recording, editing, or production of audio content such as podcasts, voice materials, or sound-based resources. It supports communication and educational outreach in audio format. It is useful for accessible and flexible dissemination.',
-    'Artistic facilitation / performance': 'This service involves artistic contributions to workshops, events, or learning activities through performance or creative facilitation. It helps make activities more participatory, expressive, and engaging. It supports artistic and experiential dimensions of the project.',
+    'Graphic design': 'We will commission professional graphic design services to create the project visual identity (logo, colour palette, typography, templates) and to design all key materials — reports, presentations, social media assets, infographics, and event visuals. The designer will produce a brand manual and deliver all files in editable and print-ready formats.',
+    'Video production / editing': 'We will hire professional videographers and editors to produce high-quality video content including project documentary footage, interviews, event coverage, educational content, and promotional clips. All videos will be colour-graded, subtitled in consortium languages, and delivered in formats optimised for web, social media, and conference projection.',
+    'Photography': 'We will engage a professional photographer to document key project activities, events, and outputs with high-resolution imagery. The photo archive will be used across all communication channels — website, social media, reports, and printed materials. All images will be properly released and credited, with model consent forms collected where applicable.',
+    'Illustration / branding': 'We will commission custom illustrations and visual elements to give the project a distinctive, recognisable identity. This includes character design, infographic illustrations, icon sets, and decorative elements for publications and digital media. The illustrator will work closely with the communication team to ensure visual consistency across all outputs.',
+    'Audio / podcast production': 'We will produce a series of podcast episodes or audio resources covering project themes, partner perspectives, expert interviews, and beneficiary stories. Each episode will be professionally recorded, edited, and published on major podcast platforms (Spotify, Apple Podcasts, Google Podcasts). We will promote episodes through our social media channels and newsletter.',
+    'Artistic facilitation / performance': 'We will engage artists or creative facilitators to lead participatory activities during workshops, events, or training sessions. This may include theatre-based methods, visual facilitation, music, movement, or storytelling techniques. The artistic dimension will make activities more inclusive, emotionally engaging, and memorable for participants.',
+
     // Equipment
-    'Computers / laptops': 'This equipment includes computers or laptops needed to support project management, content development, training, or digital work. It is useful when activities require regular technical access. It helps ensure smooth implementation of project tasks.',
-    'Tablets / mobile devices': 'This equipment includes portable digital devices used for participation, learning, data collection, or communication. It is useful in activities requiring flexibility and mobility. It supports access and interaction in dynamic settings.',
-    'Audio-visual equipment': 'This equipment includes tools such as projectors, screens, speakers, or related devices used in training, events, or presentations. It supports visibility and effective delivery of activities. It is important for communication and group-based learning.',
-    'Recording equipment': 'This equipment includes microphones, cameras, or recording devices used to document activities or create project content. It is useful for producing materials and capturing evidence. It supports dissemination, reporting, and content creation.',
-    'Educational / workshop equipment': 'This equipment includes tools or materials needed to run workshops, learning activities, or practical sessions. It may vary depending on the topic and methodology of the project. It supports participation and effective delivery of activities.',
-    'Event technical equipment': 'This equipment includes technical resources needed for public events, presentations, or conferences. It may involve sound, projection, lighting, or related support devices. It helps ensure professional and functional event implementation.',
+    'Computers / laptops': 'We will purchase computers or laptops necessary for project implementation — content development, platform management, video editing, online training delivery, and day-to-day coordination. Equipment will be assigned to specific project tasks, and depreciation will be calculated according to EU financial rules. After the project, equipment will remain with the partner organisations for continued use.',
+    'Tablets / mobile devices': 'We will acquire tablets or mobile devices to support fieldwork, data collection, interactive workshop facilitation, and participant access to digital resources. Devices will be configured with project-specific apps and tools. They will be particularly useful for activities in community settings or locations without fixed computer infrastructure.',
+    'Audio-visual equipment': 'We will purchase projectors, screens, portable speakers, and related AV equipment to ensure professional delivery of training sessions, workshops, and public events across partner locations. Equipment will be shared among partners as needed and managed through an inventory tracking system.',
+    'Recording equipment': 'We will acquire professional-grade microphones, cameras, tripods, lighting kits, and audio interfaces for recording project activities, producing video content, and creating podcast episodes. Equipment specifications will be aligned with our production quality standards and will serve multiple activities throughout the project lifecycle.',
+    'Educational / workshop equipment': 'We will purchase specialised equipment needed to deliver hands-on workshop activities — this may include demonstration materials, training simulators, modular furniture, display boards, or field equipment depending on the project methodology. Each item will be justified by its direct connection to planned activities.',
+    'Event technical equipment': 'We will acquire technical equipment for organising professional events — portable PA systems, wireless microphones, presentation clickers, streaming hardware, and signage displays. This equipment will be reused across multiple project events and will remain available for partner organisations after the project.',
+
     // Other Goods
-    'Printed materials': 'These goods include brochures, handouts, manuals, posters, or other printed resources used in the project. They support communication, training, and dissemination. They are especially useful in face-to-face contexts and public activities.',
-    'Educational materials': 'These goods include physical resources used to support learning and training activities. They may include manuals, cards, kits, or teaching aids. They help make educational processes more practical and accessible.',
-    'Visibility materials': 'These goods include branded or visual items used to increase recognition of the project. They may include banners, roll-ups, posters, or similar elements. They support public visibility and communication at events and activities.',
-    'Workshop materials': 'These goods include physical items needed to carry out workshop activities effectively. They may include stationery, practical materials, or activity-specific resources. They support implementation and participant engagement.',
-    'Event materials': 'These goods include resources needed for conferences, meetings, or public events. They may include signage, folders, participant packs, or visual supports. They help organise activities and improve the participant experience.',
-    'Participant kits / welcome packs': 'These goods include sets of materials prepared for participants at the beginning of an activity or event. They may contain practical, informative, or branded resources. They help participants feel welcomed and better prepared.',
+    'Printed materials': 'We will produce printed brochures, handbooks, reference cards, posters, and other materials needed for training sessions, events, and public dissemination. All materials will be professionally designed, printed on quality paper, and distributed to participants, institutions, and public spaces. Print runs will be calculated based on confirmed participant numbers plus a dissemination margin.',
+    'Educational materials': 'We will produce physical educational resources — printed manuals, activity card decks, learning kits, visual aids, and reference guides — that participants will use during and after training activities. Materials will be designed to be durable, self-explanatory, and usable in both facilitated and self-directed learning contexts.',
+    'Visibility materials': 'We will produce branded visibility items — roll-up banners, table displays, flag banners, name badges, and event signage — that will be used at all project events and partner premises. All items will comply with EU co-funding visibility requirements and feature the project logo, EU emblem, and funding acknowledgement.',
+    'Workshop materials': 'We will purchase stationery, flip charts, sticky notes, markers, printed worksheets, and other practical materials needed to run interactive workshops effectively. Materials will be prepared in advance for each session and budgeted based on planned participant numbers and workshop methodology requirements.',
+    'Event materials': 'We will produce event-specific materials including programmes, name badges, feedback forms, signage, participant folders, and evaluation questionnaires. Materials will be tailored to each event format (conference, workshop, networking) and produced in the relevant languages. Digital alternatives will be used where appropriate to reduce environmental impact.',
+    'Participant kits / welcome packs': 'We will prepare welcome packs for participants at major project events and mobilities. Each kit will include a project folder, programme, relevant publications, a branded notebook and pen, practical information sheet, and feedback form. Kits will be designed to be useful and informative while reinforcing the project brand identity.',
+
     // Consumables
-    'Printing consumables': 'These consumables include paper, ink, toner, or other items needed for printing project materials. They support the preparation of resources, handouts, and communication assets. They are often used in administration, workshops, and dissemination.',
-    'Workshop consumables': 'These consumables include materials used up during practical activities, training sessions, or group work. They may include paper, markers, cards, or other disposable resources. They support dynamic and participatory implementation.',
-    'Office consumables': 'These consumables include everyday materials needed for project administration and coordination. They may include pens, folders, paper, or similar supplies. They support the practical running of project work.',
-    'Hygiene / cleaning consumables': 'These consumables include cleaning and hygiene supplies used during meetings, workshops, or events. They help maintain safe and appropriate conditions for participants. They are especially relevant in shared spaces and group activities.',
-    'Catering consumables': 'These consumables include food-related disposable items used during meetings, workshops, or events. They may include cups, plates, napkins, or similar materials. They support participant comfort and activity logistics.',
-    'Technical consumables': 'These consumables include small technical items used during project implementation, such as batteries, cables, or storage media. They support the functioning of equipment and technical activities. They are useful in training, events, and production work.',
+    'Printing consumables': 'We will purchase paper, ink cartridges, toner, and binding materials needed for in-house production of project documents, workshop handouts, draft reports, and internal communication materials. Quantities will be estimated based on planned print volumes across all project activities.',
+    'Workshop consumables': 'We will purchase disposable materials consumed during workshops — marker refills, flip chart paper, adhesive materials, craft supplies, printed exercise sheets, and other activity-specific items. Budget is calculated per workshop based on methodology and participant numbers.',
+    'Office consumables': 'We will cover the cost of everyday office supplies needed for project administration — paper, envelopes, folders, pens, printer cartridges, and filing materials. These consumables support the continuous operational needs of project coordination and reporting across all partner offices.',
+    'Hygiene / cleaning consumables': 'We will provide cleaning and hygiene supplies for project spaces used during workshops, meetings, and events — hand sanitiser, surface disinfectant, paper towels, and waste bags. This ensures safe and comfortable conditions for all participants, particularly in shared or rented venues.',
+    'Catering consumables': 'We will purchase disposable catering items — cups, plates, napkins, cutlery, and serving materials — needed for coffee breaks, working lunches, and networking receptions during project events. Quantities will be planned per event based on confirmed participant numbers. We will prioritise recyclable or compostable options.',
+    'Technical consumables': 'We will purchase small technical items consumed during project activities — USB drives, batteries, memory cards, adapter cables, and replacement parts for recording or workshop equipment. These items support the reliable functioning of technical infrastructure across events, production sessions, and training activities.',
+
     // Other Costs
-    'Translation / interpretation costs': 'These costs cover language support needed to make project activities and results accessible to different audiences. They may include written translation or live interpretation. They support inclusion, multilingual communication, and international cooperation.',
-    'External expert / trainer costs': 'These costs cover the contribution of external professionals who provide specialised knowledge or training. They help strengthen the quality and relevance of project activities. They are useful when specific expertise is needed.',
-    'Venue / space rental costs': 'These costs cover the rental of spaces used for meetings, workshops, training, or public events. They help provide an appropriate setting for project implementation. They are relevant when partner organisations do not have suitable spaces available.',
-    'Hosting / software / platform costs': 'These costs cover digital services needed to run websites, online tools, subscriptions, or project platforms. They support communication, learning, content sharing, and project management. They are important for digital or hybrid activities.',
-    'Travel / accommodation support costs': 'These costs cover additional support related to participant mobility, especially when specific travel or stay arrangements are needed. They help ensure participation and smooth organisation of activities. They may be particularly relevant in inclusive or international contexts.',
-    'Evaluation / administrative support costs': 'These costs cover external or additional support for evaluation, reporting, documentation, or administrative tasks. They help strengthen quality assurance and project management. They are useful when specific technical or organisational support is needed.',
+    'Translation / interpretation costs': 'We will hire professional translators and interpreters to ensure all key project outputs, events, and communications are accessible in the consortium languages. This includes written translation of deliverables, simultaneous or consecutive interpretation at transnational meetings and events, and proofreading of multilingual publications.',
+    'External expert / trainer costs': 'We will contract external specialists to deliver specific training sessions, provide technical consultancy, review project outputs, or contribute expertise that is not available within the consortium. Each expert engagement will be documented with a terms of reference, contract, and deliverable report.',
+    'Venue / space rental costs': 'We will rent appropriate venues for workshops, training sessions, conferences, and consortium meetings when partner premises are not available or suitable. Venue selection will consider capacity, accessibility, technical equipment, and location. We will negotiate institutional rates and prioritise venues with inclusive access.',
+    'Hosting / software / platform costs': 'We will cover hosting fees, domain registrations, software licences, and subscription costs for digital tools used in project implementation — website hosting, learning platform, project management tools, video conferencing, cloud storage, and design software. All tools will be selected based on functionality, data protection compliance, and cost-effectiveness.',
+    'Travel / accommodation support costs': 'We will cover supplementary travel and accommodation costs that fall outside standard mobility unit costs — additional transport legs, visa fees, accessible travel arrangements, pre-arrival hotel nights, or travel insurance. These costs ensure that all participants, including those with specific needs, can fully participate in project activities.',
+    'Evaluation / administrative support costs': 'We will contract external evaluators or administrative support to strengthen project quality assurance, produce independent evaluation reports, assist with financial reporting, or manage specific logistical tasks. External evaluation will follow a structured methodology with clear indicators and will produce mid-term and final assessment reports.',
   };
 
   function setActSubtype(wi, actId, subtype) {
@@ -2629,7 +2793,7 @@ const Calculator = (() => {
       state.wps[0].activities.push({
         id: ++state.actCounter, type: 'mgmt', label: 'Project Management',
         rate_applicant: 500, rate_partner: 250,
-        desc: 'This work package covers the overall coordination and management of the project throughout its duration.',
+        desc: 'We will coordinate and manage all project operations throughout its full duration.',
         date_start: toISO(getProjectStart()), date_end: toISO(addMonths(getProjectStart() || new Date(), getProjectMonths()))
       });
       scheduleSave();
@@ -2664,7 +2828,7 @@ const Calculator = (() => {
       state.wps[0].activities.push({
         id: ++state.actCounter, type: 'mgmt', label: 'Project Management',
         rate_applicant: 500, rate_partner: 250,
-        desc: 'This work package covers the overall coordination and management of the project throughout its duration. It includes internal communication between partners, financial management, progress monitoring and quality assurance. The coordinator will organise regular online meetings and prepare interim and final reports. All partners contribute to administrative tasks, reporting and compliance with the grant agreement.',
+        desc: 'We will coordinate and manage all project operations throughout its full duration. We will handle internal communication between partners, financial oversight, progress monitoring against milestones, and quality assurance. The coordinator will organise regular online meetings and prepare interim and final reports. All partners will contribute to administrative tasks, reporting, and compliance with the grant agreement.',
         date_start: toISO(getProjectStart()), date_end: toISO(addMonths(getProjectStart() || new Date(), getProjectMonths()))
       });
     }
@@ -2936,6 +3100,21 @@ const Calculator = (() => {
     _setWP: (...a) => { setWP(...a); scheduleSave(); },
     _setWPCat: (...a) => { setWPCat(...a); scheduleSave(); },
     _applyWPTitle: (...a) => { applyWPTitle(...a); scheduleSave(); },
+    _setWPName: (wi, name) => { state.wps[wi].name = name; scheduleSave(); },
+    _showWPTitleMenu: (wi, btnEl) => {
+      // Close any existing menu
+      document.querySelectorAll('.wp-title-menu').forEach(m => m.remove());
+      const wp = state.wps[wi];
+      const menu = document.createElement('div');
+      menu.className = 'wp-title-menu';
+      menu.innerHTML = buildWPTitleMenu(wi, wp);
+      btnEl.parentElement.appendChild(menu);
+      // Close on click outside
+      setTimeout(() => {
+        const close = (e) => { if (!menu.contains(e.target) && e.target !== btnEl) { menu.remove(); document.removeEventListener('click', close); } };
+        document.addEventListener('click', close);
+      }, 10);
+    },
     _syncWPs: (...a) => { syncWPs(...a); scheduleSave(); },
     _syncWPsMerged: (...a) => { syncWPsMerged(...a); scheduleSave(); },
     _setWPLeader: (...a) => { setWPLeader(...a); },

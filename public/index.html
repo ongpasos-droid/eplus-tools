@@ -596,6 +596,21 @@ tailwind.config = {
             <h1 class="font-headline text-3xl font-extrabold tracking-tighter text-primary mb-1">Project</h1>
             <p class="text-on-surface-variant text-base mb-8">Define your project identity and build the consortium.</p>
 
+            <!-- Call summary (collapsible context for the user) -->
+            <details id="intake-call-summary-p1" class="hidden rounded-2xl border border-secondary-fixed/30 bg-secondary-fixed/5 mb-6 group">
+              <summary class="flex items-start gap-2.5 px-4 py-3 cursor-pointer select-none">
+                <span class="material-symbols-outlined text-primary text-lg mt-0.5">campaign</span>
+                <div class="flex-1 min-w-0">
+                  <span class="text-[10px] font-bold uppercase tracking-widest text-primary block mb-0.5">About this call</span>
+                  <span id="intake-call-summary-p1-preview" class="text-xs text-on-surface-variant line-clamp-1 group-open:hidden"></span>
+                </div>
+                <span class="material-symbols-outlined text-primary/40 text-sm transition-transform group-open:rotate-180 mt-1">expand_more</span>
+              </summary>
+              <div class="px-4 pb-4">
+                <p id="intake-call-summary-p1-text" class="text-sm text-on-surface leading-relaxed whitespace-pre-line"></p>
+              </div>
+            </details>
+
             <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">
               <span>Identification</span><div class="flex-1 h-px bg-outline-variant"></div>
             </div>
@@ -609,29 +624,7 @@ tailwind.config = {
                 <input type="text" id="intake-f-name" placeholder="e.g. ARISE" maxlength="20" class="w-full px-3 py-2.5 rounded-lg bg-white border border-outline-variant text-on-surface font-body text-sm focus:border-primary focus:ring-2 focus:ring-secondary-fixed outline-none transition-all">
               </div>
             </div>
-            <div class="flex flex-col gap-1.5 mb-4">
-              <label class="text-xs font-semibold text-on-surface-variant">Project Summary</label>
-              <details class="rounded-xl bg-amber-50/60 border border-amber-200/40 mb-2 group">
-                <summary class="flex items-center gap-2 px-4 py-2.5 cursor-pointer select-none text-xs text-amber-800 font-medium">
-                  <span class="material-symbols-outlined text-amber-600 text-base">lightbulb</span>
-                  Que deberia contar aqui?
-                  <span class="material-symbols-outlined text-amber-400 text-sm ml-auto transition-transform group-open:rotate-180">expand_more</span>
-                </summary>
-                <div class="px-4 pb-3 text-xs text-amber-900/80 leading-relaxed">
-                  <strong class="text-amber-800">Solo tienes una oportunidad para causar una buena primera impresion.</strong> Los evaluadores reciben cientos de propuestas y apenas dedican unos minutos a decidir si la tuya merece la pena. Cuentanos con tus propias palabras:
-                  <ul class="mt-1.5 space-y-1 list-none">
-                    <li><span class="text-amber-600 font-bold">1.</span> Cual es el problema que has detectado? Por que es importante abordarlo ahora?</li>
-                    <li><span class="text-amber-600 font-bold">2.</span> Cual es la esencia de tu idea? Que la hace especial y diferente?</li>
-                    <li><span class="text-amber-600 font-bold">3.</span> Que actividades quieres hacer para solucionar ese problema?</li>
-                    <li><span class="text-amber-600 font-bold">4.</span> Que quieres conseguir con este proyecto? Que cambio va a provocar?</li>
-                  </ul>
-                  <p class="mt-1.5 text-amber-700 font-medium">Se creativo, se concreto y conecta tu idea con las prioridades de la convocatoria. Esta es tu carta de presentacion.</p>
-                </div>
-              </details>
-              <textarea id="intake-f-desc" rows="6" placeholder="Cuentanos tu idea: que problema has visto, como quieres solucionarlo, que actividades tienes en mente y que cambio esperas conseguir. Escribe con tus propias palabras, como si se lo contaras a alguien que no sabe nada del tema." class="w-full px-3 py-2.5 rounded-lg bg-white border border-outline-variant text-on-surface font-body text-sm focus:border-primary focus:ring-2 focus:ring-secondary-fixed outline-none transition-all resize-vertical leading-relaxed"></textarea>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
               <div class="flex flex-col gap-1.5">
                 <label class="text-xs font-semibold text-on-surface-variant">Duración del proyecto (meses)</label>
                 <input type="number" id="intake-f-dur-visible" value="24" min="6" max="60" step="1" class="w-full px-3 py-2.5 rounded-lg bg-white border border-outline-variant text-on-surface font-body text-sm focus:border-primary focus:ring-2 focus:ring-secondary-fixed outline-none transition-all font-bold">
@@ -644,6 +637,141 @@ tailwind.config = {
                 <label class="text-xs font-semibold text-on-surface-variant">Tipo de acción</label>
                 <input type="text" id="intake-f-type-visible" readonly class="w-full px-3 py-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/50 text-on-surface-variant font-body text-sm outline-none cursor-default">
               </div>
+            </div>
+            <div class="flex flex-col gap-1.5 mb-8">
+              <label class="text-xs font-semibold text-on-surface-variant flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">account_balance</span>Agencia Nacional (dónde se presenta)
+              </label>
+              <p class="text-xs text-on-surface-variant/70 leading-relaxed mb-1">Selecciona la agencia donde vas a presentar la propuesta. El idioma del formulario se ajustará automáticamente según la agencia elegida.</p>
+              <div class="flex items-center gap-3">
+                <select id="intake-f-na" class="flex-1 px-3 py-2.5 rounded-lg bg-white border border-outline-variant text-on-surface font-body text-sm focus:border-primary focus:ring-2 focus:ring-secondary-fixed outline-none transition-all">
+                  <optgroup label="— European Commission —">
+                    <option value="EACEA">EACEA — European Education and Culture Executive Agency</option>
+                  </optgroup>
+                  <optgroup label="Austria">
+                    <option value="AT01">AT01 — OeAD-GmbH – Agentur für Bildung und Internationalisierung</option>
+                  </optgroup>
+                  <optgroup label="Belgium">
+                    <option value="BE01">BE01 — AEF-Europe</option>
+                    <option value="BE02">BE02 — EPOS vzw</option>
+                    <option value="BE03">BE03 — Jugendbüro der Deutschsprachigen Gemeinschaft</option>
+                    <option value="BE04">BE04 — BIJ – Bureau International Jeunesse</option>
+                    <option value="BE05">BE05 — JINT</option>
+                  </optgroup>
+                  <optgroup label="Bulgaria">
+                    <option value="BG01">BG01 — Human Resource Development Centre (HRDC)</option>
+                  </optgroup>
+                  <optgroup label="Croatia">
+                    <option value="HR01">HR01 — Agency for Mobility and EU Programmes (AMPEU)</option>
+                  </optgroup>
+                  <optgroup label="Cyprus">
+                    <option value="CY01">CY01 — Foundation for the Management of European LLL Programmes</option>
+                  </optgroup>
+                  <optgroup label="Czechia">
+                    <option value="CZ01">CZ01 — Dům zahraniční spolupráce (DZS)</option>
+                  </optgroup>
+                  <optgroup label="Denmark">
+                    <option value="DK01">DK01 — Danish Agency for Higher Education and Science</option>
+                  </optgroup>
+                  <optgroup label="Estonia">
+                    <option value="EE01">EE01 — Education and Youth Board / Harno</option>
+                  </optgroup>
+                  <optgroup label="Finland">
+                    <option value="FI01">FI01 — Finnish National Agency for Education (EDUFI)</option>
+                  </optgroup>
+                  <optgroup label="France">
+                    <option value="FR01">FR01 — Agence Erasmus+ France / Education Formation</option>
+                    <option value="FR02">FR02 — Agence Erasmus+ France Jeunesse & Sport</option>
+                  </optgroup>
+                  <optgroup label="Germany">
+                    <option value="DE01">DE01 — NA Erasmus+ Hochschulzusammenarbeit (DAAD)</option>
+                    <option value="DE02">DE02 — NA Bildung für Europa (BiBB)</option>
+                    <option value="DE03">DE03 — NA Erasmus+ Schulbildung</option>
+                    <option value="DE04">DE04 — JUGEND für Europa</option>
+                  </optgroup>
+                  <optgroup label="Greece">
+                    <option value="EL01">EL01 — Greek State Scholarship's Foundation (IKY)</option>
+                    <option value="EL02">EL02 — Youth and Lifelong Learning Foundation (I.NE.DI.VI.M.)</option>
+                  </optgroup>
+                  <optgroup label="Hungary">
+                    <option value="HU01">HU01 — Tempus Public Foundation</option>
+                  </optgroup>
+                  <optgroup label="Iceland">
+                    <option value="IS01">IS01 — The Icelandic Centre for Research (Rannís)</option>
+                  </optgroup>
+                  <optgroup label="Ireland">
+                    <option value="IE01">IE01 — Léargas</option>
+                    <option value="IE02">IE02 — The Higher Education Authority (HEA)</option>
+                  </optgroup>
+                  <optgroup label="Italy">
+                    <option value="IT01">IT01 — INAPP</option>
+                    <option value="IT02">IT02 — Agenzia Nazionale Erasmus+ (INDIRE)</option>
+                    <option value="IT03">IT03 — Agenzia nazionale per i giovani (ANG)</option>
+                  </optgroup>
+                  <optgroup label="Latvia">
+                    <option value="LV01">LV01 — Valsts izglītības attīstības aģentūra (VIAA)</option>
+                    <option value="LV02">LV02 — Jaunatnes starptautisko programmu aģentūra</option>
+                  </optgroup>
+                  <optgroup label="Liechtenstein">
+                    <option value="LI01">LI01 — AIBA | Nationalagentur für Erasmus+ und ESK</option>
+                  </optgroup>
+                  <optgroup label="Lithuania">
+                    <option value="LT01">LT01 — Education Exchanges Support Foundation</option>
+                    <option value="LT02">LT02 — Jaunatnes starptautisko programmu aģentūra</option>
+                  </optgroup>
+                  <optgroup label="Luxembourg">
+                    <option value="LU01">LU01 — Anefore asbl</option>
+                  </optgroup>
+                  <optgroup label="Malta">
+                    <option value="MT01">MT01 — European Union Programmes Agency (EUPA)</option>
+                  </optgroup>
+                  <optgroup label="Netherlands">
+                    <option value="NL01">NL01 — NA Erasmus+ Onderwijs & Training</option>
+                    <option value="NL02">NL02 — Nederlands Jeugdinstituut / NA Erasmus+ Youth</option>
+                  </optgroup>
+                  <optgroup label="Norway">
+                    <option value="NO01">NO01 — Norwegian Directorate for Higher Education and Skills</option>
+                    <option value="NO02">NO02 — Bufdir</option>
+                  </optgroup>
+                  <optgroup label="Poland">
+                    <option value="PL01">PL01 — Foundation for the Development of the Education System (FRSE)</option>
+                  </optgroup>
+                  <optgroup label="Portugal">
+                    <option value="PT01">PT01 — Agência Nacional Erasmus+ Educação e Formação</option>
+                    <option value="PT02">PT02 — Agência Nacional Erasmus+ Juventude / Desporto</option>
+                  </optgroup>
+                  <optgroup label="Romania">
+                    <option value="RO01">RO01 — ANPCDEFP</option>
+                  </optgroup>
+                  <optgroup label="Serbia">
+                    <option value="RS01">RS01 — Fondacija Tempus</option>
+                  </optgroup>
+                  <optgroup label="Slovakia">
+                    <option value="SK01">SK01 — SAAIC</option>
+                    <option value="SK02">SK02 — National Institute for Education and Youth</option>
+                  </optgroup>
+                  <optgroup label="Slovenia">
+                    <option value="SI01">SI01 — CMEPIUS</option>
+                    <option value="SI02">SI02 — MOVIT</option>
+                  </optgroup>
+                  <optgroup label="Spain">
+                    <option value="ES01">ES01 — SEPIE</option>
+                    <option value="ES02">ES02 — INJUVE</option>
+                  </optgroup>
+                  <optgroup label="Sweden">
+                    <option value="SE01">SE01 — Swedish Council for Higher Education (UHR)</option>
+                    <option value="SE02">SE02 — Swedish Agency for Youth and Civil Society (MUCF)</option>
+                  </optgroup>
+                  <optgroup label="Türkiye">
+                    <option value="TR01">TR01 — Turkish National Agency</option>
+                  </optgroup>
+                </select>
+                <span id="intake-na-lang-badge" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold whitespace-nowrap">
+                  <span class="material-symbols-outlined text-sm">translate</span>
+                  <span id="intake-na-lang-label">English</span>
+                </span>
+              </div>
+              <input type="hidden" id="intake-f-lang" value="en">
             </div>
 
             <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-4">
@@ -759,6 +887,46 @@ tailwind.config = {
 
           <!-- STEP: Resumen & Lanzar (unified) -->
           <div class="intake-step hidden" id="intake-p3">
+
+            <!-- ── Call Summary (collapsible context for the user) ── -->
+            <details id="intake-call-summary-box" class="hidden rounded-2xl border border-secondary-fixed/30 bg-secondary-fixed/5 mb-6 group">
+              <summary class="flex items-start gap-2.5 px-4 py-3 cursor-pointer select-none">
+                <span class="material-symbols-outlined text-primary text-lg mt-0.5">campaign</span>
+                <div class="flex-1 min-w-0">
+                  <span class="text-[10px] font-bold uppercase tracking-widest text-primary block mb-0.5">About this call</span>
+                  <span id="intake-call-summary-preview" class="text-xs text-on-surface-variant line-clamp-1 group-open:hidden"></span>
+                </div>
+                <span class="material-symbols-outlined text-primary/40 text-sm transition-transform group-open:rotate-180 mt-1">expand_more</span>
+              </summary>
+              <div class="px-4 pb-4">
+                <p id="intake-call-summary-text" class="text-sm text-on-surface leading-relaxed whitespace-pre-line"></p>
+              </div>
+            </details>
+
+            <!-- ── Project Summary (required before launch) ─────── -->
+            <div class="mb-10">
+              <h1 class="font-headline text-3xl font-extrabold tracking-tighter text-primary mb-1">Project Summary</h1>
+              <p class="text-on-surface-variant text-sm mb-5 leading-relaxed">Antes de lanzar la escritura, resume tu proyecto. Este texto es la base que la IA usara para redactar la propuesta.</p>
+
+              <details class="rounded-xl bg-amber-50/60 border border-amber-200/40 mb-3 group">
+                <summary class="flex items-center gap-2 px-4 py-2.5 cursor-pointer select-none text-xs text-amber-800 font-medium">
+                  <span class="material-symbols-outlined text-amber-600 text-base">lightbulb</span>
+                  Que deberia contar aqui?
+                  <span class="material-symbols-outlined text-amber-400 text-sm ml-auto transition-transform group-open:rotate-180">expand_more</span>
+                </summary>
+                <div class="px-4 pb-3 text-xs text-amber-900/80 leading-relaxed">
+                  <strong class="text-amber-800">Solo tienes una oportunidad para causar una buena primera impresion.</strong> Los evaluadores reciben cientos de propuestas y apenas dedican unos minutos a decidir si la tuya merece la pena. Cuentanos con tus propias palabras:
+                  <ul class="mt-1.5 space-y-1 list-none">
+                    <li><span class="text-amber-600 font-bold">1.</span> Cual es el problema que has detectado? Por que es importante abordarlo ahora?</li>
+                    <li><span class="text-amber-600 font-bold">2.</span> Cual es la esencia de tu idea? Que la hace especial y diferente?</li>
+                    <li><span class="text-amber-600 font-bold">3.</span> Que actividades quieres hacer para solucionar ese problema?</li>
+                    <li><span class="text-amber-600 font-bold">4.</span> Que quieres conseguir con este proyecto? Que cambio va a provocar?</li>
+                  </ul>
+                  <p class="mt-1.5 text-amber-700 font-medium">Se creativo, se concreto y conecta tu idea con las prioridades de la convocatoria. Esta es tu carta de presentacion.</p>
+                </div>
+              </details>
+              <textarea id="intake-f-desc" rows="8" placeholder="Cuentanos tu idea: que problema has visto, como quieres solucionarlo, que actividades tienes en mente y que cambio esperas conseguir. Escribe con tus propias palabras, como si se lo contaras a alguien que no sabe nada del tema." class="w-full px-3 py-2.5 rounded-lg bg-white border border-outline-variant text-on-surface font-body text-sm focus:border-primary focus:ring-2 focus:ring-secondary-fixed outline-none transition-all resize-vertical leading-relaxed"></textarea>
+            </div>
 
             <!-- ── Hero: Launch section ──────────────────────────── -->
             <div class="text-center mb-10">
@@ -2008,6 +2176,7 @@ tailwind.config = {
 <script src="/js/developer.js"></script>
 <script src="/js/evaluator.js"></script>
 <script src="/js/budget.js"></script>
+<script src="/js/voice-input.js"></script>
 
 <!-- ── Mini modal (reemplaza prompt/confirm nativos) ────────── -->
 <div id="mini-modal" class="hidden fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-black/40"

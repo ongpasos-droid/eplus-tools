@@ -210,7 +210,7 @@ async function deleteExtraDestination(id) {
 
 async function getWorkPackages(projectId) {
   const sql = `
-    SELECT id, project_id, order_index, code, title, category, leader_id
+    SELECT id, project_id, order_index, code, title, summary, category, leader_id
     FROM work_packages
     WHERE project_id = ?
     ORDER BY order_index
@@ -219,7 +219,7 @@ async function getWorkPackages(projectId) {
   return rows;
 }
 
-async function createWorkPackage(projectId, { title, category, leader_id }) {
+async function createWorkPackage(projectId, { title, summary, category, leader_id }) {
   // Get next order_index
   const [maxOrder] = await db.execute(
     'SELECT MAX(order_index) as max_order FROM work_packages WHERE project_id = ?',
@@ -230,25 +230,29 @@ async function createWorkPackage(projectId, { title, category, leader_id }) {
 
   const id = genUUID();
   const sql = `
-    INSERT INTO work_packages (id, project_id, order_index, code, title, category, leader_id, created_at, updated_at)
-    VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
+    INSERT INTO work_packages (id, project_id, order_index, code, title, summary, category, leader_id, created_at, updated_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
   `;
-  await db.execute(sql, [id, projectId, nextOrder, code, title, category, leader_id]);
+  await db.execute(sql, [id, projectId, nextOrder, code, title, summary || null, category, leader_id]);
 
   const [rows] = await db.execute(
-    'SELECT id, order_index, code, title, category, leader_id, created_at, updated_at FROM work_packages WHERE id = ?',
+    'SELECT id, order_index, code, title, summary, category, leader_id, created_at, updated_at FROM work_packages WHERE id = ?',
     [id]
   );
   return rows[0];
 }
 
-async function updateWorkPackage(id, { title, category, leader_id, order_index }) {
+async function updateWorkPackage(id, { title, summary, category, leader_id, order_index }) {
   const updates = [];
   const params = [];
 
   if (title !== undefined) {
     updates.push('title = ?');
     params.push(title);
+  }
+  if (summary !== undefined) {
+    updates.push('summary = ?');
+    params.push(summary);
   }
   if (category !== undefined) {
     updates.push('category = ?');
@@ -272,7 +276,7 @@ async function updateWorkPackage(id, { title, category, leader_id, order_index }
   await db.execute(sql, params);
 
   const [rows] = await db.execute(
-    'SELECT id, code, title, category, leader_id, order_index, updated_at FROM work_packages WHERE id = ?',
+    'SELECT id, code, title, summary, category, leader_id, order_index, updated_at FROM work_packages WHERE id = ?',
     [id]
   );
   return rows[0];

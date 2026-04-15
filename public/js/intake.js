@@ -33,6 +33,54 @@ const Intake = (() => {
     { key: 'resumen',      label: 'Resumen',       icon: 'rocket_launch', panel: 'intake-p3' },
   ];
 
+  /* ── National Agency → proposal language mapping ──────────────── */
+  const NA_LANG = {
+    EACEA:'en',
+    AT01:'de',
+    BE01:'fr', BE02:'nl', BE03:'de', BE04:'fr', BE05:'nl',
+    BG01:'bg', HR01:'hr', CY01:'el', CZ01:'cs', DK01:'da',
+    EE01:'et', FI01:'fi',
+    FR01:'fr', FR02:'fr',
+    DE01:'de', DE02:'de', DE03:'de', DE04:'de',
+    EL01:'el', EL02:'el',
+    HU01:'hu', IS01:'is',
+    IE01:'en', IE02:'en',
+    IT01:'it', IT02:'it', IT03:'it',
+    LV01:'lv', LV02:'lv',
+    LI01:'de',
+    LT01:'lt', LT02:'lt',
+    LU01:'fr',
+    MT01:'en',
+    NL01:'nl', NL02:'nl',
+    NO01:'no', NO02:'no',
+    PL01:'pl',
+    PT01:'pt', PT02:'pt',
+    RO01:'ro', RS01:'sr',
+    SK01:'sk', SK02:'sk',
+    SI01:'sl', SI02:'sl',
+    ES01:'es', ES02:'es',
+    SE01:'sv', SE02:'sv',
+    TR01:'tr',
+  };
+  const LANG_NAMES = {
+    en:'English', es:'Español', fr:'Français', de:'Deutsch', it:'Italiano', pt:'Português',
+    nl:'Nederlands', bg:'Български', hr:'Hrvatski', el:'Ελληνικά', cs:'Čeština', da:'Dansk',
+    et:'Eesti', fi:'Suomi', hu:'Magyar', is:'Íslenska', lv:'Latviešu', lt:'Lietuvių',
+    no:'Norsk', pl:'Polski', ro:'Română', sr:'Srpski', sk:'Slovenčina', sl:'Slovenščina',
+    sv:'Svenska', tr:'Türkçe',
+  };
+
+  function onNAChange() {
+    const naEl = document.getElementById('intake-f-na');
+    const langEl = document.getElementById('intake-f-lang');
+    const badge = document.getElementById('intake-na-lang-label');
+    if (!naEl) return;
+    const code = naEl.value;
+    const lang = NA_LANG[code] || 'en';
+    if (langEl) langEl.value = lang;
+    if (badge) badge.textContent = LANG_NAMES[lang] || lang;
+  }
+
   /* ── Init ────────────────────────────────────────────────────── */
   function init() {
     if (initialized) {
@@ -120,6 +168,15 @@ const Intake = (() => {
     document.querySelectorAll('#panel-intake input, #panel-intake select, #panel-intake textarea')
       .forEach(el => el.addEventListener('input', () => { _dirty = true; scheduleIntakeSave(); }));
 
+    // Gate launch button on Project Summary content
+    document.getElementById('intake-f-desc')?.addEventListener('input', updateLaunchGate);
+
+    // National Agency → auto-set proposal language
+    document.getElementById('intake-f-na')?.addEventListener('change', () => {
+      onNAChange();
+      _dirty = true; scheduleIntakeSave();
+    });
+
     // Save/Load file buttons
     document.getElementById('intake-btn-save-file')?.addEventListener('click', saveToFile);
     document.getElementById('intake-btn-load-file')?.addEventListener('click', () => {
@@ -158,6 +215,18 @@ const Intake = (() => {
     setVal('intake-f-dur-visible', p.duration_max_months || 24);
     setVal('intake-f-start-visible', p.start_date_min ? toDateStr(p.start_date_min) : '');
     setVal('intake-f-type-visible', p.action_type || '');
+
+    // Show call summary in Step 1
+    const csBox = document.getElementById('intake-call-summary-p1');
+    const csText = document.getElementById('intake-call-summary-p1-text');
+    const csPreview = document.getElementById('intake-call-summary-p1-preview');
+    if (csBox && csText) {
+      if (p.call_summary) {
+        csText.textContent = p.call_summary;
+        if (csPreview) csPreview.textContent = p.call_summary.split('\n')[0];
+        csBox.classList.remove('hidden');
+      } else { csBox.classList.add('hidden'); }
+    }
   }
 
   /* ── Server projects ─────────────────────────────────────────── */
@@ -220,6 +289,11 @@ const Intake = (() => {
       document.getElementById('intake-f-start').value = toDateStr(project.start_date);
       document.getElementById('intake-f-type').value = project.type || '';
 
+      // Load national agency + derive proposal language
+      const naEl = document.getElementById('intake-f-na');
+      if (naEl && project.national_agency) naEl.value = project.national_agency;
+      onNAChange();
+
       // Select matching program (sets selectedProgram + type-visible field)
       if (project.type && programs.length) {
         const match = programs.find(p => p.action_type === project.type);
@@ -230,6 +304,15 @@ const Intake = (() => {
           const setVal = (elId, v) => { const el = document.getElementById(elId); if (el) el.value = v || ''; };
           setVal('intake-f-type', match.action_type || '');
           setVal('intake-f-type-visible', match.action_type || '');
+          // Show call summary
+          const csBox = document.getElementById('intake-call-summary-p1');
+          const csText = document.getElementById('intake-call-summary-p1-text');
+          const csPreview = document.getElementById('intake-call-summary-p1-preview');
+          if (csBox && csText && match.call_summary) {
+            csText.textContent = match.call_summary;
+            if (csPreview) csPreview.textContent = match.call_summary.split('\n')[0];
+            csBox.classList.remove('hidden');
+          }
         }
       }
       // Re-apply project values that selectProgram would have overwritten
@@ -292,6 +375,8 @@ const Intake = (() => {
         full_name: document.getElementById('intake-f-fullname')?.value?.trim() || null,
         type: document.getElementById('intake-f-type').value || null,
         description: document.getElementById('intake-f-desc').value.trim() || null,
+        proposal_lang: document.getElementById('intake-f-lang')?.value || 'en',
+        national_agency: document.getElementById('intake-f-na')?.value || 'EACEA',
         start_date: document.getElementById('intake-f-start').value || null,
         duration_months: parseInt(document.getElementById('intake-f-dur').value) || 24,
         eu_grant: selectedProgram ? Number(selectedProgram.eu_grant_max) : 0,
@@ -1182,6 +1267,20 @@ const Intake = (() => {
 
   /* ── Launch step (step 10) ─────────────────────────────────── */
   function renderLaunchStep() {
+    // Show call summary if available
+    const summaryBox = document.getElementById('intake-call-summary-box');
+    const summaryText = document.getElementById('intake-call-summary-text');
+    const summaryPreview = document.getElementById('intake-call-summary-preview');
+    if (summaryBox && summaryText && selectedProgram) {
+      if (selectedProgram.call_summary) {
+        summaryText.textContent = selectedProgram.call_summary;
+        if (summaryPreview) summaryPreview.textContent = selectedProgram.call_summary.split('\n')[0];
+        summaryBox.classList.remove('hidden');
+      } else {
+        summaryBox.classList.add('hidden');
+      }
+    }
+
     const statsEl = document.getElementById('intake-launch-stats');
     if (!statsEl) return;
 
@@ -1208,12 +1307,24 @@ const Intake = (() => {
       </div>
     `).join('');
 
-    // Bind launch button
+    // Bind launch button + gate on Project Summary
     const btn = document.getElementById('intake-btn-launch');
     if (btn && !btn._bound) {
       btn._bound = true;
       btn.addEventListener('click', launchProject);
     }
+    updateLaunchGate();
+  }
+
+  function updateLaunchGate() {
+    const desc = document.getElementById('intake-f-desc');
+    const btn = document.getElementById('intake-btn-launch');
+    if (!desc || !btn) return;
+    const hasText = desc.value.trim().length >= 20;
+    btn.disabled = !hasText;
+    btn.classList.toggle('opacity-40', !hasText);
+    btn.classList.toggle('pointer-events-none', !hasText);
+    btn.title = hasText ? '' : 'Escribe el Project Summary antes de continuar';
   }
 
   async function launchProject() {
@@ -1566,5 +1677,9 @@ const Intake = (() => {
 
   function hasUnsavedChanges() { return _dirty; }
 
-  return { init, startNew, openProject, _setProgram, _calcNav: calcNav, _preloadDemo: preloadDemo, _loadProject: loadFromServer, hasUnsavedChanges };
+  function getProposalLang() {
+    return document.getElementById('intake-f-lang')?.value || 'en';
+  }
+
+  return { init, startNew, openProject, getProposalLang, _setProgram, _calcNav: calcNav, _preloadDemo: preloadDemo, _loadProject: loadFromServer, hasUnsavedChanges };
 })();
