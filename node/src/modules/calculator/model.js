@@ -1194,15 +1194,17 @@ async function saveFullState(projectId, data) {
               [actId, wpId, act.type, act.label || '', act.subtype || null, act.desc || null,
                act.date_start || null, act.date_end || null, act.online ? 1 : 0, ai]
             );
-            await insertActivityDetails(conn, actId, act);
+            await insertActivityDetails(conn, actId, act, partnerIds);
           }
         }
       }
     }
 
     await conn.commit();
+    console.log(`[saveFullState] ${projectId} OK — ${data.wps?.length || 0} WPs, ${data.wps?.reduce((s, w) => s + (w.activities?.length || 0), 0) || 0} activities`);
   } catch (err) {
     await conn.rollback();
+    console.error(`[saveFullState] ${projectId} ROLLBACK — ${err.code || ''}: ${err.message}`);
     throw err;
   } finally {
     conn.release();
@@ -1237,7 +1239,10 @@ async function deleteActivityDetails(conn, actId, type) {
   }
 }
 
-async function insertActivityDetails(conn, actId, act) {
+async function insertActivityDetails(conn, actId, act, partnerIds) {
+  // partnerIds = valid partner IDs for this project (used to filter FK references)
+  const validPid = pid => !partnerIds || partnerIds.includes(pid);
+
   switch (act.type) {
     case 'mgmt': {
       await conn.execute(
@@ -1247,13 +1252,19 @@ async function insertActivityDetails(conn, actId, act) {
       break;
     }
     case 'meeting': case 'ltta': {
+      const hostValid = act.host && validPid(act.host);
+      if (!hostValid) {
+        console.warn(`[saveFullState] activity ${act.label}: host '${act.host}' not in partners, skipping mobility details`);
+        break;
+      }
       await conn.execute(
         'INSERT INTO activity_mobility (id, activity_id, host_partner_id, host_active, pax_per_partner, duration_days, local_pax, local_transport, mat_cost_per_pax) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-        [genUUID(), actId, act.host || '', act.host_active !== false ? 1 : 0, act.pax || 2, act.days || 3, act.local_pax || 0, act.local_transport || 0, act.mat_cost || 0]
+        [genUUID(), actId, act.host, act.host_active !== false ? 1 : 0, act.pax || 2, act.days || 3, act.local_pax || 0, act.local_transport || 0, act.mat_cost || 0]
       );
-      // Participant toggles
+      // Participant toggles — only valid partner IDs
       if (act.participants) {
         for (const [pid, active] of Object.entries(act.participants)) {
+          if (!validPid(pid)) { console.warn(`[saveFullState] skipping participant '${pid}' — not a valid partner`); continue; }
           await conn.execute(
             'INSERT INTO activity_mobility_participants (activity_id, partner_id, active) VALUES (?, ?, ?)',
             [actId, pid, active !== false ? 1 : 0]
@@ -1265,7 +1276,7 @@ async function insertActivityDetails(conn, actId, act) {
     case 'io': {
       if (act.io_staff) {
         for (const [pid, ps] of Object.entries(act.io_staff)) {
-          if (!ps.active) continue;
+          if (!ps.active || !validPid(pid)) continue;
           for (const s of (ps.staff || [])) {
             await conn.execute(
               'INSERT INTO activity_intellectual_outputs (id, activity_id, partner_id, days, worker_category) VALUES (?, ?, ?, ?, ?)',
@@ -1279,6 +1290,7 @@ async function insertActivityDetails(conn, actId, act) {
     case 'me': {
       if (act.me_events) {
         for (const [pid, ev] of Object.entries(act.me_events)) {
+          if (!validPid(pid)) continue;
           await conn.execute(
             'INSERT INTO activity_multiplier_events (id, activity_id, partner_id, active, local_pax, intl_pax, local_rate, intl_rate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
             [genUUID(), actId, pid, ev.active ? 1 : 0, ev.local_pax || 0, ev.intl_pax || 0, ev.local_rate || 0, ev.intl_rate || 0]
@@ -1290,6 +1302,7 @@ async function insertActivityDetails(conn, actId, act) {
     case 'local_ws': {
       if (act.ws_partners) {
         for (const [pid, w] of Object.entries(act.ws_partners)) {
+          if (!validPid(pid)) continue;
           await conn.execute(
             'INSERT INTO activity_local_workshops (id, activity_id, partner_id, active, participants, sessions, cost_per_pax) VALUES (?, ?, ?, ?, ?, ?, ?)',
             [genUUID(), actId, pid, w.active ? 1 : 0, w.ws_pax || 0, w.ws_n || 0, w.ws_cost || 0]
@@ -1301,6 +1314,7 @@ async function insertActivityDetails(conn, actId, act) {
     case 'campaign': {
       if (act.camp_partners) {
         for (const [pid, c] of Object.entries(act.camp_partners)) {
+          if (!validPid(pid)) continue;
           await conn.execute(
             'INSERT INTO activity_campaigns (id, activity_id, partner_id, active, monthly_amount, months) VALUES (?, ?, ?, ?, ?, ?)',
             [genUUID(), actId, pid, c.active ? 1 : 0, c.monthly || 0, c.months || 0]
@@ -1312,6 +1326,7 @@ async function insertActivityDetails(conn, actId, act) {
     default: { // website, artistic, equipment, goods, consumables, other
       if (act.note_partners) {
         for (const [pid, np] of Object.entries(act.note_partners)) {
+          if (!validPid(pid)) continue;
           await conn.execute(
             'INSERT INTO activity_generic_costs (id, activity_id, partner_id, active, note, amount, project_pct, lifetime_pct) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
             [genUUID(), actId, pid, np.active ? 1 : 0, np.note || null, np.amount || 0, np.project_pct || null, np.lifetime_pct || null]

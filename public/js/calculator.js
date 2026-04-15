@@ -2438,6 +2438,11 @@ const Calculator = (() => {
     const act = state.wps[wi].activities.find(a => a.id === actId);
     if (!act) return;
     act[field] = isNaN(value) ? value : (parseFloat(value)||0);
+    // Re-render mobility fields when pax/days change so partner table updates
+    if ((field === 'pax' || field === 'days') && (act.type === 'meeting' || act.type === 'ltta')) {
+      const el = $('calc-act-fields-' + actId);
+      if (el) el.innerHTML = buildActFields(act, wi);
+    }
     recalcWP(wi);
   }
 
