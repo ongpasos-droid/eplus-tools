@@ -35,6 +35,11 @@ router.patch('/contexts/:id', requireAuth, ctrl.updateContext);
 /* ── Upload Form Part B (DOCX) ────────────────────────────────── */
 router.post('/parse-form-b', requireAuth, upload.single('file'), ctrl.parseFormB);
 
+/* ── Interview (AI-guided Project Summary) ───────────────────── */
+router.get   ('/projects/:id/interview',      requireAuth, ctrl.getInterview);
+router.post  ('/projects/:id/interview/next',  requireAuth, ctrl.interviewNext);
+router.delete('/projects/:id/interview',       requireAuth, ctrl.resetInterview);
+
 /* ── Task Templates ──────────────────────────────────────────── */
 router.get('/task-templates', ctrl.getTaskTemplates);
 

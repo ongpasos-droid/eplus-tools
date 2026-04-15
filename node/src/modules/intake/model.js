@@ -463,6 +463,12 @@ module.exports = {
   updateTask,
   deleteTask,
   deleteAllTasks,
+  // Interview
+  getInterviewTurns,
+  saveInterviewTurn,
+  deleteInterview,
+  saveInterviewSummary,
+  buildInterviewContext,
 };
 
 /* ── Project Tasks ───────────────────────────────────────────── */
@@ -504,4 +510,130 @@ async function deleteTask(id) {
 
 async function deleteAllTasks(projectId) {
   await db.query('DELETE FROM project_tasks WHERE project_id = ?', [projectId]);
+}
+
+/* ══ INTERVIEW ══════════════════════════════════════════════════ */
+
+async function getInterviewTurns(projectId) {
+  const [rows] = await db.query(
+    'SELECT turn_index, role, content, created_at FROM intake_interviews WHERE project_id = ? ORDER BY turn_index',
+    [projectId]
+  );
+  return rows;
+}
+
+async function saveInterviewTurn(projectId, userId, turnIndex, role, content) {
+  const id = genUUID();
+  await db.query(
+    'INSERT INTO intake_interviews (id, project_id, user_id, turn_index, role, content) VALUES (?,?,?,?,?,?)',
+    [id, projectId, userId, turnIndex, role, content]
+  );
+  return id;
+}
+
+async function deleteInterview(projectId) {
+  await db.query('DELETE FROM intake_interviews WHERE project_id = ?', [projectId]);
+  await db.query('UPDATE projects SET interview_summary = NULL WHERE id = ?', [projectId]);
+}
+
+async function saveInterviewSummary(projectId, summary) {
+  await db.query('UPDATE projects SET interview_summary = ? WHERE id = ?', [summary, projectId]);
+}
+
+async function buildInterviewContext(projectId, userId) {
+  // Project
+  const [projects] = await db.query(
+    'SELECT name, full_name, type, description, start_date, duration_months, eu_grant, cofin_pct, indirect_pct, calc_state FROM projects WHERE id = ? AND user_id = ?',
+    [projectId, userId]
+  );
+  const proj = projects[0];
+  if (!proj) return null;
+
+  // Partners
+  const [partners] = await db.query(
+    'SELECT name, city, country, role FROM partners WHERE project_id = ? ORDER BY order_index',
+    [projectId]
+  );
+
+  // Call summary from programme
+  const [progs] = await db.query(
+    'SELECT name, call_summary, eu_grant_max FROM intake_programs WHERE action_type = ? AND active = 1 LIMIT 1',
+    [proj.type]
+  );
+  const programme = progs[0] || {};
+
+  // Load WPs and activities from relational tables (primary source)
+  let wps = [];
+  const [wpRows] = await db.query(
+    'SELECT id, code, title, summary, order_index FROM work_packages WHERE project_id = ? ORDER BY order_index',
+    [projectId]
+  );
+  if (wpRows.length) {
+    for (const wp of wpRows) {
+      const [actRows] = await db.query(
+        'SELECT label, type, subtype, description FROM activities WHERE wp_id = ? ORDER BY order_index',
+        [wp.id]
+      );
+      wps.push({
+        code: wp.code || `WP${wp.order_index + 1}`,
+        name: wp.title || `Work Package ${wp.order_index + 1}`,
+        summary: wp.summary || '',
+        activities: actRows.map(a => ({
+          label: a.label || a.type,
+          subtype: a.subtype || '',
+          desc: a.description || '',
+        }))
+      });
+    }
+  }
+  // Fallback: try calc_state JSON if no WPs in tables
+  if (!wps.length && proj.calc_state) {
+    try {
+      const cs = typeof proj.calc_state === 'string' ? JSON.parse(proj.calc_state) : proj.calc_state;
+      if (cs && cs.wps) {
+        wps = cs.wps.map((wp, i) => ({
+          code: `WP${i + 1}`,
+          name: wp.name || `Work Package ${i + 1}`,
+          summary: wp.summary || '',
+          activities: (wp.activities || []).map(a => ({
+            label: a.label || a.type,
+            subtype: a.subtype || '',
+            desc: a.desc || '',
+          }))
+        }));
+      }
+    } catch (e) { /* calc_state not parseable */ }
+  }
+
+  // Format context string
+  let ctx = `Project: ${proj.full_name || proj.name} (${proj.type})\n`;
+  ctx += `Duration: ${proj.duration_months || '?'} months\n`;
+  if (proj.start_date) ctx += `Start: ${String(proj.start_date).slice(0, 10)}\n`;
+  ctx += `EU Grant: €${Number(proj.eu_grant || programme.eu_grant_max || 0).toLocaleString('es-ES')}\n\n`;
+
+  ctx += `Partners (${partners.length}):\n`;
+  partners.forEach((p, i) => {
+    ctx += `  ${i + 1}. ${p.name} — ${p.city}, ${p.country} (${p.role})\n`;
+  });
+
+  if (wps.length) {
+    ctx += `\nWork Packages (${wps.length} total):\n`;
+    wps.forEach(wp => {
+      ctx += `\n  ${wp.code}: ${wp.name}\n`;
+      if (wp.summary) ctx += `    Summary: ${wp.summary}\n`;
+      if (wp.activities.length) {
+        ctx += `    Activities (${wp.activities.length}):\n`;
+        wp.activities.forEach(a => {
+          ctx += `      - ${a.label}${a.subtype ? ` (${a.subtype})` : ''}\n`;
+          if (a.desc) ctx += `        Description: ${a.desc}\n`;
+        });
+      }
+    });
+  }
+
+  if (programme.call_summary) {
+    ctx += `\nCall priorities:\n${programme.call_summary}\n`;
+  }
+
+  return ctx;
 }

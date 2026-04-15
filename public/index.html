@@ -888,8 +888,8 @@ tailwind.config = {
           <!-- STEP: Resumen & Lanzar (unified) -->
           <div class="intake-step hidden" id="intake-p3">
 
-            <!-- ── Call Summary (collapsible context for the user) ── -->
-            <details id="intake-call-summary-box" class="hidden rounded-2xl border border-secondary-fixed/30 bg-secondary-fixed/5 mb-6 group">
+            <!-- ── Call Summary (collapsible) ── -->
+            <details id="intake-call-summary-box" class="hidden rounded-2xl border border-secondary-fixed/30 bg-secondary-fixed/5 mb-8 group">
               <summary class="flex items-start gap-2.5 px-4 py-3 cursor-pointer select-none">
                 <span class="material-symbols-outlined text-primary text-lg mt-0.5">campaign</span>
                 <div class="flex-1 min-w-0">
@@ -903,127 +903,101 @@ tailwind.config = {
               </div>
             </details>
 
-            <!-- ── Project Summary (required before launch) ─────── -->
-            <div class="mb-10">
-              <h1 class="font-headline text-3xl font-extrabold tracking-tighter text-primary mb-1">Project Summary</h1>
-              <p class="text-on-surface-variant text-sm mb-5 leading-relaxed">Antes de lanzar la escritura, resume tu proyecto. Este texto es la base que la IA usara para redactar la propuesta.</p>
-
-              <details class="rounded-xl bg-amber-50/60 border border-amber-200/40 mb-3 group">
-                <summary class="flex items-center gap-2 px-4 py-2.5 cursor-pointer select-none text-xs text-amber-800 font-medium">
-                  <span class="material-symbols-outlined text-amber-600 text-base">lightbulb</span>
-                  Que deberia contar aqui?
-                  <span class="material-symbols-outlined text-amber-400 text-sm ml-auto transition-transform group-open:rotate-180">expand_more</span>
-                </summary>
-                <div class="px-4 pb-3 text-xs text-amber-900/80 leading-relaxed">
-                  <strong class="text-amber-800">Solo tienes una oportunidad para causar una buena primera impresion.</strong> Los evaluadores reciben cientos de propuestas y apenas dedican unos minutos a decidir si la tuya merece la pena. Cuentanos con tus propias palabras:
-                  <ul class="mt-1.5 space-y-1 list-none">
-                    <li><span class="text-amber-600 font-bold">1.</span> Cual es el problema que has detectado? Por que es importante abordarlo ahora?</li>
-                    <li><span class="text-amber-600 font-bold">2.</span> Cual es la esencia de tu idea? Que la hace especial y diferente?</li>
-                    <li><span class="text-amber-600 font-bold">3.</span> Que actividades quieres hacer para solucionar ese problema?</li>
-                    <li><span class="text-amber-600 font-bold">4.</span> Que quieres conseguir con este proyecto? Que cambio va a provocar?</li>
-                  </ul>
-                  <p class="mt-1.5 text-amber-700 font-medium">Se creativo, se concreto y conecta tu idea con las prioridades de la convocatoria. Esta es tu carta de presentacion.</p>
+            <!-- ══ AI Assistant (always visible at top) ═══════════════ -->
+            <div class="mb-8">
+              <!-- Start button (shown when interview not started) -->
+              <div id="intake-interview-start" class="rounded-2xl border border-primary/15 bg-gradient-to-r from-primary/[0.04] via-transparent to-secondary-fixed/[0.04] p-5 cursor-pointer hover:border-primary/30 hover:shadow-md transition-all group">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-md shadow-primary/20 flex-shrink-0">
+                    <span class="material-symbols-outlined text-white text-2xl">smart_toy</span>
+                  </div>
+                  <div class="flex-1">
+                    <h2 class="font-headline text-base font-extrabold text-on-surface mb-0.5">AI Summary Assistant</h2>
+                    <p class="text-xs text-on-surface-variant leading-relaxed">Deja que te guiemos con nuestro agente especialmente disenado para generar un resumen que sirva como base para las siguientes fases de escritura.</p>
+                  </div>
+                  <div class="flex flex-col items-center gap-1 flex-shrink-0">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                      <span class="material-symbols-outlined text-primary text-lg">arrow_forward</span>
+                    </div>
+                    <span class="text-[9px] font-bold text-primary/60 uppercase">5 min</span>
+                  </div>
                 </div>
-              </details>
-              <textarea id="intake-f-desc" rows="8" placeholder="Cuentanos tu idea: que problema has visto, como quieres solucionarlo, que actividades tienes en mente y que cambio esperas conseguir. Escribe con tus propias palabras, como si se lo contaras a alguien que no sabe nada del tema." class="w-full px-3 py-2.5 rounded-lg bg-white border border-outline-variant text-on-surface font-body text-sm focus:border-primary focus:ring-2 focus:ring-secondary-fixed outline-none transition-all resize-vertical leading-relaxed"></textarea>
-            </div>
-
-            <!-- ── Hero: Launch section ──────────────────────────── -->
-            <div class="text-center mb-10">
-              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary-fixed mx-auto mb-5 flex items-center justify-center shadow-lg">
-                <span class="material-symbols-outlined text-3xl text-white">celebration</span>
               </div>
-              <h1 class="font-headline text-3xl font-extrabold tracking-tighter text-primary mb-2">Tu proyecto esta listo para escribirse</h1>
-              <p class="text-on-surface-variant text-sm mb-6 leading-relaxed max-w-lg mx-auto">
-                Has completado la fase de <strong>Diseno</strong>. Revisa el resumen y lanza la escritura cuando estes listo.
-              </p>
 
-              <!-- Summary stats -->
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6" id="intake-launch-stats"></div>
-
-              <!-- CTA -->
-              <button type="button" id="intake-btn-launch" class="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-primary to-primary/80 text-white font-bold text-base shadow-[0_24px_48px_rgba(27,20,100,0.15)] hover:scale-[1.03] hover:shadow-[0_28px_56px_rgba(27,20,100,0.2)] active:scale-95 transition-all mb-4">
-                <span class="material-symbols-outlined text-xl">rocket_launch</span>
-                Comenzar a escribir este proyecto
-              </button>
-
-              <!-- What comes next (collapsed by default) -->
-              <details class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl text-left max-w-2xl mx-auto">
-                <summary class="font-headline text-sm font-bold text-primary p-4 cursor-pointer flex items-center gap-2 select-none">
-                  <span class="material-symbols-outlined text-lg">arrow_forward</span> Que viene ahora
-                </summary>
-                <div class="px-4 pb-4">
-                  <ul class="space-y-3 text-sm text-on-surface-variant">
-                    <li class="flex items-start gap-3">
-                      <span class="material-symbols-outlined text-base text-primary mt-0.5">edit_note</span>
-                      <span><strong>Escribir la propuesta</strong> — Responder a cada pregunta del formulario oficial con ayuda de IA</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                      <span class="material-symbols-outlined text-base text-primary mt-0.5">payments</span>
-                      <span><strong>Presupuesto detallado</strong> — Generar el presupuesto real del proyecto en formato EACEA</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                      <span class="material-symbols-outlined text-base text-primary mt-0.5">verified</span>
-                      <span><strong>Evaluar y mejorar</strong> — Validar la propuesta contra los criterios de evaluacion oficiales</span>
-                    </li>
-                  </ul>
+              <!-- Chat container (hidden until interview starts) -->
+              <div id="intake-interview-chat" class="hidden rounded-2xl border border-outline-variant/20 bg-surface-container-lowest overflow-hidden shadow-sm">
+                <!-- Header -->
+                <div class="flex items-center gap-2.5 px-5 py-3.5 bg-gradient-to-r from-primary/[0.06] to-transparent border-b border-outline-variant/15">
+                  <div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center shadow-sm">
+                    <span class="material-symbols-outlined text-white text-lg">smart_toy</span>
+                  </div>
+                  <div class="flex-1">
+                    <span class="font-headline text-sm font-bold text-on-surface">AI Summary Assistant</span>
+                    <div class="flex items-center gap-2 mt-0.5">
+                      <div class="flex-1 h-1.5 bg-outline-variant/15 rounded-full overflow-hidden">
+                        <div id="intake-interview-progress-bar" class="h-full bg-gradient-to-r from-primary to-secondary-fixed rounded-full transition-all duration-500" style="width:0%"></div>
+                      </div>
+                      <span id="intake-interview-progress-label" class="text-[10px] text-on-surface-variant font-mono">0/6</span>
+                    </div>
+                  </div>
+                  <button type="button" id="intake-interview-reset" class="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-error/10 hover:text-error transition-all" title="Reiniciar entrevista">
+                    <span class="material-symbols-outlined text-base">refresh</span>
+                  </button>
                 </div>
-              </details>
-            </div>
 
-            <!-- ── Divider ───────────────────────────────────────── -->
-            <div class="flex items-center gap-3 mb-8">
-              <div class="flex-1 h-px bg-outline-variant"></div>
-              <span class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Resumen del proyecto</span>
-              <div class="flex-1 h-px bg-outline-variant"></div>
-            </div>
+                <!-- Messages area -->
+                <div id="intake-interview-messages" class="px-5 py-4 space-y-3 max-h-[32rem] overflow-y-auto"></div>
 
-            <!-- ── Summary: Proyecto ─────────────────────────────── -->
-            <div class="mb-6 pb-6 border-b border-outline-variant/50">
-              <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">
-                <span class="material-symbols-outlined text-sm">description</span>
-                <span>Proyecto</span><div class="flex-1 h-px bg-outline-variant/50"></div>
+                <!-- Input area -->
+                <div id="intake-interview-input-area" class="px-5 py-3 border-t border-outline-variant/15 bg-surface-container-lowest">
+                  <div class="flex gap-2 items-end">
+                    <textarea id="intake-interview-input" rows="2"
+                      placeholder="Escribe tu respuesta aqui..."
+                      class="flex-1 px-3.5 py-2.5 rounded-xl bg-white border border-outline-variant/30 text-on-surface text-sm focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none resize-none leading-relaxed"></textarea>
+                    <button type="button" id="intake-interview-send"
+                      class="px-3.5 py-2.5 rounded-xl bg-primary text-white hover:bg-primary/90 transition-colors disabled:opacity-30 disabled:pointer-events-none shadow-sm">
+                      <span class="material-symbols-outlined text-base">send</span>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="intake-sum-proj"></div>
             </div>
 
-            <!-- ── Summary: Consorcio ────────────────────────────── -->
-            <div class="mb-6 pb-6 border-b border-outline-variant/50">
-              <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">
-                <span class="material-symbols-outlined text-sm">groups</span>
-                <span>Consorcio</span><div class="flex-1 h-px bg-outline-variant/50"></div>
+            <!-- ══ Project Summary textarea (always visible) ═══════ -->
+            <div class="mb-8">
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <div class="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-primary text-sm">description</span>
+                  </div>
+                  <h2 class="font-headline text-base font-extrabold text-on-surface tracking-tight">Project Summary</h2>
+                </div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/50">Editable</span>
               </div>
-              <div id="intake-sum-partners"></div>
-            </div>
-
-            <!-- ── Summary: Presupuesto ──────────────────────────── -->
-            <div class="mb-8 pb-6 border-b border-outline-variant/50">
-              <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">
-                <span class="material-symbols-outlined text-sm">payments</span>
-                <span>Presupuesto</span><div class="flex-1 h-px bg-outline-variant/50"></div>
+              <div class="rounded-2xl border border-outline-variant/20 bg-white shadow-sm overflow-hidden">
+                <textarea id="intake-f-desc" rows="6"
+                  placeholder="Escribe aqui tu resumen o deja que el asistente lo genere por ti..."
+                  class="w-full px-5 py-4 text-on-surface font-body text-sm outline-none resize-none leading-relaxed overflow-hidden border-none" style="min-height:120px"></textarea>
               </div>
-              <div id="intake-sum-budget"></div>
             </div>
 
-            <!-- ── Actions ───────────────────────────────────────── -->
-            <div class="grid grid-cols-2 gap-3 mb-6">
-              <button type="button" id="intake-btn-save-server" class="border border-outline-variant rounded-xl p-4 text-center cursor-pointer bg-white hover:border-primary hover:bg-primary/5 hover:-translate-y-0.5 transition-all">
-                <span class="material-symbols-outlined text-xl text-primary mb-1 block">cloud_upload</span>
-                <div class="font-headline text-sm font-bold text-primary mb-0.5">Guardar en servidor</div>
-                <div class="text-[11px] text-on-surface-variant leading-snug">Guarda en base de datos</div>
-              </button>
-              <button type="button" id="intake-btn-export-wizard" class="border border-outline-variant rounded-xl p-4 text-center cursor-pointer bg-white hover:border-primary hover:bg-primary/5 hover:-translate-y-0.5 transition-all">
-                <span class="material-symbols-outlined text-xl text-primary mb-1 block">bolt</span>
-                <div class="font-headline text-sm font-bold text-primary mb-0.5">Exportar para Wizard</div>
-                <div class="text-[11px] text-on-surface-variant leading-snug">JSON listo para Calculator</div>
-              </button>
-            </div>
+            <!-- ══ Post-interview: Celebration + Launch (hidden until summary has content) ══ -->
+            <div id="intake-post-interview" class="hidden">
+              <div class="text-center mb-8 py-8 rounded-2xl bg-gradient-to-b from-primary/[0.04] to-transparent border border-primary/10">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-secondary-fixed mx-auto mb-4 flex items-center justify-center shadow-lg shadow-primary/20">
+                  <span class="material-symbols-outlined text-2xl text-white">celebration</span>
+                </div>
+                <h2 class="font-headline text-2xl font-extrabold tracking-tight text-on-surface mb-1">Tu proyecto esta listo</h2>
+                <p class="text-on-surface-variant text-sm mb-6 max-w-sm mx-auto">Revisa el resumen y lanza la escritura cuando estes listo.</p>
 
-            <!-- ── Note ──────────────────────────────────────────── -->
-            <p class="text-[11px] text-on-surface-variant/70 text-center mb-6">
-              <span class="material-symbols-outlined text-[11px] align-middle mr-1">info</span>
-              Tu diseno se queda guardado en <strong>Intake</strong> para futuras modificaciones. Siempre puedes volver a ajustar partners, WPs o presupuesto.
-            </p>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6 max-w-lg mx-auto" id="intake-launch-stats"></div>
+
+                <button type="button" id="intake-btn-launch" class="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-primary to-primary/80 text-white font-bold text-base shadow-[0_24px_48px_rgba(27,20,100,0.15)] hover:scale-[1.03] hover:shadow-[0_28px_56px_rgba(27,20,100,0.2)] active:scale-95 transition-all">
+                  <span class="material-symbols-outlined text-xl">rocket_launch</span>
+                  Comenzar a escribir este proyecto
+                </button>
+              </div>
+            </div><!-- /intake-post-interview -->
 
             <!-- ── Nav ───────────────────────────────────────────── -->
             <div class="flex justify-start items-center pt-5 border-t border-outline-variant">

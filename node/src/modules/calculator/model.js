@@ -1181,8 +1181,8 @@ async function saveFullState(projectId, data) {
         const wp = data.wps[wi];
         const wpId = genUUID();
         await conn.execute(
-          'INSERT INTO work_packages (id, project_id, order_index, code, title, category, leader_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
-          [wpId, projectId, wi, `WP${wi + 1}`, wp.name || wp.desc || `WP${wi + 1}`, wp._cat || null, wp.leader || null]
+          'INSERT INTO work_packages (id, project_id, order_index, code, title, summary, category, leader_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+          [wpId, projectId, wi, `WP${wi + 1}`, wp.name || wp.desc || `WP${wi + 1}`, wp.summary || null, wp._cat || null, wp.leader || null]
         );
 
         if (wp.activities && wp.activities.length) {
@@ -1366,7 +1366,7 @@ async function loadFullState(projectId) {
 
   // Work packages + activities + details
   const [wpRows] = await db.execute(
-    'SELECT id, order_index, code, title, category, leader_id FROM work_packages WHERE project_id = ? ORDER BY order_index', [projectId]
+    'SELECT id, order_index, code, title, summary, category, leader_id FROM work_packages WHERE project_id = ? ORDER BY order_index', [projectId]
   );
 
   const wps = [];
@@ -1392,6 +1392,7 @@ async function loadFullState(projectId) {
     wps.push({
       name: wp.title,
       desc: wp.title,
+      summary: wp.summary || '',
       leader: wp.leader_id,
       _cat: wp.category || undefined,
       activities

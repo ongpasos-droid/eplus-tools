@@ -168,8 +168,26 @@ const Intake = (() => {
     document.querySelectorAll('#panel-intake input, #panel-intake select, #panel-intake textarea')
       .forEach(el => el.addEventListener('input', () => { _dirty = true; scheduleIntakeSave(); }));
 
-    // Gate launch button on Project Summary content
-    document.getElementById('intake-f-desc')?.addEventListener('input', updateLaunchGate);
+    // Gate launch button on Project Summary content + auto-resize + show launch
+    const descEl = document.getElementById('intake-f-desc');
+    if (descEl) {
+      descEl.addEventListener('input', () => {
+        autoResizeDesc();
+        if (descEl.value.trim().length >= 20) showPostInterview();
+        updateLaunchGate();
+      });
+    }
+
+    // AI Interview — bind all buttons once
+    document.getElementById('intake-interview-start')?.addEventListener('click', startInterview);
+    document.getElementById('intake-interview-send')?.addEventListener('click', sendAnswer);
+    document.getElementById('intake-interview-reset')?.addEventListener('click', resetInterview);
+    document.getElementById('intake-interview-input')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendAnswer(); }
+    });
+    // Voice on interview input
+    const intInput = document.getElementById('intake-interview-input');
+    if (intInput && typeof VoiceInput !== 'undefined') VoiceInput.attach(intInput);
 
     // National Agency → auto-set proposal language
     document.getElementById('intake-f-na')?.addEventListener('change', () => {
@@ -1281,39 +1299,241 @@ const Intake = (() => {
       }
     }
 
-    const statsEl = document.getElementById('intake-launch-stats');
-    if (!statsEl) return;
+    initInterview();
+  }
 
-    const nPartners = partners.filter(p => p.name).length;
-    let nWPs = 0, nActs = 0, budget = '—';
+  /* ── AI Interview ──────────────────────────────────────────── */
+  let interviewLoading = false;
 
-    if (calcInitialized && typeof Calculator !== 'undefined' && Calculator.isInitialized()) {
-      const cs = Calculator.getCalcState();
-      nWPs = cs.wps.length;
-      nActs = cs.wps.reduce((s, wp) => s + wp.activities.length, 0);
-      budget = '\u20AC' + Math.round(cs.total).toLocaleString('es-ES');
+  async function initInterview() {
+    const startBtn = document.getElementById('intake-interview-start');
+    const chatEl = document.getElementById('intake-interview-chat');
+    if (!startBtn || !chatEl) return;
+
+    // Load existing interview if project is saved
+    if (!currentProjectId) return;
+    try {
+      const res = await API.get('/intake/projects/' + currentProjectId + '/interview');
+      if (res.turns && res.turns.length > 0) {
+        startBtn.classList.add('hidden');
+        chatEl.classList.remove('hidden');
+        const msgEl = document.getElementById('intake-interview-messages');
+        if (msgEl) msgEl.innerHTML = '';
+        res.turns.forEach(t => {
+          if (t.content === '[INTERVIEW_COMPLETE]') return;
+          renderInterviewTurn(t.role, t.content);
+        });
+        if (res.completed) {
+          const inputArea = document.getElementById('intake-interview-input-area');
+          if (inputArea) inputArea.classList.add('hidden');
+        }
+        // Update progress
+        const userCount = res.turns.filter(t => t.role === 'user').length;
+        updateInterviewProgress(userCount, 6);
+        // If summary exists, populate textarea and show launch section
+        if (res.summary) {
+          const desc = document.getElementById('intake-f-desc');
+          if (desc && !desc.value.trim()) {
+            desc.value = res.summary;
+            desc.dispatchEvent(new Event('input', { bubbles: true }));
+            setTimeout(autoResizeDesc, 50);
+          }
+          showPostInterview();
+        }
+      }
+    } catch (e) { /* no interview yet, that's ok */ }
+  }
+
+  async function startInterview() {
+    if (!currentProjectId) {
+      // Auto-save project first
+      const name = document.getElementById('intake-f-name')?.value?.trim();
+      if (!name) { Toast.show('Guarda el proyecto antes de iniciar la entrevista', 'err'); return; }
+      await saveToServer(true);
+      if (!currentProjectId) { Toast.show('Error guardando el proyecto', 'err'); return; }
+    }
+    // Also save calculator state so backend has WP data
+    if (typeof Calculator !== 'undefined') {
+      try { await ensureCalcInit(); await Calculator.forceSave(); } catch (e) {}
     }
 
-    statsEl.innerHTML = [
-      { icon: 'groups', label: 'Partners', value: nPartners },
-      { icon: 'account_tree', label: 'Work Packages', value: nWPs },
-      { icon: 'task_alt', label: 'Actividades', value: nActs },
-      { icon: 'payments', label: 'Presupuesto', value: budget },
-    ].map(s => `
-      <div class="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-4 text-center">
-        <span class="material-symbols-outlined text-2xl text-primary mb-1 block">${s.icon}</span>
-        <div class="font-headline text-xl font-extrabold text-on-surface">${s.value}</div>
-        <div class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">${s.label}</div>
-      </div>
-    `).join('');
+    const startBtn = document.getElementById('intake-interview-start');
+    if (startBtn) startBtn.classList.add('hidden');
+    const chatEl = document.getElementById('intake-interview-chat');
+    if (chatEl) chatEl.classList.remove('hidden');
 
-    // Bind launch button + gate on Project Summary
+    // Show typing indicator and call API
+    showTypingIndicator();
+    try {
+      const res = await API.post('/intake/projects/' + currentProjectId + '/interview/next', { answer: null });
+      removeTypingIndicator();
+      if (res.content) renderInterviewTurn('assistant', res.content);
+      updateInterviewProgress(res.progress || 0, res.total_questions || 6);
+    } catch (e) {
+      removeTypingIndicator();
+      renderInterviewTurn('assistant', 'Error starting interview: ' + e.message);
+    }
+  }
+
+  async function sendAnswer() {
+    if (interviewLoading) return;
+    const inputEl = document.getElementById('intake-interview-input');
+    if (!inputEl) return;
+    const answer = inputEl.value.trim();
+    if (!answer) return;
+
+    // Render user bubble
+    renderInterviewTurn('user', answer);
+    inputEl.value = '';
+    interviewLoading = true;
+    const sendBtn = document.getElementById('intake-interview-send');
+    if (sendBtn) sendBtn.disabled = true;
+
+    showTypingIndicator();
+    try {
+      const res = await API.post('/intake/projects/' + currentProjectId + '/interview/next', { answer });
+      removeTypingIndicator();
+
+      if (res.type === 'summary') {
+        // Interview complete — populate summary textarea and show launch section
+        const desc = document.getElementById('intake-f-desc');
+        if (desc) {
+          desc.value = res.content;
+          desc.dispatchEvent(new Event('input', { bubbles: true }));
+          setTimeout(autoResizeDesc, 50);
+        }
+        updateInterviewProgress(res.progress, res.total_questions);
+        // Hide input area, show completion message
+        const inputArea = document.getElementById('intake-interview-input-area');
+        if (inputArea) inputArea.classList.add('hidden');
+        renderInterviewTurn('assistant', 'The interview is complete! I have generated a Project Summary draft below. Please review and edit it before launching.');
+        Toast.show('Project Summary generated!', 'ok');
+        // Show post-interview launch section
+        showPostInterview();
+        // Scroll to textarea
+        desc?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        renderInterviewTurn('assistant', res.content);
+        updateInterviewProgress(res.progress || 0, res.total_questions || 6);
+      }
+    } catch (e) {
+      removeTypingIndicator();
+      renderInterviewTurn('assistant', 'Error: ' + e.message + '. Please try again.');
+    }
+    interviewLoading = false;
+    if (sendBtn) sendBtn.disabled = false;
+    document.getElementById('intake-interview-input')?.focus();
+  }
+
+  function renderInterviewTurn(role, content) {
+    const msgEl = document.getElementById('intake-interview-messages');
+    if (!msgEl) return;
+    const escaped = content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
+    if (role === 'assistant') {
+      msgEl.insertAdjacentHTML('beforeend', `
+        <div class="flex gap-2.5 items-start">
+          <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <span class="material-symbols-outlined text-primary text-xs">smart_toy</span>
+          </span>
+          <div class="bg-secondary-fixed/10 rounded-xl rounded-tl-sm px-3.5 py-2.5 text-sm text-on-surface leading-relaxed max-w-[85%]">${escaped}</div>
+        </div>`);
+    } else {
+      msgEl.insertAdjacentHTML('beforeend', `
+        <div class="flex justify-end">
+          <div class="bg-primary/10 rounded-xl rounded-tr-sm px-3.5 py-2.5 text-sm text-on-surface leading-relaxed max-w-[85%]">${escaped}</div>
+        </div>`);
+    }
+    msgEl.scrollTop = msgEl.scrollHeight;
+  }
+
+  function showTypingIndicator() {
+    const msgEl = document.getElementById('intake-interview-messages');
+    if (!msgEl) return;
+    msgEl.insertAdjacentHTML('beforeend', `
+      <div id="intake-interview-typing" class="flex gap-2.5 items-start">
+        <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+          <span class="material-symbols-outlined text-primary text-xs">smart_toy</span>
+        </span>
+        <div class="bg-secondary-fixed/10 rounded-xl rounded-tl-sm px-3.5 py-2.5 text-sm text-on-surface-variant">
+          <span class="inline-flex gap-1"><span class="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce" style="animation-delay:0ms"></span><span class="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce" style="animation-delay:150ms"></span><span class="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce" style="animation-delay:300ms"></span></span>
+        </div>
+      </div>`);
+    msgEl.scrollTop = msgEl.scrollHeight;
+  }
+
+  function removeTypingIndicator() {
+    document.getElementById('intake-interview-typing')?.remove();
+  }
+
+  function updateInterviewProgress(current, total) {
+    const bar = document.getElementById('intake-interview-progress-bar');
+    const label = document.getElementById('intake-interview-progress-label');
+    if (bar) bar.style.width = Math.round((current / total) * 100) + '%';
+    if (label) label.textContent = current + '/' + total;
+  }
+
+  function showPostInterview() {
+    const postEl = document.getElementById('intake-post-interview');
+    if (postEl) postEl.classList.remove('hidden');
+    // Re-render stats
+    const statsEl = document.getElementById('intake-launch-stats');
+    if (statsEl) {
+      const nPartners = partners.filter(p => p.name).length;
+      let nWPs = 0, nActs = 0, budget = '—';
+      if (calcInitialized && typeof Calculator !== 'undefined' && Calculator.isInitialized()) {
+        const cs = Calculator.getCalcState();
+        nWPs = cs.wps.length;
+        nActs = cs.wps.reduce((s, wp) => s + wp.activities.length, 0);
+        budget = '\u20AC' + Math.round(cs.total).toLocaleString('es-ES');
+      }
+      statsEl.innerHTML = [
+        { icon: 'groups', label: 'Partners', value: nPartners },
+        { icon: 'account_tree', label: 'Work Packages', value: nWPs },
+        { icon: 'task_alt', label: 'Actividades', value: nActs },
+        { icon: 'payments', label: 'Presupuesto', value: budget },
+      ].map(s => `
+        <div class="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-4 text-center">
+          <span class="material-symbols-outlined text-2xl text-primary mb-1 block">${s.icon}</span>
+          <div class="font-headline text-xl font-extrabold text-on-surface">${s.value}</div>
+          <div class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">${s.label}</div>
+        </div>
+      `).join('');
+    }
+    // Bind launch button
     const btn = document.getElementById('intake-btn-launch');
     if (btn && !btn._bound) {
       btn._bound = true;
       btn.addEventListener('click', launchProject);
     }
     updateLaunchGate();
+  }
+
+  async function resetInterview() {
+    if (!confirm('Restart the interview? All answers will be deleted.')) return;
+    try {
+      await API.del('/intake/projects/' + currentProjectId + '/interview');
+      const msgEl = document.getElementById('intake-interview-messages');
+      if (msgEl) msgEl.innerHTML = '';
+      const chatEl = document.getElementById('intake-interview-chat');
+      if (chatEl) chatEl.classList.add('hidden');
+      const startBtn = document.getElementById('intake-interview-start');
+      if (startBtn) startBtn.classList.remove('hidden');
+      const inputArea = document.getElementById('intake-interview-input-area');
+      if (inputArea) inputArea.classList.remove('hidden');
+      updateInterviewProgress(0, 6);
+      const desc = document.getElementById('intake-f-desc');
+      if (desc) { desc.value = ''; desc.dispatchEvent(new Event('input', { bubbles: true })); }
+      // Hide post-interview section
+      const postEl = document.getElementById('intake-post-interview');
+      if (postEl) postEl.classList.add('hidden');
+    } catch (e) { Toast.show('Error resetting interview', 'error'); }
+  }
+
+  function autoResizeDesc() {
+    const el = document.getElementById('intake-f-desc');
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = el.scrollHeight + 'px';
   }
 
   function updateLaunchGate() {

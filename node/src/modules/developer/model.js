@@ -389,25 +389,7 @@ async function callGemini(systemPrompt, userPrompt) {
 }
 
 // ── Claude (quality, for evaluation & improvement) ──────────
-let Anthropic = null;
-function getClient() {
-  if (!Anthropic) Anthropic = require('@anthropic-ai/sdk');
-  const key = process.env.ANTHROPIC_API_KEY;
-  if (!key) throw new Error('ANTHROPIC_API_KEY not configured');
-  return new Anthropic({ apiKey: key });
-}
-
-async function callClaude(systemPrompt, userPrompt, maxTokens = 4096) {
-  const client = getClient();
-  const response = await client.messages.create({
-    model: process.env.AI_MODEL || 'claude-sonnet-4-20250514',
-    max_tokens: maxTokens,
-    temperature: 0.9,
-    system: systemPrompt,
-    messages: [{ role: 'user', content: userPrompt }],
-  });
-  return response.content[0]?.text || '';
-}
+const { getClient, callClaude } = require('../../utils/ai');
 
 // ── Smart router: Gemini for generation, Claude for quality ──
 async function callAI(systemPrompt, userPrompt, purpose = 'generate') {
