@@ -1190,9 +1190,10 @@ async function saveFullState(projectId, data) {
             const act = wp.activities[ai];
             const actId = genUUID();
             await conn.execute(
-              `INSERT INTO activities (id, wp_id, type, label, subtype, description, date_start, date_end, online, order_index) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+              `INSERT INTO activities (id, wp_id, type, label, subtype, description, date_start, date_end, online, order_index, gantt_start_month, gantt_end_month) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
               [actId, wpId, act.type, act.label || '', act.subtype || null, act.desc || null,
-               act.date_start || null, act.date_end || null, act.online ? 1 : 0, ai]
+               act.date_start || null, act.date_end || null, act.online ? 1 : 0, ai,
+               act._gantt_start || null, act._gantt_end || null]
             );
             await insertActivityDetails(conn, actId, act, partnerIds);
           }
@@ -1387,7 +1388,7 @@ async function loadFullState(projectId) {
   const wps = [];
   for (const wp of wpRows) {
     const [actRows] = await db.execute(
-      'SELECT id, type, label, subtype, description, date_start, date_end, online, order_index FROM activities WHERE wp_id = ? ORDER BY order_index', [wp.id]
+      'SELECT id, type, label, subtype, description, date_start, date_end, online, order_index, gantt_start_month, gantt_end_month FROM activities WHERE wp_id = ? ORDER BY order_index', [wp.id]
     );
     const activities = [];
     for (const act of actRows) {
@@ -1399,6 +1400,8 @@ async function loadFullState(projectId) {
         date_start: act.date_start ? act.date_start.toISOString().split('T')[0] : undefined,
         date_end: act.date_end ? act.date_end.toISOString().split('T')[0] : undefined,
         online: !!act.online,
+        _gantt_start: act.gantt_start_month || null,
+        _gantt_end: act.gantt_end_month || null,
       };
       // Load type-specific details
       await loadActivityDetails(a, act.id, act.type);

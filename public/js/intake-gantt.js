@@ -312,6 +312,8 @@ const IntakeGantt = (() => {
         if (rid.startsWith('act-')) {
           const actId = parseInt(rid.replace('act-',''));
           for (const wp of cs.wps) { const a = wp.activities.find(x=>x.id===actId); if (a) { a._gantt_start=sVal||null; a._gantt_end=eVal||null; break; } }
+          // Trigger Calculator autosave so gantt months persist to DB
+          if (typeof Calculator !== 'undefined' && Calculator.scheduleSave) Calculator.scheduleSave();
         } else {
           const tid = rid.replace('mgmt-','').replace('custom-','');
           if (projectId && tid) API.patch('/intake/tasks/'+tid, { start_month:sVal||null, end_month:eVal||null }).catch(()=>{});

@@ -3085,6 +3085,7 @@ const Calculator = (() => {
     getPartnerBudgets,
     isInitialized,
     forceSave: doSave,
+    scheduleSave,
     // Exposed for onclick handlers (prefixed with _ to signal internal use)
     _loadProject: loadProject,
     _backToSelector: backToSelector,
