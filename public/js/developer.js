@@ -130,7 +130,7 @@ const Developer = (() => {
       // Load eval criteria
       try { evalCriteria = await API.get('/developer/eval-criteria'); } catch (e) { evalCriteria = []; }
 
-      renderPhase1();
+      renderGanttPhase();
     } catch (err) {
       console.error('Developer.openProject:', err);
       el.innerHTML = '<p class="text-sm text-error py-8 text-center">Error al abrir proyecto: ' + esc(err.message || err) + '</p>';
@@ -183,26 +183,32 @@ const Developer = (() => {
   }
 
   /* ── Phase tabs ────────────────────────────────────────────── */
+  const PHASE_TABS = [
+    { id: 11, label: 'Cronograma',   icon: 'timeline' },
+    { id: 'consorcio',    label: 'Consorcio',    icon: 'groups' },
+    { id: 'relevancia',   label: 'Relevancia',   icon: 'lightbulb' },
+    { id: 'actividades',  label: 'Actividades',  icon: 'task_alt' },
+    { id: 'tareas',       label: 'Tareas',       icon: 'checklist' },
+    { id: 'analisis',     label: 'Analisis',     icon: 'analytics' },
+    { id: 2,  label: 'Escribir',     icon: 'edit_note' },
+    { id: 4,  label: 'Revisar',      icon: 'fact_check' },
+  ];
+
   function renderPhaseTabs(active) {
-    const tabs = [
-      { id: 1, label: 'Contexto', icon: 'checklist' },
-      { id: 11, label: 'Cronograma', icon: 'timeline' },
-      { id: 12, label: 'Presupuesto', icon: 'account_balance' },
-      { id: 15, label: 'Prep Studio', icon: 'psychology' },
-      { id: 2, label: 'Escribir', icon: 'edit_note' },
-      { id: 4, label: 'Revisar', icon: 'fact_check' },
-    ];
     return `
-      <div class="flex items-center gap-1 mb-6 border-b border-outline-variant/30 pb-3">
-        <button onclick="Developer._back()" class="mr-2 text-on-surface-variant hover:text-primary transition-colors" title="Volver a proyectos">
+      <div class="flex items-center gap-1 mb-6 border-b border-outline-variant/30 pb-3 overflow-x-auto">
+        <button onclick="Developer._back()" class="mr-2 text-on-surface-variant hover:text-primary transition-colors shrink-0" title="Volver a proyectos">
           <span class="material-symbols-outlined text-xl">arrow_back</span>
         </button>
-        <span class="font-headline text-sm font-bold text-primary mr-4 truncate max-w-[200px]">${esc(currentProject?.name)}</span>
-        ${tabs.map(t => `
-          <button onclick="Developer._phase(${t.id})" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold transition-all ${active === t.id ? 'bg-primary text-white shadow-md' : 'text-on-surface-variant hover:bg-surface-container-low'}">
+        <span class="font-headline text-sm font-bold text-primary mr-4 truncate max-w-[200px] shrink-0">${esc(currentProject?.name)}</span>
+        ${PHASE_TABS.map(t => {
+          const isPrep = typeof t.id === 'string';
+          const onclick = isPrep ? `Developer._prepTab('${t.id}')` : `Developer._phase(${t.id})`;
+          return `
+          <button onclick="${onclick}" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap ${active === t.id ? 'bg-primary text-white shadow-md' : 'text-on-surface-variant hover:bg-surface-container-low'}">
             <span class="material-symbols-outlined text-sm">${t.icon}</span> ${t.label}
-          </button>
-        `).join('')}
+          </button>`;
+        }).join('')}
       </div>`;
   }
 
@@ -269,8 +275,8 @@ const Developer = (() => {
         </div>
 
         <div class="flex justify-center">
-          <button onclick="Developer._phase(15)" class="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-[#1b1464] text-[#e7eb00] font-bold text-base shadow-[0_24px_48px_rgba(27,20,100,0.2)] hover:scale-[1.03] hover:shadow-[0_28px_56px_rgba(27,20,100,0.3)] active:scale-95 transition-all ${canGenerate ? '' : 'opacity-40 pointer-events-none'}">
-            <span class="material-symbols-outlined text-2xl">psychology</span> Preparar propuesta
+          <button onclick="Developer._prepTab('consorcio')" class="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-[#1b1464] text-[#e7eb00] font-bold text-base shadow-[0_24px_48px_rgba(27,20,100,0.2)] hover:scale-[1.03] hover:shadow-[0_28px_56px_rgba(27,20,100,0.3)] active:scale-95 transition-all ${canGenerate ? '' : 'opacity-40 pointer-events-none'}">
+            <span class="material-symbols-outlined text-2xl">groups</span> Consorcio
           </button>
         </div>
       </div>`;
@@ -364,82 +370,50 @@ const Developer = (() => {
   /* ══════════════════════════════════════════════════════════════
      PHASE 1.5: Prep Studio — 5 Sub-tabs
      ══════════════════════════════════════════════════════════════ */
-  const PREP_TABS = [
-    { id: 'consorcio',    label: 'Consorcio',    icon: 'groups' },
-    { id: 'relevancia',   label: 'Relevancia',   icon: 'lightbulb' },
-    { id: 'actividades',  label: 'Actividades',  icon: 'task_alt' },
-    { id: 'tareas',       label: 'Tareas',       icon: 'checklist' },
-    { id: 'cronograma',   label: 'Cronograma',   icon: 'timeline' },
-    { id: 'analisis',     label: 'Analisis',     icon: 'analytics' },
-  ];
-
-  function renderPrepSubTabs(active) {
-    return `
-      <div class="flex items-center gap-1 mb-6 bg-surface-container-lowest rounded-xl border border-outline-variant/20 p-1.5">
-        ${PREP_TABS.map(t => `
-          <button onclick="Developer._prepTab('${t.id}')" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-all ${active === t.id ? 'bg-[#1b1464] text-[#e7eb00] shadow-md' : 'text-on-surface-variant hover:bg-surface-container-low'}">
-            <span class="material-symbols-outlined text-sm">${t.icon}</span>
-            <span class="hidden sm:inline">${t.label}</span>
-          </button>
-        `).join('')}
-      </div>`;
-  }
+  /* PREP_TABS and renderPrepSubTabs removed — prep tabs now live in PHASE_TABS */
 
   async function renderPrepStudio(subTab) {
     phase = 15;
     if (subTab) prepSubTab = subTab;
     const el = document.getElementById('developer-content');
 
-    // Header + sub-tabs
-    const header = renderPhaseTabs(15) + `
+    el.innerHTML = renderPhaseTabs(prepSubTab) + `
       <div class="max-w-4xl">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-xl bg-[#1b1464]/10 flex items-center justify-center">
-            <span class="material-symbols-outlined text-xl text-[#1b1464]">psychology</span>
-          </div>
-          <div>
-            <h2 class="font-headline text-lg font-bold">Prep Studio</h2>
-            <p class="text-xs text-on-surface-variant">Prepara el contexto para que la IA escriba una propuesta de excelencia</p>
-          </div>
-        </div>
-        ${renderPrepSubTabs(prepSubTab)}
         <div id="prep-tab-content"></div>
         <div id="prep-nav-buttons" class="flex justify-between items-center mt-8"></div>
       </div>`;
 
-    el.innerHTML = header;
-    // Render active sub-tab content
     await renderPrepTabContent(prepSubTab);
-    // Render navigation buttons based on active tab
     renderPrepNavButtons(prepSubTab);
+    // Auto-size all textareas to fit content
+    document.querySelectorAll('#prep-tab-content textarea').forEach(ta => {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
   }
 
   function renderPrepNavButtons(tab) {
     const nav = document.getElementById('prep-nav-buttons');
     if (!nav) return;
-    const tabIds = PREP_TABS.map(t => t.id);
-    const idx = tabIds.indexOf(tab);
-    const prevTab = idx > 0 ? PREP_TABS[idx - 1] : null;
-    const nextTab = idx < tabIds.length - 1 ? PREP_TABS[idx + 1] : null;
-    const isLast = idx === tabIds.length - 1; // Analisis = last tab
+    // Use the global PHASE_TABS for linear navigation
+    const idx = PHASE_TABS.findIndex(t => t.id === tab);
+    const prev = idx > 0 ? PHASE_TABS[idx - 1] : null;
+    const next = idx < PHASE_TABS.length - 1 ? PHASE_TABS[idx + 1] : null;
 
-    const prevBtn = prevTab
-      ? `<button onclick="Developer._prepTab('${prevTab.id}')" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-on-surface-variant border border-outline-variant hover:bg-surface-container-low transition-colors">
-          <span class="material-symbols-outlined text-sm">arrow_back</span> ${prevTab.label}
-        </button>`
-      : `<button onclick="Developer._phase(12)" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-on-surface-variant border border-outline-variant hover:bg-surface-container-low transition-colors">
-          <span class="material-symbols-outlined text-sm">arrow_back</span> Presupuesto
+    function navBtn(t, direction) {
+      const isPrep = typeof t.id === 'string';
+      const onclick = isPrep ? `Developer._prepTab('${t.id}')` : `Developer._phase(${t.id})`;
+      if (direction === 'prev') {
+        return `<button onclick="${onclick}" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-on-surface-variant border border-outline-variant hover:bg-surface-container-low transition-colors">
+          <span class="material-symbols-outlined text-sm">arrow_back</span> ${t.label}
         </button>`;
-
-    const nextBtn = isLast
-      ? `<button onclick="Developer._phase(2)" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold bg-primary text-white hover:bg-primary/90 transition-colors shadow-sm">
-          Generar <span class="material-symbols-outlined text-sm">arrow_forward</span>
-        </button>`
-      : `<button onclick="Developer._prepTab('${nextTab.id}')" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold bg-primary text-white hover:bg-primary/90 transition-colors shadow-sm">
-          ${nextTab.label} <span class="material-symbols-outlined text-sm">arrow_forward</span>
+      }
+      return `<button onclick="${onclick}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold bg-primary text-white hover:bg-primary/90 transition-colors shadow-sm">
+          ${t.label} <span class="material-symbols-outlined text-sm">arrow_forward</span>
         </button>`;
+    }
 
-    nav.innerHTML = prevBtn + nextBtn;
+    nav.innerHTML = (prev ? navBtn(prev, 'prev') : '<div></div>') + (next ? navBtn(next, 'next') : '<div></div>');
   }
 
   async function renderPrepTabContent(tab) {
@@ -467,6 +441,7 @@ const Developer = (() => {
     const data = await API.get('/developer/projects/' + pid + '/prep/consorcio').catch(() => ({ partners: [] }));
     prepCache.consorcio = data;
     const partners = data.partners || [];
+    const workerCategories = data.workerCategories || [];
 
     el.innerHTML = `
       <div class="space-y-4">
@@ -477,12 +452,25 @@ const Developer = (() => {
           </div>
         </div>
 
+        <div class="flex items-start gap-3 bg-blue-50 border border-blue-200 rounded-xl p-4 mb-2">
+          <span class="material-symbols-outlined text-blue-600 text-xl mt-0.5">tips_and_updates</span>
+          <div>
+            <p class="text-sm font-semibold text-blue-900 mb-1">Consortium quality matters</p>
+            <p class="text-xs text-blue-800">The quality of your proposal depends heavily on how well each partner's profile aligns with the project's objectives, thematic areas, and planned activities. Take time to review and refine each organisation's description and staff profiles — the AI will use this information to build a stronger, more coherent narrative throughout the entire proposal.</p>
+          </div>
+        </div>
+
         ${partners.length ? partners.map((p, i) => {
           const linked = !!p.organization_id;
           const org = p.organization || {};
           const variants = p.variants || [];
           const selectedVariant = p.selected_variant;
           const pifText = p.custom_text || (selectedVariant ? selectedVariant.adapted_text : org.description) || '';
+          const euProjects = org.eu_projects || [];
+          const selectedEuProjects = p.selected_eu_projects || [];
+          const keyStaff = org.key_staff || [];
+          const staffCustom = p.staff_custom || {};
+          const extraStaff = p.extra_staff || [];
 
           return `
           <div class="bg-white rounded-2xl border border-outline-variant/20 p-5">
@@ -499,18 +487,6 @@ const Developer = (() => {
             </div>
 
             ${linked ? `
-              <!-- Org details expandable -->
-              <details class="mb-3">
-                <summary class="text-xs font-bold text-primary cursor-pointer hover:underline">Ver perfil de la organizacion</summary>
-                <div class="mt-2 bg-surface-container-lowest rounded-xl p-4 space-y-3 text-xs">
-                  ${org.description ? `<div><span class="font-bold text-on-surface-variant">Descripcion:</span><p class="mt-0.5 text-on-surface">${esc(org.description).substring(0, 500)}${(org.description||'').length > 500 ? '...' : ''}</p></div>` : ''}
-                  ${org.activities_experience ? `<div><span class="font-bold text-on-surface-variant">Experiencia:</span><p class="mt-0.5 text-on-surface">${esc(org.activities_experience).substring(0, 500)}${(org.activities_experience||'').length > 500 ? '...' : ''}</p></div>` : ''}
-                  ${(org.key_staff || []).length ? `<div><span class="font-bold text-on-surface-variant">Personal clave:</span><ul class="mt-1 space-y-0.5">${org.key_staff.map(s => `<li>- ${esc(s.name)} (${esc(s.role)}): ${esc(s.skills_summary || '')}</li>`).join('')}</ul></div>` : ''}
-                  ${(org.eu_projects || []).length ? `<div><span class="font-bold text-on-surface-variant">Proyectos EU:</span><ul class="mt-1 space-y-0.5">${org.eu_projects.map(ep => `<li>- ${esc(ep.title || ep.programme)} (${ep.year}, ${esc(ep.role)})</li>`).join('')}</ul></div>` : ''}
-                  ${(org.stakeholders || []).length ? `<div><span class="font-bold text-on-surface-variant">Stakeholders:</span><ul class="mt-1 space-y-0.5">${org.stakeholders.map(sh => `<li>- ${esc(sh.entity_name)} (${esc(sh.relationship_type)})</li>`).join('')}</ul></div>` : ''}
-                </div>
-              </details>
-
               <!-- PIF Variant selector as chips -->
               <div class="mb-3">
                 <div class="flex items-center gap-1.5 mb-2 flex-wrap">
@@ -529,8 +505,95 @@ const Developer = (() => {
                 </div>
               </div>
 
-              <!-- PIF preview -->
-              <div class="bg-surface-container-lowest rounded-xl p-3 text-xs text-on-surface whitespace-pre-wrap max-h-48 overflow-y-auto border border-outline-variant/10">${esc(pifText) || '<span class="italic text-on-surface-variant">Sin perfil adaptado. Genera una variante o selecciona una existente.</span>'}</div>
+              <!-- PIF text (editable) -->
+              <div class="mb-4">
+                <label class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider block mb-1">
+                  <span class="material-symbols-outlined text-xs align-middle mr-0.5">edit_note</span> Organization description (PIF)
+                </label>
+                <textarea id="prep-pif-text-${p.id}" class="w-full px-3 py-2 text-xs bg-surface-container-lowest border border-outline-variant/20 rounded-lg resize-vertical focus:outline-none focus:ring-2 focus:ring-primary/15 min-h-[100px]" onblur="Developer._saveCustomText('${p.id}', this.value)" placeholder="Organization profile text..." oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'">${esc(pifText)}</textarea>
+              </div>
+
+              <!-- Key Staff profiles -->
+              <details class="mb-4" open>
+                <summary class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider cursor-pointer hover:text-primary mb-2">
+                  <span class="material-symbols-outlined text-xs align-middle mr-0.5">badge</span> Key staff (${keyStaff.filter(s => p.staff_selected?.[s.id]).length + extraStaff.length} selected / ${keyStaff.length + extraStaff.length} total)
+                </summary>
+                <div class="space-y-2">
+                  ${keyStaff.map(s => {
+                    const isSelected = p.staff_selected?.[s.id] || false;
+                    const projectRole = p.staff_project_role?.[s.id] || '';
+                    const customSkills = staffCustom[s.id] !== undefined ? staffCustom[s.id] : null;
+                    const displaySkills = customSkills !== null ? customSkills : (s.skills_summary || '');
+                    return `
+                    <div class="rounded-lg border p-3 transition-all ${isSelected ? 'bg-primary/5 border-primary/20' : 'bg-surface-container-lowest border-outline-variant/10 opacity-60'}">
+                      <div class="flex items-center gap-2 mb-1.5">
+                        <input type="checkbox" ${isSelected ? 'checked' : ''} onchange="Developer._toggleStaff('${p.id}','${s.id}',this.checked)" class="accent-primary">
+                        <span class="material-symbols-outlined text-sm ${isSelected ? 'text-primary' : 'text-on-surface-variant'}">person</span>
+                        <span class="text-xs font-bold">${esc(s.name)}</span>
+                        ${s.role ? `<span class="text-[10px] text-on-surface-variant bg-surface-container-high px-1.5 py-0.5 rounded">${esc(s.role)}</span>` : ''}
+                        <select class="ml-auto text-[10px] bg-white border border-outline-variant/20 rounded px-1.5 py-0.5 focus:outline-none focus:border-primary ${isSelected ? '' : 'pointer-events-none opacity-40'}" onchange="Developer._setStaffRole('${p.id}','${s.id}',this.value)">
+                          <option value="">-- Project role --</option>
+                          ${workerCategories.map(c => `<option value="${esc(c)}" ${projectRole === c ? 'selected' : ''}>${esc(c)}</option>`).join('')}
+                        </select>
+                      </div>
+                      ${isSelected ? `<textarea class="w-full px-2 py-1.5 text-xs bg-white border border-outline-variant/15 rounded-md resize-vertical focus:outline-none focus:ring-2 focus:ring-primary/15 min-h-[50px]" onblur="Developer._saveStaffSkills('${p.id}', '${s.id}', this.value)" placeholder="Skills and experience relevant to this project...">${esc(displaySkills)}</textarea>` : ''}
+                    </div>`;
+                  }).join('')}
+                  ${extraStaff.map(s => `
+                    <div class="bg-amber-50/50 rounded-lg border border-amber-200/30 p-3">
+                      <div class="flex items-center gap-2 mb-1.5">
+                        <span class="material-symbols-outlined text-sm text-amber-700">person_add</span>
+                        <input type="text" value="${esc(s.name)}" placeholder="Name" class="text-xs font-bold bg-transparent border-b border-outline-variant/20 focus:outline-none focus:border-primary px-1 py-0.5 w-32" onblur="Developer._updateExtraStaff('${p.id}','${s.id}','name',this.value)">
+                        <select class="text-[10px] bg-transparent border-b border-outline-variant/20 focus:outline-none focus:border-primary px-1 py-0.5" onchange="Developer._updateExtraStaff('${p.id}','${s.id}','role',this.value)">
+                          <option value="">-- Role --</option>
+                          ${workerCategories.map(c => `<option value="${esc(c)}" ${s.role === c ? 'selected' : ''}>${esc(c)}</option>`).join('')}
+                        </select>
+                        <span class="text-[9px] font-bold text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded">PROJECT</span>
+                        <button onclick="Developer._removeExtraStaff('${p.id}','${s.id}')" class="ml-auto w-6 h-6 flex items-center justify-center rounded text-on-surface-variant hover:bg-error/10 hover:text-error transition-colors">
+                          <span class="material-symbols-outlined text-sm">close</span>
+                        </button>
+                      </div>
+                      <textarea class="w-full px-2 py-1.5 text-xs bg-white border border-outline-variant/15 rounded-md resize-vertical focus:outline-none focus:ring-2 focus:ring-primary/15 min-h-[50px]" onblur="Developer._updateExtraStaff('${p.id}','${s.id}','skills_summary',this.value)" placeholder="Skills and experience...">${esc(s.skills_summary || '')}</textarea>
+                    </div>
+                  `).join('')}
+                  <button onclick="Developer._addExtraStaff('${p.id}')" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-primary hover:bg-primary/5 transition-colors mt-1">
+                    <span class="material-symbols-outlined text-sm">person_add</span> Add staff for this project
+                  </button>
+                </div>
+              </details>
+
+              <!-- EU Projects selection -->
+              ${euProjects.length ? `
+              <details class="mb-3">
+                <summary class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider cursor-pointer hover:text-primary mb-2">
+                  <span class="material-symbols-outlined text-xs align-middle mr-0.5">folder_special</span> EU Projects — select relevant (${selectedEuProjects.length}/${euProjects.length})
+                </summary>
+                <div class="bg-surface-container-lowest rounded-lg border border-outline-variant/10 p-3 space-y-1.5">
+                  ${euProjects.map(ep => {
+                    const checked = selectedEuProjects.includes(ep.id);
+                    return `
+                    <label class="flex items-start gap-2 py-1 px-1 rounded hover:bg-surface-container-low cursor-pointer transition-colors">
+                      <input type="checkbox" ${checked ? 'checked' : ''} onchange="Developer._toggleEuProject('${p.id}', '${ep.id}', this.checked)" class="mt-0.5 accent-primary">
+                      <div class="flex-1 text-xs">
+                        <span class="font-semibold">${esc(ep.title || ep.programme)}</span>
+                        <span class="text-on-surface-variant"> (${ep.year || '?'}, ${esc(ep.role || '')})</span>
+                      </div>
+                    </label>`;
+                  }).join('')}
+                </div>
+              </details>` : ''}
+
+              <!-- Org details expandable (reference) -->
+              <details class="mb-3">
+                <summary class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider cursor-pointer hover:text-primary">
+                  <span class="material-symbols-outlined text-xs align-middle mr-0.5">info</span> Original profile (read-only reference)
+                </summary>
+                <div class="mt-2 bg-surface-container-lowest rounded-xl p-4 space-y-3 text-xs">
+                  ${org.description ? `<div><span class="font-bold text-on-surface-variant">Description:</span><p class="mt-0.5 text-on-surface">${esc(org.description).substring(0, 500)}${(org.description||'').length > 500 ? '...' : ''}</p></div>` : ''}
+                  ${org.activities_experience ? `<div><span class="font-bold text-on-surface-variant">Experience:</span><p class="mt-0.5 text-on-surface">${esc(org.activities_experience).substring(0, 500)}${(org.activities_experience||'').length > 500 ? '...' : ''}</p></div>` : ''}
+                  ${(org.stakeholders || []).length ? `<div><span class="font-bold text-on-surface-variant">Stakeholders:</span><ul class="mt-1 space-y-0.5">${org.stakeholders.map(sh => `<li>- ${esc(sh.entity_name)} (${esc(sh.relationship_type)})</li>`).join('')}</ul></div>` : ''}
+                </div>
+              </details>
             ` : `
               <div class="bg-amber-50 rounded-xl p-3 text-xs text-amber-700">
                 <span class="material-symbols-outlined text-sm align-middle mr-1">info</span>
@@ -578,49 +641,188 @@ const Developer = (() => {
   }
 
   /* ── Sub-tab: Relevancia ──────────────────────────────────────── */
+
+  const FIELD_CFG = {
+    problem:       { id: 'prep-rel-problem',  label: 'Problema / Necesidades', placeholder: 'Describe el problema o necesidad que aborda el proyecto...', minH: '80px' },
+    target_groups: { id: 'prep-rel-targets',   label: 'Grupos objetivo',        placeholder: 'A quien beneficia el proyecto...',                         minH: '60px' },
+    approach:      { id: 'prep-rel-approach',  label: 'Enfoque / Metodologia',  placeholder: 'Como abordareis el problema...',                           minH: '80px' },
+  };
+
+  function buildFieldHTML(fieldKey, value, chatStatus) {
+    const cfg = FIELD_CFG[fieldKey];
+    const hasDraft = (chatStatus[fieldKey] || 0) > 0;
+    const hasText = !!(value && value.trim());
+    return `
+      <div class="bg-white rounded-2xl border border-outline-variant/20 p-5" data-ai-field="${fieldKey}">
+        <div class="flex items-center justify-between mb-2">
+          <label class="text-xs font-bold text-on-surface-variant">${cfg.label}</label>
+          <div class="flex items-center gap-2">
+            ${!hasDraft ? `<button onclick="Developer._genFieldDraft('${fieldKey}')" class="prep-gen-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold bg-primary/10 text-primary hover:bg-primary/20 transition-colors" id="prep-gen-${fieldKey}">
+              <span class="material-symbols-outlined text-sm">auto_awesome</span> Generar borrador IA
+            </button>` : `<button onclick="Developer._toggleFieldChat('${fieldKey}')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+              <span class="material-symbols-outlined text-sm">chat</span> Refinar con IA
+            </button>`}
+          </div>
+        </div>
+        <textarea id="${cfg.id}" class="w-full px-3 py-2 text-sm bg-surface-container-lowest border border-outline-variant/20 rounded-lg resize-vertical focus:outline-none focus:ring-2 focus:ring-primary/15" style="min-height:${cfg.minH}" placeholder="${cfg.placeholder}">${esc(value || '')}</textarea>
+
+        <!-- Inline chat (hidden by default) -->
+        <div id="prep-chat-${fieldKey}" class="hidden mt-3 border-t border-outline-variant/10 pt-3">
+          <div id="prep-chat-msgs-${fieldKey}" class="space-y-2 max-h-[300px] overflow-y-auto mb-3"></div>
+          <div class="flex gap-2">
+            <input id="prep-chat-input-${fieldKey}" class="flex-1 px-3 py-2 text-xs bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/15" placeholder="Tu respuesta..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();Developer._sendFieldChat('${fieldKey}')}">
+            <button onclick="Developer._sendFieldChat('${fieldKey}')" class="px-4 py-2 rounded-lg text-xs font-bold bg-primary text-white hover:bg-primary/90 transition-colors">
+              <span class="material-symbols-outlined text-sm">send</span>
+            </button>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function renderFieldChatBubble(fieldKey, role, text) {
+    const container = document.getElementById('prep-chat-msgs-' + fieldKey);
+    if (!container) return;
+    const isUser = role === 'user';
+    const bubble = document.createElement('div');
+    bubble.className = `flex ${isUser ? 'justify-end' : 'justify-start'}`;
+    bubble.innerHTML = `
+      <div class="max-w-[85%] px-3 py-2 rounded-xl text-xs leading-relaxed ${isUser ? 'bg-primary text-white rounded-br-sm' : 'bg-surface-container border border-outline-variant/20 text-on-surface rounded-bl-sm'}">
+        ${esc(text).replace(/\n/g, '<br>')}
+      </div>`;
+    container.appendChild(bubble);
+    container.scrollTop = container.scrollHeight;
+  }
+
+  function showFieldTyping(fieldKey) {
+    const container = document.getElementById('prep-chat-msgs-' + fieldKey);
+    if (!container) return;
+    const el = document.createElement('div');
+    el.id = 'prep-chat-typing-' + fieldKey;
+    el.className = 'flex justify-start';
+    el.innerHTML = `<div class="px-3 py-2 rounded-xl text-xs bg-surface-container border border-outline-variant/20 rounded-bl-sm text-on-surface-variant animate-pulse">Pensando...</div>`;
+    container.appendChild(el);
+    container.scrollTop = container.scrollHeight;
+  }
+
+  function removeFieldTyping(fieldKey) {
+    document.getElementById('prep-chat-typing-' + fieldKey)?.remove();
+  }
+
+  async function generateFieldDraft(fieldKey) {
+    const pid = currentProject.id;
+    const btn = document.getElementById('prep-gen-' + fieldKey);
+    if (btn) { btn.disabled = true; btn.innerHTML = '<span class="material-symbols-outlined text-sm animate-spin">progress_activity</span> Generando...'; }
+
+    // Show chat panel with typing
+    const chatPanel = document.getElementById('prep-chat-' + fieldKey);
+    if (chatPanel) chatPanel.classList.remove('hidden');
+    showFieldTyping(fieldKey);
+
+    try {
+      const res = await API.post('/developer/projects/' + pid + '/prep/relevancia/generate-draft', { field_key: fieldKey });
+      removeFieldTyping(fieldKey);
+      const data = res.data || res;
+
+      // Populate textarea if empty
+      const ta = document.getElementById(FIELD_CFG[fieldKey].id);
+      if (ta && !ta.value.trim() && data.draft) {
+        ta.value = data.draft;
+        ta.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+
+      // Show AI message with draft summary + questions
+      let msg = 'He generado un borrador basado en los documentos del proyecto.';
+      if (data.questions && data.questions.length) {
+        msg += '\n\nPara mejorar el texto, responde a estas preguntas:\n\n' + data.questions.map((q, i) => (i + 1) + '. ' + q).join('\n');
+      }
+      renderFieldChatBubble(fieldKey, 'assistant', msg);
+
+      // Replace "Generate" button with "Refine" button
+      if (btn) {
+        btn.outerHTML = `<button onclick="Developer._toggleFieldChat('${fieldKey}')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+          <span class="material-symbols-outlined text-sm">chat</span> Refinar con IA
+        </button>`;
+      }
+
+      Toast.show('Borrador generado', 'ok');
+    } catch (e) {
+      removeFieldTyping(fieldKey);
+      if (btn) { btn.disabled = false; btn.innerHTML = '<span class="material-symbols-outlined text-sm">auto_awesome</span> Generar borrador IA'; }
+      Toast.show('Error generando borrador: ' + e.message, 'err');
+    }
+  }
+
+  async function sendFieldChat(fieldKey) {
+    const input = document.getElementById('prep-chat-input-' + fieldKey);
+    if (!input) return;
+    const msg = input.value.trim();
+    if (!msg) return;
+    input.value = '';
+
+    renderFieldChatBubble(fieldKey, 'user', msg);
+    showFieldTyping(fieldKey);
+
+    try {
+      const res = await API.post('/developer/projects/' + currentProject.id + '/prep/relevancia/chat', { field_key: fieldKey, message: msg });
+      removeFieldTyping(fieldKey);
+      const data = res.data || res;
+
+      // Update textarea with revised text
+      if (data.revised_text) {
+        const ta = document.getElementById(FIELD_CFG[fieldKey].id);
+        if (ta) {
+          ta.value = data.revised_text;
+          ta.dispatchEvent(new Event('input', { bubbles: true }));
+          ta.classList.add('ring-2', 'ring-primary/30');
+          setTimeout(() => ta.classList.remove('ring-2', 'ring-primary/30'), 1500);
+        }
+      }
+
+      // Show AI response
+      let response = 'He actualizado el texto con tu aportacion.';
+      if (data.follow_up) response += '\n\n' + data.follow_up;
+      renderFieldChatBubble(fieldKey, 'assistant', response);
+
+      // Disable input if too many turns
+      if (data.turn_count >= 10) {
+        input.disabled = true;
+        input.placeholder = 'Limite de chat alcanzado. Edita el texto directamente.';
+      }
+    } catch (e) {
+      removeFieldTyping(fieldKey);
+      renderFieldChatBubble(fieldKey, 'assistant', 'Error: ' + e.message);
+    }
+  }
+
+  function toggleFieldChat(fieldKey) {
+    const panel = document.getElementById('prep-chat-' + fieldKey);
+    if (panel) panel.classList.toggle('hidden');
+  }
+
   async function renderPrepRelevancia(el) {
     const pid = currentProject.id;
     const [relData, docs, interview] = await Promise.all([
-      API.get('/developer/projects/' + pid + '/prep/relevancia').catch(() => ({ context: {} })),
+      API.get('/developer/projects/' + pid + '/prep/relevancia').catch(() => ({ context: {}, chatStatus: {} })),
       API.get('/developer/projects/' + pid + '/research-docs').catch(() => []),
       API.get('/developer/projects/' + pid + '/interview').catch(() => []),
     ]);
     prepCache.relevancia = relData;
-    const ctx = relData.context || {};
+    const rd = relData.data || relData;
+    const ctx = rd.context || {};
+    const chatStatus = rd.chatStatus || {};
     const relInterview = interview.filter(q => q.tab === 'relevancia' || (!q.tab && ['origin_story', 'unique_approach', 'problem_data', 'eu_added_value', 'innovation'].includes(q.question_key)));
 
     el.innerHTML = `
       <div class="space-y-4">
         <h3 class="font-headline text-base font-bold">Relevancia e Investigacion</h3>
-        <p class="text-xs text-on-surface-variant mb-2">Define la idea central, sube investigacion de apoyo y responde las preguntas del coordinador.</p>
+        <p class="text-xs text-on-surface-variant mb-2">Sube primero tus documentos de apoyo. Despues, la IA generara borradores basados en ellos y en los documentos de la convocatoria.</p>
 
-        <!-- Editable context fields -->
-        <div class="bg-white rounded-2xl border border-outline-variant/20 p-5 space-y-4">
-          <div>
-            <label class="text-xs font-bold text-on-surface-variant block mb-1">Problema / Necesidades</label>
-            <textarea id="prep-rel-problem" class="w-full px-3 py-2 text-sm bg-surface-container-lowest border border-outline-variant/20 rounded-lg resize-vertical focus:outline-none focus:ring-2 focus:ring-primary/15 min-h-[80px]" placeholder="Describe el problema o necesidad que aborda el proyecto...">${esc(ctx.problem || '')}</textarea>
-          </div>
-          <div>
-            <label class="text-xs font-bold text-on-surface-variant block mb-1">Grupos objetivo</label>
-            <textarea id="prep-rel-targets" class="w-full px-3 py-2 text-sm bg-surface-container-lowest border border-outline-variant/20 rounded-lg resize-vertical focus:outline-none focus:ring-2 focus:ring-primary/15 min-h-[60px]" placeholder="A quien beneficia el proyecto...">${esc(ctx.target_groups || '')}</textarea>
-          </div>
-          <div>
-            <label class="text-xs font-bold text-on-surface-variant block mb-1">Enfoque / Metodologia</label>
-            <textarea id="prep-rel-approach" class="w-full px-3 py-2 text-sm bg-surface-container-lowest border border-outline-variant/20 rounded-lg resize-vertical focus:outline-none focus:ring-2 focus:ring-primary/15 min-h-[80px]" placeholder="Como abordareis el problema...">${esc(ctx.approach || '')}</textarea>
-          </div>
-          <div class="flex justify-end">
-            <button onclick="Developer._saveRelContext()" class="inline-flex items-center gap-1 text-xs font-bold text-primary hover:text-primary/80 transition-colors">
-              <span class="material-symbols-outlined text-sm">save</span> Guardar cambios
-            </button>
-          </div>
-        </div>
-
-        <!-- Research Documents (moved from old Block A) -->
+        <!-- 1. Research Documents (FIRST — user uploads before generating drafts) -->
         <div class="bg-white rounded-2xl border border-outline-variant/20 p-5">
           <h4 class="font-headline text-sm font-bold text-primary mb-1 flex items-center gap-2">
-            <span class="material-symbols-outlined text-lg">upload_file</span> Documentos de investigacion
+            <span class="material-symbols-outlined text-lg">upload_file</span> 1. Documentos de investigacion
           </h4>
-          <p class="text-xs text-on-surface-variant mb-3">Sube documentos que respalden tu propuesta. La IA los usara como evidencia primaria en cada seccion relevante.</p>
+          <p class="text-xs text-on-surface-variant mb-3">Sube documentos que respalden tu propuesta. La IA los usara como evidencia al generar los borradores.</p>
           <div class="bg-primary/5 border border-primary/10 rounded-lg p-3 mb-3">
             <div class="text-[10px] font-bold uppercase tracking-wider text-primary mb-1.5">Que tipo de documentos subir</div>
             <div class="grid grid-cols-1 gap-1 text-[11px] text-on-surface-variant">
@@ -650,6 +852,11 @@ const Developer = (() => {
             `).join('') : '<p class="text-xs text-on-surface-variant/50 italic py-2">Ningun documento subido aun.</p>'}
           </div>
         </div>
+
+        <!-- 2. AI-assisted fields (AFTER documents are uploaded) -->
+        ${buildFieldHTML('problem', ctx.problem, chatStatus)}
+        ${buildFieldHTML('target_groups', ctx.target_groups, chatStatus)}
+        ${buildFieldHTML('approach', ctx.approach, chatStatus)}
 
         <!-- Interview questions (relevancia) -->
         ${relInterview.length ? `
@@ -1543,10 +1750,7 @@ const Developer = (() => {
 
   function goPhase(p) {
     switch (p) {
-      case 1: renderPhase1(); break;
       case 11: renderGanttPhase(); break;
-      case 12: renderBudgetPhase(); break;
-      case 15: renderPrepStudio(); break;
       case 2: renderPhase2(); break;
       case 3: renderPhase2(); break; // Phase 3 absorbed into cascade
       case 4: renderPhase4(); break;
@@ -1559,6 +1763,46 @@ const Developer = (() => {
   }
 
   /* ── Consorcio actions ──────────────────────────────────────── */
+  let _customTextTimer = {};
+  async function saveCustomText(partnerId, text) {
+    clearTimeout(_customTextTimer[partnerId]);
+    _customTextTimer[partnerId] = setTimeout(async () => {
+      try {
+        await API.put('/developer/projects/' + currentProject.id + '/prep/consorcio/' + partnerId + '/custom-text', { custom_text: text });
+      } catch (err) { Toast.show('Error saving: ' + err.message, 'err'); }
+    }, 500);
+  }
+
+  let _staffSkillsTimer = {};
+  async function saveStaffSkills(partnerId, staffId, text) {
+    const key = partnerId + '_' + staffId;
+    clearTimeout(_staffSkillsTimer[key]);
+    _staffSkillsTimer[key] = setTimeout(async () => {
+      try {
+        await API.put('/developer/projects/' + currentProject.id + '/prep/consorcio/' + partnerId + '/staff-skills', { staff_id: staffId, custom_skills: text });
+      } catch (err) { Toast.show('Error saving: ' + err.message, 'err'); }
+    }, 500);
+  }
+
+  async function toggleStaff(partnerId, staffId, selected) {
+    try {
+      await API.put('/developer/projects/' + currentProject.id + '/prep/consorcio/' + partnerId + '/toggle-staff', { staff_id: staffId, selected });
+      renderPrepTabContent('consorcio');
+    } catch (err) { Toast.show('Error: ' + err.message, 'err'); }
+  }
+
+  async function setStaffRole(partnerId, staffId, projectRole) {
+    try {
+      await API.put('/developer/projects/' + currentProject.id + '/prep/consorcio/' + partnerId + '/staff-role', { staff_id: staffId, project_role: projectRole });
+    } catch (err) { Toast.show('Error: ' + err.message, 'err'); }
+  }
+
+  async function toggleEuProject(partnerId, euProjectId, selected) {
+    try {
+      await API.put('/developer/projects/' + currentProject.id + '/prep/consorcio/' + partnerId + '/toggle-eu-project', { eu_project_id: euProjectId, selected });
+    } catch (err) { Toast.show('Error: ' + err.message, 'err'); }
+  }
+
   async function linkOrg(partnerId) {
     // First load all available organizations to show them
     try {
@@ -1599,7 +1843,6 @@ const Developer = (() => {
   ];
 
   function generateVariant(partnerId) {
-    // Create modal overlay
     const overlay = document.createElement('div');
     overlay.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm';
     overlay.innerHTML = `
@@ -1633,12 +1876,10 @@ const Developer = (() => {
     `;
     document.body.appendChild(overlay);
 
-    // Close handlers
     const closeModal = () => overlay.remove();
     overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
     overlay.querySelector('.pif-modal-close').addEventListener('click', closeModal);
 
-    // Category button click
     overlay.querySelectorAll('.pif-cat-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         closeModal();
@@ -1646,7 +1887,6 @@ const Developer = (() => {
       });
     });
 
-    // Custom input
     overlay.querySelector('.pif-custom-btn').addEventListener('click', () => {
       const val = overlay.querySelector('.pif-custom-input').value.trim();
       if (!val) return;
@@ -1668,6 +1908,31 @@ const Developer = (() => {
     try {
       await API.post('/developer/projects/' + currentProject.id + '/prep/consorcio/' + partnerId + '/generate-variant', { category, category_label: categoryLabel });
       Toast.show('Variante "' + categoryLabel + '" generada', 'ok');
+      renderPrepTabContent('consorcio');
+    } catch (err) { Toast.show('Error: ' + err.message, 'err'); }
+  }
+
+  async function addExtraStaff(partnerId) {
+    try {
+      await API.post('/developer/projects/' + currentProject.id + '/prep/consorcio/' + partnerId + '/extra-staff');
+      renderPrepTabContent('consorcio');
+    } catch (err) { Toast.show('Error: ' + err.message, 'err'); }
+  }
+
+  let _extraStaffTimer = {};
+  function updateExtraStaff(partnerId, staffId, field, value) {
+    const key = partnerId + '_' + staffId + '_' + field;
+    clearTimeout(_extraStaffTimer[key]);
+    _extraStaffTimer[key] = setTimeout(async () => {
+      try {
+        await API.put('/developer/projects/' + currentProject.id + '/prep/consorcio/' + partnerId + '/extra-staff/' + staffId, { field, value });
+      } catch (err) { Toast.show('Error: ' + err.message, 'err'); }
+    }, 500);
+  }
+
+  async function removeExtraStaff(partnerId, staffId) {
+    try {
+      await API.del('/developer/projects/' + currentProject.id + '/prep/consorcio/' + partnerId + '/extra-staff/' + staffId);
       renderPrepTabContent('consorcio');
     } catch (err) { Toast.show('Error: ' + err.message, 'err'); }
   }
@@ -1744,7 +2009,18 @@ const Developer = (() => {
     _linkOrg: linkOrg,
     _selectVariant: selectVariant,
     _generateVariant: generateVariant,
+    _saveCustomText: saveCustomText,
+    _saveStaffSkills: saveStaffSkills,
+    _toggleStaff: toggleStaff,
+    _setStaffRole: setStaffRole,
+    _toggleEuProject: toggleEuProject,
+    _addExtraStaff: addExtraStaff,
+    _updateExtraStaff: updateExtraStaff,
+    _removeExtraStaff: removeExtraStaff,
     _saveRelContext: saveRelContext,
+    _genFieldDraft: generateFieldDraft,
+    _sendFieldChat: sendFieldChat,
+    _toggleFieldChat: toggleFieldChat,
     _selectSection: selectSection,
     _generateField: generateField,
     _markReviewed: markReviewed,

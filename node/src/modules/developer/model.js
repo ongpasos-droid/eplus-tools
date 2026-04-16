@@ -958,6 +958,9 @@ async function getPrepConsorcio(projectId, userId) {
     p.variants = [];
     p.selected_variant = null;
     p.custom_text = null;
+    p.selected_eu_projects = [];
+    p.staff_custom = {};
+    p.extra_staff = [];
 
     if (p.organization_id) {
       // Load org profile
@@ -968,12 +971,33 @@ async function getPrepConsorcio(projectId, userId) {
       if (orgs.length) {
         p.organization = orgs[0];
         // Load child tables
-        const [staff] = await db.execute('SELECT name, role, skills_summary FROM org_key_staff WHERE organization_id = ?', [p.organization_id]);
+        const [staff] = await db.execute('SELECT id, name, role, skills_summary FROM org_key_staff WHERE organization_id = ?', [p.organization_id]);
         p.organization.key_staff = staff;
-        const [euProj] = await db.execute('SELECT programme, year, project_id_or_contract, role, title FROM org_eu_projects WHERE organization_id = ?', [p.organization_id]);
+        const [euProj] = await db.execute('SELECT id, programme, year, project_id_or_contract, role, title FROM org_eu_projects WHERE organization_id = ?', [p.organization_id]);
         p.organization.eu_projects = euProj;
         const [stakeholders] = await db.execute('SELECT entity_name, entity_type, relationship_type, description FROM org_stakeholders WHERE organization_id = ?', [p.organization_id]);
         p.organization.stakeholders = stakeholders;
+      }
+
+      // Load project-specific EU project selections
+      const [selectedEuProjs] = await db.execute(
+        'SELECT eu_project_id FROM project_partner_eu_projects WHERE project_id = ? AND partner_id = ?',
+        [projectId, p.id]
+      );
+      p.selected_eu_projects = selectedEuProjs.map(r => r.eu_project_id);
+
+      // Load project-specific staff customizations
+      const [staffCustom] = await db.execute(
+        'SELECT staff_id, custom_skills, selected, project_role FROM project_partner_staff WHERE project_id = ? AND partner_id = ?',
+        [projectId, p.id]
+      );
+      p.staff_custom = {};
+      p.staff_selected = {};
+      p.staff_project_role = {};
+      for (const sc of staffCustom) {
+        p.staff_custom[sc.staff_id] = sc.custom_skills;
+        p.staff_selected[sc.staff_id] = !!sc.selected;
+        p.staff_project_role[sc.staff_id] = sc.project_role || '';
       }
 
       // Load PIF variants for this organization
@@ -983,6 +1007,13 @@ async function getPrepConsorcio(projectId, userId) {
       );
       p.variants = variants;
     }
+
+    // Load extra staff added for this project (works even without org link)
+    const [extraStaff] = await db.execute(
+      'SELECT id, name, role, skills_summary FROM project_extra_staff WHERE project_id = ? AND partner_id = ?',
+      [projectId, p.id]
+    );
+    p.extra_staff = extraStaff;
 
     // Load project-specific PIF selection
     const [pifs] = await db.execute(
@@ -1000,7 +1031,16 @@ async function getPrepConsorcio(projectId, userId) {
     }
   }
 
-  return { partners };
+  // Load unique worker rate categories across all partners in this project
+  const [wrCats] = await db.execute(
+    `SELECT DISTINCT wr.category FROM worker_rates wr
+     JOIN partners p ON p.id = wr.partner_id
+     WHERE p.project_id = ? AND wr.category != '' ORDER BY wr.category`,
+    [projectId]
+  );
+  const workerCategories = wrCats.map(r => r.category);
+
+  return { partners, workerCategories };
 }
 
 async function linkPartnerOrg(projectId, partnerId, organizationId) {
@@ -1021,9 +1061,23 @@ async function generatePifVariant(projectId, partnerId, category, categoryLabel,
   const orgId = partner.organization_id;
 
   // Load org child data
-  const [staff] = await db.execute('SELECT name, role, skills_summary FROM org_key_staff WHERE organization_id = ?', [orgId]);
-  const [euProj] = await db.execute('SELECT programme, year, role, title FROM org_eu_projects WHERE organization_id = ?', [orgId]);
+  const [staff] = await db.execute('SELECT id, name, role, skills_summary FROM org_key_staff WHERE organization_id = ?', [orgId]);
+  const [euProj] = await db.execute('SELECT id, programme, year, role, title FROM org_eu_projects WHERE organization_id = ?', [orgId]);
   const [stakeholders] = await db.execute('SELECT entity_name, relationship_type FROM org_stakeholders WHERE organization_id = ?', [orgId]);
+
+  // Load selected EU projects for this partner (if any)
+  const [selectedEuProjs] = await db.execute(
+    'SELECT eu_project_id FROM project_partner_eu_projects WHERE project_id = ? AND partner_id = ?',
+    [projectId, partnerId]
+  );
+  const selectedEuIds = selectedEuProjs.map(r => r.eu_project_id);
+  const relevantEuProj = selectedEuIds.length ? euProj.filter(ep => selectedEuIds.includes(ep.id)) : euProj;
+
+  // Load extra staff added for this project
+  const [extraStaff] = await db.execute(
+    'SELECT name, role, skills_summary FROM project_extra_staff WHERE project_id = ? AND partner_id = ?',
+    [projectId, partnerId]
+  );
 
   // Load project context
   const ctx = await getProjectContext(projectId, userId);
@@ -1046,6 +1100,8 @@ Rules:
 - DO emphasize existing capabilities that connect to the project theme
 - Output a single cohesive text of ~300-400 words`;
 
+  const allStaff = [...staff, ...extraStaff.map(s => ({ ...s, extra: true }))];
+
   const userPrompt = `ORGANIZATION PROFILE:
 Name: ${partner.organization_name}
 Description: ${partner.description || 'Not available'}
@@ -1053,10 +1109,10 @@ Experience: ${partner.activities_experience || 'Not available'}
 Expertise areas: ${partner.expertise_areas || 'Not available'}
 
 KEY STAFF:
-${staff.map(s => `- ${s.name} (${s.role}): ${s.skills_summary || ''}`).join('\n') || 'None listed'}
+${allStaff.map(s => `- ${s.name} (${s.role}): ${s.skills_summary || ''}`).join('\n') || 'None listed'}
 
 PAST EU PROJECTS:
-${euProj.map(ep => `- ${ep.title || ep.programme} (${ep.year}, role: ${ep.role})`).join('\n') || 'None listed'}
+${relevantEuProj.map(ep => `- ${ep.title || ep.programme} (${ep.year}, role: ${ep.role})`).join('\n') || 'None listed'}
 
 STAKEHOLDERS:
 ${stakeholders.map(sh => `- ${sh.entity_name} (${sh.relationship_type})`).join('\n') || 'None listed'}
@@ -1074,7 +1130,6 @@ ADAPTATION THEME: ${categoryLabel || category}
 
 Write the adapted PIF now.`;
 
-  // Call AI (uses local callAI: Gemini for generation, Claude fallback)
   const adaptedText = await callAI(systemPrompt, userPrompt, 'generate');
 
   // Save or update variant in org_pif_variants
@@ -1086,7 +1141,6 @@ Write the adapted PIF now.`;
     [variantId, orgId, category, categoryLabel || null, adaptedText]
   );
 
-  // Get the actual ID (might be existing on duplicate)
   const [inserted] = await db.execute(
     'SELECT id FROM org_pif_variants WHERE organization_id = ? AND category = ?', [orgId, category]
   );
@@ -1096,7 +1150,7 @@ Write the adapted PIF now.`;
   await db.execute(
     `INSERT INTO project_partner_pifs (id, project_id, partner_id, variant_id)
      VALUES (?, ?, ?, ?)
-     ON DUPLICATE KEY UPDATE variant_id = VALUES(variant_id)`,
+     ON DUPLICATE KEY UPDATE variant_id = VALUES(variant_id), custom_text = NULL`,
     [genUUID(), projectId, partnerId, actualId]
   );
 
@@ -1109,6 +1163,82 @@ async function selectPifVariant(projectId, partnerId, variantId) {
      VALUES (?, ?, ?, ?)
      ON DUPLICATE KEY UPDATE variant_id = VALUES(variant_id), custom_text = NULL`,
     [genUUID(), projectId, partnerId, variantId]
+  );
+}
+
+async function savePartnerCustomText(projectId, partnerId, customText) {
+  await db.execute(
+    `INSERT INTO project_partner_pifs (id, project_id, partner_id, custom_text)
+     VALUES (?, ?, ?, ?)
+     ON DUPLICATE KEY UPDATE custom_text = VALUES(custom_text)`,
+    [genUUID(), projectId, partnerId, customText || null]
+  );
+}
+
+async function toggleEuProject(projectId, partnerId, euProjectId, selected) {
+  if (selected) {
+    await db.execute(
+      `INSERT IGNORE INTO project_partner_eu_projects (id, project_id, partner_id, eu_project_id)
+       VALUES (?, ?, ?, ?)`,
+      [genUUID(), projectId, partnerId, euProjectId]
+    );
+  } else {
+    await db.execute(
+      'DELETE FROM project_partner_eu_projects WHERE project_id = ? AND partner_id = ? AND eu_project_id = ?',
+      [projectId, partnerId, euProjectId]
+    );
+  }
+}
+
+async function saveStaffCustomSkills(projectId, partnerId, staffId, customSkills) {
+  await db.execute(
+    `INSERT INTO project_partner_staff (id, project_id, partner_id, staff_id, custom_skills)
+     VALUES (?, ?, ?, ?, ?)
+     ON DUPLICATE KEY UPDATE custom_skills = VALUES(custom_skills)`,
+    [genUUID(), projectId, partnerId, staffId, customSkills || null]
+  );
+}
+
+async function toggleStaffSelected(projectId, partnerId, staffId, selected) {
+  await db.execute(
+    `INSERT INTO project_partner_staff (id, project_id, partner_id, staff_id, selected)
+     VALUES (?, ?, ?, ?, ?)
+     ON DUPLICATE KEY UPDATE selected = VALUES(selected)`,
+    [genUUID(), projectId, partnerId, staffId, selected ? 1 : 0]
+  );
+}
+
+async function setStaffProjectRole(projectId, partnerId, staffId, projectRole) {
+  await db.execute(
+    `INSERT INTO project_partner_staff (id, project_id, partner_id, staff_id, project_role)
+     VALUES (?, ?, ?, ?, ?)
+     ON DUPLICATE KEY UPDATE project_role = VALUES(project_role)`,
+    [genUUID(), projectId, partnerId, staffId, projectRole || null]
+  );
+}
+
+async function addExtraStaff(projectId, partnerId) {
+  const id = genUUID();
+  await db.execute(
+    'INSERT INTO project_extra_staff (id, project_id, partner_id, name, role, skills_summary) VALUES (?, ?, ?, "", "", "")',
+    [id, projectId, partnerId]
+  );
+  return { id };
+}
+
+async function updateExtraStaff(projectId, partnerId, staffId, field, value) {
+  const allowed = ['name', 'role', 'skills_summary'];
+  if (!allowed.includes(field)) throw new Error('Invalid field');
+  await db.execute(
+    `UPDATE project_extra_staff SET ${field} = ? WHERE id = ? AND project_id = ? AND partner_id = ?`,
+    [value, staffId, projectId, partnerId]
+  );
+}
+
+async function removeExtraStaff(projectId, partnerId, staffId) {
+  await db.execute(
+    'DELETE FROM project_extra_staff WHERE id = ? AND project_id = ? AND partner_id = ?',
+    [staffId, projectId, partnerId]
   );
 }
 
@@ -1158,7 +1288,16 @@ async function getPrepRelevancia(projectId) {
     'SELECT problem, target_groups, approach FROM intake_contexts WHERE project_id = ? LIMIT 1',
     [projectId]
   );
-  return { context: contexts[0] || { problem: '', target_groups: '', approach: '' } };
+  // Chat status per field (how many turns exist)
+  let chatStatus = {};
+  try {
+    const [chats] = await db.execute(
+      'SELECT field_key, COUNT(*) as turns FROM prep_field_chats WHERE project_id = ? GROUP BY field_key',
+      [projectId]
+    );
+    chatStatus = Object.fromEntries(chats.map(c => [c.field_key, c.turns]));
+  } catch { /* table may not exist yet */ }
+  return { context: contexts[0] || { problem: '', target_groups: '', approach: '' }, chatStatus };
 }
 
 async function updatePrepRelevanciaContext(projectId, problem, targetGroups, approach) {
@@ -1175,6 +1314,211 @@ async function updatePrepRelevanciaContext(projectId, problem, targetGroups, app
       [genUUID(), projectId, problem, targetGroups, approach]
     );
   }
+}
+
+// ── Relevancia: AI-assisted field drafts ──
+
+const FIELD_PROMPTS = {
+  problem: {
+    ragQuery: 'needs analysis problems challenges target groups evidence statistics European policy priorities',
+    label: 'Problem / Needs',
+    instruction: `Write a 150-250 word draft describing the PROBLEM and NEEDS this project addresses.
+Ground it in specific evidence: cite statistics, reports, or policy priorities from the documents provided.
+Reference the countries of the consortium partners when possible.
+Write in the voice of the project coordinator — direct, concrete, with conviction.
+Do NOT use generic statements like "in today's world" or "it is widely known that".`
+  },
+  target_groups: {
+    ragQuery: 'target groups beneficiaries participants demographics needs direct indirect stakeholders',
+    label: 'Target Groups',
+    instruction: `Write a 100-200 word draft describing the TARGET GROUPS and beneficiaries of this project.
+Be specific: mention who they are, approximate numbers, their geographic distribution across consortium countries, and their concrete needs.
+Distinguish between direct beneficiaries (who participate in activities) and indirect beneficiaries (who benefit from results).
+Write in the voice of the project coordinator.`
+  },
+  approach: {
+    ragQuery: 'methodology approach activities innovation pedagogy work packages implementation strategy',
+    label: 'Approach / Methodology',
+    instruction: `Write a 150-250 word draft describing the APPROACH and METHODOLOGY of this project.
+Explain how the activities and work packages will address the problem.
+Mention specific methods, tools, or pedagogical approaches if the project data mentions them.
+Highlight what is innovative or distinctive about this approach compared to existing practices.
+Write in the voice of the project coordinator.`
+  }
+};
+
+async function generateRelevanciaFieldDraft(projectId, userId, fieldKey) {
+  if (!FIELD_PROMPTS[fieldKey]) throw new Error('Invalid field_key: ' + fieldKey);
+  const cfg = FIELD_PROMPTS[fieldKey];
+
+  // Get project context
+  const ctx = await getProjectContext(projectId, userId);
+  if (!ctx) throw new Error('Project not found');
+  const projectContext = buildProjectContext(ctx);
+
+  // Get programId
+  const [programs] = await db.execute(
+    'SELECT id FROM intake_programs WHERE action_type = ? LIMIT 1',
+    [ctx.project.type]
+  );
+  const programId = programs[0]?.id || null;
+
+  // RAG: call docs + research docs in parallel
+  const [callChunks, researchChunks] = await Promise.all([
+    programId ? retrieveRelevantChunks(cfg.ragQuery, programId, 6) : Promise.resolve(''),
+    retrieveResearchChunks(cfg.ragQuery, projectId, 4),
+  ]);
+
+  const system = `You are helping an Erasmus+ project coordinator prepare the Relevance section of their proposal.
+You have access to programme documents and research evidence. Use them to write grounded, specific text.
+
+${callChunks ? '══ PROGRAMME DOCUMENTS ══\n' + callChunks + '\n\n' : ''}${researchChunks ? '══ RESEARCH EVIDENCE ══\n' + researchChunks + '\n\n' : ''}══ PROJECT OVERVIEW ══
+${projectContext}
+
+══ YOUR TASK ══
+${cfg.instruction}
+
+After the draft, provide exactly 2-3 follow-up questions to elicit specific details you could NOT find in the documents.
+These questions should help the coordinator add real-world knowledge, local context, or personal experience.
+
+FORMAT YOUR RESPONSE EXACTLY AS:
+
+DRAFT:
+[your draft text here]
+
+QUESTIONS:
+1. [specific question]
+2. [specific question]
+3. [specific question, optional]`;
+
+  const result = await callAI(system, `Generate a draft for the "${cfg.label}" field of this Erasmus+ proposal.`, 'generate');
+
+  // Parse response
+  let draft = '', questions = [];
+  const draftMatch = result.match(/DRAFT:\s*\n([\s\S]*?)(?=\nQUESTIONS:)/i);
+  const questionsMatch = result.match(/QUESTIONS:\s*\n([\s\S]*)/i);
+  if (draftMatch) draft = draftMatch[1].trim();
+  else draft = result.split('QUESTIONS:')[0].replace(/^DRAFT:\s*/i, '').trim();
+  if (questionsMatch) {
+    questions = questionsMatch[1].trim().split(/\n\d+\.\s*/).filter(q => q.trim()).map(q => q.trim());
+  }
+
+  // Save draft to intake_contexts ONLY if field is empty
+  const [existing] = await db.execute('SELECT ' + fieldKey + ' as val FROM intake_contexts WHERE project_id = ?', [projectId]);
+  if (!existing.length) {
+    await db.execute(
+      'INSERT INTO intake_contexts (id, project_id, ' + fieldKey + ') VALUES (?, ?, ?)',
+      [genUUID(), projectId, draft]
+    );
+  } else if (!existing[0].val || !existing[0].val.trim()) {
+    await db.execute('UPDATE intake_contexts SET ' + fieldKey + ' = ? WHERE project_id = ?', [draft, projectId]);
+  }
+
+  // Save assistant turn to chat history
+  const chatContent = JSON.stringify({ draft, questions });
+  const id = genUUID();
+  await db.execute(
+    'INSERT INTO prep_field_chats (id, project_id, field_key, role, content, turn_order) VALUES (?, ?, ?, ?, ?, ?)',
+    [id, projectId, fieldKey, 'assistant', chatContent, 0]
+  );
+
+  return { draft, questions, field_key: fieldKey };
+}
+
+async function chatRelevanciaField(projectId, userId, fieldKey, userMessage) {
+  if (!FIELD_PROMPTS[fieldKey]) throw new Error('Invalid field_key: ' + fieldKey);
+  const cfg = FIELD_PROMPTS[fieldKey];
+
+  // Load chat history
+  const [history] = await db.execute(
+    'SELECT role, content, turn_order FROM prep_field_chats WHERE project_id = ? AND field_key = ? ORDER BY turn_order',
+    [projectId, fieldKey]
+  );
+
+  // Load current field value
+  const [ctxRows] = await db.execute('SELECT ' + fieldKey + ' as val FROM intake_contexts WHERE project_id = ?', [projectId]);
+  const currentText = ctxRows[0]?.val || '';
+
+  // Light RAG context
+  const [programs] = await db.execute(
+    'SELECT id FROM intake_programs ip JOIN projects pr ON pr.type = ip.action_type WHERE pr.id = ? LIMIT 1',
+    [projectId]
+  );
+  const programId = programs[0]?.id || null;
+  const [callChunks, researchChunks] = await Promise.all([
+    programId ? retrieveRelevantChunks(cfg.ragQuery, programId, 4) : Promise.resolve(''),
+    retrieveResearchChunks(cfg.ragQuery, projectId, 3),
+  ]);
+
+  // Build conversation
+  const conversationParts = history.map(h => {
+    if (h.role === 'assistant') {
+      try { const parsed = JSON.parse(h.content); return `ASSISTANT: ${parsed.draft || parsed.revised_text || h.content}`; }
+      catch { return `ASSISTANT: ${h.content}`; }
+    }
+    return `USER: ${h.content}`;
+  });
+
+  const system = `You are helping an Erasmus+ project coordinator refine the "${cfg.label}" field.
+
+${callChunks ? '══ PROGRAMME CONTEXT ══\n' + callChunks + '\n\n' : ''}${researchChunks ? '══ RESEARCH EVIDENCE ══\n' + researchChunks + '\n\n' : ''}══ CURRENT TEXT IN THE FIELD ══
+${currentText}
+
+══ CONVERSATION SO FAR ══
+${conversationParts.join('\n\n')}
+
+══ YOUR TASK ══
+The coordinator just answered your question. Use their input to improve the text.
+Write a revised version of the field text that incorporates their answer.
+If you still need more information, add ONE follow-up question.
+
+FORMAT YOUR RESPONSE EXACTLY AS:
+
+REVISED_TEXT:
+[the complete revised text for the field]
+
+FOLLOW_UP:
+[one follow-up question, or NONE if no more questions needed]`;
+
+  const result = await callAI(system, `User says: ${userMessage}`, 'generate');
+
+  // Parse
+  let revisedText = '', followUp = null;
+  const revMatch = result.match(/REVISED_TEXT:\s*\n([\s\S]*?)(?=\nFOLLOW_UP:)/i);
+  const fuMatch = result.match(/FOLLOW_UP:\s*\n([\s\S]*)/i);
+  if (revMatch) revisedText = revMatch[1].trim();
+  else revisedText = result.split('FOLLOW_UP:')[0].replace(/^REVISED_TEXT:\s*/i, '').trim();
+  if (fuMatch) {
+    const fuText = fuMatch[1].trim();
+    followUp = (fuText.toLowerCase() === 'none' || !fuText) ? null : fuText;
+  }
+
+  // Save turns
+  const nextOrder = history.length ? Math.max(...history.map(h => h.turn_order)) + 1 : 1;
+  await db.execute(
+    'INSERT INTO prep_field_chats (id, project_id, field_key, role, content, turn_order) VALUES (?, ?, ?, ?, ?, ?)',
+    [genUUID(), projectId, fieldKey, 'user', userMessage, nextOrder]
+  );
+  const assistantContent = JSON.stringify({ revised_text: revisedText, follow_up: followUp });
+  await db.execute(
+    'INSERT INTO prep_field_chats (id, project_id, field_key, role, content, turn_order) VALUES (?, ?, ?, ?, ?, ?)',
+    [genUUID(), projectId, fieldKey, 'assistant', assistantContent, nextOrder + 1]
+  );
+
+  // Update field value
+  if (revisedText) {
+    await db.execute('UPDATE intake_contexts SET ' + fieldKey + ' = ? WHERE project_id = ?', [revisedText, projectId]);
+  }
+
+  return { revised_text: revisedText, follow_up: followUp, turn_count: nextOrder + 2 };
+}
+
+async function getFieldChatHistory(projectId, fieldKey) {
+  const [rows] = await db.execute(
+    'SELECT role, content, turn_order, created_at FROM prep_field_chats WHERE project_id = ? AND field_key = ? ORDER BY turn_order',
+    [projectId, fieldKey]
+  );
+  return rows;
 }
 
 // ── Tab 4: Actividades ──
@@ -1244,9 +1588,20 @@ module.exports = {
   linkPartnerOrg,
   generatePifVariant,
   selectPifVariant,
+  savePartnerCustomText,
+  toggleEuProject,
+  saveStaffCustomSkills,
+  toggleStaffSelected,
+  setStaffProjectRole,
+  addExtraStaff,
+  updateExtraStaff,
+  removeExtraStaff,
   getPrepPresupuesto,
   getPrepRelevancia,
   updatePrepRelevanciaContext,
+  generateRelevanciaFieldDraft,
+  chatRelevanciaField,
+  getFieldChatHistory,
   getPrepActividades,
   updateWpSummary,
   updateActivityDescription,

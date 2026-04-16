@@ -592,8 +592,19 @@ const Calculator = (() => {
 
   function renderRates(container) {
     container.innerHTML = `
-      <h2 class="font-headline text-lg font-bold mb-1">Rates, Costs & Routes</h2>
-      <p class="text-sm text-on-surface-variant mb-5">Per diem, staff costs and travel distances per partner. Auto-filled from Erasmus+ reference rates — editable.</p>
+      <h2 class="font-headline text-lg font-bold mb-1">Routes, Costs & Rates</h2>
+      <p class="text-sm text-on-surface-variant mb-5">Define travel routes and distances between partners. Per diem and staff rates are auto-filled from Erasmus+ tables.</p>
+
+      ${buildRoutesSection()}
+
+      <!-- Note: European reference rates -->
+      <div class="flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-xl p-4 mb-4">
+        <span class="material-symbols-outlined text-amber-600 text-xl mt-0.5">info</span>
+        <div>
+          <p class="text-sm font-semibold text-amber-900 mb-1">European reference rates</p>
+          <p class="text-xs text-amber-800">The following amounts (Per Diem and Worker Rates) are pre-configured based on standard Erasmus+ rates for each country group. You should keep these values unless you have a specific reason to change them.</p>
+        </div>
+      </div>
 
       <!-- Per diem -->
       <div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-5 mb-4">
@@ -643,8 +654,6 @@ const Calculator = (() => {
         </h3>
         <div id="calc-worker-rates">${buildWorkerRatesHTML()}</div>
       </div>
-
-      ${buildRoutesSection()}
 
       ${_embeddedMode ? embeddedNavButtons(0, 2, 'Work Packages \u2192') : navButtons(null, 1, 'Work Packages \u2192')}
     `;
@@ -1553,7 +1562,7 @@ const Calculator = (() => {
     const { totalProject } = getFinancials();
     const direct = state.wps.reduce((s, wp) => s + wp.activities.reduce((ss, a) => ss + calcActivity(a).total, 0), 0);
     const { total } = applyIndirectCosts(direct);
-    const diff = totalProject - total;
+    const diff = Math.round(totalProject - total);
     const usePct = totalProject > 0 ? Math.min(total / totalProject * 100, 100).toFixed(1) : 0;
 
     const elTotal = $('calc-live-total');
@@ -1592,14 +1601,13 @@ const Calculator = (() => {
       <!-- Hero: Progress toward target -->
       ${(() => {
         const pct = totalProject > 0 ? Math.min(subtotal / totalProject * 100, 100) : 0;
-        const gap = totalProject - subtotal;
+        const gap = Math.round(totalProject - subtotal);
         const isOver = gap < 0;
-        const isClose = !isOver && pct >= 90;
         const targetDirect = totalProject / (1 + indirectPct / 100);
         const targetIndirect = totalProject - targetDirect;
         const targetOwnFunds = totalProject - Math.min(totalProject * cofinPct / 100, euGrant);
-        const barColor = isOver ? 'bg-red-500' : isClose ? 'bg-green-500' : 'bg-amber-500';
-        const borderColor = isOver ? 'border-red-200' : isClose ? 'border-green-200' : 'border-amber-200';
+        const barColor = isOver ? 'bg-red-500' : 'bg-green-500';
+        const borderColor = isOver ? 'border-red-200' : 'border-green-200';
         return `
       <div class="rounded-xl border ${borderColor} overflow-hidden mb-5">
         <!-- Progress bar -->
@@ -1619,8 +1627,8 @@ const Calculator = (() => {
           </div>
           <div class="flex justify-between mt-2 text-xs">
             <span class="opacity-70">${pct.toFixed(1)}% del target</span>
-            <span class="font-bold ${isOver ? 'text-red-300' : isClose ? 'text-green-300' : 'text-amber-300'}">
-              ${isOver ? 'Excede en ' + euros(Math.abs(gap)) : 'Faltan ' + euros(gap)}
+            <span class="font-bold ${isOver ? 'text-red-300' : 'text-green-300'}">
+              ${isOver ? 'Excede en ' + euros(Math.abs(gap)) : gap === 0 ? 'Ajustado' : 'Faltan ' + euros(gap)}
             </span>
           </div>
         </div>
@@ -2695,7 +2703,7 @@ const Calculator = (() => {
   function switchResTab(name) {
     document.querySelectorAll('.calc-res-tab').forEach(t => t.classList.remove('active'));
     ['summary','wp','partner'].forEach(n => { const el = $('calc-res-'+n); if (el) el.style.display = 'none'; });
-    document.querySelector(`.calc-res-tab:nth-child(${name==='summary'?1:name==='wp'?2:3})`).classList.add('active');
+    document.querySelector(`.calc-res-tab:nth-child(${name==='partner'?1:name==='wp'?2:3})`).classList.add('active');
     const el = $('calc-res-'+name);
     if (el) el.style.display = 'block';
   }

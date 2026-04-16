@@ -304,6 +304,7 @@ const Intake = (() => {
       const fullnameEl = document.getElementById('intake-f-fullname');
       if (fullnameEl) fullnameEl.value = project.full_name || '';
       document.getElementById('intake-f-desc').value = project.description || '';
+      setTimeout(autoResizeDesc, 50);
       document.getElementById('intake-f-start').value = toDateStr(project.start_date);
       document.getElementById('intake-f-type').value = project.type || '';
 
@@ -515,7 +516,7 @@ const Intake = (() => {
     }
 
     // If going to summary, build it with budget data + launch stats
-    if (cfg.key === 'resumen') { renderLaunchStep(); }
+    if (cfg.key === 'resumen') { renderLaunchStep(); setTimeout(autoResizeDesc, 60); }
 
     // Update nav dots
     for (let i = 0; i < STEPS.length; i++) {

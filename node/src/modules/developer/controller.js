@@ -161,6 +161,70 @@ exports.selectPifVariant = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
+// PUT /v1/developer/projects/:projectId/prep/consorcio/:partnerId/custom-text
+exports.savePartnerCustomText = async (req, res, next) => {
+  try {
+    await model.savePartnerCustomText(req.params.projectId, req.params.partnerId, req.body.custom_text);
+    res.json({ ok: true });
+  } catch (err) { next(err); }
+};
+
+// PUT /v1/developer/projects/:projectId/prep/consorcio/:partnerId/toggle-eu-project
+exports.toggleEuProject = async (req, res, next) => {
+  try {
+    await model.toggleEuProject(req.params.projectId, req.params.partnerId, req.body.eu_project_id, req.body.selected);
+    res.json({ ok: true });
+  } catch (err) { next(err); }
+};
+
+// PUT /v1/developer/projects/:projectId/prep/consorcio/:partnerId/staff-skills
+exports.saveStaffCustomSkills = async (req, res, next) => {
+  try {
+    await model.saveStaffCustomSkills(req.params.projectId, req.params.partnerId, req.body.staff_id, req.body.custom_skills);
+    res.json({ ok: true });
+  } catch (err) { next(err); }
+};
+
+// PUT /v1/developer/projects/:projectId/prep/consorcio/:partnerId/toggle-staff
+exports.toggleStaffSelected = async (req, res, next) => {
+  try {
+    await model.toggleStaffSelected(req.params.projectId, req.params.partnerId, req.body.staff_id, req.body.selected);
+    res.json({ ok: true });
+  } catch (err) { next(err); }
+};
+
+// PUT /v1/developer/projects/:projectId/prep/consorcio/:partnerId/staff-role
+exports.setStaffProjectRole = async (req, res, next) => {
+  try {
+    await model.setStaffProjectRole(req.params.projectId, req.params.partnerId, req.body.staff_id, req.body.project_role);
+    res.json({ ok: true });
+  } catch (err) { next(err); }
+};
+
+// POST /v1/developer/projects/:projectId/prep/consorcio/:partnerId/extra-staff
+exports.addExtraStaff = async (req, res, next) => {
+  try {
+    const result = await model.addExtraStaff(req.params.projectId, req.params.partnerId);
+    res.json({ ok: true, data: result });
+  } catch (err) { next(err); }
+};
+
+// PUT /v1/developer/projects/:projectId/prep/consorcio/:partnerId/extra-staff/:staffId
+exports.updateExtraStaff = async (req, res, next) => {
+  try {
+    await model.updateExtraStaff(req.params.projectId, req.params.partnerId, req.params.staffId, req.body.field, req.body.value);
+    res.json({ ok: true });
+  } catch (err) { next(err); }
+};
+
+// DELETE /v1/developer/projects/:projectId/prep/consorcio/:partnerId/extra-staff/:staffId
+exports.removeExtraStaff = async (req, res, next) => {
+  try {
+    await model.removeExtraStaff(req.params.projectId, req.params.partnerId, req.params.staffId);
+    res.json({ ok: true });
+  } catch (err) { next(err); }
+};
+
 // GET /v1/developer/projects/:projectId/prep/presupuesto
 exports.getPrepPresupuesto = async (req, res, next) => {
   try {
@@ -183,6 +247,33 @@ exports.updatePrepRelevanciaContext = async (req, res, next) => {
     const { problem, target_groups, approach } = req.body;
     await model.updatePrepRelevanciaContext(req.params.projectId, problem, target_groups, approach);
     res.json({ ok: true, data: { saved: true } });
+  } catch (err) { next(err); }
+};
+
+// POST /v1/developer/projects/:projectId/prep/relevancia/generate-draft
+exports.generateRelevanciaFieldDraft = async (req, res, next) => {
+  try {
+    const { field_key } = req.body;
+    if (!['problem', 'target_groups', 'approach'].includes(field_key)) {
+      return res.status(400).json({ ok: false, error: 'Invalid field_key' });
+    }
+    const data = await model.generateRelevanciaFieldDraft(req.params.projectId, req.user.id, field_key);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+// POST /v1/developer/projects/:projectId/prep/relevancia/chat
+exports.chatRelevanciaField = async (req, res, next) => {
+  try {
+    const { field_key, message } = req.body;
+    if (!['problem', 'target_groups', 'approach'].includes(field_key)) {
+      return res.status(400).json({ ok: false, error: 'Invalid field_key' });
+    }
+    if (!message || !message.trim()) {
+      return res.status(400).json({ ok: false, error: 'Message required' });
+    }
+    const data = await model.chatRelevanciaField(req.params.projectId, req.user.id, field_key, message.trim());
+    res.json({ ok: true, data });
   } catch (err) { next(err); }
 };
 
