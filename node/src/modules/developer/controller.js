@@ -255,11 +255,14 @@ exports.generateRelevanciaFieldDraft = async (req, res, next) => {
   try {
     const { field_key } = req.body;
     if (!['problem', 'target_groups', 'approach'].includes(field_key)) {
-      return res.status(400).json({ ok: false, error: 'Invalid field_key' });
+      return res.status(400).json({ ok: false, error: { code: 'BAD_REQUEST', message: 'Invalid field_key: ' + field_key } });
     }
     const data = await model.generateRelevanciaFieldDraft(req.params.projectId, req.user.id, field_key);
     res.json({ ok: true, data });
-  } catch (err) { next(err); }
+  } catch (err) {
+    console.error('[generateRelevanciaFieldDraft] ERROR:', err?.message || err, err?.stack);
+    next(err);
+  }
 };
 
 // POST /v1/developer/projects/:projectId/prep/relevancia/chat
@@ -267,14 +270,17 @@ exports.chatRelevanciaField = async (req, res, next) => {
   try {
     const { field_key, message } = req.body;
     if (!['problem', 'target_groups', 'approach'].includes(field_key)) {
-      return res.status(400).json({ ok: false, error: 'Invalid field_key' });
+      return res.status(400).json({ ok: false, error: { code: 'BAD_REQUEST', message: 'Invalid field_key: ' + field_key } });
     }
     if (!message || !message.trim()) {
-      return res.status(400).json({ ok: false, error: 'Message required' });
+      return res.status(400).json({ ok: false, error: { code: 'BAD_REQUEST', message: 'Message required' } });
     }
     const data = await model.chatRelevanciaField(req.params.projectId, req.user.id, field_key, message.trim());
     res.json({ ok: true, data });
-  } catch (err) { next(err); }
+  } catch (err) {
+    console.error('[chatRelevanciaField] ERROR:', err?.message || err, err?.stack);
+    next(err);
+  }
 };
 
 // GET /v1/developer/projects/:projectId/prep/actividades
@@ -299,6 +305,48 @@ exports.updateActivityDescription = async (req, res, next) => {
     await model.updateActivityDescription(req.params.activityId, req.body.description || '');
     res.json({ ok: true, data: { saved: true } });
   } catch (err) { next(err); }
+};
+
+// POST /v1/developer/projects/:projectId/prep/wp/:wpId/generate-summary
+exports.generateWpSummaryDraft = async (req, res, next) => {
+  try {
+    const data = await model.generateWpSummaryDraft(req.params.projectId, req.params.wpId);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+// POST /v1/developer/projects/:projectId/prep/wp/:wpId/improve-summary
+exports.improveWpSummary = async (req, res, next) => {
+  try {
+    const { message } = req.body || {};
+    if (!message || !message.trim()) return res.status(400).json({ ok: false, error: { code: 'BAD_REQUEST', message: 'message required' } });
+    const data = await model.improveWpSummary(req.params.projectId, req.params.wpId, message.trim());
+    res.json({ ok: true, data });
+  } catch (err) {
+    console.error('[improveWpSummary] ERROR:', err?.message || err, err?.stack);
+    next(err);
+  }
+};
+
+// POST /v1/developer/projects/:projectId/prep/activity/:activityId/generate-description
+exports.generateActivityDescriptionDraft = async (req, res, next) => {
+  try {
+    const data = await model.generateActivityDescriptionDraft(req.params.projectId, req.params.activityId);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+// POST /v1/developer/projects/:projectId/prep/activity/:activityId/improve-description
+exports.improveActivityDescription = async (req, res, next) => {
+  try {
+    const { message } = req.body || {};
+    if (!message || !message.trim()) return res.status(400).json({ ok: false, error: { code: 'BAD_REQUEST', message: 'message required' } });
+    const data = await model.improveActivityDescription(req.params.projectId, req.params.activityId, message.trim());
+    res.json({ ok: true, data });
+  } catch (err) {
+    console.error('[improveActivityDescription] ERROR:', err?.message || err, err?.stack);
+    next(err);
+  }
 };
 
 // POST /v1/developer/instances/:id/generate

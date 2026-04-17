@@ -59,5 +59,9 @@ router.post('/projects/:projectId/prep/relevancia/chat', requireAuth, ctrl.chatR
 router.get('/projects/:projectId/prep/actividades', requireAuth, ctrl.getPrepActividades);
 router.put('/wp/:wpId/summary', requireAuth, ctrl.updateWpSummary);
 router.put('/activity/:activityId/description', requireAuth, ctrl.updateActivityDescription);
+router.post('/projects/:projectId/prep/wp/:wpId/generate-summary', requireAuth, ctrl.generateWpSummaryDraft);
+router.post('/projects/:projectId/prep/wp/:wpId/improve-summary', requireAuth, ctrl.improveWpSummary);
+router.post('/projects/:projectId/prep/activity/:activityId/generate-description', requireAuth, ctrl.generateActivityDescriptionDraft);
+router.post('/projects/:projectId/prep/activity/:activityId/improve-description', requireAuth, ctrl.improveActivityDescription);
 
 module.exports = router;

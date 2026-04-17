@@ -116,6 +116,8 @@ const Developer = (() => {
       contextData = ctx;
       currentProject = ctx.project;
       currentInstance = instance;
+      window.__projectNA = currentProject?.national_agency || null;
+      window.__projectLang = currentProject?.proposal_lang || null;
 
       // Parse template
       if (instance.template_json) {
@@ -659,24 +661,35 @@ const Developer = (() => {
           <div class="flex items-center gap-2">
             ${!hasDraft ? `<button onclick="Developer._genFieldDraft('${fieldKey}')" class="prep-gen-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold bg-primary/10 text-primary hover:bg-primary/20 transition-colors" id="prep-gen-${fieldKey}">
               <span class="material-symbols-outlined text-sm">auto_awesome</span> Generar borrador IA
-            </button>` : `<button onclick="Developer._toggleFieldChat('${fieldKey}')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
-              <span class="material-symbols-outlined text-sm">chat</span> Refinar con IA
+            </button>` : `<button onclick="Developer._startImprove('${fieldKey}')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold bg-primary/10 text-primary hover:bg-primary/20 transition-colors" id="prep-improve-${fieldKey}">
+              <span class="material-symbols-outlined text-sm">psychology</span> Mejorar propuesta
             </button>`}
           </div>
         </div>
-        <textarea id="${cfg.id}" class="w-full px-3 py-2 text-sm bg-surface-container-lowest border border-outline-variant/20 rounded-lg resize-vertical focus:outline-none focus:ring-2 focus:ring-primary/15" style="min-height:${cfg.minH}" placeholder="${cfg.placeholder}">${esc(value || '')}</textarea>
+        <textarea id="${cfg.id}" class="w-full px-3 py-2 text-sm bg-surface-container-lowest border border-outline-variant/20 rounded-lg resize-none overflow-hidden focus:outline-none focus:ring-2 focus:ring-primary/15" style="min-height:${cfg.minH}" placeholder="${cfg.placeholder}" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'">${esc(value || '')}</textarea>
 
         <!-- Inline chat (hidden by default) -->
         <div id="prep-chat-${fieldKey}" class="hidden mt-3 border-t border-outline-variant/10 pt-3">
-          <div id="prep-chat-msgs-${fieldKey}" class="space-y-2 max-h-[300px] overflow-y-auto mb-3"></div>
-          <div class="flex gap-2">
-            <input id="prep-chat-input-${fieldKey}" class="flex-1 px-3 py-2 text-xs bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/15" placeholder="Tu respuesta..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();Developer._sendFieldChat('${fieldKey}')}">
-            <button onclick="Developer._sendFieldChat('${fieldKey}')" class="px-4 py-2 rounded-lg text-xs font-bold bg-primary text-white hover:bg-primary/90 transition-colors">
-              <span class="material-symbols-outlined text-sm">send</span>
-            </button>
+          <div id="prep-chat-msgs-${fieldKey}" class="space-y-2 mb-3"></div>
+          <div id="prep-chat-input-area-${fieldKey}">
+            <div class="flex gap-2 items-stretch">
+              <div class="flex-1">
+                <input id="prep-chat-input-${fieldKey}" class="w-full px-3 py-2 text-xs bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/15" placeholder="Tu aporte (o escribe 'nada' para reescribir igualmente)..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();Developer._sendFieldChat('${fieldKey}')}">
+              </div>
+              <button onclick="Developer._sendFieldChat('${fieldKey}')" class="px-4 py-2 rounded-lg text-xs font-bold bg-primary text-white hover:bg-primary/90 transition-colors">
+                <span class="material-symbols-outlined text-sm">send</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>`;
+  }
+
+  function autoResizeField(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = el.scrollHeight + 'px';
   }
 
   function renderFieldChatBubble(fieldKey, role, text) {
@@ -713,9 +726,6 @@ const Developer = (() => {
     const btn = document.getElementById('prep-gen-' + fieldKey);
     if (btn) { btn.disabled = true; btn.innerHTML = '<span class="material-symbols-outlined text-sm animate-spin">progress_activity</span> Generando...'; }
 
-    // Show chat panel with typing
-    const chatPanel = document.getElementById('prep-chat-' + fieldKey);
-    if (chatPanel) chatPanel.classList.remove('hidden');
     showFieldTyping(fieldKey);
 
     try {
@@ -728,19 +738,13 @@ const Developer = (() => {
       if (ta && !ta.value.trim() && data.draft) {
         ta.value = data.draft;
         ta.dispatchEvent(new Event('input', { bubbles: true }));
+        setTimeout(() => autoResizeField(FIELD_CFG[fieldKey].id), 50);
       }
 
-      // Show AI message with draft summary + questions
-      let msg = 'He generado un borrador basado en los documentos del proyecto.';
-      if (data.questions && data.questions.length) {
-        msg += '\n\nPara mejorar el texto, responde a estas preguntas:\n\n' + data.questions.map((q, i) => (i + 1) + '. ' + q).join('\n');
-      }
-      renderFieldChatBubble(fieldKey, 'assistant', msg);
-
-      // Replace "Generate" button with "Refine" button
+      // Replace "Generate" button with "Improve" button
       if (btn) {
-        btn.outerHTML = `<button onclick="Developer._toggleFieldChat('${fieldKey}')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
-          <span class="material-symbols-outlined text-sm">chat</span> Refinar con IA
+        btn.outerHTML = `<button onclick="Developer._startImprove('${fieldKey}')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold bg-primary/10 text-primary hover:bg-primary/20 transition-colors" id="prep-improve-${fieldKey}">
+          <span class="material-symbols-outlined text-sm">psychology</span> Mejorar propuesta
         </button>`;
       }
 
@@ -749,6 +753,27 @@ const Developer = (() => {
       removeFieldTyping(fieldKey);
       if (btn) { btn.disabled = false; btn.innerHTML = '<span class="material-symbols-outlined text-sm">auto_awesome</span> Generar borrador IA'; }
       Toast.show('Error generando borrador: ' + e.message, 'err');
+    }
+  }
+
+  async function startImprove(fieldKey) {
+    const chatPanel = document.getElementById('prep-chat-' + fieldKey);
+    if (chatPanel) chatPanel.classList.remove('hidden');
+
+    showFieldTyping(fieldKey);
+    try {
+      const res = await API.post('/developer/projects/' + currentProject.id + '/prep/relevancia/chat', {
+        field_key: fieldKey,
+        message: '__START_IMPROVE__'
+      });
+      removeFieldTyping(fieldKey);
+      const data = res.data || res;
+      if (data.follow_up) {
+        renderFieldChatBubble(fieldKey, 'assistant', data.follow_up);
+      }
+    } catch (e) {
+      removeFieldTyping(fieldKey);
+      renderFieldChatBubble(fieldKey, 'assistant', 'Error: ' + e.message);
     }
   }
 
@@ -767,31 +792,55 @@ const Developer = (() => {
       removeFieldTyping(fieldKey);
       const data = res.data || res;
 
-      // Update textarea with revised text
+      // Backend returned revised_text → conversation done, apply improvement
       if (data.revised_text) {
         const ta = document.getElementById(FIELD_CFG[fieldKey].id);
         if (ta) {
           ta.value = data.revised_text;
           ta.dispatchEvent(new Event('input', { bubbles: true }));
-          ta.classList.add('ring-2', 'ring-primary/30');
-          setTimeout(() => ta.classList.remove('ring-2', 'ring-primary/30'), 1500);
+          setTimeout(() => autoResizeField(FIELD_CFG[fieldKey].id), 50);
+          ta.classList.add('ring-2', 'ring-green-400/40');
+          setTimeout(() => ta.classList.remove('ring-2', 'ring-green-400/40'), 2000);
         }
+        renderFieldChatBubble(fieldKey, 'assistant', 'He mejorado el texto con tus aportaciones. Puedes seguir editandolo directamente.');
+        const inputArea = document.getElementById('prep-chat-input-area-' + fieldKey);
+        if (inputArea) inputArea.innerHTML = `<p class="text-xs text-green-600 font-semibold text-center py-2"><span class="material-symbols-outlined text-sm align-middle">check_circle</span> Mejora completada</p>`;
+        const improveBtn = document.getElementById('prep-improve-' + fieldKey);
+        if (improveBtn) {
+          improveBtn.innerHTML = '<span class="material-symbols-outlined text-sm">psychology</span> Mejorar de nuevo';
+          improveBtn.onclick = () => { resetFieldChat(fieldKey); Developer._startImprove(fieldKey); };
+        }
+        Toast.show('Texto mejorado', 'ok');
       }
-
-      // Show AI response
-      let response = 'He actualizado el texto con tu aportacion.';
-      if (data.follow_up) response += '\n\n' + data.follow_up;
-      renderFieldChatBubble(fieldKey, 'assistant', response);
-
-      // Disable input if too many turns
-      if (data.turn_count >= 10) {
-        input.disabled = true;
-        input.placeholder = 'Limite de chat alcanzado. Edita el texto directamente.';
+      // Backend returned follow_up → conversation continues
+      else if (data.follow_up) {
+        renderFieldChatBubble(fieldKey, 'assistant', data.follow_up);
       }
     } catch (e) {
       removeFieldTyping(fieldKey);
       renderFieldChatBubble(fieldKey, 'assistant', 'Error: ' + e.message);
     }
+  }
+
+  function resetFieldChat(fieldKey, sendHandler) {
+    const handler = sendHandler || `Developer._sendFieldChat('${fieldKey}')`;
+    const msgs = document.getElementById('prep-chat-msgs-' + fieldKey);
+    if (msgs) msgs.innerHTML = '';
+    const inputArea = document.getElementById('prep-chat-input-area-' + fieldKey);
+    if (inputArea) inputArea.innerHTML = `
+      <div class="flex gap-2 items-stretch">
+        <div class="flex-1">
+          <input id="prep-chat-input-${fieldKey}" class="w-full px-3 py-2 text-xs bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/15" placeholder="Tu aporte (o escribe 'nada' para reescribir igualmente)..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();${handler}}">
+        </div>
+        <button onclick="${handler}" class="px-4 py-2 rounded-lg text-xs font-bold bg-primary text-white hover:bg-primary/90 transition-colors">
+          <span class="material-symbols-outlined text-sm">send</span>
+        </button>
+      </div>`;
+    // Re-attach voice input
+    setTimeout(() => {
+      const inp = document.getElementById('prep-chat-input-' + fieldKey);
+      if (inp && typeof VoiceInput !== 'undefined') VoiceInput.attach(inp);
+    }, 50);
   }
 
   function toggleFieldChat(fieldKey) {
@@ -858,39 +907,26 @@ const Developer = (() => {
         ${buildFieldHTML('target_groups', ctx.target_groups, chatStatus)}
         ${buildFieldHTML('approach', ctx.approach, chatStatus)}
 
-        <!-- Interview questions (relevancia) -->
-        ${relInterview.length ? `
-        <div class="bg-white rounded-2xl border border-outline-variant/20 p-5">
-          <h4 class="font-headline text-sm font-bold text-primary mb-1 flex items-center gap-2">
-            <span class="material-symbols-outlined text-lg">chat</span> Preguntas del coordinador
-          </h4>
-          <div class="space-y-3" id="prep-interview-list">
-            ${relInterview.map((q, i) => `
-              <div class="border border-outline-variant/20 rounded-xl p-3">
-                <div class="flex items-start gap-2 mb-1.5">
-                  <span class="w-5 h-5 rounded-full ${q.answer_text ? 'bg-green-100 text-green-600' : 'bg-amber-100 text-amber-600'} text-[9px] font-bold flex items-center justify-center shrink-0">${i + 1}</span>
-                  <p class="text-xs font-medium text-on-surface">${esc(q.question_text)}</p>
-                </div>
-                <textarea class="w-full px-3 py-2 text-xs bg-surface-container-lowest border border-outline-variant/20 rounded-lg resize-vertical focus:outline-none focus:ring-2 focus:ring-primary/15 min-h-[50px]"
-                  placeholder="Tu respuesta..." data-key="${esc(q.question_key)}"
-                  onfocus="this.style.minHeight='100px'">${esc(q.answer_text || '')}</textarea>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-        ` : interview.length === 0 ? `
-        <div class="bg-white rounded-2xl border border-outline-variant/20 p-5 text-center">
-          <button onclick="Developer._genInterview()" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold bg-[#1b1464] text-[#e7eb00] hover:bg-[#1b1464]/90 transition-colors" id="prep-gen-interview-btn">
-            <span class="material-symbols-outlined text-lg">auto_awesome</span> Generar preguntas de entrevista
-          </button>
-          <p class="text-xs text-on-surface-variant mt-2">La IA generara preguntas especificas sobre tu proyecto, distribuidas en cada pestana.</p>
-        </div>` : ''}
       </div>`;
 
     // Bind events
     document.getElementById('prep-doc-upload')?.addEventListener('change', handleDocUpload);
     bindInterviewAutosave();
     bindRelContextAutosave();
+
+    // Auto-resize textareas to fit existing content + attach voice input
+    setTimeout(() => {
+      ['prep-rel-problem', 'prep-rel-targets', 'prep-rel-approach'].forEach(id => {
+        autoResizeField(id);
+        const el = document.getElementById(id);
+        if (el && typeof VoiceInput !== 'undefined') VoiceInput.attach(el);
+      });
+      // Attach voice to chat inputs
+      ['problem', 'target_groups', 'approach'].forEach(fk => {
+        const inp = document.getElementById('prep-chat-input-' + fk);
+        if (inp && typeof VoiceInput !== 'undefined') VoiceInput.attach(inp);
+      });
+    }, 50);
   }
 
   function bindRelContextAutosave() {
@@ -899,6 +935,7 @@ const Developer = (() => {
       if (!ta) return;
       let timer;
       ta.addEventListener('input', () => {
+        autoResizeField(id);
         clearTimeout(timer);
         timer = setTimeout(() => saveRelContext(), 2000);
       });
@@ -931,7 +968,10 @@ const Developer = (() => {
           </div>
         </div>
 
-        ${wps.length ? wps.map(wp => `
+        ${wps.length ? wps.map(wp => {
+          const wpKey = 'wpsum_' + wp.id;
+          const wpHasDraft = !!(wp.summary && wp.summary.trim());
+          return `
           <details class="bg-white rounded-2xl border border-outline-variant/20" open>
             <summary class="p-5 cursor-pointer">
               <div class="inline-flex items-center gap-3">
@@ -945,21 +985,58 @@ const Developer = (() => {
             <div class="px-5 pb-5 space-y-3">
               <!-- WP Summary -->
               <div class="bg-primary/5 rounded-xl p-3 border border-primary/10">
-                <label class="text-[10px] font-bold text-primary uppercase tracking-wider block mb-1">Resumen del WP</label>
-                <textarea class="prep-wp-summary w-full px-3 py-2 text-xs bg-white border border-outline-variant/20 rounded-lg resize-vertical focus:outline-none focus:ring-2 focus:ring-primary/15 min-h-[60px]"
-                  data-wp-id="${wp.id}" placeholder="Describe brevemente el objetivo y enfoque de este Work Package...">${esc(wp.summary || '')}</textarea>
+                <div class="flex items-center justify-between mb-1">
+                  <label class="text-[10px] font-bold text-primary uppercase tracking-wider">Resumen del WP</label>
+                  <button id="prep-wpbtn-${wp.id}" onclick="Developer.${wpHasDraft ? '_improveWpSummary' : '_genWpSummary'}('${wp.id}')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-[11px] font-bold bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+                    <span class="material-symbols-outlined text-sm">${wpHasDraft ? 'psychology' : 'auto_awesome'}</span> ${wpHasDraft ? 'Mejorar propuesta' : 'Generar borrador IA'}
+                  </button>
+                </div>
+                <textarea id="prep-wp-ta-${wp.id}" class="prep-wp-summary w-full px-3 py-2 text-xs bg-white border border-outline-variant/20 rounded-lg resize-none overflow-hidden focus:outline-none focus:ring-2 focus:ring-primary/15 min-h-[60px]"
+                  data-wp-id="${wp.id}" placeholder="Describe brevemente el objetivo y enfoque de este Work Package..." oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'">${esc(wp.summary || '')}</textarea>
+                <div id="prep-chat-${wpKey}" class="hidden mt-3 border-t border-primary/10 pt-3">
+                  <div id="prep-chat-msgs-${wpKey}" class="space-y-2 mb-3"></div>
+                  <div id="prep-chat-input-area-${wpKey}">
+                    <div class="flex gap-2 items-stretch">
+                      <div class="flex-1">
+                        <input id="prep-chat-input-${wpKey}" class="w-full px-3 py-2 text-xs bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/15" placeholder="Tu aporte (o escribe 'nada' para reescribir igualmente)..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();Developer._sendWpSummaryChat('${wp.id}')}">
+                      </div>
+                      <button onclick="Developer._sendWpSummaryChat('${wp.id}')" class="px-4 py-2 rounded-lg text-xs font-bold bg-primary text-white hover:bg-primary/90 transition-colors">
+                        <span class="material-symbols-outlined text-sm">send</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <!-- Activities -->
-              ${(wp.activities || []).map(act => `
+              ${(wp.activities || []).map(act => {
+                const actKey = 'actdesc_' + act.id;
+                const actHasDraft = !!(act.description && act.description.trim());
+                return `
                 <div class="bg-surface-container-lowest rounded-xl p-3 border border-outline-variant/10">
                   <div class="flex items-center gap-2 mb-2">
                     <span class="text-xs font-bold text-primary">${esc(act.label || act.type)}</span>
                     ${act.subtype ? `<span class="text-[10px] text-on-surface-variant bg-surface-container-low px-1.5 py-0.5 rounded">${esc(act.subtype)}</span>` : ''}
-                    ${act.date_start ? `<span class="text-[10px] text-on-surface-variant ml-auto">${fmtDate(act.date_start)} - ${fmtDate(act.date_end)}</span>` : ''}
+                    ${act.date_start ? `<span class="text-[10px] text-on-surface-variant">${fmtDate(act.date_start)} - ${fmtDate(act.date_end)}</span>` : ''}
+                    <button id="prep-actbtn-${act.id}" onclick="Developer.${actHasDraft ? '_improveActivityDesc' : '_genActivityDesc'}('${act.id}')" class="ml-auto inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-[11px] font-bold bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+                      <span class="material-symbols-outlined text-sm">${actHasDraft ? 'psychology' : 'auto_awesome'}</span> ${actHasDraft ? 'Mejorar propuesta' : 'Generar borrador IA'}
+                    </button>
                   </div>
-                  <textarea class="prep-act-desc w-full px-3 py-2 text-xs bg-white border border-outline-variant/20 rounded-lg resize-vertical focus:outline-none focus:ring-2 focus:ring-primary/15 min-h-[50px]"
-                    data-act-id="${act.id}" placeholder="Describe esta actividad: objetivos, metodologia, resultados esperados...">${esc(act.description || '')}</textarea>
+                  <textarea id="prep-act-ta-${act.id}" class="prep-act-desc w-full px-3 py-2 text-xs bg-white border border-outline-variant/20 rounded-lg resize-none overflow-hidden focus:outline-none focus:ring-2 focus:ring-primary/15 min-h-[50px]"
+                    data-act-id="${act.id}" placeholder="Describe esta actividad: objetivos, metodologia, resultados esperados..." oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'">${esc(act.description || '')}</textarea>
+                  <div id="prep-chat-${actKey}" class="hidden mt-3 border-t border-outline-variant/10 pt-3">
+                    <div id="prep-chat-msgs-${actKey}" class="space-y-2 mb-3"></div>
+                    <div id="prep-chat-input-area-${actKey}">
+                      <div class="flex gap-2 items-stretch">
+                        <div class="flex-1">
+                          <input id="prep-chat-input-${actKey}" class="w-full px-3 py-2 text-xs bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/15" placeholder="Tu aporte (o escribe 'nada' para reescribir igualmente)..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();Developer._sendActivityDescChat('${act.id}')}">
+                        </div>
+                        <button onclick="Developer._sendActivityDescChat('${act.id}')" class="px-4 py-2 rounded-lg text-xs font-bold bg-primary text-white hover:bg-primary/90 transition-colors">
+                          <span class="material-symbols-outlined text-sm">send</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                   ${(act.tasks || []).length ? `
                     <div class="mt-2 space-y-1">
                       ${act.tasks.map(t => `
@@ -971,11 +1048,11 @@ const Developer = (() => {
                       `).join('')}
                     </div>
                   ` : ''}
-                </div>
-              `).join('')}
+                </div>`;
+              }).join('')}
             </div>
-          </details>
-        `).join('') : `
+          </details>`;
+        }).join('') : `
           <div class="bg-amber-50 rounded-2xl border border-amber-200 p-8 text-center">
             <span class="material-symbols-outlined text-4xl text-amber-400 mb-2">task_alt</span>
             <h3 class="font-headline text-base font-bold text-amber-800 mb-1">Sin actividades</h3>
@@ -1009,6 +1086,175 @@ const Developer = (() => {
         }, 1500);
       });
     });
+
+    // Attach voice input to all chat inputs in this tab
+    setTimeout(() => {
+      el.querySelectorAll('input[id^="prep-chat-input-"]').forEach(inp => {
+        if (typeof VoiceInput !== 'undefined') VoiceInput.attach(inp);
+      });
+      el.querySelectorAll('.prep-wp-summary, .prep-act-desc').forEach(ta => {
+        ta.style.height = 'auto';
+        ta.style.height = ta.scrollHeight + 'px';
+      });
+    }, 50);
+  }
+
+  /* ── Activities AI flow ────────────────────────────────────────── */
+
+  async function genWpSummary(wpId) {
+    const btn = document.getElementById('prep-wpbtn-' + wpId);
+    if (btn) { btn.disabled = true; btn.innerHTML = '<span class="material-symbols-outlined text-sm animate-spin">progress_activity</span> Generando...'; }
+    try {
+      const res = await API.post('/developer/projects/' + currentProject.id + '/prep/wp/' + wpId + '/generate-summary', {});
+      const data = res.data || res;
+      const ta = document.getElementById('prep-wp-ta-' + wpId);
+      if (ta && data.summary) {
+        ta.value = data.summary;
+        ta.dispatchEvent(new Event('input', { bubbles: true }));
+        ta.classList.add('ring-2', 'ring-green-400/40');
+        setTimeout(() => ta.classList.remove('ring-2', 'ring-green-400/40'), 2000);
+      }
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = '<span class="material-symbols-outlined text-sm">psychology</span> Mejorar propuesta';
+        btn.setAttribute('onclick', `Developer._improveWpSummary('${wpId}')`);
+      }
+      Toast.show('Resumen generado', 'ok');
+    } catch (e) {
+      if (btn) { btn.disabled = false; btn.innerHTML = '<span class="material-symbols-outlined text-sm">auto_awesome</span> Generar borrador IA'; }
+      Toast.show('Error: ' + e.message, 'error');
+    }
+  }
+
+  async function improveWpSummary(wpId) {
+    const chatKey = 'wpsum_' + wpId;
+    const panel = document.getElementById('prep-chat-' + chatKey);
+    if (panel) panel.classList.remove('hidden');
+    resetFieldChat(chatKey, `Developer._sendWpSummaryChat('${wpId}')`);
+    showFieldTyping(chatKey);
+    try {
+      const res = await API.post('/developer/projects/' + currentProject.id + '/prep/wp/' + wpId + '/improve-summary', { message: '__START_IMPROVE__' });
+      removeFieldTyping(chatKey);
+      const data = res.data || res;
+      if (data.follow_up) renderFieldChatBubble(chatKey, 'assistant', data.follow_up);
+    } catch (e) {
+      removeFieldTyping(chatKey);
+      console.error('[chat error]', chatKey, e);
+      renderFieldChatBubble(chatKey, 'assistant', 'Error: ' + (e?.message || e?.code || JSON.stringify(e)));
+    }
+  }
+
+  async function sendWpSummaryChat(wpId) {
+    const chatKey = 'wpsum_' + wpId;
+    const input = document.getElementById('prep-chat-input-' + chatKey);
+    if (!input) return;
+    const msg = input.value.trim();
+    if (!msg) return;
+    input.value = '';
+    renderFieldChatBubble(chatKey, 'user', msg);
+    showFieldTyping(chatKey);
+    try {
+      const res = await API.post('/developer/projects/' + currentProject.id + '/prep/wp/' + wpId + '/improve-summary', { message: msg });
+      removeFieldTyping(chatKey);
+      const data = res.data || res;
+      if (data.revised_text) {
+        const ta = document.getElementById('prep-wp-ta-' + wpId);
+        if (ta) {
+          ta.value = data.revised_text;
+          ta.dispatchEvent(new Event('input', { bubbles: true }));
+          ta.classList.add('ring-2', 'ring-green-400/40');
+          setTimeout(() => ta.classList.remove('ring-2', 'ring-green-400/40'), 2000);
+        }
+        renderFieldChatBubble(chatKey, 'assistant', 'He mejorado el texto. Puedes seguir editandolo directamente.');
+        const inputArea = document.getElementById('prep-chat-input-area-' + chatKey);
+        if (inputArea) inputArea.innerHTML = `<p class="text-xs text-green-600 font-semibold text-center py-2"><span class="material-symbols-outlined text-sm align-middle">check_circle</span> Mejora completada</p>`;
+        Toast.show('Resumen mejorado', 'ok');
+      } else if (data.follow_up) {
+        renderFieldChatBubble(chatKey, 'assistant', data.follow_up);
+      }
+    } catch (e) {
+      removeFieldTyping(chatKey);
+      console.error('[chat error]', chatKey, e);
+      renderFieldChatBubble(chatKey, 'assistant', 'Error: ' + (e?.message || e?.code || JSON.stringify(e)));
+    }
+  }
+
+  async function genActivityDesc(actId) {
+    const btn = document.getElementById('prep-actbtn-' + actId);
+    if (btn) { btn.disabled = true; btn.innerHTML = '<span class="material-symbols-outlined text-sm animate-spin">progress_activity</span> Generando...'; }
+    try {
+      const res = await API.post('/developer/projects/' + currentProject.id + '/prep/activity/' + actId + '/generate-description', {});
+      const data = res.data || res;
+      const ta = document.getElementById('prep-act-ta-' + actId);
+      if (ta && data.description) {
+        ta.value = data.description;
+        ta.dispatchEvent(new Event('input', { bubbles: true }));
+        ta.classList.add('ring-2', 'ring-green-400/40');
+        setTimeout(() => ta.classList.remove('ring-2', 'ring-green-400/40'), 2000);
+      }
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = '<span class="material-symbols-outlined text-sm">psychology</span> Mejorar propuesta';
+        btn.setAttribute('onclick', `Developer._improveActivityDesc('${actId}')`);
+      }
+      Toast.show('Descripción generada', 'ok');
+    } catch (e) {
+      if (btn) { btn.disabled = false; btn.innerHTML = '<span class="material-symbols-outlined text-sm">auto_awesome</span> Generar borrador IA'; }
+      Toast.show('Error: ' + e.message, 'error');
+    }
+  }
+
+  async function improveActivityDesc(actId) {
+    const chatKey = 'actdesc_' + actId;
+    const panel = document.getElementById('prep-chat-' + chatKey);
+    if (panel) panel.classList.remove('hidden');
+    resetFieldChat(chatKey, `Developer._sendActivityDescChat('${actId}')`);
+    showFieldTyping(chatKey);
+    try {
+      const res = await API.post('/developer/projects/' + currentProject.id + '/prep/activity/' + actId + '/improve-description', { message: '__START_IMPROVE__' });
+      removeFieldTyping(chatKey);
+      const data = res.data || res;
+      if (data.follow_up) renderFieldChatBubble(chatKey, 'assistant', data.follow_up);
+    } catch (e) {
+      removeFieldTyping(chatKey);
+      console.error('[chat error]', chatKey, e);
+      renderFieldChatBubble(chatKey, 'assistant', 'Error: ' + (e?.message || e?.code || JSON.stringify(e)));
+    }
+  }
+
+  async function sendActivityDescChat(actId) {
+    const chatKey = 'actdesc_' + actId;
+    const input = document.getElementById('prep-chat-input-' + chatKey);
+    if (!input) return;
+    const msg = input.value.trim();
+    if (!msg) return;
+    input.value = '';
+    renderFieldChatBubble(chatKey, 'user', msg);
+    showFieldTyping(chatKey);
+    try {
+      const res = await API.post('/developer/projects/' + currentProject.id + '/prep/activity/' + actId + '/improve-description', { message: msg });
+      removeFieldTyping(chatKey);
+      const data = res.data || res;
+      if (data.revised_text) {
+        const ta = document.getElementById('prep-act-ta-' + actId);
+        if (ta) {
+          ta.value = data.revised_text;
+          ta.dispatchEvent(new Event('input', { bubbles: true }));
+          ta.classList.add('ring-2', 'ring-green-400/40');
+          setTimeout(() => ta.classList.remove('ring-2', 'ring-green-400/40'), 2000);
+        }
+        renderFieldChatBubble(chatKey, 'assistant', 'He mejorado el texto. Puedes seguir editandolo directamente.');
+        const inputArea = document.getElementById('prep-chat-input-area-' + chatKey);
+        if (inputArea) inputArea.innerHTML = `<p class="text-xs text-green-600 font-semibold text-center py-2"><span class="material-symbols-outlined text-sm align-middle">check_circle</span> Mejora completada</p>`;
+        Toast.show('Descripción mejorada', 'ok');
+      } else if (data.follow_up) {
+        renderFieldChatBubble(chatKey, 'assistant', data.follow_up);
+      }
+    } catch (e) {
+      removeFieldTyping(chatKey);
+      console.error('[chat error]', chatKey, e);
+      renderFieldChatBubble(chatKey, 'assistant', 'Error: ' + (e?.message || e?.code || JSON.stringify(e)));
+    }
   }
 
   /* ── Sub-tab: Tareas ────────────────────────────────────────────── */
@@ -2019,8 +2265,15 @@ const Developer = (() => {
     _removeExtraStaff: removeExtraStaff,
     _saveRelContext: saveRelContext,
     _genFieldDraft: generateFieldDraft,
+    _startImprove: startImprove,
     _sendFieldChat: sendFieldChat,
     _toggleFieldChat: toggleFieldChat,
+    _genWpSummary: genWpSummary,
+    _improveWpSummary: improveWpSummary,
+    _sendWpSummaryChat: sendWpSummaryChat,
+    _genActivityDesc: genActivityDesc,
+    _improveActivityDesc: improveActivityDesc,
+    _sendActivityDescChat: sendActivityDescChat,
     _selectSection: selectSection,
     _generateField: generateField,
     _markReviewed: markReviewed,

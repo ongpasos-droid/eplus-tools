@@ -1347,6 +1347,46 @@ Write in the voice of the project coordinator.`
   }
 };
 
+// Helper: get programId and proposal language for a project
+// Language is derived from national_agency (source of truth); proposal_lang is a fallback.
+const NA_LANG = {
+  EACEA:'en',
+  AT01:'de',
+  BE01:'fr', BE02:'nl', BE03:'de', BE04:'fr', BE05:'nl',
+  BG01:'bg', HR01:'hr', CY01:'el', CZ01:'cs', DK01:'da',
+  EE01:'et', FI01:'fi',
+  FR01:'fr', FR02:'fr',
+  DE01:'de', DE02:'de', DE03:'de', DE04:'de',
+  EL01:'el', EL02:'el',
+  HU01:'hu', IS01:'is',
+  IE01:'en', IE02:'en',
+  IT01:'it', IT02:'it', IT03:'it',
+  LV01:'lv', LV02:'lv',
+  LI01:'de',
+  LT01:'lt', LT02:'lt',
+  LU01:'fr',
+  MT01:'en',
+  NL01:'nl', NL02:'nl',
+  NO01:'no', NO02:'no',
+  PL01:'pl',
+  PT01:'pt', PT02:'pt',
+  RO01:'ro', RS01:'sr',
+  SK01:'sk', SK02:'sk',
+  SI01:'sl', SI02:'sl',
+  ES01:'es', ES02:'es',
+  SE01:'sv', SE02:'sv',
+  TR01:'tr',
+};
+const LANG_NAMES_META = { es: 'Spanish', en: 'English', fr: 'French', de: 'German', it: 'Italian', pt: 'Portuguese', nl: 'Dutch', pl: 'Polish', ro: 'Romanian', el: 'Greek', sv: 'Swedish', da: 'Danish', fi: 'Finnish', cs: 'Czech', hu: 'Hungarian', bg: 'Bulgarian', hr: 'Croatian', sk: 'Slovak', sl: 'Slovenian', et: 'Estonian', lv: 'Latvian', lt: 'Lithuanian', mt: 'Maltese', ga: 'Irish', is: 'Icelandic', no: 'Norwegian', tr: 'Turkish', mk: 'Macedonian', sr: 'Serbian', sq: 'Albanian' };
+
+async function getProjectMeta(projectId) {
+  const [rows] = await db.execute('SELECT type, proposal_lang, national_agency FROM projects WHERE id = ? LIMIT 1', [projectId]);
+  if (!rows.length) return { programId: null, lang: 'en', langName: 'English' };
+  const [programs] = await db.execute('SELECT ip.id FROM intake_programs ip WHERE ip.action_type = ? LIMIT 1', [rows[0].type]);
+  const lang = NA_LANG[rows[0].national_agency] || rows[0].proposal_lang || 'en';
+  return { programId: programs[0]?.id || null, lang, langName: LANG_NAMES_META[lang] || 'English' };
+}
+
 async function generateRelevanciaFieldDraft(projectId, userId, fieldKey) {
   if (!FIELD_PROMPTS[fieldKey]) throw new Error('Invalid field_key: ' + fieldKey);
   const cfg = FIELD_PROMPTS[fieldKey];
@@ -1356,12 +1396,8 @@ async function generateRelevanciaFieldDraft(projectId, userId, fieldKey) {
   if (!ctx) throw new Error('Project not found');
   const projectContext = buildProjectContext(ctx);
 
-  // Get programId
-  const [programs] = await db.execute(
-    'SELECT id FROM intake_programs WHERE action_type = ? LIMIT 1',
-    [ctx.project.type]
-  );
-  const programId = programs[0]?.id || null;
+  // Get programId and language
+  const { programId, langName } = await getProjectMeta(projectId);
 
   // RAG: call docs + research docs in parallel
   const [callChunks, researchChunks] = await Promise.all([
@@ -1375,6 +1411,9 @@ You have access to programme documents and research evidence. Use them to write 
 ${callChunks ? '══ PROGRAMME DOCUMENTS ══\n' + callChunks + '\n\n' : ''}${researchChunks ? '══ RESEARCH EVIDENCE ══\n' + researchChunks + '\n\n' : ''}══ PROJECT OVERVIEW ══
 ${projectContext}
 
+══ LANGUAGE ══
+IMPORTANT: Write EVERYTHING in ${langName}. The draft and questions MUST be in ${langName}.
+
 ══ YOUR TASK ══
 ${cfg.instruction}
 
@@ -1384,12 +1423,12 @@ These questions should help the coordinator add real-world knowledge, local cont
 FORMAT YOUR RESPONSE EXACTLY AS:
 
 DRAFT:
-[your draft text here]
+[your draft text in ${langName}]
 
 QUESTIONS:
-1. [specific question]
-2. [specific question]
-3. [specific question, optional]`;
+1. [specific question in ${langName}]
+2. [specific question in ${langName}]
+3. [specific question in ${langName}, optional]`;
 
   const result = await callAI(system, `Generate a draft for the "${cfg.label}" field of this Erasmus+ proposal.`, 'generate');
 
@@ -1428,73 +1467,110 @@ QUESTIONS:
 async function chatRelevanciaField(projectId, userId, fieldKey, userMessage) {
   if (!FIELD_PROMPTS[fieldKey]) throw new Error('Invalid field_key: ' + fieldKey);
   const cfg = FIELD_PROMPTS[fieldKey];
-
-  // Load chat history
-  const [history] = await db.execute(
-    'SELECT role, content, turn_order FROM prep_field_chats WHERE project_id = ? AND field_key = ? ORDER BY turn_order',
-    [projectId, fieldKey]
-  );
+  const isStartImprove = userMessage === '__START_IMPROVE__';
 
   // Load current field value
   const [ctxRows] = await db.execute('SELECT ' + fieldKey + ' as val FROM intake_contexts WHERE project_id = ?', [projectId]);
   const currentText = ctxRows[0]?.val || '';
 
-  // Light RAG context
-  const [programs] = await db.execute(
-    'SELECT id FROM intake_programs ip JOIN projects pr ON pr.type = ip.action_type WHERE pr.id = ? LIMIT 1',
-    [projectId]
-  );
-  const programId = programs[0]?.id || null;
+  // Get programId and language
+  const { programId, langName } = await getProjectMeta(projectId);
   const [callChunks, researchChunks] = await Promise.all([
     programId ? retrieveRelevantChunks(cfg.ragQuery, programId, 4) : Promise.resolve(''),
     retrieveResearchChunks(cfg.ragQuery, projectId, 3),
   ]);
 
-  // Build conversation
+  if (isStartImprove) {
+    // Clear previous improvement chat for this field (fresh start)
+    await db.execute('DELETE FROM prep_field_chats WHERE project_id = ? AND field_key = ? AND turn_order > 0', [projectId, fieldKey]);
+
+    // AI reads the current text and returns ONE open question + 3-4 improvement area suggestions
+    const system = `You are helping an Erasmus+ project coordinator improve the "${cfg.label}" field of their proposal.
+
+${callChunks ? '══ PROGRAMME DOCUMENTS ══\n' + callChunks + '\n\n' : ''}${researchChunks ? '══ RESEARCH EVIDENCE ══\n' + researchChunks + '\n\n' : ''}══ CURRENT TEXT ══
+${currentText}
+
+══ YOUR TASK ══
+Read the current text and identify which areas could be strengthened.
+Respond with ONE open-ended question inviting the coordinator to share anything they want to add or change, followed by 3-4 specific improvement areas as bullets.
+Each bullet must name the type of information that would help (e.g. "local quantitative data", "direct testimonials", "comparison with best practice X") — NOT a separate question.
+The coordinator may have nothing to add: that is fine.
+
+IMPORTANT: Write EVERYTHING in ${langName}.
+
+FORMAT EXACTLY:
+[your open question in ${langName}]
+
+${langName === 'Spanish' ? 'Áreas donde tu aporte puede reforzar el texto:' : langName === 'English' ? 'Areas where your input could strengthen the text:' : `[heading in ${langName}: "Areas where your input could strengthen the text"]`}
+• [area 1 in ${langName}]
+• [area 2 in ${langName}]
+• [area 3 in ${langName}]
+• [area 4 in ${langName}, optional]`;
+
+    const response = await callAI(system, 'Generate the improvement prompt.', 'generate');
+    const cleanResponse = response.replace(/^(FOLLOW_UP:|QUESTION:)\s*/i, '').trim();
+
+    // Save assistant turn
+    await db.execute(
+      'INSERT INTO prep_field_chats (id, project_id, field_key, role, content, turn_order) VALUES (?, ?, ?, ?, ?, ?)',
+      [genUUID(), projectId, fieldKey, 'assistant', JSON.stringify({ follow_up: cleanResponse }), 1]
+    );
+
+    return { revised_text: null, follow_up: cleanResponse, turn_count: 1 };
+  }
+
+  // Any user response finalizes the improvement with a single rewrite
+  const [history] = await db.execute(
+    'SELECT role, content, turn_order FROM prep_field_chats WHERE project_id = ? AND field_key = ? AND turn_order > 0 ORDER BY turn_order',
+    [projectId, fieldKey]
+  );
+
   const conversationParts = history.map(h => {
     if (h.role === 'assistant') {
-      try { const parsed = JSON.parse(h.content); return `ASSISTANT: ${parsed.draft || parsed.revised_text || h.content}`; }
+      try { const parsed = JSON.parse(h.content); return `ASSISTANT: ${parsed.follow_up || parsed.revised_text || h.content}`; }
       catch { return `ASSISTANT: ${h.content}`; }
     }
     return `USER: ${h.content}`;
   });
 
-  const system = `You are helping an Erasmus+ project coordinator refine the "${cfg.label}" field.
+  const system = `You are helping an Erasmus+ project coordinator improve the "${cfg.label}" field.
+IMPORTANT: Write EVERYTHING in ${langName}.
 
-${callChunks ? '══ PROGRAMME CONTEXT ══\n' + callChunks + '\n\n' : ''}${researchChunks ? '══ RESEARCH EVIDENCE ══\n' + researchChunks + '\n\n' : ''}══ CURRENT TEXT IN THE FIELD ══
+${callChunks ? '══ PROGRAMME DOCUMENTS ══\n' + callChunks + '\n\n' : ''}${researchChunks ? '══ RESEARCH EVIDENCE ══\n' + researchChunks + '\n\n' : ''}══ CURRENT TEXT ══
 ${currentText}
 
 ══ CONVERSATION SO FAR ══
 ${conversationParts.join('\n\n')}
 
 ══ YOUR TASK ══
-The coordinator just answered your question. Use their input to improve the text.
-Write a revised version of the field text that incorporates their answer.
-If you still need more information, add ONE follow-up question.
+The coordinator just responded: "${userMessage}"
 
-FORMAT YOUR RESPONSE EXACTLY AS:
+Write a significantly IMPROVED version of the text in ${langName}, incorporating the coordinator's input and the improvement areas you had identified. If their response is brief or empty, still improve the text using the programme documents and research evidence. Make it concrete, evidence-based, and compelling for evaluators.
 
+FORMAT:
 REVISED_TEXT:
-[the complete revised text for the field]
+[complete improved text in ${langName}]
 
 FOLLOW_UP:
-[one follow-up question, or NONE if no more questions needed]`;
+NONE`;
 
   const result = await callAI(system, `User says: ${userMessage}`, 'generate');
 
   // Parse
-  let revisedText = '', followUp = null;
+  let revisedText = null, followUp = null;
   const revMatch = result.match(/REVISED_TEXT:\s*\n([\s\S]*?)(?=\nFOLLOW_UP:)/i);
   const fuMatch = result.match(/FOLLOW_UP:\s*\n([\s\S]*)/i);
-  if (revMatch) revisedText = revMatch[1].trim();
-  else revisedText = result.split('FOLLOW_UP:')[0].replace(/^REVISED_TEXT:\s*/i, '').trim();
+  if (revMatch) {
+    const rt = revMatch[1].trim();
+    if (rt && rt.toLowerCase() !== 'none') revisedText = rt;
+  }
   if (fuMatch) {
-    const fuText = fuMatch[1].trim();
-    followUp = (fuText.toLowerCase() === 'none' || !fuText) ? null : fuText;
+    const ft = fuMatch[1].trim();
+    if (ft && ft.toLowerCase() !== 'none') followUp = ft;
   }
 
   // Save turns
-  const nextOrder = history.length ? Math.max(...history.map(h => h.turn_order)) + 1 : 1;
+  const nextOrder = history.length ? Math.max(...history.map(h => h.turn_order)) + 1 : 2;
   await db.execute(
     'INSERT INTO prep_field_chats (id, project_id, field_key, role, content, turn_order) VALUES (?, ?, ?, ?, ?, ?)',
     [genUUID(), projectId, fieldKey, 'user', userMessage, nextOrder]
@@ -1504,6 +1580,11 @@ FOLLOW_UP:
     'INSERT INTO prep_field_chats (id, project_id, field_key, role, content, turn_order) VALUES (?, ?, ?, ?, ?, ?)',
     [genUUID(), projectId, fieldKey, 'assistant', assistantContent, nextOrder + 1]
   );
+
+  // Update field if we have revised text
+  if (revisedText) {
+    await db.execute('UPDATE intake_contexts SET ' + fieldKey + ' = ? WHERE project_id = ?', [revisedText, projectId]);
+  }
 
   // Update field value
   if (revisedText) {
@@ -1559,6 +1640,282 @@ async function updateActivityDescription(activityId, description) {
   await db.execute('UPDATE activities SET description = ? WHERE id = ?', [description, activityId]);
 }
 
+// ── Activities: AI-assisted field drafts ──────────────────────────────
+
+async function getWpContext(projectId, wpId) {
+  const [wps] = await db.execute(
+    `SELECT wp.id, wp.code, wp.title, wp.category, wp.summary, p.name as leader_name
+     FROM work_packages wp LEFT JOIN partners p ON p.id = wp.leader_id
+     WHERE wp.id = ? AND wp.project_id = ? LIMIT 1`,
+    [wpId, projectId]
+  );
+  if (!wps.length) return null;
+  const wp = wps[0];
+  const [acts] = await db.execute(
+    `SELECT id, type, label, subtype, description FROM activities WHERE wp_id = ? ORDER BY order_index`,
+    [wpId]
+  );
+  const [tasks] = await db.execute(
+    `SELECT title, description, deliverable, milestone FROM project_tasks WHERE wp_id = ? ORDER BY sort_order`,
+    [wpId]
+  );
+  return { ...wp, activities: acts, tasks };
+}
+
+async function getActivityContext(projectId, activityId) {
+  const [rows] = await db.execute(
+    `SELECT a.id, a.type, a.label, a.subtype, a.description, a.date_start, a.date_end, a.online,
+            a.wp_id, wp.code as wp_code, wp.title as wp_title, wp.summary as wp_summary, wp.project_id
+     FROM activities a JOIN work_packages wp ON wp.id = a.wp_id
+     WHERE a.id = ? AND wp.project_id = ? LIMIT 1`,
+    [activityId, projectId]
+  );
+  if (!rows.length) return null;
+  const act = rows[0];
+  const [tasks] = await db.execute(
+    `SELECT title, description, deliverable, milestone, start_month, end_month
+     FROM project_tasks WHERE wp_id = ? AND category = ? ORDER BY sort_order`,
+    [act.wp_id, act.type || 'general']
+  );
+  act.tasks = tasks;
+  return act;
+}
+
+async function getRelevanciaContext(projectId) {
+  const [rows] = await db.execute(
+    'SELECT problem, target_groups, approach FROM intake_contexts WHERE project_id = ? LIMIT 1',
+    [projectId]
+  );
+  return rows[0] || { problem: '', target_groups: '', approach: '' };
+}
+
+function buildActivitiesContextBlock(rel, wp, activity) {
+  let out = '══ PROJECT RELEVANCE CONTEXT ══\n';
+  if (rel.problem) out += `Problem: ${rel.problem}\n\n`;
+  if (rel.target_groups) out += `Target groups: ${rel.target_groups}\n\n`;
+  if (rel.approach) out += `Approach: ${rel.approach}\n\n`;
+  if (wp) {
+    out += `══ WORK PACKAGE ══\n${wp.code} - ${wp.title}${wp.category ? ' [' + wp.category + ']' : ''}\n`;
+    if (wp.leader_name) out += `Leader: ${wp.leader_name}\n`;
+    if (wp.summary) out += `Current summary: ${wp.summary}\n`;
+    if (wp.activities && wp.activities.length) {
+      out += `Activities in this WP:\n`;
+      wp.activities.forEach(a => { out += `  • ${a.label || a.type}${a.subtype ? ' (' + a.subtype + ')' : ''}\n`; });
+    }
+    if (wp.tasks && wp.tasks.length) {
+      out += `Tasks/deliverables:\n`;
+      wp.tasks.forEach(t => { out += `  • ${t.title}${t.deliverable ? ' → ' + t.deliverable : ''}\n`; });
+    }
+    out += '\n';
+  }
+  if (activity) {
+    out += `══ ACTIVITY ══\n${activity.label || activity.type}${activity.subtype ? ' (' + activity.subtype + ')' : ''}\n`;
+    out += `Type: ${activity.type}\n`;
+    if (activity.date_start) out += `Dates: ${activity.date_start} → ${activity.date_end}\n`;
+    if (activity.tasks && activity.tasks.length) {
+      out += `Tasks:\n`;
+      activity.tasks.forEach(t => { out += `  • ${t.title}${t.deliverable ? ' → ' + t.deliverable : ''}\n`; });
+    }
+  }
+  return out;
+}
+
+async function generateWpSummaryDraft(projectId, wpId) {
+  const wp = await getWpContext(projectId, wpId);
+  if (!wp) throw new Error('Work package not found');
+  const rel = await getRelevanciaContext(projectId);
+  const { programId, langName } = await getProjectMeta(projectId);
+  const ragQuery = `work package ${wp.title} ${wp.category || ''} activities deliverables`;
+  const [callChunks, researchChunks] = await Promise.all([
+    programId ? retrieveRelevantChunks(ragQuery, programId, 4) : Promise.resolve(''),
+    retrieveResearchChunks(ragQuery, projectId, 2),
+  ]);
+  const ctxBlock = buildActivitiesContextBlock(rel, wp, null);
+
+  const system = `You are helping an Erasmus+ project coordinator draft the SUMMARY of a Work Package.
+The goal is a concrete, specific description of WHAT this WP will do and WHAT is its main objective. This is NOT a proposal answer — it is an internal definition that will later feed the writing of the proposal sections.
+
+${callChunks ? '══ PROGRAMME DOCUMENTS ══\n' + callChunks + '\n\n' : ''}${researchChunks ? '══ RESEARCH EVIDENCE ══\n' + researchChunks + '\n\n' : ''}${ctxBlock}
+
+══ LANGUAGE ══
+IMPORTANT: Write EVERYTHING in ${langName}.
+
+══ YOUR TASK ══
+Write a 80-150 word summary of this Work Package. Structure:
+1. Main objective (1 sentence): what this WP aims to achieve.
+2. Concrete scope (2-4 sentences): what will actually be done, referencing the activities and tasks listed. Connect to the project's problem, target groups and approach.
+3. Expected outcome (1 sentence): what the WP produces for the overall project.
+
+Be concrete and specific. Avoid generic filler. Write in the voice of the project coordinator.
+Write ONLY the summary text, no headers or meta-commentary.`;
+
+  const draft = await callAI(system, `Draft the summary for WP "${wp.title}".`, 'generate');
+  const clean = draft.trim();
+  await db.execute('UPDATE work_packages SET summary = ? WHERE id = ?', [clean, wpId]);
+  return { summary: clean };
+}
+
+async function generateActivityDescriptionDraft(projectId, activityId) {
+  const activity = await getActivityContext(projectId, activityId);
+  if (!activity) throw new Error('Activity not found');
+  const wp = await getWpContext(projectId, activity.wp_id);
+  const rel = await getRelevanciaContext(projectId);
+  const { programId, langName } = await getProjectMeta(projectId);
+  const ragQuery = `${activity.label || ''} ${activity.type} ${activity.subtype || ''} methodology outcomes`;
+  const [callChunks, researchChunks] = await Promise.all([
+    programId ? retrieveRelevantChunks(ragQuery, programId, 4) : Promise.resolve(''),
+    retrieveResearchChunks(ragQuery, projectId, 2),
+  ]);
+  const ctxBlock = buildActivitiesContextBlock(rel, wp, activity);
+
+  const system = `You are helping an Erasmus+ project coordinator draft the DESCRIPTION of a project activity.
+The goal is a concrete, specific description of WHAT will be done in this activity and WHAT is its main objective. This is NOT a proposal answer — it is an internal definition that will later feed the writing of the proposal sections.
+
+${callChunks ? '══ PROGRAMME DOCUMENTS ══\n' + callChunks + '\n\n' : ''}${researchChunks ? '══ RESEARCH EVIDENCE ══\n' + researchChunks + '\n\n' : ''}${ctxBlock}
+
+══ LANGUAGE ══
+IMPORTANT: Write EVERYTHING in ${langName}.
+
+══ YOUR TASK ══
+Write a 80-150 word description of this activity. Structure:
+1. Main objective (1 sentence): what this activity aims to achieve and why it matters for the project.
+2. What will actually happen (2-4 sentences): concrete actions, methodology, who participates, what materials/tools are used. Connect to the project's problem, target groups and approach.
+3. Expected output (1 sentence): what this activity produces.
+
+Be concrete and specific. Avoid generic filler. Write in the voice of the project coordinator.
+Write ONLY the description text, no headers or meta-commentary.`;
+
+  const draft = await callAI(system, `Draft the description for activity "${activity.label || activity.type}".`, 'generate');
+  const clean = draft.trim();
+  await db.execute('UPDATE activities SET description = ? WHERE id = ?', [clean, activityId]);
+  return { description: clean };
+}
+
+async function improveActivityField(projectId, fieldKey, currentText, contextBlock, fieldLabel, userMessage) {
+  const { programId, langName } = await getProjectMeta(projectId);
+  const isStartImprove = userMessage === '__START_IMPROVE__';
+  const ragQuery = fieldLabel + ' ' + (currentText ? currentText.substring(0, 200) : '');
+  const [callChunks, researchChunks] = await Promise.all([
+    programId ? retrieveRelevantChunks(ragQuery, programId, 3) : Promise.resolve(''),
+    retrieveResearchChunks(ragQuery, projectId, 2),
+  ]);
+
+  if (isStartImprove) {
+    await db.execute('DELETE FROM prep_field_chats WHERE project_id = ? AND field_key = ? AND turn_order > 0', [projectId, fieldKey]);
+
+    const system = `You are helping an Erasmus+ project coordinator refine the "${fieldLabel}". This is an internal definition (not a proposal answer) that will later feed the writing of the proposal.
+
+${callChunks ? '══ PROGRAMME DOCUMENTS ══\n' + callChunks + '\n\n' : ''}${researchChunks ? '══ RESEARCH EVIDENCE ══\n' + researchChunks + '\n\n' : ''}${contextBlock}
+
+══ CURRENT TEXT ══
+${currentText || '(empty)'}
+
+══ YOUR TASK ══
+Read the current text and identify which aspects could be strengthened to make it more concrete and useful as internal definition.
+Respond with ONE open-ended question inviting the coordinator to share anything they want to add or change, followed by 2-3 specific improvement ideas as bullets.
+Each bullet must name an area or type of detail that would help (e.g. "concrete methodology step", "specific materials used", "role of a partner") — NOT a separate question.
+
+IMPORTANT: Write EVERYTHING in ${langName}.
+
+FORMAT EXACTLY:
+[your open question in ${langName}]
+
+${langName === 'Spanish' ? 'Ideas para mejorar esta definición:' : langName === 'English' ? 'Ideas to strengthen this definition:' : `[heading in ${langName}: "Ideas to strengthen this definition"]`}
+• [idea 1 in ${langName}]
+• [idea 2 in ${langName}]
+• [idea 3 in ${langName}, optional]`;
+
+    const response = await callAI(system, 'Generate the improvement prompt.', 'generate');
+    const clean = response.replace(/^(FOLLOW_UP:|QUESTION:)\s*/i, '').trim();
+    await db.execute(
+      'INSERT INTO prep_field_chats (id, project_id, field_key, role, content, turn_order) VALUES (?, ?, ?, ?, ?, ?)',
+      [genUUID(), projectId, fieldKey, 'assistant', JSON.stringify({ follow_up: clean }), 1]
+    );
+    return { revised_text: null, follow_up: clean };
+  }
+
+  const [history] = await db.execute(
+    'SELECT role, content, turn_order FROM prep_field_chats WHERE project_id = ? AND field_key = ? AND turn_order > 0 ORDER BY turn_order',
+    [projectId, fieldKey]
+  );
+  const conversationParts = history.map(h => {
+    if (h.role === 'assistant') {
+      try { const parsed = JSON.parse(h.content); return `ASSISTANT: ${parsed.follow_up || parsed.revised_text || h.content}`; }
+      catch { return `ASSISTANT: ${h.content}`; }
+    }
+    return `USER: ${h.content}`;
+  });
+
+  const system = `You are helping an Erasmus+ project coordinator refine the "${fieldLabel}".
+IMPORTANT: Write EVERYTHING in ${langName}.
+
+${callChunks ? '══ PROGRAMME DOCUMENTS ══\n' + callChunks + '\n\n' : ''}${researchChunks ? '══ RESEARCH EVIDENCE ══\n' + researchChunks + '\n\n' : ''}${contextBlock}
+
+══ CURRENT TEXT ══
+${currentText}
+
+══ CONVERSATION SO FAR ══
+${conversationParts.join('\n\n')}
+
+══ YOUR TASK ══
+The coordinator just responded: "${userMessage}"
+
+Write an IMPROVED version of the text in ${langName}, keeping the same structure (objective, what happens, expected outcome) but more concrete and specific. Incorporate the coordinator's input and the improvement ideas you had identified. If their response is brief or empty, still improve the text using programme documents and research evidence.
+
+FORMAT:
+REVISED_TEXT:
+[complete improved text in ${langName}]
+
+FOLLOW_UP:
+NONE`;
+
+  const result = await callAI(system, `User says: ${userMessage}`, 'generate');
+  let revisedText = null;
+  const revMatch = result.match(/REVISED_TEXT:\s*\n([\s\S]*?)(?=\nFOLLOW_UP:)/i);
+  if (revMatch) {
+    const rt = revMatch[1].trim();
+    if (rt && rt.toLowerCase() !== 'none') revisedText = rt;
+  }
+
+  const nextOrder = history.length ? Math.max(...history.map(h => h.turn_order)) + 1 : 2;
+  await db.execute(
+    'INSERT INTO prep_field_chats (id, project_id, field_key, role, content, turn_order) VALUES (?, ?, ?, ?, ?, ?)',
+    [genUUID(), projectId, fieldKey, 'user', userMessage, nextOrder]
+  );
+  await db.execute(
+    'INSERT INTO prep_field_chats (id, project_id, field_key, role, content, turn_order) VALUES (?, ?, ?, ?, ?, ?)',
+    [genUUID(), projectId, fieldKey, 'assistant', JSON.stringify({ revised_text: revisedText, follow_up: null }), nextOrder + 1]
+  );
+  return { revised_text: revisedText, follow_up: null };
+}
+
+async function improveWpSummary(projectId, wpId, userMessage) {
+  const wp = await getWpContext(projectId, wpId);
+  if (!wp) throw new Error('Work package not found');
+  const rel = await getRelevanciaContext(projectId);
+  const ctxBlock = buildActivitiesContextBlock(rel, wp, null);
+  const fieldKey = 'wp_sum:' + wpId;
+  const result = await improveActivityField(projectId, fieldKey, wp.summary || '', ctxBlock, `Summary of WP ${wp.code} - ${wp.title}`, userMessage);
+  if (result.revised_text) {
+    await db.execute('UPDATE work_packages SET summary = ? WHERE id = ?', [result.revised_text, wpId]);
+  }
+  return result;
+}
+
+async function improveActivityDescription(projectId, activityId, userMessage) {
+  const activity = await getActivityContext(projectId, activityId);
+  if (!activity) throw new Error('Activity not found');
+  const wp = await getWpContext(projectId, activity.wp_id);
+  const rel = await getRelevanciaContext(projectId);
+  const ctxBlock = buildActivitiesContextBlock(rel, wp, activity);
+  const fieldKey = 'act_desc:' + activityId;
+  const result = await improveActivityField(projectId, fieldKey, activity.description || '', ctxBlock, `Description of activity "${activity.label || activity.type}"`, userMessage);
+  if (result.revised_text) {
+    await db.execute('UPDATE activities SET description = ? WHERE id = ?', [result.revised_text, activityId]);
+  }
+  return result;
+}
+
 module.exports = {
   getProjectContext,
   getOrCreateInstance,
@@ -1605,4 +1962,8 @@ module.exports = {
   getPrepActividades,
   updateWpSummary,
   updateActivityDescription,
+  generateWpSummaryDraft,
+  generateActivityDescriptionDraft,
+  improveWpSummary,
+  improveActivityDescription,
 };
