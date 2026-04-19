@@ -283,31 +283,49 @@ Entidad (organización)
 
 El Legal Rep es quien puede firmar la declaración de honor en Erasmus+ — debe ser el único con control total sobre la entidad en la plataforma.
 
-### 8.3 Verificación por OID/PIC
+### 8.3 Registro — sin verificación, con confianza
 
-El OID/PIC europeo ya es el sistema de verificación — no hace falta inventar uno propio.
+**Principio:** no verificamos la vinculación persona-entidad. La fricción de verificación europea mataría la adopción. El daño potencial en el tier gratuito es mínimo.
 
-- Al crear una entidad → campo obligatorio OID o PIC
-- El sistema importa nombre legal, país y tipo desde el registro EACEA
-- **MVP:** el usuario introduce OID → entidad queda "pendiente de verificación" → badge visible
-- **v2:** EU Login OAuth → verificación automática en tiempo real
+**Registro en 3 campos:**
 
-### 8.4 Sistema de reclamación
+| Campo | Obligatorio |
+|-------|-------------|
+| Email | Sí |
+| Nombre | Sí |
+| OID o nombre de entidad | Sí |
 
-Cualquier usuario puede añadir una entidad con su OID. Si nadie la ha reclamado:
-- La entidad aparece como "sin propietario verificado"
-- El sistema envía email al contacto oficial del registro EACEA
-- El representante legal puede reclamarla y convertirse en Legal Rep
-- Mientras no está reclamada: acceso limitado (puede usarse en consorcios pero no editar el perfil)
+**Flujo de vinculación:**
+
+```
+Usuario A entra primero
+    → Busca su entidad por OID o nombre
+    → Se vincula → queda como Admin automático
+
+Usuario B entra después
+    → Busca la misma entidad
+    → Solicita acceso → Admin A aprueba → B entra como Writer
+
+Usuario C llega con link de invitación del Admin
+    → Crea usuario → queda vinculado directamente como Writer
+```
+
+**Ayudas automáticas para reducir fricción:**
+- Si el email del nuevo usuario tiene el mismo dominio que el Admin (`@mismaempresa.es`), se sugiere la entidad automáticamente al registrarse
+- El Admin puede generar links de invitación directa para compartir por WhatsApp/email
+
+### 8.4 Gestión de conflictos
+
+| Situación | Resolución |
+|-----------|------------|
+| Primero en llegar a una entidad | Admin automático |
+| Llega después sin invitación | Solicita acceso, Admin aprueba |
+| Llega con link de invitación | Acceso directo como Writer |
+| Representante legal quiere tomar control | Contacta soporte — resolución manual |
+
+La verificación formal (EU Login, documentos) se reserva para cuando haya dinero en juego: pago de licencia o participación como socia en consorcio real.
 
 ### 8.5 Casos de uso
-
-| Caso | Solución |
-|------|----------|
-| CEO que escribe solo | Usuario = él. Admin de su propia entidad |
-| Freelance con 3 entidades | Un usuario, 3 entidades. Switcher de contexto (como Slack workspaces) |
-| Empresa con varios escritores | Una entidad, varios usuarios con rol Writer |
-| Representante legal de varias ONGs | Un usuario, Legal Rep en múltiples entidades |
 
 ### 8.6 Viral loop integrado
 
