@@ -1,10 +1,14 @@
 #!/bin/bash
 # enrich-status.sh — snapshot of the enrichment pipeline.
-# Invoked by cron every 2h; output appended to /var/log/enrich-batch/status.log.
+# Invoked by cron every 2h; output appended to /var/log/enrich-batch/status.log
+# AND pushed to Oscar's Telegram (chat_id from telegram-bot-claude27/.env).
 # Safe to invoke manually any time.
 
 set -euo pipefail
 cd /opt/eplus-tools-dev
+
+TMP_OUT=$(mktemp)
+trap 'rm -f "$TMP_OUT"' EXIT
 
 /usr/bin/node -e "
 const mysql = require('mysql2/promise');
@@ -77,4 +81,23 @@ require('dotenv').config();
 
   await c.end();
 })().catch(e => { console.error(e); process.exit(1); });
-"
+" | tee "$TMP_OUT"
+
+# ── Push snapshot to Telegram ────────────────────────────────────────
+# Credentials come from the telegram-bot-claude27 project already running
+# on this VPS. We intentionally source only the two vars we need.
+set -a
+# shellcheck disable=SC1091
+source <(grep -E '^(TELEGRAM_BOT_TOKEN|TELEGRAM_USER_ID)=' /opt/telegram-bot-claude27/.env)
+set +a
+
+if [[ -n "${TELEGRAM_BOT_TOKEN:-}" && -n "${TELEGRAM_USER_ID:-}" ]]; then
+  # Telegram caps messages at 4096 chars — our snapshot is <1500.
+  MSG=$(cat "$TMP_OUT")
+  curl -s -o /dev/null \
+    -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+    --data-urlencode "chat_id=${TELEGRAM_USER_ID}" \
+    --data-urlencode "text=${MSG}" \
+    --data-urlencode "disable_notification=true" \
+    || echo "[warn] telegram push failed" >&2
+fi
