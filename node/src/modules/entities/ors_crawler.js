@@ -120,14 +120,16 @@ async function upsertEntity(raw, taxToISO) {
 }
 
 /**
- * Check if a prefix is already completed (done) in crawl state.
+ * Check if a prefix has reached a terminal state (done, capped, error).
+ * Errors are terminal to avoid the PM2 restart loop on HTTP 500 prefixes;
+ * to retry them, use scripts/retry_errors.js which expands errors to children.
  */
-async function isPrefixDone(countryTaxId, prefix) {
+async function isPrefixTerminal(countryTaxId, prefix) {
   const [rows] = await pool.execute(
     `SELECT status FROM ors_crawl_state WHERE country_tax_id = ? AND prefix = ?`,
     [countryTaxId, prefix]
   );
-  return rows.length > 0 && rows[0].status === 'done';
+  return rows.length > 0 && ['done', 'capped', 'error'].includes(rows[0].status);
 }
 
 /**
@@ -234,7 +236,7 @@ async function crawlGlobal(taxToISO, options = {}) {
 
     const prefix = queue.shift();
 
-    if (await isPrefixDone(stateKey, prefix)) {
+    if (await isPrefixTerminal(stateKey, prefix)) {
       continue;
     }
 
