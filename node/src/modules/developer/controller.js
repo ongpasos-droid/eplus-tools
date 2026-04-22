@@ -404,3 +404,100 @@ exports.improveField = async (req, res, next) => {
     res.json({ ok: true, data: { text: improved } });
   } catch (err) { next(err); }
 };
+
+// POST /v1/developer/instances/:id/refine/evaluate
+// Phase 1 of Evaluate-and-Refine: returns the diagnosis + which weaknesses
+// would be targeted if the user opts to continue with phase 2.
+exports.refineEvaluate = async (req, res, next) => {
+  try {
+    const { field_id, text } = req.body;
+    if (!field_id || !text) {
+      return res.status(400).json({ ok: false, error: { code: 'BAD_REQUEST', message: 'field_id y text son obligatorios' } });
+    }
+    const instance = await model.getInstance(req.params.id, req.user.id);
+    if (!instance) return res.status(404).json({ ok: false, error: { code: 'NOT_FOUND' } });
+
+    const programId = instance.program_id || null;
+    const result = await model.refineEvaluatePhase(instance.id, field_id, text, programId);
+    res.json({ ok: true, data: result });
+  } catch (err) { next(err); }
+};
+
+// POST /v1/developer/instances/:id/refine/apply
+// Phase 2 of Evaluate-and-Refine: takes the evaluation from phase 1, runs a
+// targeted improve + re-evaluation, returns the result. Auto-reverts on regression.
+exports.refineApply = async (req, res, next) => {
+  try {
+    const { field_id, text, evaluation } = req.body;
+    if (!field_id || !text || !evaluation) {
+      return res.status(400).json({ ok: false, error: { code: 'BAD_REQUEST', message: 'field_id, text y evaluation son obligatorios' } });
+    }
+    const instance = await model.getInstance(req.params.id, req.user.id);
+    if (!instance) return res.status(404).json({ ok: false, error: { code: 'NOT_FOUND' } });
+
+    const programId = instance.program_id || null;
+    const projectContext = instance.project_id
+      ? await model.buildEnrichedContext(instance.project_id, req.user.id)
+      : '';
+    const ctx = instance.project_id ? await model.getProjectContext(instance.project_id, req.user.id) : null;
+    const coordName = ctx?.partners?.[0]?.name || 'the lead organisation';
+
+    const result = await model.refineApplyPhase(
+      instance.id, field_id, text, evaluation, projectContext, programId, coordName
+    );
+    res.json({ ok: true, data: result });
+  } catch (err) { next(err); }
+};
+
+// POST /v1/developer/instances/:id/refine
+// Legacy one-shot auto-refine (kept for backwards compat).
+exports.refineField = async (req, res, next) => {
+  try {
+    const { field_id, text } = req.body;
+    if (!field_id || !text) {
+      return res.status(400).json({ ok: false, error: { code: 'BAD_REQUEST', message: 'field_id y text son obligatorios' } });
+    }
+
+    const instance = await model.getInstance(req.params.id, req.user.id);
+    if (!instance) return res.status(404).json({ ok: false, error: { code: 'NOT_FOUND' } });
+
+    const programId = instance.program_id || null;
+    const projectContext = instance.project_id
+      ? await model.buildEnrichedContext(instance.project_id, req.user.id)
+      : '';
+    const ctx = instance.project_id ? await model.getProjectContext(instance.project_id, req.user.id) : null;
+    const coordName = ctx?.partners?.[0]?.name || 'the lead organisation';
+
+    const result = await model.refineSectionAuto(
+      instance.id, field_id, text, projectContext, programId, coordName
+    );
+    res.json({ ok: true, data: result });
+  } catch (err) { next(err); }
+};
+
+// POST /v1/developer/instances/:id/improve-custom
+// Accepts a free-text user_request from the coordinator and revises the current
+// section text applying that request, using the same enriched context as generate.
+exports.improveFieldCustom = async (req, res, next) => {
+  try {
+    const { field_id, text, user_request } = req.body;
+    if (!field_id || !text || !user_request || !user_request.trim()) {
+      return res.status(400).json({ ok: false, error: { code: 'BAD_REQUEST', message: 'field_id, text y user_request son obligatorios' } });
+    }
+
+    const instance = await model.getInstance(req.params.id, req.user.id);
+    if (!instance) return res.status(404).json({ ok: false, error: { code: 'NOT_FOUND' } });
+
+    const programId = instance.program_id || null;
+    const projectContext = instance.project_id
+      ? await model.buildEnrichedContext(instance.project_id, req.user.id)
+      : '';
+    const ctx = instance.project_id ? await model.getProjectContext(instance.project_id, req.user.id) : null;
+    const coordName = ctx?.partners?.[0]?.name || 'the lead organisation';
+
+    const improved = await model.improveSectionCustom(
+      instance.id, field_id, text, user_request.trim(), projectContext, programId, coordName
+    );
+    res.json({ ok: true, data: { text: improved } });
+  } catch (err) { next(err); }
+};

@@ -119,15 +119,29 @@ const Developer = (() => {
       window.__projectNA = currentProject?.national_agency || null;
       window.__projectLang = currentProject?.proposal_lang || null;
 
-      // Parse template
+      // Parse template. Pass the project's Work Packages so section 4.2 can
+      // spawn one cascade step per WP (dynamic count based on Intake data)
+      // instead of a single monolithic section.
+      const projectWps = (ctx && Array.isArray(ctx.wps)) ? ctx.wps : [];
       if (instance.template_json) {
         templateJson = typeof instance.template_json === 'string' ? JSON.parse(instance.template_json) : instance.template_json;
-        flatSections = flattenSections(templateJson);
+        flatSections = flattenSections(templateJson, projectWps);
       }
 
-      // TEST MODE: start blank — don't load saved values
-      fieldValues = {};
-      // Production: fieldValues = await API.get('/developer/instances/' + instance.id + '/values');
+      // Load persisted field values so refreshing the page doesn't lose work
+      try {
+        fieldValues = await API.get('/developer/instances/' + instance.id + '/values') || {};
+      } catch (e) {
+        console.error('Could not load saved field values:', e);
+        fieldValues = {};
+      }
+
+      // Restore approval state (persisted in value_json.reviewed)
+      cascadeApproved = {};
+      for (const [fieldId, val] of Object.entries(fieldValues)) {
+        if (val && val.json && val.json.reviewed) cascadeApproved[fieldId] = true;
+      }
+      cascadeIndex = 0;  // renderPhase2() auto-jumps to first non-approved section
 
       // Load eval criteria
       try { evalCriteria = await API.get('/developer/eval-criteria'); } catch (e) { evalCriteria = []; }
@@ -140,7 +154,11 @@ const Developer = (() => {
   }
 
   /* ── Flatten template sections into linear list ────────────── */
-  function flattenSections(tmpl) {
+  // `wps` is the array of Work Packages defined in Intake for this project.
+  // When a subsection contains `work_package_template`, we spawn one cascade
+  // step per WP instead of a single monolithic section.
+  function flattenSections(tmpl, wps) {
+    wps = wps || [];
     const flat = [];
     for (const sec of (tmpl.sections || [])) {
       // Collect all subsections — handle both direct subsections and subsections_groups
@@ -156,6 +174,31 @@ const Developer = (() => {
         }
       }
       for (const { sub, parent, parentNumber } of allSubs) {
+        // Dynamic expansion for Work Package template subsections (sec_4_2).
+        // Spawns one cascade step per WP defined in Intake.
+        if (sub.work_package_template && wps.length) {
+          wps.forEach((wp, idx) => {
+            const label = (wp.code || ('WP' + (idx + 1))) + ' — ' + (wp.title || 'Work Package');
+            flat.push({
+              id: sub.id + '__wp_' + wp.id,
+              fieldId: 's4_2_wp_' + wp.id,
+              number: sub.number + '.' + (idx + 1),
+              title: label,
+              guidance: (sub.guidance || []).join('\n'),
+              parent,
+              parentNumber,
+              wpMeta: {
+                id: wp.id,
+                code: wp.code,
+                title: wp.title,
+                order_index: wp.order_index,
+                leader_id: wp.leader_id,
+                category: wp.category,
+              },
+            });
+          });
+          continue;
+        }
         for (const field of (sub.fields || [])) {
           if (field.type === 'textarea' || field.type === 'table') {
             flat.push({
@@ -1465,13 +1508,18 @@ const Developer = (() => {
         html += `<div class="text-[9px] font-bold uppercase tracking-widest text-on-surface-variant/60 mt-4 mb-1 px-2">${sec.parentNumber}. ${esc(sec.parent)}</div>`;
       }
 
-      const dotClass = isApproved ? 'text-green-500' : isCurrent ? 'text-amber-500 animate-pulse' : hasText ? 'text-amber-300' : 'text-outline-variant/30';
-      const icon = isApproved ? 'check_circle' : isCurrent ? 'edit_note' : hasText ? 'circle' : 'radio_button_unchecked';
-      const clickable = isApproved || isCurrent;
-      const onclick = clickable ? `Developer._cascadeGoTo(${i})` : '';
+      const dotClass = isApproved ? 'text-green-500' : isCurrent ? 'text-amber-500 animate-pulse' : hasText ? 'text-amber-400' : 'text-outline-variant/40';
+      const icon = isApproved ? 'check_circle' : isCurrent ? 'edit_note' : hasText ? 'edit' : 'radio_button_unchecked';
+      const stateClass = isCurrent
+        ? 'bg-primary/10 text-primary font-bold'
+        : isApproved
+          ? 'hover:bg-surface-container-low text-on-surface-variant'
+          : hasText
+            ? 'hover:bg-surface-container-low text-on-surface-variant'
+            : 'hover:bg-surface-container-low text-on-surface-variant/60';
 
       html += `
-        <button ${onclick ? 'onclick="' + onclick + '"' : 'disabled'} class="w-full text-left flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs transition-all ${isCurrent ? 'bg-primary/10 text-primary font-bold' : isApproved ? 'hover:bg-surface-container-low text-on-surface-variant cursor-pointer' : 'text-on-surface-variant/40 cursor-default'}">
+        <button onclick="Developer._cascadeGoTo(${i})" class="w-full text-left flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs transition-all cursor-pointer ${stateClass}">
           <span class="material-symbols-outlined text-xs ${dotClass}">${icon}</span>
           <span class="truncate">${sec.number} ${esc(sec.title.substring(0, 28))}</span>
         </button>`;
@@ -1480,6 +1528,7 @@ const Developer = (() => {
   }
 
   let _cascadeGenerating = false;
+  const _cascadeWriteBlank = {};  // fieldId → true means user opted to write manually even without existing text
 
   async function renderCascadeSection() {
     const main = document.getElementById('dev-cascade-main');
@@ -1494,22 +1543,14 @@ const Developer = (() => {
     const hasText = text.trim().length > 10;
     const isApproved = cascadeApproved[sec.fieldId];
 
-    if (!hasText && !_cascadeGenerating) {
-      // No text yet — show generating UI and auto-trigger
+    if (_cascadeGenerating) {
+      // Generation in progress — show animated loader
       main.innerHTML = `
         <div class="mb-4">
           <div class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60 mb-1">${sec.parentNumber ? sec.parentNumber + '. ' + esc(sec.parent) : 'Summary'}</div>
           <h2 class="font-headline text-lg font-bold text-on-surface">${sec.number} ${esc(sec.title)}</h2>
         </div>
-        <details class="mb-4 group">
-          <summary class="text-xs font-bold text-primary cursor-pointer flex items-center gap-1">
-            <span class="material-symbols-outlined text-xs group-open:rotate-90 transition-transform">chevron_right</span> Guia del formulario
-          </summary>
-          <div class="mt-2 text-xs text-on-surface-variant leading-relaxed bg-primary/5 rounded-lg p-3 border border-primary/10">
-            ${sec.guidance ? sec.guidance.split('\n').map(g => '<p class="mb-1">' + esc(g) + '</p>').join('') : '<p>Sin guia disponible.</p>'}
-          </div>
-        </details>
-        <div class="flex flex-col items-center py-12" id="dev-cascade-loading">
+        <div class="flex flex-col items-center py-12">
           <div class="relative w-16 h-16 mb-4">
             <div class="absolute inset-0 rounded-full bg-[#1b1464]/10 animate-pulse"></div>
             <div class="absolute inset-0 flex items-center justify-center">
@@ -1517,7 +1558,7 @@ const Developer = (() => {
             </div>
           </div>
           <p class="text-sm font-bold text-[#1b1464] mb-1">Generando seccion...</p>
-          <p class="text-xs text-on-surface-variant mb-4">La IA escribe con todo el contexto de las secciones anteriores aprobadas</p>
+          <p class="text-xs text-on-surface-variant mb-4">La IA escribe con todo el contexto del proyecto</p>
           <div class="bg-[#1b1464] rounded-xl p-4 max-w-md shadow-lg">
             <div class="flex items-start gap-2">
               <span class="material-symbols-outlined text-sm text-[#e7eb00] mt-0.5">lightbulb</span>
@@ -1533,8 +1574,6 @@ const Developer = (() => {
             75% { transform: rotate(4deg) translateY(-2px); }
           }
         </style>`;
-
-      // Start tip rotation
       clearInterval(_tipTimer);
       let tipIdx = 0;
       _tipTimer = setInterval(() => {
@@ -1546,27 +1585,39 @@ const Developer = (() => {
           tipEl.style.transition = 'opacity 0.3s';
         }
       }, 4000);
+      return;
+    }
 
-      // Auto-generate
-      _cascadeGenerating = true;
-      try {
-        const result = await API.post('/developer/instances/' + currentInstance.id + '/generate', { sections: [sec.fieldId] });
-        const genText = result[sec.fieldId] || '';
-        if (!fieldValues[sec.fieldId]) fieldValues[sec.fieldId] = {};
-        fieldValues[sec.fieldId].text = genText;
-        fieldValues[sec.fieldId].section = sec.id;
-      } catch (err) {
-        console.error('Cascade generate error:', err);
-        if (!fieldValues[sec.fieldId]) fieldValues[sec.fieldId] = {};
-        fieldValues[sec.fieldId].text = '';
-      }
-      _cascadeGenerating = false;
-      clearInterval(_tipTimer);
-
-      // Re-render with text now available
-      renderCascadeSection();
-      renderCascadeNav();
-      renderAIPanel();
+    if (!hasText && !_cascadeWriteBlank[sec.fieldId]) {
+      // Empty section — invite the coordinator to generate manually
+      main.innerHTML = `
+        <div class="mb-4">
+          <div class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60 mb-1">${sec.parentNumber ? sec.parentNumber + '. ' + esc(sec.parent) : 'Summary'}</div>
+          <h2 class="font-headline text-lg font-bold text-on-surface">${sec.number} ${esc(sec.title)}</h2>
+        </div>
+        <details class="mb-4 group" open>
+          <summary class="text-xs font-bold text-primary cursor-pointer flex items-center gap-1">
+            <span class="material-symbols-outlined text-xs group-open:rotate-90 transition-transform">chevron_right</span> Guia del formulario
+          </summary>
+          <div class="mt-2 text-xs text-on-surface-variant leading-relaxed bg-primary/5 rounded-lg p-3 border border-primary/10">
+            ${sec.guidance ? sec.guidance.split('\n').map(g => '<p class="mb-1">' + esc(g) + '</p>').join('') : '<p>Sin guia disponible.</p>'}
+          </div>
+        </details>
+        <div class="flex flex-col items-center text-center py-10 px-6 rounded-2xl bg-primary/5 border border-primary/10">
+          <span class="material-symbols-outlined text-4xl text-primary mb-3">auto_awesome</span>
+          <h3 class="font-headline text-base font-bold text-on-surface mb-1">Esta sección está vacía</h3>
+          <p class="text-xs text-on-surface-variant max-w-md mb-5">Cuando pulses "Generar con IA", redactaré una primera propuesta con todo el contexto del proyecto. Después podrás iterar pidiendo mejoras concretas.</p>
+          <div class="flex flex-wrap items-center justify-center gap-2">
+            <button onclick="Developer._cascadeGenerate()" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-white bg-[#1b1464] shadow-lg hover:bg-[#1b1464]/90 transition-all">
+              <span class="material-symbols-outlined text-lg text-[#e7eb00]">auto_awesome</span>
+              <span class="text-white">Generar con IA</span>
+            </button>
+            <button onclick="Developer._cascadeWriteBlank()" class="inline-flex items-center gap-2 px-4 py-3 rounded-xl text-xs font-bold text-[#1b1464] bg-white border border-[#1b1464]/30 hover:bg-[#1b1464]/5 transition-colors">
+              <span class="material-symbols-outlined text-sm">edit</span>
+              <span>Escribir yo mismo</span>
+            </button>
+          </div>
+        </div>`;
       return;
     }
 
@@ -1588,14 +1639,12 @@ const Developer = (() => {
         </div>
       </details>
 
-      <textarea id="dev-textarea" class="w-full px-4 py-3 text-sm bg-white border border-outline-variant/30 rounded-xl resize-vertical focus:outline-none focus:ring-2 focus:ring-primary/15 focus:border-primary/30 leading-relaxed font-[system-ui]" style="min-height:350px" placeholder="Escribe o genera esta seccion con IA...">${esc(text)}</textarea>
+      <textarea id="dev-textarea" class="w-full px-4 py-3 text-sm bg-white border border-outline-variant/30 rounded-xl resize-none overflow-hidden focus:outline-none focus:ring-2 focus:ring-primary/15 focus:border-primary/30 leading-relaxed font-[system-ui]" style="min-height:350px" placeholder="Escribe o genera esta seccion con IA...">${esc(text)}</textarea>
 
-      <div class="flex items-center justify-between mt-2 mb-4">
+      <div class="flex items-center justify-between mt-2">
         <span class="text-xs text-on-surface-variant" id="dev-cascade-wc">${wc} palabras</span>
-        <button onclick="Developer._cascadeRegenerate()" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold text-primary border border-primary/30 hover:bg-primary/5 transition-colors">
-          <span class="material-symbols-outlined text-sm">auto_awesome</span> Generar con IA
-        </button>
       </div>
+      <div id="dev-iteration-tracker" class="mb-4"></div>
 
       <!-- Action buttons -->
       <div class="flex items-center gap-3">
@@ -1614,10 +1663,14 @@ const Developer = (() => {
         ${isApproved ? '<span class="text-xs text-green-600 font-bold flex items-center gap-1"><span class="material-symbols-outlined text-sm">check_circle</span> Aprobada</span>' : ''}
       </div>`;
 
-    // Bind textarea autosave + word count
+    renderIterationTracker(sec);
+
+    // Bind textarea autosave + word count + auto-grow
     const textarea = document.getElementById('dev-textarea');
     if (textarea) {
+      autoGrow(textarea);
       textarea.addEventListener('input', () => {
+        autoGrow(textarea);
         clearTimeout(_saveTimer);
         const wcEl = document.getElementById('dev-cascade-wc');
         if (wcEl) wcEl.textContent = wordCount(textarea.value) + ' palabras';
@@ -1633,6 +1686,35 @@ const Developer = (() => {
     }
   }
 
+  // Grow a textarea to fit its content so there's no inner scrollbar.
+  // Runs twice via rAF + a delayed fallback because scrollHeight can be
+  // under-reported before the browser has laid out the element (first paint
+  // after innerHTML assignment, or when the textarea is mid-transition).
+  function autoGrow(ta) {
+    if (!ta) return;
+    const resize = () => {
+      ta.style.height = 'auto';
+      const needed = ta.scrollHeight;
+      if (needed > 0) ta.style.height = (needed + 4) + 'px';
+    };
+    resize();
+    requestAnimationFrame(() => {
+      resize();
+      // Safety net: if layout/font loading delayed measurement, resize once more.
+      setTimeout(resize, 80);
+    });
+  }
+
+  // Re-fit the active textarea when the window resizes (responsive widths
+  // change wrap, which changes scrollHeight).
+  if (!window._devAutoGrowBound) {
+    window._devAutoGrowBound = true;
+    window.addEventListener('resize', () => {
+      const ta = document.getElementById('dev-textarea');
+      if (ta) autoGrow(ta);
+    });
+  }
+
   async function cascadeApproveAndNext() {
     const sec = flatSections[cascadeIndex];
     if (!sec) return;
@@ -1645,9 +1727,12 @@ const Developer = (() => {
       if (!fieldValues[sec.fieldId]) fieldValues[sec.fieldId] = {};
       fieldValues[sec.fieldId].text = text;
       fieldValues[sec.fieldId].reviewed = true;
+      if (!fieldValues[sec.fieldId].json) fieldValues[sec.fieldId].json = {};
+      fieldValues[sec.fieldId].json.reviewed = true;
       try {
         await API.put('/developer/instances/' + currentInstance.id + '/field', {
-          field_id: sec.fieldId, section_path: sec.id, text
+          field_id: sec.fieldId, section_path: sec.id, text,
+          json: fieldValues[sec.fieldId].json
         });
       } catch (e) { console.error('save before approve:', e); }
     }
@@ -1673,9 +1758,6 @@ const Developer = (() => {
 
   function cascadeGoTo(targetIndex) {
     if (targetIndex === cascadeIndex) return;
-    if (cascadeApproved[flatSections[targetIndex]?.fieldId] && targetIndex < cascadeIndex) {
-      if (!confirm('Si editas esta seccion, las posteriores podrian necesitar regeneracion. ¿Continuar?')) return;
-    }
     cascadeIndex = targetIndex;
     activeFieldId = flatSections[cascadeIndex]?.fieldId;
     renderCascadeNav();
@@ -1683,9 +1765,57 @@ const Developer = (() => {
     renderAIPanel();
   }
 
+  // True if editing this section would invalidate downstream work
+  // (i.e. there are later sections already approved).
+  function hasApprovedDownstream(fieldId) {
+    const idx = flatSections.findIndex(s => s.fieldId === fieldId);
+    if (idx < 0) return false;
+    for (let i = idx + 1; i < flatSections.length; i++) {
+      if (cascadeApproved[flatSections[i].fieldId]) return true;
+    }
+    return false;
+  }
+
+  // First-time generation for an empty section (invoked from the empty-state button)
+  async function cascadeGenerate() {
+    const sec = flatSections[cascadeIndex];
+    if (!sec || !currentInstance) return;
+    _cascadeGenerating = true;
+    renderCascadeSection();
+    try {
+      const result = await API.post('/developer/instances/' + currentInstance.id + '/generate', { sections: [sec.fieldId] });
+      const text = result[sec.fieldId] || '';
+      if (!fieldValues[sec.fieldId]) fieldValues[sec.fieldId] = {};
+      fieldValues[sec.fieldId].text = text;
+      fieldValues[sec.fieldId].section = sec.id;
+    } catch (err) {
+      console.error('Generate error:', err);
+      alert('Error al generar: ' + (err.message || err));
+    }
+    _cascadeGenerating = false;
+    clearInterval(_tipTimer);
+    renderCascadeSection();
+    renderCascadeNav();
+    renderAIPanel();
+  }
+
+  // User chose "escribir yo mismo" — show the empty editor without generating
+  function cascadeWriteBlank() {
+    const sec = flatSections[cascadeIndex];
+    if (!sec) return;
+    _cascadeWriteBlank[sec.fieldId] = true;
+    renderCascadeSection();
+    renderAIPanel();
+  }
+
+  // Regenerate current section from scratch. Invoked from the "Regenerar desde cero"
+  // button inside the Improve modal — the user has already committed to the action.
   async function cascadeRegenerate() {
     const sec = flatSections[cascadeIndex];
     if (!sec) return;
+    if (hasApprovedDownstream(sec.fieldId)) {
+      if (!confirm('Si regeneras esta sección, las posteriores ya aprobadas podrían necesitar regenerarse para mantener coherencia. ¿Continuar?')) return false;
+    }
     const textarea = document.getElementById('dev-textarea');
     if (textarea) textarea.value = 'Generando con IA...';
     try {
@@ -1693,12 +1823,31 @@ const Developer = (() => {
       const text = result[sec.fieldId] || '';
       if (!fieldValues[sec.fieldId]) fieldValues[sec.fieldId] = {};
       fieldValues[sec.fieldId].text = text;
-      if (textarea) textarea.value = text;
+      if (textarea) { textarea.value = text; autoGrow(textarea); }
       const wcEl = document.getElementById('dev-cascade-wc');
       if (wcEl) wcEl.textContent = wordCount(text) + ' palabras';
       renderCascadeNav();
+      return true;
     } catch (err) {
       if (textarea) textarea.value = 'Error al generar: ' + (err.message || err);
+      return false;
+    }
+  }
+
+  // Called from the Improve modal's "Regenerar desde cero" button.
+  // Closes the modal and delegates to cascadeRegenerate (which handles the
+  // downstream-approved confirm).
+  async function regenerateFromModal() {
+    const btn = document.getElementById('improve-regen-btn');
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = '<div class="animate-spin w-4 h-4 border-2 border-current border-t-transparent rounded-full"></div><span>Regenerando...</span>';
+    }
+    const ok = await cascadeRegenerate();
+    if (ok) closeImproveModal();
+    else if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = '<span class="material-symbols-outlined text-base">restart_alt</span><span>Regenerar desde cero</span>';
     }
   }
 
@@ -1765,24 +1914,11 @@ const Developer = (() => {
     const sec = flatSections.find(s => s.fieldId === activeFieldId);
     if (!sec) { panel.innerHTML = ''; return; }
 
-    // Find matching eval criteria
-    let relevantCriteria = [];
-    if (evalCriteria.length && sec.parent) {
-      const parentLower = sec.parent.toLowerCase();
-      for (const es of evalCriteria) {
-        if (es.title.toLowerCase().includes(parentLower.substring(0, 6))) {
-          for (const q of (es.questions || [])) {
-            relevantCriteria.push(q);
-          }
-        }
-      }
-    }
-
     panel.innerHTML = `
       <h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant/60 mb-3">Panel de IA</h3>
 
-      <!-- Criteria -->
-      ${relevantCriteria.length ? `
+      <!-- Criteria block removed by design: redundant with form guidance + AI eval pipeline -->
+      ${false ? `
         <div class="mb-4">
           <div class="text-[10px] font-bold uppercase tracking-wider text-primary mb-2">Criterios de evaluacion</div>
           ${relevantCriteria.map(q => `
@@ -1795,30 +1931,22 @@ const Developer = (() => {
           `).join('')}
         </div>
       ` : `
-        <div class="text-xs text-on-surface-variant/50 italic mb-4">Sin criterios vinculados a esta seccion.</div>
       `}
 
       <!-- AI actions -->
       <div class="space-y-2">
-        <button onclick="Developer._aiImprove()" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold text-left text-on-surface-variant border border-outline-variant/20 hover:bg-surface-container-low transition-colors">
-          <span class="material-symbols-outlined text-sm text-primary">psychology</span>
+        <button onclick="Developer._aiImproveCustom()" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold text-left text-white bg-[#1b1464] hover:bg-[#1b1464]/90 shadow-sm transition-colors">
+          <span class="material-symbols-outlined text-base text-[#e7eb00]">auto_awesome</span>
           <div>
-            <div>Evaluar seccion</div>
-            <div class="text-[10px] font-normal opacity-60">Analizar contra criterios</div>
+            <div class="text-white">Mejorar con IA</div>
+            <div class="text-[10px] font-normal text-white/75">Dile que quieres cambiar (voz o texto)</div>
           </div>
         </button>
-        <button onclick="Developer._aiExpand()" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold text-left text-on-surface-variant border border-outline-variant/20 hover:bg-surface-container-low transition-colors">
-          <span class="material-symbols-outlined text-sm text-primary">expand</span>
+        <button onclick="Developer._aiEvaluateAndRefine()" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold text-left text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 shadow-sm transition-colors">
+          <span class="material-symbols-outlined text-base text-[#e7eb00]">trending_up</span>
           <div>
-            <div>Expandir texto</div>
-            <div class="text-[10px] font-normal opacity-60">Anadir detalle y profundidad</div>
-          </div>
-        </button>
-        <button onclick="Developer._aiSimplify()" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold text-left text-on-surface-variant border border-outline-variant/20 hover:bg-surface-container-low transition-colors">
-          <span class="material-symbols-outlined text-sm text-primary">compress</span>
-          <div>
-            <div>Simplificar</div>
-            <div class="text-[10px] font-normal opacity-60">Reducir sin perder contenido</div>
+            <div class="text-white">Evaluar y refinar con IA</div>
+            <div class="text-[10px] font-normal text-white/80">Diagnóstico + arreglo automático</div>
           </div>
         </button>
       </div>
@@ -1936,7 +2064,7 @@ const Developer = (() => {
       const text = result[fieldId] || '';
       if (!fieldValues[fieldId]) fieldValues[fieldId] = {};
       fieldValues[fieldId].text = text;
-      if (textarea) textarea.value = text;
+      if (textarea) { textarea.value = text; autoGrow(textarea); }
       if (phase === 2) renderCascadeNav();
     } catch (err) {
       if (textarea) textarea.value = 'Error al generar: ' + (err.message || err);
@@ -2173,31 +2301,561 @@ const Developer = (() => {
     } catch (err) { if (el) el.innerHTML = '<span class="text-error text-xs">Error: ' + esc(err.message || err) + '</span>'; }
   }
 
-  async function aiAction(action) {
+
+  /* ── Evaluate and Refine with AI: 3-act flow with pause between phases ── */
+  const _refineNarratorLines = {
+    phase1: [
+      'Leyendo tu texto y contrastando con los criterios EACEA…',
+      'Puntuando relevancia, metodología, impacto y coherencia…',
+      'Identificando qué suma puntos y qué los resta…',
+    ],
+    phase2: [
+      'Leyendo tu consorcio y las contribuciones de cada partner…',
+      'Consultando la convocatoria (fragmentos más relevantes para esta sección)…',
+      'Cruzando con los research docs que subiste…',
+      'Reescribiendo con datos concretos de tu proyecto…',
+      'Preservando los párrafos que ya funcionaban…',
+      'Inyectando la rúbrica EACEA en el nuevo texto…',
+    ],
+    phase3: [
+      'Re-evaluando contra los mismos criterios…',
+      'Midiendo el delta frente a la versión anterior…',
+      'Confirmando que no se ha perdido ninguna fortaleza…',
+    ],
+  };
+  let _refineState = null;
+
+  function _refineSetNarrator(el, lines) {
+    const host = el.querySelector('.refine-narrator');
+    if (!host) return;
+    let i = 0;
+    host.textContent = lines[0];
+    clearInterval(host._t);
+    host._t = setInterval(() => {
+      i = (i + 1) % lines.length;
+      host.style.opacity = '0';
+      setTimeout(() => { host.textContent = lines[i]; host.style.opacity = '1'; }, 250);
+    }, 2600);
+  }
+  function _refineStopNarrator(el) {
+    const host = el && el.querySelector ? el.querySelector('.refine-narrator') : null;
+    if (host && host._t) { clearInterval(host._t); host._t = null; }
+  }
+  function _scoreColor(s) {
+    if (s == null) return 'text-on-surface-variant';
+    if (s >= 8.5) return 'text-green-600';
+    if (s >= 7) return 'text-blue-600';
+    if (s >= 5.5) return 'text-amber-600';
+    return 'text-red-600';
+  }
+  function _badgeClass(overall) {
+    return ({ excellent: 'text-green-700 bg-green-100', good: 'text-blue-700 bg-blue-100', fair: 'text-amber-700 bg-amber-100', weak: 'text-red-700 bg-red-100' })[overall] || 'text-on-surface-variant bg-surface-container';
+  }
+  function _animateNumber(el, from, to, duration) {
+    const start = performance.now();
+    function tick(now) {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const v = from + (to - from) * eased;
+      el.textContent = v.toFixed(1);
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = Number.isInteger(to) ? String(to) : to.toFixed(1);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  async function aiEvaluateAndRefine() {
+    const sec = flatSections.find(s => s.fieldId === activeFieldId);
+    const textarea = document.getElementById('dev-textarea');
+    const el = document.getElementById('dev-ai-response');
+    const text = textarea ? textarea.value : '';
+    if (!sec || !currentInstance) return;
+    if (!text.trim() || text.trim().length < 50) {
+      if (el) el.innerHTML = '<span class="text-amber-500">Genera el texto primero — no se puede evaluar algo vacío.</span>';
+      return;
+    }
+
+    // PHASE 1 — Evaluating
+    el.innerHTML = `
+      <div class="flex flex-col gap-3 p-3 rounded-xl bg-gradient-to-br from-primary/5 to-purple-500/5 border border-primary/10">
+        <div class="flex items-center gap-3">
+          <div class="relative w-10 h-10">
+            <div class="absolute inset-0 rounded-full bg-primary/20 animate-ping"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="material-symbols-outlined text-xl text-primary">radar</span>
+            </div>
+          </div>
+          <div class="flex-1">
+            <div class="text-[10px] uppercase tracking-wider text-primary font-bold">Acto 1 de 3</div>
+            <div class="text-xs font-bold text-on-surface">Evaluando contra los criterios EACEA</div>
+          </div>
+        </div>
+        <div class="refine-narrator text-[10px] italic text-on-surface-variant/80 transition-opacity duration-200" style="min-height:16px"></div>
+      </div>`;
+    _refineSetNarrator(el, _refineNarratorLines.phase1);
+
+    let phase1;
+    try {
+      phase1 = await API.post('/developer/instances/' + currentInstance.id + '/refine/evaluate', {
+        field_id: sec.fieldId, text,
+      });
+    } catch (err) {
+      _refineStopNarrator(el);
+      el.innerHTML = '<span class="text-error text-xs">Error al evaluar: ' + esc(err.message || err) + '</span>';
+      return;
+    }
+    _refineStopNarrator(el);
+    _refineState = { sec, text, evaluation: phase1 };
+    _renderRefineDiagnosis(el, phase1);
+  }
+
+  function _renderRefineDiagnosis(el, ev) {
+    const score = ev.score_estimate != null ? ev.score_estimate : null;
+    const scoreCls = _scoreColor(score);
+    const overallBadge = _badgeClass(ev.overall);
+    const strengths = ev.strengths || [];
+    const weaknesses = ev.weaknesses || [];
+    const suggestions = ev.suggestions || [];
+    const willTarget = (ev.would_target_weaknesses || []).map(w => w.toLowerCase());
+    const canRefine = !ev.skip_reason;
+
+    el.innerHTML = `
+      <div class="flex flex-col gap-3 p-3 rounded-xl bg-white border border-outline-variant/20 shadow-sm">
+        <div class="flex items-center gap-3">
+          <div class="flex flex-col items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20">
+            <div class="text-lg font-extrabold ${scoreCls} leading-none">${score != null ? score : '?'}</div>
+            <div class="text-[8px] uppercase tracking-wider text-on-surface-variant/60">/ 10</div>
+          </div>
+          <div class="flex-1">
+            <div class="text-[10px] uppercase tracking-wider text-on-surface-variant/60 font-bold">Diagnóstico</div>
+            <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded ${overallBadge}">${ev.overall || '?'}</span>
+          </div>
+        </div>
+
+        ${strengths.length ? `
+          <div>
+            <div class="text-[10px] font-bold uppercase tracking-wider text-green-700 mb-1">Fortalezas a conservar</div>
+            ${strengths.slice(0, 4).map(s => '<div class="text-[11px] text-on-surface-variant mb-0.5 flex gap-1"><span class="text-green-600 font-bold">+</span><span>' + esc(s) + '</span></div>').join('')}
+          </div>
+        ` : ''}
+
+        ${weaknesses.length ? `
+          <div>
+            <div class="text-[10px] font-bold uppercase tracking-wider text-red-700 mb-1">Debilidades identificadas</div>
+            ${weaknesses.slice(0, 5).map(w => {
+              const isTargeted = willTarget.indexOf(w.toLowerCase()) !== -1;
+              return '<div class="text-[11px] mb-0.5 flex gap-1 items-start ' + (isTargeted ? 'bg-amber-50 border border-amber-200 rounded px-1 py-0.5' : '') + '">'
+                + (isTargeted ? '<span class="material-symbols-outlined text-[14px] text-amber-600" title="Se atacará si pulsas Refinar">bolt</span>' : '<span class="text-red-500 font-bold">-</span>')
+                + '<span class="text-on-surface-variant">' + esc(w) + '</span></div>';
+            }).join('')}
+          </div>
+        ` : ''}
+
+        ${suggestions.length ? `
+          <div>
+            <div class="text-[10px] font-bold uppercase tracking-wider text-primary mb-1">Sugerencias del evaluador</div>
+            ${suggestions.slice(0, 3).map(s => '<div class="text-[11px] text-on-surface-variant mb-0.5 flex gap-1"><span class="text-primary">&rarr;</span><span>' + esc(s) + '</span></div>').join('')}
+          </div>
+        ` : ''}
+
+        ${ev.skip_reason ? `
+          <div class="text-[11px] text-on-surface-variant p-2 rounded bg-amber-50 border border-amber-100">${esc(ev.skip_reason)}</div>
+        ` : ''}
+
+        <div class="flex items-center gap-2 mt-1">
+          <button onclick="Developer._refineStop()" class="flex-1 px-3 py-2 rounded-lg text-xs font-bold text-on-surface-variant border border-outline-variant/40 hover:bg-surface-container-low">
+            Me quedo así
+          </button>
+          ${canRefine ? `
+            <button onclick="Developer._refineGo()" class="flex-1 px-3 py-2 rounded-lg text-xs font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 flex items-center justify-center gap-1 shadow-sm">
+              <span class="material-symbols-outlined text-sm text-[#e7eb00]">bolt</span>
+              <span>Refinar con IA</span>
+            </button>
+          ` : ''}
+        </div>
+      </div>`;
+  }
+
+  function refineStop() {
+    _refineState = null;
+    const el = document.getElementById('dev-ai-response');
+    if (el) el.innerHTML = '<span class="text-on-surface-variant/40 italic text-xs">Diagnóstico descartado. Pulsa "Evaluar y refinar con IA" cuando quieras otro.</span>';
+  }
+
+  async function refineGo() {
+    if (!_refineState) return;
+    const { sec, text, evaluation } = _refineState;
     const el = document.getElementById('dev-ai-response');
     const textarea = document.getElementById('dev-textarea');
-    const sec = flatSections.find(s => s.fieldId === activeFieldId);
-    const text = textarea?.value || '';
-    if (!text || !sec) { if (el) el.innerHTML = '<span class="text-amber-500">Escribe algo primero.</span>'; return; }
-    if (el) el.innerHTML = '<div class="flex items-center gap-2 text-primary"><div class="animate-spin w-4 h-4 border-2 border-primary border-t-transparent rounded-full"></div> Procesando...</div>';
+    if (!el || !textarea || !currentInstance) return;
+
+    if (hasApprovedDownstream(sec.fieldId)) {
+      if (!confirm('Si refinas esta sección, las posteriores ya aprobadas podrían necesitar regenerarse para mantener coherencia. ¿Continuar?')) return;
+    }
+
+    // PHASE 2 — Rewriting
+    const targets = (evaluation.would_target_weaknesses || []).slice(0, 2);
+    el.innerHTML = `
+      <div class="flex flex-col gap-3 p-3 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200">
+        <div class="flex items-center gap-3">
+          <div class="relative w-10 h-10">
+            <div class="absolute inset-0 rounded-full bg-emerald-300/40 animate-pulse"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="material-symbols-outlined text-xl text-emerald-700" style="animation:writePencil 1.5s ease-in-out infinite">edit_note</span>
+            </div>
+          </div>
+          <div class="flex-1">
+            <div class="text-[10px] uppercase tracking-wider text-emerald-700 font-bold" id="refine-act-label">Acto 2 de 3</div>
+            <div class="text-xs font-bold text-on-surface" id="refine-act-title">Reescribiendo con correcciones dirigidas</div>
+          </div>
+        </div>
+        <div class="refine-narrator text-[10px] italic text-emerald-800/70 transition-opacity duration-200" style="min-height:16px"></div>
+        <div class="text-[10px] text-on-surface-variant/60">Atacando: ${targets.map(w => '<span class="inline-block bg-white border border-emerald-200 rounded px-1.5 py-0.5 mr-1 my-0.5">' + esc(w.substring(0, 60)) + (w.length > 60 ? '&hellip;' : '') + '</span>').join('')}</div>
+      </div>`;
+    _refineSetNarrator(el, _refineNarratorLines.phase2);
+
+    let result;
     try {
-      const result = await API.post('/developer/instances/' + currentInstance.id + '/improve', {
-        text, action, section_title: sec.number + ' ' + sec.title
+      result = await API.post('/developer/instances/' + currentInstance.id + '/refine/apply', {
+        field_id: sec.fieldId, text, evaluation,
+      });
+    } catch (err) {
+      _refineStopNarrator(el);
+      el.innerHTML = '<span class="text-error text-xs">Error al refinar: ' + esc(err.message || err) + '</span>';
+      return;
+    }
+
+    // PHASE 3 — Validating (brief theatrical pause for the re-evaluation)
+    _refineSetNarrator(el, _refineNarratorLines.phase3);
+    const actLabel = document.getElementById('refine-act-label');
+    const actTitle = document.getElementById('refine-act-title');
+    if (actLabel) actLabel.textContent = 'Acto 3 de 3';
+    if (actTitle) actTitle.textContent = 'Validando la mejora';
+    await new Promise(r => setTimeout(r, 1200));
+    _refineStopNarrator(el);
+
+    if (textarea && result.text && !result.reverted) {
+      textarea.value = result.text;
+      autoGrow(textarea);
+      if (!fieldValues[sec.fieldId]) fieldValues[sec.fieldId] = {};
+      fieldValues[sec.fieldId].text = result.text;
+
+      if (!fieldValues[sec.fieldId].json) fieldValues[sec.fieldId].json = {};
+      const iters = fieldValues[sec.fieldId].json.iterations || [];
+      iters.push({
+        ts: Date.now(),
+        source: 'refine',
+        before_score: result.before && result.before.score_estimate != null ? result.before.score_estimate : null,
+        after_score: result.after && result.after.score_estimate != null ? result.after.score_estimate : null,
+        delta: result.delta != null ? result.delta : null,
+        weaknesses_targeted: (result.weaknesses_targeted || []).slice(0, 2),
+      });
+      fieldValues[sec.fieldId].json.iterations = iters;
+
+      await API.put('/developer/instances/' + currentInstance.id + '/field', {
+        field_id: sec.fieldId, section_path: sec.id,
+        text: result.text,
+        json: fieldValues[sec.fieldId].json,
+      });
+      renderIterationTracker(sec);
+    }
+
+    _renderRefineResult(el, result);
+    _refineState = null;
+  }
+
+  function _renderRefineResult(el, result) {
+    const before = result.before || {};
+    const after = result.after || {};
+    const beforeScore = before.score_estimate != null ? before.score_estimate : null;
+    const afterScore = after.score_estimate != null ? after.score_estimate : null;
+    const delta = result.delta;
+
+    if (result.reverted) {
+      el.innerHTML = `
+        <div class="flex flex-col gap-2 p-3 rounded-xl bg-amber-50 border border-amber-200">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-amber-700">undo</span>
+            <div class="text-xs font-bold text-amber-900">Texto original restaurado</div>
+          </div>
+          <div class="text-[11px] text-amber-900/80">${esc(result.note || 'La refinación no mejoró el texto; se descarta.')}</div>
+          <div class="flex items-center gap-2 text-[11px] font-mono">
+            <span class="${_scoreColor(beforeScore)}">${beforeScore != null ? beforeScore : '?'}/10</span>
+            <span class="material-symbols-outlined text-sm text-on-surface-variant/40">arrow_forward</span>
+            <span class="${_scoreColor(afterScore)} line-through opacity-60">${afterScore != null ? afterScore : '?'}/10</span>
+            ${delta != null ? '<span class="text-red-600 font-bold">' + delta.toFixed(1) + '</span>' : ''}
+          </div>
+        </div>`;
+      return;
+    }
+
+    const deltaHtml = delta != null
+      ? (delta > 0 ? '<span class="text-green-600 font-bold text-sm">+' + delta.toFixed(1) + '</span>'
+        : delta < 0 ? '<span class="text-red-600 font-bold text-sm">' + delta.toFixed(1) + '</span>'
+        : '<span class="text-on-surface-variant text-sm">&plusmn;0</span>')
+      : '';
+
+    el.innerHTML = `
+      <div class="flex flex-col gap-3 p-3 rounded-xl bg-gradient-to-br from-emerald-50 to-white border border-emerald-200 shadow-sm">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-emerald-600">task_alt</span>
+          <div class="text-xs font-bold uppercase tracking-wider text-emerald-700">Refinado completado</div>
+        </div>
+        <div class="flex items-center justify-center gap-3 p-2 rounded-lg bg-white border border-outline-variant/10">
+          <div class="flex flex-col items-center">
+            <div class="text-[8px] uppercase tracking-wider text-on-surface-variant/60 font-bold">Antes</div>
+            <div class="text-lg font-extrabold ${_scoreColor(beforeScore)}">${beforeScore != null ? beforeScore : '?'}</div>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant/40">arrow_forward</span>
+          <div class="flex flex-col items-center">
+            <div class="text-[8px] uppercase tracking-wider text-on-surface-variant/60 font-bold">Después</div>
+            <div class="text-2xl font-extrabold ${_scoreColor(afterScore)}" id="refine-score-after">${beforeScore != null ? beforeScore : (afterScore != null ? afterScore : '?')}</div>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="text-[8px] uppercase tracking-wider text-on-surface-variant/60 font-bold">Delta</div>
+            ${deltaHtml}
+          </div>
+        </div>
+        ${(result.weaknesses_targeted || []).length ? `
+          <div>
+            <div class="text-[10px] font-bold uppercase tracking-wider text-emerald-700 mb-1">Debilidades resueltas</div>
+            ${result.weaknesses_targeted.map(w => '<div class="text-[11px] text-on-surface-variant mb-0.5 flex gap-1 items-start"><span class="material-symbols-outlined text-[14px] text-emerald-600 mt-0.5">check_circle</span><span>' + esc(w) + '</span></div>').join('')}
+          </div>
+        ` : ''}
+        <button onclick="Developer._aiEvaluateAndRefine()" class="mt-1 px-3 py-2 rounded-lg text-xs font-bold text-emerald-700 border border-emerald-300 hover:bg-emerald-50 flex items-center justify-center gap-1">
+          <span class="material-symbols-outlined text-sm">autorenew</span>
+          <span>Volver a evaluar y refinar</span>
+        </button>
+      </div>`;
+
+    if (beforeScore != null && afterScore != null && beforeScore !== afterScore) {
+      const afterEl = document.getElementById('refine-score-after');
+      if (afterEl) _animateNumber(afterEl, beforeScore, afterScore, 1000);
+    }
+  }
+
+  /* ── Legacy one-shot refine (kept as dead code; the UI no longer calls it) ── */
+  async function aiRefine() {
+    const sec = flatSections.find(s => s.fieldId === activeFieldId);
+    const textarea = document.getElementById('dev-textarea');
+    const el = document.getElementById('dev-ai-response');
+    const text = textarea ? textarea.value : '';
+    if (!sec || !currentInstance) return;
+    if (!text.trim() || text.trim().length < 50) {
+      if (el) el.innerHTML = '<span class="text-amber-500">Genera el texto primero — no se puede refinar algo vacío.</span>';
+      return;
+    }
+    if (hasApprovedDownstream(sec.fieldId)) {
+      if (!confirm('Si refinas esta sección, las posteriores ya aprobadas podrían necesitar regenerarse para mantener coherencia. ¿Continuar?')) return;
+    }
+    if (el) el.innerHTML = '<div class="flex items-center gap-2 text-primary"><div class="animate-spin w-4 h-4 border-2 border-primary border-t-transparent rounded-full"></div> Refinando con IA...</div>';
+    try {
+      const result = await API.post('/developer/instances/' + currentInstance.id + '/refine', { field_id: sec.fieldId, text });
+      if (textarea && result.text && !result.reverted) {
+        textarea.value = result.text;
+        autoGrow(textarea);
+        if (!fieldValues[sec.fieldId]) fieldValues[sec.fieldId] = {};
+        fieldValues[sec.fieldId].text = result.text;
+        if (!fieldValues[sec.fieldId].json) fieldValues[sec.fieldId].json = {};
+        const iters = fieldValues[sec.fieldId].json.iterations || [];
+        iters.push({
+          ts: Date.now(), source: 'refine',
+          before_score: result.before && result.before.score_estimate != null ? result.before.score_estimate : null,
+          after_score: result.after && result.after.score_estimate != null ? result.after.score_estimate : null,
+          delta: result.delta != null ? result.delta : null,
+          weaknesses_targeted: (result.weaknesses_targeted || []).slice(0, 2),
+        });
+        fieldValues[sec.fieldId].json.iterations = iters;
+        await API.put('/developer/instances/' + currentInstance.id + '/field', {
+          field_id: sec.fieldId, section_path: sec.id, text: result.text, json: fieldValues[sec.fieldId].json,
+        });
+        renderIterationTracker(sec);
+      }
+
+      // Render the before/after result panel
+      const before = result.before || {};
+      const after = result.after || {};
+      const deltaStr = result.delta != null
+        ? (result.delta > 0 ? `<span class="text-green-600 font-bold">+${result.delta.toFixed(1)}</span>`
+          : result.delta < 0 ? `<span class="text-red-600 font-bold">${result.delta.toFixed(1)}</span>`
+          : `<span class="text-on-surface-variant">±0</span>`)
+        : '';
+      const badge = { excellent: 'text-green-600 bg-green-50', good: 'text-blue-600 bg-blue-50', fair: 'text-amber-600 bg-amber-50', weak: 'text-red-600 bg-red-50' };
+      if (el) {
+        if (result.note) {
+          el.innerHTML = `<div class="text-xs text-on-surface">${esc(result.note)}</div>`;
+        } else {
+          el.innerHTML = `
+            <div class="mb-2 text-xs font-bold uppercase tracking-wider text-on-surface-variant/60">Resultado</div>
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-xs font-mono">${before.score_estimate ?? '?'}/10</span>
+              <span class="material-symbols-outlined text-sm text-on-surface-variant/50">arrow_forward</span>
+              <span class="text-sm font-bold font-mono">${after.score_estimate ?? '?'}/10</span>
+              <span class="ml-1">${deltaStr}</span>
+              <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded ${badge[after.overall] || ''}">${after.overall || '?'}</span>
+            </div>
+            ${(result.weaknesses_targeted || []).length ? `
+              <div class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/60 mb-1">Debilidades atacadas</div>
+              ${result.weaknesses_targeted.map(w => '<div class="text-xs text-on-surface-variant mb-0.5">→ ' + esc(w) + '</div>').join('')}
+              <div class="mt-2 text-[10px] text-on-surface-variant/60 italic">Pulsa "Refinar con IA" otra vez para seguir subiendo.</div>
+            ` : ''}`;
+        }
+      }
+    } catch (err) {
+      if (el) el.innerHTML = '<span class="text-error text-xs">Error al refinar: ' + esc(err.message || err) + '</span>';
+    }
+  }
+
+  /* ── Iteration tracker (score history under the textarea) ── */
+  function renderIterationTracker(sec) {
+    const host = document.getElementById('dev-iteration-tracker');
+    if (!host) return;
+    const iters = fieldValues[sec.fieldId]?.json?.iterations || [];
+    if (!iters.length) { host.innerHTML = ''; return; }
+    const pills = iters.slice(-6).map((it, idx) => {
+      const arrow = it.delta > 0 ? '<span class="material-symbols-outlined text-[10px] text-green-600">trending_up</span>'
+        : it.delta < 0 ? '<span class="material-symbols-outlined text-[10px] text-red-500">trending_down</span>'
+        : '<span class="material-symbols-outlined text-[10px] text-on-surface-variant/40">trending_flat</span>';
+      const fromTo = (it.before_score ?? '?') + ' → ' + (it.after_score ?? '?');
+      return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-lowest border border-outline-variant/20 text-[10px] font-mono text-on-surface-variant" title="${esc((it.weaknesses_targeted || []).join(' · '))}">
+        v${iters.length - Math.min(5, iters.length - 1 - idx)} ${fromTo} ${arrow}
+      </span>`;
+    }).join('');
+    host.innerHTML = `
+      <div class="flex items-center gap-2 flex-wrap mt-1">
+        <span class="text-[10px] uppercase tracking-wider text-on-surface-variant/60 font-bold">Historial</span>
+        ${pills}
+      </div>`;
+  }
+
+  /* ── Mejorar con IA: ask user what to improve (voice + text) ── */
+  function aiImproveCustom() {
+    const sec = flatSections.find(s => s.fieldId === activeFieldId);
+    const textarea = document.getElementById('dev-textarea');
+    const el = document.getElementById('dev-ai-response');
+    const text = textarea?.value || '';
+    if (!sec) { if (el) el.innerHTML = '<span class="text-amber-500">Selecciona una sección.</span>'; return; }
+    if (!text.trim()) { if (el) el.innerHTML = '<span class="text-amber-500">Genera o escribe el texto antes de mejorarlo.</span>'; return; }
+    openImproveModal(sec);
+  }
+
+  function openImproveModal(sec) {
+    closeImproveModal();
+    const modal = document.createElement('div');
+    modal.id = 'improve-modal';
+    modal.className = 'fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4';
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeImproveModal(); });
+    modal.innerHTML = `
+      <div class="bg-surface rounded-2xl p-6 w-full max-w-2xl shadow-2xl border border-outline-variant/20">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <h2 class="text-lg font-bold text-on-surface flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">auto_awesome</span>
+              Mejorar con IA
+            </h2>
+            <p class="text-xs text-on-surface-variant mt-1">${esc(sec.number + ' ' + sec.title)}</p>
+          </div>
+          <button onclick="Developer._closeImproveModal()" class="text-on-surface-variant hover:text-on-surface p-1">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <label class="block text-sm font-medium text-on-surface mb-2">¿Qué te ha gustado y qué deberías mejorar?</label>
+        <p class="text-xs text-on-surface-variant/70 mb-2">Cuéntame qué partes del texto quieres conservar y qué partes quieres cambiar. Puedes escribir o usar el micrófono. Podemos iterar tantas veces como haga falta.</p>
+        <p class="text-[11px] text-on-surface-variant/60 mb-2 italic">Ejemplos: "me gusta el primer párrafo, mejora el segundo con más datos del territorio", "conserva el tono pero acorta el final", "enfatiza más el valor europeo y menciona a nuestra entidad coordinadora".</p>
+        <textarea id="improve-request" rows="4" class="w-full px-3 py-2 rounded-lg border border-outline-variant/40 bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none" placeholder="Qué te ha gustado y qué hay que mejorar..."></textarea>
+        <div class="mt-4 flex items-center justify-between gap-2 flex-wrap">
+          <button onclick="Developer._closeImproveModal()" class="px-4 py-2 rounded-lg text-sm font-medium text-on-surface-variant hover:bg-surface-container-low">Cancelar</button>
+          <div class="flex items-center gap-2 ml-auto">
+            <button onclick="Developer._regenerateFromModal()" id="improve-regen-btn" class="px-4 py-2 rounded-lg text-sm font-bold text-on-surface-variant border border-outline-variant/40 hover:bg-surface-container-low flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" title="Genera desde cero sin usar tus instrucciones ni el texto actual">
+              <span class="material-symbols-outlined text-base">restart_alt</span>
+              <span>Regenerar desde cero</span>
+            </button>
+            <button onclick="Developer._submitImproveRequest()" id="improve-submit-btn" class="px-4 py-2 rounded-lg text-sm font-bold bg-[#1b1464] text-white hover:bg-[#1b1464]/90 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow">
+              <span class="material-symbols-outlined text-base text-[#e7eb00]">auto_awesome</span>
+              <span>Mejorar texto</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    // VoiceInput auto-attaches the mic button via MutationObserver
+    setTimeout(() => {
+      const ta = document.getElementById('improve-request');
+      if (ta) {
+        ta.focus();
+        ta.addEventListener('keydown', (e) => {
+          if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); submitImproveRequest(); }
+          else if (e.key === 'Escape') closeImproveModal();
+        });
+      }
+    }, 50);
+  }
+
+  function closeImproveModal() {
+    document.getElementById('improve-modal')?.remove();
+  }
+
+  async function submitImproveRequest() {
+    const sec = flatSections.find(s => s.fieldId === activeFieldId);
+    const textarea = document.getElementById('dev-textarea');
+    const reqTa = document.getElementById('improve-request');
+    const btn = document.getElementById('improve-submit-btn');
+    const respEl = document.getElementById('dev-ai-response');
+    const text = textarea?.value || '';
+    const userRequest = (reqTa?.value || '').trim();
+    if (!userRequest) { reqTa?.focus(); reqTa?.classList.add('ring-2','ring-error/40'); return; }
+    if (!sec || !text || !currentInstance) return;
+
+    if (hasApprovedDownstream(sec.fieldId)) {
+      if (!confirm('Si mejoras esta sección, las posteriores ya aprobadas podrían necesitar regenerarse para mantener coherencia. ¿Continuar?')) return;
+    }
+
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = '<div class="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div><span>Mejorando...</span>';
+    }
+    if (respEl) respEl.innerHTML = '<div class="flex items-center gap-2 text-primary"><div class="animate-spin w-4 h-4 border-2 border-primary border-t-transparent rounded-full"></div> Mejorando con tu petición...</div>';
+
+    try {
+      const result = await API.post('/developer/instances/' + currentInstance.id + '/improve-custom', {
+        field_id: sec.fieldId,
+        text,
+        user_request: userRequest
       });
       if (textarea && result.text) {
         textarea.value = result.text;
+        autoGrow(textarea);
         if (!fieldValues[sec.fieldId]) fieldValues[sec.fieldId] = {};
         fieldValues[sec.fieldId].text = result.text;
-        await API.put('/developer/instances/' + currentInstance.id + '/field', {
-          field_id: sec.fieldId, section_path: sec.id, text: result.text
-        });
-      }
-      if (el) el.innerHTML = '<span class="text-green-600 text-xs">Texto actualizado.</span>';
-    } catch (err) { if (el) el.innerHTML = '<span class="text-error text-xs">Error: ' + esc(err.message || err) + '</span>'; }
-  }
 
-  function aiExpand() { aiAction('expand'); }
-  function aiSimplify() { aiAction('simplify'); }
+        if (!fieldValues[sec.fieldId].json) fieldValues[sec.fieldId].json = {};
+        const iters = fieldValues[sec.fieldId].json.iterations || [];
+        iters.push({
+          ts: Date.now(),
+          source: 'improve-custom',
+          user_request: userRequest.substring(0, 200),
+        });
+        fieldValues[sec.fieldId].json.iterations = iters;
+
+        await API.put('/developer/instances/' + currentInstance.id + '/field', {
+          field_id: sec.fieldId, section_path: sec.id,
+          text: result.text,
+          json: fieldValues[sec.fieldId].json,
+        });
+        textarea.dispatchEvent(new Event('input', { bubbles: true }));
+        renderIterationTracker(sec);
+      }
+      if (respEl) respEl.innerHTML = '<span class="text-green-600 text-xs">Texto mejorado con tu petición: "' + esc(userRequest.substring(0, 120)) + (userRequest.length > 120 ? '…' : '') + '"</span>';
+      closeImproveModal();
+    } catch (err) {
+      if (respEl) respEl.innerHTML = '<span class="text-error text-xs">Error: ' + esc(err.message || err) + '</span>';
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = '<span class="material-symbols-outlined text-base">auto_awesome</span><span>Mejorar texto</span>';
+      }
+    }
+  }
 
   /* ── Public API ────────────────────────────────────────────── */
   return {
@@ -2233,14 +2891,22 @@ const Developer = (() => {
     _generateField: generateField,
     _markReviewed: markReviewed,
     _aiImprove: aiImprove,
-    _aiExpand: aiExpand,
-    _aiSimplify: aiSimplify,
+    _aiImproveCustom: aiImproveCustom,
+    _aiRefine: aiRefine,
+    _aiEvaluateAndRefine: aiEvaluateAndRefine,
+    _refineStop: refineStop,
+    _refineGo: refineGo,
+    _closeImproveModal: closeImproveModal,
+    _submitImproveRequest: submitImproveRequest,
+    _regenerateFromModal: regenerateFromModal,
     _sendToEvaluator: sendToEvaluator,
     // Cascade
     _cascadeApprove: cascadeApproveAndNext,
     _cascadeSkip: cascadeSkip,
     _cascadeGoTo: cascadeGoTo,
     _cascadeRegenerate: cascadeRegenerate,
+    _cascadeGenerate: cascadeGenerate,
+    _cascadeWriteBlank: cascadeWriteBlank,
     _cascadeRestart: cascadeRestart,
   };
 })();

@@ -123,7 +123,7 @@ async function getFieldValues(instanceId) {
   for (const r of rows) {
     values[r.field_id] = {
       text: r.value_text || '',
-      json: r.value_json ? JSON.parse(r.value_json) : null,
+      json: r.value_json ? (typeof r.value_json === 'string' ? JSON.parse(r.value_json) : r.value_json) : null,
       section: r.section_path,
       updated: r.updated_at,
     };
@@ -132,16 +132,24 @@ async function getFieldValues(instanceId) {
 }
 
 async function saveFieldValue(instanceId, fieldId, sectionPath, text, json) {
-  // Upsert
+  // Upsert. json === undefined means "don't touch value_json" (preserve existing);
+  // json === null clears it; json object stringifies.
   const [existing] = await db.execute(
     'SELECT id FROM form_field_values WHERE instance_id = ? AND field_id = ?',
     [instanceId, fieldId]
   );
   if (existing.length) {
-    await db.execute(
-      'UPDATE form_field_values SET value_text = ?, value_json = ?, section_path = ?, updated_at = NOW() WHERE instance_id = ? AND field_id = ?',
-      [text || '', json ? JSON.stringify(json) : null, sectionPath || '', instanceId, fieldId]
-    );
+    if (json === undefined) {
+      await db.execute(
+        'UPDATE form_field_values SET value_text = ?, section_path = ?, updated_at = NOW() WHERE instance_id = ? AND field_id = ?',
+        [text || '', sectionPath || '', instanceId, fieldId]
+      );
+    } else {
+      await db.execute(
+        'UPDATE form_field_values SET value_text = ?, value_json = ?, section_path = ?, updated_at = NOW() WHERE instance_id = ? AND field_id = ?',
+        [text || '', json ? JSON.stringify(json) : null, sectionPath || '', instanceId, fieldId]
+      );
+    }
   } else {
     await db.execute(
       'INSERT INTO form_field_values (id, instance_id, field_id, section_path, value_text, value_json, updated_at) VALUES (?, ?, ?, ?, ?, ?, NOW())',
@@ -768,6 +776,49 @@ async function getPreviousSections(instanceId, currentFieldId) {
   return context;
 }
 
+// Strip markdown / list / table artefacts from AI output so the text can be
+// pasted directly into the EACEA PDF form. Safety net in case the model
+// ignores the OUTPUT FORMAT instructions in the prompt.
+function sanitizeProposalText(text) {
+  if (!text || typeof text !== 'string') return text;
+  let out = text;
+
+  // Drop markdown table blocks (lines with pipes + a separator line with ---)
+  out = out.replace(/(^|\n)\s*\|[^\n]*\|[^\n]*(\n\s*\|[\s\-:|]+\|[^\n]*)?(\n\s*\|[^\n]*\|[^\n]*)+/g, '$1');
+  // Any remaining single pipe-framed line
+  out = out.replace(/^\s*\|[^\n]*\|\s*$/gm, '');
+
+  // Strip heading markers at start of line: #, ##, ###…
+  out = out.replace(/^\s{0,3}#{1,6}\s+/gm, '');
+
+  // Remove ** bold and * italics wrappers, keep the inner text
+  out = out.replace(/\*\*([^*\n]+?)\*\*/g, '$1');
+  out = out.replace(/(^|[\s(])\*([^*\n]+?)\*(?=[\s).,;:!?]|$)/g, '$1$2');
+  // Remove __ bold / _ italics
+  out = out.replace(/__([^_\n]+?)__/g, '$1');
+  out = out.replace(/(^|[\s(])_([^_\n]+?)_(?=[\s).,;:!?]|$)/g, '$1$2');
+
+  // Strip blockquote markers
+  out = out.replace(/^\s{0,3}>\s?/gm, '');
+
+  // Turn bullet / numbered list markers into prose — drop the marker, keep content
+  out = out.replace(/^\s*[-*•▪→]\s+/gm, '');
+  out = out.replace(/^\s*\d{1,2}[.)]\s+/gm, '');
+  out = out.replace(/^\s*[a-z][.)]\s+/gm, '');
+
+  // Remove decorative rules / separators
+  out = out.replace(/^\s*[═─━_*=\-]{3,}\s*$/gm, '');
+
+  // Backticks (inline and fenced)
+  out = out.replace(/```[\s\S]*?```/g, (m) => m.replace(/```[a-zA-Z]*\n?|```/g, ''));
+  out = out.replace(/`([^`\n]+)`/g, '$1');
+
+  // Collapse 3+ blank lines to 2
+  out = out.replace(/\n{3,}/g, '\n\n');
+
+  return out.trim();
+}
+
 // ── Main generation function ────────────────────────────────
 
 async function generateSection(instanceId, sectionId, projectContext, programId, coordinatorName) {
@@ -794,7 +845,7 @@ async function generateSection(instanceId, sectionId, projectContext, programId,
     's5_2_text': '5.2 Security',
   };
 
-  const sectionTitle = sectionNames[sectionId] || sectionId;
+  let sectionTitle = sectionNames[sectionId] || sectionId;
 
   // Get project ID from instance
   const [instRow] = await db.execute('SELECT project_id FROM form_instances WHERE id = ?', [instanceId]);
@@ -802,6 +853,14 @@ async function generateSection(instanceId, sectionId, projectContext, programId,
 
   // Get project language (derived from national_agency)
   const { langName } = projId ? await getProjectMeta(projId) : { langName: 'English' };
+
+  // Dynamic per-WP section: resolve a human title + a focused WP context block
+  let wpFocusBlock = '';
+  if (typeof sectionId === 'string' && sectionId.startsWith('s4_2_wp_')) {
+    const wpId = sectionId.substring('s4_2_wp_'.length);
+    sectionTitle = await getSectionTitleAsync(sectionId);
+    wpFocusBlock = await buildWpFocusContext(wpId);
+  }
 
   // Build section-specific RAG query using project context for smarter retrieval
   const ragQuery = await buildSectionRagQuery(sectionId, sectionTitle, projId);
@@ -862,10 +921,27 @@ Write the ENTIRE section in ${langName}. Every paragraph, every sentence, every 
 - Reference prior experience with SPECIFIC lessons learned, not generic "track record"
 - Use numbers that come from YOUR needs assessment, not EU-level statistics
 - Write as if explaining to a colleague, not a bureaucrat
-- Vary paragraph length dramatically: one 5-line paragraph, then a 2-line paragraph, then 4 lines`;
+- Vary paragraph length dramatically: one 5-line paragraph, then a 2-line paragraph, then 4 lines
+
+══ OUTPUT FORMAT (MANDATORY — THIS TEXT GOES INTO AN OFFICIAL EACEA PDF FORM) ══
+The output MUST be plain prose. Pasting markdown into the EACEA form gives it away as AI-generated and looks unprofessional.
+- NO markdown at all. NO "**bold**", NO "*italics*", NO "##" or "#" headings, NO "> quotes", NO backticks.
+- NO markdown tables (pipes "|" or "---" separators). If you need to compare things, do it in prose ("Unlike ERDF which is top-down, our approach is bottom-up...").
+- NO bullet lists or numbered lists. NO lines starting with "- ", "* ", "• ", "→ ", "1.", "2.", "a)", "b)", etc. Write it as continuous prose.
+- NO subheadings or internal section titles (you are writing the BODY of one single section).
+- NO emojis, NO ASCII art, NO decorative symbols ("═", "──", "▪").
+- Paragraphs separated by a single blank line, that's all the formatting you get.`;
 
   // Build user prompt
   let user = `══ YOUR PROJECT ══\n${projectContext}`;
+
+  // Per-WP focus: tell the model EXACTLY which WP it is writing about and give
+  // it the activities/leader/category for THAT WP specifically. Without this,
+  // 4.2 WP1 and 4.2 WP2 would get the same generic prompt and produce
+  // near-identical text.
+  if (wpFocusBlock) {
+    user += `\n\n══ WRITE THIS SPECIFIC WORK PACKAGE (NOT THE OTHERS) ══\n${wpFocusBlock}\nWrite a narrative that describes this WP concretely: its objective, the sequence of its activities, who leads and who contributes, expected outputs/deliverables, and how the timing fits the project. Reference other WPs only when coherence demands it. Do NOT summarise the whole workplan — only this WP.`;
+  }
 
   if (evalGuidance) {
     user += `\n\n══ WHAT THE EVALUATOR SCORES IN THIS SECTION ══\n${evalGuidance}\nAddress ALL of these points, but naturally woven into the narrative — not as a checklist.`;
@@ -891,28 +967,32 @@ Write the ENTIRE section in ${langName}. Every paragraph, every sentence, every 
   const seed = Math.random().toString(36).substring(2, 8);
   user += `\n\n══ NOW WRITE ══\nWrite section "${sectionTitle}" for this specific project. Use the coordinator's own words and research documents as your primary material. The call documents are secondary context. Write with conviction and specificity. [v:${seed}]`;
 
-  return await callAI(system, user, 'generate');
+  const raw = await callAI(system, user, 'generate');
+  return sanitizeProposalText(raw);
 }
 
 // ── Evaluate section with full criteria context ─────────────
 
-async function evaluateSection(text, sectionTitle, criteria, programId) {
+async function evaluateSection(text, sectionTitle, criteria, programId, langName) {
   if (!process.env.ANTHROPIC_API_KEY) return { score: 'pending', feedback: 'API key not configured' };
 
   const writingRules = programId ? await getWritingRules(programId) : {};
+  const outputLang = langName || 'English';
 
   const system = `You are a senior Erasmus+ proposal evaluator with extensive experience scoring EU project applications. You evaluate rigorously but constructively.
 
 Evaluate the section text below. Score each aspect and provide actionable feedback.
 
+LANGUAGE (MANDATORY): the "strengths", "weaknesses", "suggestions" and "missing_elements" fields MUST be written in ${outputLang}. Every sentence of those fields in ${outputLang}. The "overall" field keeps its English enum value (excellent|good|fair|weak).
+
 Respond ONLY in valid JSON:
 {
   "overall": "excellent|good|fair|weak",
   "score_estimate": 8,
-  "strengths": ["specific strength 1", "specific strength 2"],
-  "weaknesses": ["specific weakness 1"],
-  "suggestions": ["actionable improvement 1", "actionable improvement 2", "actionable improvement 3"],
-  "missing_elements": ["element the evaluator would expect but is missing"],
+  "strengths": ["fortaleza específica en ${outputLang} 1", "fortaleza específica en ${outputLang} 2"],
+  "weaknesses": ["debilidad específica en ${outputLang} 1"],
+  "suggestions": ["mejora accionable en ${outputLang} 1", "mejora accionable en ${outputLang} 2", "mejora accionable en ${outputLang} 3"],
+  "missing_elements": ["elemento que el evaluador esperaría pero falta, en ${outputLang}"],
   "word_count_ok": true
 }`;
 
@@ -948,8 +1028,401 @@ async function improveSection(text, action, sectionTitle, projectContext, progra
   let user = `Section: ${sectionTitle}\n\nInstruction: ${actions[action] || actions.improve}`;
   if (projectContext) user += `\n\nProject context for reference:\n${projectContext.substring(0, 3000)}`;
   user += `\n\nOriginal text to improve:\n${text}`;
+  user += `\n\nOUTPUT: plain prose only. No markdown, no bullets, no tables, no headings, no bold/italics, no backticks. Paragraphs separated by blank lines.`;
 
-  return await callClaude(system, user, 4096);
+  const raw = await callClaude(system, user, 4096);
+  return sanitizeProposalText(raw);
+}
+
+// ── Improve section with a CUSTOM user request (free-text from coordinator) ──
+// Uses the same enriched context as generateSection so the revision is grounded
+// in the full project data (partners, budget, activities, RAG, eval guidance,
+// previous sections, research docs). The user_request is injected as a top-level
+// mandate for the revision.
+async function improveSectionCustom(instanceId, sectionId, currentText, userRequest, projectContext, programId, coordinatorName, opts = {}) {
+  if (!process.env.ANTHROPIC_API_KEY) return currentText;
+
+  const sectionNames = {
+    'summary_text': 'Project Summary',
+    's1_1_text': '1.1 Background and general objectives',
+    's1_2_text': '1.2 Needs analysis and specific objectives',
+    's1_3_text': '1.3 Complementarity, innovation and European added value',
+    's2_1_1_text': '2.1.1 Concept and methodology',
+    's2_1_2_text': '2.1.2 Project management, quality assurance and monitoring',
+    's2_1_4_text': '2.1.4 Cost effectiveness and financial management',
+    's2_2_1_text': '2.2.1 Consortium set-up and cooperation',
+    's2_2_2_text': '2.2.2 Consortium management and decision-making',
+    's3_1_text': '3.1 Impact and ambition',
+    's3_2_text': '3.2 Communication, dissemination and visibility',
+    's3_3_text': '3.3 Sustainability and continuation',
+    's4_1_text': '4.1 Work plan overview',
+    's4_2_text': '4.2 Work packages, activities, resources and timing',
+    's5_1_text': '5.1 Ethics',
+    's5_2_text': '5.2 Security',
+  };
+  let sectionTitle = sectionNames[sectionId] || sectionId;
+
+  const [instRow] = await db.execute('SELECT project_id FROM form_instances WHERE id = ?', [instanceId]);
+  const projId = instRow[0]?.project_id;
+  const { langName } = projId ? await getProjectMeta(projId) : { langName: 'English' };
+
+  // Per-WP dynamic section support
+  let wpFocusBlock = '';
+  if (typeof sectionId === 'string' && sectionId.startsWith('s4_2_wp_')) {
+    const wpId = sectionId.substring('s4_2_wp_'.length);
+    sectionTitle = await getSectionTitleAsync(sectionId);
+    wpFocusBlock = await buildWpFocusContext(wpId);
+  }
+
+  const ragQuery = await buildSectionRagQuery(sectionId, sectionTitle, projId);
+
+  const [ragChunks, writingRules, evalGuidance, previousSections, researchChunks] = await Promise.all([
+    programId ? retrieveRelevantChunks(ragQuery, programId, 8) : Promise.resolve(''),
+    programId ? getWritingRules(programId) : Promise.resolve({}),
+    getEvalGuidanceForSection(sectionId),
+    getPreviousSections(instanceId, sectionId),
+    projId ? retrieveResearchChunks(ragQuery, projId, 6) : Promise.resolve(''),
+  ]);
+
+  console.log(`[Writer/improve-custom] section=${sectionId} req="${(userRequest || '').substring(0, 80)}..." writingRules=${writingRules.writing_style ? 'Y' : 'N'} evalGuidance=${evalGuidance ? 'Y' : 'N'} RAG=${ragChunks ? ragChunks.length : 0}ch prev=${previousSections ? 'Y' : 'N'}`);
+
+  let system = `You are a real project coordinator revising a funding proposal. You are NOT an AI assistant — you are a practitioner refining your own text based on your own judgement.
+
+PERSONA: You are the project coordinator at ${coordinatorName || 'the lead organisation'}. You wrote the original text and you now want to improve it for a SPECIFIC reason.
+
+SECTION: "${sectionTitle}"
+OUTPUT: Only the revised section text. No title, no numbering, no meta-commentary, no explanation of what you changed.
+LENGTH: Keep a similar length to the original unless the coordinator's request explicitly asks to expand or shorten it.
+
+══ LANGUAGE (MANDATORY) ══
+Write the ENTIRE revised section in ${langName}. Every paragraph, every sentence, every word must be in ${langName}.
+
+══ HOW TO REVISE ══
+- Apply the coordinator's request faithfully — it is the PRIMARY instruction.
+- Keep the parts of the original that already work. Do NOT rewrite from scratch unless the request asks for it.
+- Preserve the narrative voice and the specific facts/names/numbers from the original.
+- Ground any new content in the project context, RAG references and previous sections below.
+- Do not invent partners, figures, deliverables or countries that are not in the project context.
+
+══ ANTI-REGRESSION RULES (CRITICAL — REVISIONS OFTEN MAKE TEXT WORSE, DON'T) ══
+- If the instruction is about LENGTH ("too long", "shorten", "concise"), reduce by AT MOST 10% of the original word count. Never cut specific examples, partner names, city names, data points, percentages, dates, or references to EU policies. Remove only filler phrases and redundancies. A shorter-but-emptier text scores WORSE, not better.
+- If the instruction is about STRUCTURE ("bullet points", "tables", "clearer"), convert the form but keep 100% of the content.
+- If the instruction is vague ("improve", "polish"), make minimal surgical changes — you will usually cause regressions if you rewrite paragraphs wholesale.
+- Strengths identified by the evaluator (when provided) are LOAD-BEARING. Removing or diluting them drops the score. If addressing a weakness would damage a strength, find a less destructive path.
+
+══ OUTPUT FORMAT (MANDATORY — THIS TEXT GOES INTO AN OFFICIAL EACEA PDF FORM) ══
+The output MUST be plain prose. Pasting markdown into the EACEA form gives it away as AI-generated.
+- NO markdown at all. NO "**bold**", NO "*italics*", NO "##" or "#" headings, NO "> quotes", NO backticks.
+- NO markdown tables (pipes "|" or "---" separators). Compare things in prose instead.
+- NO bullet lists or numbered lists. NO lines starting with "- ", "* ", "• ", "→ ", "1.", "2.", "a)", "b)". Write continuous prose.
+- NO subheadings or internal section titles (you are writing the BODY of one single section).
+- NO emojis, ASCII art, decorative symbols ("═", "──", "▪").
+- Paragraphs separated by a single blank line, that's all the formatting you get.`;
+
+  if (writingRules.writing_style) {
+    system += `\n\n══ WRITING STYLE (FOLLOW STRICTLY) ══\n${writingRules.writing_style}`;
+  }
+  if (writingRules.ai_detection_rules) {
+    system += `\n\n══ ANTI-AI DETECTION (MANDATORY) ══\n${writingRules.ai_detection_rules}`;
+  }
+
+  let user = `══ COORDINATOR'S REQUEST (PRIMARY INSTRUCTION) ══\n${userRequest}\n\n`;
+
+  // Score-aware context: when the caller provides the current evaluation and
+  // a target score (used by the auto-refine loop), spell out the gap so the
+  // model knows what it's optimising for.
+  if (opts.evaluation) {
+    const ev = opts.evaluation;
+    const curScore = typeof ev.score_estimate === 'number' ? ev.score_estimate : (ev.score || null);
+    const target = opts.targetScore || 9;
+    user += `══ CURRENT EVALUATOR SCORE ══\nThe current text scores ${curScore ?? '?'}/10 according to the EACEA rubric. Your job is to push this text to ${target}/10 or higher.\n`;
+    if (ev.weaknesses && ev.weaknesses.length) {
+      user += `\nWEAKNESSES THE EVALUATOR FLAGGED (address ALL of these, they are the gap between current score and ${target}):\n`;
+      ev.weaknesses.forEach((w, i) => { user += `${i + 1}. ${w}\n`; });
+    }
+    if (ev.suggestions && ev.suggestions.length) {
+      user += `\nEVALUATOR SUGGESTIONS (apply these — they are concrete fixes):\n`;
+      ev.suggestions.forEach((s, i) => { user += `${i + 1}. ${s}\n`; });
+    }
+    if (ev.strengths && ev.strengths.length) {
+      user += `\nSTRENGTHS TO PRESERVE (do NOT remove or weaken these):\n`;
+      ev.strengths.forEach((s, i) => { user += `${i + 1}. ${s}\n`; });
+    }
+    user += `\n`;
+  }
+
+  user += `══ ORIGINAL TEXT TO REVISE ══\n${currentText}\n\n`;
+  if (projectContext) user += `══ YOUR PROJECT ══\n${projectContext}\n\n`;
+  if (wpFocusBlock) user += `══ FOCUS WORK PACKAGE (revise ONLY this WP, not the full workplan) ══\n${wpFocusBlock}\n\n`;
+  if (evalGuidance) user += `══ WHAT THE EVALUATOR SCORES IN THIS SECTION ══\n${evalGuidance}\n\n`;
+  if (ragChunks) {
+    const limitedRag = ragChunks.substring(0, 8000);
+    user += `══ REFERENCE DOCUMENTS (cite naturally, don't list) ══\n${limitedRag}\n\n`;
+  }
+  if (researchChunks) user += `══ THEMATIC RESEARCH (uploaded by coordinator) ══\n${researchChunks}\n\n`;
+  if (previousSections) user += `══ WHAT YOU ALREADY WROTE IN OTHER SECTIONS (stay coherent, don't repeat) ══\n${previousSections}\n\n`;
+  user += `══ NOW REVISE ══\nReturn ONLY the revised text for section "${sectionTitle}", applying the coordinator's request above.`;
+
+  const raw = await callAI(system, user, 'generate');
+  return sanitizeProposalText(raw);
+}
+
+// Central section-title mapping shared by all refine/evaluate/improve paths.
+const SECTION_NAMES = {
+  'summary_text': 'Project Summary',
+  's1_1_text': '1.1 Background and general objectives',
+  's1_2_text': '1.2 Needs analysis and specific objectives',
+  's1_3_text': '1.3 Complementarity, innovation and European added value',
+  's2_1_1_text': '2.1.1 Concept and methodology',
+  's2_1_2_text': '2.1.2 Project management, quality assurance and monitoring',
+  's2_1_4_text': '2.1.4 Cost effectiveness and financial management',
+  's2_2_1_text': '2.2.1 Consortium set-up and cooperation',
+  's2_2_2_text': '2.2.2 Consortium management and decision-making',
+  's3_1_text': '3.1 Impact and ambition',
+  's3_2_text': '3.2 Communication, dissemination and visibility',
+  's3_3_text': '3.3 Sustainability and continuation',
+  's4_1_text': '4.1 Work plan overview',
+  's4_2_text': '4.2 Work packages, activities, resources and timing',
+  's5_1_text': '5.1 Ethics',
+  's5_2_text': '5.2 Security',
+};
+function getSectionTitle(sectionId) { return SECTION_NAMES[sectionId] || sectionId; }
+
+// Async version that resolves dynamic per-WP section IDs (s4_2_wp_{uuid}) by
+// looking up the WP in the DB. Falls back to the static map for known IDs.
+async function getSectionTitleAsync(sectionId) {
+  if (SECTION_NAMES[sectionId]) return SECTION_NAMES[sectionId];
+  if (typeof sectionId === 'string' && sectionId.startsWith('s4_2_wp_')) {
+    const wpId = sectionId.substring('s4_2_wp_'.length);
+    try {
+      const [rows] = await db.execute('SELECT code, title, order_index FROM work_packages WHERE id = ?', [wpId]);
+      if (rows[0]) {
+        const code = rows[0].code || ('WP' + ((rows[0].order_index || 0) + 1));
+        const t = rows[0].title || 'Work Package';
+        return `4.2 ${code} — ${t}`;
+      }
+    } catch (e) { /* fall through */ }
+    return '4.2 Work Package';
+  }
+  return sectionId;
+}
+
+// Load a WP-focused block (WP header, activities, deliverables, budget) that
+// the LLM can use to write or revise section 4.2 for a specific WP. Kept small
+// and narrative so it plugs into existing prompts cleanly.
+async function buildWpFocusContext(wpId) {
+  if (!wpId) return '';
+  const [[wp]] = await db.execute(
+    'SELECT wp.id, wp.code, wp.title, wp.category, wp.order_index, wp.leader_id, p.name AS leader_name, p.country AS leader_country FROM work_packages wp LEFT JOIN partners p ON p.id = wp.leader_id WHERE wp.id = ?',
+    [wpId]
+  ).then(r => [r]).catch(() => [[]]);
+  if (!wp) return '';
+
+  const [activities] = await db.execute(
+    'SELECT id, type, label, subtype, date_start, date_end, description, order_index FROM activities WHERE wp_id = ? ORDER BY order_index, date_start',
+    [wpId]
+  ).catch(() => [[]]);
+
+  let block = `FOCUS WORK PACKAGE: ${wp.code || ('WP' + ((wp.order_index || 0) + 1))} — ${wp.title || ''}\n`;
+  if (wp.category) block += `Category: ${wp.category}\n`;
+  if (wp.leader_name) block += `Lead Beneficiary: ${wp.leader_name}${wp.leader_country ? ' (' + wp.leader_country + ')' : ''}\n`;
+
+  if (activities.length) {
+    block += `\nActivities / Tasks in this WP (${activities.length}):\n`;
+    activities.forEach((a, i) => {
+      block += `  T${(wp.order_index || 0) + 1}.${i + 1} — ${a.label || a.type}`;
+      if (a.subtype) block += ` (${a.subtype})`;
+      if (a.date_start && a.date_end) block += ` [${a.date_start} → ${a.date_end}]`;
+      if (a.description) block += `\n      ${a.description.substring(0, 400)}`;
+      block += `\n`;
+    });
+  } else {
+    block += `\n(No activities defined yet in Intake for this WP — produce a plausible set based on the WP title and the project context.)\n`;
+  }
+  return block;
+}
+
+// Phase 1 of Evaluate-and-Refine: evaluate the current text, return the
+// diagnosis + which 2 weaknesses would be targeted if the user chooses to
+// refine. Decides whether refining makes sense at all (skip_reason).
+async function refineEvaluatePhase(instanceId, sectionId, currentText, programId) {
+  if (!process.env.ANTHROPIC_API_KEY) {
+    return { skip_reason: 'AI key not configured.' };
+  }
+  const sectionTitle = await getSectionTitleAsync(sectionId);
+  const [instRow] = await db.execute('SELECT project_id FROM form_instances WHERE id = ?', [instanceId]);
+  const projId = instRow[0]?.project_id;
+  const { langName } = projId ? await getProjectMeta(projId) : { langName: 'English' };
+  const evaluation = await evaluateSection(currentText, sectionTitle, null, programId, langName);
+  const score = typeof evaluation.score_estimate === 'number' ? evaluation.score_estimate : null;
+  const weaknesses = evaluation.weaknesses || [];
+  const suggestions = evaluation.suggestions || [];
+
+  let skip_reason = null;
+  if (score != null && score >= 8.5) {
+    skip_reason = `Ya estás en ${score}/10 — zona de rendimientos decrecientes. Refinar podría empeorar el texto. Si quieres cambios puntuales, usa "Mejorar con IA" con una instrucción específica.`;
+  } else if (!weaknesses.length) {
+    skip_reason = 'El evaluador no ha identificado debilidades claras. No hay nada que refinar automáticamente.';
+  }
+
+  return {
+    ...evaluation,
+    would_target_weaknesses: weaknesses.slice(0, 2),
+    would_target_suggestions: suggestions.slice(0, 3),
+    skip_reason,
+  };
+}
+
+// Phase 2 of Evaluate-and-Refine: takes the evaluation from phase 1 and a
+// targeted improve pass, then re-evaluates. Auto-reverts on regression.
+async function refineApplyPhase(instanceId, sectionId, currentText, beforeEval, projectContext, programId, coordinatorName) {
+  if (!process.env.ANTHROPIC_API_KEY) {
+    return { text: currentText, before: beforeEval, after: beforeEval, delta: 0, weaknesses_targeted: [] };
+  }
+  const sectionTitle = await getSectionTitleAsync(sectionId);
+  const [instRow] = await db.execute('SELECT project_id FROM form_instances WHERE id = ?', [instanceId]);
+  const projId = instRow[0]?.project_id;
+  const { langName } = projId ? await getProjectMeta(projId) : { langName: 'English' };
+  const beforeScore = typeof beforeEval.score_estimate === 'number' ? beforeEval.score_estimate : null;
+  const topWeaknesses = (beforeEval.weaknesses || []).slice(0, 2);
+  const topSuggestions = (beforeEval.suggestions || []).slice(0, 3);
+
+  const targetScore = Math.min(10, Math.max(9, Math.ceil((beforeScore || 7) + 1.5)));
+  const userRequest = `Improve this section to reach ${targetScore}/10. Focus ONLY on these high-impact issues, not a general polish:\n` +
+    topWeaknesses.map((w, i) => `Issue ${i + 1}: ${w}`).join('\n') +
+    (topSuggestions.length ? `\n\nConcrete suggestions to apply:\n` + topSuggestions.map((s) => `- ${s}`).join('\n') : '');
+
+  const improved = await improveSectionCustom(
+    instanceId, sectionId, currentText, userRequest, projectContext, programId, coordinatorName,
+    { evaluation: beforeEval, targetScore }
+  );
+
+  const afterEval = await evaluateSection(improved, sectionTitle, null, programId, langName);
+  const afterScore = typeof afterEval.score_estimate === 'number' ? afterEval.score_estimate : null;
+  const delta = (beforeScore != null && afterScore != null) ? (afterScore - beforeScore) : null;
+  console.log(`[Writer/refine-apply] ${beforeScore} → ${afterScore} (delta ${delta})`);
+
+  if (delta != null && delta < -0.5) {
+    return {
+      text: currentText,
+      before: beforeEval,
+      after: afterEval,
+      delta,
+      weaknesses_targeted: topWeaknesses,
+      reverted: true,
+      note: `La refinación bajó la puntuación de ${beforeScore} a ${afterScore} (delta ${delta.toFixed(1)}). Se ha restaurado el texto original. Prueba con "Mejorar con IA" dando una instrucción más específica.`,
+    };
+  }
+
+  return {
+    text: improved,
+    before: beforeEval,
+    after: afterEval,
+    delta,
+    weaknesses_targeted: topWeaknesses,
+  };
+}
+
+// ── Legacy one-shot auto-refine (kept for backwards compat, will be removed).
+async function refineSectionAuto(instanceId, sectionId, currentText, projectContext, programId, coordinatorName) {
+  if (!process.env.ANTHROPIC_API_KEY) {
+    return { text: currentText, before: null, after: null, weaknesses_targeted: [] };
+  }
+
+  const sectionNames = {
+    'summary_text': 'Project Summary',
+    's1_1_text': '1.1 Background and general objectives',
+    's1_2_text': '1.2 Needs analysis and specific objectives',
+    's1_3_text': '1.3 Complementarity, innovation and European added value',
+    's2_1_1_text': '2.1.1 Concept and methodology',
+    's2_1_2_text': '2.1.2 Project management, quality assurance and monitoring',
+    's2_1_4_text': '2.1.4 Cost effectiveness and financial management',
+    's2_2_1_text': '2.2.1 Consortium set-up and cooperation',
+    's2_2_2_text': '2.2.2 Consortium management and decision-making',
+    's3_1_text': '3.1 Impact and ambition',
+    's3_2_text': '3.2 Communication, dissemination and visibility',
+    's3_3_text': '3.3 Sustainability and continuation',
+    's4_1_text': '4.1 Work plan overview',
+    's4_2_text': '4.2 Work packages, activities, resources and timing',
+    's5_1_text': '5.1 Ethics',
+    's5_2_text': '5.2 Security',
+  };
+  const sectionTitle = sectionNames[sectionId] || sectionId;
+
+  // 1. Evaluate current text
+  const beforeEval = await evaluateSection(currentText, sectionTitle, null, programId);
+  const beforeScore = typeof beforeEval.score_estimate === 'number' ? beforeEval.score_estimate : null;
+  console.log(`[Writer/refine] before: ${beforeScore}/10, weaknesses=${(beforeEval.weaknesses || []).length}, suggestions=${(beforeEval.suggestions || []).length}`);
+
+  // 2. Pick the top 2 weaknesses (most impactful, not a laundry list)
+  const topWeaknesses = (beforeEval.weaknesses || []).slice(0, 2);
+  const topSuggestions = (beforeEval.suggestions || []).slice(0, 3);
+
+  // High-score guard: above 8.5 we're in diminishing returns; refining here
+  // often regresses because the improver overcorrects on a weakness while
+  // eroding existing strengths. Return a clear message instead of risking it.
+  if (beforeScore != null && beforeScore >= 8.5) {
+    return {
+      text: currentText,
+      before: beforeEval,
+      after: beforeEval,
+      delta: 0,
+      weaknesses_targeted: [],
+      note: `Ya estás en ${beforeScore}/10 — zona de rendimientos decrecientes. Usa "Mejorar con IA" con una instrucción muy específica si quieres cambiar algo puntual, o déjalo como está.`,
+    };
+  }
+
+  if (!topWeaknesses.length) {
+    return {
+      text: currentText,
+      before: beforeEval,
+      after: beforeEval,
+      delta: 0,
+      weaknesses_targeted: [],
+      note: 'El evaluador no ha identificado debilidades claras. No hay nada que refinar.',
+    };
+  }
+
+  // 3. Build a focused improve instruction from the top weaknesses only
+  const targetScore = Math.min(10, Math.max(9, Math.ceil((beforeScore || 7) + 1.5)));
+  const userRequest = `Improve this section to reach ${targetScore}/10. Focus ONLY on these high-impact issues, not a general polish:\n` +
+    topWeaknesses.map((w, i) => `Issue ${i + 1}: ${w}`).join('\n') +
+    (topSuggestions.length ? `\n\nConcrete suggestions to apply:\n` + topSuggestions.map((s, i) => `- ${s}`).join('\n') : '');
+
+  // 4. Run targeted improve
+  const improved = await improveSectionCustom(
+    instanceId, sectionId, currentText, userRequest, projectContext, programId, coordinatorName,
+    { evaluation: beforeEval, targetScore }
+  );
+
+  // 5. Re-evaluate
+  const afterEval = await evaluateSection(improved, sectionTitle, null, programId);
+  const afterScore = typeof afterEval.score_estimate === 'number' ? afterEval.score_estimate : null;
+  const delta = (beforeScore != null && afterScore != null) ? (afterScore - beforeScore) : null;
+  console.log(`[Writer/refine] after: ${afterScore}/10 (delta ${delta})`);
+
+  // Regression guard: if the refined version is worse by more than 0.5 points,
+  // revert to the original. Better to keep the user's current text than to
+  // ship a regression. The UI shows the delta so the user understands why.
+  if (delta != null && delta < -0.5) {
+    return {
+      text: currentText,  // revert
+      before: beforeEval,
+      after: afterEval,
+      delta,
+      weaknesses_targeted: topWeaknesses,
+      reverted: true,
+      note: `La refinación bajó la puntuación de ${beforeScore} a ${afterScore} (delta ${delta.toFixed(1)}). Se ha restaurado el texto original para no perder calidad. Prueba con "Mejorar con IA" dando una instrucción más específica.`,
+    };
+  }
+
+  return {
+    text: improved,
+    before: beforeEval,
+    after: afterEval,
+    delta,
+    weaknesses_targeted: topWeaknesses,
+  };
 }
 
 // ============ PREP STUDIO v2: 5-TAB CONTEXT ============
@@ -1949,6 +2422,10 @@ module.exports = {
   generateSection,
   evaluateSection,
   improveSection,
+  improveSectionCustom,
+  refineSectionAuto,
+  refineEvaluatePhase,
+  refineApplyPhase,
   retrieveRelevantChunks,
   getWritingRules,
   // Prep Studio v2

@@ -19,6 +19,10 @@ router.put('/instances/:id/field', requireAuth, ctrl.saveField);
 router.post('/instances/:id/generate', requireAuth, ctrl.generateDraft);
 router.post('/instances/:id/evaluate', requireAuth, ctrl.evaluateField);
 router.post('/instances/:id/improve', requireAuth, ctrl.improveField);
+router.post('/instances/:id/improve-custom', requireAuth, ctrl.improveFieldCustom);
+router.post('/instances/:id/refine', requireAuth, ctrl.refineField);
+router.post('/instances/:id/refine/evaluate', requireAuth, ctrl.refineEvaluate);
+router.post('/instances/:id/refine/apply', requireAuth, ctrl.refineApply);
 
 // Eval criteria (read-only)
 router.get('/eval-criteria', requireAuth, ctrl.getEvalCriteria);
