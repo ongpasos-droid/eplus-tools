@@ -1,6 +1,7 @@
 /* ── Intake Controller — Business logic for intake endpoints ───────── */
 
 const model = require('./model');
+const subscribersModel = require('../subscribers/model');
 
 /* ── GET /v1/intake/programs ─────────────────────────────────────── */
 async function listPrograms(req, res, next) {
@@ -82,6 +83,14 @@ async function createProject(req, res, next) {
     };
 
     const project = await model.createProject(req.user.id, projectData);
+
+    // Fire-and-forget: real project → promote newsletter subscriber to 'hot'.
+    // Sandbox projects never trigger this (they go via /v1/sandbox/start).
+    if (req.user?.email && !project.is_sandbox) {
+      subscribersModel
+        .promoteByEmail(req.user.email, 'hot', req.user.id)
+        .catch(err => console.warn('[subscribers] promote hot failed:', err.message));
+    }
 
     res.status(201).json({
       ok: true,

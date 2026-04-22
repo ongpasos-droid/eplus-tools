@@ -1,8 +1,18 @@
 const bcrypt = require('bcryptjs');
 const User = require('./model');
 const { signToken, signRefreshToken, verifyRefreshToken } = require('../../middleware/auth');
+const subscribersModel = require('../subscribers/model');
 
 const SALT_ROUNDS = 12;
+
+/** Fire-and-forget: promote newsletter subscriber to 'warm' on signup/login.
+ *  Never block or fail the auth flow if this errors. */
+function _promoteWarm(user) {
+  if (!user?.email) return;
+  subscribersModel
+    .promoteByEmail(user.email, 'warm', user.id || null)
+    .catch(err => console.warn('[subscribers] promote warm failed:', err.message));
+}
 
 /* ── Cookie options ──────────────────────────────────────────── */
 function cookieOpts() {
@@ -51,6 +61,7 @@ const AuthController = {
       const refreshToken = signRefreshToken(user);
 
       res.cookie('refresh_token', refreshToken, cookieOpts());
+      _promoteWarm(user);
       res.status(201).json({
         ok: true,
         data: { user, access_token: accessToken }
@@ -85,6 +96,7 @@ const AuthController = {
       const refreshToken = signRefreshToken(safeUser);
 
       res.cookie('refresh_token', refreshToken, cookieOpts());
+      _promoteWarm(safeUser);
       res.json({
         ok: true,
         data: { user: safeUser, access_token: accessToken }
@@ -123,6 +135,7 @@ const AuthController = {
       const refreshToken = signRefreshToken(user);
 
       res.cookie('refresh_token', refreshToken, cookieOpts());
+      _promoteWarm(user);
       res.json({
         ok: true,
         data: { user, access_token: accessToken }

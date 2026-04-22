@@ -33,9 +33,29 @@ app.use(helmet({
   }
 }));
 
+// CORS allow-list. Tool origins + WP origins (local + prod) so the WP
+// newsletter form can POST to /v1/subscribers. Env var can override.
+const ALLOWED_ORIGINS = (process.env.CORS_ORIGINS || [
+  process.env.CORS_ORIGIN || 'http://localhost:3000',
+  'http://localhost:3000',
+  'http://eufundingschool.test',
+  'https://eufundingschool.com',
+  'https://www.eufundingschool.com',
+  'https://intake.eufundingschool.com',
+  'https://app.eufundingschool.com',
+].join(','))
+  .split(',')
+  .map(s => s.trim())
+  .filter(Boolean);
+
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
-  credentials: true
+  origin: (origin, cb) => {
+    // No Origin header: same-origin, curl, native apps. Allow.
+    if (!origin) return cb(null, true);
+    if (ALLOWED_ORIGINS.includes(origin)) return cb(null, true);
+    return cb(new Error(`CORS: origin ${origin} not allowed`), false);
+  },
+  credentials: true,
 }));
 
 /* ── Body parsing ─────────────────────────────────────────────── */
@@ -73,6 +93,7 @@ app.use('/v1/evaluator',   require('./node/src/modules/evaluator/routes'));
 app.use('/v1/budget',      require('./node/src/modules/budget/routes'));
 app.use('/v1/voice',       require('./node/src/modules/voice/routes'));
 app.use('/v1/sandbox',     require('./node/src/modules/sandbox/routes'));
+app.use('/v1/subscribers', require('./node/src/modules/subscribers/routes'));
 
 /* ── SPA fallback — serve index.html for all non-API routes ─── */
 app.get('*', (req, res) => {
