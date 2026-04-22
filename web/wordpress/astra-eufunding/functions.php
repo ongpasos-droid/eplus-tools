@@ -71,6 +71,27 @@ function efs_cta( $slug ) {
 }
 
 /* -------------------------------------------------------------------------
+ * Shortcodes para usar los CTAs dentro de páginas/posts editados en wp-admin.
+ *   [efs_newsletter]   → form del boletín (POST a /v1/subscribers)
+ *   [efs_sandbox]      → caja CTA hacia el sandbox del tool
+ * ------------------------------------------------------------------------- */
+add_shortcode( 'efs_newsletter', function ( $atts ) {
+	$atts = shortcode_atts( array( 'variant' => '' ), $atts, 'efs_newsletter' );
+	// Pass variant to the partial via a global the partial can read.
+	$GLOBALS['efs_newsletter_variant'] = $atts['variant']; // 'bare' = no outer card
+	ob_start();
+	get_template_part( 'template-parts/cta', 'newsletter' );
+	unset( $GLOBALS['efs_newsletter_variant'] );
+	return ob_get_clean();
+} );
+
+add_shortcode( 'efs_sandbox', function () {
+	ob_start();
+	get_template_part( 'template-parts/cta', 'sandbox' );
+	return ob_get_clean();
+} );
+
+/* -------------------------------------------------------------------------
  * Tweaks to Astra defaults that the blog needs
  * ------------------------------------------------------------------------- */
 

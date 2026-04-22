@@ -13,10 +13,16 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 $source = is_single() ? 'blog_post' : ( is_home() ? 'blog_home' : 'wp' );
 $source = preg_replace( '/[^a-z0-9_-]/i', '', $source ) ?: 'wp';
+$variant = isset( $GLOBALS['efs_newsletter_variant'] ) ? $GLOBALS['efs_newsletter_variant'] : '';
+$bare    = ( $variant === 'bare' );
+$tag     = $bare ? 'div' : 'aside';
+$cls     = $bare ? 'efs-newsletter efs-newsletter--bare' : 'efs-cta efs-cta--newsletter efs-newsletter';
 ?>
-<aside class="efs-cta efs-cta--newsletter" data-efs-newsletter data-source="<?php echo esc_attr( $source ); ?>">
-	<h3>Recibe cada mes las calls Erasmus+ por prioridad</h3>
-	<p>Un correo el primer viernes de cada mes. Calls abiertas, un tip práctico y el artículo destacado. Sin relleno.</p>
+<<?php echo $tag; ?> class="<?php echo esc_attr( $cls ); ?>" data-efs-newsletter data-source="<?php echo esc_attr( $source ); ?>">
+	<?php if ( ! $bare ) : ?>
+		<h3>Recibe cada mes las calls Erasmus+ por prioridad</h3>
+		<p>Un correo el primer viernes de cada mes. Calls abiertas, un tip práctico y el artículo destacado. Sin relleno.</p>
+	<?php endif; ?>
 
 	<form class="efs-newsletter-form" novalidate>
 		<label class="sr-only" for="efs-news-email-<?php echo esc_attr( $source ); ?>">Tu email</label>
@@ -36,44 +42,75 @@ $source = preg_replace( '/[^a-z0-9_-]/i', '', $source ) ?: 'wp';
 	<p class="efs-newsletter-form__legal">
 		Al apuntarte aceptas la <a href="<?php echo esc_url( home_url( '/politica-de-privacidad/' ) ); ?>">política de privacidad</a>. Puedes darte de baja cuando quieras desde cualquier email.
 	</p>
-</aside>
+</<?php echo $tag; ?>>
 
 <style>
-	.efs-newsletter-form { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem; }
-	.efs-newsletter-form__input {
-		flex:1 1 220px; min-width:220px;
-		padding:.7rem 1rem;
-		border:1px solid rgba(255,255,255,0.22);
-		background: rgba(255,255,255,0.08);
-		color:#fff;
+	/* Bare variant: el shortcode se inserta dentro de una sección que ya
+	   tiene su propio fondo/padding (ej. la home). No envolvemos en card. */
+	.efs-newsletter--bare { padding: 0; margin: 0; background: transparent; }
+
+	.efs-newsletter-form {
+		display: flex; gap: .5rem; flex-wrap: wrap;
+		margin-top: .5rem; align-items: stretch;
+	}
+	/* Input: contraste alto, fondo blanco siempre — funciona sobre cualquier fondo */
+	.efs-newsletter .efs-newsletter-form__input {
+		flex: 1 1 240px; min-width: 240px;
+		padding: .85rem 1rem;
+		border: 2px solid var(--efs-color-accent, #e7eb00);
+		background: #ffffff;
+		color: #06003e;
 		border-radius: var(--efs-radius, .25rem);
-		font: 500 .95rem/1.3 var(--efs-font-body, inherit);
+		font: 500 1rem/1.3 var(--efs-font-body, inherit);
+		box-sizing: border-box;
 	}
-	.efs-newsletter-form__input::placeholder { color: rgba(255,255,255,0.55); }
-	.efs-newsletter-form__input:focus {
-		outline:none; border-color: var(--efs-color-accent, #e7eb00);
-		box-shadow: 0 0 0 2px rgba(231,235,0,0.35);
+	.efs-newsletter .efs-newsletter-form__input::placeholder {
+		color: rgba(6, 0, 62, 0.45);
 	}
-	.efs-cta--light .efs-newsletter-form__input {
-		background:#fff; color: var(--efs-color-text);
-		border-color: var(--efs-color-line);
+	.efs-newsletter .efs-newsletter-form__input:focus {
+		outline: none;
+		box-shadow: 0 0 0 4px rgba(231, 235, 0, 0.45);
 	}
-	.efs-newsletter-form__btn { flex: 0 0 auto; }
-	.efs-newsletter-form__msg { margin-top: .6rem; font-size: .9rem; min-height: 1.2em; }
-	.efs-newsletter-form__msg.is-ok  { color: var(--efs-color-accent, #e7eb00); }
-	.efs-newsletter-form__msg.is-err { color: #ffb4b4; }
-	.efs-cta--light .efs-newsletter-form__msg.is-ok { color: #2E7D32; }
-	.efs-cta--light .efs-newsletter-form__msg.is-err { color: var(--efs-color-error, #ba1a1a); }
+	.efs-newsletter-form__btn { flex: 0 0 auto; padding: .85rem 1.4rem !important; }
+
+	/* Mensaje feedback — bien visible */
+	.efs-newsletter-form__msg {
+		margin: .9rem 0 0;
+		padding: .55rem .85rem;
+		font-size: .95rem; font-weight: 600;
+		border-radius: var(--efs-radius, .25rem);
+		min-height: 1em;
+	}
+	.efs-newsletter-form__msg:empty { display: none; }
+	.efs-newsletter-form__msg.is-ok {
+		background: rgba(231, 235, 0, 0.18);
+		color: #e7eb00;
+		border: 1px solid rgba(231, 235, 0, 0.45);
+	}
+	.efs-newsletter-form__msg.is-err {
+		background: rgba(255, 180, 180, 0.15);
+		color: #ffb4b4;
+		border: 1px solid rgba(255, 180, 180, 0.45);
+	}
+	/* En cajas claras: invertir colores del feedback */
+	.efs-cta--light .efs-newsletter-form__msg.is-ok {
+		background: #e8f5e9; color: #2E7D32; border-color: #2E7D32;
+	}
+	.efs-cta--light .efs-newsletter-form__msg.is-err {
+		background: #ffeaea; color: var(--efs-color-error, #ba1a1a); border-color: var(--efs-color-error, #ba1a1a);
+	}
+
 	.efs-newsletter-form__legal {
-		margin: .75rem 0 0 0;
-		font-size: .72rem;
-		color: rgba(255,255,255,0.55);
+		margin: .85rem 0 0 0;
+		font-size: .75rem; line-height: 1.5;
+		color: rgba(255, 255, 255, 0.6);
 	}
 	.efs-cta--light .efs-newsletter-form__legal { color: var(--efs-color-muted); }
 	.efs-newsletter-form__legal a { color: inherit; text-decoration: underline; }
+
 	.sr-only {
-		position:absolute; width:1px; height:1px; padding:0; margin:-1px;
-		overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+		position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+		overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
 	}
 </style>
 

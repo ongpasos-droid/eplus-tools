@@ -2,8 +2,27 @@
 
 const db = require('../../utils/db');
 const genUUID = require('../../utils/uuid');
+const ghlSync = require('../ghl/sync');
 
 const TAG_RANK = { cold: 0, warm: 1, hot: 2 };
+
+/**
+ * Fire-and-forget GHL sync. Logs warnings but never throws.
+ * No-op if GHL is not configured (returns { skipped: true }).
+ */
+function _ghlSync(email, tag, source) {
+  if (!email) return;
+  ghlSync
+    .upsertContact({ email, tag, source })
+    .then(res => {
+      if (res?.ok) {
+        console.log(`[GHL] synced ${email} → ${tag}${res.isNew ? ' (new contact)' : ''}`);
+      } else if (!res?.skipped) {
+        console.warn(`[GHL] sync failed for ${email}:`, res?.error);
+      }
+    })
+    .catch(err => console.warn(`[GHL] sync threw for ${email}:`, err.message));
+}
 
 /**
  * Insert or upsert a subscriber. Promotion is monotonic:
@@ -51,6 +70,8 @@ async function upsertSubscriber({ email, source = 'blog', tag = 'cold', userId =
       'SELECT id, email, source, tag, user_id, unsubscribed, created_at, updated_at FROM newsletter_subscribers WHERE id = ?',
       [row.id]
     );
+    // Sync to GHL only when promoted (existing contact's tag changed).
+    if (shouldPromote) _ghlSync(refreshed[0].email, refreshed[0].tag, refreshed[0].source);
     return { subscriber: refreshed[0], created: false, promoted: shouldPromote };
   }
 
@@ -64,6 +85,8 @@ async function upsertSubscriber({ email, source = 'blog', tag = 'cold', userId =
     'SELECT id, email, source, tag, user_id, unsubscribed, created_at, updated_at FROM newsletter_subscribers WHERE id = ?',
     [id]
   );
+  // New subscriber → always sync to GHL.
+  _ghlSync(rows[0].email, rows[0].tag, rows[0].source);
   return { subscriber: rows[0], created: true, promoted: false };
 }
 
@@ -86,6 +109,8 @@ async function promoteByEmail(email, targetTag, userId = null) {
       WHERE id = ?`,
     [targetTag, userId, row.id]
   );
+  // Reflect promotion in GHL (cold→warm or warm→hot).
+  _ghlSync(String(email).trim().toLowerCase(), targetTag, null);
   return { id: row.id, tag: targetTag };
 }
 
