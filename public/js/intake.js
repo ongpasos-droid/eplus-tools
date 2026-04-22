@@ -299,6 +299,9 @@ const Intake = (() => {
       const project = await API.get('/intake/projects/' + id);
       currentProjectId = project.id;
 
+      // Notify Sandbox so the banner reflects the loaded project.
+      if (typeof Sandbox !== 'undefined') Sandbox.setActiveProject(project);
+
       // Load project fields
       document.getElementById('intake-f-name').value = project.name || '';
       const fullnameEl = document.getElementById('intake-f-fullname');

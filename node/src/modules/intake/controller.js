@@ -137,6 +137,21 @@ async function launchProject(req, res, next) {
     const projectId = req.params.id;
     const userId = req.user.id;
 
+    // Block launch for sandbox projects — user must graduate first.
+    const [sbRows] = await db.execute(
+      'SELECT is_sandbox FROM projects WHERE id = ? AND user_id = ?',
+      [projectId, userId]
+    );
+    if (sbRows.length && sbRows[0].is_sandbox) {
+      return res.status(422).json({
+        ok: false,
+        error: {
+          code: 'SANDBOX_LOCKED',
+          message: 'Este proyecto está en modo demo. Gradúalo a proyecto real para continuar.'
+        }
+      });
+    }
+
     const [result] = await db.execute(
       'UPDATE projects SET status = ? WHERE id = ? AND user_id = ?',
       ['writing', projectId, userId]

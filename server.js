@@ -72,6 +72,7 @@ app.use('/v1/developer',   require('./node/src/modules/developer/routes'));
 app.use('/v1/evaluator',   require('./node/src/modules/evaluator/routes'));
 app.use('/v1/budget',      require('./node/src/modules/budget/routes'));
 app.use('/v1/voice',       require('./node/src/modules/voice/routes'));
+app.use('/v1/sandbox',     require('./node/src/modules/sandbox/routes'));
 
 /* ── SPA fallback — serve index.html for all non-API routes ─── */
 app.get('*', (req, res) => {

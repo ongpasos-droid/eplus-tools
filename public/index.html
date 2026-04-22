@@ -308,6 +308,9 @@ tailwind.config = {
       </button>
     </header>
 
+    <!-- Sandbox banner (shown when active project has is_sandbox=1) -->
+    <div id="sandbox-banner" class="hidden sticky top-16 z-20 bg-primary text-white px-4 lg:px-8 py-2 text-sm"></div>
+
     <!-- Content panels (one per module) -->
     <main class="p-4 lg:p-8" id="content-area">
 
@@ -2160,6 +2163,7 @@ tailwind.config = {
 <script src="/js/evaluator.js"></script>
 <script src="/js/budget.js"></script>
 <script src="/js/voice-input.js"></script>
+<script src="/js/sandbox.js"></script>
 
 <!-- ── Mini modal (reemplaza prompt/confirm nativos) ────────── -->
 <div id="mini-modal" class="hidden fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-black/40"

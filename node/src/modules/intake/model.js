@@ -75,7 +75,7 @@ async function createProject(userId, projectData) {
 async function findProjectById(projectId, userId) {
   const sql = `
     SELECT id, user_id, name, full_name, type, description, proposal_lang, national_agency, start_date, duration_months,
-           deadline, eu_grant, cofin_pct, indirect_pct, status, calc_state, created_at, updated_at
+           deadline, eu_grant, cofin_pct, indirect_pct, status, is_sandbox, calc_state, created_at, updated_at
     FROM projects
     WHERE id = ? AND user_id = ?
   `;
@@ -96,7 +96,7 @@ async function findProjectsByUserId(userId, page = 1, perPage = 20) {
 
   const sql = `
     SELECT id, user_id, name, full_name, type, description, proposal_lang, start_date, duration_months,
-           deadline, eu_grant, cofin_pct, indirect_pct, status, created_at, updated_at
+           deadline, eu_grant, cofin_pct, indirect_pct, status, is_sandbox, created_at, updated_at
     FROM projects
     WHERE user_id = ?
     ORDER BY updated_at DESC

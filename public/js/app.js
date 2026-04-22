@@ -36,6 +36,9 @@ const App = (() => {
   async function init() {
     await loadConfig();
 
+    // Detect ?sandbox=start in URL before showing any auth UI.
+    if (typeof Sandbox !== 'undefined') Sandbox.init();
+
     // Try to restore session from refresh token cookie
     const restored = await Auth.tryRestore();
     if (!restored) {
@@ -84,6 +87,8 @@ const App = (() => {
     currentUser = user;
     showApp();
     Toast.show(`Welcome, ${user.name}!`, 'ok');
+    // If user came in via ?sandbox=start, fire the sandbox flow now.
+    if (typeof Sandbox !== 'undefined') Sandbox.resume();
   }
 
   function onLogout() {
