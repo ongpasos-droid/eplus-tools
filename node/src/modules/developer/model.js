@@ -35,6 +35,16 @@ async function getProjectContext(projectId, userId) {
       [wp.id]
     );
     wp.activities = acts;
+    const [ms] = await db.execute(
+      'SELECT id, code, title, description, due_month, verification, sort_order FROM milestones WHERE work_package_id = ? ORDER BY sort_order, created_at',
+      [wp.id]
+    ).catch(() => [[]]);
+    wp.milestones = ms || [];
+    const [dels] = await db.execute(
+      'SELECT id, code, title, description, type, dissemination_level, due_month, sort_order FROM deliverables WHERE work_package_id = ? ORDER BY sort_order, created_at',
+      [wp.id]
+    ).catch(() => [[]]);
+    wp.deliverables = dels || [];
   }
 
   // Budget totals (from Calculator state if saved)
@@ -1239,7 +1249,169 @@ async function buildWpFocusContext(wpId) {
   } else {
     block += `\n(No activities defined yet in Intake for this WP — produce a plausible set based on the WP title and the project context.)\n`;
   }
+
+  const [milestones] = await db.execute(
+    'SELECT code, title, description, due_month, verification FROM milestones WHERE work_package_id = ? ORDER BY sort_order, created_at',
+    [wpId]
+  ).catch(() => [[]]);
+  if (milestones && milestones.length) {
+    block += `\nMilestones for this WP (${milestones.length}):\n`;
+    milestones.forEach(m => {
+      block += `  ${m.code ? m.code + ' — ' : ''}${m.title}`;
+      if (m.due_month) block += ` (M${m.due_month})`;
+      block += '\n';
+      if (m.description) block += `      ${m.description.substring(0, 300)}\n`;
+      if (m.verification) block += `      Verification: ${m.verification.substring(0, 200)}\n`;
+    });
+  }
+
+  const [deliverables] = await db.execute(
+    'SELECT code, title, description, type, dissemination_level, due_month FROM deliverables WHERE work_package_id = ? ORDER BY sort_order, created_at',
+    [wpId]
+  ).catch(() => [[]]);
+  if (deliverables && deliverables.length) {
+    block += `\nDeliverables for this WP (${deliverables.length}):\n`;
+    deliverables.forEach(d => {
+      block += `  ${d.code ? d.code + ' — ' : ''}${d.title}`;
+      if (d.type) block += ` [${d.type}]`;
+      if (d.dissemination_level) block += ` (${d.dissemination_level})`;
+      if (d.due_month) block += ` (M${d.due_month})`;
+      block += '\n';
+      if (d.description) block += `      ${d.description.substring(0, 300)}\n`;
+    });
+  }
+
   return block;
+}
+
+/* ══ Milestones + Deliverables CRUD (Writer Phase 2) ══════════
+   First-class rows per WP. UI renders as structured tables.
+   ─────────────────────────────────────────────────────────── */
+
+async function _assertWp(wpId, userId) {
+  const [rows] = await db.execute(
+    `SELECT wp.id, wp.project_id FROM work_packages wp
+       JOIN projects p ON p.id = wp.project_id
+      WHERE wp.id = ? AND p.user_id = ?`,
+    [wpId, userId]
+  );
+  if (!rows.length) {
+    const err = new Error('Work package not found');
+    err.status = 404;
+    throw err;
+  }
+  return rows[0];
+}
+
+async function listMilestones(wpId) {
+  const [rows] = await db.execute(
+    'SELECT * FROM milestones WHERE work_package_id = ? ORDER BY sort_order, created_at',
+    [wpId]
+  );
+  return rows;
+}
+
+async function createMilestone(wpId, userId, data) {
+  const wp = await _assertWp(wpId, userId);
+  const id = genUUID();
+  await db.execute(
+    `INSERT INTO milestones (id, work_package_id, project_id, code, title, description, due_month, verification, sort_order)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      id, wpId, wp.project_id,
+      data.code || null,
+      data.title || 'New milestone',
+      data.description || null,
+      data.due_month || null,
+      data.verification || null,
+      data.sort_order || 0,
+    ]
+  );
+  return id;
+}
+
+async function updateMilestone(msId, userId, data) {
+  const [rows] = await db.execute(
+    `SELECT m.id FROM milestones m JOIN projects p ON p.id = m.project_id
+      WHERE m.id = ? AND p.user_id = ?`,
+    [msId, userId]
+  );
+  if (!rows.length) { const e = new Error('Milestone not found'); e.status = 404; throw e; }
+  const allowed = ['code','title','description','due_month','verification','sort_order'];
+  const sets = [];
+  const vals = [];
+  for (const k of allowed) {
+    if (data[k] !== undefined) { sets.push(`${k} = ?`); vals.push(data[k] === '' ? null : data[k]); }
+  }
+  if (!sets.length) return;
+  vals.push(msId);
+  await db.execute(`UPDATE milestones SET ${sets.join(', ')} WHERE id = ?`, vals);
+}
+
+async function deleteMilestone(msId, userId) {
+  const [rows] = await db.execute(
+    `SELECT m.id FROM milestones m JOIN projects p ON p.id = m.project_id
+      WHERE m.id = ? AND p.user_id = ?`,
+    [msId, userId]
+  );
+  if (!rows.length) { const e = new Error('Milestone not found'); e.status = 404; throw e; }
+  await db.execute('DELETE FROM milestones WHERE id = ?', [msId]);
+}
+
+async function listDeliverables(wpId) {
+  const [rows] = await db.execute(
+    'SELECT * FROM deliverables WHERE work_package_id = ? ORDER BY sort_order, created_at',
+    [wpId]
+  );
+  return rows;
+}
+
+async function createDeliverable(wpId, userId, data) {
+  const wp = await _assertWp(wpId, userId);
+  const id = genUUID();
+  await db.execute(
+    `INSERT INTO deliverables (id, work_package_id, project_id, code, title, description, type, dissemination_level, due_month, sort_order)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      id, wpId, wp.project_id,
+      data.code || null,
+      data.title || 'New deliverable',
+      data.description || null,
+      data.type || null,
+      data.dissemination_level || null,
+      data.due_month || null,
+      data.sort_order || 0,
+    ]
+  );
+  return id;
+}
+
+async function updateDeliverable(dId, userId, data) {
+  const [rows] = await db.execute(
+    `SELECT d.id FROM deliverables d JOIN projects p ON p.id = d.project_id
+      WHERE d.id = ? AND p.user_id = ?`,
+    [dId, userId]
+  );
+  if (!rows.length) { const e = new Error('Deliverable not found'); e.status = 404; throw e; }
+  const allowed = ['code','title','description','type','dissemination_level','due_month','sort_order'];
+  const sets = [];
+  const vals = [];
+  for (const k of allowed) {
+    if (data[k] !== undefined) { sets.push(`${k} = ?`); vals.push(data[k] === '' ? null : data[k]); }
+  }
+  if (!sets.length) return;
+  vals.push(dId);
+  await db.execute(`UPDATE deliverables SET ${sets.join(', ')} WHERE id = ?`, vals);
+}
+
+async function deleteDeliverable(dId, userId) {
+  const [rows] = await db.execute(
+    `SELECT d.id FROM deliverables d JOIN projects p ON p.id = d.project_id
+      WHERE d.id = ? AND p.user_id = ?`,
+    [dId, userId]
+  );
+  if (!rows.length) { const e = new Error('Deliverable not found'); e.status = 404; throw e; }
+  await db.execute('DELETE FROM deliverables WHERE id = ?', [dId]);
 }
 
 // Phase 1 of Evaluate-and-Refine: evaluate the current text, return the
@@ -2454,4 +2626,13 @@ module.exports = {
   generateActivityDescriptionDraft,
   improveWpSummary,
   improveActivityDescription,
+  // Writer Phase 2 — per-WP structured tables
+  listMilestones,
+  createMilestone,
+  updateMilestone,
+  deleteMilestone,
+  listDeliverables,
+  createDeliverable,
+  updateDeliverable,
+  deleteDeliverable,
 };

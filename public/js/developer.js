@@ -320,7 +320,7 @@ const Developer = (() => {
         </div>
 
         <div class="flex justify-center">
-          <button onclick="Developer._prepTab('consorcio')" class="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-[#1b1464] text-[#e7eb00] font-bold text-base shadow-[0_24px_48px_rgba(27,20,100,0.2)] hover:scale-[1.03] hover:shadow-[0_28px_56px_rgba(27,20,100,0.3)] active:scale-95 transition-all ${canGenerate ? '' : 'opacity-40 pointer-events-none'}">
+          <button onclick="Developer._prepTab('consorcio')" class="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-[#1b1464] text-[#fbff12] font-bold text-base shadow-[0_24px_48px_rgba(27,20,100,0.2)] hover:scale-[1.03] hover:shadow-[0_28px_56px_rgba(27,20,100,0.3)] active:scale-95 transition-all ${canGenerate ? '' : 'opacity-40 pointer-events-none'}">
             <span class="material-symbols-outlined text-2xl">groups</span> Consorcio
           </button>
         </div>
@@ -539,7 +539,7 @@ const Developer = (() => {
                     <span class="material-symbols-outlined text-xs">description</span> Original
                   </button>
                   ${variants.map(v => `
-                    <button onclick="Developer._selectVariant('${p.id}', '${v.id}')" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold transition-all ${selectedVariant?.id === v.id ? 'bg-[#1b1464] text-[#e7eb00] shadow-sm' : 'bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/20'}">
+                    <button onclick="Developer._selectVariant('${p.id}', '${v.id}')" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold transition-all ${selectedVariant?.id === v.id ? 'bg-[#1b1464] text-[#fbff12] shadow-sm' : 'bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/20'}">
                       <span class="material-symbols-outlined text-xs">auto_awesome</span> ${esc(v.category_label || v.category)}
                     </button>
                   `).join('')}
@@ -671,7 +671,7 @@ const Developer = (() => {
             <span class="material-symbols-outlined text-4xl text-amber-400 mb-2">account_balance</span>
             <h3 class="font-headline text-base font-bold text-amber-800 mb-1">Error generando presupuesto</h3>
             <p class="text-sm text-amber-700 mb-4">${esc(e.message || 'Error desconocido')}</p>
-            <button id="prep-budget-retry" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-[#e7eb00] bg-[#1b1464] hover:bg-[#1b1464]/80 transition-colors">
+            <button id="prep-budget-retry" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-[#fbff12] bg-[#1b1464] hover:bg-[#1b1464]/80 transition-colors">
               <span class="material-symbols-outlined text-sm">refresh</span> Reintentar
             </button>
           </div>`;
@@ -925,7 +925,7 @@ const Developer = (() => {
           </div>
 
           <div class="flex items-center gap-3 mb-3">
-            <label class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-[#1b1464] text-[#e7eb00] cursor-pointer hover:bg-[#1b1464]/90 transition-colors">
+            <label class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-[#1b1464] text-[#fbff12] cursor-pointer hover:bg-[#1b1464]/90 transition-colors">
               <span class="material-symbols-outlined text-sm">add</span> Subir documento
               <input type="file" accept=".pdf,.docx,.txt" class="hidden" id="prep-doc-upload">
             </label>
@@ -1403,7 +1403,7 @@ const Developer = (() => {
 
   async function genInterview() {
     const btn = document.getElementById('prep-gen-interview-btn');
-    if (btn) { btn.disabled = true; btn.innerHTML = '<span class="animate-spin w-4 h-4 border-2 border-[#e7eb00] border-t-transparent rounded-full"></span> Generando preguntas...'; }
+    if (btn) { btn.disabled = true; btn.innerHTML = '<span class="animate-spin w-4 h-4 border-2 border-[#fbff12] border-t-transparent rounded-full"></span> Generando preguntas...'; }
     try {
       await API.post('/developer/projects/' + currentProject.id + '/interview/generate', {});
       renderPrepStudio();
@@ -1561,8 +1561,8 @@ const Developer = (() => {
           <p class="text-xs text-on-surface-variant mb-4">La IA escribe con todo el contexto del proyecto</p>
           <div class="bg-[#1b1464] rounded-xl p-4 max-w-md shadow-lg">
             <div class="flex items-start gap-2">
-              <span class="material-symbols-outlined text-sm text-[#e7eb00] mt-0.5">lightbulb</span>
-              <p class="text-xs text-[#e7eb00]/90 leading-relaxed" id="dev-cascade-tip">${TIPS[Math.floor(Math.random() * TIPS.length)]}</p>
+              <span class="material-symbols-outlined text-sm text-[#fbff12] mt-0.5">lightbulb</span>
+              <p class="text-xs text-[#fbff12]/90 leading-relaxed" id="dev-cascade-tip">${TIPS[Math.floor(Math.random() * TIPS.length)]}</p>
             </div>
           </div>
         </div>
@@ -1609,7 +1609,7 @@ const Developer = (() => {
           <p class="text-xs text-on-surface-variant max-w-md mb-5">Cuando pulses "Generar con IA", redactaré una primera propuesta con todo el contexto del proyecto. Después podrás iterar pidiendo mejoras concretas.</p>
           <div class="flex flex-wrap items-center justify-center gap-2">
             <button onclick="Developer._cascadeGenerate()" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-white bg-[#1b1464] shadow-lg hover:bg-[#1b1464]/90 transition-all">
-              <span class="material-symbols-outlined text-lg text-[#e7eb00]">auto_awesome</span>
+              <span class="material-symbols-outlined text-lg text-[#fbff12]">auto_awesome</span>
               <span class="text-white">Generar con IA</span>
             </button>
             <button onclick="Developer._cascadeWriteBlank()" class="inline-flex items-center gap-2 px-4 py-3 rounded-xl text-xs font-bold text-[#1b1464] bg-white border border-[#1b1464]/30 hover:bg-[#1b1464]/5 transition-colors">
@@ -1646,6 +1646,8 @@ const Developer = (() => {
       </div>
       <div id="dev-iteration-tracker" class="mb-4"></div>
 
+      <div id="dev-wp-tables" class="mb-4"></div>
+
       <!-- Action buttons -->
       <div class="flex items-center gap-3">
         ${cascadeIndex < flatSections.length - 1 ? `
@@ -1664,6 +1666,7 @@ const Developer = (() => {
       </div>`;
 
     renderIterationTracker(sec);
+    renderWpTables(sec);
 
     // Bind textarea autosave + word count + auto-grow
     const textarea = document.getElementById('dev-textarea');
@@ -1936,14 +1939,14 @@ const Developer = (() => {
       <!-- AI actions -->
       <div class="space-y-2">
         <button onclick="Developer._aiImproveCustom()" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold text-left text-white bg-[#1b1464] hover:bg-[#1b1464]/90 shadow-sm transition-colors">
-          <span class="material-symbols-outlined text-base text-[#e7eb00]">auto_awesome</span>
+          <span class="material-symbols-outlined text-base text-[#fbff12]">auto_awesome</span>
           <div>
             <div class="text-white">Mejorar con IA</div>
             <div class="text-[10px] font-normal text-white/75">Dile que quieres cambiar (voz o texto)</div>
           </div>
         </button>
         <button onclick="Developer._aiEvaluateAndRefine()" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold text-left text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 shadow-sm transition-colors">
-          <span class="material-symbols-outlined text-base text-[#e7eb00]">trending_up</span>
+          <span class="material-symbols-outlined text-base text-[#fbff12]">trending_up</span>
           <div>
             <div class="text-white">Evaluar y refinar con IA</div>
             <div class="text-[10px] font-normal text-white/80">Diagnóstico + arreglo automático</div>
@@ -2468,7 +2471,7 @@ const Developer = (() => {
           </button>
           ${canRefine ? `
             <button onclick="Developer._refineGo()" class="flex-1 px-3 py-2 rounded-lg text-xs font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 flex items-center justify-center gap-1 shadow-sm">
-              <span class="material-symbols-outlined text-sm text-[#e7eb00]">bolt</span>
+              <span class="material-symbols-outlined text-sm text-[#fbff12]">bolt</span>
               <span>Refinar con IA</span>
             </button>
           ` : ''}
@@ -2728,6 +2731,166 @@ const Developer = (() => {
       </div>`;
   }
 
+  /* ── Writer Phase 2: per-WP structured tables ───────────────
+     Rendered below the textarea in section 4.2 WP-specific steps.
+     ─────────────────────────────────────────────────────────── */
+
+  async function renderWpTables(sec) {
+    const host = document.getElementById('dev-wp-tables');
+    if (!host) return;
+    const m = sec?.fieldId?.match(/^s4_2_wp_(.+)$/);
+    if (!m) { host.innerHTML = ''; return; }
+    const wpId = m[1];
+    host.innerHTML = `
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div id="dev-ms-card" class="rounded-xl border border-outline-variant/30 bg-white p-4">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-sm font-bold text-primary flex items-center gap-1">
+              <span class="material-symbols-outlined text-base">flag</span> Milestones
+            </h3>
+            <button class="dev-ms-add text-xs font-semibold text-primary hover:underline">+ Añadir</button>
+          </div>
+          <div class="dev-ms-list text-xs space-y-1.5 text-on-surface-variant">Cargando…</div>
+        </div>
+        <div id="dev-dl-card" class="rounded-xl border border-outline-variant/30 bg-white p-4">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-sm font-bold text-primary flex items-center gap-1">
+              <span class="material-symbols-outlined text-base">deployed_code</span> Deliverables
+            </h3>
+            <button class="dev-dl-add text-xs font-semibold text-primary hover:underline">+ Añadir</button>
+          </div>
+          <div class="dev-dl-list text-xs space-y-1.5 text-on-surface-variant">Cargando…</div>
+        </div>
+      </div>
+    `;
+    host.querySelector('.dev-ms-add').addEventListener('click', () => addMilestone(wpId));
+    host.querySelector('.dev-dl-add').addEventListener('click', () => addDeliverable(wpId));
+    await Promise.all([loadMilestones(wpId), loadDeliverables(wpId)]);
+  }
+
+  async function loadMilestones(wpId) {
+    const list = document.querySelector('#dev-ms-card .dev-ms-list');
+    if (!list) return;
+    try {
+      const rows = await API.get(`/developer/wp/${wpId}/milestones`);
+      if (!rows.length) { list.innerHTML = '<span class="italic text-on-surface-variant/60">Sin milestones. Pulsa + para añadir.</span>'; return; }
+      list.innerHTML = rows.map(m => milestoneRow(m)).join('');
+      list.querySelectorAll('[data-ms-edit]').forEach(b => b.addEventListener('click', () => editMilestone(b.dataset.msEdit, wpId)));
+      list.querySelectorAll('[data-ms-del]').forEach(b => b.addEventListener('click', () => delMilestone(b.dataset.msDel, wpId)));
+    } catch (err) {
+      list.innerHTML = `<span class="text-error">${esc(err.message || 'Error')}</span>`;
+    }
+  }
+
+  function milestoneRow(m) {
+    return `<div class="flex items-start gap-2 py-1 border-b border-outline-variant/10 last:border-0">
+      <div class="flex-1 min-w-0">
+        <div class="font-semibold text-on-surface">${esc(m.code || '')} ${esc(m.title || '(sin título)')}${m.due_month ? ` <span class="text-[10px] font-mono text-on-surface-variant">M${m.due_month}</span>` : ''}</div>
+        ${m.description ? `<div class="text-on-surface-variant truncate">${esc(m.description)}</div>` : ''}
+        ${m.verification ? `<div class="text-on-surface-variant/70 text-[10px]">Verif: ${esc(m.verification)}</div>` : ''}
+      </div>
+      <button data-ms-edit="${m.id}" class="text-on-surface-variant hover:text-primary text-[10px]">editar</button>
+      <button data-ms-del="${m.id}" class="text-on-surface-variant hover:text-error text-[10px]">×</button>
+    </div>`;
+  }
+
+  async function addMilestone(wpId) {
+    const title = prompt('Título del milestone:');
+    if (!title || !title.trim()) return;
+    try {
+      await API.post(`/developer/wp/${wpId}/milestones`, { title: title.trim() });
+      await loadMilestones(wpId);
+    } catch (err) { alert(err.message || 'Error'); }
+  }
+
+  async function editMilestone(id, wpId) {
+    const title = prompt('Título:');
+    if (title === null) return;
+    const due_month = prompt('Mes (número, vacío = ninguno):');
+    const description = prompt('Descripción (opcional):');
+    const verification = prompt('Medio de verificación (opcional):');
+    const payload = {};
+    if (title.trim()) payload.title = title.trim();
+    if (due_month !== null && due_month.trim()) payload.due_month = parseInt(due_month, 10) || null;
+    if (description !== null) payload.description = description;
+    if (verification !== null) payload.verification = verification;
+    try {
+      await API.patch(`/developer/milestones/${id}`, payload);
+      await loadMilestones(wpId);
+    } catch (err) { alert(err.message || 'Error'); }
+  }
+
+  async function delMilestone(id, wpId) {
+    if (!confirm('¿Eliminar este milestone?')) return;
+    try {
+      await API.del(`/developer/milestones/${id}`);
+      await loadMilestones(wpId);
+    } catch (err) { alert(err.message || 'Error'); }
+  }
+
+  async function loadDeliverables(wpId) {
+    const list = document.querySelector('#dev-dl-card .dev-dl-list');
+    if (!list) return;
+    try {
+      const rows = await API.get(`/developer/wp/${wpId}/deliverables`);
+      if (!rows.length) { list.innerHTML = '<span class="italic text-on-surface-variant/60">Sin deliverables. Pulsa + para añadir.</span>'; return; }
+      list.innerHTML = rows.map(d => deliverableRow(d)).join('');
+      list.querySelectorAll('[data-dl-edit]').forEach(b => b.addEventListener('click', () => editDeliverable(b.dataset.dlEdit, wpId)));
+      list.querySelectorAll('[data-dl-del]').forEach(b => b.addEventListener('click', () => delDeliverable(b.dataset.dlDel, wpId)));
+    } catch (err) {
+      list.innerHTML = `<span class="text-error">${esc(err.message || 'Error')}</span>`;
+    }
+  }
+
+  function deliverableRow(d) {
+    return `<div class="flex items-start gap-2 py-1 border-b border-outline-variant/10 last:border-0">
+      <div class="flex-1 min-w-0">
+        <div class="font-semibold text-on-surface">${esc(d.code || '')} ${esc(d.title || '(sin título)')}${d.due_month ? ` <span class="text-[10px] font-mono text-on-surface-variant">M${d.due_month}</span>` : ''}</div>
+        ${d.type ? `<span class="text-[10px] uppercase tracking-wide bg-primary/10 text-primary px-1.5 rounded">${esc(d.type)}</span>` : ''}
+        ${d.dissemination_level ? ` <span class="text-[10px] text-on-surface-variant">(${esc(d.dissemination_level)})</span>` : ''}
+        ${d.description ? `<div class="text-on-surface-variant truncate">${esc(d.description)}</div>` : ''}
+      </div>
+      <button data-dl-edit="${d.id}" class="text-on-surface-variant hover:text-primary text-[10px]">editar</button>
+      <button data-dl-del="${d.id}" class="text-on-surface-variant hover:text-error text-[10px]">×</button>
+    </div>`;
+  }
+
+  async function addDeliverable(wpId) {
+    const title = prompt('Título del deliverable:');
+    if (!title || !title.trim()) return;
+    try {
+      await API.post(`/developer/wp/${wpId}/deliverables`, { title: title.trim() });
+      await loadDeliverables(wpId);
+    } catch (err) { alert(err.message || 'Error'); }
+  }
+
+  async function editDeliverable(id, wpId) {
+    const title = prompt('Título:');
+    if (title === null) return;
+    const type = prompt('Tipo (report, software, event, dataset, other):');
+    const dissemination_level = prompt('Dissemination (public, sensitive, confidential):');
+    const due_month = prompt('Mes (número, vacío = ninguno):');
+    const description = prompt('Descripción (opcional):');
+    const payload = {};
+    if (title.trim()) payload.title = title.trim();
+    if (type !== null) payload.type = type.trim() || null;
+    if (dissemination_level !== null) payload.dissemination_level = dissemination_level.trim() || null;
+    if (due_month !== null && due_month.trim()) payload.due_month = parseInt(due_month, 10) || null;
+    if (description !== null) payload.description = description;
+    try {
+      await API.patch(`/developer/deliverables/${id}`, payload);
+      await loadDeliverables(wpId);
+    } catch (err) { alert(err.message || 'Error'); }
+  }
+
+  async function delDeliverable(id, wpId) {
+    if (!confirm('¿Eliminar este deliverable?')) return;
+    try {
+      await API.del(`/developer/deliverables/${id}`);
+      await loadDeliverables(wpId);
+    } catch (err) { alert(err.message || 'Error'); }
+  }
+
   /* ── Mejorar con IA: ask user what to improve (voice + text) ── */
   function aiImproveCustom() {
     const sec = flatSections.find(s => s.fieldId === activeFieldId);
@@ -2771,7 +2934,7 @@ const Developer = (() => {
               <span>Regenerar desde cero</span>
             </button>
             <button onclick="Developer._submitImproveRequest()" id="improve-submit-btn" class="px-4 py-2 rounded-lg text-sm font-bold bg-[#1b1464] text-white hover:bg-[#1b1464]/90 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow">
-              <span class="material-symbols-outlined text-base text-[#e7eb00]">auto_awesome</span>
+              <span class="material-symbols-outlined text-base text-[#fbff12]">auto_awesome</span>
               <span>Mejorar texto</span>
             </button>
           </div>

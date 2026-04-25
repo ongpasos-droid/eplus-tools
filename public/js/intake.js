@@ -996,7 +996,7 @@ const Intake = (() => {
     b.textContent = n + ' palabra' + (n !== 1 ? 's' : '');
     if (n === 0) {
       b.className = 'text-xs font-semibold font-headline px-2.5 py-0.5 rounded border border-outline-variant bg-surface-container-low text-on-surface-variant transition-all';
-      f.style.width = '0%'; f.style.background = '#c8c5d2';
+      f.style.width = '0%'; f.style.background = '#cccccc';
     } else if (n < c.min) {
       b.className = 'text-xs font-semibold font-headline px-2.5 py-0.5 rounded border border-yellow-400 bg-yellow-50 text-yellow-700 transition-all';
       f.style.width = (n / c.max * 100) + '%'; f.style.background = '#eab308';
@@ -1005,7 +1005,7 @@ const Intake = (() => {
       f.style.width = '100%'; f.style.background = '#ba1a1a';
     } else {
       b.className = 'text-xs font-semibold font-headline px-2.5 py-0.5 rounded border border-green-300 bg-green-50 text-green-700 transition-all';
-      f.style.width = (n / c.max * 100) + '%'; f.style.background = '#06003e';
+      f.style.width = (n / c.max * 100) + '%'; f.style.background = '#1b1464';
     }
   }
 

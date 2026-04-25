@@ -57,9 +57,9 @@ $cls     = $bare ? 'efs-newsletter efs-newsletter--bare' : 'efs-cta efs-cta--new
 	.efs-newsletter .efs-newsletter-form__input {
 		flex: 1 1 240px; min-width: 240px;
 		padding: .85rem 1rem;
-		border: 2px solid var(--efs-color-accent, #e7eb00);
+		border: 2px solid var(--efs-color-accent, #fbff12);
 		background: #ffffff;
-		color: #06003e;
+		color: #1b1464;
 		border-radius: var(--efs-radius, .25rem);
 		font: 500 1rem/1.3 var(--efs-font-body, inherit);
 		box-sizing: border-box;
@@ -84,7 +84,7 @@ $cls     = $bare ? 'efs-newsletter efs-newsletter--bare' : 'efs-cta efs-cta--new
 	.efs-newsletter-form__msg:empty { display: none; }
 	.efs-newsletter-form__msg.is-ok {
 		background: rgba(231, 235, 0, 0.18);
-		color: #e7eb00;
+		color: #fbff12;
 		border: 1px solid rgba(231, 235, 0, 0.45);
 	}
 	.efs-newsletter-form__msg.is-err {

@@ -68,4 +68,14 @@ router.post('/projects/:projectId/prep/wp/:wpId/improve-summary', requireAuth, c
 router.post('/projects/:projectId/prep/activity/:activityId/generate-description', requireAuth, ctrl.generateActivityDescriptionDraft);
 router.post('/projects/:projectId/prep/activity/:activityId/improve-description', requireAuth, ctrl.improveActivityDescription);
 
+// Writer Phase 2 — per-WP structured tables (milestones + deliverables)
+router.get   ('/wp/:wpId/milestones',   requireAuth, ctrl.listMilestones);
+router.post  ('/wp/:wpId/milestones',   requireAuth, ctrl.createMilestone);
+router.patch ('/milestones/:id',        requireAuth, ctrl.updateMilestone);
+router.delete('/milestones/:id',        requireAuth, ctrl.deleteMilestone);
+router.get   ('/wp/:wpId/deliverables', requireAuth, ctrl.listDeliverables);
+router.post  ('/wp/:wpId/deliverables', requireAuth, ctrl.createDeliverable);
+router.patch ('/deliverables/:id',      requireAuth, ctrl.updateDeliverable);
+router.delete('/deliverables/:id',      requireAuth, ctrl.deleteDeliverable);
+
 module.exports = router;

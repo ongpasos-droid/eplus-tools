@@ -7,32 +7,40 @@
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 
 <!-- Tailwind CDN -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+<!-- ApexCharts (used by Entities ficha for score donuts, by Stats dashboard) -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.49.1/dist/apexcharts.min.js" defer></script>
+
+<!-- D3 + topojson (Europe map en Atlas Stats) -->
+<script src="https://cdn.jsdelivr.net/npm/d3@7" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3" defer></script>
 <script>
 tailwind.config = {
   darkMode: "class",
   theme: {
     extend: {
       colors: {
-        "primary":"#06003e","primary-container":"#1b1464",
-        "secondary-fixed":"#e7eb00","secondary-fixed-dim":"#cbce00",
-        "surface":"#f0f4fa","surface-dim":"#d8dadc","surface-bright":"#f7f9fb",
-        "surface-container":"#eceef0","surface-container-low":"#e8eef6",
-        "surface-container-high":"#e6e8ea","surface-container-lowest":"#ffffff",
+        "primary":"#1b1464","primary-container":"#1b1464",
+        "secondary-fixed":"#fbff12","secondary-fixed-dim":"#e7eb00",
+        "accent-warm":"#c7afdf",
+        "surface":"#f8f8f8","surface-dim":"#cccccc","surface-bright":"#ffffff",
+        "surface-container":"#eeeeee","surface-container-low":"#f8f8f8",
+        "surface-container-high":"#eeeeee","surface-container-lowest":"#ffffff",
         "on-surface":"#191c1e","on-surface-variant":"#474551",
-        "outline":"#787682","outline-variant":"#c8c5d2",
+        "outline":"#888888","outline-variant":"#cccccc",
         "error":"#ba1a1a","error-container":"#ffdad6",
         "on-error-container":"#93000a",
-        "surface-tint":"#5855a3",
-        "on-primary-container":"#8481d3",
+        "surface-tint":"#c7afdf",
+        "on-primary-container":"#c7afdf",
       },
       fontFamily: {
-        "headline":["Manrope","sans-serif"],
-        "body":["Manrope","sans-serif"],
+        "headline":["Poppins","sans-serif"],
+        "body":["Poppins","sans-serif"],
       }
     }
   }
@@ -237,6 +245,18 @@ tailwind.config = {
         <span class="material-symbols-outlined text-[20px]">corporate_fare</span>
         Directorio
       </a>
+      <a href="#shortlists"
+        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
+        data-route="shortlists">
+        <span class="material-symbols-outlined text-[20px]">favorite</span>
+        Mi Pool
+      </a>
+      <a href="#atlas-stats"
+        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
+        data-route="atlas-stats">
+        <span class="material-symbols-outlined text-[20px]">insights</span>
+        Atlas Stats
+      </a>
 
       <!-- Library -->
       <div class="mt-3 mb-1 px-3 text-[10px] font-semibold tracking-[.2em] uppercase text-white/30">Library</div>
@@ -320,7 +340,7 @@ tailwind.config = {
         <!-- Hero -->
         <div class="relative bg-[#1b1464] rounded-2xl p-10 md:p-14 mb-10 overflow-hidden">
           <div class="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/3 blur-2xl pointer-events-none"></div>
-          <div class="absolute bottom-0 left-0 w-60 h-60 bg-[#e7eb00]/10 rounded-full translate-y-1/2 -translate-x-1/4 blur-3xl pointer-events-none"></div>
+          <div class="absolute bottom-0 left-0 w-60 h-60 bg-[#fbff12]/10 rounded-full translate-y-1/2 -translate-x-1/4 blur-3xl pointer-events-none"></div>
           <div class="relative z-10 max-w-2xl">
             <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-[11px] font-bold uppercase tracking-widest text-white/80 mb-6">
               <span class="material-symbols-outlined text-sm">euro</span>
@@ -328,7 +348,7 @@ tailwind.config = {
             </div>
             <h1 class="font-headline text-3xl md:text-4xl font-extrabold tracking-tighter text-white leading-tight mb-4">
               From idea to funded project.<br>
-              <span class="text-[#e7eb00]">Three steps. One platform.</span>
+              <span class="text-[#fbff12]">Three steps. One platform.</span>
             </h1>
             <p class="text-white/60 text-base leading-relaxed mb-8 max-w-xl">
               Design your project, write a winning proposal, and evaluate it against real criteria &mdash; all before you submit.
@@ -343,7 +363,7 @@ tailwind.config = {
           <div class="group relative bg-white rounded-2xl border-2 border-outline-variant/20 hover:border-[#1b1464]/30 p-6 transition-all hover:shadow-xl cursor-pointer" onclick="location.hash='create'">
             <div class="flex items-center gap-3 mb-4">
               <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center group-hover:bg-[#1b1464] transition-colors">
-                <span class="material-symbols-outlined text-blue-600 text-2xl group-hover:text-[#e7eb00] transition-colors">architecture</span>
+                <span class="material-symbols-outlined text-blue-600 text-2xl group-hover:text-[#fbff12] transition-colors">architecture</span>
               </div>
               <div>
                 <div class="text-[10px] font-extrabold uppercase tracking-widest text-blue-500">Phase 1</div>
@@ -359,7 +379,7 @@ tailwind.config = {
               <li class="flex items-center gap-2 text-xs text-on-surface-variant"><span class="material-symbols-outlined text-blue-400 text-sm">check_circle</span> Plan activities &amp; work packages</li>
               <li class="flex items-center gap-2 text-xs text-on-surface-variant"><span class="material-symbols-outlined text-blue-400 text-sm">check_circle</span> Calculate EU-compliant budget</li>
             </ul>
-            <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-[#e7eb00] bg-[#1b1464] group-hover:bg-[#1b1464]/90 transition-colors">
+            <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-[#fbff12] bg-[#1b1464] group-hover:bg-[#1b1464]/90 transition-colors">
               <span class="material-symbols-outlined text-sm">rocket_launch</span> Start designing
             </div>
           </div>
@@ -368,7 +388,7 @@ tailwind.config = {
           <div class="group relative bg-white rounded-2xl border-2 border-outline-variant/20 hover:border-[#1b1464]/30 p-6 transition-all hover:shadow-xl cursor-pointer" onclick="location.hash='developer'">
             <div class="flex items-center gap-3 mb-4">
               <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center group-hover:bg-[#1b1464] transition-colors">
-                <span class="material-symbols-outlined text-purple-600 text-2xl group-hover:text-[#e7eb00] transition-colors">edit_document</span>
+                <span class="material-symbols-outlined text-purple-600 text-2xl group-hover:text-[#fbff12] transition-colors">edit_document</span>
               </div>
               <div>
                 <div class="text-[10px] font-extrabold uppercase tracking-widest text-purple-500">Phase 2</div>
@@ -384,7 +404,7 @@ tailwind.config = {
               <li class="flex items-center gap-2 text-xs text-on-surface-variant"><span class="material-symbols-outlined text-purple-400 text-sm">check_circle</span> Import existing DOCX proposals</li>
               <li class="flex items-center gap-2 text-xs text-on-surface-variant"><span class="material-symbols-outlined text-purple-400 text-sm">check_circle</span> Budget calculator (official format)</li>
             </ul>
-            <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-[#e7eb00] bg-[#1b1464] group-hover:bg-[#1b1464]/90 transition-colors">
+            <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-[#fbff12] bg-[#1b1464] group-hover:bg-[#1b1464]/90 transition-colors">
               <span class="material-symbols-outlined text-sm">edit_note</span> Start writing
             </div>
           </div>
@@ -393,7 +413,7 @@ tailwind.config = {
           <div class="group relative bg-white rounded-2xl border-2 border-outline-variant/20 hover:border-[#1b1464]/30 p-6 transition-all hover:shadow-xl cursor-pointer" onclick="location.hash='evaluator'">
             <div class="flex items-center gap-3 mb-4">
               <div class="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center group-hover:bg-[#1b1464] transition-colors">
-                <span class="material-symbols-outlined text-green-600 text-2xl group-hover:text-[#e7eb00] transition-colors">verified</span>
+                <span class="material-symbols-outlined text-green-600 text-2xl group-hover:text-[#fbff12] transition-colors">verified</span>
               </div>
               <div>
                 <div class="text-[10px] font-extrabold uppercase tracking-widest text-green-600">Phase 3</div>
@@ -409,7 +429,7 @@ tailwind.config = {
               <li class="flex items-center gap-2 text-xs text-on-surface-variant"><span class="material-symbols-outlined text-green-400 text-sm">check_circle</span> AI-powered improvement tips</li>
               <li class="flex items-center gap-2 text-xs text-on-surface-variant"><span class="material-symbols-outlined text-green-400 text-sm">check_circle</span> Upload &amp; evaluate any DOCX</li>
             </ul>
-            <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-[#e7eb00] bg-[#1b1464] group-hover:bg-[#1b1464]/90 transition-colors">
+            <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-[#fbff12] bg-[#1b1464] group-hover:bg-[#1b1464]/90 transition-colors">
               <span class="material-symbols-outlined text-sm">fact_check</span> Start evaluating
             </div>
           </div>
@@ -524,7 +544,7 @@ tailwind.config = {
                   </div>
                 </div>
                 <p class="text-xs text-on-surface-variant leading-relaxed mb-4">Select a call, define partners, plan activities and calculate your budget. Build the foundations.</p>
-                <button type="button" id="create-btn-start" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-[#e7eb00] bg-[#1b1464] hover:bg-[#1b1464]/90 transition-colors">
+                <button type="button" id="create-btn-start" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-[#fbff12] bg-[#1b1464] hover:bg-[#1b1464]/90 transition-colors">
                   <span class="material-symbols-outlined text-sm">rocket_launch</span> Start designing
                 </button>
               </div>
@@ -1316,7 +1336,7 @@ tailwind.config = {
                   <svg class="animate-spin h-4 w-4 text-primary" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
                   <span id="eval-parse-text">Analizando...</span>
                 </div>
-                <label id="eval-upload-label" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-[#e7eb00] bg-[#1b1464] hover:bg-[#1b1464]/80 cursor-pointer transition-colors shadow-md">
+                <label id="eval-upload-label" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-[#fbff12] bg-[#1b1464] hover:bg-[#1b1464]/80 cursor-pointer transition-colors shadow-md">
                   <span class="material-symbols-outlined text-sm">upload_file</span> Subir Proyecto
                   <input type="file" id="eval-upload-input" accept=".pdf,.docx" class="hidden">
                 </label>
@@ -1513,7 +1533,7 @@ tailwind.config = {
             <div class="bg-white rounded-xl border border-outline-variant/30 overflow-hidden">
               <div class="px-5 py-4 border-b border-outline-variant/20 flex items-center justify-between">
                 <h2 class="font-semibold text-primary">Staff categories</h2>
-                <button id="worker-add-btn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-[#e7eb00] bg-[#1b1464] hover:bg-[#1b1464]/80 transition-colors">
+                <button id="worker-add-btn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-[#fbff12] bg-[#1b1464] hover:bg-[#1b1464]/80 transition-colors">
                   <span class="material-symbols-outlined text-sm">add</span> Add category
                 </button>
               </div>
@@ -1795,6 +1815,10 @@ tailwind.config = {
                 <div>
                   <label class="block text-xs font-semibold text-on-surface-variant mb-1">PIC</label>
                   <input data-field="pic" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm" placeholder="940435371">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">OID (Erasmus+)</label>
+                  <input data-field="oid" type="text" class="w-full border border-outline-variant/40 rounded-lg px-3 py-2 text-sm" placeholder="E10175142">
                 </div>
                 <div>
                   <label class="block text-xs font-semibold text-on-surface-variant mb-1">NIF / ID Nacional</label>
@@ -2112,29 +2136,247 @@ tailwind.config = {
         </div>
       </section>
 
-      <!-- ═══ PANEL: DIRECTORIO ORGANIZACIONES ═════════════════ -->
+      <!-- ═══ PANEL: ATLAS STATS (Mapa + dashboard) ════════════ -->
+      <section id="panel-atlas-stats" class="panel">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 py-8">
+
+          <!-- Hero -->
+          <header class="mb-6 relative overflow-visible">
+            <div class="splash-yellow-sm hidden lg:block" aria-hidden="true"></div>
+            <div class="relative">
+              <h1 class="font-headline text-3xl lg:text-4xl font-extrabold text-primary tracking-tight">
+                Atlas <span class="yellow-underline">Erasmus+</span>
+              </h1>
+              <p class="text-on-surface-variant text-sm mt-2 max-w-2xl">
+                Vista panorámica de las <strong id="stats-total-hero" class="text-primary">165.606</strong>
+                entidades europeas verificadas. Click en un país para filtrar el directorio.
+              </p>
+            </div>
+          </header>
+
+          <!-- KPIs row -->
+          <div id="stats-kpis" class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6"></div>
+
+          <!-- Map + tier donut row -->
+          <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-5 mb-6">
+            <div class="bg-white rounded-2xl border border-outline-variant/25 p-5">
+              <div class="flex items-baseline justify-between mb-3">
+                <h3 class="font-bold text-primary text-sm">Distribución por país</h3>
+                <span id="stats-map-hint" class="text-[11px] text-on-surface-variant">Hover un país para ver el conteo</span>
+              </div>
+              <div id="stats-map-container" class="relative w-full" style="aspect-ratio: 4/3; min-height:380px"></div>
+              <div class="flex items-center gap-3 mt-3 text-[11px] text-on-surface-variant">
+                <span>Pocas</span>
+                <span class="flex-1 h-2 rounded-full" style="background:linear-gradient(90deg,#f8f8f8,#fbff12,#1b1464)"></span>
+                <span>Muchas</span>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-outline-variant/25 p-5">
+              <h3 class="font-bold text-primary text-sm mb-3">Calidad del dataset</h3>
+              <div id="stats-tier-donut" class="min-h-[260px]"></div>
+              <p class="text-[11px] text-on-surface-variant mt-2">
+                Tier según campos rellenos por entidad (sobre 9 indicadores).
+              </p>
+            </div>
+          </div>
+
+          <!-- Bars row -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-6">
+            <div class="bg-white rounded-2xl border border-outline-variant/25 p-5">
+              <h3 class="font-bold text-primary text-sm mb-3">Top 15 países</h3>
+              <div id="stats-bar-countries" class="min-h-[340px]"></div>
+            </div>
+            <div class="bg-white rounded-2xl border border-outline-variant/25 p-5">
+              <h3 class="font-bold text-primary text-sm mb-3">Top categorías</h3>
+              <div id="stats-bar-categories" class="min-h-[340px]"></div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <div class="bg-white rounded-2xl border border-outline-variant/25 p-5">
+              <h3 class="font-bold text-primary text-sm mb-3">Top CMS</h3>
+              <div id="stats-bar-cms" class="min-h-[300px]"></div>
+            </div>
+            <div class="bg-white rounded-2xl border border-outline-variant/25 p-5">
+              <h3 class="font-bold text-primary text-sm mb-3">Top idiomas web</h3>
+              <div id="stats-bar-languages" class="min-h-[300px]"></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ═══ PANEL: SHORTLISTS (Mi Pool) ══════════════════════ -->
+      <section id="panel-shortlists" class="panel">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 py-8">
+          <header class="flex items-end gap-3 mb-6">
+            <div class="min-w-0 flex-1">
+              <h1 class="font-headline text-3xl font-extrabold text-primary tracking-tight">
+                Mi <span class="yellow-underline">Pool</span>
+              </h1>
+              <p class="text-on-surface-variant text-sm mt-1">Tus colecciones de partners para futuras propuestas Erasmus+.</p>
+            </div>
+            <button id="shortlists-new-btn" type="button"
+              class="inline-flex items-center gap-1.5 text-sm font-semibold text-primary bg-secondary-fixed hover:bg-secondary-fixed-dim px-4 py-2 rounded-lg transition-colors">
+              <span class="material-symbols-outlined text-[18px]">add</span>
+              Nueva shortlist
+            </button>
+          </header>
+
+          <div id="shortlists-tabs" class="flex flex-wrap gap-2 mb-6"></div>
+
+          <div id="shortlist-detail"></div>
+        </div>
+      </section>
+
+      <!-- ═══ PANEL: PARTNER ENGINE (Directorio europeo) ══════ -->
       <section id="panel-organizations" class="panel">
-        <div class="max-w-6xl mx-auto py-8 px-4">
-          <h1 class="font-headline text-2xl font-extrabold text-primary mb-6">Directorio de Organizaciones</h1>
 
-          <!-- Filters -->
-          <div class="flex flex-wrap gap-3 mb-6">
-            <input id="org-dir-search" type="text" placeholder="Buscar por nombre, ciudad o PIC..."
-              class="flex-1 min-w-[200px] border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
-            <input id="org-dir-country" type="text" placeholder="País"
-              class="w-36 border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
-            <select id="org-dir-type" class="w-44 border border-outline-variant/40 rounded-lg px-3 py-2 text-sm">
-              <option value="">Todos los tipos</option>
-              <option>NGO</option><option>University</option><option>School/Institute</option>
-              <option>Research Centre</option><option>SME</option><option>Large Enterprise</option>
-              <option>Public body</option><option>Foundation</option><option>Social enterprise</option><option>Other</option>
-            </select>
-          </div>
+        <!-- Hero strip -->
+        <div class="entities-hero relative px-4 lg:px-8 pt-8 pb-6">
+          <div class="splash-yellow hidden lg:block" aria-hidden="true"></div>
+          <div class="max-w-7xl mx-auto relative">
+            <div class="flex flex-wrap items-end gap-4 mb-6">
+              <div class="min-w-0">
+                <h1 class="font-headline text-3xl lg:text-4xl font-extrabold text-primary tracking-tight">
+                  Partner <span class="yellow-underline">Engine</span>
+                </h1>
+                <p class="text-on-surface-variant text-sm mt-2 max-w-xl">
+                  <strong id="entities-total-real" class="text-primary">165.606</strong>
+                  entidades europeas Erasmus+ verificadas. Encuentra los socios reales para tu próxima propuesta.
+                </p>
+              </div>
+              <div class="ml-auto flex items-center gap-3 text-xs text-on-surface-variant">
+                <span class="inline-flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span id="entities-sync-meta">Datos sincronizados</span>
+                </span>
+              </div>
+            </div>
 
-          <!-- Org cards grid -->
-          <div id="org-dir-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div class="col-span-full py-12 text-center text-on-surface-variant">Cargando organizaciones...</div>
+            <!-- Searchbar -->
+            <div class="flex flex-col sm:flex-row gap-2">
+              <div class="relative flex-1">
+                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary text-[22px] pointer-events-none">search</span>
+                <input id="entities-q" type="text" autocomplete="off"
+                  placeholder="Busca por nombre, descripción, ciudad…"
+                  class="w-full pl-12 pr-32 py-4 rounded-xl bg-white border border-outline-variant/30
+                         text-base font-medium placeholder:text-on-surface-variant/60
+                         focus:outline-none focus:border-primary focus:ring-4 focus:ring-secondary-fixed/40
+                         transition-shadow duration-200">
+                <div id="entities-q-meta" class="absolute right-5 top-1/2 -translate-y-1/2 text-[11px] text-on-surface-variant pointer-events-none"></div>
+              </div>
+              <button id="entities-smart-btn" type="button"
+                class="inline-flex items-center justify-center gap-2 px-5 py-4 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors shrink-0">
+                <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+                Smart Shortlist
+              </button>
+            </div>
+            <p class="text-[11px] text-on-surface-variant mt-2">
+              <span class="font-semibold">Tip:</span> usa <strong>Smart Shortlist</strong> para preguntar en lenguaje natural — ej: "5 ONGs en Italia con web en inglés y email".
+            </p>
           </div>
+        </div>
+
+        <!-- Active filter chips -->
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+          <div id="entities-active-chips" class="flex flex-wrap gap-2 min-h-[2px]"></div>
+        </div>
+
+        <!-- Layout: filters + grid -->
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 pb-16 pt-4">
+          <div class="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-6">
+
+            <!-- Filter sidebar -->
+            <aside id="entities-filters" class="space-y-5 lg:sticky lg:top-24 self-start">
+              <div class="text-[10px] font-bold tracking-[.2em] uppercase text-on-surface-variant mb-1">Filtros</div>
+
+              <!-- Calidad -->
+              <div class="filter-group">
+                <div class="filter-label">Calidad</div>
+                <div class="space-y-1.5" data-filter-group="tier">
+                  <label class="filter-radio"><input type="radio" name="ent-tier" value=""><span>Todas</span></label>
+                  <label class="filter-radio"><input type="radio" name="ent-tier" value="premium+"><span>Premium + Buena</span></label>
+                  <label class="filter-radio"><input type="radio" name="ent-tier" value="premium"><span class="badge-tier badge-premium">Premium</span></label>
+                  <label class="filter-radio"><input type="radio" name="ent-tier" value="good"><span class="badge-tier badge-good">Buena</span></label>
+                  <label class="filter-radio"><input type="radio" name="ent-tier" value="acceptable"><span class="badge-tier badge-acceptable">Aceptable</span></label>
+                </div>
+              </div>
+
+              <!-- País -->
+              <div class="filter-group">
+                <div class="filter-label">País</div>
+                <div id="entities-filter-country" class="space-y-1 max-h-56 overflow-y-auto pr-1"></div>
+              </div>
+
+              <!-- Categoría -->
+              <div class="filter-group">
+                <div class="filter-label">Tipo</div>
+                <div id="entities-filter-category" class="space-y-1 max-h-48 overflow-y-auto pr-1"></div>
+              </div>
+
+              <!-- Idioma -->
+              <div class="filter-group">
+                <div class="filter-label">Idioma web</div>
+                <div id="entities-filter-language" class="space-y-1 max-h-40 overflow-y-auto pr-1"></div>
+              </div>
+
+              <!-- Contacto -->
+              <div class="filter-group">
+                <div class="filter-label">Contacto</div>
+                <label class="filter-toggle">
+                  <input id="ent-has-email" type="checkbox">
+                  <span>Con email</span>
+                </label>
+                <label class="filter-toggle">
+                  <input id="ent-has-phone" type="checkbox">
+                  <span>Con teléfono</span>
+                </label>
+              </div>
+
+              <button id="entities-clear" type="button"
+                class="w-full text-xs font-semibold text-primary hover:bg-secondary-fixed/30 transition-colors px-3 py-2 rounded-lg border border-outline-variant/30 hidden">
+                Limpiar filtros
+              </button>
+            </aside>
+
+            <!-- Results -->
+            <div>
+              <div class="flex items-center gap-3 mb-4">
+                <div id="entities-results-count" class="text-sm font-semibold text-on-surface">Cargando…</div>
+                <div class="flex-1"></div>
+                <label class="text-xs text-on-surface-variant flex items-center gap-2">
+                  <span>Ordenar:</span>
+                  <select id="entities-sort"
+                    class="text-xs px-3 py-1.5 rounded-lg border border-outline-variant/40 bg-white font-medium">
+                    <option value="quality">Mejor calidad</option>
+                    <option value="name">Nombre A-Z</option>
+                    <option value="country">País</option>
+                    <option value="recent">Más recientes</option>
+                  </select>
+                </label>
+              </div>
+
+              <div id="entities-grid"
+                class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-5">
+              </div>
+
+              <div id="entities-sentinel" class="h-1"></div>
+              <div id="entities-loadmore" class="py-6 text-center text-xs text-on-surface-variant"></div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Ficha slide-over (S3 will fill this) -->
+        <div id="entity-ficha-overlay" class="hidden fixed inset-0 z-40">
+          <div id="entity-ficha-backdrop" class="absolute inset-0 bg-primary/30 backdrop-blur-sm"></div>
+          <aside id="entity-ficha-panel"
+            class="absolute right-0 top-0 bottom-0 w-full max-w-3xl bg-white shadow-2xl overflow-y-auto
+                   transform transition-transform duration-300">
+            <div id="entity-ficha-content" class="min-h-full"></div>
+          </aside>
         </div>
       </section>
 
@@ -2155,6 +2397,9 @@ tailwind.config = {
 <script src="/js/admin.js"></script>
 <script src="/js/calculator.js?v=20260413b"></script>
 <script src="/js/organizations.js"></script>
+<script src="/js/entities.js?v=20260426b"></script>
+<script src="/js/shortlists.js?v=20260426b"></script>
+<script src="/js/atlas-stats.js?v=20260426a"></script>
 <script src="/js/documents.js"></script>
 <script src="/js/research.js"></script>
 <script src="/js/intake-tasks.js"></script>
@@ -2172,6 +2417,8 @@ tailwind.config = {
     <p id="mini-modal-msg" class="text-sm font-semibold text-on-surface mb-4"></p>
     <input id="mini-modal-input" type="number" min="0" step="1" aria-label="Valor"
       class="w-full border border-outline rounded-lg px-3 py-3 text-base mb-4 hidden focus:outline-none focus:ring-2 focus:ring-primary" />
+    <input id="mini-modal-input-text" type="text" aria-label="Texto"
+      class="w-full border border-outline rounded-lg px-3 py-3 text-base mb-4 hidden focus:outline-none focus:ring-2 focus:ring-primary" />
     <div class="flex gap-3">
       <button id="mini-modal-cancel" class="flex-1 py-3 rounded-xl border border-outline text-sm font-semibold text-on-surface-variant">Cancelar</button>
       <button id="mini-modal-confirm" class="flex-1 py-3 rounded-xl bg-primary text-white text-sm font-semibold">Confirmar</button>
@@ -2188,8 +2435,45 @@ window.Modal = {
       this._resolve = resolve;
       document.getElementById('mini-modal-msg').textContent = msg;
       const inp = document.getElementById('mini-modal-input');
-      inp.classList.toggle('hidden', !input);
-      if (input) { inp.value = defaultVal; setTimeout(() => inp.focus(), 100); }
+      const txt = document.getElementById('mini-modal-input-text');
+      inp.classList.add('hidden');
+      txt.classList.add('hidden');
+      if (input === true || input === 'number') {
+        inp.classList.remove('hidden');
+        inp.value = defaultVal || '';
+        setTimeout(() => inp.focus(), 100);
+      } else if (input === 'text') {
+        txt.classList.remove('hidden');
+        txt.value = defaultVal || '';
+        if (typeof input === 'object' && input?.placeholder) txt.placeholder = input.placeholder;
+        setTimeout(() => { txt.focus(); txt.select(); }, 100);
+      }
+      this._mode = input;
+      document.getElementById('mini-modal').classList.remove('hidden');
+    });
+  },
+  prompt(msg, defaultVal = '', opts = {}) {
+    return new Promise(resolve => {
+      this._resolve = resolve;
+      document.getElementById('mini-modal-msg').textContent = msg;
+      const inp = document.getElementById('mini-modal-input');
+      const txt = document.getElementById('mini-modal-input-text');
+      inp.classList.add('hidden');
+      txt.classList.remove('hidden');
+      txt.value = defaultVal || '';
+      txt.placeholder = opts.placeholder || '';
+      this._mode = 'text';
+      document.getElementById('mini-modal').classList.remove('hidden');
+      setTimeout(() => { txt.focus(); txt.select(); }, 100);
+    });
+  },
+  confirm(msg) {
+    return new Promise(resolve => {
+      this._resolve = resolve;
+      document.getElementById('mini-modal-msg').textContent = msg;
+      document.getElementById('mini-modal-input').classList.add('hidden');
+      document.getElementById('mini-modal-input-text').classList.add('hidden');
+      this._mode = 'confirm';
       document.getElementById('mini-modal').classList.remove('hidden');
     });
   },
@@ -2199,11 +2483,18 @@ window.Modal = {
   }
 };
 document.getElementById('mini-modal-confirm').addEventListener('click', () => {
-  const inp = document.getElementById('mini-modal-input');
-  Modal._close(inp.classList.contains('hidden') ? true : inp.value);
+  const mode = Modal._mode;
+  if (mode === 'text') {
+    Modal._close(document.getElementById('mini-modal-input-text').value || null);
+  } else if (mode === true || mode === 'number') {
+    Modal._close(document.getElementById('mini-modal-input').value);
+  } else {
+    Modal._close(true);
+  }
 });
 document.getElementById('mini-modal-cancel').addEventListener('click', () => Modal._close(null));
 document.getElementById('mini-modal').addEventListener('click', e => { if (e.target === e.currentTarget) Modal._close(null); });
+document.getElementById('mini-modal-input-text').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('mini-modal-confirm').click(); });
 </script>
 
 </body>

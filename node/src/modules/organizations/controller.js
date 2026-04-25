@@ -88,6 +88,18 @@ exports.deleteChild = async (req, res) => {
   } catch (e) { err(res, e.message, 500); }
 };
 
+/* ── ORS lookup (prefill on new-org) ─────────────────────────── */
+
+exports.orsLookup = async (req, res) => {
+  try {
+    const q = (req.body?.q || req.query?.q || '').toString();
+    const results = await m.orsLookup(q);
+    ok(res, results);
+  } catch (e) {
+    err(res, e.message || 'ORS lookup failed', e.status || 500);
+  }
+};
+
 exports.uploadLogo = async (req, res) => {
   try {
     if (!req.file) return err(res, 'No file uploaded');

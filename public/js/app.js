@@ -195,7 +195,9 @@ const App = (() => {
       'my-documents': 'My Documents',
       research:       'Research',
       'my-org':       'Mi Organización',
-      organizations:  'Organizaciones',
+      organizations:  'Partner Engine',
+      shortlists:     'Mi Pool',
+      'atlas-stats':  'Atlas Stats',
       admin:          'Admin — Data E+'
     };
     document.getElementById('topbar-title').textContent = titles[route] || 'E+ Tools';
@@ -210,7 +212,9 @@ const App = (() => {
     if (route === 'calculator' && typeof Calculator !== 'undefined') Calculator.init();
     if (route === 'my-documents' && typeof Documents !== 'undefined') Documents.init();
     if (route === 'my-org' && typeof Organizations !== 'undefined') Organizations.initMyOrg();
-    if (route === 'organizations' && typeof Organizations !== 'undefined') Organizations.initDirectory();
+    if (route === 'organizations' && typeof Entities !== 'undefined') Entities.init();
+    if (route === 'shortlists' && typeof Shortlists !== 'undefined') Shortlists.init();
+    if (route === 'atlas-stats' && typeof AtlasStats !== 'undefined') AtlasStats.init();
     if (route === 'research' && typeof Research !== 'undefined') Research.init();
     if (route === 'developer' && typeof Developer !== 'undefined') Developer.init();
     if (route === 'evaluator' && typeof Evaluator !== 'undefined') Evaluator.init();
@@ -303,7 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
       recentEl.innerHTML = list.slice(0, 5).map(p => `
         <div class="flex items-center gap-3 px-4 py-3 bg-white rounded-xl shadow-sm hover:shadow-md cursor-pointer transition-all mb-2" onclick="if(typeof Intake!=='undefined'){Intake.openProject('${p.id}')}">
           <div class="w-8 h-8 rounded-lg bg-[#1b1464] flex items-center justify-center flex-shrink-0">
-            <span class="material-symbols-outlined text-[#e7eb00] text-base">description</span>
+            <span class="material-symbols-outlined text-[#fbff12] text-base">description</span>
           </div>
           <div class="flex-1 min-w-0">
             <div class="text-sm font-bold text-on-surface truncate">${p.name || 'Untitled'}</div>

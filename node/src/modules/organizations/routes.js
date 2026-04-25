@@ -25,6 +25,9 @@ router.get ('/mine/all',  auth, ctrl.getMyOrgs);
 router.put ('/mine',      auth, ctrl.upsertMyOrg);
 router.post('/mine/logo', auth, uploadLogo.single('logo'), ctrl.uploadLogo);
 
+/* ── ORS lookup (prefill new-org form) ───────────────────────── */
+router.post('/ors-lookup', auth, ctrl.orsLookup);
+
 /* ── Directory ───────────────────────────────────────────────── */
 router.get ('/',      auth, ctrl.listOrgs);
 router.get ('/:id',   auth, ctrl.getOrg);

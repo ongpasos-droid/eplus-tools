@@ -39,15 +39,134 @@ const Organizations = (() => {
         loadAllChildren();
       } catch (e) { Toast.show(e.message || 'Error', 'error'); }
     });
-    document.getElementById('myorg-btn-new-org')?.addEventListener('click', async () => {
-      const name = await Modal.show('Nombre de la nueva organización:', { input: true });
-      if (!name) return;
-      try {
-        const res = await API.put('/organizations/mine', { organization_name: name });
-        Toast.show('Organización creada', 'ok');
-        loadMyOrgs();
-      } catch (e) { Toast.show(e.message || 'Error', 'error'); }
+    document.getElementById('myorg-btn-new-org')?.addEventListener('click', () => {
+      openNewOrgModal();
     });
+  }
+
+  /* ── New org modal with ORS prefill search ────────────────── */
+  function openNewOrgModal() {
+    document.getElementById('org-new-modal')?.remove();
+    const overlay = document.createElement('div');
+    overlay.id = 'org-new-modal';
+    overlay.className = 'fixed inset-0 bg-black/40 z-50 flex items-start justify-center pt-16 pb-8 overflow-y-auto';
+    overlay.innerHTML = `
+      <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl mx-4 overflow-hidden">
+        <div class="bg-primary text-white px-6 py-4 flex items-center justify-between">
+          <div>
+            <h2 class="font-headline text-lg font-bold">Nueva organización</h2>
+            <p class="text-white/70 text-xs">Busca en el registro Erasmus+ (ORS) para precargar datos.</p>
+          </div>
+          <button class="org-new-close text-white/70 hover:text-white" aria-label="Cerrar">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="p-5 space-y-4">
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+            <input id="org-new-search" type="text" autocomplete="off"
+              placeholder="Busca por nombre, acrónimo, ciudad, OID o PIC..."
+              class="w-full pl-10 pr-3 py-3 text-sm border border-outline-variant/40 rounded-lg bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" />
+          </div>
+          <div id="org-new-results" class="max-h-[50vh] overflow-y-auto divide-y divide-outline-variant/20 border border-outline-variant/20 rounded-lg hidden"></div>
+          <div id="org-new-hint" class="text-xs text-on-surface-variant">
+            Escribe al menos 2 caracteres. Si tu entidad no sale, puedes crearla vacía y rellenar los datos a mano.
+          </div>
+        </div>
+        <div class="px-5 py-4 border-t border-outline-variant/20 flex items-center justify-between bg-surface-container-low/40">
+          <button class="org-new-empty text-sm text-primary font-semibold hover:underline">
+            <span class="material-symbols-outlined align-middle text-[18px]">add</span>
+            No la encuentro — crear vacía
+          </button>
+          <button class="org-new-cancel text-sm text-on-surface-variant font-semibold hover:text-on-surface">Cancelar</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+    const input = overlay.querySelector('#org-new-search');
+    const resultsBox = overlay.querySelector('#org-new-results');
+    const hint = overlay.querySelector('#org-new-hint');
+    setTimeout(() => input.focus(), 60);
+
+    const close = () => overlay.remove();
+    overlay.querySelector('.org-new-close').addEventListener('click', close);
+    overlay.querySelector('.org-new-cancel').addEventListener('click', close);
+    overlay.querySelector('.org-new-empty').addEventListener('click', async () => {
+      const name = prompt('Nombre de la nueva organización:');
+      if (!name || !name.trim()) return;
+      await createOrgFromData({ organization_name: name.trim() });
+      close();
+    });
+
+    input.addEventListener('input', debounce(async () => {
+      const q = input.value.trim();
+      if (q.length < 2) {
+        resultsBox.classList.add('hidden');
+        hint.textContent = 'Escribe al menos 2 caracteres. Si tu entidad no sale, puedes crearla vacía y rellenar los datos a mano.';
+        return;
+      }
+      resultsBox.classList.remove('hidden');
+      resultsBox.innerHTML = '<div class="py-6 text-center text-on-surface-variant text-sm">Buscando en ORS…</div>';
+      hint.textContent = '';
+      try {
+        const rows = await API.post('/organizations/ors-lookup', { q });
+        if (!rows || !rows.length) {
+          resultsBox.innerHTML = '<div class="py-6 text-center text-on-surface-variant text-sm">Sin resultados. Prueba con otro término o crea la entidad vacía.</div>';
+          return;
+        }
+        resultsBox.innerHTML = rows.map((r, i) => `
+          <button class="org-new-pick w-full text-left px-4 py-3 hover:bg-primary/5 transition-colors" data-idx="${i}">
+            <div class="flex items-start justify-between gap-3">
+              <div class="flex-1 min-w-0">
+                <div class="font-semibold text-sm text-on-surface truncate">${esc(r.legal_name)}</div>
+                <div class="text-xs text-on-surface-variant mt-0.5">
+                  ${r.city ? esc(r.city) : ''}${r.city && r.country_iso ? ', ' : ''}${r.country_iso ? esc(r.country_iso) : ''}
+                  ${r.website_show ? ` · ${esc(r.website_show)}` : ''}
+                </div>
+              </div>
+              <div class="shrink-0 text-right text-[10px] font-mono leading-tight">
+                ${r.oid ? `<div class="text-primary">${esc(r.oid)}</div>` : ''}
+                ${r.pic ? `<div class="text-on-surface-variant">PIC ${esc(r.pic)}</div>` : ''}
+                ${r.validity_label ? `<div class="${r.validity_label === 'certified' ? 'text-green-600' : 'text-amber-600'} uppercase mt-0.5">${esc(r.validity_label)}</div>` : ''}
+              </div>
+            </div>
+          </button>
+        `).join('');
+        resultsBox.querySelectorAll('.org-new-pick').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const r = rows[parseInt(btn.dataset.idx, 10)];
+            await createOrgFromData(mapOrsToOrg(r));
+            close();
+          });
+        });
+      } catch (e) {
+        resultsBox.innerHTML = `<div class="py-6 text-center text-error text-sm">Error consultando ORS: ${esc(e.message || 'Error')}</div>`;
+      }
+    }, 350));
+  }
+
+  function mapOrsToOrg(r) {
+    return {
+      organization_name:   r.legal_name,
+      legal_name_national: r.legal_name,
+      oid:                 r.oid,
+      pic:                 r.pic,
+      country:             r.country_iso,
+      city:                r.city,
+      website:             r.website,
+      national_id:         r.vat || r.registration_no || null,
+    };
+  }
+
+  async function createOrgFromData(data) {
+    try {
+      await API.put('/organizations/mine', data);
+      Toast.show('Organización creada', 'ok');
+      loadMyOrgs();
+    } catch (e) {
+      Toast.show(e.message || 'Error', 'error');
+    }
   }
 
   async function loadMyOrgs() {
@@ -535,6 +654,7 @@ const Organizations = (() => {
         <div class="p-6 space-y-6 max-h-[70vh] overflow-y-auto">
           ${detailSection('Datos generales', `
             ${detailRow('Tipo', org.org_type)}
+            ${detailRow('OID (Erasmus+)', org.oid)}
             ${detailRow('PIC', org.pic)}
             ${detailRow('NIF / ID Nacional', org.national_id)}
             ${detailRow('Fecha fundación', org.foundation_date?.slice(0,10))}

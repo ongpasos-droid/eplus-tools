@@ -1,4 +1,5 @@
 const model = require('./model');
+const { enforceRefineCap } = require('../../utils/ai');
 
 // GET /v1/developer/projects/:projectId/context
 exports.getContext = async (req, res, next) => {
@@ -414,6 +415,7 @@ exports.refineEvaluate = async (req, res, next) => {
     if (!field_id || !text) {
       return res.status(400).json({ ok: false, error: { code: 'BAD_REQUEST', message: 'field_id y text son obligatorios' } });
     }
+    await enforceRefineCap(req.user.id, req.user.role);
     const instance = await model.getInstance(req.params.id, req.user.id);
     if (!instance) return res.status(404).json({ ok: false, error: { code: 'NOT_FOUND' } });
 
@@ -432,6 +434,7 @@ exports.refineApply = async (req, res, next) => {
     if (!field_id || !text || !evaluation) {
       return res.status(400).json({ ok: false, error: { code: 'BAD_REQUEST', message: 'field_id, text y evaluation son obligatorios' } });
     }
+    await enforceRefineCap(req.user.id, req.user.role);
     const instance = await model.getInstance(req.params.id, req.user.id);
     if (!instance) return res.status(404).json({ ok: false, error: { code: 'NOT_FOUND' } });
 
@@ -457,6 +460,7 @@ exports.refineField = async (req, res, next) => {
     if (!field_id || !text) {
       return res.status(400).json({ ok: false, error: { code: 'BAD_REQUEST', message: 'field_id y text son obligatorios' } });
     }
+    await enforceRefineCap(req.user.id, req.user.role);
 
     const instance = await model.getInstance(req.params.id, req.user.id);
     if (!instance) return res.status(404).json({ ok: false, error: { code: 'NOT_FOUND' } });
@@ -499,5 +503,65 @@ exports.improveFieldCustom = async (req, res, next) => {
       instance.id, field_id, text, user_request.trim(), projectContext, programId, coordName
     );
     res.json({ ok: true, data: { text: improved } });
+  } catch (err) { next(err); }
+};
+
+/* ── Writer Phase 2 — Milestones ─────────────────────────────── */
+
+exports.listMilestones = async (req, res, next) => {
+  try {
+    const rows = await model.listMilestones(req.params.wpId);
+    res.json({ ok: true, data: rows });
+  } catch (err) { next(err); }
+};
+
+exports.createMilestone = async (req, res, next) => {
+  try {
+    const id = await model.createMilestone(req.params.wpId, req.user.id, req.body || {});
+    res.json({ ok: true, data: { id } });
+  } catch (err) { next(err); }
+};
+
+exports.updateMilestone = async (req, res, next) => {
+  try {
+    await model.updateMilestone(req.params.id, req.user.id, req.body || {});
+    res.json({ ok: true, data: { saved: true } });
+  } catch (err) { next(err); }
+};
+
+exports.deleteMilestone = async (req, res, next) => {
+  try {
+    await model.deleteMilestone(req.params.id, req.user.id);
+    res.json({ ok: true, data: { deleted: true } });
+  } catch (err) { next(err); }
+};
+
+/* ── Writer Phase 2 — Deliverables ────────────────────────────── */
+
+exports.listDeliverables = async (req, res, next) => {
+  try {
+    const rows = await model.listDeliverables(req.params.wpId);
+    res.json({ ok: true, data: rows });
+  } catch (err) { next(err); }
+};
+
+exports.createDeliverable = async (req, res, next) => {
+  try {
+    const id = await model.createDeliverable(req.params.wpId, req.user.id, req.body || {});
+    res.json({ ok: true, data: { id } });
+  } catch (err) { next(err); }
+};
+
+exports.updateDeliverable = async (req, res, next) => {
+  try {
+    await model.updateDeliverable(req.params.id, req.user.id, req.body || {});
+    res.json({ ok: true, data: { saved: true } });
+  } catch (err) { next(err); }
+};
+
+exports.deleteDeliverable = async (req, res, next) => {
+  try {
+    await model.deleteDeliverable(req.params.id, req.user.id);
+    res.json({ ok: true, data: { deleted: true } });
   } catch (err) { next(err); }
 };

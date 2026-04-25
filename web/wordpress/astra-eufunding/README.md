@@ -17,7 +17,7 @@ Child theme de [Astra](https://wordpress.org/themes/astra/) para `eufundingschoo
 ```
 web/wordpress/astra-eufunding/
 ├── style.css                    # Theme header + tokens locales (sync'd con brand/) + custom CSS
-├── functions.php                # Enqueue parent + Manrope + hooks, helpers
+├── functions.php                # Enqueue parent + Poppins + hooks, helpers
 ├── home.php                     # Blog index (/blog/)
 ├── single.php                   # Post individual
 ├── archive.php                  # Categoría / tag / fecha
@@ -67,14 +67,15 @@ efs_cta( 'sandbox' );     // Caja CTA clara — enlace al intake
 
 Fuente de verdad: `web/brand/tokens.css` (monorepo).
 
-Paleta actual (alineada con el tool E+):
+Paleta actual (alineada con la visión de Ana — Presentation Templates de EU Funding School):
 
 ```css
---efs-color-primary:    #06003e   /* deep navy, max hierarchy */
---efs-color-primary-2:  #1b1464   /* mid navy */
---efs-color-accent:     #e7eb00   /* neon yellow, CTA */
---efs-color-surface:    #f0f4fa   /* ice-blue background */
---efs-font-body:        'Manrope', system-ui, sans-serif
+--efs-color-primary:      #1b1464   /* single brand blue — titles, text, nav, icons */
+--efs-color-accent:       #fbff12   /* lime yellow — CTA bg, highlights */
+--efs-color-accent-warm:  #c7afdf   /* lavender — soft accents, secondary cards */
+--efs-color-surface:      #f8f8f8   /* neutral light gray background */
+--efs-color-line:         #cccccc   /* separators, pills inactive */
+--efs-font-body:          'Poppins', system-ui, sans-serif
 ```
 
 Cualquier cambio de paleta/fuente que deba afectar a ambos ecosistemas (web + tool) se hace en `web/brand/tokens.css` y se refleja en `style.css` y en el tool.

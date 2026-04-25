@@ -14,14 +14,15 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 define( 'EFS_CHILD_VERSION', '0.2.0' );
 
 /* -------------------------------------------------------------------------
- * Enqueue parent + child styles + Manrope
- * Manrope es la fuente compartida del ecosistema (WP + tool E+).
+ * Enqueue parent + child styles + Poppins
+ * Poppins es la fuente compartida del ecosistema (WP + tool E+), alineada
+ * con las Presentation Templates de EU Funding School.
  * Tokens completos en web/brand/tokens.css del monorepo.
  * ------------------------------------------------------------------------- */
 add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_style(
-		'efs-manrope',
-		'https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap',
+		'efs-poppins',
+		'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap',
 		array(),
 		null
 	);
@@ -30,7 +31,7 @@ add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_style(
 		'astra-eufunding',
 		get_stylesheet_directory_uri() . '/style.css',
-		array( $parent_handle, 'efs-manrope' ),
+		array( $parent_handle, 'efs-poppins' ),
 		EFS_CHILD_VERSION
 	);
 }, 20 );

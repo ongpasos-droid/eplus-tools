@@ -17,16 +17,17 @@ Text Domain:    astra-eufunding
    ====================================================================== */
 :root {
 	--efs-color-bg:                #ffffff;
-	--efs-color-surface:           #f0f4fa;
+	--efs-color-surface:           #f8f8f8;
 	--efs-color-text:              #191c1e;
 	--efs-color-muted:             #474551;
-	--efs-color-primary:           #06003e;
+	--efs-color-primary:           #1b1464;
 	--efs-color-primary-2:         #1b1464;
-	--efs-color-accent:            #e7eb00;
-	--efs-color-line:              #c8c5d2;
+	--efs-color-accent:            #fbff12;
+	--efs-color-accent-warm:       #c7afdf;
+	--efs-color-line:              #cccccc;
 
-	--efs-font-body:    'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-	--efs-font-display: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+	--efs-font-body:    'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+	--efs-font-display: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 
 	--efs-radius:       0.25rem;
 	--efs-shadow-soft:  0px 24px 48px rgba(27, 20, 100, 0.06);
@@ -42,7 +43,7 @@ Text Domain:    astra-eufunding
 .efs-landing {
 	color: var(--efs-color-text);
 	font-family: var(--efs-font-body);
-	font-weight: 500; /* Manrope medium = body default per DESIGN.md */
+	font-weight: 500; /* Poppins medium = body default per DESIGN.md */
 	line-height: 1.65;
 	-webkit-font-smoothing: antialiased;
 }
