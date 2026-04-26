@@ -16,9 +16,15 @@
 <!-- ApexCharts (used by Entities ficha for score donuts, by Stats dashboard) -->
 <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.49.1/dist/apexcharts.min.js" defer></script>
 
-<!-- D3 + topojson (Europe map en Atlas Stats) -->
+<!-- D3 (KPI/bars helpers, mantienen compat con stats antiguos) -->
 <script src="https://cdn.jsdelivr.net/npm/d3@7" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/topojson-client@3" defer></script>
+<!-- MapLibre GL JS v5+ — Atlas 2D + 3D con vector tiles. La proyección `globe` requiere v5.0+ -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@5.6.1/dist/maplibre-gl.css">
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5.6.1/dist/maplibre-gl.js" defer></script>
+
+<!-- Leaflet (sólo para el pin editor de Mi Organización) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js" defer></script>
 <script>
 tailwind.config = {
   darkMode: "class",
@@ -284,6 +290,15 @@ tailwind.config = {
         </a>
       </div>
     </nav>
+
+    <!-- Volver a la web pública (eufundingschool.com) -->
+    <a id="back-to-web"
+      href="https://eufundingschool.com"
+      class="flex items-center gap-3 px-3 py-2 mx-3 mb-2 rounded-lg text-white/40 hover:text-white/80 hover:bg-white/5 transition-colors text-xs font-medium">
+      <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+      Volver a eufundingschool.com
+      <span class="material-symbols-outlined text-[14px] ml-auto">open_in_new</span>
+    </a>
 
     <!-- User section at bottom -->
     <div class="p-3 border-t border-white/10">
@@ -1362,13 +1377,13 @@ tailwind.config = {
             </div>
 
             <!-- Layout: sidebar + main -->
-            <div class="flex gap-0" style="min-height:70vh">
+            <div class="flex gap-0 items-start" style="min-height:70vh">
               <!-- Sidebar secciones -->
-              <div id="eval-user-sidebar" class="w-64 flex-shrink-0 bg-[#edf2f9] rounded-l-2xl flex flex-col overflow-hidden border-r border-outline-variant/20">
+              <div id="eval-user-sidebar" class="w-64 flex-shrink-0 bg-[#edf2f9] rounded-l-2xl flex flex-col border-r border-outline-variant/20">
                 <div class="px-4 py-3 border-b border-outline-variant/20">
                   <div class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Secciones del formulario</div>
                 </div>
-                <div id="eval-user-sidebar-nav" class="flex-1 overflow-y-auto px-2 py-2"></div>
+                <div id="eval-user-sidebar-nav" class="px-2 py-2"></div>
               </div>
               <!-- Main content -->
               <div id="eval-user-main" class="flex-1 min-w-0 bg-white rounded-r-2xl border border-l-0 border-outline-variant/20">
@@ -1890,6 +1905,29 @@ tailwind.config = {
                     <option value="open">🟢 Abierta — cualquier usuario puede usarla sin pedir permiso</option>
                   </select>
                 </div>
+
+                <!-- Pin de ubicación (Leaflet) -->
+                <div class="md:col-span-2 mt-2 p-4 bg-surface-container-low/40 rounded-lg border border-outline-variant/30">
+                  <div class="flex items-baseline justify-between mb-2">
+                    <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant">Ubicación en el mapa</label>
+                    <span id="myorg-coords-label" class="text-[10px] text-on-surface-variant font-mono"></span>
+                  </div>
+                  <p class="text-xs text-on-surface-variant mb-3">Arrastra el pin a la dirección exacta. Esta posición alimenta el Atlas 3D y las bandas km del Calculator.</p>
+                  <div id="myorg-map" class="w-full rounded-lg border border-outline-variant/40" style="height: 320px; background: #f0f0f5"></div>
+                  <div class="flex flex-wrap gap-2 mt-3">
+                    <button type="button" id="myorg-self-locate"
+                      class="inline-flex items-center gap-1.5 text-xs font-semibold text-primary bg-secondary-fixed hover:bg-secondary-fixed-dim px-3 py-1.5 rounded-lg transition-colors">
+                      <span class="material-symbols-outlined text-[16px]">my_location</span>
+                      Usar mi ubicación
+                    </button>
+                    <button type="button" id="myorg-save-pin"
+                      class="inline-flex items-center gap-1.5 text-xs font-semibold text-white bg-primary hover:bg-primary/90 px-3 py-1.5 rounded-lg transition-colors">
+                      <span class="material-symbols-outlined text-[16px]">save</span>
+                      Guardar ubicación
+                    </button>
+                    <span id="myorg-coords-source" class="text-[11px] text-on-surface-variant ml-auto self-center"></span>
+                  </div>
+                </div>
               </div>
               <div class="mt-6 flex justify-end">
                 <button data-org-save="myorg-tab-general" class="bg-primary text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors">Guardar datos generales</button>
@@ -2157,26 +2195,51 @@ tailwind.config = {
           <!-- KPIs row -->
           <div id="stats-kpis" class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6"></div>
 
-          <!-- Map + tier donut row -->
-          <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-5 mb-6">
-            <div class="bg-white rounded-2xl border border-outline-variant/25 p-5">
-              <div class="flex items-baseline justify-between mb-3">
-                <h3 class="font-bold text-primary text-sm">Distribución por país</h3>
-                <span id="stats-map-hint" class="text-[11px] text-on-surface-variant">Hover un país para ver el conteo</span>
+          <!-- Atlas: vista 2D (mapa cartográfico) + 3D (globo) ─────── -->
+          <div class="bg-white rounded-2xl border border-outline-variant/25 mb-6 overflow-hidden">
+            <div class="flex flex-wrap items-center justify-between gap-3 px-5 pt-5 pb-3">
+              <div class="min-w-0">
+                <h3 class="font-bold text-primary text-sm">Atlas — entidades geolocalizadas</h3>
+                <p id="atlas-mode-hint" class="text-[11px] text-on-surface-variant">Pan y zoom · click una entidad para abrir su ficha</p>
               </div>
-              <div id="stats-map-container" class="relative w-full" style="aspect-ratio: 4/3; min-height:380px"></div>
-              <div class="flex items-center gap-3 mt-3 text-[11px] text-on-surface-variant">
-                <span>Pocas</span>
-                <span class="flex-1 h-2 rounded-full" style="background:linear-gradient(90deg,#f8f8f8,#fbff12,#1b1464)"></span>
-                <span>Muchas</span>
+              <div class="flex items-center gap-3">
+                <!-- Toggle 2D / 3D -->
+                <div class="inline-flex bg-surface-container rounded-lg p-1" role="tablist">
+                  <button id="atlas-mode-2d" class="atlas-mode-btn px-3 py-1.5 text-xs font-bold rounded-md transition-colors bg-primary text-white" type="button">
+                    <span class="material-symbols-outlined text-[14px] align-middle mr-1">map</span>2D mapa
+                  </button>
+                  <button id="atlas-mode-3d" class="atlas-mode-btn px-3 py-1.5 text-xs font-bold rounded-md transition-colors text-primary" type="button">
+                    <span class="material-symbols-outlined text-[14px] align-middle mr-1">public</span>3D globo
+                  </button>
+                </div>
+                <!-- Leyenda tier -->
+                <div class="hidden lg:flex items-center gap-2 text-[10px] text-on-surface-variant">
+                  <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full" style="background:#fbff12;border:1px solid #1b1464"></span>Premium</span>
+                  <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full" style="background:#c7afdf"></span>Buena</span>
+                  <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full" style="background:#9aa0a6"></span>Aceptable</span>
+                  <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full" style="background:#5a5a6a"></span>Mínima</span>
+                  <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full" style="background:#3a3a48"></span>Sin enriquecer</span>
+                </div>
               </div>
             </div>
+            <!-- Mapa único (MapLibre): toggle 2D/3D = toggle de proyección, mismos vector tiles -->
+            <div id="stats-map-container" class="relative w-full" style="height:620px; background:#f0f0f5"></div>
+          </div>
 
+          <!-- Tier donut + filter -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-6">
             <div class="bg-white rounded-2xl border border-outline-variant/25 p-5">
               <h3 class="font-bold text-primary text-sm mb-3">Calidad del dataset</h3>
               <div id="stats-tier-donut" class="min-h-[260px]"></div>
               <p class="text-[11px] text-on-surface-variant mt-2">
                 Tier según campos rellenos por entidad (sobre 9 indicadores).
+              </p>
+            </div>
+            <div class="bg-white rounded-2xl border border-outline-variant/25 p-5">
+              <h3 class="font-bold text-primary text-sm mb-3">Filtra el globo</h3>
+              <div id="stats-globe-filters" class="flex flex-wrap gap-2"></div>
+              <p class="text-[11px] text-on-surface-variant mt-3">
+                Selecciona un tier para resaltar entidades de esa calidad. Click sobre un punto del globo para abrir la ficha.
               </p>
             </div>
           </div>
@@ -2396,10 +2459,10 @@ tailwind.config = {
 <script src="/js/intake.js?v=20260413b"></script>
 <script src="/js/admin.js"></script>
 <script src="/js/calculator.js?v=20260413b"></script>
-<script src="/js/organizations.js"></script>
-<script src="/js/entities.js?v=20260426b"></script>
+<script src="/js/organizations.js?v=20260426f"></script>
+<script src="/js/entities.js?v=20260426k"></script>
 <script src="/js/shortlists.js?v=20260426b"></script>
-<script src="/js/atlas-stats.js?v=20260426a"></script>
+<script src="/js/atlas-stats.js?v=20260426k"></script>
 <script src="/js/documents.js"></script>
 <script src="/js/research.js"></script>
 <script src="/js/intake-tasks.js"></script>

@@ -207,6 +207,10 @@ const Organizations = (() => {
         btn.classList.remove('text-on-surface-variant');
         document.querySelectorAll('.myorg-tab').forEach(s => s.classList.add('hidden'));
         document.getElementById(`myorg-tab-${activeTab}`)?.classList.remove('hidden');
+        // Leaflet necesita recalcular tamaño cuando vuelve a ser visible
+        if (activeTab === 'general' && _orgMap) {
+          setTimeout(() => _orgMap.invalidateSize(), 50);
+        }
       });
     });
 
@@ -239,6 +243,10 @@ const Organizations = (() => {
     document.querySelectorAll('[data-org-add]').forEach(btn => {
       btn.addEventListener('click', () => addChild(btn.dataset.orgAdd));
     });
+
+    // Pin de ubicación
+    document.getElementById('myorg-self-locate')?.addEventListener('click', selfLocate);
+    document.getElementById('myorg-save-pin')?.addEventListener('click', savePin);
   }
 
   async function loadMyOrg() {
@@ -247,6 +255,8 @@ const Organizations = (() => {
       if (myOrg) {
         fillForm(myOrg);
         loadAllChildren();
+        // Lazy-init map cuando el panel está visible (evita render con tamaño 0)
+        setTimeout(() => initOrgMap(), 100);
       }
     } catch (e) {
       console.error('loadMyOrg', e);
@@ -319,6 +329,127 @@ const Organizations = (() => {
     loadChildTable('eu-projects');
     loadChildTable('key-staff');
     loadChildTable('stakeholders');
+  }
+
+  /* ── Pin de ubicación (Leaflet) ───────────────────────────── */
+
+  let _orgMap = null;
+  let _orgMarker = null;
+  let _orgCoords = { lat: null, lng: null, source: null };
+
+  function initOrgMap() {
+    if (typeof L === 'undefined') {
+      // Leaflet aún no cargado; reintentar
+      return setTimeout(initOrgMap, 200);
+    }
+    const el = document.getElementById('myorg-map');
+    if (!el) return;
+
+    // Si ya existe, solo actualizar (otra org seleccionada)
+    if (_orgMap) {
+      _orgMap.remove();
+      _orgMap = null;
+      _orgMarker = null;
+    }
+
+    // Coords iniciales: org guardadas → centroide país → Europa
+    const lat0 = myOrg?.lat != null ? Number(myOrg.lat) : null;
+    const lng0 = myOrg?.lng != null ? Number(myOrg.lng) : null;
+    const center = lat0 != null && lng0 != null
+      ? [lat0, lng0]
+      : [47, 12]; // Europa central
+    const zoom = lat0 != null ? 13 : 4;
+
+    _orgMap = L.map(el).setView(center, zoom);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      maxZoom: 19,
+      subdomains: 'abcd',
+      attribution: '© OpenStreetMap · © CARTO',
+    }).addTo(_orgMap);
+
+    if (lat0 != null && lng0 != null) {
+      _orgMarker = L.marker([lat0, lng0], { draggable: true }).addTo(_orgMap);
+      _orgCoords = { lat: lat0, lng: lng0, source: myOrg.geocoded_source || 'manual_pin' };
+      updateCoordsLabel();
+      _orgMarker.on('dragend', onMarkerMove);
+    } else {
+      // Click en el mapa para colocar el primer pin
+      _orgMap.on('click', (ev) => placeMarker(ev.latlng.lat, ev.latlng.lng, 'manual_pin'));
+    }
+  }
+
+  function placeMarker(lat, lng, source) {
+    if (!_orgMap) return;
+    if (_orgMarker) {
+      _orgMarker.setLatLng([lat, lng]);
+    } else {
+      _orgMarker = L.marker([lat, lng], { draggable: true }).addTo(_orgMap);
+      _orgMarker.on('dragend', onMarkerMove);
+    }
+    _orgCoords = { lat, lng, source: source || 'manual_pin' };
+    _orgMap.setView([lat, lng], Math.max(_orgMap.getZoom(), 13));
+    updateCoordsLabel();
+  }
+
+  function onMarkerMove(ev) {
+    const ll = ev.target.getLatLng();
+    _orgCoords = { lat: ll.lat, lng: ll.lng, source: 'manual_pin' };
+    updateCoordsLabel();
+  }
+
+  function updateCoordsLabel() {
+    const lbl = document.getElementById('myorg-coords-label');
+    const src = document.getElementById('myorg-coords-source');
+    if (lbl) lbl.textContent = _orgCoords.lat != null
+      ? `${_orgCoords.lat.toFixed(5)}, ${_orgCoords.lng.toFixed(5)}`
+      : 'Sin pin — click en el mapa o usa "Mi ubicación"';
+    if (src) {
+      const labels = {
+        manual_pin: '📍 Pin manual',
+        self_geolocate: '🛰️ Tu ubicación (GPS)',
+        mapbox: 'Mapbox geocoding',
+        google: 'Google geocoding',
+        nominatim: 'OSM Nominatim',
+      };
+      src.textContent = _orgCoords.source ? (labels[_orgCoords.source] || _orgCoords.source) : '';
+    }
+  }
+
+  function selfLocate() {
+    if (!('geolocation' in navigator)) {
+      Toast.show('Tu navegador no soporta geolocalización', 'error');
+      return;
+    }
+    Toast.show('Obteniendo tu ubicación…', 'ok');
+    navigator.geolocation.getCurrentPosition(
+      (pos) => placeMarker(pos.coords.latitude, pos.coords.longitude, 'self_geolocate'),
+      (err) => Toast.show(err.message || 'No se pudo obtener tu ubicación', 'error'),
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
+    );
+  }
+
+  async function savePin() {
+    if (!myOrg?.id) {
+      Toast.show('Guarda primero los datos generales para crear la organización', 'error');
+      return;
+    }
+    if (_orgCoords.lat == null) {
+      Toast.show('Coloca un pin en el mapa primero', 'error');
+      return;
+    }
+    try {
+      await API.patch(`/organizations/${myOrg.id}/coords`, {
+        lat: _orgCoords.lat,
+        lng: _orgCoords.lng,
+        source: _orgCoords.source,
+      });
+      myOrg.lat = _orgCoords.lat;
+      myOrg.lng = _orgCoords.lng;
+      myOrg.geocoded_source = _orgCoords.source;
+      Toast.show('Ubicación guardada', 'ok');
+    } catch (e) {
+      Toast.show(e.message || 'Error al guardar', 'error');
+    }
   }
 
   async function loadChildTable(type) {

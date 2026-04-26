@@ -24,13 +24,22 @@ app.use(helmet({
       defaultSrc:  ["'self'"],
       scriptSrc:    ["'self'", "'unsafe-inline'", "https://cdn.tailwindcss.com", "https://cdn.jsdelivr.net", "https://accounts.google.com", "https://apis.google.com"],
       scriptSrcAttr:["'unsafe-inline'"],
-      styleSrc:    ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://accounts.google.com"],
+      styleSrc:    ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://accounts.google.com", "https://cdn.jsdelivr.net"],
       fontSrc:     ["'self'", "https://fonts.gstatic.com"],
-      imgSrc:      ["'self'", "data:", "https:"],
-      connectSrc:  ["'self'", "https://cdn.jsdelivr.net", "https://accounts.google.com"],
+      imgSrc:      ["'self'", "data:", "blob:", "https:"],
+      connectSrc:  ["'self'", "https://cdn.jsdelivr.net", "https://accounts.google.com",
+                    "https://tiles.openfreemap.org", "https://*.openfreemap.org",
+                    "https://*.basemaps.cartocdn.com"],
       frameSrc:    ["https://accounts.google.com"],
+      // MapLibre GL JS usa Web Workers desde un blob para decodificar vector tiles
+      workerSrc:   ["'self'", "blob:"],
+      childSrc:    ["'self'", "blob:"],
     }
-  }
+  },
+  // Default helmet pone Referrer-Policy: no-referrer, lo que rompe los tile servers
+  // (OSM y otros requieren Referer para identificar la fuente). Usamos la política
+  // estándar más restrictiva que sí envía origin cross-origin.
+  referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
 }));
 
 // CORS allow-list. Tool origins + WP origins (local + prod) so the WP

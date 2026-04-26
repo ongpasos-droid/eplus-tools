@@ -28,6 +28,9 @@ router.post('/mine/logo', auth, uploadLogo.single('logo'), ctrl.uploadLogo);
 /* ── ORS lookup (prefill new-org form) ───────────────────────── */
 router.post('/ors-lookup', auth, ctrl.orsLookup);
 
+/* ── Coords (self-geolocate / pin manual) ───────────────────── */
+router.patch('/:id/coords', auth, ctrl.updateCoords);
+
 /* ── Directory ───────────────────────────────────────────────── */
 router.get ('/',      auth, ctrl.listOrgs);
 router.get ('/:id',   auth, ctrl.getOrg);

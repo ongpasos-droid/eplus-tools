@@ -237,6 +237,99 @@ async function listSimilar(oid, limit = 3) {
   return rows;
 }
 
+/* ── Markers para el Atlas 3D ─────────────────────────────────
+   Devuelve solo (oid, lat, lng, name, country, tier_code) para
+   pintar 165k puntos sin saturar el payload. Tier compactado a int. */
+
+async function listGeoMarkers({ country, tier } = {}) {
+  const where = ['e.geocoded_lat IS NOT NULL'];
+  const params = [];
+  if (country) { where.push('e.country_code = ?'); params.push(String(country).toUpperCase()); }
+
+  // tier filter usa la misma fórmula que la vista; para 'unenriched' permitimos LEFT JOIN
+  // pero por simplicidad aquí filtramos sobre v_entities_public + UNION con entidades
+  // sin enrichment cuando NO hay filtro de tier.
+  let sql, rows;
+
+  if (tier) {
+    where.push('v.quality_tier = ?');
+    params.push(tier);
+    [rows] = await pool.query(
+      `SELECT v.oid, v.geocoded_lat AS lat, v.geocoded_lng AS lng,
+              v.country_code AS cc, v.display_name AS name, v.quality_tier AS tier
+       FROM v_entities_public v
+       JOIN entities e ON e.oid = v.oid
+       WHERE ${where.join(' AND ')}
+       LIMIT 200000`,
+      params
+    );
+  } else {
+    // Todas las entidades con coords; entidades sin enrichment marcadas como 'unenriched'
+    [rows] = await pool.query(
+      `SELECT
+         e.oid,
+         e.geocoded_lat AS lat,
+         e.geocoded_lng AS lng,
+         e.country_code AS cc,
+         COALESCE(NULLIF(ee.extracted_name, ''), e.legal_name) AS name,
+         CASE
+           WHEN ee.oid IS NULL THEN 'unenriched'
+           WHEN (
+             (ee.extracted_name IS NOT NULL) +
+             (ee.description IS NOT NULL AND CHAR_LENGTH(ee.description) > 50) +
+             (COALESCE(JSON_LENGTH(ee.emails), 0) > 0) +
+             (COALESCE(JSON_LENGTH(ee.phones), 0) > 0) +
+             (COALESCE(JSON_LENGTH(ee.social_links), 0) > 0) +
+             (ee.logo_url IS NOT NULL) +
+             (ee.year_founded IS NOT NULL) +
+             (ee.legal_form IS NOT NULL) +
+             (COALESCE(JSON_LENGTH(ee.website_languages), 0) > 0)
+           ) >= 7 THEN 'premium'
+           WHEN (
+             (ee.extracted_name IS NOT NULL) +
+             (ee.description IS NOT NULL AND CHAR_LENGTH(ee.description) > 50) +
+             (COALESCE(JSON_LENGTH(ee.emails), 0) > 0) +
+             (COALESCE(JSON_LENGTH(ee.phones), 0) > 0) +
+             (COALESCE(JSON_LENGTH(ee.social_links), 0) > 0) +
+             (ee.logo_url IS NOT NULL) +
+             (ee.year_founded IS NOT NULL) +
+             (ee.legal_form IS NOT NULL) +
+             (COALESCE(JSON_LENGTH(ee.website_languages), 0) > 0)
+           ) >= 5 THEN 'good'
+           WHEN (
+             (ee.extracted_name IS NOT NULL) +
+             (ee.description IS NOT NULL AND CHAR_LENGTH(ee.description) > 50) +
+             (COALESCE(JSON_LENGTH(ee.emails), 0) > 0) +
+             (COALESCE(JSON_LENGTH(ee.phones), 0) > 0) +
+             (COALESCE(JSON_LENGTH(ee.social_links), 0) > 0) +
+             (ee.logo_url IS NOT NULL) +
+             (ee.year_founded IS NOT NULL) +
+             (ee.legal_form IS NOT NULL) +
+             (COALESCE(JSON_LENGTH(ee.website_languages), 0) > 0)
+           ) >= 3 THEN 'acceptable'
+           ELSE 'minimal'
+         END AS tier
+       FROM entities e
+       LEFT JOIN entity_enrichment ee ON ee.oid = e.oid AND ee.archived = 0
+       WHERE ${where.join(' AND ')}
+       LIMIT 200000`,
+      params
+    );
+  }
+
+  // Compact rows para minimizar payload (~50 bytes/entity)
+  // Tier code: 1=premium, 2=good, 3=acceptable, 4=minimal, 0=unenriched
+  const tierCode = { premium: 1, good: 2, acceptable: 3, minimal: 4, unenriched: 0 };
+  return rows.map(r => ({
+    o: r.oid,
+    a: Number(r.lat),
+    g: Number(r.lng),
+    c: r.cc,
+    n: r.name,
+    t: tierCode[r.tier] ?? 0,
+  }));
+}
+
 /* ── Stats (lectura del cache) ───────────────────────────────── */
 
 async function getStat(metricKey) {
@@ -269,6 +362,7 @@ module.exports = {
   listEntities,
   getEntityById,
   listSimilar,
+  listGeoMarkers,
   getStat,
   getFilterFacets,
 };
