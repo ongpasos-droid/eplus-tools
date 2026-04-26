@@ -477,6 +477,26 @@ const Entities = (() => {
     if (!overlay || !content) return;
     overlay.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
+
+    // Self-wire close affordances once (idempotent flag). When openFicha
+    // is invoked from Atlas — or any module that loads before
+    // Entities.init() runs — bindEvents() may never have run, leaving
+    // close handlers unbound and trapping the user with body overflow
+    // locked. Delegating on the OVERLAY (not just the backdrop) closes
+    // on any click outside the drawer panel, plus Esc and hashchange.
+    if (!document._fichaCloseBound) {
+      document._fichaCloseBound = true;
+      overlay.addEventListener('click', (e) => {
+        if (!e.target.closest('#entity-ficha-panel')) closeFicha();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !overlay.classList.contains('hidden')) closeFicha();
+      });
+      // Browser back / hash navigation must release the body scroll lock
+      window.addEventListener('hashchange', () => {
+        if (!overlay.classList.contains('hidden')) closeFicha();
+      });
+    }
     content.innerHTML = `
       <div class="p-8">
         <div class="animate-pulse space-y-4">

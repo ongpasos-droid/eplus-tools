@@ -189,6 +189,7 @@ const Developer = (() => {
               parentNumber,
               wpMeta: {
                 id: wp.id,
+                project_id: wp.project_id || (currentProject && currentProject.id),
                 code: wp.code,
                 title: wp.title,
                 order_index: wp.order_index,
@@ -1475,13 +1476,13 @@ const Developer = (() => {
         </div>
       </div>
 
-      <div class="flex gap-0 -mx-4" style="height:calc(100vh - 220px)">
+      <div class="flex gap-0 -mx-4 items-start">
         <!-- Left: Section nav -->
-        <div class="w-56 shrink-0 border-r border-outline-variant/20 overflow-y-auto px-3 py-2" id="dev-cascade-nav"></div>
+        <div class="w-56 shrink-0 border-r border-outline-variant/20 px-3 py-2" id="dev-cascade-nav"></div>
         <!-- Center: Editor -->
-        <div class="flex-1 overflow-y-auto px-6 py-2" id="dev-cascade-main"></div>
+        <div class="flex-1 min-w-0 px-6 py-2" id="dev-cascade-main"></div>
         <!-- Right: AI panel -->
-        <div class="w-72 shrink-0 border-l border-outline-variant/20 overflow-y-auto px-4 py-2" id="dev-ai-panel"></div>
+        <div class="w-72 shrink-0 border-l border-outline-variant/20 px-4 py-2" id="dev-ai-panel"></div>
       </div>`;
 
     renderCascadeNav();
@@ -1530,6 +1531,10 @@ const Developer = (() => {
   let _cascadeGenerating = false;
   const _cascadeWriteBlank = {};  // fieldId → true means user opted to write manually even without existing text
 
+  function isWpFormSection(sec) {
+    return sec && typeof sec.fieldId === 'string' && /^s4_2_wp_/.test(sec.fieldId);
+  }
+
   async function renderCascadeSection() {
     const main = document.getElementById('dev-cascade-main');
     if (!main) return;
@@ -1538,6 +1543,14 @@ const Developer = (() => {
     if (!sec) { showCelebration(); return; }
 
     activeFieldId = sec.fieldId;
+
+    // WP sections (4.2.X) use a structured form with 5 tables instead
+    // of a free-text editor. Header / Objectives / Tasks / Milestones /
+    // Deliverables / Budget — directly mirroring Application Form Part B.
+    if (isWpFormSection(sec)) {
+      return renderWpFormSection(sec);
+    }
+
     const val = fieldValues[sec.fieldId];
     const text = val?.text || '';
     const hasText = text.trim().length > 10;
@@ -1646,8 +1659,6 @@ const Developer = (() => {
       </div>
       <div id="dev-iteration-tracker" class="mb-4"></div>
 
-      <div id="dev-wp-tables" class="mb-4"></div>
-
       <!-- Action buttons -->
       <div class="flex items-center gap-3">
         ${cascadeIndex < flatSections.length - 1 ? `
@@ -1666,7 +1677,6 @@ const Developer = (() => {
       </div>`;
 
     renderIterationTracker(sec);
-    renderWpTables(sec);
 
     // Bind textarea autosave + word count + auto-grow
     const textarea = document.getElementById('dev-textarea');
@@ -1722,23 +1732,23 @@ const Developer = (() => {
     const sec = flatSections[cascadeIndex];
     if (!sec) return;
 
-    // Flush pending autosave
+    // Flush pending autosave + mark reviewed. WP form sections have no
+    // textarea — fall back to whatever text was last persisted (or empty)
+    // so the approval still sticks across sessions.
     clearTimeout(_saveTimer);
     const textarea = document.getElementById('dev-textarea');
-    if (textarea) {
-      const text = textarea.value;
-      if (!fieldValues[sec.fieldId]) fieldValues[sec.fieldId] = {};
-      fieldValues[sec.fieldId].text = text;
-      fieldValues[sec.fieldId].reviewed = true;
-      if (!fieldValues[sec.fieldId].json) fieldValues[sec.fieldId].json = {};
-      fieldValues[sec.fieldId].json.reviewed = true;
-      try {
-        await API.put('/developer/instances/' + currentInstance.id + '/field', {
-          field_id: sec.fieldId, section_path: sec.id, text,
-          json: fieldValues[sec.fieldId].json
-        });
-      } catch (e) { console.error('save before approve:', e); }
-    }
+    const text = textarea ? textarea.value : (fieldValues[sec.fieldId]?.text || '');
+    if (!fieldValues[sec.fieldId]) fieldValues[sec.fieldId] = {};
+    fieldValues[sec.fieldId].text = text;
+    fieldValues[sec.fieldId].reviewed = true;
+    if (!fieldValues[sec.fieldId].json) fieldValues[sec.fieldId].json = {};
+    fieldValues[sec.fieldId].json.reviewed = true;
+    try {
+      await API.put('/developer/instances/' + currentInstance.id + '/field', {
+        field_id: sec.fieldId, section_path: sec.id, text,
+        json: fieldValues[sec.fieldId].json
+      });
+    } catch (e) { console.error('save before approve:', e); }
 
     cascadeApproved[sec.fieldId] = true;
     cascadeIndex++;
@@ -1915,7 +1925,17 @@ const Developer = (() => {
     if (!panel) return;
 
     const sec = flatSections.find(s => s.fieldId === activeFieldId);
-    if (!sec) { panel.innerHTML = ''; return; }
+    if (!sec) { panel.innerHTML = ''; panel.style.display = ''; return; }
+
+    // WP form sections (4.2.X) work with structured tables — the generic
+    // "Improve / Refine" buttons don't apply. Hide the panel entirely so the
+    // tables get full horizontal width.
+    if (isWpFormSection(sec)) {
+      panel.style.display = 'none';
+      panel.innerHTML = '';
+      return;
+    }
+    panel.style.display = '';
 
     panel.innerHTML = `
       <h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant/60 mb-3">Panel de IA</h3>
@@ -2731,164 +2751,593 @@ const Developer = (() => {
       </div>`;
   }
 
-  /* ── Writer Phase 2: per-WP structured tables ───────────────
-     Rendered below the textarea in section 4.2 WP-specific steps.
-     ─────────────────────────────────────────────────────────── */
+  /* ── Writer Phase 3: full WP form (Application Form Part B 4.2) ──
+     Replaces the free-text editor for WP cascade sections.
+     5 cards: Header / Objectives / Tasks / Milestones / Deliverables / Budget.
+     ────────────────────────────────────────────────────────────── */
 
-  async function renderWpTables(sec) {
-    const host = document.getElementById('dev-wp-tables');
-    if (!host) return;
-    const m = sec?.fieldId?.match(/^s4_2_wp_(.+)$/);
-    if (!m) { host.innerHTML = ''; return; }
-    const wpId = m[1];
-    host.innerHTML = `
-      <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div id="dev-ms-card" class="rounded-xl border border-outline-variant/30 bg-white p-4">
-          <div class="flex items-center justify-between mb-2">
-            <h3 class="text-sm font-bold text-primary flex items-center gap-1">
-              <span class="material-symbols-outlined text-base">flag</span> Milestones
-            </h3>
-            <button class="dev-ms-add text-xs font-semibold text-primary hover:underline">+ Añadir</button>
-          </div>
-          <div class="dev-ms-list text-xs space-y-1.5 text-on-surface-variant">Cargando…</div>
-        </div>
-        <div id="dev-dl-card" class="rounded-xl border border-outline-variant/30 bg-white p-4">
-          <div class="flex items-center justify-between mb-2">
-            <h3 class="text-sm font-bold text-primary flex items-center gap-1">
-              <span class="material-symbols-outlined text-base">deployed_code</span> Deliverables
-            </h3>
-            <button class="dev-dl-add text-xs font-semibold text-primary hover:underline">+ Añadir</button>
-          </div>
-          <div class="dev-dl-list text-xs space-y-1.5 text-on-surface-variant">Cargando…</div>
-        </div>
-      </div>
-    `;
-    host.querySelector('.dev-ms-add').addEventListener('click', () => addMilestone(wpId));
-    host.querySelector('.dev-dl-add').addEventListener('click', () => addDeliverable(wpId));
-    await Promise.all([loadMilestones(wpId), loadDeliverables(wpId)]);
-  }
+  const WP_DELIVERABLE_TYPES = ['R', 'DEM', 'DEC', 'DATA', 'DMP', 'ETHICS', 'SECURITY', 'OTHER'];
+  const WP_DISSEMINATION_LEVELS = ['PU', 'SEN', 'R-UE/EU-R', 'C-UE/EU-C', 'S-UE/EU-S'];
+  const WP_TASK_ROLES = ['COO', 'BEN', 'AE', 'AP', 'OTHER'];
 
-  async function loadMilestones(wpId) {
-    const list = document.querySelector('#dev-ms-card .dev-ms-list');
-    if (!list) return;
+  // Cache project partners per project (rebuilt when section changes project)
+  let _wpPartnersCache = { projectId: null, list: [] };
+
+  async function _wpFetchPartners(projectId) {
+    if (!projectId) return [];
+    if (_wpPartnersCache.projectId === projectId) return _wpPartnersCache.list;
     try {
-      const rows = await API.get(`/developer/wp/${wpId}/milestones`);
-      if (!rows.length) { list.innerHTML = '<span class="italic text-on-surface-variant/60">Sin milestones. Pulsa + para añadir.</span>'; return; }
-      list.innerHTML = rows.map(m => milestoneRow(m)).join('');
-      list.querySelectorAll('[data-ms-edit]').forEach(b => b.addEventListener('click', () => editMilestone(b.dataset.msEdit, wpId)));
-      list.querySelectorAll('[data-ms-del]').forEach(b => b.addEventListener('click', () => delMilestone(b.dataset.msDel, wpId)));
+      const list = await API.get(`/developer/projects/${projectId}/partners`);
+      _wpPartnersCache = { projectId, list: list || [] };
+      return _wpPartnersCache.list;
     } catch (err) {
-      list.innerHTML = `<span class="text-error">${esc(err.message || 'Error')}</span>`;
+      console.warn('[wp-form] partners fetch failed:', err);
+      return [];
     }
   }
 
-  function milestoneRow(m) {
-    return `<div class="flex items-start gap-2 py-1 border-b border-outline-variant/10 last:border-0">
-      <div class="flex-1 min-w-0">
-        <div class="font-semibold text-on-surface">${esc(m.code || '')} ${esc(m.title || '(sin título)')}${m.due_month ? ` <span class="text-[10px] font-mono text-on-surface-variant">M${m.due_month}</span>` : ''}</div>
-        ${m.description ? `<div class="text-on-surface-variant truncate">${esc(m.description)}</div>` : ''}
-        ${m.verification ? `<div class="text-on-surface-variant/70 text-[10px]">Verif: ${esc(m.verification)}</div>` : ''}
+  function _wpFmtEur(n) {
+    const v = Math.round(Number(n || 0));
+    if (!v) return '—';
+    return v.toLocaleString('es-ES') + ' €';
+  }
+
+  async function renderWpFormSection(sec) {
+    const main = document.getElementById('dev-cascade-main');
+    if (!main) return;
+    const m = sec?.fieldId?.match(/^s4_2_wp_(.+)$/);
+    if (!m) return;
+    const wpId = m[1];
+    const projectId = currentProject?.id || sec.wpMeta?.project_id;
+    const isApproved = cascadeApproved[sec.fieldId];
+    const isLast = cascadeIndex >= flatSections.length - 1;
+
+    main.innerHTML = `
+      <div class="mb-4 flex items-start justify-between gap-3">
+        <div class="flex-1 min-w-0">
+          <div class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60 mb-1">${sec.parentNumber ? sec.parentNumber + '. ' + esc(sec.parent) : ''}</div>
+          <h2 class="font-headline text-lg font-bold text-on-surface">${sec.number} ${esc(sec.title)}</h2>
+          <p class="text-xs text-on-surface-variant mt-1">Tabla del Application Form Part B — sección 4.2. Cada celda corresponde a una columna del formulario oficial.</p>
+        </div>
+        <button id="wp-ai-fill-btn" onclick="Developer._wpAiFill('${esc(wpId)}')" class="shrink-0 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 shadow-lg hover:shadow-xl transition-all">
+          <span class="material-symbols-outlined text-lg text-yellow-200">auto_awesome</span>
+          Rellenar con IA
+        </button>
       </div>
-      <button data-ms-edit="${m.id}" class="text-on-surface-variant hover:text-primary text-[10px]">editar</button>
-      <button data-ms-del="${m.id}" class="text-on-surface-variant hover:text-error text-[10px]">×</button>
-    </div>`;
+
+      <div id="wp-card-header" class="rounded-xl border border-outline-variant/30 bg-white p-4 mb-4">Cargando cabecera…</div>
+      <div id="wp-card-tasks" class="rounded-xl border border-outline-variant/30 bg-white p-4 mb-4">Cargando tasks…</div>
+      <div id="wp-card-milestones" class="rounded-xl border border-outline-variant/30 bg-white p-4 mb-4">Cargando milestones…</div>
+      <div id="wp-card-deliverables" class="rounded-xl border border-outline-variant/30 bg-white p-4 mb-4">Cargando deliverables…</div>
+      <div id="wp-card-budget" class="rounded-xl border border-outline-variant/30 bg-white p-4 mb-6">Cargando budget…</div>
+
+      <div class="flex items-center gap-3">
+        <button onclick="Developer._cascadeApprove()" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-white bg-[#1b1464] hover:bg-[#1b1464]/90 shadow-lg hover:shadow-xl transition-all">
+          <span class="material-symbols-outlined text-lg">check</span> ${isLast ? 'Finalizar borrador' : 'Aprobar y siguiente'}
+        </button>
+        ${!isLast ? '<button onclick="Developer._cascadeSkip()" class="inline-flex items-center gap-2 px-4 py-3 rounded-xl text-xs font-bold text-on-surface-variant border border-outline-variant/30 hover:bg-surface-container-low transition-colors">Saltar</button>' : ''}
+        ${isApproved ? '<span class="text-xs text-green-600 font-bold flex items-center gap-1"><span class="material-symbols-outlined text-sm">check_circle</span> Aprobada</span>' : ''}
+      </div>`;
+
+    // Fire partners fetch in parallel with the cards so a slow/failing
+    // partners endpoint can't block the WP data from loading. Each card
+    // awaits the same promise and renders its own data first; partner-
+    // dependent dropdowns degrade to "—" when partners are still loading.
+    const partnersPromise = _wpFetchPartners(projectId);
+    const wpCode = sec.wpMeta?.code || '';
+    await Promise.all([
+      _wpRenderHeaderCard(wpId, partnersPromise),
+      _wpRenderTasksCard(wpId, partnersPromise, wpCode),
+      _wpRenderMilestonesCard(wpId, partnersPromise),
+      _wpRenderDeliverablesCard(wpId, partnersPromise, wpCode),
+      _wpRenderBudgetCard(wpId),
+    ]);
   }
 
-  async function addMilestone(wpId) {
-    const title = prompt('Título del milestone:');
-    if (!title || !title.trim()) return;
+  /* ── Card 1: Header (Title, Duration MX-MX, Lead, Objectives) ── */
+
+  async function _wpRenderHeaderCard(wpId, partnersOrPromise) {
+    const host = document.getElementById('wp-card-header');
+    if (!host) return;
+    let h, partners;
     try {
-      await API.post(`/developer/wp/${wpId}/milestones`, { title: title.trim() });
-      await loadMilestones(wpId);
+      [h, partners] = await Promise.all([
+        API.get(`/developer/wp/${wpId}/header`),
+        Promise.resolve(partnersOrPromise),
+      ]);
+    } catch (err) { host.innerHTML = `<span class="text-error text-xs">Error cargando cabecera: ${esc(err.message || '')}</span>`; return; }
+    partners = partners || [];
+
+    const partnerOptions = ['<option value="">— sin asignar —</option>']
+      .concat(partners.map(p => `<option value="${esc(p.id)}" ${p.id === h.leader_id ? 'selected' : ''}>${esc(p.name || p.legal_name || '(sin nombre)')} ${p.country ? '(' + esc(p.country) + ')' : ''}</option>`))
+      .join('');
+
+    host.innerHTML = `
+      <h3 class="text-sm font-bold text-primary flex items-center gap-1.5 mb-3">
+        <span class="material-symbols-outlined text-base">summarize</span> Cabecera del Work Package
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+        <label class="text-[11px] font-bold text-on-surface-variant md:col-span-3">
+          <span class="block mb-1">Work Package Name <span class="text-on-surface-variant/60 font-normal">(${esc(h.code || '')})</span></span>
+          <input data-wp-fld="title" value="${esc(h.title || '')}" class="w-full px-3 py-2 text-sm bg-white border border-outline-variant/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/15">
+        </label>
+        <label class="text-[11px] font-bold text-on-surface-variant">
+          <span class="block mb-1">Duration — desde mes</span>
+          <input type="number" min="1" max="60" data-wp-fld="duration_from_month" value="${h.duration_from_month || ''}" class="w-full px-3 py-2 text-sm bg-white border border-outline-variant/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/15">
+        </label>
+        <label class="text-[11px] font-bold text-on-surface-variant">
+          <span class="block mb-1">Duration — hasta mes</span>
+          <input type="number" min="1" max="60" data-wp-fld="duration_to_month" value="${h.duration_to_month || ''}" class="w-full px-3 py-2 text-sm bg-white border border-outline-variant/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/15">
+        </label>
+        <label class="text-[11px] font-bold text-on-surface-variant">
+          <span class="block mb-1">Lead Beneficiary</span>
+          <select data-wp-fld="leader_id" class="w-full px-3 py-2 text-sm bg-white border border-outline-variant/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/15">${partnerOptions}</select>
+        </label>
+      </div>
+      <label class="text-[11px] font-bold text-on-surface-variant block">
+        <span class="block mb-1">Objectives <span class="text-on-surface-variant/60 font-normal">(lista de bullets — uno por línea)</span></span>
+        <textarea data-no-voice="1" data-wp-fld="objectives" rows="3" class="w-full px-3 py-2 text-sm bg-white border border-outline-variant/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/15" placeholder="• Objetivo 1&#10;• Objetivo 2">${esc(h.objectives || '')}</textarea>
+      </label>`;
+
+    host.querySelectorAll('[data-wp-fld]').forEach(el => {
+      el.addEventListener('change', () => _wpSaveHeader(wpId, el));
+      if (el.tagName === 'TEXTAREA') el.addEventListener('blur', () => _wpSaveHeader(wpId, el));
+    });
+  }
+
+  async function _wpSaveHeader(wpId, el) {
+    const fld = el.dataset.wpFld;
+    let value = el.value;
+    if (fld === 'duration_from_month' || fld === 'duration_to_month') {
+      value = value.trim() === '' ? null : parseInt(value, 10) || null;
+    }
+    try {
+      await API.put(`/developer/wp/${wpId}/header`, { [fld]: value });
+    } catch (err) { console.error('save wp header', fld, err); }
+  }
+
+  /* ── Card 2: Tasks (Activities and division of work) ──────── */
+
+  async function _wpRenderTasksCard(wpId, partnersOrPromise, wpCode) {
+    const host = document.getElementById('wp-card-tasks');
+    if (!host) return;
+    let rows, partners;
+    try {
+      [rows, partners] = await Promise.all([
+        API.get(`/developer/wp/${wpId}/tasks`),
+        Promise.resolve(partnersOrPromise),
+      ]);
+    } catch (err) { host.innerHTML = `<span class="text-error text-xs">Error cargando tasks: ${esc(err.message || '')}</span>`; return; }
+    partners = partners || [];
+
+    const wpNum = (wpCode || '').replace(/\D/g, '') || '1';
+    host.innerHTML = `
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-sm font-bold text-primary flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-base">task_alt</span> Activities and division of work (Tasks)
+        </h3>
+        <button onclick="Developer._wpAddTask('${esc(wpId)}', '${esc(wpNum)}')" class="text-xs font-bold text-primary inline-flex items-center gap-1 hover:underline">
+          <span class="material-symbols-outlined text-sm">add</span> Añadir task
+        </button>
+      </div>
+      ${rows.length ? `
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs border-collapse">
+          <thead class="bg-primary/5">
+            <tr>
+              <th class="text-left p-2 border border-outline-variant/30 w-16">Task No</th>
+              <th class="text-left p-2 border border-outline-variant/30 w-48">Task Name</th>
+              <th class="text-left p-2 border border-outline-variant/30">Description</th>
+              <th class="text-left p-2 border border-outline-variant/30 w-56">Participants</th>
+              <th class="text-left p-2 border border-outline-variant/30 w-40">In-kind / Subcontracting</th>
+              <th class="border border-outline-variant/30 w-8"></th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows.map((t, i) => _wpTaskRow(t, partners, wpNum, i + 1)).join('')}
+          </tbody>
+        </table>
+      </div>` : '<p class="text-xs italic text-on-surface-variant/60">Sin tasks. Pulsa "Añadir task" para empezar.</p>'}`;
+
+    host.querySelectorAll('[data-task-fld]').forEach(el => {
+      const handler = () => _wpSaveTask(el.dataset.taskId, el.dataset.taskFld, el.value, el);
+      el.addEventListener('change', handler);
+      if (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') el.addEventListener('blur', handler);
+    });
+    host.querySelectorAll('[data-task-del]').forEach(b => b.addEventListener('click', () => _wpDelTask(b.dataset.taskDel, wpId, partners, wpCode)));
+    host.querySelectorAll('[data-task-part-toggle]').forEach(cb => cb.addEventListener('change', () => _wpToggleParticipant(cb.dataset.taskPartToggle, cb.dataset.partnerId, cb.checked, wpId, partners, wpCode)));
+    host.querySelectorAll('[data-task-part-role]').forEach(sel => sel.addEventListener('change', () => _wpSetParticipantRole(sel.dataset.taskPartRole, sel.dataset.partnerId, sel.value, wpId, partners, wpCode)));
+  }
+
+  function _wpTaskRow(t, partners, wpNum, autoIdx) {
+    const code = t.code || `T${wpNum}.${autoIdx}`;
+    const partsByPartner = Object.fromEntries((t.participants || []).map(p => [p.partner_id, p]));
+    const partsHtml = partners.length
+      ? `<details class="text-[11px]"><summary class="cursor-pointer text-primary font-semibold">${(t.participants || []).length} partner(s)</summary>
+          <div class="mt-1 space-y-1">
+            ${partners.map(p => {
+              const cur = partsByPartner[p.id];
+              const checked = cur ? 'checked' : '';
+              const role = cur?.role || 'BEN';
+              return `<div class="flex items-center gap-1">
+                <input type="checkbox" data-task-part-toggle="${esc(t.id)}" data-partner-id="${esc(p.id)}" ${checked}>
+                <span class="flex-1 truncate">${esc(p.name || '')}</span>
+                <select data-task-part-role="${esc(t.id)}" data-partner-id="${esc(p.id)}" ${cur ? '' : 'disabled'} class="text-[10px] border border-outline-variant/30 rounded px-1 py-0.5 bg-white">
+                  ${WP_TASK_ROLES.map(r => `<option value="${r}" ${role === r ? 'selected' : ''}>${r}</option>`).join('')}
+                </select>
+              </div>`;
+            }).join('')}
+          </div>
+        </details>`
+      : '<span class="text-[10px] italic text-on-surface-variant/60">Añade partners al proyecto</span>';
+
+    return `<tr class="align-top">
+      <td class="p-1.5 border border-outline-variant/30 font-mono text-[11px] text-on-surface-variant">
+        <input data-task-fld="code" data-task-id="${esc(t.id)}" value="${esc(code)}" class="w-full px-1 py-0.5 text-[11px] font-mono bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded">
+      </td>
+      <td class="p-1.5 border border-outline-variant/30">
+        <input data-task-fld="title" data-task-id="${esc(t.id)}" value="${esc(t.title || '')}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded">
+      </td>
+      <td class="p-1.5 border border-outline-variant/30">
+        <textarea data-no-voice="1" data-task-fld="description" data-task-id="${esc(t.id)}" rows="2" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded resize-none">${esc(t.description || '')}</textarea>
+      </td>
+      <td class="p-1.5 border border-outline-variant/30">${partsHtml}</td>
+      <td class="p-1.5 border border-outline-variant/30">
+        <input data-task-fld="in_kind_subcontracting" data-task-id="${esc(t.id)}" value="${esc(t.in_kind_subcontracting || '')}" placeholder="No / Yes (qué)" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded">
+      </td>
+      <td class="p-1 border border-outline-variant/30 text-center">
+        <button data-task-del="${esc(t.id)}" class="text-on-surface-variant hover:text-error" title="Eliminar"><span class="material-symbols-outlined text-sm">close</span></button>
+      </td>
+    </tr>`;
+  }
+
+  async function _wpSaveTask(taskId, fld, value, el) {
+    try {
+      await API.patch(`/developer/tasks/${taskId}`, { [fld]: value });
+    } catch (err) {
+      console.error('save task', fld, err);
+      if (el) el.classList.add('ring-1', 'ring-error');
+    }
+  }
+
+  async function _wpAddTask(wpId, wpNum) {
+    try {
+      // Derive next index from current rows count for the suggested code
+      const existing = await API.get(`/developer/wp/${wpId}/tasks`);
+      const next = (existing?.length || 0) + 1;
+      await API.post(`/developer/wp/${wpId}/tasks`, { title: 'Nueva task', code: `T${wpNum}.${next}` });
+      const partners = currentProject?.id ? await _wpFetchPartners(currentProject.id) : [];
+      await _wpRenderTasksCard(wpId, partners, `WP${wpNum}`);
     } catch (err) { alert(err.message || 'Error'); }
   }
 
-  async function editMilestone(id, wpId) {
-    const title = prompt('Título:');
-    if (title === null) return;
-    const due_month = prompt('Mes (número, vacío = ninguno):');
-    const description = prompt('Descripción (opcional):');
-    const verification = prompt('Medio de verificación (opcional):');
-    const payload = {};
-    if (title.trim()) payload.title = title.trim();
-    if (due_month !== null && due_month.trim()) payload.due_month = parseInt(due_month, 10) || null;
-    if (description !== null) payload.description = description;
-    if (verification !== null) payload.verification = verification;
+  async function _wpDelTask(taskId, wpId, partners, wpCode) {
+    if (!confirm('¿Eliminar esta task?')) return;
     try {
-      await API.patch(`/developer/milestones/${id}`, payload);
-      await loadMilestones(wpId);
+      await API.del(`/developer/tasks/${taskId}`);
+      await _wpRenderTasksCard(wpId, partners, wpCode);
     } catch (err) { alert(err.message || 'Error'); }
   }
 
-  async function delMilestone(id, wpId) {
+  async function _wpToggleParticipant(taskId, partnerId, checked, wpId, partners, wpCode) {
+    try {
+      if (checked) {
+        await API.put(`/developer/tasks/${taskId}/participants/${partnerId}`, { role: 'BEN' });
+      } else {
+        await API.del(`/developer/tasks/${taskId}/participants/${partnerId}`);
+      }
+      await _wpRenderTasksCard(wpId, partners, wpCode);
+    } catch (err) { alert(err.message || 'Error'); }
+  }
+
+  async function _wpSetParticipantRole(taskId, partnerId, role, wpId, partners, wpCode) {
+    try {
+      await API.put(`/developer/tasks/${taskId}/participants/${partnerId}`, { role });
+    } catch (err) { console.error('set role', err); }
+  }
+
+  /* ── Card 3: Milestones ──────────────────────────────────── */
+
+  async function _wpRenderMilestonesCard(wpId, partnersOrPromise) {
+    const host = document.getElementById('wp-card-milestones');
+    if (!host) return;
+    let rows, partners;
+    try {
+      [rows, partners] = await Promise.all([
+        API.get(`/developer/wp/${wpId}/milestones`),
+        Promise.resolve(partnersOrPromise),
+      ]);
+    } catch (err) { host.innerHTML = `<span class="text-error text-xs">Error cargando milestones: ${esc(err.message || '')}</span>`; return; }
+    partners = partners || [];
+
+    host.innerHTML = `
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-sm font-bold text-primary flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-base">flag</span> Milestones
+        </h3>
+        <button onclick="Developer._wpAddMs('${esc(wpId)}')" class="text-xs font-bold text-primary inline-flex items-center gap-1 hover:underline">
+          <span class="material-symbols-outlined text-sm">add</span> Añadir milestone
+        </button>
+      </div>
+      ${rows.length ? `
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs border-collapse">
+          <thead class="bg-primary/5">
+            <tr>
+              <th class="text-left p-2 border border-outline-variant/30 w-16">No</th>
+              <th class="text-left p-2 border border-outline-variant/30 w-48">Name</th>
+              <th class="text-left p-2 border border-outline-variant/30 w-40">Lead Beneficiary</th>
+              <th class="text-left p-2 border border-outline-variant/30">Description</th>
+              <th class="text-left p-2 border border-outline-variant/30 w-20">Due (M)</th>
+              <th class="text-left p-2 border border-outline-variant/30 w-40">Means of Verification</th>
+              <th class="border border-outline-variant/30 w-8"></th>
+            </tr>
+          </thead>
+          <tbody>${rows.map((m, i) => _wpMsRow(m, partners, i + 1)).join('')}</tbody>
+        </table>
+      </div>` : '<p class="text-xs italic text-on-surface-variant/60">Sin milestones. Pulsa "Añadir milestone" para empezar.</p>'}`;
+
+    host.querySelectorAll('[data-ms-fld]').forEach(el => {
+      const handler = () => _wpSaveMs(el.dataset.msId, el.dataset.msFld, el.value, el);
+      el.addEventListener('change', handler);
+      if (el.tagName !== 'SELECT') el.addEventListener('blur', handler);
+    });
+    host.querySelectorAll('[data-ms-del]').forEach(b => b.addEventListener('click', () => _wpDelMs(b.dataset.msDel, wpId, partners)));
+  }
+
+  function _wpMsRow(m, partners, autoIdx) {
+    const code = m.code || `MS${autoIdx}`;
+    const partnerOptions = ['<option value="">—</option>']
+      .concat(partners.map(p => `<option value="${esc(p.id)}" ${p.id === m.lead_partner_id ? 'selected' : ''}>${esc(p.name || '')}</option>`))
+      .join('');
+    return `<tr class="align-top">
+      <td class="p-1.5 border border-outline-variant/30 font-mono text-[11px]">
+        <input data-ms-fld="code" data-ms-id="${esc(m.id)}" value="${esc(code)}" class="w-full px-1 py-0.5 font-mono text-[11px] bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded">
+      </td>
+      <td class="p-1.5 border border-outline-variant/30"><input data-ms-fld="title" data-ms-id="${esc(m.id)}" value="${esc(m.title || '')}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
+      <td class="p-1.5 border border-outline-variant/30"><select data-ms-fld="lead_partner_id" data-ms-id="${esc(m.id)}" class="w-full px-1 py-0.5 text-[11px] bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded">${partnerOptions}</select></td>
+      <td class="p-1.5 border border-outline-variant/30"><textarea data-no-voice="1" data-ms-fld="description" data-ms-id="${esc(m.id)}" rows="2" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded resize-none">${esc(m.description || '')}</textarea></td>
+      <td class="p-1.5 border border-outline-variant/30"><input type="number" min="1" max="60" data-ms-fld="due_month" data-ms-id="${esc(m.id)}" value="${m.due_month || ''}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
+      <td class="p-1.5 border border-outline-variant/30"><input data-ms-fld="verification" data-ms-id="${esc(m.id)}" value="${esc(m.verification || '')}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
+      <td class="p-1 border border-outline-variant/30 text-center"><button data-ms-del="${esc(m.id)}" class="text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-sm">close</span></button></td>
+    </tr>`;
+  }
+
+  async function _wpSaveMs(id, fld, value, el) {
+    let payload = value;
+    if (fld === 'due_month') payload = value.trim() === '' ? null : parseInt(value, 10) || null;
+    try { await API.patch(`/developer/milestones/${id}`, { [fld]: payload }); }
+    catch (err) { console.error('save ms', err); if (el) el.classList.add('ring-1', 'ring-error'); }
+  }
+
+  async function _wpAddMs(wpId) {
+    try {
+      const existing = await API.get(`/developer/wp/${wpId}/milestones`);
+      const next = (existing?.length || 0) + 1;
+      await API.post(`/developer/wp/${wpId}/milestones`, { title: 'Nuevo milestone', code: `MS${next}` });
+      const partners = currentProject?.id ? await _wpFetchPartners(currentProject.id) : [];
+      await _wpRenderMilestonesCard(wpId, partners);
+    } catch (err) { alert(err.message || 'Error'); }
+  }
+
+  async function _wpDelMs(id, wpId, partners) {
     if (!confirm('¿Eliminar este milestone?')) return;
     try {
       await API.del(`/developer/milestones/${id}`);
-      await loadMilestones(wpId);
+      await _wpRenderMilestonesCard(wpId, partners);
     } catch (err) { alert(err.message || 'Error'); }
   }
 
-  async function loadDeliverables(wpId) {
-    const list = document.querySelector('#dev-dl-card .dev-dl-list');
-    if (!list) return;
-    try {
-      const rows = await API.get(`/developer/wp/${wpId}/deliverables`);
-      if (!rows.length) { list.innerHTML = '<span class="italic text-on-surface-variant/60">Sin deliverables. Pulsa + para añadir.</span>'; return; }
-      list.innerHTML = rows.map(d => deliverableRow(d)).join('');
-      list.querySelectorAll('[data-dl-edit]').forEach(b => b.addEventListener('click', () => editDeliverable(b.dataset.dlEdit, wpId)));
-      list.querySelectorAll('[data-dl-del]').forEach(b => b.addEventListener('click', () => delDeliverable(b.dataset.dlDel, wpId)));
-    } catch (err) {
-      list.innerHTML = `<span class="text-error">${esc(err.message || 'Error')}</span>`;
-    }
-  }
+  /* ── Card 4: Deliverables ───────────────────────────────── */
 
-  function deliverableRow(d) {
-    return `<div class="flex items-start gap-2 py-1 border-b border-outline-variant/10 last:border-0">
-      <div class="flex-1 min-w-0">
-        <div class="font-semibold text-on-surface">${esc(d.code || '')} ${esc(d.title || '(sin título)')}${d.due_month ? ` <span class="text-[10px] font-mono text-on-surface-variant">M${d.due_month}</span>` : ''}</div>
-        ${d.type ? `<span class="text-[10px] uppercase tracking-wide bg-primary/10 text-primary px-1.5 rounded">${esc(d.type)}</span>` : ''}
-        ${d.dissemination_level ? ` <span class="text-[10px] text-on-surface-variant">(${esc(d.dissemination_level)})</span>` : ''}
-        ${d.description ? `<div class="text-on-surface-variant truncate">${esc(d.description)}</div>` : ''}
+  async function _wpRenderDeliverablesCard(wpId, partnersOrPromise, wpCode) {
+    const host = document.getElementById('wp-card-deliverables');
+    if (!host) return;
+    let rows, partners;
+    try {
+      [rows, partners] = await Promise.all([
+        API.get(`/developer/wp/${wpId}/deliverables`),
+        Promise.resolve(partnersOrPromise),
+      ]);
+    } catch (err) { host.innerHTML = `<span class="text-error text-xs">Error cargando deliverables: ${esc(err.message || '')}</span>`; return; }
+    partners = partners || [];
+
+    const wpNum = (wpCode || '').replace(/\D/g, '') || '1';
+    host.innerHTML = `
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-sm font-bold text-primary flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-base">deployed_code</span> Deliverables
+        </h3>
+        <button onclick="Developer._wpAddDl('${esc(wpId)}', '${esc(wpNum)}')" class="text-xs font-bold text-primary inline-flex items-center gap-1 hover:underline">
+          <span class="material-symbols-outlined text-sm">add</span> Añadir deliverable
+        </button>
       </div>
-      <button data-dl-edit="${d.id}" class="text-on-surface-variant hover:text-primary text-[10px]">editar</button>
-      <button data-dl-del="${d.id}" class="text-on-surface-variant hover:text-error text-[10px]">×</button>
-    </div>`;
+      ${rows.length ? `
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs border-collapse">
+          <thead class="bg-primary/5">
+            <tr>
+              <th class="text-left p-2 border border-outline-variant/30 w-20">No</th>
+              <th class="text-left p-2 border border-outline-variant/30 w-48">Name</th>
+              <th class="text-left p-2 border border-outline-variant/30 w-40">Lead Beneficiary</th>
+              <th class="text-left p-2 border border-outline-variant/30 w-28">Type</th>
+              <th class="text-left p-2 border border-outline-variant/30 w-32">Dissem.</th>
+              <th class="text-left p-2 border border-outline-variant/30 w-20">Due (M)</th>
+              <th class="text-left p-2 border border-outline-variant/30">Description</th>
+              <th class="border border-outline-variant/30 w-8"></th>
+            </tr>
+          </thead>
+          <tbody>${rows.map((d, i) => _wpDlRow(d, partners, wpNum, i + 1)).join('')}</tbody>
+        </table>
+      </div>` : '<p class="text-xs italic text-on-surface-variant/60">Sin deliverables. Pulsa "Añadir deliverable" para empezar.</p>'}`;
+
+    host.querySelectorAll('[data-dl-fld]').forEach(el => {
+      const handler = () => _wpSaveDl(el.dataset.dlId, el.dataset.dlFld, el.value, el);
+      el.addEventListener('change', handler);
+      if (el.tagName !== 'SELECT') el.addEventListener('blur', handler);
+    });
+    host.querySelectorAll('[data-dl-del]').forEach(b => b.addEventListener('click', () => _wpDelDl(b.dataset.dlDel, wpId, partners, wpCode)));
   }
 
-  async function addDeliverable(wpId) {
-    const title = prompt('Título del deliverable:');
-    if (!title || !title.trim()) return;
+  function _wpDlRow(d, partners, wpNum, autoIdx) {
+    const code = d.code || `D${wpNum}.${autoIdx}`;
+    const partnerOptions = ['<option value="">—</option>']
+      .concat(partners.map(p => `<option value="${esc(p.id)}" ${p.id === d.lead_partner_id ? 'selected' : ''}>${esc(p.name || '')}</option>`))
+      .join('');
+    const typeOptions = ['<option value="">—</option>']
+      .concat(WP_DELIVERABLE_TYPES.map(t => `<option value="${t}" ${d.type === t ? 'selected' : ''}>${t}</option>`)).join('');
+    const dissOptions = ['<option value="">—</option>']
+      .concat(WP_DISSEMINATION_LEVELS.map(l => `<option value="${l}" ${d.dissemination_level === l ? 'selected' : ''}>${l}</option>`)).join('');
+    return `<tr class="align-top">
+      <td class="p-1.5 border border-outline-variant/30 font-mono text-[11px]"><input data-dl-fld="code" data-dl-id="${esc(d.id)}" value="${esc(code)}" class="w-full px-1 py-0.5 font-mono text-[11px] bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
+      <td class="p-1.5 border border-outline-variant/30"><input data-dl-fld="title" data-dl-id="${esc(d.id)}" value="${esc(d.title || '')}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
+      <td class="p-1.5 border border-outline-variant/30"><select data-dl-fld="lead_partner_id" data-dl-id="${esc(d.id)}" class="w-full px-1 py-0.5 text-[11px] bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded">${partnerOptions}</select></td>
+      <td class="p-1.5 border border-outline-variant/30"><select data-dl-fld="type" data-dl-id="${esc(d.id)}" class="w-full px-1 py-0.5 text-[11px] bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded">${typeOptions}</select></td>
+      <td class="p-1.5 border border-outline-variant/30"><select data-dl-fld="dissemination_level" data-dl-id="${esc(d.id)}" class="w-full px-1 py-0.5 text-[11px] bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded">${dissOptions}</select></td>
+      <td class="p-1.5 border border-outline-variant/30"><input type="number" min="1" max="60" data-dl-fld="due_month" data-dl-id="${esc(d.id)}" value="${d.due_month || ''}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
+      <td class="p-1.5 border border-outline-variant/30"><textarea data-no-voice="1" data-dl-fld="description" data-dl-id="${esc(d.id)}" rows="2" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded resize-none">${esc(d.description || '')}</textarea></td>
+      <td class="p-1 border border-outline-variant/30 text-center"><button data-dl-del="${esc(d.id)}" class="text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-sm">close</span></button></td>
+    </tr>`;
+  }
+
+  async function _wpSaveDl(id, fld, value, el) {
+    let payload = value;
+    if (fld === 'due_month') payload = value.trim() === '' ? null : parseInt(value, 10) || null;
+    try { await API.patch(`/developer/deliverables/${id}`, { [fld]: payload }); }
+    catch (err) { console.error('save dl', err); if (el) el.classList.add('ring-1', 'ring-error'); }
+  }
+
+  async function _wpAddDl(wpId, wpNum) {
     try {
-      await API.post(`/developer/wp/${wpId}/deliverables`, { title: title.trim() });
-      await loadDeliverables(wpId);
+      const existing = await API.get(`/developer/wp/${wpId}/deliverables`);
+      const next = (existing?.length || 0) + 1;
+      await API.post(`/developer/wp/${wpId}/deliverables`, { title: 'Nuevo deliverable', code: `D${wpNum}.${next}` });
+      const partners = currentProject?.id ? await _wpFetchPartners(currentProject.id) : [];
+      await _wpRenderDeliverablesCard(wpId, partners, `WP${wpNum}`);
     } catch (err) { alert(err.message || 'Error'); }
   }
 
-  async function editDeliverable(id, wpId) {
-    const title = prompt('Título:');
-    if (title === null) return;
-    const type = prompt('Tipo (report, software, event, dataset, other):');
-    const dissemination_level = prompt('Dissemination (public, sensitive, confidential):');
-    const due_month = prompt('Mes (número, vacío = ninguno):');
-    const description = prompt('Descripción (opcional):');
-    const payload = {};
-    if (title.trim()) payload.title = title.trim();
-    if (type !== null) payload.type = type.trim() || null;
-    if (dissemination_level !== null) payload.dissemination_level = dissemination_level.trim() || null;
-    if (due_month !== null && due_month.trim()) payload.due_month = parseInt(due_month, 10) || null;
-    if (description !== null) payload.description = description;
-    try {
-      await API.patch(`/developer/deliverables/${id}`, payload);
-      await loadDeliverables(wpId);
-    } catch (err) { alert(err.message || 'Error'); }
-  }
-
-  async function delDeliverable(id, wpId) {
+  async function _wpDelDl(id, wpId, partners, wpCode) {
     if (!confirm('¿Eliminar este deliverable?')) return;
     try {
       await API.del(`/developer/deliverables/${id}`);
-      await loadDeliverables(wpId);
+      await _wpRenderDeliverablesCard(wpId, partners, wpCode);
     } catch (err) { alert(err.message || 'Error'); }
+  }
+
+  /* ── Master AI fill: synthesise objectives + 3 tables in one go ── */
+
+  async function _wpAiFill(wpId) {
+    if (!confirm('La IA generará Objectives, Tasks, Milestones y Deliverables a partir del contexto del proyecto.\n\nLas filas existentes en este WP se REEMPLAZARÁN. ¿Continuar?')) return;
+    const btn = document.getElementById('wp-ai-fill-btn');
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = '<span class="material-symbols-outlined text-lg animate-spin">progress_activity</span> Generando…';
+      btn.classList.add('opacity-70');
+    }
+    try {
+      await API.post(`/developer/wp/${wpId}/ai-fill`, {});
+      // Re-render all WP cards with fresh data
+      const projectId = currentProject?.id;
+      const partners = projectId ? await _wpFetchPartners(projectId) : [];
+      const sec = flatSections[cascadeIndex];
+      const wpCode = sec?.wpMeta?.code || '';
+      await Promise.all([
+        _wpRenderHeaderCard(wpId, partners),
+        _wpRenderTasksCard(wpId, partners, wpCode),
+        _wpRenderMilestonesCard(wpId, partners),
+        _wpRenderDeliverablesCard(wpId, partners, wpCode),
+      ]);
+    } catch (err) {
+      alert('Error al generar con IA: ' + (err.message || ''));
+    } finally {
+      const b = document.getElementById('wp-ai-fill-btn');
+      if (b) {
+        b.disabled = false;
+        b.innerHTML = '<span class="material-symbols-outlined text-lg text-yellow-200">auto_awesome</span> Rellenar con IA';
+        b.classList.remove('opacity-70');
+      }
+    }
+  }
+
+  /* ── Card 5: Estimated budget — Resources (read-only pivot) ── */
+
+  async function _wpRenderBudgetCard(wpId) {
+    const host = document.getElementById('wp-card-budget');
+    if (!host) return;
+    let data;
+    try { data = await API.get(`/developer/wp/${wpId}/budget`); }
+    catch (err) { host.innerHTML = `<span class="text-error text-xs">Error: ${esc(err.message || '')}</span>`; return; }
+
+    if (!data || !data.matched) {
+      host.innerHTML = `
+        <h3 class="text-sm font-bold text-primary flex items-center gap-1.5 mb-2">
+          <span class="material-symbols-outlined text-base">payments</span> Estimated budget — Resources
+        </h3>
+        <p class="text-xs italic text-on-surface-variant/70">No hay presupuesto del Calculator vinculado a este WP. Genera el presupuesto en la Calculator y sincronízalo con el proyecto para ver esta tabla.</p>`;
+      return;
+    }
+
+    const totals = {
+      a_personnel: 0, b_subcontracting: 0, c1a_travel: 0, c1b_accommodation: 0, c1c_subsistence: 0,
+      c2_equipment: 0, c3_other: 0, d1_third_parties: 0, e_indirect: 0, total: 0,
+    };
+    for (const r of data.rows) {
+      for (const k of Object.keys(totals)) totals[k] += Number(r[k] || 0);
+    }
+
+    host.innerHTML = `
+      <h3 class="text-sm font-bold text-primary flex items-center gap-1.5 mb-2">
+        <span class="material-symbols-outlined text-base">payments</span> Estimated budget — Resources
+        <span class="text-[10px] font-normal text-on-surface-variant/70 ml-1">(solo lectura — calcula desde el módulo Calculator)</span>
+      </h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-[11px] border-collapse">
+          <thead class="bg-primary/5">
+            <tr>
+              <th class="text-left p-1.5 border border-outline-variant/30">Participant</th>
+              <th class="text-right p-1.5 border border-outline-variant/30">A. Personnel</th>
+              <th class="text-right p-1.5 border border-outline-variant/30">B. Subcontract.</th>
+              <th class="text-right p-1.5 border border-outline-variant/30">C.1a Travel</th>
+              <th class="text-right p-1.5 border border-outline-variant/30">C.1b Accom.</th>
+              <th class="text-right p-1.5 border border-outline-variant/30">C.1c Subsist.</th>
+              <th class="text-right p-1.5 border border-outline-variant/30">C.2 Equip.</th>
+              <th class="text-right p-1.5 border border-outline-variant/30">C.3 Other</th>
+              <th class="text-right p-1.5 border border-outline-variant/30">D.1 Third</th>
+              <th class="text-right p-1.5 border border-outline-variant/30">E. Indirect (${data.indirect_pct || 0}%)</th>
+              <th class="text-right p-1.5 border border-outline-variant/30 font-bold">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${data.rows.map(r => `<tr>
+              <td class="p-1.5 border border-outline-variant/30">${esc(r.acronym || r.name || '')}${r.is_coordinator ? ' <span class="text-[9px] text-primary font-bold">(COO)</span>' : ''}</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono">${_wpFmtEur(r.a_personnel)}</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono">${_wpFmtEur(r.b_subcontracting)}</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono">${_wpFmtEur(r.c1a_travel)}</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono">${_wpFmtEur(r.c1b_accommodation)}</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono">${_wpFmtEur(r.c1c_subsistence)}</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono">${_wpFmtEur(r.c2_equipment)}</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono">${_wpFmtEur(r.c3_other)}</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono">${_wpFmtEur(r.d1_third_parties)}</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono">${_wpFmtEur(r.e_indirect)}</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono font-bold">${_wpFmtEur(r.total)}</td>
+            </tr>`).join('')}
+            <tr class="bg-primary/5 font-bold">
+              <td class="p-1.5 border border-outline-variant/30">Total</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono">${_wpFmtEur(totals.a_personnel)}</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono">${_wpFmtEur(totals.b_subcontracting)}</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono">${_wpFmtEur(totals.c1a_travel)}</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono">${_wpFmtEur(totals.c1b_accommodation)}</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono">${_wpFmtEur(totals.c1c_subsistence)}</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono">${_wpFmtEur(totals.c2_equipment)}</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono">${_wpFmtEur(totals.c3_other)}</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono">${_wpFmtEur(totals.d1_third_parties)}</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono">${_wpFmtEur(totals.e_indirect)}</td>
+              <td class="p-1.5 border border-outline-variant/30 text-right font-mono">${_wpFmtEur(totals.total)}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>`;
   }
 
   /* ── Mejorar con IA: ask user what to improve (voice + text) ── */
@@ -3071,5 +3520,10 @@ const Developer = (() => {
     _cascadeGenerate: cascadeGenerate,
     _cascadeWriteBlank: cascadeWriteBlank,
     _cascadeRestart: cascadeRestart,
+    // WP form (Application Form Part B 4.2)
+    _wpAddTask: _wpAddTask,
+    _wpAddMs: _wpAddMs,
+    _wpAddDl: _wpAddDl,
+    _wpAiFill: _wpAiFill,
   };
 })();

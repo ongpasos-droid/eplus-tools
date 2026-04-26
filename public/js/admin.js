@@ -383,12 +383,12 @@ const Admin = (() => {
 
   function convRenderCriteriaEditor(content) {
     content.innerHTML = `
-      <div class="flex gap-0" style="min-height:70vh">
-        <div id="eval-sidebar" class="w-72 flex-shrink-0 bg-[#edf2f9] rounded-l-2xl flex flex-col overflow-hidden border-r border-outline-variant/20">
+      <div class="flex gap-0 items-start" style="min-height:70vh">
+        <div id="eval-sidebar" class="w-72 flex-shrink-0 bg-[#edf2f9] rounded-l-2xl flex flex-col border-r border-outline-variant/20">
           <div class="px-5 py-3">
             <div class="text-[11px] text-on-surface-variant font-medium">Evaluation framework</div>
           </div>
-          <div id="eval-sidebar-sections" class="flex-1 overflow-y-auto px-3 py-1"></div>
+          <div id="eval-sidebar-sections" class="px-3 py-1"></div>
           <div class="p-3">
             <button id="eval-add-section-btn" class="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-[11px] font-bold text-primary border border-dashed border-primary/30 hover:bg-primary/5 transition-colors">
               <span class="material-symbols-outlined text-sm">add</span> Add section
@@ -600,8 +600,8 @@ const Admin = (() => {
           </div>
           <button id="conv-change-template" class="text-xs text-primary hover:underline">Cambiar template</button>
         </div>
-        <div class="flex gap-4" style="min-height:60vh">
-          <div id="conv-form-nav" class="w-56 flex-shrink-0 space-y-0.5 sticky top-0 overflow-y-auto" style="max-height:70vh">
+        <div class="flex gap-4 items-start" style="min-height:60vh">
+          <div id="conv-form-nav" class="w-56 flex-shrink-0 space-y-0.5">
             ${navItems.map(it => `
             <div class="conv-form-nav-item flex items-center gap-2 px-3 py-2 rounded-xl cursor-pointer transition-all text-xs ${fm.activeSection === it.id ? 'bg-[#1b1464] text-white font-bold' : 'text-primary/70 hover:bg-primary/5'}"
                  data-sid="${it.id}" style="${it.level ? 'padding-left:'+(12 + it.level * 12)+'px' : ''}">

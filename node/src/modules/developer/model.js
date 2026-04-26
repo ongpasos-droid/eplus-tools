@@ -1305,7 +1305,11 @@ async function _assertWp(wpId, userId) {
 
 async function listMilestones(wpId) {
   const [rows] = await db.execute(
-    'SELECT * FROM milestones WHERE work_package_id = ? ORDER BY sort_order, created_at',
+    `SELECT m.*, p.name AS lead_partner_name
+       FROM milestones m
+       LEFT JOIN partners p ON p.id = m.lead_partner_id
+      WHERE m.work_package_id = ?
+      ORDER BY m.sort_order, m.created_at`,
     [wpId]
   );
   return rows;
@@ -1315,8 +1319,8 @@ async function createMilestone(wpId, userId, data) {
   const wp = await _assertWp(wpId, userId);
   const id = genUUID();
   await db.execute(
-    `INSERT INTO milestones (id, work_package_id, project_id, code, title, description, due_month, verification, sort_order)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO milestones (id, work_package_id, project_id, code, title, description, due_month, verification, lead_partner_id, sort_order)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       id, wpId, wp.project_id,
       data.code || null,
@@ -1324,6 +1328,7 @@ async function createMilestone(wpId, userId, data) {
       data.description || null,
       data.due_month || null,
       data.verification || null,
+      data.lead_partner_id || null,
       data.sort_order || 0,
     ]
   );
@@ -1337,7 +1342,7 @@ async function updateMilestone(msId, userId, data) {
     [msId, userId]
   );
   if (!rows.length) { const e = new Error('Milestone not found'); e.status = 404; throw e; }
-  const allowed = ['code','title','description','due_month','verification','sort_order'];
+  const allowed = ['code','title','description','due_month','verification','lead_partner_id','sort_order'];
   const sets = [];
   const vals = [];
   for (const k of allowed) {
@@ -1360,7 +1365,11 @@ async function deleteMilestone(msId, userId) {
 
 async function listDeliverables(wpId) {
   const [rows] = await db.execute(
-    'SELECT * FROM deliverables WHERE work_package_id = ? ORDER BY sort_order, created_at',
+    `SELECT d.*, p.name AS lead_partner_name
+       FROM deliverables d
+       LEFT JOIN partners p ON p.id = d.lead_partner_id
+      WHERE d.work_package_id = ?
+      ORDER BY d.sort_order, d.created_at`,
     [wpId]
   );
   return rows;
@@ -1370,8 +1379,8 @@ async function createDeliverable(wpId, userId, data) {
   const wp = await _assertWp(wpId, userId);
   const id = genUUID();
   await db.execute(
-    `INSERT INTO deliverables (id, work_package_id, project_id, code, title, description, type, dissemination_level, due_month, sort_order)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO deliverables (id, work_package_id, project_id, code, title, description, type, dissemination_level, due_month, lead_partner_id, sort_order)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       id, wpId, wp.project_id,
       data.code || null,
@@ -1380,6 +1389,7 @@ async function createDeliverable(wpId, userId, data) {
       data.type || null,
       data.dissemination_level || null,
       data.due_month || null,
+      data.lead_partner_id || null,
       data.sort_order || 0,
     ]
   );
@@ -1393,7 +1403,7 @@ async function updateDeliverable(dId, userId, data) {
     [dId, userId]
   );
   if (!rows.length) { const e = new Error('Deliverable not found'); e.status = 404; throw e; }
-  const allowed = ['code','title','description','type','dissemination_level','due_month','sort_order'];
+  const allowed = ['code','title','description','type','dissemination_level','due_month','lead_partner_id','sort_order'];
   const sets = [];
   const vals = [];
   for (const k of allowed) {
@@ -1412,6 +1422,394 @@ async function deleteDeliverable(dId, userId) {
   );
   if (!rows.length) { const e = new Error('Deliverable not found'); e.status = 404; throw e; }
   await db.execute('DELETE FROM deliverables WHERE id = ?', [dId]);
+}
+
+/* ── Writer Phase 3: full WP form (Application Form Part B 4.2) ──
+   Header (objectives + duration + lead), Tasks + participants,
+   Budget pivot. Milestones/deliverables already covered above.
+   ────────────────────────────────────────────────────────────── */
+
+async function getWpHeader(wpId, userId) {
+  const [rows] = await db.execute(
+    `SELECT wp.id, wp.code, wp.title, wp.summary, wp.objectives,
+            wp.duration_from_month, wp.duration_to_month, wp.leader_id,
+            p.name AS leader_name, p.country AS leader_country
+       FROM work_packages wp
+       JOIN projects pr ON pr.id = wp.project_id
+       LEFT JOIN partners p ON p.id = wp.leader_id
+      WHERE wp.id = ? AND pr.user_id = ?`,
+    [wpId, userId]
+  );
+  if (!rows.length) { const e = new Error('Work package not found'); e.status = 404; throw e; }
+  return rows[0];
+}
+
+async function updateWpHeader(wpId, userId, data) {
+  await _assertWp(wpId, userId);
+  const allowed = ['title', 'objectives', 'duration_from_month', 'duration_to_month', 'leader_id'];
+  const sets = [];
+  const vals = [];
+  for (const k of allowed) {
+    if (data[k] !== undefined) { sets.push(`${k} = ?`); vals.push(data[k] === '' ? null : data[k]); }
+  }
+  if (!sets.length) return;
+  vals.push(wpId);
+  await db.execute(`UPDATE work_packages SET ${sets.join(', ')} WHERE id = ?`, vals);
+}
+
+async function listWpTasks(wpId) {
+  const [tasks] = await db.execute(
+    `SELECT * FROM wp_tasks WHERE work_package_id = ? ORDER BY sort_order, created_at`,
+    [wpId]
+  );
+  if (!tasks.length) return [];
+  const taskIds = tasks.map(t => t.id);
+  const placeholders = taskIds.map(() => '?').join(',');
+  const [parts] = await db.execute(
+    `SELECT tp.task_id, tp.partner_id, tp.role, tp.sort_order,
+            p.name AS partner_name, p.country AS partner_country
+       FROM wp_task_participants tp
+       JOIN partners p ON p.id = tp.partner_id
+      WHERE tp.task_id IN (${placeholders})
+      ORDER BY tp.sort_order, p.order_index`,
+    taskIds
+  );
+  const partsByTask = {};
+  for (const p of parts) {
+    (partsByTask[p.task_id] ||= []).push(p);
+  }
+  return tasks.map(t => ({ ...t, participants: partsByTask[t.id] || [] }));
+}
+
+async function createWpTask(wpId, userId, data) {
+  const wp = await _assertWp(wpId, userId);
+  const id = genUUID();
+  await db.execute(
+    `INSERT INTO wp_tasks (id, work_package_id, project_id, code, title, description, in_kind_subcontracting, sort_order)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      id, wpId, wp.project_id,
+      data.code || null,
+      data.title || 'New task',
+      data.description || null,
+      data.in_kind_subcontracting || null,
+      data.sort_order || 0,
+    ]
+  );
+  if (Array.isArray(data.participants)) {
+    for (const part of data.participants) {
+      if (!part.partner_id) continue;
+      await db.execute(
+        `INSERT INTO wp_task_participants (id, task_id, partner_id, role, sort_order)
+         VALUES (?, ?, ?, ?, ?)
+         ON DUPLICATE KEY UPDATE role = VALUES(role)`,
+        [genUUID(), id, part.partner_id, part.role || 'BEN', part.sort_order || 0]
+      );
+    }
+  }
+  return id;
+}
+
+async function _assertTask(taskId, userId) {
+  const [rows] = await db.execute(
+    `SELECT t.id, t.work_package_id, t.project_id
+       FROM wp_tasks t
+       JOIN projects p ON p.id = t.project_id
+      WHERE t.id = ? AND p.user_id = ?`,
+    [taskId, userId]
+  );
+  if (!rows.length) { const e = new Error('Task not found'); e.status = 404; throw e; }
+  return rows[0];
+}
+
+async function updateWpTask(taskId, userId, data) {
+  await _assertTask(taskId, userId);
+  const allowed = ['code', 'title', 'description', 'in_kind_subcontracting', 'sort_order'];
+  const sets = [];
+  const vals = [];
+  for (const k of allowed) {
+    if (data[k] !== undefined) { sets.push(`${k} = ?`); vals.push(data[k] === '' ? null : data[k]); }
+  }
+  if (!sets.length) return;
+  vals.push(taskId);
+  await db.execute(`UPDATE wp_tasks SET ${sets.join(', ')} WHERE id = ?`, vals);
+}
+
+async function deleteWpTask(taskId, userId) {
+  await _assertTask(taskId, userId);
+  await db.execute('DELETE FROM wp_tasks WHERE id = ?', [taskId]);
+}
+
+async function setTaskParticipant(taskId, userId, partnerId, role) {
+  await _assertTask(taskId, userId);
+  await db.execute(
+    `INSERT INTO wp_task_participants (id, task_id, partner_id, role)
+     VALUES (?, ?, ?, ?)
+     ON DUPLICATE KEY UPDATE role = VALUES(role)`,
+    [genUUID(), taskId, partnerId, role || 'BEN']
+  );
+}
+
+async function removeTaskParticipant(taskId, userId, partnerId) {
+  await _assertTask(taskId, userId);
+  await db.execute(
+    'DELETE FROM wp_task_participants WHERE task_id = ? AND partner_id = ?',
+    [taskId, partnerId]
+  );
+}
+
+/* ── WP Budget pivot ────────────────────────────────────────────
+   Reads from budget_costs and pivots into the form columns:
+   A · B · C.1a (Travel) · C.1b (Accommodation) · C.1c (Subsistence)
+   · C.2 (Equipment) · C.3 (Other) · D.1 · E (indirect) · Total.
+   The match between budget_work_packages and work_packages is by
+   label prefix (label = `${wp.code} — ${wp.title}` at sync time).
+   ────────────────────────────────────────────────────────────── */
+
+async function getWpBudget(wpId, userId) {
+  const wp = await _assertWp(wpId, userId);
+  const [wpInfo] = await db.execute(
+    `SELECT code, order_index FROM work_packages WHERE id = ?`,
+    [wpId]
+  );
+  if (!wpInfo.length) return null;
+  const wpCode = wpInfo[0].code;
+  const wpOrder = wpInfo[0].order_index;
+
+  const [budgets] = await db.execute(
+    `SELECT id, indirect_pct FROM budget_projects WHERE project_id = ? LIMIT 1`,
+    [wp.project_id]
+  );
+  if (!budgets.length) return { rows: [], total: 0, indirect_pct: 0, matched: false };
+  const budgetId = budgets[0].id;
+  const indirectPct = Number(budgets[0].indirect_pct || 0);
+
+  // Find the matching budget_work_package: prefer label starting with `${wpCode} —`,
+  // fall back to ordinal position (number = order_index + 1).
+  const [bwps] = await db.execute(
+    `SELECT id, number, label FROM budget_work_packages WHERE budget_id = ? ORDER BY number`,
+    [budgetId]
+  );
+  let bwp = bwps.find(b => b.label && wpCode && b.label.startsWith(wpCode + ' '));
+  if (!bwp) bwp = bwps[Math.max(0, wpOrder)] || null;
+  if (!bwp) return { rows: [], total: 0, indirect_pct: indirectPct, matched: false };
+
+  // Pivot per beneficiary
+  const [rows] = await db.execute(
+    `SELECT bb.id AS beneficiary_id, bb.name, bb.acronym, bb.is_coordinator,
+            COALESCE(SUM(CASE WHEN bc.category = 'A' THEN bc.total_cost ELSE 0 END), 0) AS a_personnel,
+            COALESCE(SUM(CASE WHEN bc.category = 'B' THEN bc.total_cost ELSE 0 END), 0) AS b_subcontracting,
+            COALESCE(SUM(CASE WHEN bc.category = 'C' AND bc.subcategory = 'C1' AND bc.line_item = 'Travel'        THEN bc.total_cost ELSE 0 END), 0) AS c1a_travel,
+            COALESCE(SUM(CASE WHEN bc.category = 'C' AND bc.subcategory = 'C1' AND bc.line_item = 'Accommodation' THEN bc.total_cost ELSE 0 END), 0) AS c1b_accommodation,
+            COALESCE(SUM(CASE WHEN bc.category = 'C' AND bc.subcategory = 'C1' AND bc.line_item = 'Subsistence'   THEN bc.total_cost ELSE 0 END), 0) AS c1c_subsistence,
+            COALESCE(SUM(CASE WHEN bc.category = 'C' AND bc.subcategory = 'C2' THEN bc.total_cost ELSE 0 END), 0) AS c2_equipment,
+            COALESCE(SUM(CASE WHEN bc.category = 'C' AND bc.subcategory = 'C3' THEN bc.total_cost ELSE 0 END), 0) AS c3_other,
+            COALESCE(SUM(CASE WHEN bc.category = 'D' THEN bc.total_cost ELSE 0 END), 0) AS d1_third_parties,
+            COALESCE(SUM(bc.total_cost), 0) AS direct_total
+       FROM budget_beneficiaries bb
+       LEFT JOIN budget_costs bc
+         ON bc.beneficiary_id = bb.id
+        AND bc.budget_id = bb.budget_id
+        AND bc.wp_id = ?
+      WHERE bb.budget_id = ?
+      GROUP BY bb.id
+      ORDER BY bb.sort_order, bb.number`,
+    [bwp.id, budgetId]
+  );
+
+  const enriched = rows.map(r => {
+    const direct = Number(r.direct_total || 0);
+    const e_indirect = Math.round(direct * indirectPct) / 100;
+    return { ...r, e_indirect, total: direct + e_indirect };
+  });
+  const total = enriched.reduce((s, r) => s + r.total, 0);
+  return { rows: enriched, total, indirect_pct: indirectPct, matched: true };
+}
+
+async function listProjectPartners(projectId, userId) {
+  const [rows] = await db.execute(
+    `SELECT pa.id, pa.name, pa.legal_name, pa.country, pa.role, pa.order_index
+       FROM partners pa
+       JOIN projects pr ON pr.id = pa.project_id
+      WHERE pa.project_id = ? AND pr.user_id = ?
+      ORDER BY pa.order_index`,
+    [projectId, userId]
+  );
+  return rows;
+}
+
+/* ── AI auto-fill for the whole WP form ─────────────────────────
+   Synthesises Objectives / Tasks / Milestones / Deliverables from
+   project context (Intake activities + partners + WP summary +
+   problem/target_groups). REPLACES existing rows for this WP.
+   ────────────────────────────────────────────────────────────── */
+
+async function aiFillWp(wpId, userId) {
+  const ai = require('../../utils/ai');
+  const wp = await _assertWp(wpId, userId);
+
+  // Gather context: WP, partners, activities for this WP, project meta
+  const [wpRows] = await db.execute(
+    `SELECT id, code, title, summary, objectives, duration_from_month, duration_to_month
+       FROM work_packages WHERE id = ?`,
+    [wpId]
+  );
+  const wpInfo = wpRows[0] || {};
+
+  const [partners] = await db.execute(
+    `SELECT id, name, legal_name, country, role FROM partners
+      WHERE project_id = ? ORDER BY order_index`,
+    [wp.project_id]
+  );
+
+  const [activities] = await db.execute(
+    `SELECT id, type, label, description FROM activities
+      WHERE wp_id = ? ORDER BY order_index`,
+    [wpId]
+  );
+
+  const [contexts] = await db.execute(
+    `SELECT problem, target_groups, approach FROM intake_contexts
+      WHERE project_id = ? LIMIT 1`,
+    [wp.project_id]
+  );
+  const ctx = contexts[0] || {};
+
+  const [projects] = await db.execute(
+    `SELECT name, type, description, duration_months FROM projects WHERE id = ?`,
+    [wp.project_id]
+  );
+  const project = projects[0] || {};
+
+  const wpNum = (wpInfo.code || '').replace(/\D/g, '') || '1';
+
+  const partnersForPrompt = partners.map(p =>
+    `  - id=${p.id} | ${p.name || p.legal_name} (${p.country || '?'}) [${p.role}]`
+  ).join('\n');
+
+  const activitiesForPrompt = activities.length
+    ? activities.map(a => `  - [${a.type}] ${a.label}${a.description ? ': ' + a.description.slice(0, 200) : ''}`).join('\n')
+    : '  (no activities planned in Intake yet — synthesise reasonable defaults from the WP summary)';
+
+  const systemPrompt = `You are an Erasmus+ proposal expert filling Section 4.2 (Work Packages) of the EU Application Form Part B.
+
+Output ONE JSON object with exactly these keys: "objectives", "tasks", "milestones", "deliverables".
+
+CONSTRAINTS — every cell must be SHORT (max ~one line, ~80 chars). The form has limited table space.
+
+"objectives": string. 2–4 short bullet lines starting with "• ", separated by \\n.
+"tasks": array of 3–5 objects, each: { "code": "T${wpNum}.N", "title": short, "description": one line, "in_kind_subcontracting": "No" or "Yes — short reason", "participants": [{"partner_id": uuid_from_list, "role": one of "COO"|"BEN"|"AE"|"AP"|"OTHER"}] }. The applicant partner is COO; others default to BEN. Most tasks involve 2–4 partners.
+"milestones": array of 2–3 objects, each: { "code": "MSN" (continuous globally — start at 1 for WP1), "title": short, "due_month": integer 1–${project.duration_months || 24}, "lead_partner_id": uuid_from_list, "description": one line, "verification": short means of verification }.
+"deliverables": array of 3–5 objects, each: { "code": "D${wpNum}.N", "title": short, "type": one of "R"|"DEM"|"DEC"|"DATA"|"DMP"|"ETHICS"|"SECURITY"|"OTHER", "dissemination_level": one of "PU"|"SEN"|"R-UE/EU-R"|"C-UE/EU-C"|"S-UE/EU-S", "due_month": integer, "lead_partner_id": uuid_from_list, "description": one line including format and language }.
+
+Use ONLY partner_id values from the provided list. Do not invent UUIDs.
+Output only valid JSON, no markdown fences, no commentary.`;
+
+  const userPrompt = `PROJECT: ${project.name || ''} (${project.type || ''})
+Total duration: ${project.duration_months || 24} months
+Problem: ${ctx.problem || '(not specified)'}
+Target groups: ${ctx.target_groups || '(not specified)'}
+Approach: ${ctx.approach || '(not specified)'}
+
+THIS WORK PACKAGE: ${wpInfo.code || ''} — ${wpInfo.title || ''}
+Summary: ${wpInfo.summary || '(not specified)'}
+Duration: months ${wpInfo.duration_from_month || '?'} – ${wpInfo.duration_to_month || '?'}
+
+PARTNERS (use these UUIDs as partner_id and lead_partner_id):
+${partnersForPrompt || '  (no partners — leave participants/lead empty)'}
+
+INTAKE ACTIVITIES PLANNED FOR THIS WP (synthesise tasks from these):
+${activitiesForPrompt}
+
+Return the JSON now.`;
+
+  const raw = await ai.callClaude(systemPrompt, userPrompt, 4096);
+  let parsed;
+  try {
+    // Strip optional code fences just in case
+    const cleaned = raw.replace(/^```json\s*/i, '').replace(/^```\s*/, '').replace(/\s*```$/, '').trim();
+    parsed = JSON.parse(cleaned);
+  } catch (e) {
+    const err = new Error('AI returned invalid JSON: ' + (e.message || ''));
+    err.status = 502;
+    throw err;
+  }
+
+  const partnerIds = new Set(partners.map(p => p.id));
+
+  // Persist: replace existing rows for this WP
+  const conn = await db.getConnection();
+  try {
+    await conn.beginTransaction();
+
+    if (typeof parsed.objectives === 'string') {
+      await conn.execute(`UPDATE work_packages SET objectives = ? WHERE id = ?`, [parsed.objectives, wpId]);
+    }
+
+    await conn.execute(`DELETE FROM wp_tasks WHERE work_package_id = ?`, [wpId]);
+    if (Array.isArray(parsed.tasks)) {
+      for (let i = 0; i < parsed.tasks.length; i++) {
+        const t = parsed.tasks[i] || {};
+        const taskId = genUUID();
+        await conn.execute(
+          `INSERT INTO wp_tasks (id, work_package_id, project_id, code, title, description, in_kind_subcontracting, sort_order)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+          [taskId, wpId, wp.project_id, t.code || `T${wpNum}.${i + 1}`, (t.title || 'Task').slice(0, 250), t.description || null, t.in_kind_subcontracting || null, i]
+        );
+        if (Array.isArray(t.participants)) {
+          for (const p of t.participants) {
+            if (!p.partner_id || !partnerIds.has(p.partner_id)) continue;
+            try {
+              await conn.execute(
+                `INSERT INTO wp_task_participants (id, task_id, partner_id, role) VALUES (?, ?, ?, ?)`,
+                [genUUID(), taskId, p.partner_id, (p.role || 'BEN').toUpperCase()]
+              );
+            } catch (e) { /* ignore dup */ }
+          }
+        }
+      }
+    }
+
+    await conn.execute(`DELETE FROM milestones WHERE work_package_id = ?`, [wpId]);
+    if (Array.isArray(parsed.milestones)) {
+      for (let i = 0; i < parsed.milestones.length; i++) {
+        const m = parsed.milestones[i] || {};
+        const lead = partnerIds.has(m.lead_partner_id) ? m.lead_partner_id : null;
+        await conn.execute(
+          `INSERT INTO milestones (id, work_package_id, project_id, code, title, description, due_month, verification, lead_partner_id, sort_order)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [genUUID(), wpId, wp.project_id, m.code || null, (m.title || 'Milestone').slice(0, 250), m.description || null, parseInt(m.due_month, 10) || null, m.verification || null, lead, i]
+        );
+      }
+    }
+
+    await conn.execute(`DELETE FROM deliverables WHERE work_package_id = ?`, [wpId]);
+    if (Array.isArray(parsed.deliverables)) {
+      for (let i = 0; i < parsed.deliverables.length; i++) {
+        const d = parsed.deliverables[i] || {};
+        const lead = partnerIds.has(d.lead_partner_id) ? d.lead_partner_id : null;
+        await conn.execute(
+          `INSERT INTO deliverables (id, work_package_id, project_id, code, title, description, type, dissemination_level, due_month, lead_partner_id, sort_order)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [genUUID(), wpId, wp.project_id, d.code || null, (d.title || 'Deliverable').slice(0, 250), d.description || null, d.type || null, d.dissemination_level || null, parseInt(d.due_month, 10) || null, lead, i]
+        );
+      }
+    }
+
+    await conn.commit();
+  } catch (err) {
+    await conn.rollback();
+    throw err;
+  } finally {
+    conn.release();
+  }
+
+  return {
+    objectives: parsed.objectives || '',
+    tasks_count: (parsed.tasks || []).length,
+    milestones_count: (parsed.milestones || []).length,
+    deliverables_count: (parsed.deliverables || []).length,
+  };
 }
 
 // Phase 1 of Evaluate-and-Refine: evaluate the current text, return the
@@ -2635,4 +3033,16 @@ module.exports = {
   createDeliverable,
   updateDeliverable,
   deleteDeliverable,
+  // Writer Phase 3 — full WP form (Application Form Part B section 4.2)
+  getWpHeader,
+  updateWpHeader,
+  listWpTasks,
+  createWpTask,
+  updateWpTask,
+  deleteWpTask,
+  setTaskParticipant,
+  removeTaskParticipant,
+  getWpBudget,
+  listProjectPartners,
+  aiFillWp,
 };

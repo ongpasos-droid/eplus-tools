@@ -2489,19 +2489,20 @@ tailwind.config = {
           </div>
         </div>
 
-        <!-- Ficha slide-over (S3 will fill this) -->
-        <div id="entity-ficha-overlay" class="hidden fixed inset-0 z-40">
-          <div id="entity-ficha-backdrop" class="absolute inset-0 bg-primary/30 backdrop-blur-sm"></div>
-          <aside id="entity-ficha-panel"
-            class="absolute right-0 top-0 bottom-0 w-full max-w-3xl bg-white shadow-2xl overflow-y-auto
-                   transform transition-transform duration-300">
-            <div id="entity-ficha-content" class="min-h-full"></div>
-          </aside>
-        </div>
       </section>
 
     </main>
   </div>
+</div>
+
+<!-- ═══ ENTITY FICHA OVERLAY (global — works from any panel) ═══ -->
+<div id="entity-ficha-overlay" class="hidden fixed inset-0 z-40">
+  <div id="entity-ficha-backdrop" class="absolute inset-0 bg-primary/30 backdrop-blur-sm"></div>
+  <aside id="entity-ficha-panel"
+    class="absolute right-0 top-0 bottom-0 w-full max-w-3xl bg-white shadow-2xl overflow-y-auto
+           transform transition-transform duration-300">
+    <div id="entity-ficha-content" class="min-h-full"></div>
+  </aside>
 </div>
 
 <!-- ═══ TOAST ═══════════════════════════════════════════════════ -->

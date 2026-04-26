@@ -171,6 +171,11 @@ const App = (() => {
     // Update URL hash
     if (pushHash) location.hash = route;
 
+    // Defensive: panel navigation always releases body scroll lock so an
+    // orphan drawer (e.g. ficha overlay) can never strand the user with
+    // a non-scrollable page.
+    document.body.style.overflow = '';
+
     // Update panels
     document.querySelectorAll('#content-area .panel').forEach(p => p.classList.remove('active'));
     const panel = document.getElementById(`panel-${route}`);
