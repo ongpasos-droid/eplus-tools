@@ -236,6 +236,7 @@ const Developer = (() => {
     { id: 'relevancia',   label: 'Relevancia',   icon: 'lightbulb' },
     { id: 'actividades',  label: 'Actividades',  icon: 'task_alt' },
     { id: 'tareas',       label: 'Tareas',       icon: 'checklist' },
+    { id: 'entregables',  label: 'Entregables',  icon: 'inventory_2' },
     { id: 2,  label: 'Escribir',     icon: 'edit_note' },
     { id: 4,  label: 'Revisar',      icon: 'fact_check' },
   ];
@@ -473,6 +474,7 @@ const Developer = (() => {
         case 'relevancia':   await renderPrepRelevancia(el); break;
         case 'actividades':  await renderPrepActividades(el); break;
         case 'tareas':       await renderPrepTareas(el); break;
+        case 'entregables':  await renderPrepEntregables(el); break;
         case 'cronograma':   await renderPrepCronograma(el); break;
       }
     } catch (err) {
@@ -1333,6 +1335,245 @@ const Developer = (() => {
           <p class="text-sm text-amber-700">Define Work Packages y actividades en el Intake primero.</p>
         </div>`;
     }
+  }
+
+  /* ── Sub-tab: Entregables (Deliverables & Milestones) ────────── */
+
+  const PREP_DEL_TYPES         = ['R','DEM','DEC','DATA','DMP','ETHICS','SECURITY','OTHER'];
+  const PREP_DEL_DISSEM_LEVELS = ['PU','SEN','R-UE/EU-R','C-UE/EU-C','S-UE/EU-S'];
+
+  async function renderPrepEntregables(el) {
+    const pid = currentProject.id;
+    el.innerHTML = `
+      <div>
+        <div class="flex items-start justify-between mb-4 gap-4 flex-wrap">
+          <div class="flex-1 min-w-[280px]">
+            <h3 class="font-headline text-base font-bold">Entregables y Milestones</h3>
+            <p class="text-xs text-on-surface-variant">Cap de 15 entregables por proyecto (regla EACEA). Los milestones se generan automáticamente: 1 por entregable + lanzamiento (M1) y reporte final.</p>
+          </div>
+          <div id="prep-del-summary" class="text-right text-xs text-on-surface-variant"></div>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 mb-4">
+          <button id="prep-del-auto" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-primary text-white text-xs font-bold hover:bg-primary/90 transition-colors">
+            <span class="material-symbols-outlined text-sm">auto_awesome</span> Auto-distribuir desde actividades
+          </button>
+          <button id="prep-ms-auto" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-secondary text-white text-xs font-bold hover:bg-secondary/90 transition-colors">
+            <span class="material-symbols-outlined text-sm">flag</span> Auto-generar milestones
+          </button>
+          <span class="text-[11px] text-on-surface-variant/60 ml-2">Estas acciones reemplazan los entregables/milestones actuales del proyecto.</span>
+        </div>
+        <div id="prep-del-content" class="space-y-6"></div>
+      </div>`;
+
+    document.getElementById('prep-del-auto').addEventListener('click', () => _prepDelAutoDistribute(pid));
+    document.getElementById('prep-ms-auto').addEventListener('click', () => _prepMsAutoGenerate(pid));
+
+    await _prepDelLoad(pid);
+  }
+
+  async function _prepDelLoad(pid) {
+    const host = document.getElementById('prep-del-content');
+    if (!host) return;
+    host.innerHTML = '<p class="text-xs text-on-surface-variant/60 italic">Cargando…</p>';
+    let summary, delivs, miles, partners;
+    try {
+      [summary, delivs, miles, partners] = await Promise.all([
+        API.get(`/developer/projects/${pid}/deliverables/summary`),
+        API.get(`/developer/projects/${pid}/deliverables`),
+        API.get(`/developer/projects/${pid}/milestones`),
+        _wpFetchPartners(pid).catch(() => []),
+      ]);
+    } catch (err) {
+      host.innerHTML = `<p class="text-error text-xs">Error: ${esc(err.message || '')}</p>`;
+      return;
+    }
+    const cap = summary.hard_cap || 15;
+    const dCount = summary.deliverables_count || 0;
+    const mCount = summary.milestones_count || 0;
+    const overCap = dCount > cap;
+    const summaryEl = document.getElementById('prep-del-summary');
+    if (summaryEl) {
+      summaryEl.innerHTML = `
+        <div class="font-bold text-base ${overCap ? 'text-error' : (dCount === cap ? 'text-amber-600' : 'text-primary')}">${dCount}/${cap} entregables</div>
+        <div class="text-[11px]">${mCount} milestones</div>
+        ${overCap ? '<div class="text-[10px] text-error font-bold mt-0.5">Por encima del cap recomendado</div>' : ''}`;
+    }
+
+    if (!delivs.length && !miles.length) {
+      host.innerHTML = `
+        <div class="bg-surface-container-low rounded-2xl border border-outline-variant/30 p-8 text-center">
+          <span class="material-symbols-outlined text-4xl text-on-surface-variant/40 mb-2">inventory_2</span>
+          <h3 class="font-headline text-base font-bold mb-1">Aún no hay entregables</h3>
+          <p class="text-sm text-on-surface-variant mb-4">Pulsa <strong>Auto-distribuir desde actividades</strong> para generar una propuesta a partir de las actividades del proyecto. Después puedes editar cada fila o reasignar a otro WP.</p>
+        </div>`;
+      return;
+    }
+
+    // Group by WP
+    const byWp = {};
+    const wpMeta = {};
+    for (const d of delivs) {
+      const k = d.work_package_id;
+      (byWp[k] ||= { delivs: [], miles: [] }).delivs.push(d);
+      wpMeta[k] = { code: d.wp_code, title: d.wp_title, order: d.wp_order_index };
+    }
+    for (const m of miles) {
+      const k = m.work_package_id;
+      (byWp[k] ||= { delivs: [], miles: [] }).miles.push(m);
+      if (!wpMeta[k]) wpMeta[k] = { code: m.wp_code, title: m.wp_title, order: m.wp_order_index };
+    }
+    const wpIds = Object.keys(byWp).sort((a, b) => (wpMeta[a].order ?? 99) - (wpMeta[b].order ?? 99));
+
+    const partnerSelect = (selectedId, name) => {
+      const opts = ['<option value="">— sin asignar —</option>']
+        .concat(partners.map(p => `<option value="${esc(p.id)}" ${p.id === selectedId ? 'selected' : ''}>${esc(p.name || '')}</option>`)).join('');
+      return `<select data-prep-partner="${name}" class="w-full px-1.5 py-1 text-[11px] border border-outline-variant/30 rounded">${opts}</select>`;
+    };
+
+    host.innerHTML = wpIds.map(wpId => {
+      const blk = byWp[wpId];
+      const meta = wpMeta[wpId];
+      return `
+      <div class="rounded-xl border border-outline-variant/30 bg-white p-4">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-primary/10 text-primary">${esc(meta.code || '')}</span>
+          <span class="font-semibold text-sm">${esc(meta.title || '')}</span>
+          <span class="text-[11px] text-on-surface-variant ml-auto">${blk.delivs.length} entregables · ${blk.miles.length} milestones</span>
+        </div>
+
+        <h4 class="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant mt-2 mb-1">Deliverables</h4>
+        ${blk.delivs.length ? `
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs border-collapse">
+              <thead class="bg-primary/5">
+                <tr>
+                  <th class="text-left p-1.5 border border-outline-variant/30 w-16">Code</th>
+                  <th class="text-left p-1.5 border border-outline-variant/30 w-44">Título</th>
+                  <th class="text-left p-1.5 border border-outline-variant/30">Descripción</th>
+                  <th class="text-left p-1.5 border border-outline-variant/30 w-20">Tipo</th>
+                  <th class="text-left p-1.5 border border-outline-variant/30 w-24">Disem.</th>
+                  <th class="text-left p-1.5 border border-outline-variant/30 w-16">Mes</th>
+                  <th class="text-left p-1.5 border border-outline-variant/30 w-32">Lead</th>
+                  <th class="border border-outline-variant/30 w-8"></th>
+                </tr>
+              </thead>
+              <tbody>
+                ${blk.delivs.map(d => `
+                  <tr data-prep-d-row="${esc(d.id)}" class="align-top">
+                    <td class="p-1 border border-outline-variant/30 font-mono"><input data-prep-d="code" data-id="${esc(d.id)}" value="${esc(d.code || '')}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
+                    <td class="p-1 border border-outline-variant/30"><input data-prep-d="title" data-id="${esc(d.id)}" value="${esc(d.title || '')}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
+                    <td class="p-1 border border-outline-variant/30"><textarea data-no-voice="1" data-prep-d="description" data-id="${esc(d.id)}" rows="1" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded resize-none">${esc(d.description || '')}</textarea></td>
+                    <td class="p-1 border border-outline-variant/30">
+                      <select data-prep-d="type" data-id="${esc(d.id)}" class="w-full px-1 py-0.5 text-[11px] border-0 bg-transparent focus:bg-white focus:ring-1 focus:ring-primary/30 rounded">
+                        <option value="">—</option>
+                        ${PREP_DEL_TYPES.map(t => `<option value="${t}" ${d.type === t ? 'selected' : ''}>${t}</option>`).join('')}
+                      </select>
+                    </td>
+                    <td class="p-1 border border-outline-variant/30">
+                      <select data-prep-d="dissemination_level" data-id="${esc(d.id)}" class="w-full px-1 py-0.5 text-[11px] border-0 bg-transparent focus:bg-white focus:ring-1 focus:ring-primary/30 rounded">
+                        <option value="">—</option>
+                        ${PREP_DEL_DISSEM_LEVELS.map(l => `<option value="${l}" ${d.dissemination_level === l ? 'selected' : ''}>${l}</option>`).join('')}
+                      </select>
+                    </td>
+                    <td class="p-1 border border-outline-variant/30"><input type="number" min="1" max="60" data-prep-d="due_month" data-id="${esc(d.id)}" value="${d.due_month || ''}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
+                    <td class="p-1 border border-outline-variant/30">
+                      <select data-prep-d="lead_partner_id" data-id="${esc(d.id)}" class="w-full px-1 py-0.5 text-[11px] border-0 bg-transparent focus:bg-white focus:ring-1 focus:ring-primary/30 rounded">
+                        <option value="">—</option>
+                        ${partners.map(p => `<option value="${esc(p.id)}" ${p.id === d.lead_partner_id ? 'selected' : ''}>${esc(p.name || '')}</option>`).join('')}
+                      </select>
+                    </td>
+                    <td class="p-1 border border-outline-variant/30 text-center"><button data-prep-d-del="${esc(d.id)}" class="text-on-surface-variant hover:text-error" title="Eliminar"><span class="material-symbols-outlined text-sm">close</span></button></td>
+                  </tr>`).join('')}
+              </tbody>
+            </table>
+          </div>` : '<p class="text-[11px] italic text-on-surface-variant/60">Sin entregables en este WP.</p>'}
+
+        <h4 class="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant mt-4 mb-1">Milestones</h4>
+        ${blk.miles.length ? `
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs border-collapse">
+              <thead class="bg-secondary/5">
+                <tr>
+                  <th class="text-left p-1.5 border border-outline-variant/30 w-16">Code</th>
+                  <th class="text-left p-1.5 border border-outline-variant/30 w-44">Título</th>
+                  <th class="text-left p-1.5 border border-outline-variant/30">Descripción</th>
+                  <th class="text-left p-1.5 border border-outline-variant/30 w-16">Mes</th>
+                  <th class="text-left p-1.5 border border-outline-variant/30 w-40">Verificación</th>
+                  <th class="text-left p-1.5 border border-outline-variant/30 w-24">Liga D</th>
+                  <th class="border border-outline-variant/30 w-8"></th>
+                </tr>
+              </thead>
+              <tbody>
+                ${blk.miles.map(m => `
+                  <tr class="align-top">
+                    <td class="p-1 border border-outline-variant/30 font-mono"><input data-prep-m="code" data-id="${esc(m.id)}" value="${esc(m.code || '')}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
+                    <td class="p-1 border border-outline-variant/30"><input data-prep-m="title" data-id="${esc(m.id)}" value="${esc(m.title || '')}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
+                    <td class="p-1 border border-outline-variant/30"><textarea data-no-voice="1" data-prep-m="description" data-id="${esc(m.id)}" rows="1" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded resize-none">${esc(m.description || '')}</textarea></td>
+                    <td class="p-1 border border-outline-variant/30"><input type="number" min="1" max="60" data-prep-m="due_month" data-id="${esc(m.id)}" value="${m.due_month || ''}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
+                    <td class="p-1 border border-outline-variant/30"><input data-prep-m="verification" data-id="${esc(m.id)}" value="${esc(m.verification || '')}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
+                    <td class="p-1 border border-outline-variant/30 text-[11px] font-mono text-on-surface-variant">${esc(m.deliverable_code || '—')}</td>
+                    <td class="p-1 border border-outline-variant/30 text-center"><button data-prep-m-del="${esc(m.id)}" class="text-on-surface-variant hover:text-error" title="Eliminar"><span class="material-symbols-outlined text-sm">close</span></button></td>
+                  </tr>`).join('')}
+              </tbody>
+            </table>
+          </div>` : '<p class="text-[11px] italic text-on-surface-variant/60">Sin milestones en este WP.</p>'}
+      </div>`;
+    }).join('');
+
+    // Wire inline editing
+    host.querySelectorAll('[data-prep-d]').forEach(el => {
+      const handler = () => _prepSaveDeliverable(el.dataset.id, el.dataset.prepD, el.value);
+      el.addEventListener('change', handler);
+      if (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') el.addEventListener('blur', handler);
+    });
+    host.querySelectorAll('[data-prep-m]').forEach(el => {
+      const handler = () => _prepSaveMilestone(el.dataset.id, el.dataset.prepM, el.value);
+      el.addEventListener('change', handler);
+      if (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') el.addEventListener('blur', handler);
+    });
+    host.querySelectorAll('[data-prep-d-del]').forEach(b => b.addEventListener('click', async () => {
+      if (!confirm('¿Eliminar este entregable? El milestone asociado conservará su entrada pero perderá la liga.')) return;
+      try { await API.del(`/developer/deliverables/${b.dataset.prepDDel}`); await _prepDelLoad(pid); }
+      catch (err) { alert(err.message || 'Error'); }
+    }));
+    host.querySelectorAll('[data-prep-m-del]').forEach(b => b.addEventListener('click', async () => {
+      if (!confirm('¿Eliminar este milestone?')) return;
+      try { await API.del(`/developer/milestones/${b.dataset.prepMDel}`); await _prepDelLoad(pid); }
+      catch (err) { alert(err.message || 'Error'); }
+    }));
+  }
+
+  async function _prepSaveDeliverable(id, fld, value) {
+    const v = (fld === 'due_month') ? (value === '' ? null : parseInt(value, 10) || null) : value;
+    try { await API.patch(`/developer/deliverables/${id}`, { [fld]: v }); }
+    catch (err) { console.error('save deliverable', fld, err); }
+  }
+
+  async function _prepSaveMilestone(id, fld, value) {
+    const v = (fld === 'due_month') ? (value === '' ? null : parseInt(value, 10) || null) : value;
+    try { await API.patch(`/developer/milestones/${id}`, { [fld]: v }); }
+    catch (err) { console.error('save milestone', fld, err); }
+  }
+
+  async function _prepDelAutoDistribute(pid) {
+    if (!confirm('Esto REEMPLAZA todos los entregables actuales por una distribución automática derivada de tus actividades (cap 15). Los milestones quedarán huérfanos hasta que pulses "Auto-generar milestones". ¿Continuar?')) return;
+    try {
+      const res = await API.post(`/developer/projects/${pid}/deliverables/auto-distribute`, {});
+      const data = res?.data || res;
+      const msg = `${data.created} entregables creados · ${data.total_activities} actividades` + (data.compressed ? ' (modo compresión)' : '');
+      if (typeof Toast !== 'undefined' && Toast.show) Toast.show(msg, 'ok');
+      await _prepDelLoad(pid);
+    } catch (err) { alert(err.message || 'Error'); }
+  }
+
+  async function _prepMsAutoGenerate(pid) {
+    if (!confirm('Esto REEMPLAZA todos los milestones actuales por: lanzamiento (M1) + 1 milestone por entregable + reporte final. ¿Continuar?')) return;
+    try {
+      const res = await API.post(`/developer/projects/${pid}/milestones/auto-generate`, {});
+      const data = res?.data || res;
+      if (typeof Toast !== 'undefined' && Toast.show) Toast.show(`${data.created} milestones creados`, 'ok');
+      await _prepDelLoad(pid);
+    } catch (err) { alert(err.message || 'Error'); }
   }
 
   /* ── Sub-tab: Cronograma ────────────────────────────────────────── */
@@ -2807,8 +3048,8 @@ const Developer = (() => {
 
       <div id="wp-card-header" class="rounded-xl border border-outline-variant/30 bg-white p-4 mb-4">Cargando cabecera…</div>
       <div id="wp-card-tasks" class="rounded-xl border border-outline-variant/30 bg-white p-4 mb-4">Cargando tasks…</div>
-      <div id="wp-card-milestones" class="rounded-xl border border-outline-variant/30 bg-white p-4 mb-4">Cargando milestones…</div>
       <div id="wp-card-deliverables" class="rounded-xl border border-outline-variant/30 bg-white p-4 mb-4">Cargando deliverables…</div>
+      <div id="wp-card-milestones" class="rounded-xl border border-outline-variant/30 bg-white p-4 mb-4">Cargando milestones…</div>
       <div id="wp-card-budget" class="rounded-xl border border-outline-variant/30 bg-white p-4 mb-6">Cargando budget…</div>
 
       <div class="flex items-center gap-3">
@@ -2916,9 +3157,14 @@ const Developer = (() => {
         <h3 class="text-sm font-bold text-primary flex items-center gap-1.5">
           <span class="material-symbols-outlined text-base">task_alt</span> Activities and division of work (Tasks)
         </h3>
-        <button onclick="Developer._wpAddTask('${esc(wpId)}', '${esc(wpNum)}')" class="text-xs font-bold text-primary inline-flex items-center gap-1 hover:underline">
-          <span class="material-symbols-outlined text-sm">add</span> Añadir task
-        </button>
+        <div class="flex items-center gap-3">
+          <button onclick="Developer._wpResyncTasks('${esc(wpId)}', '${esc(wpNum)}')" class="text-xs font-bold text-secondary inline-flex items-center gap-1 hover:underline" title="Reemplaza las tasks de este WP por las que vienen de la pestaña Tareas + actividades">
+            <span class="material-symbols-outlined text-sm">sync</span> Sincronizar desde Tareas
+          </button>
+          <button onclick="Developer._wpAddTask('${esc(wpId)}', '${esc(wpNum)}')" class="text-xs font-bold text-primary inline-flex items-center gap-1 hover:underline">
+            <span class="material-symbols-outlined text-sm">add</span> Añadir task
+          </button>
+        </div>
       </div>
       ${rows.length ? `
       <div class="overflow-x-auto">
@@ -3008,6 +3254,17 @@ const Developer = (() => {
       await API.post(`/developer/wp/${wpId}/tasks`, { title: 'Nueva task', code: `T${wpNum}.${next}` });
       const partners = currentProject?.id ? await _wpFetchPartners(currentProject.id) : [];
       await _wpRenderTasksCard(wpId, partners, `WP${wpNum}`);
+    } catch (err) { alert(err.message || 'Error'); }
+  }
+
+  async function _wpResyncTasks(wpId, wpNum) {
+    if (!confirm('Esto reemplaza TODAS las tasks de este WP por las que vienen de la pestaña Tareas + actividades. Tus participantes y ediciones manuales en esta tabla se perderán. ¿Continuar?')) return;
+    try {
+      const res = await API.post(`/developer/wp/${wpId}/tasks/resync`, {});
+      const partners = currentProject?.id ? await _wpFetchPartners(currentProject.id) : [];
+      await _wpRenderTasksCard(wpId, partners, `WP${wpNum}`);
+      const n = res?.data?.seeded ?? res?.seeded ?? 0;
+      if (typeof Toast !== 'undefined' && Toast.show) Toast.show(`${n} task(s) sincronizadas`, 'ok');
     } catch (err) { alert(err.message || 'Error'); }
   }
 
@@ -3522,6 +3779,7 @@ const Developer = (() => {
     _cascadeRestart: cascadeRestart,
     // WP form (Application Form Part B 4.2)
     _wpAddTask: _wpAddTask,
+    _wpResyncTasks: _wpResyncTasks,
     _wpAddMs: _wpAddMs,
     _wpAddDl: _wpAddDl,
     _wpAiFill: _wpAiFill,

@@ -90,5 +90,13 @@ router.delete('/tasks/:id/participants/:partnerId',        requireAuth, ctrl.rem
 router.get   ('/wp/:wpId/budget',                          requireAuth, ctrl.getWpBudget);
 router.get   ('/projects/:projectId/partners',             requireAuth, ctrl.listProjectPartners);
 router.post  ('/wp/:wpId/ai-fill',                         requireAuth, ctrl.aiFillWp);
+router.post  ('/wp/:wpId/tasks/resync',                    requireAuth, ctrl.resyncWpTasks);
+
+// Project-level Deliverables & Milestones (Phase 4)
+router.get   ('/projects/:projectId/deliverables',         requireAuth, ctrl.listProjectDeliverables);
+router.get   ('/projects/:projectId/milestones',           requireAuth, ctrl.listProjectMilestones);
+router.get   ('/projects/:projectId/deliverables/summary', requireAuth, ctrl.getDeliverableSummary);
+router.post  ('/projects/:projectId/deliverables/auto-distribute', requireAuth, ctrl.autoDistributeDeliverables);
+router.post  ('/projects/:projectId/milestones/auto-generate',     requireAuth, ctrl.autoGenerateMilestones);
 
 module.exports = router;

@@ -644,3 +644,47 @@ exports.aiFillWp = async (req, res, next) => {
     res.json({ ok: true, data });
   } catch (err) { next(err); }
 };
+
+exports.resyncWpTasks = async (req, res, next) => {
+  try {
+    const seeded = await model.resyncWpTasks(req.params.wpId, req.user.id);
+    res.json({ ok: true, data: { seeded } });
+  } catch (err) { next(err); }
+};
+
+/* ── Project-level Deliverables & Milestones ─────────────────── */
+
+exports.listProjectDeliverables = async (req, res, next) => {
+  try {
+    const data = await model.listProjectDeliverables(req.params.projectId, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+exports.listProjectMilestones = async (req, res, next) => {
+  try {
+    const data = await model.listProjectMilestones(req.params.projectId, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+exports.autoDistributeDeliverables = async (req, res, next) => {
+  try {
+    const data = await model.autoDistributeDeliverables(req.params.projectId, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+exports.autoGenerateMilestones = async (req, res, next) => {
+  try {
+    const data = await model.autoGenerateMilestones(req.params.projectId, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+exports.getDeliverableSummary = async (req, res, next) => {
+  try {
+    const data = await model.getDeliverableSummary(req.params.projectId, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
