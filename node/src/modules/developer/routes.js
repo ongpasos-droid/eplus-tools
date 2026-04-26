@@ -78,4 +78,17 @@ router.post  ('/wp/:wpId/deliverables', requireAuth, ctrl.createDeliverable);
 router.patch ('/deliverables/:id',      requireAuth, ctrl.updateDeliverable);
 router.delete('/deliverables/:id',      requireAuth, ctrl.deleteDeliverable);
 
+// Writer Phase 3 — full WP form (Application Form Part B section 4.2)
+router.get   ('/wp/:wpId/header',                          requireAuth, ctrl.getWpHeader);
+router.put   ('/wp/:wpId/header',                          requireAuth, ctrl.updateWpHeader);
+router.get   ('/wp/:wpId/tasks',                           requireAuth, ctrl.listWpTasks);
+router.post  ('/wp/:wpId/tasks',                           requireAuth, ctrl.createWpTask);
+router.patch ('/tasks/:id',                                requireAuth, ctrl.updateWpTask);
+router.delete('/tasks/:id',                                requireAuth, ctrl.deleteWpTask);
+router.put   ('/tasks/:id/participants/:partnerId',        requireAuth, ctrl.setTaskParticipant);
+router.delete('/tasks/:id/participants/:partnerId',        requireAuth, ctrl.removeTaskParticipant);
+router.get   ('/wp/:wpId/budget',                          requireAuth, ctrl.getWpBudget);
+router.get   ('/projects/:projectId/partners',             requireAuth, ctrl.listProjectPartners);
+router.post  ('/wp/:wpId/ai-fill',                         requireAuth, ctrl.aiFillWp);
+
 module.exports = router;

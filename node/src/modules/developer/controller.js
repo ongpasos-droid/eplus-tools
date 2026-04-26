@@ -565,3 +565,82 @@ exports.deleteDeliverable = async (req, res, next) => {
     res.json({ ok: true, data: { deleted: true } });
   } catch (err) { next(err); }
 };
+
+/* ── Writer Phase 3 — full WP form ───────────────────────────── */
+
+exports.getWpHeader = async (req, res, next) => {
+  try {
+    const data = await model.getWpHeader(req.params.wpId, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+exports.updateWpHeader = async (req, res, next) => {
+  try {
+    await model.updateWpHeader(req.params.wpId, req.user.id, req.body || {});
+    res.json({ ok: true, data: { saved: true } });
+  } catch (err) { next(err); }
+};
+
+exports.listWpTasks = async (req, res, next) => {
+  try {
+    const rows = await model.listWpTasks(req.params.wpId);
+    res.json({ ok: true, data: rows });
+  } catch (err) { next(err); }
+};
+
+exports.createWpTask = async (req, res, next) => {
+  try {
+    const id = await model.createWpTask(req.params.wpId, req.user.id, req.body || {});
+    res.json({ ok: true, data: { id } });
+  } catch (err) { next(err); }
+};
+
+exports.updateWpTask = async (req, res, next) => {
+  try {
+    await model.updateWpTask(req.params.id, req.user.id, req.body || {});
+    res.json({ ok: true, data: { saved: true } });
+  } catch (err) { next(err); }
+};
+
+exports.deleteWpTask = async (req, res, next) => {
+  try {
+    await model.deleteWpTask(req.params.id, req.user.id);
+    res.json({ ok: true, data: { deleted: true } });
+  } catch (err) { next(err); }
+};
+
+exports.setTaskParticipant = async (req, res, next) => {
+  try {
+    await model.setTaskParticipant(req.params.id, req.user.id, req.params.partnerId, (req.body || {}).role);
+    res.json({ ok: true, data: { saved: true } });
+  } catch (err) { next(err); }
+};
+
+exports.removeTaskParticipant = async (req, res, next) => {
+  try {
+    await model.removeTaskParticipant(req.params.id, req.user.id, req.params.partnerId);
+    res.json({ ok: true, data: { deleted: true } });
+  } catch (err) { next(err); }
+};
+
+exports.getWpBudget = async (req, res, next) => {
+  try {
+    const data = await model.getWpBudget(req.params.wpId, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+exports.listProjectPartners = async (req, res, next) => {
+  try {
+    const data = await model.listProjectPartners(req.params.projectId, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+exports.aiFillWp = async (req, res, next) => {
+  try {
+    const data = await model.aiFillWp(req.params.wpId, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
