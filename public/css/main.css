@@ -782,3 +782,49 @@ textarea:focus-visible {
     margin-bottom: 8px;
   }
 }
+
+/* ── Atlas globe tier-filter chips ───────────────────────── */
+.tier-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 999px;
+  font-size: 12px; font-weight: 600;
+  background: #f8f8f8; color: #1b1464;
+  border: 1px solid rgba(204,204,204,0.5);
+  cursor: pointer; transition: all .15s;
+}
+.tier-chip:hover { background: #eee; }
+.tier-chip.active { background: #1b1464; color: #fff; border-color: #1b1464; }
+.tier-chip .chip-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--chip, #888);
+  box-shadow: 0 0 0 2px rgba(255,255,255,.4);
+}
+#stats-globe-container { cursor: grab; }
+#stats-globe-container:active { cursor: grabbing; }
+
+/* botones del toggle 2D/3D */
+.atlas-mode-btn:not(.bg-primary):hover { background: rgba(27, 20, 100, 0.08); }
+
+/* Popup MapLibre del Atlas — apariencia E+ */
+.maplibregl-popup.atlas-popup .maplibregl-popup-content {
+  border-radius: 14px;
+  border: 1px solid rgba(204, 204, 204, 0.6);
+  box-shadow: 0 10px 28px rgba(27, 20, 100, 0.18);
+  padding: 0;
+  background: #fff;
+}
+.maplibregl-popup.atlas-popup .maplibregl-popup-tip { display: none; }
+.maplibregl-popup-close-button {
+  font-size: 18px; padding: 4px 8px; color: #1b1464;
+}
+.atlas-popup-body { font-family: 'Poppins', sans-serif; min-width: 320px; }
+.atlas-popup-body a { color: inherit; }
+.atlas-popup-body a:hover { text-decoration: underline; }
+/* Estilos del control de navegación */
+.maplibregl-ctrl-group {
+  border-radius: 10px !important;
+  box-shadow: 0 2px 6px rgba(27, 20, 100, 0.15) !important;
+}
+.maplibregl-ctrl-attrib {
+  font-size: 10px;
+}

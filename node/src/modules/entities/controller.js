@@ -32,6 +32,15 @@ exports.listSimilar = async (req, res) => {
   } catch (e) { err(res, e.message, 500); }
 };
 
+/* ── Geo markers para el Atlas 3D mundial ────────────────────── */
+exports.listGeoMarkers = async (req, res) => {
+  try {
+    const data = await m.listGeoMarkers(req.query);
+    res.set('Cache-Control', 'public, max-age=300'); // 5 min cache (cambia con backfill)
+    ok(res, data);
+  } catch (e) { err(res, e.message, 500); }
+};
+
 /* ── Stats (lectura del cache precomputado) ──────────────────── */
 exports.statGlobal       = (req, res) => sendStat(res, 'global_kpis');
 exports.statByCountry    = (req, res) => sendStat(res, 'by_country');

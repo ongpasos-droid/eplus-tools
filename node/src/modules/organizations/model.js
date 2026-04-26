@@ -241,8 +241,17 @@ function normaliseOrsRow(r, countryMap) {
   };
 }
 
+/* ── Coords (self-geolocate / pin draggable) ────────────────── */
+
+async function updateOrgCoords(orgId, lat, lng, source) {
+  await pool.query(
+    `UPDATE organizations SET lat=?, lng=?, geocoded_source=?, geocoded_at=NOW() WHERE id=?`,
+    [Number(lat).toFixed(6), Number(lng).toFixed(6), source, orgId]
+  );
+}
+
 module.exports = {
   getOrgById, getOrgByUserId, getOrgsByUserId, upsertOrg, linkUserToOrg, deleteOrg,
   listOrgs, listChildren, upsertChild, deleteChild, isOrgOwner,
-  orsLookup,
+  orsLookup, updateOrgCoords,
 };

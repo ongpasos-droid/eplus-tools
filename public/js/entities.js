@@ -40,6 +40,14 @@ const Entities = (() => {
     loadGlobalStats();
     loadFacets();
     loadList(true);
+    // Si Atlas redirigió aquí con un oid pendiente de abrir, hazlo
+    try {
+      const pending = sessionStorage.getItem('entitiesOpenOid');
+      if (pending) {
+        sessionStorage.removeItem('entitiesOpenOid');
+        setTimeout(() => openFicha(pending), 200);
+      }
+    } catch {}
   }
 
   /* ── State persistence (sessionStorage) ──────────────────────── */
@@ -743,10 +751,17 @@ const Entities = (() => {
   }
 
   /* ── Helpers ─────────────────────────────────────────────────── */
+  // Limpia mojibake `??` (datos perdidos por inserción con conexión non-utf8mb4 en
+  // el crawler del VPS). Se aplica en display; los datos crudos se preservan en DB
+  // por si se hace re-crawl.
+  function cleanMojibake(s) {
+    if (s == null) return '';
+    return String(s).replace(/\?{2,}/g, '');
+  }
   function esc(v) {
     if (v == null) return '';
     const d = document.createElement('div');
-    d.textContent = String(v);
+    d.textContent = cleanMojibake(v);
     return d.innerHTML;
   }
   function debounce(fn, ms) { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; }

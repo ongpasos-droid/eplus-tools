@@ -1,47 +1,87 @@
 /* ═══════════════════════════════════════════════════════════════
-   Atlas Stats — Mapa Europa + dashboard del Partner Engine
+   Atlas Stats — MapLibre GL JS (2D mapa + 3D globo cartográfico)
    ═══════════════════════════════════════════════════════════════
-   - 4 KPI cards (total, países, contactables, tier premium)
-   - Mapa coroplético Europa con D3 + topojson (world-atlas 110m)
-   - Donut de tiers (ApexCharts)
-   - 4 bars: países, categorías, CMS, idiomas
-   - Click país → set filtro y navega al Partner Engine
+   Una sola librería renderiza:
+     - 2D Mercator (mapa plano clásico)
+     - 3D Globe (proyección esférica)
+   Los DOS modos usan los mismos vector tiles (OpenFreeMap Liberty),
+   por lo que las calles, ciudades, países y zoom se ven igual de
+   nítidos en cualquier proyección.
+
+   - Clustering nativo de MapLibre (GeoJSON source con cluster:true)
+     escala a millones de puntos sin problema.
+   - Click sobre punto → popup rico (logo, descripción, contacto,
+     scores) + botón "Ver ficha completa" que abre el slide-over.
+   - Filtros por tier ajustan opacidad de los puntos en GPU.
    ═══════════════════════════════════════════════════════════════ */
 
 const AtlasStats = (() => {
-  let initDone = false;
   let cached = null;
+  let geoCache = null;
   let charts = [];
+  let activeMode = '2d';
+  let activeTierFilter = null;
+  let map = null;
+  let activePopup = null;
 
-  /* ── Mapping ISO numeric (world-atlas id) → ISO 2-letter ────── */
-  const NUMERIC_TO_ISO2 = {
-    '792':'TR','276':'DE','724':'ES','380':'IT','616':'PL','250':'FR','300':'EL','826':'UK',
-    '642':'RO','203':'CZ','056':'BE','040':'AT','620':'PT','348':'HU','528':'NL','372':'IE',
-    '752':'SE','100':'BG','191':'HR','208':'DK','246':'FI','703':'SK','440':'LT','705':'SI',
-    '428':'LV','233':'EE','442':'LU','196':'CY','470':'MT','352':'IS','578':'NO','438':'LI',
-    '756':'CH','807':'MK','688':'RS','008':'AL','070':'BA','499':'ME','804':'UA','112':'BY',
-    '498':'MD','643':'RU','643':'RU','268':'GE','051':'AM','031':'AZ',
+  const TIER_BY_CODE = { 0: 'unenriched', 1: 'premium', 2: 'good', 3: 'acceptable', 4: 'minimal' };
+  const TIER_COLOR = {
+    premium:    '#fbff12',
+    good:       '#c7afdf',
+    acceptable: '#9aa0a6',
+    minimal:    '#5a5a6a',
+    unenriched: '#3a3a48',
   };
-  // The world-atlas json has ids as strings without leading zeros sometimes ("8" vs "008").
-  // Build an alias-friendly lookup.
-  function isoFromNumeric(id) {
-    if (id == null) return null;
-    const s = String(id).padStart(3, '0');
-    if (NUMERIC_TO_ISO2[s]) return NUMERIC_TO_ISO2[s];
-    // also try without padding
-    return NUMERIC_TO_ISO2[String(id)] || null;
-  }
+  const TIER_LABEL = {
+    premium: 'Premium', good: 'Buena', acceptable: 'Aceptable',
+    minimal: 'Mínima', unenriched: 'Sin enriquecer',
+  };
+  const TIER_CODE = { premium:1, good:2, acceptable:3, minimal:4, unenriched:0 };
+
+  // OpenFreeMap Liberty: vector tiles open-source, gratis, sin API key,
+  // estilo limpio cartográfico tipo Mapbox Light. https://openfreemap.org
+  const STYLE_URL = 'https://tiles.openfreemap.org/styles/liberty';
 
   async function init() {
-    destroyCharts();
-    if (!cached) await loadData();
+    destroyAll();
+    if (!cached)   await loadData();
+    if (!geoCache) await loadGeo();
+    bindToggle();
     renderKpis();
     renderTierDonut();
     renderBars();
-    renderMap();   // requiere d3 + topojson cargados
+    renderMap();
+    renderTierFilters();
   }
 
-  /* ── Data fetch (en paralelo) ─────────────────────────────── */
+  /* ── Toggle 2D / 3D ──────────────────────────────────────── */
+  function bindToggle() {
+    const b2 = document.getElementById('atlas-mode-2d');
+    const b3 = document.getElementById('atlas-mode-3d');
+    if (b2 && !b2._bound) { b2._bound = true; b2.addEventListener('click', () => setProjection('2d')); }
+    if (b3 && !b3._bound) { b3._bound = true; b3.addEventListener('click', () => setProjection('3d')); }
+  }
+  function setProjection(mode) {
+    if (mode === activeMode) return;
+    activeMode = mode;
+    document.getElementById('atlas-mode-2d')?.classList.toggle('bg-primary', mode === '2d');
+    document.getElementById('atlas-mode-2d')?.classList.toggle('text-white', mode === '2d');
+    document.getElementById('atlas-mode-2d')?.classList.toggle('text-primary', mode !== '2d');
+    document.getElementById('atlas-mode-3d')?.classList.toggle('bg-primary', mode === '3d');
+    document.getElementById('atlas-mode-3d')?.classList.toggle('text-white', mode === '3d');
+    document.getElementById('atlas-mode-3d')?.classList.toggle('text-primary', mode !== '3d');
+    const hint = document.getElementById('atlas-mode-hint');
+    if (hint) hint.textContent = mode === '2d'
+      ? 'Pan y zoom · click una entidad para abrir su ficha'
+      : 'Arrastra para rotar · scroll para zoom · misma cartografía con calles y nombres';
+    if (map) {
+      map.setProjection({ type: mode === '3d' ? 'globe' : 'mercator' });
+      // Pequeño zoom-out para apreciar la curvatura en 3D
+      if (mode === '3d') map.flyTo({ zoom: Math.min(map.getZoom(), 2.8), pitch: 0, bearing: 0, duration: 800 });
+    }
+  }
+
+  /* ── Data fetch ──────────────────────────────────────────── */
   async function loadData() {
     const safe = (p) => p.catch(() => null);
     const [g, c, cat, cms, lang, tier] = await Promise.all([
@@ -61,23 +101,27 @@ const AtlasStats = (() => {
       tiers:     tier?.value || [],
     };
   }
+  async function loadGeo() {
+    try {
+      const r = await API.get('/entities/geo');
+      geoCache = Array.isArray(r) ? r : [];
+    } catch { geoCache = []; }
+  }
 
-  /* ── KPI cards ────────────────────────────────────────────── */
+  /* ── KPIs ─────────────────────────────────────────────────── */
   function renderKpis() {
     const g = cached.global;
     const tierPremium = cached.tiers.find(t => t.tier === 'premium')?.count || 0;
     const totalRowEl = document.getElementById('stats-total-hero');
-    if (totalRowEl && g.total_alive) totalRowEl.textContent = formatNumber(g.total_alive);
-
+    const total = g.total_alive || (geoCache?.length || 0);
+    if (totalRowEl && total) totalRowEl.textContent = formatNumber(total);
     const cards = [
-      kpi('Entidades vivas', g.total_alive, 'public', 'primary',
-        'En la base de datos enriquecida.'),
+      kpi('Entidades vivas', total, 'public', 'primary', 'En la base de datos enriquecida.'),
       kpi('Con email contacto', g.with_email, 'mail', 'lavender',
-        Math.round((g.with_email/g.total_alive)*100) + '% del total.'),
-      kpi('Países cubiertos', g.countries, 'flag', 'yellow',
-        'Toda la UE + países asociados.'),
-      kpi('Premium tier', tierPremium, 'workspace_premium', 'primary',
-        'Top 9% por completitud.'),
+        total ? Math.round((g.with_email/total)*100) + '% del total.' : ''),
+      kpi('Países cubiertos', g.countries || new Set((geoCache||[]).map(m=>m.c)).size,
+        'flag', 'yellow', 'Toda la UE + países asociados.'),
+      kpi('Premium tier', tierPremium, 'workspace_premium', 'primary', 'Top 9% por completitud.'),
     ];
     document.getElementById('stats-kpis').innerHTML = cards.join('');
   }
@@ -88,31 +132,37 @@ const AtlasStats = (() => {
       yellow:   'bg-secondary-fixed text-primary',
       neutral:  'bg-white border border-outline-variant/30 text-primary',
     };
-    const cls = variants[variant] || variants.neutral;
     return `
-      <div class="${cls} rounded-2xl p-5 flex flex-col gap-2 relative overflow-hidden">
+      <div class="${variants[variant] || variants.neutral} rounded-2xl p-5 flex flex-col gap-2 relative overflow-hidden">
         <div class="flex items-start justify-between">
           <span class="text-[10px] font-bold uppercase tracking-wider opacity-80">${esc(label)}</span>
           <span class="material-symbols-outlined text-[20px] opacity-70">${icon}</span>
         </div>
         <div class="font-headline text-3xl font-extrabold leading-none">${formatNumber(value || 0)}</div>
         <div class="text-[11px] opacity-80">${esc(sub || '')}</div>
-      </div>
-    `;
+      </div>`;
   }
 
-  /* ── Tier donut (ApexCharts) ──────────────────────────────── */
+  /* ── Donut + bars ─────────────────────────────────────────── */
   function renderTierDonut() {
     if (typeof ApexCharts === 'undefined') return setTimeout(renderTierDonut, 200);
     const el = document.getElementById('stats-tier-donut');
     if (!el) return;
     const order = ['premium','good','acceptable','minimal'];
-    const labels = { premium:'Premium', good:'Buena', acceptable:'Aceptable', minimal:'Mínima' };
-    const colors = { premium:'#c7afdf', good:'#fbff12', acceptable:'#cccccc', minimal:'#f8f8f8' };
     const series = [], names = [], cols = [];
     for (const k of order) {
       const r = cached.tiers.find(x => x.tier === k);
-      if (r) { series.push(r.count); names.push(labels[k]); cols.push(colors[k]); }
+      if (r) { series.push(r.count); names.push(TIER_LABEL[k]); cols.push(TIER_COLOR[k]); }
+    }
+    if (!series.length && geoCache?.length) {
+      for (const k of order) {
+        const n = geoCache.filter(m => m.t === TIER_CODE[k]).length;
+        if (n) { series.push(n); names.push(TIER_LABEL[k]); cols.push(TIER_COLOR[k]); }
+      }
+    }
+    if (!series.length) {
+      el.innerHTML = '<div class="text-xs text-on-surface-variant text-center py-8">Sin datos de calidad</div>';
+      return;
     }
     const chart = new ApexCharts(el, {
       chart: { type: 'donut', height: 260, fontFamily: 'Poppins' },
@@ -121,27 +171,16 @@ const AtlasStats = (() => {
       stroke: { width: 2, colors: ['#fff'] },
       dataLabels: { enabled: false },
       plotOptions: {
-        pie: {
-          donut: {
-            size: '70%',
-            labels: {
-              show: true,
-              total: {
-                show: true, label: 'Total', color: '#474551', fontSize: '11px', fontWeight: 600,
-                formatter: () => formatNumber(series.reduce((a,b) => a+b, 0)),
-              },
-              value: { color: '#1b1464', fontSize: '20px', fontWeight: 800 },
-            }
-          }
-        }
-      },
+        pie: { donut: { size: '70%', labels: { show: true,
+          total: { show: true, label: 'Total', color: '#474551', fontSize: '11px', fontWeight: 600,
+                   formatter: () => formatNumber(series.reduce((a,b) => a+b, 0)) },
+          value: { color: '#1b1464', fontSize: '20px', fontWeight: 800 },
+        }}}},
       tooltip: { y: { formatter: (v) => formatNumber(v) + ' entidades' } },
     });
     chart.render();
     charts.push(chart);
   }
-
-  /* ── Bar charts (4) ───────────────────────────────────────── */
   function renderBars() {
     if (typeof ApexCharts === 'undefined') return setTimeout(renderBars, 200);
     bar('stats-bar-countries', cached.countries.slice(0, 15), 'country_code', 'count', '#fbff12', '#1b1464');
@@ -171,125 +210,331 @@ const AtlasStats = (() => {
     charts.push(chart);
   }
 
-  /* ── Mapa Europa (D3 + topojson) ──────────────────────────── */
-  let mapDrawn = false;
-  async function renderMap() {
-    if (typeof d3 === 'undefined' || typeof topojson === 'undefined') {
-      return setTimeout(renderMap, 250);
-    }
+  /* ── Mapa MapLibre GL (2D/3D unificado) ──────────────────── */
+  function renderMap() {
+    if (typeof maplibregl === 'undefined') return setTimeout(renderMap, 200);
     const container = document.getElementById('stats-map-container');
     if (!container) return;
-    container.innerHTML = '<div class="absolute inset-0 flex items-center justify-center text-xs text-on-surface-variant"><div class="spinner text-primary"></div></div>';
+    if (!geoCache || !geoCache.length) {
+      container.innerHTML = '<div class="absolute inset-0 flex items-center justify-center text-xs text-on-surface-variant">Sin entidades geolocalizadas. Ejecuta <code>node scripts/backfill_geocoded.js</code></div>';
+      return;
+    }
 
-    let topo;
-    try {
-      topo = await d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json');
-    } catch {
-      container.innerHTML = '<div class="absolute inset-0 flex items-center justify-center text-xs text-error">No se pudo cargar el mapa</div>';
+    if (map) {
+      // Si el mapa ya existe (re-init), refrescar fuente
+      const src = map.getSource('entities');
+      if (src) src.setData(buildGeoJSON());
+      map.resize();
       return;
     }
 
     container.innerHTML = '';
-    const w = container.clientWidth;
-    const h = container.clientHeight;
-    const svg = d3.select(container)
-      .append('svg')
-      .attr('width', w)
-      .attr('height', h)
-      .attr('viewBox', `0 0 ${w} ${h}`);
+    map = new maplibregl.Map({
+      container,
+      style: STYLE_URL,
+      center: [12, 50],
+      zoom: 3.2,
+      attributionControl: { compact: true },
+      projection: { type: activeMode === '3d' ? 'globe' : 'mercator' },
+    });
+    map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'top-left');
+    map.addControl(new maplibregl.FullscreenControl(), 'top-left');
+    map.addControl(new maplibregl.GeolocateControl({
+      positionOptions: { enableHighAccuracy: true },
+      trackUserLocation: false,
+    }), 'top-left');
+    map.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), 'bottom-left');
 
-    const all = topojson.feature(topo, topo.objects.countries);
-    // Filter to European-ish countries (by lat/lng centroid bbox)
-    const inEurope = (f) => {
-      const c = d3.geoCentroid(f);
-      return c[0] > -25 && c[0] < 50 && c[1] > 33 && c[1] < 73;
-    };
-    const europe = { type: 'FeatureCollection', features: all.features.filter(inEurope) };
+    map.on('load', () => attachEntityLayers());
+    map.on('error', (e) => console.warn('[MapLibre]', e?.error?.message || e));
+  }
 
-    const projection = d3.geoMercator().fitSize([w, h], europe);
-    const path = d3.geoPath(projection);
+  function buildGeoJSON() {
+    const features = [];
+    for (const m of geoCache) {
+      if (m.a == null || m.g == null) continue;
+      features.push({
+        type: 'Feature',
+        geometry: { type: 'Point', coordinates: [Number(m.g), Number(m.a)] },
+        properties: {
+          oid: m.o,
+          name: m.n || '',
+          cc: m.c || '',
+          tier: TIER_BY_CODE[m.t] || 'unenriched',
+        },
+      });
+    }
+    return { type: 'FeatureCollection', features };
+  }
 
-    // map by ISO2 → count
-    const countByIso = Object.fromEntries(
-      cached.countries.map(d => [String(d.country_code).toUpperCase(), d.count])
-    );
-    const max = d3.max(cached.countries, d => d.count) || 1;
-    // Yellow → primary scale (Ana style)
-    const colorScale = d3.scaleLinear()
-      .domain([0, max * 0.05, max * 0.3, max])
-      .range(['#f8f8f8', '#fbff12', '#e7eb00', '#1b1464'])
-      .clamp(true);
+  function attachEntityLayers() {
+    map.addSource('entities', {
+      type: 'geojson',
+      data: buildGeoJSON(),
+      cluster: true,
+      clusterMaxZoom: 13,
+      clusterRadius: 55,
+    });
 
-    const tooltip = d3.select(container)
-      .append('div')
-      .attr('class', 'map-tooltip')
-      .style('position', 'absolute')
-      .style('pointer-events', 'none')
-      .style('background', '#1b1464')
-      .style('color', '#fff')
-      .style('padding', '6px 10px')
-      .style('border-radius', '8px')
-      .style('font-size', '11px')
-      .style('font-weight', '600')
-      .style('opacity', '0')
-      .style('transition', 'opacity .15s')
-      .style('white-space', 'nowrap');
+    // Cluster circles
+    map.addLayer({
+      id: 'clusters',
+      type: 'circle',
+      source: 'entities',
+      filter: ['has', 'point_count'],
+      paint: {
+        'circle-color': '#1b1464',
+        'circle-stroke-color': '#fbff12',
+        'circle-stroke-width': 3,
+        'circle-radius': [
+          'step', ['get', 'point_count'],
+          18,  50,
+          22, 500,
+          28, 5000,
+          36,
+        ],
+      },
+    });
 
-    svg.append('g')
-      .selectAll('path')
-      .data(europe.features)
-      .join('path')
-        .attr('d', path)
-        .attr('fill', d => {
-          const iso = isoFromNumeric(d.id);
-          const n = iso ? (countByIso[iso] || 0) : 0;
-          return colorScale(n);
-        })
-        .attr('stroke', '#fff')
-        .attr('stroke-width', 0.5)
-        .style('cursor', d => isoFromNumeric(d.id) ? 'pointer' : 'default')
-        .on('mousemove', function (event, d) {
-          const iso = isoFromNumeric(d.id);
-          const n = iso ? (countByIso[iso] || 0) : 0;
-          const name = d.properties?.name || iso || '?';
-          d3.select(this).attr('stroke', '#1b1464').attr('stroke-width', 1.5).raise();
-          tooltip
-            .style('opacity', '1')
-            .html(`<strong>${name}</strong><br>${formatNumber(n)} entidades${iso ? ` · ${iso}` : ''}`);
-          const rect = container.getBoundingClientRect();
-          tooltip
-            .style('left', (event.clientX - rect.left + 12) + 'px')
-            .style('top',  (event.clientY - rect.top + 12) + 'px');
-        })
-        .on('mouseleave', function () {
-          d3.select(this).attr('stroke', '#fff').attr('stroke-width', 0.5);
-          tooltip.style('opacity', '0');
-        })
-        .on('click', (event, d) => {
-          const iso = isoFromNumeric(d.id);
-          if (!iso) return;
-          if (!countByIso[iso]) return;
-          // Set entities state and navigate
-          try {
-            const state = JSON.parse(sessionStorage.getItem('entitiesState') || '{}');
-            state.country = iso;
-            state.page = 1;
-            sessionStorage.setItem('entitiesState', JSON.stringify(state));
-          } catch {}
-          if (typeof App !== 'undefined') App.navigate('organizations');
-          if (typeof Toast !== 'undefined') Toast.show(`Filtrado por ${iso}`, 'ok');
-        });
+    // Cluster count labels
+    map.addLayer({
+      id: 'cluster-count',
+      type: 'symbol',
+      source: 'entities',
+      filter: ['has', 'point_count'],
+      layout: {
+        'text-field': ['get', 'point_count_abbreviated'],
+        'text-font': ['Noto Sans Bold'],
+        'text-size': 12,
+        'text-allow-overlap': true,
+      },
+      paint: { 'text-color': '#fbff12' },
+    });
 
-    mapDrawn = true;
+    // Individual points colored by tier
+    map.addLayer({
+      id: 'unclustered',
+      type: 'circle',
+      source: 'entities',
+      filter: ['!', ['has', 'point_count']],
+      paint: {
+        'circle-color': [
+          'match', ['get', 'tier'],
+          'premium', TIER_COLOR.premium,
+          'good',    TIER_COLOR.good,
+          'acceptable', TIER_COLOR.acceptable,
+          'minimal',    TIER_COLOR.minimal,
+          TIER_COLOR.unenriched,
+        ],
+        'circle-radius': [
+          'match', ['get', 'tier'],
+          'premium', 8,
+          'good',    7,
+          6,
+        ],
+        'circle-stroke-color': '#1b1464',
+        'circle-stroke-width': 1.5,
+        'circle-opacity': 0.95,
+      },
+    });
+
+    applyTierFilterToLayer();
+
+    // Click cluster → expand zoom
+    map.on('click', 'clusters', async (e) => {
+      const features = map.queryRenderedFeatures(e.point, { layers: ['clusters'] });
+      if (!features.length) return;
+      const clusterId = features[0].properties.cluster_id;
+      const src = map.getSource('entities');
+      try {
+        const zoom = await src.getClusterExpansionZoom(clusterId);
+        map.easeTo({ center: features[0].geometry.coordinates, zoom });
+      } catch {}
+    });
+
+    // Click individual point → popup rico
+    map.on('click', 'unclustered', (e) => {
+      const f = e.features[0];
+      showEntityPopup(f);
+    });
+
+    // Cursor pointer sobre cluster/punto
+    ['clusters', 'unclustered'].forEach(layer => {
+      map.on('mouseenter', layer, () => map.getCanvas().style.cursor = 'pointer');
+      map.on('mouseleave', layer, () => map.getCanvas().style.cursor = '');
+    });
+  }
+
+  function applyTierFilterToLayer() {
+    if (!map || !map.getLayer('unclustered')) return;
+    const opacity = activeTierFilter
+      ? ['case', ['==', ['get', 'tier'], activeTierFilter], 0.95, 0.12]
+      : 0.95;
+    map.setPaintProperty('unclustered', 'circle-opacity', opacity);
+    map.setPaintProperty('unclustered', 'circle-stroke-opacity', opacity);
+  }
+
+  /* ── Popup rico (lazy-fetch ficha completa) ──────────────── */
+  function showEntityPopup(feature) {
+    if (activePopup) { activePopup.remove(); activePopup = null; }
+    const p = feature.properties;
+    const tierName = p.tier || 'unenriched';
+    const popup = new maplibregl.Popup({
+      maxWidth: '360px',
+      closeButton: true,
+      className: 'atlas-popup',
+      offset: 12,
+    })
+      .setLngLat(feature.geometry.coordinates)
+      .setHTML(buildPopupSkeleton(p, tierName))
+      .addTo(map);
+    activePopup = popup;
+    fetchAndFillPopup(popup, p, tierName);
+  }
+  async function fetchAndFillPopup(popup, p, tierName) {
+    try {
+      const e = await API.get(`/entities/${encodeURIComponent(p.oid)}`);
+      popup.setHTML(buildPopupFull(e, p.oid, tierName));
+    } catch (err) {
+      popup.setHTML(`<div class="atlas-popup-body p-4 text-xs text-error">${esc(err.message || 'Error cargando')}</div>`);
+    }
+  }
+
+  // Event delegation: sobrevive a re-renders del popup de MapLibre
+  // Se monta una sola vez al cargar el script.
+  if (typeof document !== 'undefined' && !document._atlasFichaDelegated) {
+    document._atlasFichaDelegated = true;
+    document.addEventListener('click', (ev) => {
+      const btn = ev.target.closest('[data-atlas-open-ficha]');
+      if (!btn) return;
+      ev.preventDefault();
+      ev.stopPropagation();
+      const oid = btn.getAttribute('data-atlas-open-ficha');
+      if (activePopup) { try { activePopup.remove(); } catch {} activePopup = null; }
+      if (typeof Entities !== 'undefined' && Entities.openFicha) {
+        Entities.openFicha(oid);
+      } else {
+        try { sessionStorage.setItem('entitiesOpenOid', oid); } catch {}
+        if (typeof App !== 'undefined') App.navigate('organizations');
+      }
+    });
+  }
+  function buildPopupSkeleton(p, tierName) {
+    return `
+      <div class="atlas-popup-body">
+        <div class="flex items-start gap-3 p-4">
+          <div class="w-12 h-12 rounded-lg bg-surface-container shrink-0"></div>
+          <div class="min-w-0 flex-1">
+            <div class="font-bold text-primary text-sm leading-tight">${escAttr(p.name || p.oid)}</div>
+            <div class="text-[11px] text-on-surface-variant mt-0.5">${escAttr(p.cc || '')} · ${TIER_LABEL[tierName]}</div>
+            <div class="mt-3 space-y-1.5 animate-pulse">
+              <div class="h-3 rounded bg-surface-container"></div>
+              <div class="h-3 w-3/4 rounded bg-surface-container"></div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }
+  function buildPopupFull(e, oid, tierName) {
+    const logo = e.logo_url
+      ? `<img src="${escAttr(e.logo_url)}" alt="" referrerpolicy="no-referrer" class="w-12 h-12 rounded-lg object-contain bg-white border border-outline-variant/30 shrink-0" onerror="this.style.display='none'">`
+      : `<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-primary text-[22px]">apartment</span></div>`;
+    const desc = (e.description || '').slice(0, 220);
+    const descMore = (e.description || '').length > 220 ? '…' : '';
+    const emails = Array.isArray(e.emails) ? e.emails.slice(0, 1) : [];
+    const phones = Array.isArray(e.phones) ? e.phones.slice(0, 1) : [];
+    const langs = Array.isArray(e.website_languages) ? e.website_languages.slice(0, 4).map(l => String(l).toUpperCase()).join(' · ') : '';
+    const scores = [
+      e.score_professionalism != null ? `Prof ${e.score_professionalism}` : null,
+      e.score_eu_readiness != null    ? `EU ${e.score_eu_readiness}`     : null,
+      e.score_vitality != null        ? `Vit ${e.score_vitality}`        : null,
+    ].filter(Boolean).join(' · ');
+    const tierBadge = `<span class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full" style="background:${TIER_COLOR[tierName]};color:#1b1464">${TIER_LABEL[tierName]}</span>`;
+    return `
+      <div class="atlas-popup-body">
+        <div class="p-4">
+          <div class="flex items-start gap-3 mb-3">
+            ${logo}
+            <div class="min-w-0 flex-1">
+              <div class="font-bold text-primary text-sm leading-tight">${escAttr(e.display_name || e.legal_name || oid)}</div>
+              <div class="text-[11px] text-on-surface-variant mt-0.5">
+                ${escAttr([e.city, e.country_code].filter(Boolean).join(', '))}
+                ${e.category ? ` · ${escAttr(e.category)}` : ''}
+              </div>
+              <div class="mt-1.5 flex items-center gap-1.5">${tierBadge}${e.year_founded ? `<span class="text-[10px] text-on-surface-variant">desde ${escAttr(e.year_founded)}</span>` : ''}</div>
+            </div>
+          </div>
+          ${desc ? `<p class="text-[12px] text-on-surface-variant leading-snug mb-3">${esc(desc)}${descMore}</p>` : ''}
+          ${(emails.length || phones.length || e.website || langs) ? `
+            <div class="space-y-1 text-[11px] mb-3">
+              ${e.website ? `<div class="flex items-center gap-1.5 text-primary"><span class="material-symbols-outlined text-[14px]">language</span><a href="${escAttr(e.website)}" target="_blank" rel="noopener" class="underline truncate">${escAttr(e.website.replace(/^https?:\/\//,''))}</a></div>` : ''}
+              ${emails[0] ? `<div class="flex items-center gap-1.5 text-on-surface-variant"><span class="material-symbols-outlined text-[14px]">mail</span><a href="mailto:${escAttr(emails[0])}" class="truncate">${escAttr(emails[0])}</a></div>` : ''}
+              ${phones[0] ? `<div class="flex items-center gap-1.5 text-on-surface-variant"><span class="material-symbols-outlined text-[14px]">call</span>${escAttr(phones[0])}</div>` : ''}
+              ${langs ? `<div class="flex items-center gap-1.5 text-on-surface-variant"><span class="material-symbols-outlined text-[14px]">translate</span>${escAttr(langs)}</div>` : ''}
+            </div>` : ''}
+          ${scores ? `<div class="text-[10px] font-mono text-on-surface-variant mb-3">${escAttr(scores)}</div>` : ''}
+          <button type="button" data-atlas-open-ficha="${escAttr(oid)}"
+            class="w-full text-xs font-bold text-primary bg-secondary-fixed hover:bg-secondary-fixed-dim px-3 py-2 rounded-lg transition-colors flex items-center justify-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px]">open_in_full</span>
+            Ver ficha completa
+          </button>
+        </div>
+      </div>`;
+  }
+
+  function openEntityFicha(oid) {
+    if (!oid) return;
+    if (typeof Entities !== 'undefined' && Entities.openFicha) {
+      Entities.openFicha(oid);
+      return;
+    }
+    try { sessionStorage.setItem('entitiesOpenOid', oid); } catch {}
+    if (typeof App !== 'undefined') App.navigate('organizations');
+  }
+
+  /* ── Tier filter chips ───────────────────────────────────── */
+  function renderTierFilters() {
+    const el = document.getElementById('stats-globe-filters');
+    if (!el) return;
+    const order = ['premium','good','acceptable','minimal','unenriched'];
+    const counts = {};
+    for (const k of order) counts[k] = (geoCache || []).filter(m => m.t === TIER_CODE[k]).length;
+    el.innerHTML = `
+      <button class="tier-chip ${!activeTierFilter ? 'active' : ''}" data-tier="">
+        Todos · ${formatNumber(geoCache?.length || 0)}
+      </button>
+      ${order.map(k => `
+        <button class="tier-chip ${activeTierFilter === k ? 'active' : ''}" data-tier="${k}"
+          style="--chip:${TIER_COLOR[k]}">
+          <span class="chip-dot"></span>${TIER_LABEL[k]} · ${formatNumber(counts[k])}
+        </button>
+      `).join('')}`;
+    el.querySelectorAll('.tier-chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeTierFilter = btn.dataset.tier || null;
+        applyTierFilterToLayer();
+        renderTierFilters();
+      });
+    });
   }
 
   /* ── Helpers ─────────────────────────────────────────────── */
-  function destroyCharts() {
+  function destroyAll() {
     charts.forEach(c => { try { c.destroy(); } catch {} });
     charts = [];
-    mapDrawn = false;
+    if (activePopup) { try { activePopup.remove(); } catch {} activePopup = null; }
+    // map se mantiene entre re-inits para evitar re-fetch de tiles
   }
-  function esc(v) { if (v == null) return ''; const d = document.createElement('div'); d.textContent = String(v); return d.innerHTML; }
+  // Saneamiento de mojibake: el crawler del VPS insertó datos con conexión latin1
+  // y MySQL reemplazó cada char multibyte por '?'. Aquí limpiamos los `??` consecutivos
+  // (corresponden a 1 char UTF-8 perdido, p.ej. ó → 2 bytes → '??'). No es recuperable;
+  // sólo evitamos que el UI parezca roto.
+  function cleanMojibake(s) {
+    if (s == null) return '';
+    return String(s).replace(/\?{2,}/g, '');
+  }
+  function esc(v) { if (v == null) return ''; const d = document.createElement('div'); d.textContent = cleanMojibake(v); return d.innerHTML; }
+  function escAttr(v) { return cleanMojibake(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
   function formatNumber(n) { if (n == null) return ''; return Number(n).toLocaleString('es-ES'); }
 
   return { init };

@@ -6,6 +6,9 @@ const smart = require('./smart.controller');
 const handoff = require('./handoff.controller');
 const { requireAuth } = require('../../middleware/auth');
 
+/* ── Geo markers para Atlas 3D (público, antes de /:oid) ─────── */
+router.get('/geo',                ctrl.listGeoMarkers);
+
 /* ── Stats públicos (lectura del cache; deben ir antes de /:oid) */
 router.get('/stats/global',       ctrl.statGlobal);
 router.get('/stats/by-country',   ctrl.statByCountry);
