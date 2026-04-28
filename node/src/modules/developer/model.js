@@ -1347,6 +1347,32 @@ async function _assertWp(wpId, userId) {
   return rows[0];
 }
 
+async function _assertPartnerInProject(projectId, partnerId) {
+  if (!partnerId) return;
+  const [rows] = await db.execute(
+    'SELECT id FROM partners WHERE id = ? AND project_id = ?',
+    [partnerId, projectId]
+  );
+  if (!rows.length) {
+    const err = new Error('Lead partner does not belong to this project');
+    err.status = 400;
+    throw err;
+  }
+}
+
+async function _assertWpInProject(projectId, wpId) {
+  if (!wpId) return;
+  const [rows] = await db.execute(
+    'SELECT id FROM work_packages WHERE id = ? AND project_id = ?',
+    [wpId, projectId]
+  );
+  if (!rows.length) {
+    const err = new Error('Work package does not belong to this project');
+    err.status = 400;
+    throw err;
+  }
+}
+
 async function listMilestones(wpId) {
   const [rows] = await db.execute(
     `SELECT m.*, p.name AS lead_partner_name
@@ -1361,6 +1387,7 @@ async function listMilestones(wpId) {
 
 async function createMilestone(wpId, userId, data) {
   const wp = await _assertWp(wpId, userId);
+  await _assertPartnerInProject(wp.project_id, data.lead_partner_id || null);
   const id = genUUID();
   await db.execute(
     `INSERT INTO milestones (id, work_package_id, project_id, code, title, description, due_month, verification, lead_partner_id, sort_order)
@@ -1381,18 +1408,25 @@ async function createMilestone(wpId, userId, data) {
 
 async function updateMilestone(msId, userId, data) {
   const [rows] = await db.execute(
-    `SELECT m.id FROM milestones m JOIN projects p ON p.id = m.project_id
+    `SELECT m.id, m.project_id FROM milestones m JOIN projects p ON p.id = m.project_id
       WHERE m.id = ? AND p.user_id = ?`,
     [msId, userId]
   );
   if (!rows.length) { const e = new Error('Milestone not found'); e.status = 404; throw e; }
-  const allowed = ['code','title','description','due_month','verification','lead_partner_id','sort_order'];
+  if (data.lead_partner_id) await _assertPartnerInProject(rows[0].project_id, data.lead_partner_id);
+  const allowed = ['code','title','description','due_month','verification','lead_partner_id','sort_order','deliverable_id','kind','rationale'];
+  const contentFields = new Set(['code','title','description','due_month','verification','lead_partner_id','deliverable_id','kind','rationale']);
   const sets = [];
   const vals = [];
+  let touchedContent = false;
   for (const k of allowed) {
-    if (data[k] !== undefined) { sets.push(`${k} = ?`); vals.push(data[k] === '' ? null : data[k]); }
+    if (data[k] !== undefined) {
+      sets.push(`${k} = ?`); vals.push(data[k] === '' ? null : data[k]);
+      if (contentFields.has(k)) touchedContent = true;
+    }
   }
   if (!sets.length) return;
+  if (touchedContent) sets.push('auto_generated = 0');
   vals.push(msId);
   await db.execute(`UPDATE milestones SET ${sets.join(', ')} WHERE id = ?`, vals);
 }
@@ -1421,6 +1455,7 @@ async function listDeliverables(wpId) {
 
 async function createDeliverable(wpId, userId, data) {
   const wp = await _assertWp(wpId, userId);
+  await _assertPartnerInProject(wp.project_id, data.lead_partner_id || null);
   const id = genUUID();
   await db.execute(
     `INSERT INTO deliverables (id, work_package_id, project_id, code, title, description, type, dissemination_level, due_month, lead_partner_id, sort_order)
@@ -1442,20 +1477,39 @@ async function createDeliverable(wpId, userId, data) {
 
 async function updateDeliverable(dId, userId, data) {
   const [rows] = await db.execute(
-    `SELECT d.id FROM deliverables d JOIN projects p ON p.id = d.project_id
+    `SELECT d.id, d.project_id FROM deliverables d JOIN projects p ON p.id = d.project_id
       WHERE d.id = ? AND p.user_id = ?`,
     [dId, userId]
   );
   if (!rows.length) { const e = new Error('Deliverable not found'); e.status = 404; throw e; }
-  const allowed = ['code','title','description','type','dissemination_level','due_month','lead_partner_id','sort_order'];
+  if (data.lead_partner_id)   await _assertPartnerInProject(rows[0].project_id, data.lead_partner_id);
+  if (data.work_package_id)   await _assertWpInProject(rows[0].project_id, data.work_package_id);
+  const allowed = ['code','title','description','type','dissemination_level','due_month','lead_partner_id','sort_order','work_package_id','rationale','kpi'];
+  const contentFields = new Set(['code','title','description','type','dissemination_level','due_month','lead_partner_id','rationale','kpi']);
   const sets = [];
   const vals = [];
+  let touchedContent = false;
   for (const k of allowed) {
-    if (data[k] !== undefined) { sets.push(`${k} = ?`); vals.push(data[k] === '' ? null : data[k]); }
+    if (data[k] !== undefined) {
+      sets.push(`${k} = ?`); vals.push(data[k] === '' ? null : data[k]);
+      if (contentFields.has(k)) touchedContent = true;
+    }
   }
-  if (!sets.length) return;
-  vals.push(dId);
-  await db.execute(`UPDATE deliverables SET ${sets.join(', ')} WHERE id = ?`, vals);
+  // Update task linkage if provided as task_ids array
+  if (Array.isArray(data.task_ids)) {
+    await db.execute(`DELETE FROM deliverable_tasks WHERE deliverable_id = ?`, [dId]);
+    for (const tid of data.task_ids) {
+      try { await db.execute(`INSERT INTO deliverable_tasks (deliverable_id, task_id) VALUES (?, ?)`, [dId, tid]); }
+      catch (e) { /* ignore dup or invalid */ }
+    }
+    touchedContent = true;
+  }
+  if (!sets.length && !Array.isArray(data.task_ids)) return;
+  if (sets.length) {
+    if (touchedContent) sets.push('auto_generated = 0');
+    vals.push(dId);
+    await db.execute(`UPDATE deliverables SET ${sets.join(', ')} WHERE id = ?`, vals);
+  }
 }
 
 async function deleteDeliverable(dId, userId) {
@@ -1818,9 +1872,13 @@ async function listProjectPartners(projectId, userId) {
    problem/target_groups). REPLACES existing rows for this WP.
    ────────────────────────────────────────────────────────────── */
 
-async function aiFillWp(wpId, userId) {
+async function aiFillWp(wpId, userId, options = {}) {
   const ai = require('../../utils/ai');
   const wp = await _assertWp(wpId, userId);
+
+  const VALID_TARGETS = ['objectives','tasks','milestones','deliverables'];
+  const requested = Array.isArray(options.targets) ? options.targets.filter(t => VALID_TARGETS.includes(t)) : null;
+  const targets = new Set(requested && requested.length ? requested : VALID_TARGETS);
 
   // Gather context: WP, partners, activities for this WP, project meta
   const [wpRows] = await db.execute(
@@ -1865,16 +1923,23 @@ async function aiFillWp(wpId, userId) {
     ? activities.map(a => `  - [${a.type}] ${a.label}${a.description ? ': ' + a.description.slice(0, 200) : ''}`).join('\n')
     : '  (no activities planned in Intake yet — synthesise reasonable defaults from the WP summary)';
 
+  const sectionSpecs = {
+    objectives: `"objectives": string. 2–4 short bullet lines starting with "• ", separated by \\n.`,
+    tasks: `"tasks": array of 3–5 objects, each: { "code": "T${wpNum}.N", "title": short, "description": one line, "in_kind_subcontracting": "No" or "Yes — short reason", "participants": [{"partner_id": uuid_from_list, "role": one of "COO"|"BEN"|"AE"|"AP"|"OTHER"}] }. The applicant partner is COO; others default to BEN. Most tasks involve 2–4 partners.`,
+    milestones: `"milestones": array of 2–3 objects, each: { "code": "MSN" (continuous globally — start at 1 for WP1), "title": short, "due_month": integer 1–${project.duration_months || 24}, "lead_partner_id": uuid_from_list, "description": one line, "verification": short means of verification }.`,
+    deliverables: `"deliverables": array of 3–5 objects, each: { "code": "D${wpNum}.N", "title": short, "type": one of "R"|"DEM"|"DEC"|"DATA"|"DMP"|"ETHICS"|"SECURITY"|"OTHER", "dissemination_level": one of "PU"|"SEN"|"R-UE/EU-R"|"C-UE/EU-C"|"S-UE/EU-S", "due_month": integer, "lead_partner_id": uuid_from_list, "description": one line including format and language }.`,
+  };
+  const targetKeys = [...targets];
+  const keysJson = targetKeys.map(k => `"${k}"`).join(', ');
+  const specsBlock = targetKeys.map(k => sectionSpecs[k]).join('\n');
+
   const systemPrompt = `You are an Erasmus+ proposal expert filling Section 4.2 (Work Packages) of the EU Application Form Part B.
 
-Output ONE JSON object with exactly these keys: "objectives", "tasks", "milestones", "deliverables".
+Output ONE JSON object with exactly these keys: ${keysJson}.
 
 CONSTRAINTS — every cell must be SHORT (max ~one line, ~80 chars). The form has limited table space.
 
-"objectives": string. 2–4 short bullet lines starting with "• ", separated by \\n.
-"tasks": array of 3–5 objects, each: { "code": "T${wpNum}.N", "title": short, "description": one line, "in_kind_subcontracting": "No" or "Yes — short reason", "participants": [{"partner_id": uuid_from_list, "role": one of "COO"|"BEN"|"AE"|"AP"|"OTHER"}] }. The applicant partner is COO; others default to BEN. Most tasks involve 2–4 partners.
-"milestones": array of 2–3 objects, each: { "code": "MSN" (continuous globally — start at 1 for WP1), "title": short, "due_month": integer 1–${project.duration_months || 24}, "lead_partner_id": uuid_from_list, "description": one line, "verification": short means of verification }.
-"deliverables": array of 3–5 objects, each: { "code": "D${wpNum}.N", "title": short, "type": one of "R"|"DEM"|"DEC"|"DATA"|"DMP"|"ETHICS"|"SECURITY"|"OTHER", "dissemination_level": one of "PU"|"SEN"|"R-UE/EU-R"|"C-UE/EU-C"|"S-UE/EU-S", "due_month": integer, "lead_partner_id": uuid_from_list, "description": one line including format and language }.
+${specsBlock}
 
 Use ONLY partner_id values from the provided list. Do not invent UUIDs.
 Output only valid JSON, no markdown fences, no commentary.`;
@@ -1911,62 +1976,69 @@ Return the JSON now.`;
 
   const partnerIds = new Set(partners.map(p => p.id));
 
-  // Persist: replace existing rows for this WP
+  // Persist: only target sections are touched. Each target wipes-and-replaces
+  // its rows for THIS WP. Other tables and other WPs are left untouched.
   const conn = await db.getConnection();
   try {
     await conn.beginTransaction();
 
-    if (typeof parsed.objectives === 'string') {
+    if (targets.has('objectives') && typeof parsed.objectives === 'string') {
       await conn.execute(`UPDATE work_packages SET objectives = ? WHERE id = ?`, [parsed.objectives, wpId]);
     }
 
-    await conn.execute(`DELETE FROM wp_tasks WHERE work_package_id = ?`, [wpId]);
-    if (Array.isArray(parsed.tasks)) {
-      for (let i = 0; i < parsed.tasks.length; i++) {
-        const t = parsed.tasks[i] || {};
-        const taskId = genUUID();
-        await conn.execute(
-          `INSERT INTO wp_tasks (id, work_package_id, project_id, code, title, description, in_kind_subcontracting, sort_order)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-          [taskId, wpId, wp.project_id, t.code || `T${wpNum}.${i + 1}`, (t.title || 'Task').slice(0, 250), t.description || null, t.in_kind_subcontracting || null, i]
-        );
-        if (Array.isArray(t.participants)) {
-          for (const p of t.participants) {
-            if (!p.partner_id || !partnerIds.has(p.partner_id)) continue;
-            try {
-              await conn.execute(
-                `INSERT INTO wp_task_participants (id, task_id, partner_id, role) VALUES (?, ?, ?, ?)`,
-                [genUUID(), taskId, p.partner_id, (p.role || 'BEN').toUpperCase()]
-              );
-            } catch (e) { /* ignore dup */ }
+    if (targets.has('tasks')) {
+      await conn.execute(`DELETE FROM wp_tasks WHERE work_package_id = ?`, [wpId]);
+      if (Array.isArray(parsed.tasks)) {
+        for (let i = 0; i < parsed.tasks.length; i++) {
+          const t = parsed.tasks[i] || {};
+          const taskId = genUUID();
+          await conn.execute(
+            `INSERT INTO wp_tasks (id, work_package_id, project_id, code, title, description, in_kind_subcontracting, sort_order)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+            [taskId, wpId, wp.project_id, t.code || `T${wpNum}.${i + 1}`, (t.title || 'Task').slice(0, 250), t.description || null, t.in_kind_subcontracting || null, i]
+          );
+          if (Array.isArray(t.participants)) {
+            for (const p of t.participants) {
+              if (!p.partner_id || !partnerIds.has(p.partner_id)) continue;
+              try {
+                await conn.execute(
+                  `INSERT INTO wp_task_participants (id, task_id, partner_id, role) VALUES (?, ?, ?, ?)`,
+                  [genUUID(), taskId, p.partner_id, (p.role || 'BEN').toUpperCase()]
+                );
+              } catch (e) { /* ignore dup */ }
+            }
           }
         }
       }
     }
 
-    await conn.execute(`DELETE FROM milestones WHERE work_package_id = ?`, [wpId]);
-    if (Array.isArray(parsed.milestones)) {
-      for (let i = 0; i < parsed.milestones.length; i++) {
-        const m = parsed.milestones[i] || {};
-        const lead = partnerIds.has(m.lead_partner_id) ? m.lead_partner_id : null;
-        await conn.execute(
-          `INSERT INTO milestones (id, work_package_id, project_id, code, title, description, due_month, verification, lead_partner_id, sort_order)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-          [genUUID(), wpId, wp.project_id, m.code || null, (m.title || 'Milestone').slice(0, 250), m.description || null, parseInt(m.due_month, 10) || null, m.verification || null, lead, i]
-        );
+    if (targets.has('milestones')) {
+      await conn.execute(`DELETE FROM milestones WHERE work_package_id = ?`, [wpId]);
+      if (Array.isArray(parsed.milestones)) {
+        for (let i = 0; i < parsed.milestones.length; i++) {
+          const m = parsed.milestones[i] || {};
+          const lead = partnerIds.has(m.lead_partner_id) ? m.lead_partner_id : null;
+          await conn.execute(
+            `INSERT INTO milestones (id, work_package_id, project_id, code, title, description, due_month, verification, lead_partner_id, sort_order, auto_generated)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)`,
+            [genUUID(), wpId, wp.project_id, m.code || null, (m.title || 'Milestone').slice(0, 250), m.description || null, parseInt(m.due_month, 10) || null, m.verification || null, lead, i]
+          );
+        }
       }
     }
 
-    await conn.execute(`DELETE FROM deliverables WHERE work_package_id = ?`, [wpId]);
-    if (Array.isArray(parsed.deliverables)) {
-      for (let i = 0; i < parsed.deliverables.length; i++) {
-        const d = parsed.deliverables[i] || {};
-        const lead = partnerIds.has(d.lead_partner_id) ? d.lead_partner_id : null;
-        await conn.execute(
-          `INSERT INTO deliverables (id, work_package_id, project_id, code, title, description, type, dissemination_level, due_month, lead_partner_id, sort_order)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-          [genUUID(), wpId, wp.project_id, d.code || null, (d.title || 'Deliverable').slice(0, 250), d.description || null, d.type || null, d.dissemination_level || null, parseInt(d.due_month, 10) || null, lead, i]
-        );
+    if (targets.has('deliverables')) {
+      await conn.execute(`DELETE FROM deliverables WHERE work_package_id = ?`, [wpId]);
+      if (Array.isArray(parsed.deliverables)) {
+        for (let i = 0; i < parsed.deliverables.length; i++) {
+          const d = parsed.deliverables[i] || {};
+          const lead = partnerIds.has(d.lead_partner_id) ? d.lead_partner_id : null;
+          await conn.execute(
+            `INSERT INTO deliverables (id, work_package_id, project_id, code, title, description, type, dissemination_level, due_month, lead_partner_id, sort_order, auto_generated)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)`,
+            [genUUID(), wpId, wp.project_id, d.code || null, (d.title || 'Deliverable').slice(0, 250), d.description || null, d.type || null, d.dissemination_level || null, parseInt(d.due_month, 10) || null, lead, i]
+          );
+        }
       }
     }
 
@@ -1979,10 +2051,11 @@ Return the JSON now.`;
   }
 
   return {
-    objectives: parsed.objectives || '',
-    tasks_count: (parsed.tasks || []).length,
-    milestones_count: (parsed.milestones || []).length,
-    deliverables_count: (parsed.deliverables || []).length,
+    targets: targetKeys,
+    objectives: targets.has('objectives') ? (parsed.objectives || '') : undefined,
+    tasks_count: targets.has('tasks') ? (parsed.tasks || []).length : undefined,
+    milestones_count: targets.has('milestones') ? (parsed.milestones || []).length : undefined,
+    deliverables_count: targets.has('deliverables') ? (parsed.deliverables || []).length : undefined,
   };
 }
 
@@ -3186,6 +3259,21 @@ async function listProjectDeliverables(projectId, userId) {
       ORDER BY wp.order_index, d.sort_order, d.created_at`,
     [projectId]
   );
+  if (!rows.length) return rows;
+  // Attach source tasks per deliverable for trazabilidad in the UI
+  const ids = rows.map(d => d.id);
+  const placeholders = ids.map(() => '?').join(',');
+  const [taskRows] = await db.execute(
+    `SELECT dt.deliverable_id, t.id AS task_id, t.code, t.title
+       FROM deliverable_tasks dt JOIN wp_tasks t ON t.id = dt.task_id
+      WHERE dt.deliverable_id IN (${placeholders})`,
+    ids
+  );
+  const tasksByD = {};
+  for (const t of taskRows) {
+    (tasksByD[t.deliverable_id] ||= []).push({ id: t.task_id, code: t.code, title: t.title });
+  }
+  for (const d of rows) d.source_tasks = tasksByD[d.id] || [];
   return rows;
 }
 
@@ -3206,243 +3294,10 @@ async function listProjectMilestones(projectId, userId) {
   return rows;
 }
 
-// Compute deliverable allocation per WP given total non-mgmt activities.
-// Public for testability and for the frontend to preview before applying.
-function _computeDeliverableAllocation(wps, wpActivitiesCount) {
-  const N = wps.reduce((s, wp) => s + (wpActivitiesCount[wp.id] || 0), 0);
-  const HARD_CAP = PROJECT_DELIVERABLE_HARD_CAP;
-  const allocation = {};
 
-  if (N <= HARD_CAP) {
-    // 1:1 with activities; min 1 per WP that has activities
-    for (const wp of wps) {
-      const k = wpActivitiesCount[wp.id] || 0;
-      allocation[wp.id] = k > 0 ? k : 0;
-    }
-    // Edge case: total still > 15 (e.g. very-many WPs case never hits because N<=15)
-    // — N<=15 by definition so we're safe.
-    // If a project has 0 activities, give WP1 a single placeholder
-    if (N === 0 && wps.length) allocation[wps[0].id] = 1;
-    return { allocation, total: Object.values(allocation).reduce((s, n) => s + n, 0), N, hard_cap: HARD_CAP, compressed: false };
-  }
+// (Removed 2026-04-28: legacy autoDistributeDeliverables / autoGenerateMilestones /
+//  _computeDeliverableAllocation. Replaced by dms-generator.js holistic v2 flow.)
 
-  // Compression mode: WP1 = 1, last = 1, middle gets 13 (Hamilton method)
-  if (wps.length === 1) {
-    allocation[wps[0].id] = HARD_CAP;
-  } else if (wps.length === 2) {
-    // Split 7/8 favouring the WP with more activities
-    const a0 = wpActivitiesCount[wps[0].id] || 0;
-    const a1 = wpActivitiesCount[wps[1].id] || 0;
-    if (a0 >= a1) { allocation[wps[0].id] = 8; allocation[wps[1].id] = 7; }
-    else          { allocation[wps[0].id] = 7; allocation[wps[1].id] = 8; }
-  } else {
-    allocation[wps[0].id] = 1;
-    allocation[wps[wps.length - 1].id] = 1;
-    const middle = wps.slice(1, -1);
-    const middleActsTotal = middle.reduce((s, wp) => s + (wpActivitiesCount[wp.id] || 0), 0);
-    const middleBudget = HARD_CAP - 2;
-
-    if (middleActsTotal <= middleBudget) {
-      for (const wp of middle) {
-        const k = wpActivitiesCount[wp.id] || 0;
-        allocation[wp.id] = k > 0 ? k : 1;
-      }
-      // If sum exceeds cap (because we forced ≥1 on empty middles), trim
-      let sum = Object.values(allocation).reduce((s, n) => s + n, 0);
-      if (sum > HARD_CAP) {
-        const empties = middle.filter(wp => (wpActivitiesCount[wp.id] || 0) === 0);
-        for (const wp of empties) {
-          if (sum > HARD_CAP && allocation[wp.id] > 0) { allocation[wp.id] = 0; sum--; }
-        }
-      }
-    } else {
-      // Hamilton's largest-remainder method
-      const items = middle.map(wp => {
-        const k = wpActivitiesCount[wp.id] || 0;
-        const raw = (k / middleActsTotal) * middleBudget;
-        return { wpId: wp.id, k, raw, floor: Math.floor(raw), rem: raw - Math.floor(raw) };
-      });
-      let used = items.reduce((s, it) => s + it.floor, 0);
-      const leftover = middleBudget - used;
-      items.sort((a, b) => b.rem - a.rem);
-      for (let i = 0; i < leftover; i++) items[i].floor += 1;
-      for (const it of items) allocation[it.wpId] = Math.max(1, it.floor);
-      // If forcing min 1 pushed sum over cap, trim from largest middle
-      let sum = Object.values(allocation).reduce((s, n) => s + n, 0);
-      while (sum > HARD_CAP) {
-        let maxId = null, maxN = 0;
-        for (const wp of middle) {
-          if (allocation[wp.id] > maxN && allocation[wp.id] > 1) { maxN = allocation[wp.id]; maxId = wp.id; }
-        }
-        if (!maxId) break;
-        allocation[maxId] -= 1;
-        sum -= 1;
-      }
-    }
-  }
-
-  return { allocation, total: Object.values(allocation).reduce((s, n) => s + n, 0), N, hard_cap: HARD_CAP, compressed: true };
-}
-
-async function autoDistributeDeliverables(projectId, userId) {
-  await _assertProject(projectId, userId);
-
-  const [wps] = await db.execute(
-    `SELECT id, code, order_index, title, leader_id FROM work_packages WHERE project_id = ? ORDER BY order_index`,
-    [projectId]
-  );
-  if (!wps.length) return { created: 0, total_activities: 0, allocation: {}, hard_cap: PROJECT_DELIVERABLE_HARD_CAP, compressed: false };
-
-  const wpActivities = {};
-  const wpActivitiesCount = {};
-  for (const wp of wps) {
-    const [acts] = await db.execute(
-      `SELECT id, type, subtype, label, gantt_start_month, gantt_end_month, order_index
-         FROM activities
-        WHERE wp_id = ? AND (type IS NULL OR type != 'mgmt')
-        ORDER BY order_index`,
-      [wp.id]
-    );
-    wpActivities[wp.id] = acts;
-    wpActivitiesCount[wp.id] = acts.length;
-  }
-
-  const plan = _computeDeliverableAllocation(wps, wpActivitiesCount);
-
-  // Wipe deliverables (and their dependent milestones via SET NULL FK)
-  // Then also wipe orphan auto-generated milestones (those linked to a now-deleted deliverable)
-  await db.execute('DELETE FROM deliverables WHERE project_id = ?', [projectId]);
-
-  const created = [];
-  for (const wp of wps) {
-    const count = plan.allocation[wp.id] || 0;
-    if (count === 0) continue;
-    const acts = wpActivities[wp.id];
-    const wpNum = parseInt(String(wp.code || '').replace(/[^0-9]/g, '')) || (wp.order_index + 1);
-
-    if (acts.length === 0 && count >= 1) {
-      // Placeholder for activity-less WP (rare)
-      const id = genUUID();
-      const code = `D${wpNum}.1`;
-      await db.execute(
-        `INSERT INTO deliverables (id, work_package_id, project_id, code, title, description, type, dissemination_level, due_month, lead_partner_id, sort_order)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [id, wp.id, projectId, code, _shortTitle(wp.title || `WP${wpNum} output`), null, 'R', 'PU', null, wp.leader_id || null, 0]
-      );
-      created.push(id);
-    } else if (count >= acts.length) {
-      // 1:1 (no compression for this WP)
-      for (let i = 0; i < acts.length; i++) {
-        const a = acts[i];
-        const id = genUUID();
-        const code = `D${wpNum}.${i+1}`;
-        const due = a.gantt_end_month || a.gantt_start_month || null;
-        await db.execute(
-          `INSERT INTO deliverables (id, work_package_id, project_id, code, title, description, type, dissemination_level, due_month, lead_partner_id, sort_order)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-          [id, wp.id, projectId, code, _shortTitle(a.label || a.subtype || `Output ${i+1}`), _shortDescription(a.label || ''), null, 'PU', due, wp.leader_id || null, i]
-        );
-        created.push(id);
-      }
-    } else {
-      // Compressed: split activities into `count` chunks, one deliverable per chunk
-      if (count === 1) {
-        const id = genUUID();
-        const code = `D${wpNum}.1`;
-        const due = Math.max(...acts.map(a => a.gantt_end_month || a.gantt_start_month || 0)) || null;
-        const title = _shortTitle(wp.title || `WP${wpNum} consolidated output`);
-        const desc = _shortDescription(`Covers ${acts.map(a => a.label).filter(Boolean).join(', ')}`, 14);
-        await db.execute(
-          `INSERT INTO deliverables (id, work_package_id, project_id, code, title, description, type, dissemination_level, due_month, lead_partner_id, sort_order)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-          [id, wp.id, projectId, code, title, desc, 'R', 'PU', due, wp.leader_id || null, 0]
-        );
-        created.push(id);
-      } else {
-        const chunkSize = Math.ceil(acts.length / count);
-        for (let i = 0; i < count; i++) {
-          const chunk = acts.slice(i * chunkSize, (i + 1) * chunkSize);
-          if (!chunk.length) continue;
-          const id = genUUID();
-          const code = `D${wpNum}.${i+1}`;
-          const due = Math.max(...chunk.map(a => a.gantt_end_month || a.gantt_start_month || 0)) || null;
-          const title = _shortTitle(chunk[0].label || `Output ${i+1}`);
-          const desc = _shortDescription(chunk.map(a => a.label).join(' + '), 14);
-          await db.execute(
-            `INSERT INTO deliverables (id, work_package_id, project_id, code, title, description, type, dissemination_level, due_month, lead_partner_id, sort_order)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [id, wp.id, projectId, code, title, desc, null, 'PU', due, wp.leader_id || null, i]
-          );
-          created.push(id);
-        }
-      }
-    }
-  }
-
-  return { created: created.length, total_activities: plan.N, allocation: plan.allocation, hard_cap: plan.hard_cap, compressed: plan.compressed };
-}
-
-async function autoGenerateMilestones(projectId, userId) {
-  const proj = await _assertProject(projectId, userId);
-
-  await db.execute('DELETE FROM milestones WHERE project_id = ?', [projectId]);
-
-  const [delivs] = await db.execute(
-    `SELECT d.id, d.work_package_id, d.code, d.title, d.due_month, d.lead_partner_id,
-            wp.order_index AS wp_order
-       FROM deliverables d
-       JOIN work_packages wp ON wp.id = d.work_package_id
-      WHERE d.project_id = ?
-      ORDER BY wp.order_index, d.sort_order`,
-    [projectId]
-  );
-
-  const [wps] = await db.execute(
-    `SELECT id, leader_id, order_index FROM work_packages WHERE project_id = ? ORDER BY order_index`,
-    [projectId]
-  );
-  const firstWp = wps[0];
-  const lastWp  = wps[wps.length - 1];
-  const finalMonth = proj.duration_months || 24;
-
-  const created = [];
-  let n = 1;
-
-  // Kick-off (WP1, M1)
-  if (firstWp) {
-    const id = genUUID();
-    await db.execute(
-      `INSERT INTO milestones (id, work_package_id, project_id, code, title, description, due_month, verification, lead_partner_id, sort_order)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [id, firstWp.id, projectId, `MS${n}`, 'Project officially launched', _shortDescription('Project kicked off and partners aligned', 10), 1, 'Kick-off meeting minutes signed', firstWp.leader_id || null, 0]
-    );
-    created.push(id); n++;
-  }
-
-  // 1 milestone per deliverable
-  for (const d of delivs) {
-    const id = genUUID();
-    await db.execute(
-      `INSERT INTO milestones (id, work_package_id, project_id, code, title, description, due_month, verification, lead_partner_id, deliverable_id, sort_order)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [id, d.work_package_id, projectId, `MS${n}`, _shortTitle(`${d.code} delivered`, 8), _shortDescription(d.title || '', 10), d.due_month || null, `${d.code} accepted`, d.lead_partner_id || null, d.id, n]
-    );
-    created.push(id); n++;
-  }
-
-  // Final report (last WP, last month)
-  if (lastWp) {
-    const id = genUUID();
-    await db.execute(
-      `INSERT INTO milestones (id, work_package_id, project_id, code, title, description, due_month, verification, lead_partner_id, sort_order)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [id, lastWp.id, projectId, `MS${n}`, 'Final report submitted', _shortDescription('Project closure with final report and evaluation', 10), finalMonth, 'Final report uploaded to ORS', lastWp.leader_id || null, 999]
-    );
-    created.push(id);
-  }
-
-  return { created: created.length };
-}
 
 async function getDeliverableSummary(projectId, userId) {
   await _assertProject(projectId, userId);
@@ -3537,10 +3392,8 @@ module.exports = {
   listProjectPartners,
   aiFillWp,
   resyncWpTasks,
-  // Phase 4 — project-level Deliverables & Milestones
+  // Phase 4 — project-level Deliverables & Milestones (v2 generator lives in dms-generator.js)
   listProjectDeliverables,
   listProjectMilestones,
-  autoDistributeDeliverables,
-  autoGenerateMilestones,
   getDeliverableSummary,
 };

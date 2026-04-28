@@ -1,4 +1,5 @@
 const model = require('./model');
+const dmsGenerator = require('./dms-generator');
 const { enforceRefineCap } = require('../../utils/ai');
 
 // GET /v1/developer/projects/:projectId/context
@@ -640,7 +641,8 @@ exports.listProjectPartners = async (req, res, next) => {
 
 exports.aiFillWp = async (req, res, next) => {
   try {
-    const data = await model.aiFillWp(req.params.wpId, req.user.id);
+    const targets = req.body && Array.isArray(req.body.targets) ? req.body.targets : null;
+    const data = await model.aiFillWp(req.params.wpId, req.user.id, { targets });
     res.json({ ok: true, data });
   } catch (err) { next(err); }
 };
@@ -668,23 +670,143 @@ exports.listProjectMilestones = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
-exports.autoDistributeDeliverables = async (req, res, next) => {
-  try {
-    const data = await model.autoDistributeDeliverables(req.params.projectId, req.user.id);
-    res.json({ ok: true, data });
-  } catch (err) { next(err); }
-};
-
-exports.autoGenerateMilestones = async (req, res, next) => {
-  try {
-    const data = await model.autoGenerateMilestones(req.params.projectId, req.user.id);
-    res.json({ ok: true, data });
-  } catch (err) { next(err); }
-};
+// (Legacy autoDistributeDeliverables / autoGenerateMilestones controllers removed
+//  2026-04-28. Replaced by dmsPreviewV2 / dmsApplyV2 below.)
 
 exports.getDeliverableSummary = async (req, res, next) => {
   try {
     const data = await model.getDeliverableSummary(req.params.projectId, req.user.id);
     res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+// POST /v1/developer/projects/:projectId/deliverables-milestones/preview-v2
+// Runs the 3-pass holistic generator and returns a preview without persisting.
+exports.dmsPreviewV2 = async (req, res, next) => {
+  try {
+    const data = await dmsGenerator.generatePreview(req.params.projectId, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+// POST /v1/developer/projects/:projectId/deliverables-milestones/apply-v2
+// Persists a previously generated preview ({ plan, copy }).
+exports.dmsApplyV2 = async (req, res, next) => {
+  try {
+    const data = await dmsGenerator.applyPreview(req.params.projectId, req.user.id, req.body);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+// GET /v1/developer/projects/:projectId/dms/tasks  (project-level wp_tasks list)
+exports.dmsListTasks = async (req, res, next) => {
+  try {
+    const data = await dmsGenerator.listProjectTasks(req.params.projectId, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+// GET /v1/developer/projects/:projectId/deliverables-milestones/programme
+exports.dmsProgrammeMeta = async (req, res, next) => {
+  try {
+    const data = await dmsGenerator.getProgrammeMeta(req.params.projectId, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+// GET /v1/developer/projects/:projectId/deliverables-milestones/validate
+exports.dmsValidate = async (req, res, next) => {
+  try {
+    const data = await dmsGenerator.validateExistingPlan(req.params.projectId, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+// POST /v1/developer/projects/:projectId/deliverables-milestones/apply-fixes
+exports.dmsApplyFixes = async (req, res, next) => {
+  try {
+    const data = await dmsGenerator.applySuggestedFixes(req.params.projectId, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+// POST /v1/developer/projects/:projectId/deliverables-milestones/autolink
+exports.dmsAutolink = async (req, res, next) => {
+  try {
+    const data = await dmsGenerator.autolinkOrphanMilestones(req.params.projectId, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+// POST /v1/developer/deliverables/:id/regenerate
+exports.dmsRegenerateDeliverable = async (req, res, next) => {
+  try {
+    const data = await dmsGenerator.regenerateDeliverable(req.params.id, req.user.id, req.body?.hint || '');
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+// GET /v1/developer/projects/:projectId/dms/snapshots
+exports.dmsListSnapshots = async (req, res, next) => {
+  try {
+    const data = await dmsGenerator.listSnapshots(req.params.projectId, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+// POST /v1/developer/dms/snapshots/:id/restore
+exports.dmsRestoreSnapshot = async (req, res, next) => {
+  try {
+    const data = await dmsGenerator.restoreSnapshot(req.params.id, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+// GET /v1/developer/projects/:projectId/dms/ai-history
+exports.dmsAiHistory = async (req, res, next) => {
+  try {
+    const data = await dmsGenerator.listAiHistory(req.params.projectId, req.user.id, req.query.limit);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+// GET /v1/developer/projects/:projectId/dms/comments?target_kind=...&target_id=...
+exports.dmsListComments = async (req, res, next) => {
+  try {
+    const data = req.query.target_id
+      ? await dmsGenerator.listComments(req.params.projectId, req.user.id, req.query.target_kind, req.query.target_id)
+      : await dmsGenerator.listAllComments(req.params.projectId, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+exports.dmsCreateComment = async (req, res, next) => {
+  try {
+    const data = await dmsGenerator.createComment(req.params.projectId, req.user.id, req.body);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+exports.dmsUpdateComment = async (req, res, next) => {
+  try {
+    const data = await dmsGenerator.updateComment(req.params.id, req.user.id, req.body);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+exports.dmsDeleteComment = async (req, res, next) => {
+  try {
+    const data = await dmsGenerator.deleteComment(req.params.id, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+// GET /v1/developer/projects/:projectId/dms/export.csv
+exports.dmsExportCsv = async (req, res, next) => {
+  try {
+    const csv = await dmsGenerator.exportCsv(req.params.projectId, req.user.id);
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', 'attachment; filename="deliverables-milestones.csv"');
+    res.send('﻿' + csv);  // UTF-8 BOM so Excel opens it correctly
   } catch (err) { next(err); }
 };

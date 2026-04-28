@@ -1342,6 +1342,43 @@ const Developer = (() => {
   const PREP_DEL_TYPES         = ['R','DEM','DEC','DATA','DMP','ETHICS','SECURITY','OTHER'];
   const PREP_DEL_DISSEM_LEVELS = ['PU','SEN','R-UE/EU-R','C-UE/EU-C','S-UE/EU-S'];
 
+  // EACEA jargon → human label (used for tooltips)
+  const PREP_TYPE_LABELS = {
+    R:        'Report — informe escrito',
+    DEM:      'Demonstrator — prototipo o demo funcional',
+    DEC:      'Dissemination/Communication — material de difusión',
+    DATA:     'Data set — conjunto de datos',
+    DMP:      'Data Management Plan — plan de gestión de datos',
+    ETHICS:   'Ethics — entregable de cumplimiento ético',
+    SECURITY: 'Security — entregable de seguridad',
+    OTHER:    'Otro tipo no listado',
+  };
+  const PREP_DL_LABELS = {
+    PU:           'Public — accesible públicamente',
+    SEN:          'Sensitive — sensible, acceso restringido',
+    'R-UE/EU-R':  'EU Restricted',
+    'C-UE/EU-C':  'EU Confidential',
+    'S-UE/EU-S':  'EU Secret',
+  };
+  const PREP_KIND_ICON = { kickoff: '🚀', deliverable: '🎯', closure: '✅' };
+  const PREP_KIND_LABEL = { kickoff: 'Lanzamiento del proyecto', deliverable: 'Cierra un entregable', closure: 'Cierre del proyecto' };
+
+  // Common verification templates (proposal best practice)
+  const PREP_VERIFY_TEMPLATES = [
+    'Acta firmada por todos los socios',
+    'Documento PDF aprobado por el coordinador',
+    'URL pública en la web del proyecto',
+    'Email de aceptación de la Agencia',
+    'Lista de asistencia firmada',
+    'Certificados de participación',
+    'Recibo de presentación en eForm',
+    'Publicación en EU Project Results Platform',
+    'Cartas de compromiso firmadas',
+  ];
+
+  // Pinned: programme meta + validation snapshot per project (refreshed lazily)
+  const _dmsState = { programme: null, validation: null, lastScore: null };
+
   async function renderPrepEntregables(el) {
     const pid = currentProject.id;
     el.innerHTML = `
@@ -1349,54 +1386,841 @@ const Developer = (() => {
         <div class="flex items-start justify-between mb-4 gap-4 flex-wrap">
           <div class="flex-1 min-w-[280px]">
             <h3 class="font-headline text-base font-bold">Entregables y Milestones</h3>
-            <p class="text-xs text-on-surface-variant">Cap de 15 entregables por proyecto (regla EACEA). Los milestones se generan automáticamente: 1 por entregable + lanzamiento (M1) y reporte final.</p>
+            <p class="text-xs text-on-surface-variant" id="prep-dms-cap-msg">Cargando configuración del programa…</p>
           </div>
           <div id="prep-del-summary" class="text-right text-xs text-on-surface-variant"></div>
         </div>
         <div class="flex flex-wrap items-center gap-2 mb-4">
-          <button id="prep-del-auto" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-primary text-white text-xs font-bold hover:bg-primary/90 transition-colors">
-            <span class="material-symbols-outlined text-sm">auto_awesome</span> Auto-distribuir desde actividades
+          <button id="prep-dms-v2" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-colors shadow-sm">
+            <span class="material-symbols-outlined text-base">psychology</span> Generar D + MS profesionales
           </button>
-          <button id="prep-ms-auto" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-secondary text-white text-xs font-bold hover:bg-secondary/90 transition-colors">
-            <span class="material-symbols-outlined text-sm">flag</span> Auto-generar milestones
-          </button>
-          <span class="text-[11px] text-on-surface-variant/60 ml-2">Estas acciones reemplazan los entregables/milestones actuales del proyecto.</span>
         </div>
+        <div id="prep-dms-banner" class="hidden mb-3"></div>
         <div id="prep-del-content" class="space-y-6"></div>
       </div>`;
 
-    document.getElementById('prep-del-auto').addEventListener('click', () => _prepDelAutoDistribute(pid));
-    document.getElementById('prep-ms-auto').addEventListener('click', () => _prepMsAutoGenerate(pid));
+    document.getElementById('prep-dms-v2').addEventListener('click', () => _prepDmsGenerateAndApply(pid));
+
+    // Load programme meta first (drives the cap message)
+    try {
+      const r = await API.get(`/developer/projects/${pid}/deliverables-milestones/programme`);
+      _dmsState.programme = r?.data || r;
+      const m = _dmsState.programme;
+      const msg = document.getElementById('prep-dms-cap-msg');
+      if (msg) {
+        msg.innerHTML = `Programa: <strong>${esc(m.programme_name || m.project_type || 'Erasmus+')}</strong> · Recomendado <strong>${m.cap_recommended} entregables</strong> (cap duro EACEA = ${m.cap_hard}). <span class="italic">${esc(m.cap_reason || '')}</span>. Trazabilidad task→D→MS validada por el generador profesional.`;
+      }
+    } catch (e) { /* fallback to default text */ }
 
     await _prepDelLoad(pid);
+    // Run validation in background
+    _dmsRunValidation(pid, false);
+  }
+
+  /* ── DMS toolbar helpers (validate / autolink / export / history / snapshots) ── */
+
+  async function _dmsRunValidation(pid, showBanner) {
+    try {
+      const r = await API.get(`/developer/projects/${pid}/deliverables-milestones/validate`);
+      _dmsState.validation = r?.data || r;
+      _dmsRenderBanner();
+      // Repaint badges on existing rows
+      _dmsApplyValidationBadges();
+    } catch (err) {
+      if (showBanner) alert(err.message || 'Error validando');
+    }
+  }
+
+  // Friendly Spanish labels for raw validator messages. Keep technical terms
+  // out of the user-facing banner; group repeated errors by their pattern.
+  function _dmsHumanizeError(err) {
+    const e = String(err.error || '');
+    if (/no task_ids/i.test(e)) return 'Sin tareas asignadas';
+    if (/deliverable_id_ref.*not found/i.test(e)) return 'Sin liga a un deliverable';
+    if (/duplicate code/i.test(e)) return 'Código duplicado';
+    if (/wp_id.*not in project/i.test(e)) return 'WP no válido';
+    if (/exceeds cap/i.test(e)) return 'Por encima del cap permitido';
+    if (/missing code/i.test(e)) return 'Sin código asignado';
+    if (/unknown kind/i.test(e)) return 'Tipo de milestone no válido';
+    return e;  // fallback to raw message
+  }
+
+  function _dmsHumanizeField(field) {
+    const map = {
+      lead_partner_id: 'partner líder',
+      due_month: 'mes',
+      code: 'código',
+      type: 'tipo',
+      dissemination_level: 'nivel difusión',
+      wp_id: 'work package',
+      deliverable_id_ref: 'liga al deliverable',
+      kind: 'tipo de milestone',
+    };
+    return map[field] || field;
+  }
+
+  function _dmsHumanizeReason(reason) {
+    if (!reason) return '';
+    const r = String(reason);
+    if (/redistribute coordinator/i.test(r)) return 'reparto de leads';
+    if (/global renumbering/i.test(r))       return 'renumerar MS sin huecos';
+    if (/kickoff fixed at M1/i.test(r))      return 'kickoff fijado en M1';
+    if (/closure fixed at M/i.test(r))       return 'cierre fijado al final';
+    if (/before WP start/i.test(r))          return 'fecha anterior al inicio del WP';
+    if (/MS must close after/i.test(r))      return 'MS debe ser después de su D';
+    if (/align with deliverable/i.test(r))   return 'alinear con WP del deliverable';
+    if (/invalid partner/i.test(r))          return 'partner no válido';
+    if (/invalid month/i.test(r))            return 'mes no válido';
+    return r;
+  }
+
+  function _dmsRenderBanner() {
+    const banner = document.getElementById('prep-dms-banner');
+    if (!banner) return;
+    const v = _dmsState.validation;
+    if (!v) { banner.classList.add('hidden'); return; }
+
+    if (v.ok && (!v.suggested_fixes || !v.suggested_fixes.length)) {
+      banner.className = 'mb-3 rounded-lg bg-green-50 border border-green-200 px-3 py-2 text-xs text-green-800';
+      banner.innerHTML = '<strong>✓ Plan válido</strong> — todas las reglas EACEA se cumplen.';
+      banner.classList.remove('hidden');
+      return;
+    }
+
+    const errors = v.errors || [];
+    const fixes  = v.suggested_fixes || [];
+
+    // Group errors by humanised message
+    const groupedErrors = {};
+    for (const e of errors) {
+      const key = _dmsHumanizeError(e);
+      (groupedErrors[key] ||= []).push(e.code || e.field || '?');
+    }
+    // Group fixes by reason
+    const groupedFixes = {};
+    for (const f of fixes) {
+      const key = _dmsHumanizeReason(f.reason) || _dmsHumanizeField(f.field);
+      (groupedFixes[key] ||= []).push(f);
+    }
+
+    const previewExists = !!_dmsV2Cached;  // Is there a generated plan waiting to apply?
+    const ctaHtml = previewExists
+      ? '<p class="mt-2 text-[11px] font-semibold">→ El plan v2 generado abajo resuelve estos problemas. Pulsa <span class="text-primary">Aplicar al proyecto</span> para corregir todo de una vez.</p>'
+      : '<p class="mt-2 text-[11px]">→ Pulsa <span class="font-bold text-primary">🧠 Generar D + MS profesionales (v2)</span> arriba para producir un plan corregido, o edita las celdas a mano.</p>';
+
+    const totalIssues = errors.length + fixes.length;
+    const tone = errors.length
+      ? 'bg-error/5 border border-error/30'
+      : 'bg-amber-50 border border-amber-200';
+
+    banner.className = `mb-3 rounded-lg ${tone} px-4 py-3 text-xs`;
+    banner.innerHTML = `
+      <div class="text-on-surface">
+        <p class="text-sm font-bold ${errors.length ? 'text-error' : 'text-amber-800'}">
+          ${errors.length ? '⚠' : 'ℹ'} ${totalIssues} ${totalIssues === 1 ? 'problema detectado' : 'problemas detectados'} en tu plan actual
+        </p>
+        <p class="text-[11px] text-on-surface-variant mt-0.5">
+          La revisión EACEA suele penalizar estos puntos en los criterios de <em>Feasibility</em> y <em>Quality of project design</em>.
+        </p>
+        ${errors.length ? `
+          <details class="mt-2" open>
+            <summary class="cursor-pointer text-[11px] font-bold text-error">${errors.length} ${errors.length === 1 ? 'error grave' : 'errores graves'}</summary>
+            <ul class="ml-4 mt-1 list-disc text-[11px]">
+              ${Object.entries(groupedErrors).map(([key, codes]) => `
+                <li><strong>${esc(key)}</strong> · afecta a <span class="font-mono">${codes.slice(0, 8).map(esc).join(', ')}</span>${codes.length > 8 ? ` <span class="italic">(+${codes.length - 8} más)</span>` : ''}</li>
+              `).join('')}
+            </ul>
+          </details>` : ''}
+        ${fixes.length ? `
+          <details class="mt-2">
+            <summary class="cursor-pointer text-[11px] font-bold text-amber-800">${fixes.length} ${fixes.length === 1 ? 'ajuste sugerido' : 'ajustes sugeridos'}</summary>
+            <ul class="ml-4 mt-1 list-disc text-[11px]">
+              ${Object.entries(groupedFixes).map(([key, list]) => `
+                <li><strong>${esc(key)}</strong> · ${list.length} ${list.length === 1 ? 'fila afectada' : 'filas afectadas'} (<span class="font-mono">${list.slice(0, 6).map(f => esc(f.code || '')).join(', ')}</span>${list.length > 6 ? ` …` : ''})</li>
+              `).join('')}
+            </ul>
+            <button id="prep-dms-apply-fixes" class="mt-2 inline-flex items-center gap-1 px-2 py-1 rounded bg-amber-600 text-white text-[11px] font-bold hover:bg-amber-700">
+              <span class="material-symbols-outlined text-sm">build</span> Aplicar los ${fixes.length} ajustes ahora
+            </button>
+          </details>` : ''}
+        ${ctaHtml}
+      </div>`;
+    banner.classList.remove('hidden');
+
+    const applyBtn = document.getElementById('prep-dms-apply-fixes');
+    if (applyBtn) applyBtn.addEventListener('click', () => _dmsApplySuggestedFixes(v.suggested_fixes || []));
+  }
+
+  function _dmsApplyValidationBadges() {
+    const v = _dmsState.validation;
+    if (!v) return;
+    const errorByCode = new Map();
+    for (const e of v.errors || []) {
+      if (e.code) errorByCode.set(e.code, e.error);
+    }
+    document.querySelectorAll('[data-prep-row-code]').forEach(el => {
+      el.querySelectorAll('.dms-row-badge').forEach(b => b.remove());
+      const code = el.dataset.prepRowCode;
+      if (errorByCode.has(code)) {
+        const span = document.createElement('span');
+        span.className = 'dms-row-badge inline-flex items-center text-error mr-1';
+        span.title = errorByCode.get(code);
+        span.innerHTML = '<span class="material-symbols-outlined text-sm">warning</span>';
+        el.prepend(span);
+      }
+    });
+  }
+
+  async function _dmsApplySuggestedFixes() {
+    const pid = currentProject?.id;
+    if (!pid) return;
+    if (!confirm('Aplicar todos los ajustes deterministas (renumerar MS, redistribuir leads, ajustar fechas, etc.)?\n\nSe creará un snapshot por seguridad antes de modificar nada.')) return;
+    try {
+      const r = await API.post(`/developer/projects/${pid}/deliverables-milestones/apply-fixes`, {});
+      const data = r?.data || r;
+      if (typeof Toast !== 'undefined' && Toast.show) Toast.show(`✓ ${data.applied} ajustes aplicados (${data.rows_updated} filas)`, 'ok');
+      await _prepDelLoad(pid);
+      await _dmsRunValidation(pid, false);
+    } catch (err) { alert(err.message || 'Error'); }
+  }
+
+  async function _dmsAutolinkOrphans(pid) {
+    if (!confirm('Linkar automáticamente los milestones huérfanos a su deliverable más probable (mismo WP, mes más cercano, mismo lead). ¿Continuar?')) return;
+    try {
+      const r = await API.post(`/developer/projects/${pid}/deliverables-milestones/autolink`, {});
+      const data = r?.data || r;
+      if (typeof Toast !== 'undefined' && Toast.show) Toast.show(`✓ ${data.linked_count} de ${data.total_orphans} MS huérfanos linkados`, 'ok');
+      await _prepDelLoad(pid);
+      await _dmsRunValidation(pid, false);
+    } catch (err) { alert(err.message || 'Error'); }
+  }
+
+  function _dmsExportCsv(pid) {
+    // Trigger browser download via temporary link with auth header in URL? simpler: use fetch + blob
+    fetch(`/v1/developer/projects/${pid}/dms/export.csv`, { headers: { Authorization: `Bearer ${localStorage.getItem('jwt') || ''}` } })
+      .then(r => r.ok ? r.blob() : Promise.reject(new Error('Export failed')))
+      .then(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'deliverables-milestones.csv';
+        a.click();
+        URL.revokeObjectURL(url);
+      })
+      .catch(err => alert(err.message));
+  }
+
+  async function _dmsToggleHistory(pid) {
+    const panel = document.getElementById('prep-dms-side-panel');
+    if (!panel.classList.contains('hidden') && panel.dataset.kind === 'history') {
+      panel.classList.add('hidden'); panel.innerHTML = ''; panel.dataset.kind = ''; return;
+    }
+    panel.classList.remove('hidden'); panel.dataset.kind = 'history';
+    panel.innerHTML = '<div class="rounded-xl border border-outline-variant/30 bg-white p-4 text-xs"><span class="spinner inline-block"></span> Cargando historial AI…</div>';
+    try {
+      const r = await API.get(`/developer/projects/${pid}/dms/ai-history?limit=30`);
+      const rows = r?.data || r;
+      panel.innerHTML = `
+        <div class="rounded-xl border border-outline-variant/30 bg-white p-4">
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="font-bold text-sm">Histórico de generaciones AI</h4>
+            <button class="text-xs text-on-surface-variant hover:text-on-surface" onclick="document.getElementById('prep-dms-side-panel').classList.add('hidden')">Cerrar</button>
+          </div>
+          <table class="w-full text-[11px] border-collapse">
+            <thead class="bg-surface-container"><tr>
+              <th class="text-left p-1.5 border border-outline-variant/30">Fecha</th>
+              <th class="text-left p-1.5 border border-outline-variant/30">Pase</th>
+              <th class="text-left p-1.5 border border-outline-variant/30">Estado</th>
+              <th class="text-left p-1.5 border border-outline-variant/30">Duración</th>
+            </tr></thead>
+            <tbody>
+              ${(rows || []).map(r => `
+                <tr>
+                  <td class="p-1.5 border border-outline-variant/30 font-mono">${esc(new Date(r.created_at).toLocaleString())}</td>
+                  <td class="p-1.5 border border-outline-variant/30">${esc(r.pass)}</td>
+                  <td class="p-1.5 border border-outline-variant/30">${r.status === 'success' ? '✓' : '✗'} ${esc(r.status)}</td>
+                  <td class="p-1.5 border border-outline-variant/30">${r.duration_ms || '?'} ms</td>
+                </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>`;
+    } catch (err) {
+      panel.innerHTML = `<div class="rounded-xl border border-error/30 bg-error/5 p-4 text-xs text-error">${esc(err.message || 'Error')}</div>`;
+    }
+  }
+
+  async function _dmsToggleSnapshots(pid) {
+    const panel = document.getElementById('prep-dms-side-panel');
+    if (!panel.classList.contains('hidden') && panel.dataset.kind === 'snapshots') {
+      panel.classList.add('hidden'); panel.innerHTML = ''; panel.dataset.kind = ''; return;
+    }
+    panel.classList.remove('hidden'); panel.dataset.kind = 'snapshots';
+    panel.innerHTML = '<div class="rounded-xl border border-outline-variant/30 bg-white p-4 text-xs"><span class="spinner inline-block"></span> Cargando snapshots…</div>';
+    try {
+      const r = await API.get(`/developer/projects/${pid}/dms/snapshots`);
+      const rows = r?.data || r;
+      panel.innerHTML = `
+        <div class="rounded-xl border border-outline-variant/30 bg-white p-4">
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="font-bold text-sm">Snapshots restaurables</h4>
+            <button class="text-xs text-on-surface-variant hover:text-on-surface" onclick="document.getElementById('prep-dms-side-panel').classList.add('hidden')">Cerrar</button>
+          </div>
+          ${(rows || []).length ? `
+            <table class="w-full text-[11px] border-collapse">
+              <thead class="bg-surface-container"><tr>
+                <th class="text-left p-1.5 border border-outline-variant/30">Fecha</th>
+                <th class="text-left p-1.5 border border-outline-variant/30">Etiqueta</th>
+                <th class="text-left p-1.5 border border-outline-variant/30">D · MS</th>
+                <th class="border border-outline-variant/30 w-20">Acción</th>
+              </tr></thead>
+              <tbody>
+                ${(rows || []).map(r => `
+                  <tr>
+                    <td class="p-1.5 border border-outline-variant/30 font-mono">${esc(new Date(r.created_at).toLocaleString())}</td>
+                    <td class="p-1.5 border border-outline-variant/30">${esc(r.label || '—')}</td>
+                    <td class="p-1.5 border border-outline-variant/30">${r.d_count} · ${r.m_count}</td>
+                    <td class="p-1.5 border border-outline-variant/30 text-center">
+                      <button data-snap-restore="${esc(r.id)}" class="text-primary hover:underline">Restaurar</button>
+                    </td>
+                  </tr>`).join('')}
+              </tbody>
+            </table>` : '<p class="text-[11px] italic text-on-surface-variant">Aún no hay snapshots — se crean al pulsar Aplicar v2.</p>'}
+        </div>`;
+      panel.querySelectorAll('[data-snap-restore]').forEach(b => b.addEventListener('click', async () => {
+        if (!confirm('¿Restaurar este snapshot? Tu estado actual se guardará como nuevo snapshot antes de sobrescribirlo.')) return;
+        try {
+          await API.post(`/developer/dms/snapshots/${b.dataset.snapRestore}/restore`, {});
+          if (typeof Toast !== 'undefined' && Toast.show) Toast.show('✓ Restaurado', 'ok');
+          await _prepDelLoad(pid);
+          await _dmsToggleSnapshots(pid); await _dmsToggleSnapshots(pid);  // refresh
+        } catch (err) { alert(err.message || 'Error'); }
+      }));
+    } catch (err) {
+      panel.innerHTML = `<div class="rounded-xl border border-error/30 bg-error/5 p-4 text-xs text-error">${esc(err.message || 'Error')}</div>`;
+    }
+  }
+
+  async function _dmsOpenComments(pid, targetKind, targetId) {
+    // Inline modal — appended to body
+    let modal = document.getElementById('dms-comments-modal');
+    if (modal) modal.remove();
+    modal = document.createElement('div');
+    modal.id = 'dms-comments-modal';
+    modal.className = 'fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4';
+    modal.innerHTML = `
+      <div class="bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[80vh] flex flex-col overflow-hidden">
+        <div class="flex items-center justify-between p-3 border-b border-outline-variant/30">
+          <h4 class="font-bold text-sm">Comentarios — ${targetKind} ${targetId.slice(0, 6)}</h4>
+          <button id="dms-comm-close" class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div id="dms-comm-list" class="flex-1 overflow-y-auto p-3 space-y-2 text-xs"></div>
+        <div class="p-3 border-t border-outline-variant/30">
+          <textarea id="dms-comm-text" rows="2" placeholder="Escribe un comentario…" class="w-full px-2 py-1 border border-outline-variant/30 rounded text-xs"></textarea>
+          <div class="flex justify-end gap-2 mt-2">
+            <button id="dms-comm-add" class="px-3 py-1 bg-primary text-white text-xs font-bold rounded hover:bg-primary/90">Añadir</button>
+          </div>
+        </div>
+      </div>`;
+    document.body.appendChild(modal);
+    const close = () => modal.remove();
+    document.getElementById('dms-comm-close').addEventListener('click', close);
+    modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+
+    const refresh = async () => {
+      try {
+        const r = await API.get(`/developer/projects/${pid}/dms/comments?target_kind=${encodeURIComponent(targetKind)}&target_id=${encodeURIComponent(targetId)}`);
+        const list = (r?.data || r) || [];
+        const listEl = document.getElementById('dms-comm-list');
+        listEl.innerHTML = list.length
+          ? list.map(c => `
+            <div class="rounded border border-outline-variant/30 p-2 ${c.resolved ? 'opacity-60 bg-surface-container-low' : 'bg-white'}">
+              <p class="text-[11px] whitespace-pre-wrap">${esc(c.body)}</p>
+              <div class="flex items-center gap-2 mt-1 text-[10px] text-on-surface-variant">
+                <span>${esc(new Date(c.created_at).toLocaleString())}</span>
+                <button data-comm-toggle="${esc(c.id)}" data-resolved="${c.resolved ? '1' : '0'}" class="ml-auto hover:text-primary">${c.resolved ? '↺ Reabrir' : '✓ Resolver'}</button>
+                <button data-comm-del="${esc(c.id)}" class="hover:text-error">Eliminar</button>
+              </div>
+            </div>`).join('')
+          : '<p class="text-[11px] italic text-on-surface-variant">Sin comentarios todavía.</p>';
+        listEl.querySelectorAll('[data-comm-toggle]').forEach(b => b.addEventListener('click', async () => {
+          await API.patch(`/developer/dms/comments/${b.dataset.commToggle}`, { resolved: b.dataset.resolved !== '1' });
+          refresh();
+        }));
+        listEl.querySelectorAll('[data-comm-del]').forEach(b => b.addEventListener('click', async () => {
+          if (!confirm('¿Eliminar comentario?')) return;
+          await API.del(`/developer/dms/comments/${b.dataset.commDel}`);
+          refresh();
+        }));
+      } catch (err) {
+        document.getElementById('dms-comm-list').innerHTML = `<p class="text-error text-xs">${esc(err.message)}</p>`;
+      }
+    };
+
+    document.getElementById('dms-comm-add').addEventListener('click', async () => {
+      const ta = document.getElementById('dms-comm-text');
+      const text = (ta.value || '').trim();
+      if (!text) return;
+      try {
+        await API.post(`/developer/projects/${pid}/dms/comments`, { target_kind: targetKind, target_id: targetId, text });
+        ta.value = '';
+        refresh();
+      } catch (err) { alert(err.message); }
+    });
+
+    refresh();
+  }
+
+  /* ── v2 Holistic Generator: one-click generate + apply ────────── */
+
+  let _dmsV2Cached = null;  // kept for back-compat with banner CTA detection
+
+  // One-shot: confirm → generate (3-pass + critic) → auto-apply → reload cards.
+  // No preview UI in between; the cards themselves ARE the editable surface.
+  async function _prepDmsGenerateAndApply(pid) {
+    const hasExisting = document.querySelectorAll('[data-prep-d-row]').length > 0;
+    const msg = hasExisting
+      ? '¿Generar plan profesional?\n\nEsto reemplazará todos los entregables y milestones actuales (se guardará un snapshot reversible automáticamente).'
+      : '¿Generar plan profesional de Entregables + Milestones?\n\nEl asistente analiza tareas, actividades y partners y produce un plan completo en ~30–45 segundos.';
+    if (!confirm(msg)) return;
+
+    // Loading overlay on the content area
+    const host = document.getElementById('prep-del-content');
+    if (host) host.innerHTML = `
+      <div class="rounded-xl border border-outline-variant/30 bg-primary/5 p-8 text-center">
+        <div class="spinner inline-block text-primary"></div>
+        <p class="mt-3 text-sm font-semibold">Generando plan profesional…</p>
+        <p class="text-[11px] text-on-surface-variant mt-1">Pass 1 estructural · Pass 2 redacción · Pass 3 crítico EACEA · ~30–45s</p>
+      </div>`;
+
+    let critic = null;
+    try {
+      const res = await API.post(`/developer/projects/${pid}/deliverables-milestones/preview-v2`, {});
+      const data = res?.data || res;
+      critic = data.critic;
+      // Auto-apply immediately with the full payload (plan + copy + critic for score persistence)
+      const applyRes = await API.post(`/developer/projects/${pid}/deliverables-milestones/apply-v2`, {
+        plan: data.plan, copy: data.copy, critic: data.critic,
+      });
+      const applied = applyRes?.data || applyRes;
+      const score = critic?.average ? `${critic.average.toFixed(1)}/5 ${critic.verdict || ''}`.trim() : '';
+      if (typeof Toast !== 'undefined' && Toast.show) {
+        Toast.show(`✓ ${applied.deliverables_count} D + ${applied.milestones_count} MS aplicados${score ? ` · EACEA ${score}` : ''}`, 'ok');
+      }
+      _dmsV2Cached = null;
+      await _prepDelLoad(pid);
+      _dmsRunValidation(pid, false);
+    } catch (err) {
+      if (host) host.innerHTML = `
+        <div class="rounded-xl border border-error/30 bg-error/5 p-4 text-sm text-error">
+          <strong>Error generando el plan:</strong> ${esc(err.message || 'desconocido')}
+        </div>`;
+    }
+  }
+
+  async function _prepDmsV2Preview(pid) {
+    if (!confirm('Generar plan profesional de Entregables + Milestones.\n\nEsta acción analiza todo el proyecto (tareas, actividades, partners) y produce un plan validado. Verás el resultado antes de guardarlo. ¿Continuar?')) return;
+
+    const previewBox = document.getElementById('prep-dms-preview');
+    previewBox.classList.remove('hidden');
+    previewBox.innerHTML = `
+      <div class="rounded-xl border border-outline-variant/30 bg-primary/5 p-6 text-center">
+        <div class="spinner inline-block text-primary"></div>
+        <p class="mt-3 text-sm font-semibold">Generando plan profesional…</p>
+        <p class="text-[11px] text-on-surface-variant mt-1">Pass 1 estructural · Pass 2 redacción · Pass 3 crítico EACEA · ~30–45s</p>
+      </div>`;
+    previewBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    try {
+      // Fetch current state in parallel for diff
+      const [res, currentD, currentM] = await Promise.all([
+        API.post(`/developer/projects/${pid}/deliverables-milestones/preview-v2`, {}),
+        API.get(`/developer/projects/${pid}/deliverables`).catch(() => []),
+        API.get(`/developer/projects/${pid}/milestones`).catch(() => []),
+      ]);
+      const data = res?.data || res;
+      _dmsV2Cached = { plan: data.plan, copy: data.copy, critic: data.critic };
+      _renderDmsV2Preview(pid, data, { currentD, currentM });
+    } catch (err) {
+      previewBox.innerHTML = `
+        <div class="rounded-xl border border-error/30 bg-error/5 p-4 text-sm text-error">
+          <strong>Error generando el plan:</strong> ${esc(err.message || 'desconocido')}
+        </div>`;
+    }
+  }
+
+  // Compute change kind per code by comparing preview vs current state.
+  function _dmsDiffKind(preview, current, fields) {
+    if (!current) return { kind: 'new', changes: [] };
+    const changes = [];
+    for (const f of fields) {
+      if (String(preview[f] ?? '').trim() !== String(current[f] ?? '').trim()) {
+        changes.push({ field: f, before: current[f], after: preview[f] });
+      }
+    }
+    return { kind: changes.length ? 'changed' : 'unchanged', changes };
+  }
+
+  function _renderDmsV2Preview(pid, data, opts) {
+    const { currentD = [], currentM = [] } = opts || {};
+    // No-prior-state mode: every card is "new" so the diff badges add noise.
+    // Hide them entirely and keep cards plain. This is the common flow for
+    // first-time generation.
+    const hasPrior = (currentD?.length || 0) + (currentM?.length || 0) > 0;
+    const previewBox = document.getElementById('prep-dms-preview');
+    const dCount = (data.deliverables || []).length;
+    const mCount = (data.milestones || []).length;
+    const fixesCount = (data.validator?.fixes || []).length;
+    const repairs = data.validator?.repair_attempts || 0;
+    const critic = data.critic || {};
+    const score = typeof critic.average === 'number' ? critic.average.toFixed(1) : null;
+    const verdict = critic.verdict || '—';
+    const weaknesses = Array.isArray(critic.weaknesses) ? critic.weaknesses : [];
+
+    const scoreColor = score == null ? 'text-on-surface-variant' : (parseFloat(score) >= 4 ? 'text-green-700' : (parseFloat(score) >= 3 ? 'text-amber-700' : 'text-error'));
+    const verdictBadge = verdict === 'ship'
+      ? '<span class="px-1.5 py-0.5 rounded bg-green-100 text-green-800 text-[10px] font-bold">SHIP</span>'
+      : verdict === 'repair'
+        ? '<span class="px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 text-[10px] font-bold">REPAIR</span>'
+        : '<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant text-[10px]">N/A</span>';
+
+    // Build current-by-code maps for diff
+    const currentDByCode = Object.fromEntries((currentD || []).map(d => [d.code, d]));
+    const currentMByCode = Object.fromEntries((currentM || []).map(m => [m.code, m]));
+    // Removed entries (in current but not in preview)
+    const newDCodes = new Set((data.deliverables || []).map(d => d.code));
+    const newMCodes = new Set((data.milestones   || []).map(m => m.code));
+    const removedD = (currentD || []).filter(d => !newDCodes.has(d.code));
+    const removedM = (currentM || []).filter(m => !newMCodes.has(m.code));
+
+    // Group + sort BY CODE within each WP (so MS1, MS2, MS3 read in order)
+    const dByWp = {};
+    for (const d of data.deliverables || []) {
+      (dByWp[d.wp_code] ||= []).push(d);
+    }
+    const mByWp = {};
+    for (const m of data.milestones || []) {
+      (mByWp[m.wp_code] ||= []).push(m);
+    }
+    const codeKey = c => {
+      const m = String(c || '').match(/(\d+)\.?(\d*)/);
+      return m ? (parseInt(m[1], 10) * 100 + (parseInt(m[2], 10) || 0)) : 999;
+    };
+    for (const arr of Object.values(dByWp)) arr.sort((a, b) => codeKey(a.code) - codeKey(b.code));
+    for (const arr of Object.values(mByWp)) arr.sort((a, b) => codeKey(a.code) - codeKey(b.code));
+    const wpCodes = Array.from(new Set([...Object.keys(dByWp), ...Object.keys(mByWp)])).sort();
+
+    // 1-line diff summary helper for changed cards (declared early so the
+    // template literals below — which run at .map() time — can reference it
+    // without hitting a temporal-dead-zone error).
+    const _diffSummary = (changes) => {
+      if (!changes || !changes.length) return '';
+      const labelMap = { title: 'título', description: 'descripción', type: 'tipo', dissemination_level: 'nivel', due_month: 'mes', lead_partner_id: 'lead', verification: 'verificación', kind: 'tipo MS', deliverable_id_ref: 'liga D' };
+      return changes.slice(0, 4).map(c => labelMap[c.field] || c.field).join(', ') + (changes.length > 4 ? ` +${changes.length - 4}` : '');
+    };
+
+    // Diff styling: only enabled when there's a prior state to compare against.
+    // First-generation flow is plain (white/borderless cards) since "all NEW" is
+    // not informative.
+    const diffStyles = hasPrior ? {
+      new:        { border: 'border-green-300 border-l-4 border-l-green-500', bg: 'bg-green-50',  badge: '<span class="text-[9px] px-1 rounded bg-green-100 text-green-800 font-bold">NUEVO</span>' },
+      changed:    { border: 'border-amber-300 border-l-4 border-l-amber-500', bg: 'bg-amber-50',  badge: '<span class="text-[9px] px-1 rounded bg-amber-100 text-amber-800 font-bold">MODIFICADO</span>' },
+      unchanged:  { border: 'border-outline-variant/30', bg: 'bg-white', badge: '<span class="text-[9px] px-1 rounded bg-surface-container text-on-surface-variant">SIN CAMBIO</span>' },
+    } : {
+      new:        { border: 'border-outline-variant/30', bg: 'bg-white', badge: '' },
+      changed:    { border: 'border-outline-variant/30', bg: 'bg-white', badge: '' },
+      unchanged:  { border: 'border-outline-variant/30', bg: 'bg-white', badge: '' },
+    };
+
+    const dEditFields = ['title', 'description', 'type', 'dissemination_level', 'due_month', 'lead_partner_id'];
+    const mEditFields = ['title', 'description', 'verification', 'kind', 'due_month', 'lead_partner_id', 'deliverable_id_ref'];
+
+    const deliverablesHtml = wpCodes.map(wpc => {
+      const ds = dByWp[wpc] || [];
+      if (!ds.length) return '';
+      return `
+        <div class="mb-3">
+          <h5 class="text-[11px] font-bold text-primary mb-1">${esc(wpc)}</h5>
+          <div class="space-y-1.5">
+            ${ds.map(d => {
+              const cur = currentDByCode[d.code];
+              const diff = _dmsDiffKind(d, cur, dEditFields);
+              const st = diffStyles[diff.kind];
+              return `
+              <div class="rounded border ${st.border} ${st.bg} p-2" data-prev-d-code="${esc(d.code)}">
+                <div class="flex items-baseline gap-2 flex-wrap">
+                  <span class="text-[11px] font-mono font-bold text-primary">${esc(d.code)}</span>
+                  ${st.badge}
+                  ${diff.kind === 'changed' && hasPrior ? `<span class="text-[9px] text-amber-800 italic" title="Campos que cambian: ${esc(diff.changes.map(c => c.field).join(', '))}">cambia ${esc(_diffSummary(diff.changes))}</span>` : ''}
+                  <input data-prev-d-field="title" value="${esc(d.title || '')}" class="text-xs font-semibold flex-1 min-w-[200px] px-1 py-0.5 bg-transparent border-0 hover:bg-white focus:bg-white focus:ring-1 focus:ring-primary/30 rounded">
+                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container" title="${esc(PREP_TYPE_LABELS[d.type] || '')}">${esc(d.type)}</span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container" title="${esc(PREP_DL_LABELS[d.dissemination_level] || '')}">${esc(d.dissemination_level)}</span>
+                  <span class="text-[10px] text-on-surface-variant">M${d.due_month}</span>
+                  <span class="text-[10px] text-on-surface-variant">${esc(d.lead_partner_name || '?')}</span>
+                </div>
+                <textarea data-no-voice="1" data-prev-d-field="description" rows="2" class="w-full mt-1 px-1 py-0.5 text-[11px] text-on-surface-variant bg-transparent border-0 hover:bg-white focus:bg-white focus:ring-1 focus:ring-primary/30 rounded resize-none">${esc(d.description || '')}</textarea>
+                ${(d.source_tasks || []).length ? `
+                  <p class="text-[10px] text-on-surface-variant/70 mt-1">
+                    <span class="font-semibold">Cubre:</span> ${d.source_tasks.map(t => `<span class="font-mono">${esc(t.code || '')}</span> ${esc(t.title || '')}`).join(' · ')}
+                  </p>` : '<p class="text-[10px] text-amber-700 mt-1">⚠ Sin tareas asociadas</p>'}
+                ${d.rationale ? `<p class="text-[10px] italic text-on-surface-variant/70 mt-1">${esc(d.rationale)}</p>` : ''}
+                ${diff.kind === 'changed' ? `
+                  <details class="mt-1">
+                    <summary class="text-[9px] text-amber-800 cursor-pointer">Cambios vs actual (${diff.changes.length})</summary>
+                    <ul class="ml-3 list-disc text-[9px]">
+                      ${diff.changes.map(c => `<li><strong>${esc(c.field)}</strong>: <span class="line-through text-on-surface-variant/60">${esc(String(c.before || '—')).slice(0, 80)}</span> → <span class="text-amber-900">${esc(String(c.after || '—')).slice(0, 80)}</span></li>`).join('')}
+                    </ul>
+                  </details>` : ''}
+              </div>`;
+            }).join('')}
+          </div>
+        </div>`;
+    }).join('');
+
+    const msHtml = wpCodes.map(wpc => {
+      const ms = mByWp[wpc] || [];
+      if (!ms.length) return '';
+      return `
+        <div class="mb-3">
+          <h5 class="text-[11px] font-bold text-secondary mb-1">${esc(wpc)}</h5>
+          <div class="space-y-1.5">
+            ${ms.map(m => {
+              const cur = currentMByCode[m.code];
+              const diff = _dmsDiffKind(m, cur, mEditFields);
+              const st = diffStyles[diff.kind];
+              return `
+              <div class="rounded border ${st.border} ${st.bg} p-2" data-prev-m-code="${esc(m.code)}">
+                <div class="flex items-baseline gap-2 flex-wrap">
+                  <span class="text-[11px] font-mono font-bold text-secondary">${esc(m.code)}</span>
+                  ${st.badge}
+                  ${diff.kind === 'changed' && hasPrior ? `<span class="text-[9px] text-amber-800 italic" title="Campos que cambian: ${esc(diff.changes.map(c => c.field).join(', '))}">cambia ${esc(_diffSummary(diff.changes))}</span>` : ''}
+                  <span class="text-base" title="${esc(PREP_KIND_LABEL[m.kind] || '')}">${PREP_KIND_ICON[m.kind] || ''}</span>
+                  <input data-prev-m-field="title" value="${esc(m.title || '')}" class="text-xs font-semibold flex-1 min-w-[200px] px-1 py-0.5 bg-transparent border-0 hover:bg-white focus:bg-white focus:ring-1 focus:ring-primary/30 rounded">
+                  ${m.deliverable_id_ref ? `<span class="text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-primary">→ ${esc(m.deliverable_id_ref)}</span>` : ''}
+                  <span class="text-[10px] text-on-surface-variant">M${m.due_month}</span>
+                  <span class="text-[10px] text-on-surface-variant">${esc(m.lead_partner_name || '?')}</span>
+                </div>
+                <textarea data-no-voice="1" data-prev-m-field="description" rows="2" class="w-full mt-1 px-1 py-0.5 text-[11px] text-on-surface-variant bg-transparent border-0 hover:bg-white focus:bg-white focus:ring-1 focus:ring-primary/30 rounded resize-none">${esc(m.description || '')}</textarea>
+                ${m.verification ? `<p class="text-[10px] text-on-surface-variant/70 mt-1"><span class="font-semibold">Verificación:</span> <input data-prev-m-field="verification" value="${esc(m.verification)}" class="ml-1 px-1 py-0 bg-transparent border-0 hover:bg-white focus:bg-white focus:ring-1 focus:ring-primary/30 rounded w-3/4"></p>` : ''}
+                ${diff.kind === 'changed' ? `
+                  <details class="mt-1">
+                    <summary class="text-[9px] text-amber-800 cursor-pointer">Cambios vs actual (${diff.changes.length})</summary>
+                    <ul class="ml-3 list-disc text-[9px]">
+                      ${diff.changes.map(c => `<li><strong>${esc(c.field)}</strong>: <span class="line-through text-on-surface-variant/60">${esc(String(c.before || '—')).slice(0, 80)}</span> → <span class="text-amber-900">${esc(String(c.after || '—')).slice(0, 80)}</span></li>`).join('')}
+                    </ul>
+                  </details>` : ''}
+              </div>`;
+            }).join('')}
+          </div>
+        </div>`;
+    }).join('');
+
+    const removedHtml = (removedD.length || removedM.length) ? `
+      <div class="mb-3 rounded-lg border-l-4 border-l-error bg-error/5 px-3 py-2">
+        <p class="text-[11px] font-bold text-error">⚠ Se ELIMINARÁN al aplicar (${removedD.length} D · ${removedM.length} MS)</p>
+        <div class="ml-2 mt-1 grid md:grid-cols-2 gap-x-4 gap-y-0.5">
+          ${removedD.map(d => `<div class="text-[10px]"><span class="font-mono text-error/80">${esc(d.code)}</span> <span class="line-through text-on-surface-variant/70">${esc(d.title || '')}</span></div>`).join('')}
+          ${removedM.map(m => `<div class="text-[10px]"><span class="font-mono text-error/80">${esc(m.code)}</span> <span class="line-through text-on-surface-variant/70">${esc(m.title || '')}</span></div>`).join('')}
+        </div>
+      </div>` : '';
+
+    // Detect a massive language sweep (>50% of pre-existing cards have their
+    // title rewritten). Common when the project's proposal_lang doesn't match
+    // the language the previous (legacy) generator used.
+    let langSweepBanner = '';
+    if (hasPrior) {
+      const allCurrent = [...(currentD || []), ...(currentM || [])];
+      const allNew = [...(data.deliverables || []), ...(data.milestones || [])];
+      const newByCode = Object.fromEntries(allNew.map(x => [x.code, x]));
+      const titleChanges = allCurrent.filter(cur => {
+        const np = newByCode[cur.code];
+        return np && String(np.title || '').trim() !== String(cur.title || '').trim();
+      });
+      if (titleChanges.length / Math.max(1, allCurrent.length) > 0.5) {
+        const projLang = _dmsState.programme?.proposal_lang || '';
+        const langLabel = { es: 'español', en: 'inglés', fr: 'francés', it: 'italiano' }[projLang] || projLang;
+        langSweepBanner = `
+          <div class="mb-3 rounded-lg border-l-4 border-l-amber-500 bg-amber-50 px-3 py-2">
+            <p class="text-[11px] font-bold text-amber-900">⚠ Cambio masivo de contenido detectado</p>
+            <p class="text-[11px] text-amber-800 mt-0.5">
+              ${titleChanges.length} de ${allCurrent.length} filas cambian su título completo${langLabel ? ` (probablemente reescritura al <strong>${langLabel}</strong>)` : ''}. Esto reemplaza todo el contenido actual.
+              Si quieres conservar parte del trabajo actual, cancela y edita a mano antes de regenerar.
+            </p>
+          </div>`;
+      }
+    }
+
+    const fixesHtml = (data.validator?.fixes || []).slice(0, 8).map(f =>
+      `<li class="text-[10px] text-on-surface-variant"><code>${esc(f.code || '')}</code>: ${esc(f.field || '')} <span class="text-on-surface-variant/60">${esc(String(f.from || ''))}</span> → <span class="font-semibold">${esc(String(f.to || ''))}</span> ${f.reason ? `<span class="italic">(${esc(f.reason)})</span>` : ''}</li>`
+    ).join('');
+
+    // ── HERO score: bigger, above-the-fold so the user sees the verdict first
+    const scoreBigSize = score != null ? (parseFloat(score) >= 4.5 ? 'text-4xl' : 'text-3xl') : 'text-2xl';
+    const heroBg = score == null ? 'bg-primary/5'
+                : (parseFloat(score) >= 4.5 ? 'bg-green-50 border-green-300'
+                : (parseFloat(score) >= 4 ? 'bg-green-50/70 border-green-200'
+                : (parseFloat(score) >= 3 ? 'bg-amber-50 border-amber-200' : 'bg-error/5 border-error/30')));
+
+    previewBox.innerHTML = `
+      <div class="rounded-xl border-2 border-primary/30 bg-primary/5 p-4">
+        <!-- HERO: score crítico arriba, foco en el veredicto -->
+        <div class="rounded-xl border-2 ${heroBg} p-4 mb-4">
+          <div class="flex items-center justify-between gap-3 flex-wrap">
+            <div>
+              <p class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">Crítico EACEA</p>
+              <p class="${scoreBigSize} font-bold ${scoreColor} leading-none">${score != null ? score + '/5' : '—'} ${verdictBadge}</p>
+              <p class="text-[11px] text-on-surface-variant mt-1">
+                ${dCount} entregables ${_dmsState.programme?.cap_recommended ? `(recomendado ${_dmsState.programme.cap_recommended}, cap ${data.cap})` : `(cap ${data.cap})`} · ${mCount} milestones · ${fixesCount} ajustes del validador${repairs ? ` · ${repairs} retry` : ''}
+              </p>
+            </div>
+            <div class="flex flex-col gap-2 items-end">
+              <div class="flex gap-2">
+                <button id="prep-dms-v2-cancel" class="px-3 py-2 rounded-lg bg-surface-container text-on-surface text-xs font-bold hover:bg-surface-container-high">Cancelar</button>
+                <button id="prep-dms-v2-apply" class="px-4 py-2 rounded-lg bg-primary text-white text-xs font-bold hover:bg-primary/90 shadow">Aplicar al proyecto</button>
+              </div>
+              ${hasPrior ? '<p class="text-[10px] text-on-surface-variant/80 text-right max-w-[260px]">Sustituye los D y MS actuales. Se guarda snapshot reversible.</p>' : '<p class="text-[10px] text-on-surface-variant/80 text-right">Primera generación — no había entregables previos.</p>'}
+            </div>
+          </div>
+
+          ${weaknesses.length ? `
+            <details class="mt-3" ${parseFloat(score) < 4 ? 'open' : ''}>
+              <summary class="text-[11px] font-bold text-amber-800 cursor-pointer">${parseFloat(score) >= 4 ? '✓' : '⚠'} ${weaknesses.length} ${weaknesses.length === 1 ? 'crítica' : 'críticas'} del evaluador</summary>
+              <ul class="mt-1 ml-4 list-disc">${weaknesses.map(w => `<li class="text-[11px] text-on-surface-variant">${esc(w)}</li>`).join('')}</ul>
+            </details>` : ''}
+        </div>
+
+        ${langSweepBanner}
+
+        ${removedHtml}
+
+        ${fixesHtml ? `
+          <details class="mb-3">
+            <summary class="text-[11px] font-bold cursor-pointer text-on-surface-variant">Ajustes automáticos del validador en este plan (${fixesCount})</summary>
+            <ul class="mt-1 ml-4 list-disc">${fixesHtml}</ul>
+          </details>` : ''}
+
+        <p class="text-[10px] text-on-surface-variant/70 mb-2 italic">💡 Edita títulos y descripciones inline; los cambios se guardan al pulsar Aplicar.</p>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <h5 class="text-xs font-bold mb-2">📦 Deliverables</h5>
+            ${deliverablesHtml || '<p class="text-[11px] italic text-on-surface-variant">Sin deliverables</p>'}
+          </div>
+          <div>
+            <h5 class="text-xs font-bold mb-2">🚩 Milestones</h5>
+            ${msHtml || '<p class="text-[11px] italic text-on-surface-variant">Sin milestones</p>'}
+          </div>
+        </div>
+      </div>`;
+
+    document.getElementById('prep-dms-v2-cancel').addEventListener('click', () => {
+      _dmsV2Cached = null;
+      previewBox.classList.add('hidden');
+      previewBox.innerHTML = '';
+    });
+    document.getElementById('prep-dms-v2-apply').addEventListener('click', () => _prepDmsV2Apply(pid));
+
+    // Wire inline-edit inputs in preview cards. Mutate _dmsV2Cached so Apply
+    // posts the user's tweaks instead of the AI's original copy.
+    previewBox.querySelectorAll('[data-prev-d-code]').forEach(card => {
+      const code = card.dataset.prevDCode;
+      const cached = _dmsV2Cached.copy.deliverables.find(x => x.code === code);
+      if (!cached) return;
+      card.querySelectorAll('[data-prev-d-field]').forEach(input => {
+        input.addEventListener('blur', () => {
+          cached[input.dataset.prevDField] = input.value;
+        });
+        if (input.tagName === 'TEXTAREA') {
+          input.style.height = 'auto';
+          input.style.height = (input.scrollHeight + 2) + 'px';
+          input.addEventListener('input', () => {
+            input.style.height = 'auto';
+            input.style.height = (input.scrollHeight + 2) + 'px';
+          });
+        }
+      });
+    });
+    previewBox.querySelectorAll('[data-prev-m-code]').forEach(card => {
+      const code = card.dataset.prevMCode;
+      const cached = _dmsV2Cached.copy.milestones.find(x => x.code === code);
+      if (!cached) return;
+      card.querySelectorAll('[data-prev-m-field]').forEach(input => {
+        input.addEventListener('blur', () => {
+          cached[input.dataset.prevMField] = input.value;
+        });
+        if (input.tagName === 'TEXTAREA') {
+          input.style.height = 'auto';
+          input.style.height = (input.scrollHeight + 2) + 'px';
+          input.addEventListener('input', () => {
+            input.style.height = 'auto';
+            input.style.height = (input.scrollHeight + 2) + 'px';
+          });
+        }
+      });
+    });
+  }
+
+  async function _prepDmsV2Apply(pid) {
+    if (!_dmsV2Cached) { alert('No hay plan en memoria. Regenera el preview.'); return; }
+    if (!confirm('¿Aplicar este plan? Se reemplazarán TODOS los entregables y milestones actuales del proyecto.')) return;
+
+    const applyBtn = document.getElementById('prep-dms-v2-apply');
+    if (applyBtn) { applyBtn.disabled = true; applyBtn.innerHTML = '<span class="spinner inline-block text-white" style="width:14px;height:14px"></span> Aplicando…'; }
+
+    try {
+      const res = await API.post(`/developer/projects/${pid}/deliverables-milestones/apply-v2`, _dmsV2Cached);
+      const data = res?.data || res;
+      if (typeof Toast !== 'undefined' && Toast.show) Toast.show(`✓ ${data.deliverables_count} D + ${data.milestones_count} MS aplicados${data.snapshot_id ? ' · snapshot guardado' : ''}`, 'ok');
+      _dmsV2Cached = null;
+      const previewBox = document.getElementById('prep-dms-preview');
+      previewBox.classList.add('hidden');
+      previewBox.innerHTML = '';
+      await _prepDelLoad(pid);
+      _dmsRunValidation(pid, false);
+    } catch (err) {
+      alert(err.message || 'Error aplicando el plan');
+      if (applyBtn) { applyBtn.disabled = false; applyBtn.innerHTML = 'Aplicar al proyecto'; }
+    }
   }
 
   async function _prepDelLoad(pid) {
     const host = document.getElementById('prep-del-content');
     if (!host) return;
     host.innerHTML = '<p class="text-xs text-on-surface-variant/60 italic">Cargando…</p>';
-    let summary, delivs, miles, partners;
+    let summary, delivs, miles, partners, allTasks;
     try {
-      [summary, delivs, miles, partners] = await Promise.all([
+      [summary, delivs, miles, partners, allTasks] = await Promise.all([
         API.get(`/developer/projects/${pid}/deliverables/summary`),
         API.get(`/developer/projects/${pid}/deliverables`),
         API.get(`/developer/projects/${pid}/milestones`),
         _wpFetchPartners(pid).catch(() => []),
+        API.get(`/developer/projects/${pid}/dms/tasks`).then(r => r?.data || r).catch(() => []),
       ]);
     } catch (err) {
       host.innerHTML = `<p class="text-error text-xs">Error: ${esc(err.message || '')}</p>`;
       return;
     }
+    const recommended = _dmsState.programme?.cap_recommended || 15;
     const cap = summary.hard_cap || 15;
     const dCount = summary.deliverables_count || 0;
     const mCount = summary.milestones_count || 0;
+    const overRecommended = dCount > recommended;
     const overCap = dCount > cap;
+
+    // Last critic score (max across all D and MS, since one score is shared)
+    const allRows = [...delivs, ...miles];
+    const scores = allRows.map(r => r.last_critic_score).filter(s => s != null);
+    _dmsState.lastScore = scores.length ? Math.max(...scores) : null;
+
     const summaryEl = document.getElementById('prep-del-summary');
     if (summaryEl) {
+      const scoreHtml = _dmsState.lastScore != null
+        ? `<div class="text-[10px] mt-0.5 ${_dmsState.lastScore >= 4 ? 'text-green-700' : 'text-amber-700'}">Última nota EACEA: <strong>${_dmsState.lastScore.toFixed(1)}/5</strong></div>`
+        : '';
       summaryEl.innerHTML = `
-        <div class="font-bold text-base ${overCap ? 'text-error' : (dCount === cap ? 'text-amber-600' : 'text-primary')}">${dCount}/${cap} entregables</div>
+        <div class="font-bold text-base ${overCap ? 'text-error' : (overRecommended ? 'text-amber-600' : 'text-primary')}">${dCount}/${recommended} entregables</div>
         <div class="text-[11px]">${mCount} milestones</div>
-        ${overCap ? '<div class="text-[10px] text-error font-bold mt-0.5">Por encima del cap recomendado</div>' : ''}`;
+        ${overCap ? '<div class="text-[10px] text-error font-bold mt-0.5">Por encima del cap duro EACEA</div>' : (overRecommended ? '<div class="text-[10px] text-amber-700 mt-0.5">Por encima del recomendado</div>' : '')}
+        ${scoreHtml}`;
     }
 
     if (!delivs.length && !miles.length) {
@@ -1404,10 +2228,85 @@ const Developer = (() => {
         <div class="bg-surface-container-low rounded-2xl border border-outline-variant/30 p-8 text-center">
           <span class="material-symbols-outlined text-4xl text-on-surface-variant/40 mb-2">inventory_2</span>
           <h3 class="font-headline text-base font-bold mb-1">Aún no hay entregables</h3>
-          <p class="text-sm text-on-surface-variant mb-4">Pulsa <strong>Auto-distribuir desde actividades</strong> para generar una propuesta a partir de las actividades del proyecto. Después puedes editar cada fila o reasignar a otro WP.</p>
+          <p class="text-sm text-on-surface-variant mb-4">Pulsa <strong>🧠 Generar D + MS profesionales</strong> para producir un plan completo a partir de tus tareas, actividades y partners.</p>
         </div>`;
       return;
     }
+
+    // ── Persistent critic panel: shows the last EACEA score above the cards ──
+    if (_dmsState.lastScore != null) {
+      const sc = _dmsState.lastScore;
+      const tone = sc >= 4.5 ? 'border-green-300 bg-green-50' : (sc >= 4 ? 'border-green-200 bg-green-50/70' : (sc >= 3 ? 'border-amber-200 bg-amber-50' : 'border-error/30 bg-error/5'));
+      const txtColor = sc >= 4 ? 'text-green-700' : (sc >= 3 ? 'text-amber-700' : 'text-error');
+      // Find a representative critic run from ai_history? For now, just show score
+      const criticPanel = document.createElement('div');
+      criticPanel.className = `rounded-xl border-2 ${tone} p-3 mb-4 flex items-center gap-3 flex-wrap`;
+      criticPanel.innerHTML = `
+        <div>
+          <p class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">Crítico EACEA</p>
+          <p class="text-2xl font-bold ${txtColor} leading-none">${sc.toFixed(1)}/5 ${sc >= 4 ? '<span class="text-[10px] px-1.5 py-0.5 rounded bg-green-100 text-green-800 font-bold align-middle">SHIP</span>' : '<span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 font-bold align-middle">REPAIR</span>'}</p>
+        </div>
+        <p class="text-[11px] text-on-surface-variant flex-1 min-w-[200px]">
+          Última evaluación tras la generación profesional. Re-genera o pulsa <em>Re-validar</em> en el menú para refrescar.
+        </p>`;
+      host.parentElement.insertBefore(criticPanel, host);
+    }
+
+    // ── Timeline overlay (D as boxes, MS as flags) ──
+    const duration = _dmsState.programme?.duration_months || 24;
+    const months = Array.from({ length: duration }, (_, i) => i + 1);
+    const allItems = [...delivs.map(d => ({ kind: 'D', code: d.code, m: d.due_month, label: d.title, wp: d.wp_code, id: d.id, lead: d.lead_partner_name })),
+                      ...miles.map(m => ({ kind: 'MS', code: m.code, m: m.due_month, label: m.title, wp: m.wp_code, id: m.id, lead: m.lead_partner_name, msKind: m.kind }))];
+    const itemsByMonth = {};
+    for (const it of allItems) {
+      if (!it.m) continue;
+      (itemsByMonth[it.m] ||= []).push(it);
+    }
+    // Pre-existing timeline block container (idempotent)
+    let timelineDiv = document.getElementById('prep-dms-timeline');
+    if (!timelineDiv) {
+      timelineDiv = document.createElement('div');
+      timelineDiv.id = 'prep-dms-timeline';
+      timelineDiv.className = 'rounded-xl border border-outline-variant/30 bg-white p-3 mb-4';
+      host.parentElement.insertBefore(timelineDiv, host);
+    }
+    timelineDiv.innerHTML = `
+      <details>
+        <summary class="cursor-pointer text-xs font-bold text-on-surface flex items-center gap-2">
+          <span class="material-symbols-outlined text-sm">timeline</span> Timeline visual D + MS (${duration} meses)
+          <span class="text-[10px] text-on-surface-variant font-normal ml-auto">click sobre un item para hacer scroll</span>
+        </summary>
+        <div class="mt-3 overflow-x-auto">
+          <div class="min-w-[800px]">
+            <div class="grid gap-px bg-outline-variant/20" style="grid-template-columns: repeat(${duration}, minmax(28px, 1fr));">
+              ${months.map(mm => `<div class="bg-surface-container-low text-center text-[9px] py-1 ${mm % 3 === 1 ? 'font-bold' : 'text-on-surface-variant/60'}">M${mm}</div>`).join('')}
+            </div>
+            <div class="grid gap-px mt-1" style="grid-template-columns: repeat(${duration}, minmax(28px, 1fr));">
+              ${months.map(mm => {
+                const items = itemsByMonth[mm] || [];
+                if (!items.length) return '<div class="min-h-[40px]"></div>';
+                return `<div class="min-h-[40px] flex flex-col gap-0.5 p-0.5">
+                  ${items.map(it => {
+                    if (it.kind === 'D') {
+                      return `<button class="text-[8px] font-mono text-left px-1 py-0.5 rounded bg-primary/10 text-primary truncate hover:bg-primary/20" title="${esc(it.code)} — ${esc(it.label)} (${esc(it.lead || '?')})" data-tl-scroll="${esc(it.id)}">${esc(it.code)}</button>`;
+                    }
+                    const icon = PREP_KIND_ICON[it.msKind] || '🚩';
+                    return `<button class="text-[8px] font-mono text-left px-1 py-0.5 rounded bg-secondary/10 text-secondary truncate hover:bg-secondary/20" title="${esc(it.code)} — ${esc(it.label)} (${esc(it.lead || '?')})" data-tl-scroll="${esc(it.id)}">${icon} ${esc(it.code)}</button>`;
+                  }).join('')}
+                </div>`;
+              }).join('')}
+            </div>
+          </div>
+        </div>
+      </details>`;
+    timelineDiv.querySelectorAll('[data-tl-scroll]').forEach(b => b.addEventListener('click', () => {
+      const target = document.querySelector(`[data-prep-d-row="${b.dataset.tlScroll}"], [data-id="${b.dataset.tlScroll}"]`);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        target.classList.add('ring-2', 'ring-primary');
+        setTimeout(() => target.classList.remove('ring-2', 'ring-primary'), 1500);
+      }
+    }));
 
     // Group by WP
     const byWp = {};
@@ -1430,107 +2329,210 @@ const Developer = (() => {
       return `<select data-prep-partner="${name}" class="w-full px-1.5 py-1 text-[11px] border border-outline-variant/30 rounded">${opts}</select>`;
     };
 
+    // ── Card-based rendering: each D and MS as an editable card (no tables) ──
+    const partnerOptionsHtml = (selectedId) =>
+      ['<option value="">—</option>'].concat(partners.map(p => `<option value="${esc(p.id)}" ${p.id === selectedId ? 'selected' : ''}>${esc(p.name || '')}</option>`)).join('');
+
+    const renderDCard = (d, wpId) => {
+      const sourceIds = new Set((d.source_tasks || []).map(t => t.id));
+      return `
+        <div data-prep-d-row="${esc(d.id)}" data-prep-row-code="${esc(d.code || '')}" data-prep-d-wp="${esc(wpId)}" draggable="true"
+             class="rounded-lg border-l-4 border-l-primary border border-outline-variant/30 bg-white p-3 cursor-move hover:shadow-sm transition-shadow">
+          <!-- Header row: code · title (large) · type · DL · month · lead · actions -->
+          <div class="flex items-baseline gap-2 flex-wrap mb-2">
+            <span class="select-none text-on-surface-variant/40" title="Arrastra para mover de WP">⠿</span>
+            <input data-prep-d="code" data-id="${esc(d.id)}" value="${esc(d.code || '')}"
+                   class="w-16 text-[11px] font-mono font-bold text-primary px-1 py-0.5 bg-transparent border-0 hover:bg-surface-container focus:bg-white focus:ring-1 focus:ring-primary/30 rounded">
+            <textarea data-no-voice="1" data-prep-d="title" data-id="${esc(d.id)}" rows="1"
+                      class="flex-1 min-w-[200px] text-sm font-semibold px-1 py-0.5 bg-transparent border-0 hover:bg-surface-container focus:bg-white focus:ring-1 focus:ring-primary/30 rounded resize-none"
+                      style="overflow:hidden">${esc(d.title || '')}</textarea>
+            <select data-prep-d="type" data-id="${esc(d.id)}" title="${esc(PREP_TYPE_LABELS[d.type] || 'Tipo')}"
+                    class="text-[10px] px-1 py-0.5 rounded bg-surface-container border-0 focus:ring-1 focus:ring-primary/30">
+              ${PREP_DEL_TYPES.map(t => `<option value="${t}" title="${esc(PREP_TYPE_LABELS[t])}" ${d.type === t ? 'selected' : ''}>${t}</option>`).join('')}
+            </select>
+            <select data-prep-d="dissemination_level" data-id="${esc(d.id)}" title="${esc(PREP_DL_LABELS[d.dissemination_level] || 'Nivel difusión')}"
+                    class="text-[10px] px-1 py-0.5 rounded bg-surface-container border-0 focus:ring-1 focus:ring-primary/30">
+              ${PREP_DEL_DISSEM_LEVELS.map(l => `<option value="${l}" title="${esc(PREP_DL_LABELS[l])}" ${d.dissemination_level === l ? 'selected' : ''}>${l}</option>`).join('')}
+            </select>
+            <span class="text-[10px] text-on-surface-variant">M</span>
+            <input type="number" min="1" max="60" data-prep-d="due_month" data-id="${esc(d.id)}" value="${d.due_month || ''}"
+                   class="w-12 text-[10px] text-center px-1 py-0.5 bg-transparent border border-outline-variant/30 rounded focus:ring-1 focus:ring-primary/30">
+            <select data-prep-d="lead_partner_id" data-id="${esc(d.id)}"
+                    class="text-[10px] px-1 py-0.5 rounded bg-surface-container border-0 focus:ring-1 focus:ring-primary/30 max-w-[140px]">${partnerOptionsHtml(d.lead_partner_id)}</select>
+            <button data-prep-d-del="${esc(d.id)}" class="text-on-surface-variant hover:text-error" title="Eliminar"><span class="material-symbols-outlined text-sm">close</span></button>
+          </div>
+
+          <!-- Description -->
+          <textarea data-no-voice="1" data-prep-d="description" data-id="${esc(d.id)}" rows="1"
+                    class="w-full text-[11px] text-on-surface-variant px-1 py-0.5 bg-transparent border-0 hover:bg-surface-container focus:bg-white focus:ring-1 focus:ring-primary/30 rounded resize-none"
+                    style="overflow:hidden" placeholder="Descripción del entregable (formato, idioma, longitud, modo de entrega)">${esc(d.description || '')}</textarea>
+
+          <!-- Footer row: source tasks · KPI · rationale -->
+          <div class="flex items-center gap-3 flex-wrap mt-1.5 text-[10px]">
+            <details class="text-[10px]">
+              <summary class="cursor-pointer text-on-surface-variant/80 hover:text-primary">
+                <span class="material-symbols-outlined text-[12px] align-middle">link</span>
+                Tasks origen (${(d.source_tasks || []).length})${(d.source_tasks || []).length ? ': ' + (d.source_tasks || []).map(t => `<span class="font-mono">${esc(t.code || '')}</span>`).join(', ') : ''}
+              </summary>
+              <div class="mt-1 max-h-32 overflow-y-auto border border-outline-variant/20 rounded p-1 bg-surface-container-low">
+                ${allTasks.map(t => `
+                  <label class="flex items-start gap-1 cursor-pointer hover:bg-primary/5 px-1 py-0.5 rounded">
+                    <input type="checkbox" data-prep-d-task="${esc(d.id)}" value="${esc(t.id)}" ${sourceIds.has(t.id) ? 'checked' : ''} class="mt-0.5">
+                    <span class="text-[10px]"><span class="font-mono text-on-surface-variant/70">${esc(t.code || '')}</span> ${esc(t.title || '')}</span>
+                  </label>`).join('')}
+              </div>
+            </details>
+            <span class="flex items-center gap-1 text-on-surface-variant/80">
+              <span class="material-symbols-outlined text-[12px]">target</span> KPI:
+              <input data-prep-d="kpi" data-id="${esc(d.id)}" value="${esc(d.kpi || '')}" placeholder="ej. ≥50 attendees"
+                     class="w-32 px-1 py-0.5 bg-transparent border-0 hover:bg-surface-container focus:bg-white focus:ring-1 focus:ring-primary/30 rounded text-[10px]">
+            </span>
+            ${d.rationale ? `<span class="italic text-on-surface-variant/70 truncate max-w-[300px]" title="${esc(d.rationale)}">↳ ${esc(d.rationale)}</span>` : ''}
+          </div>
+        </div>`;
+    };
+
+    const renderMsCard = (m) => `
+      <div data-prep-row-code="${esc(m.code || '')}"
+           class="rounded-lg border-l-4 border-l-secondary border border-outline-variant/30 bg-white p-3 hover:shadow-sm transition-shadow">
+        <div class="flex items-baseline gap-2 flex-wrap mb-2">
+          <input data-prep-m="code" data-id="${esc(m.id)}" value="${esc(m.code || '')}"
+                 class="w-14 text-[11px] font-mono font-bold text-secondary px-1 py-0.5 bg-transparent border-0 hover:bg-surface-container focus:bg-white focus:ring-1 focus:ring-primary/30 rounded">
+          <select data-prep-m="kind" data-id="${esc(m.id)}" title="${esc(PREP_KIND_LABEL[m.kind] || 'Tipo')}"
+                  class="text-base px-0.5 py-0.5 border-0 bg-transparent hover:bg-surface-container focus:ring-1 focus:ring-primary/30 rounded">
+            <option value="" ${!m.kind ? 'selected' : ''}>—</option>
+            <option value="kickoff"     ${m.kind === 'kickoff' ? 'selected' : ''}>🚀</option>
+            <option value="deliverable" ${m.kind === 'deliverable' ? 'selected' : ''}>🎯</option>
+            <option value="closure"     ${m.kind === 'closure' ? 'selected' : ''}>✅</option>
+          </select>
+          <textarea data-no-voice="1" data-prep-m="title" data-id="${esc(m.id)}" rows="1"
+                    class="flex-1 min-w-[200px] text-sm font-semibold px-1 py-0.5 bg-transparent border-0 hover:bg-surface-container focus:bg-white focus:ring-1 focus:ring-primary/30 rounded resize-none"
+                    style="overflow:hidden">${esc(m.title || '')}</textarea>
+          <select data-prep-m="deliverable_id" data-id="${esc(m.id)}" title="Cierra qué deliverable"
+                  class="text-[10px] px-1 py-0.5 rounded bg-primary/10 text-primary border-0 focus:ring-1 focus:ring-primary/30 font-mono">
+            <option value="">— sin liga —</option>
+            ${delivs.map(dd => `<option value="${esc(dd.id)}" ${dd.id === m.deliverable_id ? 'selected' : ''}>→ ${esc(dd.code || '')}</option>`).join('')}
+          </select>
+          <span class="text-[10px] text-on-surface-variant">M</span>
+          <input type="number" min="1" max="60" data-prep-m="due_month" data-id="${esc(m.id)}" value="${m.due_month || ''}"
+                 class="w-12 text-[10px] text-center px-1 py-0.5 bg-transparent border border-outline-variant/30 rounded focus:ring-1 focus:ring-primary/30">
+          <select data-prep-m="lead_partner_id" data-id="${esc(m.id)}"
+                  class="text-[10px] px-1 py-0.5 rounded bg-surface-container border-0 focus:ring-1 focus:ring-primary/30 max-w-[140px]">${partnerOptionsHtml(m.lead_partner_id)}</select>
+          <button data-prep-m-del="${esc(m.id)}" class="text-on-surface-variant hover:text-error" title="Eliminar"><span class="material-symbols-outlined text-sm">close</span></button>
+        </div>
+        <textarea data-no-voice="1" data-prep-m="description" data-id="${esc(m.id)}" rows="1"
+                  class="w-full text-[11px] text-on-surface-variant px-1 py-0.5 bg-transparent border-0 hover:bg-surface-container focus:bg-white focus:ring-1 focus:ring-primary/30 rounded resize-none"
+                  style="overflow:hidden" placeholder="Descripción del milestone">${esc(m.description || '')}</textarea>
+        <div class="mt-1.5 flex items-start gap-2 text-[10px]">
+          <span class="text-on-surface-variant/80 mt-0.5 whitespace-nowrap">✓ Verificación:</span>
+          <div class="flex-1">
+            <textarea data-no-voice="1" data-prep-m="verification" data-id="${esc(m.id)}" rows="1"
+                      class="w-full px-1 py-0.5 bg-transparent border-0 hover:bg-surface-container focus:bg-white focus:ring-1 focus:ring-primary/30 rounded resize-none"
+                      style="overflow:hidden" placeholder="Cómo se demuestra que está completado">${esc(m.verification || '')}</textarea>
+            <select data-prep-m-verif-tpl="${esc(m.id)}" class="mt-0.5 text-[10px] border border-outline-variant/20 rounded text-on-surface-variant bg-surface-container-low">
+              <option value="">— plantilla —</option>
+              ${PREP_VERIFY_TEMPLATES.map(t => `<option value="${esc(t)}">${esc(t)}</option>`).join('')}
+            </select>
+          </div>
+        </div>
+      </div>`;
+
     host.innerHTML = wpIds.map(wpId => {
       const blk = byWp[wpId];
       const meta = wpMeta[wpId];
       return `
-      <div class="rounded-xl border border-outline-variant/30 bg-white p-4">
+      <div class="rounded-xl border border-outline-variant/30 bg-surface-container-low p-4" data-prep-wp-drop="${esc(wpId)}">
         <div class="flex items-center gap-2 mb-3">
           <span class="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-primary/10 text-primary">${esc(meta.code || '')}</span>
           <span class="font-semibold text-sm">${esc(meta.title || '')}</span>
-          <span class="text-[11px] text-on-surface-variant ml-auto">${blk.delivs.length} entregables · ${blk.miles.length} milestones</span>
+          <span class="text-[11px] text-on-surface-variant ml-auto">${blk.delivs.length} D · ${blk.miles.length} MS</span>
         </div>
 
-        <h4 class="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant mt-2 mb-1">Deliverables</h4>
-        ${blk.delivs.length ? `
-          <div class="overflow-x-auto">
-            <table class="w-full text-xs border-collapse">
-              <thead class="bg-primary/5">
-                <tr>
-                  <th class="text-left p-1.5 border border-outline-variant/30 w-16">Code</th>
-                  <th class="text-left p-1.5 border border-outline-variant/30 w-44">Título</th>
-                  <th class="text-left p-1.5 border border-outline-variant/30">Descripción</th>
-                  <th class="text-left p-1.5 border border-outline-variant/30 w-20">Tipo</th>
-                  <th class="text-left p-1.5 border border-outline-variant/30 w-24">Disem.</th>
-                  <th class="text-left p-1.5 border border-outline-variant/30 w-16">Mes</th>
-                  <th class="text-left p-1.5 border border-outline-variant/30 w-32">Lead</th>
-                  <th class="border border-outline-variant/30 w-8"></th>
-                </tr>
-              </thead>
-              <tbody>
-                ${blk.delivs.map(d => `
-                  <tr data-prep-d-row="${esc(d.id)}" class="align-top">
-                    <td class="p-1 border border-outline-variant/30 font-mono"><input data-prep-d="code" data-id="${esc(d.id)}" value="${esc(d.code || '')}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
-                    <td class="p-1 border border-outline-variant/30"><input data-prep-d="title" data-id="${esc(d.id)}" value="${esc(d.title || '')}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
-                    <td class="p-1 border border-outline-variant/30"><textarea data-no-voice="1" data-prep-d="description" data-id="${esc(d.id)}" rows="1" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded resize-none">${esc(d.description || '')}</textarea></td>
-                    <td class="p-1 border border-outline-variant/30">
-                      <select data-prep-d="type" data-id="${esc(d.id)}" class="w-full px-1 py-0.5 text-[11px] border-0 bg-transparent focus:bg-white focus:ring-1 focus:ring-primary/30 rounded">
-                        <option value="">—</option>
-                        ${PREP_DEL_TYPES.map(t => `<option value="${t}" ${d.type === t ? 'selected' : ''}>${t}</option>`).join('')}
-                      </select>
-                    </td>
-                    <td class="p-1 border border-outline-variant/30">
-                      <select data-prep-d="dissemination_level" data-id="${esc(d.id)}" class="w-full px-1 py-0.5 text-[11px] border-0 bg-transparent focus:bg-white focus:ring-1 focus:ring-primary/30 rounded">
-                        <option value="">—</option>
-                        ${PREP_DEL_DISSEM_LEVELS.map(l => `<option value="${l}" ${d.dissemination_level === l ? 'selected' : ''}>${l}</option>`).join('')}
-                      </select>
-                    </td>
-                    <td class="p-1 border border-outline-variant/30"><input type="number" min="1" max="60" data-prep-d="due_month" data-id="${esc(d.id)}" value="${d.due_month || ''}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
-                    <td class="p-1 border border-outline-variant/30">
-                      <select data-prep-d="lead_partner_id" data-id="${esc(d.id)}" class="w-full px-1 py-0.5 text-[11px] border-0 bg-transparent focus:bg-white focus:ring-1 focus:ring-primary/30 rounded">
-                        <option value="">—</option>
-                        ${partners.map(p => `<option value="${esc(p.id)}" ${p.id === d.lead_partner_id ? 'selected' : ''}>${esc(p.name || '')}</option>`).join('')}
-                      </select>
-                    </td>
-                    <td class="p-1 border border-outline-variant/30 text-center"><button data-prep-d-del="${esc(d.id)}" class="text-on-surface-variant hover:text-error" title="Eliminar"><span class="material-symbols-outlined text-sm">close</span></button></td>
-                  </tr>`).join('')}
-              </tbody>
-            </table>
-          </div>` : '<p class="text-[11px] italic text-on-surface-variant/60">Sin entregables en este WP.</p>'}
+        <h4 class="text-[10px] font-bold uppercase tracking-wider text-primary/70 mt-2 mb-2">📦 Deliverables</h4>
+        ${blk.delivs.length
+          ? `<div class="space-y-2">${blk.delivs.map(d => renderDCard(d, wpId)).join('')}</div>`
+          : '<p class="text-[11px] italic text-on-surface-variant/60">Sin entregables en este WP.</p>'}
 
-        <h4 class="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant mt-4 mb-1">Milestones</h4>
-        ${blk.miles.length ? `
-          <div class="overflow-x-auto">
-            <table class="w-full text-xs border-collapse">
-              <thead class="bg-secondary/5">
-                <tr>
-                  <th class="text-left p-1.5 border border-outline-variant/30 w-16">Code</th>
-                  <th class="text-left p-1.5 border border-outline-variant/30 w-44">Título</th>
-                  <th class="text-left p-1.5 border border-outline-variant/30">Descripción</th>
-                  <th class="text-left p-1.5 border border-outline-variant/30 w-16">Mes</th>
-                  <th class="text-left p-1.5 border border-outline-variant/30 w-40">Verificación</th>
-                  <th class="text-left p-1.5 border border-outline-variant/30 w-24">Liga D</th>
-                  <th class="border border-outline-variant/30 w-8"></th>
-                </tr>
-              </thead>
-              <tbody>
-                ${blk.miles.map(m => `
-                  <tr class="align-top">
-                    <td class="p-1 border border-outline-variant/30 font-mono"><input data-prep-m="code" data-id="${esc(m.id)}" value="${esc(m.code || '')}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
-                    <td class="p-1 border border-outline-variant/30"><input data-prep-m="title" data-id="${esc(m.id)}" value="${esc(m.title || '')}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
-                    <td class="p-1 border border-outline-variant/30"><textarea data-no-voice="1" data-prep-m="description" data-id="${esc(m.id)}" rows="1" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded resize-none">${esc(m.description || '')}</textarea></td>
-                    <td class="p-1 border border-outline-variant/30"><input type="number" min="1" max="60" data-prep-m="due_month" data-id="${esc(m.id)}" value="${m.due_month || ''}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
-                    <td class="p-1 border border-outline-variant/30"><input data-prep-m="verification" data-id="${esc(m.id)}" value="${esc(m.verification || '')}" class="w-full px-1 py-0.5 bg-transparent border-0 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/30 rounded"></td>
-                    <td class="p-1 border border-outline-variant/30 text-[11px] font-mono text-on-surface-variant">${esc(m.deliverable_code || '—')}</td>
-                    <td class="p-1 border border-outline-variant/30 text-center"><button data-prep-m-del="${esc(m.id)}" class="text-on-surface-variant hover:text-error" title="Eliminar"><span class="material-symbols-outlined text-sm">close</span></button></td>
-                  </tr>`).join('')}
-              </tbody>
-            </table>
-          </div>` : '<p class="text-[11px] italic text-on-surface-variant/60">Sin milestones en este WP.</p>'}
+        <h4 class="text-[10px] font-bold uppercase tracking-wider text-secondary/70 mt-4 mb-2">🚩 Milestones</h4>
+        ${blk.miles.length
+          ? `<div class="space-y-2">${blk.miles.map(renderMsCard).join('')}</div>`
+          : '<p class="text-[11px] italic text-on-surface-variant/60">Sin milestones en este WP.</p>'}
       </div>`;
     }).join('');
 
     // Wire inline editing
+    const blockEnter = (e) => { if (e.key === 'Enter') { e.preventDefault(); e.target.blur(); } };
     host.querySelectorAll('[data-prep-d]').forEach(el => {
-      const handler = () => _prepSaveDeliverable(el.dataset.id, el.dataset.prepD, el.value);
+      const handler = () => _prepSaveDeliverable(el.dataset.id, el.dataset.prepD, el.value).then(() => _dmsRunValidation(pid, false));
       el.addEventListener('change', handler);
       if (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') el.addEventListener('blur', handler);
+      if (el.tagName === 'TEXTAREA') {
+        autoGrow(el);
+        el.addEventListener('input', () => autoGrow(el));
+        if (el.dataset.prepD === 'title') el.addEventListener('keydown', blockEnter);
+      }
     });
     host.querySelectorAll('[data-prep-m]').forEach(el => {
-      const handler = () => _prepSaveMilestone(el.dataset.id, el.dataset.prepM, el.value);
+      const handler = () => _prepSaveMilestone(el.dataset.id, el.dataset.prepM, el.value).then(() => _dmsRunValidation(pid, false));
       el.addEventListener('change', handler);
       if (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') el.addEventListener('blur', handler);
+      if (el.tagName === 'TEXTAREA') {
+        autoGrow(el);
+        el.addEventListener('input', () => autoGrow(el));
+        if (el.dataset.prepM === 'title') el.addEventListener('keydown', blockEnter);
+      }
     });
+
+    // Source-tasks multi-select for deliverables
+    const taskUpdates = {};  // dId → array of taskIds
+    host.querySelectorAll('[data-prep-d-task]').forEach(cb => {
+      cb.addEventListener('change', () => {
+        const dId = cb.dataset.prepDTask;
+        const checked = host.querySelectorAll(`[data-prep-d-task="${dId}"]:checked`);
+        const ids = Array.from(checked).map(c => c.value);
+        clearTimeout(taskUpdates[dId]);
+        taskUpdates[dId] = setTimeout(async () => {
+          try {
+            await API.patch(`/developer/deliverables/${dId}`, { task_ids: ids });
+            _dmsRunValidation(pid, false);
+          } catch (err) { console.error(err); }
+        }, 600);
+      });
+    });
+
+    // Verification template selector → injects into the textarea
+    host.querySelectorAll('[data-prep-m-verif-tpl]').forEach(sel => {
+      sel.addEventListener('change', async () => {
+        if (!sel.value) return;
+        const mId = sel.dataset.prepMVerifTpl;
+        const ta = host.querySelector(`textarea[data-prep-m="verification"][data-id="${mId}"]`);
+        if (ta) {
+          ta.value = sel.value;
+          autoGrow(ta);
+          await _prepSaveMilestone(mId, 'verification', sel.value);
+        }
+        sel.value = '';  // reset
+      });
+    });
+
+    // Regenerate single deliverable
+    host.querySelectorAll('[data-prep-d-regen]').forEach(b => b.addEventListener('click', async () => {
+      const hint = prompt('Pista para mejorar este deliverable (opcional):', '');
+      if (hint === null) return;
+      const dId = b.dataset.prepDRegen;
+      const orig = b.innerHTML; b.disabled = true; b.innerHTML = '<span class="spinner inline-block" style="width:12px;height:12px"></span>';
+      try {
+        await API.post(`/developer/deliverables/${dId}/regenerate`, { hint });
+        if (typeof Toast !== 'undefined' && Toast.show) Toast.show('✓ Deliverable mejorado', 'ok');
+        await _prepDelLoad(pid);
+      } catch (err) { alert(err.message || 'Error'); }
+      finally { b.disabled = false; b.innerHTML = orig; }
+    }));
+
+    // Comments thread (D and MS)
+    host.querySelectorAll('[data-prep-d-comments]').forEach(b => b.addEventListener('click', () => _dmsOpenComments(pid, 'deliverable', b.dataset.prepDComments)));
+    host.querySelectorAll('[data-prep-m-comments]').forEach(b => b.addEventListener('click', () => _dmsOpenComments(pid, 'milestone',  b.dataset.prepMComments)));
+
     host.querySelectorAll('[data-prep-d-del]').forEach(b => b.addEventListener('click', async () => {
       if (!confirm('¿Eliminar este entregable? El milestone asociado conservará su entrada pero perderá la liga.')) return;
       try { await API.del(`/developer/deliverables/${b.dataset.prepDDel}`); await _prepDelLoad(pid); }
@@ -1541,6 +2543,43 @@ const Developer = (() => {
       try { await API.del(`/developer/milestones/${b.dataset.prepMDel}`); await _prepDelLoad(pid); }
       catch (err) { alert(err.message || 'Error'); }
     }));
+
+    // Apply validation badges if a recent run exists
+    _dmsApplyValidationBadges();
+
+    // Drag-and-drop: reasignar deliverable a otro WP arrastrando la fila
+    host.querySelectorAll('[data-prep-d-row][draggable="true"]').forEach(row => {
+      row.addEventListener('dragstart', (e) => {
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/x-deliverable-id', row.dataset.prepDRow);
+        e.dataTransfer.setData('text/x-deliverable-from-wp', row.dataset.prepDWp);
+        row.classList.add('opacity-40');
+      });
+      row.addEventListener('dragend', () => row.classList.remove('opacity-40'));
+    });
+    host.querySelectorAll('[data-prep-wp-drop]').forEach(zone => {
+      zone.addEventListener('dragover', (e) => {
+        if (Array.from(e.dataTransfer.types || []).includes('text/x-deliverable-id')) {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'move';
+          zone.classList.add('ring-2','ring-primary/40','bg-primary/5');
+        }
+      });
+      zone.addEventListener('dragleave', () => zone.classList.remove('ring-2','ring-primary/40','bg-primary/5'));
+      zone.addEventListener('drop', async (e) => {
+        e.preventDefault();
+        zone.classList.remove('ring-2','ring-primary/40','bg-primary/5');
+        const dId = e.dataTransfer.getData('text/x-deliverable-id');
+        const fromWp = e.dataTransfer.getData('text/x-deliverable-from-wp');
+        const toWp = zone.dataset.prepWpDrop;
+        if (!dId || !toWp || fromWp === toWp) return;
+        try {
+          await API.patch(`/developer/deliverables/${dId}`, { work_package_id: toWp });
+          if (typeof Toast !== 'undefined' && Toast.show) Toast.show('Movido a otro WP', 'ok');
+          await _prepDelLoad(pid);
+        } catch (err) { alert(err.message || 'Error'); }
+      });
+    });
   }
 
   async function _prepSaveDeliverable(id, fld, value) {
@@ -1556,22 +2595,24 @@ const Developer = (() => {
   }
 
   async function _prepDelAutoDistribute(pid) {
-    if (!confirm('Esto REEMPLAZA todos los entregables actuales por una distribución automática derivada de tus actividades (cap 15). Los milestones quedarán huérfanos hasta que pulses "Auto-generar milestones". ¿Continuar?')) return;
+    if (!confirm('Auto-distribuir desde actividades (cap 15).\n\nLas filas que hayas editado a mano se conservan. Solo se reemplazan las generadas automáticamente. ¿Continuar?')) return;
     try {
       const res = await API.post(`/developer/projects/${pid}/deliverables/auto-distribute`, {});
       const data = res?.data || res;
-      const msg = `${data.created} entregables creados · ${data.total_activities} actividades` + (data.compressed ? ' (modo compresión)' : '');
+      const preservedNote = data.preserved ? ` · ${data.preserved} preservados` : '';
+      const msg = `${data.created} nuevos${preservedNote} · ${data.total_activities} actividades` + (data.compressed ? ' (compresión)' : '');
       if (typeof Toast !== 'undefined' && Toast.show) Toast.show(msg, 'ok');
       await _prepDelLoad(pid);
     } catch (err) { alert(err.message || 'Error'); }
   }
 
   async function _prepMsAutoGenerate(pid) {
-    if (!confirm('Esto REEMPLAZA todos los milestones actuales por: lanzamiento (M1) + 1 milestone por entregable + reporte final. ¿Continuar?')) return;
+    if (!confirm('Auto-generar milestones: lanzamiento (M1) + 1 por entregable + reporte final.\n\nLos milestones que hayas editado a mano se conservan. Solo se reemplazan los generados automáticamente. ¿Continuar?')) return;
     try {
       const res = await API.post(`/developer/projects/${pid}/milestones/auto-generate`, {});
       const data = res?.data || res;
-      if (typeof Toast !== 'undefined' && Toast.show) Toast.show(`${data.created} milestones creados`, 'ok');
+      const preservedNote = data.preserved ? ` · ${data.preserved} preservados` : '';
+      if (typeof Toast !== 'undefined' && Toast.show) Toast.show(`${data.created} nuevos${preservedNote}`, 'ok');
       await _prepDelLoad(pid);
     } catch (err) { alert(err.message || 'Error'); }
   }
@@ -3116,7 +4157,10 @@ const Developer = (() => {
         </label>
       </div>
       <label class="text-[11px] font-bold text-on-surface-variant block">
-        <span class="block mb-1">Objectives <span class="text-on-surface-variant/60 font-normal">(lista de bullets — uno por línea)</span></span>
+        <div class="flex items-center justify-between mb-1">
+          <span>Objectives <span class="text-on-surface-variant/60 font-normal">(lista de bullets — uno por línea)</span></span>
+          ${_wpAiCardBtn('objectives', wpId)}
+        </div>
         <textarea data-no-voice="1" data-wp-fld="objectives" rows="3" class="w-full px-3 py-2 text-sm bg-white border border-outline-variant/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/15" placeholder="• Objetivo 1&#10;• Objetivo 2">${esc(h.objectives || '')}</textarea>
       </label>`;
 
@@ -3158,6 +4202,7 @@ const Developer = (() => {
           <span class="material-symbols-outlined text-base">task_alt</span> Activities and division of work (Tasks)
         </h3>
         <div class="flex items-center gap-3">
+          ${_wpAiCardBtn('tasks', wpId)}
           <button onclick="Developer._wpResyncTasks('${esc(wpId)}', '${esc(wpNum)}')" class="text-xs font-bold text-secondary inline-flex items-center gap-1 hover:underline" title="Reemplaza las tasks de este WP por las que vienen de la pestaña Tareas + actividades">
             <span class="material-symbols-outlined text-sm">sync</span> Sincronizar desde Tareas
           </button>
@@ -3312,9 +4357,12 @@ const Developer = (() => {
         <h3 class="text-sm font-bold text-primary flex items-center gap-1.5">
           <span class="material-symbols-outlined text-base">flag</span> Milestones
         </h3>
-        <button onclick="Developer._wpAddMs('${esc(wpId)}')" class="text-xs font-bold text-primary inline-flex items-center gap-1 hover:underline">
-          <span class="material-symbols-outlined text-sm">add</span> Añadir milestone
-        </button>
+        <div class="flex items-center gap-3">
+          ${_wpAiCardBtn('milestones', wpId)}
+          <button onclick="Developer._wpAddMs('${esc(wpId)}')" class="text-xs font-bold text-primary inline-flex items-center gap-1 hover:underline">
+            <span class="material-symbols-outlined text-sm">add</span> Añadir milestone
+          </button>
+        </div>
       </div>
       ${rows.length ? `
       <div class="overflow-x-auto">
@@ -3405,9 +4453,12 @@ const Developer = (() => {
         <h3 class="text-sm font-bold text-primary flex items-center gap-1.5">
           <span class="material-symbols-outlined text-base">deployed_code</span> Deliverables
         </h3>
-        <button onclick="Developer._wpAddDl('${esc(wpId)}', '${esc(wpNum)}')" class="text-xs font-bold text-primary inline-flex items-center gap-1 hover:underline">
-          <span class="material-symbols-outlined text-sm">add</span> Añadir deliverable
-        </button>
+        <div class="flex items-center gap-3">
+          ${_wpAiCardBtn('deliverables', wpId)}
+          <button onclick="Developer._wpAddDl('${esc(wpId)}', '${esc(wpNum)}')" class="text-xs font-bold text-primary inline-flex items-center gap-1 hover:underline">
+            <span class="material-symbols-outlined text-sm">add</span> Añadir deliverable
+          </button>
+        </div>
       </div>
       ${rows.length ? `
       <div class="overflow-x-auto">
@@ -3482,39 +4533,60 @@ const Developer = (() => {
     } catch (err) { alert(err.message || 'Error'); }
   }
 
-  /* ── Master AI fill: synthesise objectives + 3 tables in one go ── */
+  /* ── AI fill: synthesise objectives + 3 tables. `targets` (optional)
+        restricts to a subset, e.g. ['tasks'] only refills the Tasks table. ── */
 
-  async function _wpAiFill(wpId) {
-    if (!confirm('La IA generará Objectives, Tasks, Milestones y Deliverables a partir del contexto del proyecto.\n\nLas filas existentes en este WP se REEMPLAZARÁN. ¿Continuar?')) return;
-    const btn = document.getElementById('wp-ai-fill-btn');
+  const _AI_TARGET_LABELS = {
+    objectives: 'Objectives',
+    tasks: 'Tasks',
+    milestones: 'Milestones',
+    deliverables: 'Deliverables',
+  };
+
+  async function _wpAiFill(wpId, targets) {
+    const all = !targets || !targets.length;
+    const labels = all ? 'Objectives, Tasks, Milestones y Deliverables' : targets.map(t => _AI_TARGET_LABELS[t] || t).join(' / ');
+    if (!confirm(`La IA generará ${labels} a partir del contexto del proyecto.\n\nLas filas existentes en este WP para esa(s) tabla(s) se REEMPLAZARÁN. ¿Continuar?`)) return;
+
+    // Find the button that triggered this (master or per-card mini)
+    const btnId = all ? 'wp-ai-fill-btn' : `wp-ai-fill-${targets[0]}-btn`;
+    const btn = document.getElementById(btnId);
+    let prevHtml = null;
     if (btn) {
       btn.disabled = true;
+      prevHtml = btn.innerHTML;
       btn.innerHTML = '<span class="material-symbols-outlined text-lg animate-spin">progress_activity</span> Generando…';
       btn.classList.add('opacity-70');
     }
     try {
-      await API.post(`/developer/wp/${wpId}/ai-fill`, {});
-      // Re-render all WP cards with fresh data
+      const body = all ? {} : { targets };
+      await API.post(`/developer/wp/${wpId}/ai-fill`, body);
       const projectId = currentProject?.id;
       const partners = projectId ? await _wpFetchPartners(projectId) : [];
       const sec = flatSections[cascadeIndex];
       const wpCode = sec?.wpMeta?.code || '';
-      await Promise.all([
-        _wpRenderHeaderCard(wpId, partners),
-        _wpRenderTasksCard(wpId, partners, wpCode),
-        _wpRenderMilestonesCard(wpId, partners),
-        _wpRenderDeliverablesCard(wpId, partners, wpCode),
-      ]);
+      const renderers = [];
+      if (all || targets.includes('objectives')) renderers.push(_wpRenderHeaderCard(wpId, partners));
+      if (all || targets.includes('tasks'))      renderers.push(_wpRenderTasksCard(wpId, partners, wpCode));
+      if (all || targets.includes('milestones')) renderers.push(_wpRenderMilestonesCard(wpId, partners));
+      if (all || targets.includes('deliverables')) renderers.push(_wpRenderDeliverablesCard(wpId, partners, wpCode));
+      await Promise.all(renderers);
     } catch (err) {
       alert('Error al generar con IA: ' + (err.message || ''));
     } finally {
-      const b = document.getElementById('wp-ai-fill-btn');
+      const b = document.getElementById(btnId);
       if (b) {
         b.disabled = false;
-        b.innerHTML = '<span class="material-symbols-outlined text-lg text-yellow-200">auto_awesome</span> Rellenar con IA';
+        if (prevHtml) b.innerHTML = prevHtml;
         b.classList.remove('opacity-70');
       }
     }
+  }
+
+  function _wpAiCardBtn(targetKey, wpId) {
+    return `<button id="wp-ai-fill-${targetKey}-btn" onclick="Developer._wpAiFill('${esc(wpId)}', ['${targetKey}'])" class="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 border border-purple-200 transition-colors" title="Rellenar solo esta tabla con IA">
+      <span class="material-symbols-outlined text-sm">auto_awesome</span> IA
+    </button>`;
   }
 
   /* ── Card 5: Estimated budget — Resources (read-only pivot) ── */

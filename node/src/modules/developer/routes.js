@@ -96,7 +96,26 @@ router.post  ('/wp/:wpId/tasks/resync',                    requireAuth, ctrl.res
 router.get   ('/projects/:projectId/deliverables',         requireAuth, ctrl.listProjectDeliverables);
 router.get   ('/projects/:projectId/milestones',           requireAuth, ctrl.listProjectMilestones);
 router.get   ('/projects/:projectId/deliverables/summary', requireAuth, ctrl.getDeliverableSummary);
-router.post  ('/projects/:projectId/deliverables/auto-distribute', requireAuth, ctrl.autoDistributeDeliverables);
-router.post  ('/projects/:projectId/milestones/auto-generate',     requireAuth, ctrl.autoGenerateMilestones);
+// v2 holistic generator (3-pass: plan → copy → critic)
+router.post  ('/projects/:projectId/deliverables-milestones/preview-v2',   requireAuth, ctrl.dmsPreviewV2);
+router.post  ('/projects/:projectId/deliverables-milestones/apply-v2',     requireAuth, ctrl.dmsApplyV2);
+router.get   ('/projects/:projectId/deliverables-milestones/programme',    requireAuth, ctrl.dmsProgrammeMeta);
+router.get   ('/projects/:projectId/dms/tasks',                            requireAuth, ctrl.dmsListTasks);
+router.get   ('/projects/:projectId/deliverables-milestones/validate',     requireAuth, ctrl.dmsValidate);
+router.post  ('/projects/:projectId/deliverables-milestones/autolink',     requireAuth, ctrl.dmsAutolink);
+router.post  ('/projects/:projectId/deliverables-milestones/apply-fixes',  requireAuth, ctrl.dmsApplyFixes);
+router.post  ('/deliverables/:id/regenerate',                              requireAuth, ctrl.dmsRegenerateDeliverable);
+
+// Snapshots, audit log, exports
+router.get   ('/projects/:projectId/dms/snapshots',     requireAuth, ctrl.dmsListSnapshots);
+router.post  ('/dms/snapshots/:id/restore',             requireAuth, ctrl.dmsRestoreSnapshot);
+router.get   ('/projects/:projectId/dms/ai-history',    requireAuth, ctrl.dmsAiHistory);
+router.get   ('/projects/:projectId/dms/export.csv',    requireAuth, ctrl.dmsExportCsv);
+
+// Comments thread on D / MS rows
+router.get   ('/projects/:projectId/dms/comments',  requireAuth, ctrl.dmsListComments);
+router.post  ('/projects/:projectId/dms/comments',  requireAuth, ctrl.dmsCreateComment);
+router.patch ('/dms/comments/:id',                  requireAuth, ctrl.dmsUpdateComment);
+router.delete('/dms/comments/:id',                  requireAuth, ctrl.dmsDeleteComment);
 
 module.exports = router;
