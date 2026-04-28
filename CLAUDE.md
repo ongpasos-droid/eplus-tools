@@ -33,6 +33,31 @@ Este repo tiene dos Claudes trabajando en paralelo, cada uno en su rama:
 - **Funcionales** (dos implementaciones del mismo feature) → la mejor solución gana.
 - **Negocio** (flujo de usuario, decisiones de producto) → siempre preguntar a Oscar.
 
+## Servidor y Entorno
+
+Antes de asumir que un bug está en el código, comprueba el entorno:
+
+- Tras añadir endpoints o cambiar archivos de rutas (`node/src/modules/*/routes.js`, `server.js`), Oscar tiene que **reiniciar el `node server.js` manualmente** desde Laragon. Si pruebas un endpoint nuevo y devuelve 404, pídele que reinicie antes de cazar el bug.
+- Antes de migraciones o queries, comprobar que **MySQL de Laragon esté corriendo** (`/c/laragon`, MySQL 8.4). Si una migración falla con `ECONNREFUSED`, no reintentar — sacar a la luz que MySQL está caído.
+- Cuando `git push` falle por permisos del sandbox, **parar y pedir a Oscar que lo ejecute él** en lugar de entrar en bucle.
+- Las env vars de producción están en Coolify, no en el repo. Si el VPS falla por config faltante, no inventar — pedir a Oscar que la verifique en Coolify.
+
+## Protocolo de investigación
+
+Antes de cambiar código:
+
+1. Confirmar que el repo/cwd activo es `eplus-tools` (no `ka3-writer` ni el WP). Oscar tiene varios proyectos.
+2. Cuando se persiga un error de API (403/404/500), **pedir pegar la env var o config relevante ANTES** de probar variantes de endpoint. Las erratas en env vars (`l` vs `I`, espacios, comillas) son la causa raíz más común.
+3. Leer el código real involucrado (`Read` en el archivo, `Grep` por el símbolo) antes de proponer un fix. No adivinar por nombre de archivo.
+4. Para bugs reportados desde Live, comprobar primero si el problema existe también en local. Si solo está en Live, sospechar de datos/migraciones/env vars de producción, no del código.
+
+## Disciplina de scope
+
+- Para trabajo de UI/feature, entregar la **versión mínima viable primero**. No añadir botones, paneles ni opciones extra sin que se pidan.
+- Cuando Oscar pida un plan multi-stage (S1-S8, bloques 1-5), **ejecutar hasta completar** salvo que pida explícitamente aprobación incremental.
+- Si una feature se vuelve compleja a mitad de implementación, **pausar y confirmar dirección** antes de añadir más superficie.
+- Los bug fixes no necesitan refactor de cleanup colateral. Las operaciones one-shot no necesitan helper. Tres líneas similares es mejor que una abstracción prematura.
+
 ## Desarrollo local
 
 Oscar trabaja en local con Laragon antes de hacer push:
@@ -71,3 +96,9 @@ public/css/                   → main.css
 migrations/                   → SQL migrations (auto-ejecutadas al deploy)
 scripts/migrate.js            → Runner de migraciones (tolerante a duplicados)
 ```
+
+## Idioma y locale
+
+- Por defecto, copy de UI y contenido generado por IA en **español**. Derivar el idioma del campo/contexto (ej. campos de NA en Erasmus+ son en español).
+- Si Oscar pide explícitamente otro idioma, respetarlo.
+- Mensajes de error técnicos al usuario también en español; logs internos pueden ir en inglés.
