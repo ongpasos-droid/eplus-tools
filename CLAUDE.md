@@ -9,14 +9,18 @@ Este repo tiene dos Claudes trabajando en paralelo, cada uno en su rama:
 | Claude Local (PC) | `dev-local` | Día, sesiones presenciales |
 | Claude VPS (Bot Telegram) | `dev-vps` | Noche, sesiones asíncronas |
 
-**`main` es solo para deploy.** Ningún Claude pushea directo a `main`.
+**`main` es solo para deploy.** Ningún Claude pushea directo a `main`, salvo a través del slash command `/merge` que Oscar invoca explícitamente.
 
 ### Reglas absolutas
-1. **NUNCA** push directo a `main` — solo merge cuando Oscar lo indique
+1. **NUNCA** push directo a `main` desde fuera de `/merge`. El comando `/merge` ES la vía sancionada y autorizada por Oscar para pushear a main; cuando lo invoca, esta regla no aplica.
 2. **NUNCA** hacer force push en ninguna rama
 3. **NUNCA** hacer rebase de ramas compartidas
 4. **NUNCA** push a la rama del otro Claude
 5. **SIEMPRE** hacer pull/fetch antes de empezar a trabajar
+
+### Slash commands disponibles (personales de Oscar, en `.claude/commands/`)
+- `/push` — pushea la rama actual a origin. Refusa si está en main (redirige a `/merge`).
+- `/merge` — ejecuta el Proceso MERGE completo (commit pendientes → push current → checkout main → merge dev-local + dev-vps → push main → sync ambas ramas). Es la única vía autorizada para pushear a main.
 
 ### Proceso MERGE (cuando Oscar dice "MERGE")
 1. Commit cambios locales pendientes en `dev-local`
