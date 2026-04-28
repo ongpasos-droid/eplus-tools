@@ -4,7 +4,8 @@
 
 const App = (() => {
   let currentUser = null;
-  let currentRoute = 'dashboard';
+  let currentRoute = 'my-projects';
+  let activeProject = null;
 
   /* ── Load public config and init Google Sign-In ───────────── */
   async function loadConfig() {
@@ -18,7 +19,11 @@ const App = (() => {
           window.google.accounts.id.initialize({
             client_id: data.googleClientId,
             callback: Auth.handleGoogleResponse,
-            auto_prompt: false,
+            auto_select: false,
+            cancel_on_tap_outside: true,
+            use_fedcm_for_prompt: false,
+            itp_support: true,
+            ux_mode: 'popup',
           });
           window.google.accounts.id.renderButton(
             document.querySelector('.g_id_signin'),
@@ -72,7 +77,7 @@ const App = (() => {
 
     // Handle browser back/forward
     window.addEventListener('hashchange', () => {
-      const hash = location.hash.slice(1) || 'dashboard';
+      const hash = location.hash.slice(1) || 'my-projects';
       if (currentUser) navigate(hash, false);
     });
   }
@@ -215,6 +220,18 @@ const App = (() => {
 
   /* ── SPA Navigation ────────────────────────────────────────── */
   function navigate(route, pushHash = true, newProject = false) {
+    // Legacy: #create no longer has its own panel — open the modal over Mis Proyectos
+    if (route === 'create') {
+      if (currentRoute !== 'my-projects') {
+        currentRoute = 'my-projects';
+        if (pushHash) location.hash = 'my-projects';
+        document.querySelectorAll('#content-area .panel').forEach(p => p.classList.remove('active'));
+        document.getElementById('panel-my-projects')?.classList.add('active');
+        if (typeof MyProjects !== 'undefined') MyProjects.init();
+      }
+      if (typeof window.openCreateModal === 'function') window.openCreateModal();
+      return;
+    }
     // Aviso si hay cambios sin guardar en Intake
     if (currentRoute === 'intake' && route !== 'intake') {
       if (typeof Intake !== 'undefined' && Intake.hasUnsavedChanges && Intake.hasUnsavedChanges()) {
@@ -258,29 +275,30 @@ const App = (() => {
 
     // Update topbar title
     const titles = {
-      dashboard:  'Dashboard',
-      'my-projects': 'Mis Proyectos',
-      create:     'Design',
-      intake:     'Intake',
-      developer:  'Write',
-      calculator: 'Calculator',
-      planner:    'Planner',
-      developer:  'Developer',
-      evaluator:  'Evaluator',
-      budget:     'Presupuesto',
-      partners:   'Partners',
-      'my-documents': 'My Documents',
-      research:       'Research',
-      'my-org':       'Mi Organización',
-      organizations:  'Partner Engine',
-      shortlists:     'Mi Pool',
-      'atlas-stats':  'Atlas Stats',
-      admin:          'Admin — Data E+'
+      dashboard:        'Dashboard',
+      'my-projects':    'Mis Proyectos',
+      'my-evaluations': 'Mis Evaluaciones',
+      create:           'Diseñar',
+      intake:           'Presupuestar',
+      developer:        'Escribir',
+      calculator:       'Calculator',
+      planner:          'Planner',
+      evaluator:        'Evaluar',
+      budget:           'Presupuesto',
+      partners:         'Partners',
+      'my-documents':   'My Documents',
+      research:         'Research',
+      'my-org':         'Mi Organización',
+      organizations:    'Partner Engine',
+      shortlists:       'Mi Pool',
+      'atlas-stats':    'Atlas Stats',
+      admin:            'Admin — Data E+'
     };
     document.getElementById('topbar-title').textContent = titles[route] || 'E+ Tools';
 
     // Initialize module when navigating to it
     if (route === 'my-projects' && typeof MyProjects !== 'undefined') MyProjects.init();
+    if (route === 'my-evaluations' && typeof MyEvaluations !== 'undefined') MyEvaluations.init();
     if (route === 'create' && typeof CreateProject !== 'undefined') CreateProject.init();
     if (route === 'intake' && typeof Intake !== 'undefined') {
       Intake.init();
@@ -308,8 +326,24 @@ const App = (() => {
     overlay?.classList.toggle('show', open);
   }
 
+  /* ── Active project (drives the contextual section of the sidebar) ─── */
+  function setActiveProject(project) {
+    activeProject = project || null;
+    const section = document.getElementById('sidebar-project-section');
+    const nameEl  = document.getElementById('sidebar-project-name');
+    if (!section) return;
+    if (activeProject) {
+      section.classList.remove('hidden');
+      if (nameEl) nameEl.textContent = activeProject.name || activeProject.acronym || 'Proyecto';
+    } else {
+      section.classList.add('hidden');
+      if (nameEl) nameEl.textContent = '';
+    }
+  }
+  function getActiveProject() { return activeProject; }
+
   /* ── Public API ────────────────────────────────────────────── */
-  return { init, onAuth, onLogout, showAuthTab, showAuthInfo, navigate, toggleSidebar };
+  return { init, onAuth, onLogout, showAuthTab, showAuthInfo, navigate, toggleSidebar, setActiveProject, getActiveProject };
 })();
 
 

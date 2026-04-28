@@ -155,6 +155,9 @@ const CreateProject = (() => {
       Intake.startNew();
     }
 
+    // Close the create modal if open
+    if (typeof window.closeCreateModal === 'function') window.closeCreateModal();
+
     // Switch to intake panel
     document.querySelectorAll('#content-area .panel').forEach(panel => panel.classList.remove('active'));
     document.getElementById('panel-intake')?.classList.add('active');
@@ -162,7 +165,7 @@ const CreateProject = (() => {
       link.classList.toggle('active', link.dataset.route === 'intake');
     });
     location.hash = 'intake';
-    document.getElementById('topbar-title').textContent = 'Intake';
+    document.getElementById('topbar-title').textContent = 'Presupuestar';
   }
 
   async function uploadDocx(e) {

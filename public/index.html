@@ -104,14 +104,14 @@ tailwind.config = {
       <ul class="efs-topbar__menu">
         <li><a href="https://eufundingschool.com/recursos/" target="_top">Recursos</a></li>
         <li><a href="https://eufundingschool.com/academia/" target="_top">Academia</a></li>
-        <li class="is-current"><a href="#dashboard">Proyectos</a></li>
+        <li class="is-current"><a href="#my-projects">Proyectos</a></li>
       </ul>
     </nav>
     <div class="efs-topbar__cta">
       <a id="topbar-cta-back" class="efs-topbar__login" href="https://eufundingschool.com/" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.3);">
         ← Volver a la web
       </a>
-      <a id="topbar-cta-account" class="efs-topbar__login" href="#dashboard" style="display:none;">
+      <a id="topbar-cta-account" class="efs-topbar__login" href="#my-projects" style="display:none;">
         Mi cuenta · <span id="topbar-user-name">…</span>
       </a>
     </div>
@@ -328,39 +328,42 @@ tailwind.config = {
 
     <!-- Nav links -->
     <nav class="flex-1 py-4 px-3 space-y-1 overflow-y-auto" id="sidebar-nav">
-      <a href="#dashboard"
-        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
-        data-route="dashboard">
-        <span class="material-symbols-outlined text-[20px]">dashboard</span>
-        Dashboard
-      </a>
       <a href="#my-projects"
         class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
         data-route="my-projects">
         <span class="material-symbols-outlined text-[20px]">folder_shared</span>
         Mis Proyectos
       </a>
+      <a href="#my-evaluations"
+        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
+        data-route="my-evaluations">
+        <span class="material-symbols-outlined text-[20px]">fact_check</span>
+        Mis Evaluaciones
+      </a>
 
-      <!-- Projects: 3 phases -->
-      <div class="mt-3 mb-1 px-3 text-[10px] font-semibold tracking-[.2em] uppercase text-white/30">Proposal Builder</div>
-      <a href="#create"
-        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
-        data-route="create">
-        <span class="material-symbols-outlined text-[20px]" style="color:#60a5fa">architecture</span>
-        Design
-      </a>
-      <a href="#developer"
-        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
-        data-route="developer">
-        <span class="material-symbols-outlined text-[20px]" style="color:#a78bfa">edit_document</span>
-        Write
-      </a>
-      <a href="#evaluator"
-        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
-        data-route="evaluator">
-        <span class="material-symbols-outlined text-[20px]" style="color:#4ade80">verified</span>
-        Evaluate
-      </a>
+      <!-- Active project phases (rendered contextually by app.js when a project is open) -->
+      <div id="sidebar-project-section" class="hidden">
+        <div class="mt-3 mb-1 px-3 text-[10px] font-semibold tracking-[.2em] uppercase text-white/30">Proyecto activo</div>
+        <div id="sidebar-project-name" class="px-3 mb-2 text-xs font-bold text-white truncate"></div>
+        <a href="#intake"
+          class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
+          data-route="intake">
+          <span class="material-symbols-outlined text-[20px]" style="color:#60a5fa">architecture</span>
+          Presupuestar
+        </a>
+        <a href="#developer"
+          class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
+          data-route="developer">
+          <span class="material-symbols-outlined text-[20px]" style="color:#a78bfa">edit_document</span>
+          Escribir
+        </a>
+        <a href="#evaluator"
+          class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
+          data-route="evaluator">
+          <span class="material-symbols-outlined text-[20px]" style="color:#4ade80">verified</span>
+          Evaluar
+        </a>
+      </div>
       <!-- Organization -->
       <div class="mt-3 mb-1 px-3 text-[10px] font-semibold tracking-[.2em] uppercase text-white/30">Organization</div>
       <a href="#my-org"
@@ -490,7 +493,7 @@ tailwind.config = {
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
 
           <!-- Phase 1: Design -->
-          <div class="group relative bg-white rounded-2xl border-2 border-outline-variant/20 hover:border-[#1b1464]/30 p-6 transition-all hover:shadow-xl cursor-pointer" onclick="location.hash='create'">
+          <div class="group relative bg-white rounded-2xl border-2 border-outline-variant/20 hover:border-[#1b1464]/30 p-6 transition-all hover:shadow-xl cursor-pointer" onclick="location.hash='my-projects'; setTimeout(() => window.openCreateModal && window.openCreateModal(), 100)">
             <div class="flex items-center gap-3 mb-4">
               <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center group-hover:bg-[#1b1464] transition-colors">
                 <span class="material-symbols-outlined text-blue-600 text-2xl group-hover:text-[#fbff12] transition-colors">architecture</span>
@@ -646,44 +649,64 @@ tailwind.config = {
             </div>
             <button type="button" id="my-projects-new-btn"
               class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white bg-primary hover:bg-primary/90 shadow-md transition-all">
-              <span class="material-symbols-outlined text-lg">add</span> Nuevo proyecto
+              <span class="material-symbols-outlined text-lg">add</span> Nuevo desde call
             </button>
           </div>
           <div id="my-projects-list"></div>
         </div>
       </section>
 
-      <!-- Create Project panel -->
-      <section id="panel-create" class="panel">
+      <!-- My Evaluations panel (Path B — proyectos antiguos solo para diagnóstico) -->
+      <section id="panel-my-evaluations" class="panel">
         <div class="max-w-6xl mx-auto">
-          <h1 class="font-headline text-3xl font-extrabold tracking-tighter text-primary mb-1">Start a project</h1>
-          <p class="text-on-surface-variant text-base mb-8">Choose how you want to begin.</p>
+          <div class="flex items-center justify-between mb-8">
+            <div>
+              <h1 class="font-headline text-3xl font-extrabold tracking-tighter text-primary mb-1">Mis Evaluaciones</h1>
+              <p class="text-on-surface-variant text-base">Sube un proyecto presentado y obtén un diagnóstico estilo EACEA. Si quieres, conviértelo en proyecto editable.</p>
+            </div>
+            <button type="button" id="my-evaluations-new-btn"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white bg-primary hover:bg-primary/90 shadow-md transition-all">
+              <span class="material-symbols-outlined text-lg">upload_file</span> Subir proyecto
+            </button>
+          </div>
+          <div id="my-evaluations-list"></div>
+        </div>
+      </section>
 
-          <!-- Path 1: Design — full width with call selector on the right -->
-          <div class="bg-white rounded-2xl border-2 border-blue-200/50 p-6 mb-4 hover:shadow-lg transition-all">
+      <!-- Create Project modal (call selector — opens from "Nuevo desde call" in Mis Proyectos) -->
+      <div id="create-modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm items-center justify-center p-4" onclick="if(event.target===this)window.closeCreateModal()">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+          <div class="flex items-center justify-between p-6 border-b border-outline-variant/20">
+            <div>
+              <h2 class="font-headline text-xl font-extrabold text-primary">Nuevo proyecto desde una convocatoria</h2>
+              <p class="text-xs text-on-surface-variant mt-1">Elige la call sobre la que vas a construir tu propuesta.</p>
+            </div>
+            <button type="button" onclick="window.closeCreateModal()"
+              class="w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors">
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+          <div class="p-6">
             <div class="flex gap-6">
-              <!-- Left: description -->
-              <div class="w-72 flex-shrink-0">
+              <!-- Left: description + start button -->
+              <div class="w-64 flex-shrink-0">
                 <div class="flex items-center gap-3 mb-3">
                   <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
                     <span class="material-symbols-outlined text-blue-600 text-xl">architecture</span>
                   </div>
-                  <div>
-                    <div class="text-[9px] font-extrabold uppercase tracking-widest text-blue-500">New project</div>
-                    <h3 class="font-headline text-base font-extrabold text-on-surface">Build something new</h3>
-                  </div>
+                  <h3 class="font-headline text-base font-extrabold text-on-surface">Empezar desde cero</h3>
                 </div>
-                <p class="text-xs text-on-surface-variant leading-relaxed mb-4">Select a call, define partners, plan activities and calculate your budget. Build the foundations.</p>
+                <p class="text-xs text-on-surface-variant leading-relaxed mb-4">Selecciona una convocatoria, define el consorcio, planifica actividades y calcula tu presupuesto.</p>
                 <button type="button" id="create-btn-start" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-[#fbff12] bg-[#1b1464] hover:bg-[#1b1464]/90 transition-colors">
-                  <span class="material-symbols-outlined text-sm">rocket_launch</span> Start designing
+                  <span class="material-symbols-outlined text-sm">rocket_launch</span> Empezar
                 </button>
               </div>
               <!-- Right: call selector -->
-              <div class="flex-1 min-w-0 border-l border-blue-100 pl-6">
+              <div class="flex-1 min-w-0 border-l border-outline-variant/20 pl-6">
                 <div class="flex items-center gap-3 mb-3">
                   <div class="relative flex-1">
                     <span class="material-symbols-outlined text-on-surface-variant/40 absolute left-3 top-1/2 -translate-y-1/2 text-base">search</span>
-                    <input type="text" id="create-prog-search" placeholder="Search calls..."
+                    <input type="text" id="create-prog-search" placeholder="Buscar convocatorias..."
                       class="w-full pl-9 pr-3 py-2 rounded-lg border border-outline-variant/20 text-xs focus:outline-none focus:ring-2 focus:ring-primary/20 bg-gray-50">
                   </div>
                   <div class="flex items-center gap-1 flex-wrap" id="create-prog-filters">
@@ -695,35 +718,20 @@ tailwind.config = {
                     <button data-filter="all" class="create-filter-btn px-2 py-1 rounded text-[9px] font-bold bg-gray-50 text-gray-500 border border-gray-100 transition-colors">All</button>
                   </div>
                 </div>
-                <div class="flex flex-col gap-1.5 max-h-[280px] overflow-y-auto pr-1" id="create-prog-list"></div>
+                <div class="flex flex-col gap-1.5 max-h-[400px] overflow-y-auto pr-1" id="create-prog-list"></div>
               </div>
             </div>
           </div>
-
-          <!-- Path 2: Already have a proposal -->
-          <div class="group bg-white rounded-2xl border-2 border-purple-200/50 hover:border-purple-300 p-6 mb-4 cursor-pointer transition-all hover:shadow-lg" onclick="location.hash='developer'">
-            <div class="flex items-center gap-5">
-              <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center flex-shrink-0 group-hover:bg-purple-500 transition-colors">
-                <span class="material-symbols-outlined text-purple-600 text-xl group-hover:text-white transition-colors">upload_file</span>
-              </div>
-              <div class="flex-1 min-w-0">
-                <h3 class="font-headline text-base font-extrabold text-on-surface">I already have a proposal</h3>
-                <p class="text-xs text-on-surface-variant leading-relaxed mt-1">Upload your existing .docx proposal and take it to the next level with AI-powered writing and expert evaluation criteria.</p>
-              </div>
-              <span class="material-symbols-outlined text-purple-300 group-hover:text-purple-600 text-2xl transition-colors">arrow_forward</span>
-            </div>
-          </div>
-
-          <!-- Hidden fields -->
+          <!-- Hidden fields needed by create.js (kept inside modal so they exist in DOM) -->
           <div style="display:none!important">
             <span id="create-ro-dl"></span><span id="create-ro-gr"></span><span id="create-ro-co"></span>
             <span id="create-ro-in"></span><span id="create-ro-sf"></span><span id="create-ro-st"></span>
             <span id="create-ro-dur"></span>
+            <div id="create-upload-status"></div>
+            <input type="file" id="create-upload-docx" accept=".docx">
           </div>
-          <div id="create-upload-status" class="hidden mt-3"></div>
-          <input type="file" id="create-upload-docx" accept=".docx" class="hidden">
         </div>
-      </section>
+      </div>
 
       <!-- Intake panel -->
       <section id="panel-intake" class="panel">
@@ -2571,6 +2579,7 @@ tailwind.config = {
 <script src="/js/auth.js"></script>
 <script src="/js/app.js"></script>
 <script src="/js/my-projects.js"></script>
+<script src="/js/my-evaluations.js"></script>
 <script src="/js/create.js"></script>
 <script src="/js/intake.js?v=20260413b"></script>
 <script src="/js/admin.js"></script>
@@ -2674,6 +2683,27 @@ document.getElementById('mini-modal-confirm').addEventListener('click', () => {
 document.getElementById('mini-modal-cancel').addEventListener('click', () => Modal._close(null));
 document.getElementById('mini-modal').addEventListener('click', e => { if (e.target === e.currentTarget) Modal._close(null); });
 document.getElementById('mini-modal-input-text').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('mini-modal-confirm').click(); });
+
+/* Create-project modal: open/close + ESC to dismiss */
+window.openCreateModal = function() {
+  const m = document.getElementById('create-modal');
+  if (!m) return;
+  m.classList.remove('hidden');
+  m.classList.add('flex');
+  if (typeof CreateProject !== 'undefined') CreateProject.init();
+};
+window.closeCreateModal = function() {
+  const m = document.getElementById('create-modal');
+  if (!m) return;
+  m.classList.add('hidden');
+  m.classList.remove('flex');
+};
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    const m = document.getElementById('create-modal');
+    if (m && !m.classList.contains('hidden')) window.closeCreateModal();
+  }
+});
 </script>
 
 </body>
