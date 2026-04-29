@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>VPS Analytics — EACEA · E+ Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="/vps.css">
+</head>
+<body>
+<aside class="vps-side">
+  <header>
+    <h1>VPS Analytics</h1>
+    <p>EACEA · 12.376 proyectos centralizados</p>
+  </header>
+  <nav id="vps-nav">
+    <a data-board="overview" class="active"><span class="material-symbols-outlined">dashboard</span>Overview</a>
+    <a data-board="country"><span class="material-symbols-outlined">public</span>Por país</a>
+    <a data-board="timeline"><span class="material-symbols-outlined">timeline</span>Evolución temporal</a>
+    <a data-board="coordinators"><span class="material-symbols-outlined">workspace_premium</span>Top coordinadores</a>
+    <a data-board="topics"><span class="material-symbols-outlined">tag</span>Topics &amp; prioridades</a>
+    <a data-board="winners"><span class="material-symbols-outlined">emoji_events</span>Topics ganadores</a>
+    <a data-board="trend"><span class="material-symbols-outlined">trending_up</span>Tendencias 14-20 vs 21-25</a>
+    <a data-board="growth"><span class="material-symbols-outlined">show_chart</span>Crecimiento país</a>
+    <a data-board="writing"><span class="material-symbols-outlined">edit_note</span>Métricas de redacción</a>
+    <a data-board="network"><span class="material-symbols-outlined">hub</span>Network países</a>
+  </nav>
+  <footer>
+    <button id="logout-btn" class="logout"><span class="material-symbols-outlined">logout</span>Salir</button>
+    <small id="health-badge" class="health">…</small>
+  </footer>
+</aside>
+
+<main class="vps-main">
+  <section class="board active" data-board="overview">
+    <div class="board-head">
+      <h2>Overview EACEA</h2>
+      <p>Una fila por familia funcional. Click en una familia para filtrar el resto del dashboard.</p>
+    </div>
+    <div class="cards" id="overview-cards"></div>
+    <div class="grid-2">
+      <div class="panel"><h3>Proyectos por familia</h3><canvas id="ch-overview-projects"></canvas></div>
+      <div class="panel"><h3>Subvención total (€) por familia</h3><canvas id="ch-overview-grant"></canvas></div>
+    </div>
+  </section>
+
+  <section class="board" data-board="country">
+    <div class="board-head">
+      <h2>Distribución por país coordinador</h2>
+      <div class="filter-bar"><label>Familia <select id="filter-country-family"></select></label></div>
+    </div>
+    <div class="panel"><canvas id="ch-by-country"></canvas></div>
+    <div class="panel"><h3>Tabla por país</h3><div class="table-wrap" id="tbl-by-country"></div></div>
+  </section>
+
+  <section class="board" data-board="timeline">
+    <div class="board-head">
+      <h2>Evolución temporal</h2>
+      <div class="filter-bar">
+        <label>Familia <select id="filter-timeline-family"></select></label>
+        <label>País <select id="filter-timeline-country"><option value="">Todos</option></select></label>
+      </div>
+    </div>
+    <div class="panel"><canvas id="ch-timeline"></canvas></div>
+    <div class="panel"><h3>Detalle por año</h3><div class="table-wrap" id="tbl-timeline"></div></div>
+  </section>
+
+  <section class="board" data-board="coordinators">
+    <div class="board-head">
+      <h2>Top coordinadores</h2>
+      <div class="filter-bar">
+        <label>Familia <select id="filter-coord-family"></select></label>
+        <label>País <select id="filter-coord-country"><option value="">Todos</option></select></label>
+      </div>
+    </div>
+    <div class="panel"><div class="table-wrap" id="tbl-coordinators"></div></div>
+  </section>
+
+  <section class="board" data-board="topics">
+    <div class="board-head">
+      <h2>Topics más usados</h2>
+      <div class="filter-bar"><label>Familia <select id="filter-topics-family"></select></label></div>
+    </div>
+    <div class="panel"><canvas id="ch-topics"></canvas></div>
+    <div class="panel"><h3>Tabla de topics</h3><div class="table-wrap" id="tbl-topics"></div></div>
+  </section>
+
+  <section class="board" data-board="winners">
+    <div class="board-head">
+      <h2>Topics ganadores (grant medio &gt; mediana de su familia)</h2>
+      <div class="filter-bar"><label>Familia <select id="filter-winners-family"></select></label></div>
+    </div>
+    <div class="panel"><div class="table-wrap" id="tbl-winners"></div></div>
+  </section>
+
+  <section class="board" data-board="trend">
+    <div class="board-head">
+      <h2>Tendencia 2014-2020 vs 2021-2025</h2>
+      <p style="font-size:11px;color:var(--muted);max-width:780px">Cuidado: la taxonomía oficial de topics cambió en Erasmus+ 2021-27. Crecimientos negativos extremos en topics que desaparecieron suelen ser <em>renombrado</em>, no declive real.</p>
+    </div>
+    <div class="panel"><h3>Topics que más crecen</h3><div class="table-wrap" id="tbl-trend-up"></div></div>
+    <div class="panel"><h3>Topics que más caen</h3><div class="table-wrap" id="tbl-trend-down"></div></div>
+  </section>
+
+  <section class="board" data-board="growth">
+    <div class="board-head">
+      <h2>Crecimiento por país × familia</h2>
+      <div class="filter-bar"><label>Familia <select id="filter-growth-family"></select></label></div>
+    </div>
+    <div class="panel"><div class="table-wrap" id="tbl-growth"></div></div>
+  </section>
+
+  <section class="board" data-board="writing">
+    <div class="board-head">
+      <h2>Métricas de redacción del project_summary</h2>
+      <p style="font-size:11px;color:var(--muted)">Por familia: longitud media + presencia de palabras clave (innovación, digital, verde, inclusión, juventud, género, business). Multilingüe.</p>
+    </div>
+    <div class="panel"><div class="table-wrap" id="tbl-writing"></div></div>
+    <div class="panel"><h3>Mapa de calor de prioridades léxicas</h3><canvas id="ch-writing"></canvas></div>
+  </section>
+
+  <section class="board" data-board="network">
+    <div class="board-head">
+      <h2>Network — pares de países en consorcio</h2>
+      <div class="filter-bar">
+        <label>Familia <select id="filter-network-family"></select></label>
+        <label>País <input id="filter-network-country" placeholder="ES, IT, …" maxlength="2" style="width:60px"></label>
+      </div>
+    </div>
+    <div class="panel"><h3>Top 100 pares</h3><div class="table-wrap" id="tbl-network"></div></div>
+  </section>
+</main>
+
+<script src="/vps.js" type="module"></script>
+</body>
+</html>
