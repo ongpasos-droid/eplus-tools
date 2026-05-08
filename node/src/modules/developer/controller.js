@@ -174,7 +174,8 @@ exports.savePartnerCustomText = async (req, res, next) => {
 // PUT /v1/developer/projects/:projectId/prep/consorcio/:partnerId/toggle-eu-project
 exports.toggleEuProject = async (req, res, next) => {
   try {
-    await model.toggleEuProject(req.params.projectId, req.params.partnerId, req.body.eu_project_id, req.body.selected);
+    const id = req.body.project_identifier || req.body.eu_project_id;
+    await model.toggleEuProject(req.params.projectId, req.params.partnerId, id, req.body.selected);
     res.json({ ok: true });
   } catch (err) { next(err); }
 };

@@ -1,6 +1,25 @@
 const db = require('../../utils/db');
 const genUUID = require('../../utils/uuid');
+const directoryApi = require('../../utils/directory-api');
 const TASK_TEMPLATES = require('../../data/task-templates');
+
+// ── Narrative format rules ────────────────────────────────────────────────
+// Applied to every system prompt that produces text destined for the EACEA
+// Form Part B. The official template renders narrative sections as plain
+// prose inside boxes — markdown (tables, lists, headings, bold) survives the
+// export as raw characters and gives the text away as AI-generated.
+const NARRATIVE_FORMAT_RULES = `
+
+══ FORMAT RULES (MANDATORY — TEXT GOES INTO THE OFFICIAL EACEA PDF FORM) ══
+The output MUST be plain prose. Markdown does NOT render in the EACEA form — it appears as literal "|" pipes, "##" hashes, "**" stars and looks unprofessional/AI-generated.
+- NO markdown tables. NEVER use "|" pipes or "---" separator rows. Compare options, methodologies, initiatives, or alternatives as flowing prose ("While ERDF focuses on top-down infrastructure and LEADER targets cycle-tourists, our project ..."). Never as a table.
+- NO markdown headings (no "#", "##", "###"). The form already provides section headers.
+- NO bold ("**text**"), italics ("*text*"), strikethrough, or backticks.
+- NO bullet or numbered lists. NO lines starting with "- ", "* ", "• ", "→ ", "1.", "2.", "a)", "b)". Write continuous prose. If you must enumerate, weave items into a sentence ("first ...; second ...; third ...") or list them inside a paragraph separated by commas or semicolons.
+- NO subheadings or internal section titles inside the answer.
+- NO emojis, ASCII art, decorative symbols ("═", "──", "▪", "✓").
+- Paragraphs separated by a single blank line — that is the only formatting allowed.
+`;
 
 // Activity.type → task-template category (mirrors public/js/intake-tasks.js TYPE_MAP)
 const ACT_TYPE_TO_TEMPLATE_CAT = {
@@ -566,10 +585,27 @@ async function buildEnrichedContext(projectId, userId) {
         consortiumBlock += `\n  Key staff: ${staff.map(s => `${s.name} (${s.role}${s.skills_summary ? ': ' + s.skills_summary.substring(0, 80) : ''})`).join('; ')}`;
       }
 
-      // Past EU projects
-      const [euProj] = await db.execute('SELECT title, role, year FROM org_eu_projects WHERE organization_id = ? ORDER BY year DESC LIMIT 5', [pt.organization_id]);
-      if (euProj.length) {
-        consortiumBlock += `\n  EU projects: ${euProj.map(ep => `${ep.title || 'Untitled'} (${ep.year}, ${ep.role})`).join('; ')}`;
+      // Past EU projects: solo los seleccionados por el usuario en el sub-tab
+      // Consorcio. Identifiers están en project_partner_eu_projects; los datos
+      // vienen del directory-api (cache LRU 60s evita repetir llamadas).
+      const [selectedRows] = await db.execute(
+        'SELECT project_identifier FROM project_partner_eu_projects WHERE project_id = ? AND partner_id = ?',
+        [projectId, pt.id]
+      );
+      if (selectedRows.length) {
+        const [orgRows] = await db.execute('SELECT oid, pic FROM organizations WHERE id = ?', [pt.organization_id]);
+        const lookupId = orgRows[0] && (orgRows[0].oid || orgRows[0].pic);
+        if (lookupId) {
+          try {
+            const resp = await directoryApi.getEntityProjects(lookupId, { limit: 300 });
+            const list = Array.isArray(resp && resp.projects) ? resp.projects : [];
+            const wanted = new Set(selectedRows.map(r => r.project_identifier));
+            const picked = list.filter(pr => wanted.has(pr.project_identifier));
+            if (picked.length) {
+              consortiumBlock += `\n  EU projects: ${picked.map(ep => `${ep.project_title || 'Untitled'} (${ep.funding_year}, ${ep.role})`).join('; ')}`;
+            }
+          } catch (_) { /* silencioso */ }
+        }
       }
     }
   }
@@ -1075,7 +1111,7 @@ async function improveSection(text, action, sectionTitle, projectContext, progra
     improve: 'Strengthen this text to score higher with EU evaluators. Improve: (1) specificity — use more project-specific data, (2) evidence — reference EU policies and official documents, (3) coherence — better flow between paragraphs, (4) evaluation alignment — address criteria more explicitly.',
   };
 
-  let system = `You are an expert Erasmus+ proposal writer revising a section. Return ONLY the improved text — no explanations, no commentary, no section titles.`;
+  let system = `You are an expert Erasmus+ proposal writer revising a section. Return ONLY the improved text — no explanations, no commentary, no section titles.` + NARRATIVE_FORMAT_RULES;
   if (writingRules.writing_style) system += `\n\nFollow this writing style:\n${writingRules.writing_style}`;
   if (writingRules.ai_detection_rules) system += `\n\nAI detection rules:\n${writingRules.ai_detection_rules}`;
 
@@ -2665,28 +2701,27 @@ async function getPrepConsorcio(projectId, userId) {
     p.extra_staff = [];
 
     if (p.organization_id) {
-      // Load org profile
+      // Load org profile (oid o pic — el directory-api acepta ambos como id)
       const [orgs] = await db.execute(
-        `SELECT id, organization_name, acronym, org_type, country, city, description, activities_experience, expertise_areas, staff_size
+        `SELECT id, organization_name, acronym, org_type, country, city, description, activities_experience, expertise_areas, staff_size, oid, pic
          FROM organizations WHERE id = ?`, [p.organization_id]
       );
       if (orgs.length) {
         p.organization = orgs[0];
-        // Load child tables
+        // Load child tables (eu_projects ya no vive en MySQL: se carga abajo desde directory-api)
         const [staff] = await db.execute('SELECT id, name, role, skills_summary FROM org_key_staff WHERE organization_id = ?', [p.organization_id]);
         p.organization.key_staff = staff;
-        const [euProj] = await db.execute('SELECT id, programme, year, project_id_or_contract, role, title FROM org_eu_projects WHERE organization_id = ?', [p.organization_id]);
-        p.organization.eu_projects = euProj;
+        p.organization.eu_projects = [];
         const [stakeholders] = await db.execute('SELECT entity_name, entity_type, relationship_type, description FROM org_stakeholders WHERE organization_id = ?', [p.organization_id]);
         p.organization.stakeholders = stakeholders;
       }
 
-      // Load project-specific EU project selections
+      // Load project-specific EU project selections (ahora project_identifier string)
       const [selectedEuProjs] = await db.execute(
-        'SELECT eu_project_id FROM project_partner_eu_projects WHERE project_id = ? AND partner_id = ?',
+        'SELECT project_identifier FROM project_partner_eu_projects WHERE project_id = ? AND partner_id = ?',
         [projectId, p.id]
       );
-      p.selected_eu_projects = selectedEuProjs.map(r => r.eu_project_id);
+      p.selected_eu_projects = selectedEuProjs.map(r => r.project_identifier);
 
       // Load project-specific staff customizations
       const [staffCustom] = await db.execute(
@@ -2733,6 +2768,37 @@ async function getPrepConsorcio(projectId, userId) {
     }
   }
 
+  // Pass-through al directory-api: cargar proyectos UE reales por OID, en paralelo.
+  // Esto sustituye la antigua tabla MySQL `org_eu_projects` (incompleta).
+  // Si el partner no tiene oid o el directory-api falla, queda lista vacía.
+  await Promise.all(partners.map(async (p) => {
+    // El directory-api acepta tanto oid (E10xxxxx) como pic numérico (940...)
+    // como identificador en /entity/<id>/projects.
+    const lookupId = (p.organization && (p.organization.oid || p.organization.pic)) || null;
+    if (!lookupId) return;
+    try {
+      const resp = await directoryApi.getEntityProjects(lookupId, { limit: 300 });
+      const list = Array.isArray(resp && resp.projects) ? resp.projects : [];
+      p.organization.eu_projects = list.map(pr => ({
+        id: pr.project_identifier,
+        project_identifier: pr.project_identifier,
+        title: pr.project_title || pr.title || '',
+        programme: pr.programme || '',
+        year: pr.funding_year || null,
+        role: pr.role || '',
+        coordinator_name: pr.coordinator_name || '',
+        coordinator_country: pr.coordinator_country || '',
+        eu_grant_eur: pr.eu_grant_eur || null,
+        is_good_practice: !!pr.is_good_practice,
+        summary_excerpt: (pr.project_summary || '').slice(0, 300),
+      }));
+    } catch (_) {
+      // Silencioso: si la API falla, lista vacía. El usuario verá
+      // "No hay proyectos" en vez de un error y puede reintentar.
+      p.organization.eu_projects = [];
+    }
+  }));
+
   // Load unique worker rate categories across all partners in this project
   const [wrCats] = await db.execute(
     `SELECT DISTINCT wr.category FROM worker_rates wr
@@ -2753,9 +2819,9 @@ async function linkPartnerOrg(projectId, partnerId, organizationId) {
 }
 
 async function generatePifVariant(projectId, partnerId, category, categoryLabel, userId) {
-  // Get partner + org + project context
+  // Get partner + org + project context (oid o pic para directory-api)
   const [partners] = await db.execute(
-    'SELECT p.*, o.organization_name, o.description, o.activities_experience, o.expertise_areas FROM partners p LEFT JOIN organizations o ON o.id = p.organization_id WHERE p.id = ? AND p.project_id = ?',
+    'SELECT p.*, o.organization_name, o.description, o.activities_experience, o.expertise_areas, o.oid, o.pic FROM partners p LEFT JOIN organizations o ON o.id = p.organization_id WHERE p.id = ? AND p.project_id = ?',
     [partnerId, projectId]
   );
   if (!partners.length || !partners[0].organization_id) throw new Error('Partner not linked to organization');
@@ -2764,16 +2830,34 @@ async function generatePifVariant(projectId, partnerId, category, categoryLabel,
 
   // Load org child data
   const [staff] = await db.execute('SELECT id, name, role, skills_summary FROM org_key_staff WHERE organization_id = ?', [orgId]);
-  const [euProj] = await db.execute('SELECT id, programme, year, role, title FROM org_eu_projects WHERE organization_id = ?', [orgId]);
   const [stakeholders] = await db.execute('SELECT entity_name, relationship_type FROM org_stakeholders WHERE organization_id = ?', [orgId]);
 
-  // Load selected EU projects for this partner (if any)
+  // Proyectos UE: pass-through al directory-api (en lugar de org_eu_projects).
+  let euProj = [];
+  const partnerLookupId = partner.oid || partner.pic;
+  if (partnerLookupId) {
+    try {
+      const resp = await directoryApi.getEntityProjects(partnerLookupId, { limit: 300 });
+      const list = Array.isArray(resp && resp.projects) ? resp.projects : [];
+      euProj = list.map(pr => ({
+        project_identifier: pr.project_identifier,
+        title: pr.project_title || pr.title || '',
+        programme: pr.programme || '',
+        year: pr.funding_year || null,
+        role: pr.role || '',
+      }));
+    } catch (_) { euProj = []; }
+  }
+
+  // Load selected EU projects for this partner (project_identifier strings)
   const [selectedEuProjs] = await db.execute(
-    'SELECT eu_project_id FROM project_partner_eu_projects WHERE project_id = ? AND partner_id = ?',
+    'SELECT project_identifier FROM project_partner_eu_projects WHERE project_id = ? AND partner_id = ?',
     [projectId, partnerId]
   );
-  const selectedEuIds = selectedEuProjs.map(r => r.eu_project_id);
-  const relevantEuProj = selectedEuIds.length ? euProj.filter(ep => selectedEuIds.includes(ep.id)) : euProj;
+  const selectedIds = selectedEuProjs.map(r => r.project_identifier);
+  const relevantEuProj = selectedIds.length
+    ? euProj.filter(ep => selectedIds.includes(ep.project_identifier))
+    : euProj;
 
   // Load extra staff added for this project
   const [extraStaff] = await db.execute(
@@ -2877,17 +2961,18 @@ async function savePartnerCustomText(projectId, partnerId, customText) {
   );
 }
 
-async function toggleEuProject(projectId, partnerId, euProjectId, selected) {
+async function toggleEuProject(projectId, partnerId, projectIdentifier, selected) {
+  if (!projectIdentifier) throw new Error('project_identifier requerido');
   if (selected) {
     await db.execute(
-      `INSERT IGNORE INTO project_partner_eu_projects (id, project_id, partner_id, eu_project_id)
+      `INSERT IGNORE INTO project_partner_eu_projects (id, project_id, partner_id, project_identifier)
        VALUES (?, ?, ?, ?)`,
-      [genUUID(), projectId, partnerId, euProjectId]
+      [genUUID(), projectId, partnerId, projectIdentifier]
     );
   } else {
     await db.execute(
-      'DELETE FROM project_partner_eu_projects WHERE project_id = ? AND partner_id = ? AND eu_project_id = ?',
-      [projectId, partnerId, euProjectId]
+      'DELETE FROM project_partner_eu_projects WHERE project_id = ? AND partner_id = ? AND project_identifier = ?',
+      [projectId, partnerId, projectIdentifier]
     );
   }
 }
@@ -3130,7 +3215,7 @@ DRAFT:
 QUESTIONS:
 1. [specific question in ${langName}]
 2. [specific question in ${langName}]
-3. [specific question in ${langName}, optional]`;
+3. [specific question in ${langName}, optional]` + NARRATIVE_FORMAT_RULES;
 
   const result = await callAI(system, `Generate a draft for the "${cfg.label}" field of this Erasmus+ proposal.`, 'generate');
 
@@ -3254,7 +3339,7 @@ REVISED_TEXT:
 [complete improved text in ${langName}]
 
 FOLLOW_UP:
-NONE`;
+NONE` + NARRATIVE_FORMAT_RULES;
 
   const result = await callAI(system, `User says: ${userMessage}`, 'generate');
 
@@ -3449,7 +3534,7 @@ Write a 80-150 word summary of this Work Package. Structure:
 3. Expected outcome (1 sentence): what the WP produces for the overall project.
 
 Be concrete and specific. Avoid generic filler. Write in the voice of the project coordinator.
-Write ONLY the summary text, no headers or meta-commentary.`;
+Write ONLY the summary text, no headers or meta-commentary.` + NARRATIVE_FORMAT_RULES;
 
   const draft = await callAI(system, `Draft the summary for WP "${wp.title}".`, 'generate');
   const clean = draft.trim();
@@ -3485,7 +3570,7 @@ Write a 80-150 word description of this activity. Structure:
 3. Expected output (1 sentence): what this activity produces.
 
 Be concrete and specific. Avoid generic filler. Write in the voice of the project coordinator.
-Write ONLY the description text, no headers or meta-commentary.`;
+Write ONLY the description text, no headers or meta-commentary.` + NARRATIVE_FORMAT_RULES;
 
   const draft = await callAI(system, `Draft the description for activity "${activity.label || activity.type}".`, 'generate');
   const clean = draft.trim();
@@ -3569,7 +3654,7 @@ REVISED_TEXT:
 [complete improved text in ${langName}]
 
 FOLLOW_UP:
-NONE`;
+NONE` + NARRATIVE_FORMAT_RULES;
 
   const result = await callAI(system, `User says: ${userMessage}`, 'generate');
   let revisedText = null;

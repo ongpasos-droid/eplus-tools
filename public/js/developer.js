@@ -610,26 +610,50 @@ const Developer = (() => {
                 </div>
               </details>
 
-              <!-- EU Projects selection -->
-              ${euProjects.length ? `
+              <!-- EU Projects selection (pass-through directory-api: todos los proyectos UE de la entidad) -->
+              ${euProjects.length ? (() => {
+                const years = [...new Set(euProjects.map(ep => ep.year).filter(Boolean))].sort((a,b) => b - a);
+                return `
               <details class="mb-3">
                 <summary class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider cursor-pointer hover:text-primary mb-2">
-                  <span class="material-symbols-outlined text-xs align-middle mr-0.5">folder_special</span> EU Projects — select relevant (${selectedEuProjects.length}/${euProjects.length})
+                  <span class="material-symbols-outlined text-xs align-middle mr-0.5">folder_special</span> EU Projects — select relevant (<span id="eu-sel-${p.id}">${selectedEuProjects.length}</span> selected / <span id="eu-cnt-${p.id}">${euProjects.length}</span> shown / ${euProjects.length} total)
                 </summary>
-                <div class="bg-surface-container-lowest rounded-lg border border-outline-variant/10 p-3 space-y-1.5">
-                  ${euProjects.map(ep => {
-                    const checked = selectedEuProjects.includes(ep.id);
-                    return `
-                    <label class="flex items-start gap-2 py-1 px-1 rounded hover:bg-surface-container-low cursor-pointer transition-colors">
-                      <input type="checkbox" ${checked ? 'checked' : ''} onchange="Developer._toggleEuProject('${p.id}', '${ep.id}', this.checked)" class="mt-0.5 accent-primary">
-                      <div class="flex-1 text-xs">
-                        <span class="font-semibold">${esc(ep.title || ep.programme)}</span>
-                        <span class="text-on-surface-variant"> (${ep.year || '?'}, ${esc(ep.role || '')})</span>
-                      </div>
-                    </label>`;
-                  }).join('')}
+                <div class="bg-surface-container-lowest rounded-lg border border-outline-variant/10 p-3">
+                  <div class="flex flex-wrap gap-2 mb-2 items-center">
+                    <select id="eu-year-${p.id}" onchange="Developer._filterEuProjects('${p.id}')" class="text-[10px] bg-white border border-outline-variant/20 rounded px-1.5 py-1 focus:outline-none focus:border-primary">
+                      <option value="">Todos los años</option>
+                      ${years.map(y => `<option value="${y}">${y}</option>`).join('')}
+                    </select>
+                    <select id="eu-role-${p.id}" onchange="Developer._filterEuProjects('${p.id}')" class="text-[10px] bg-white border border-outline-variant/20 rounded px-1.5 py-1 focus:outline-none focus:border-primary">
+                      <option value="">Todos los roles</option>
+                      <option value="coordinator">Coordinator</option>
+                      <option value="partner">Partner</option>
+                    </select>
+                    <label class="text-[10px] text-on-surface-variant inline-flex items-center gap-1 cursor-pointer ml-auto">
+                      <input type="checkbox" id="eu-only-sel-${p.id}" onchange="Developer._filterEuProjects('${p.id}')" class="accent-primary"> Solo seleccionados
+                    </label>
+                  </div>
+                  <div id="eu-list-${p.id}" class="space-y-1.5 max-h-96 overflow-y-auto pr-1">
+                    ${euProjects.map(ep => {
+                      const checked = selectedEuProjects.includes(ep.project_identifier);
+                      const role = (ep.role || '').toLowerCase();
+                      return `
+                      <label class="eu-item flex items-start gap-2 py-1 px-1 rounded hover:bg-surface-container-low cursor-pointer transition-colors" data-year="${ep.year || ''}" data-role="${esc(role)}" data-selected="${checked ? '1' : '0'}">
+                        <input type="checkbox" ${checked ? 'checked' : ''} onchange="Developer._toggleEuProject('${p.id}', '${esc(ep.project_identifier)}', this.checked); this.closest('.eu-item').dataset.selected = this.checked ? '1' : '0'; Developer._filterEuProjects('${p.id}')" class="mt-0.5 accent-primary">
+                        <div class="flex-1 text-xs">
+                          <div class="font-semibold">${esc(ep.title || ep.programme || ep.project_identifier)}</div>
+                          <div class="text-on-surface-variant text-[10px]">${ep.year || '?'} · ${esc(ep.programme || '')} · ${esc(ep.role || '—')}</div>
+                        </div>
+                      </label>`;
+                    }).join('')}
+                  </div>
                 </div>
-              </details>` : ''}
+              </details>`;
+              })() : `
+              <div class="mb-3 text-[10px] text-on-surface-variant italic px-2">
+                <span class="material-symbols-outlined text-xs align-middle mr-0.5">folder_off</span>
+                Sin proyectos UE registrados para esta entidad en el directorio.
+              </div>`}
 
               <!-- Org details expandable (reference) -->
               <details class="mb-3">
@@ -4205,10 +4229,38 @@ const Developer = (() => {
     } catch (err) { Toast.show('Error: ' + err.message, 'err'); }
   }
 
-  async function toggleEuProject(partnerId, euProjectId, selected) {
+  async function toggleEuProject(partnerId, projectIdentifier, selected) {
     try {
-      await API.put('/developer/projects/' + currentProject.id + '/prep/consorcio/' + partnerId + '/toggle-eu-project', { eu_project_id: euProjectId, selected });
+      await API.put('/developer/projects/' + currentProject.id + '/prep/consorcio/' + partnerId + '/toggle-eu-project', { project_identifier: projectIdentifier, selected });
+      const sel = document.getElementById('eu-sel-' + partnerId);
+      if (sel) {
+        const items = document.querySelectorAll('#eu-list-' + partnerId + ' .eu-item');
+        let n = 0;
+        items.forEach(it => { if (it.dataset.selected === '1') n++; });
+        sel.textContent = n;
+      }
     } catch (err) { Toast.show('Error: ' + err.message, 'err'); }
+  }
+
+  function filterEuProjects(partnerId) {
+    const yearSel = document.getElementById('eu-year-' + partnerId);
+    const roleSel = document.getElementById('eu-role-' + partnerId);
+    const onlySelChk = document.getElementById('eu-only-sel-' + partnerId);
+    const year = yearSel ? yearSel.value : '';
+    const role = roleSel ? roleSel.value.toLowerCase() : '';
+    const onlySel = !!(onlySelChk && onlySelChk.checked);
+    const items = document.querySelectorAll('#eu-list-' + partnerId + ' .eu-item');
+    let visible = 0;
+    items.forEach(it => {
+      const okYear = !year || it.dataset.year === year;
+      const okRole = !role || (it.dataset.role || '') === role;
+      const okSel  = !onlySel || it.dataset.selected === '1';
+      const ok = okYear && okRole && okSel;
+      it.style.display = ok ? '' : 'none';
+      if (ok) visible++;
+    });
+    const cnt = document.getElementById('eu-cnt-' + partnerId);
+    if (cnt) cnt.textContent = visible;
   }
 
   async function linkOrg(partnerId) {
@@ -5588,6 +5640,7 @@ const Developer = (() => {
     _toggleStaff: toggleStaff,
     _setStaffRole: setStaffRole,
     _toggleEuProject: toggleEuProject,
+    _filterEuProjects: filterEuProjects,
     _addExtraStaff: addExtraStaff,
     _updateExtraStaff: updateExtraStaff,
     _removeExtraStaff: removeExtraStaff,

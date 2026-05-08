@@ -279,7 +279,7 @@ const App = (() => {
       'my-projects':    'Mis Proyectos',
       'my-evaluations': 'Mis Evaluaciones',
       create:           'Diseñar',
-      intake:           'Presupuestar',
+      intake:           'Diseñar',
       developer:        'Escribir',
       calculator:       'Calculator',
       planner:          'Planner',

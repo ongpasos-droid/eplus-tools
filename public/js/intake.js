@@ -1914,7 +1914,7 @@ const Intake = (() => {
       link.classList.toggle('active', link.dataset.route === 'intake');
     });
     location.hash = 'intake';
-    document.getElementById('topbar-title').textContent = 'Presupuestar';
+    document.getElementById('topbar-title').textContent = 'Diseñar';
     // Activate contextual sidebar with the project name (loadFromServer fills the rest later)
     if (typeof App !== 'undefined' && App.setActiveProject) {
       App.setActiveProject({ id, name: 'Cargando...' });
