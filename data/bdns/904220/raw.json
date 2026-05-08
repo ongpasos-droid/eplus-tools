@@ -1,0 +1,104 @@
+{
+  "id": 1105781,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "ALCÁZAR DE SAN JUAN",
+    "nivel3": "AYUNTAMIENTO DE ALCÁZAR DE SAN JUAN"
+  },
+  "sedeElectronica": "https://sede.alcazardesanjuan.es/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=PTS2_HOME",
+  "codigoBDNS": "904220",
+  "fechaRecepcion": "2026-05-07",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 11900,
+  "mrr": false,
+  "descripcion": "BASES CONVOCATORIA BECAS PARA JÓVENES “TRANSICIÓN A LA VIDA ACTIVA 2026”",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES422 - Ciudad Real"
+    }
+  ],
+  "descripcionFinalidad": "Fomento del Empleo",
+  "descripcionBasesReguladoras": "BASES DE EJECUCIÓN DE PRESUPUESTO",
+  "urlBasesReguladoras": "https://alcazardesanjuan.es/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "El día siguiente a la publicación de la presente convocatoria en el B.O.P. de Ciudad Real",
+  "textFin": "20 días naturales a partir del día siguiente a la publicación en el B.O.P. de Ciudad Real",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1450558,
+      "descripcion": "Anexo IV. Ficha de aceptación de beca",
+      "nombreFic": "ANEXO_IV__FICHA_DE_ACEPTACION_DE_LA_BECA_2026.pdf",
+      "long": 968137,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450555,
+      "descripcion": "Anexo III. Autobaremación",
+      "nombreFic": "ANEXO_III__AUTOBAREMACION.pdf",
+      "long": 789292,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450560,
+      "descripcion": "Anexo V. Ficha renuncia de beca",
+      "nombreFic": "ANEXO_V__FICHA_RENUNCIA_DE_LA_BECA_2026.pdf",
+      "long": 968532,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450552,
+      "descripcion": "Anexo I. Relación de proyectos",
+      "nombreFic": "ANEXO I. RELACIÓN PROYECTOS.pdf",
+      "long": 801615,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450546,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "BASES__BECAS_DE_TRANSICION_A_LA_VIDA_ACTIVA_2026.pdf",
+      "long": 871509,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450553,
+      "descripcion": "Anexo II. Solicitud",
+      "nombreFic": "ANEXO_II__SOLICITUD_BECAS_DE_TRANSICION_A_LA_VIDA_ACTIVA_2026.pdf",
+      "long": 1080284,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

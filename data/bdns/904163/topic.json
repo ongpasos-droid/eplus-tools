@@ -1,0 +1,117 @@
+{
+  "source": "bdns",
+  "source_id": "904163",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / COMUNIDAD DE MADRID / CONSEJERÍA DE MEDIO AMBIENTE, AGRICULTURA E INTERIOR",
+  "nuts_codes": [
+    "ES3"
+  ],
+  "nuts_primary": "ES3",
+  "title": "AYUDAS INVERSIONES INFRAESTRUCTURAS AGRARIAS FOMENTO COMPETITIVIDAD 2026",
+  "title_lang": "es",
+  "summary": "Agricultura, Pesca y Alimentación",
+  "status": "open",
+  "publication_date": "2026-05-07",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 2200000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "A",
+      "descripcion": "AGRICULTURA, GANADERÍA, SILVICULTURA Y PESCA"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/904163",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Modelo de Solicitud  Anexo 1701F1_26",
+      "url": null
+    },
+    {
+      "label": "Anexos  1701FI1_Anexo II_Ámbito de aplicación",
+      "url": null
+    },
+    {
+      "label": "Anexos  1701F2_AnexoIII_Contenido mínimo",
+      "url": null
+    },
+    {
+      "label": "Anexos  1701FI3_Anexo XIII_Tipificación incumplimientos",
+      "url": null
+    },
+    {
+      "label": "Anexos  1701FA1_Anexo X_memoria económica justificativa",
+      "url": null
+    },
+    {
+      "label": "Anexos  1701FR1_Solicitud de pago",
+      "url": null
+    },
+    {
+      "label": "Anexos  1701FO2_Anexo V_Certificado de disponiblidad",
+      "url": null
+    },
+    {
+      "label": "Anexos  1701FO6_Anexo VI_Escrito conjunto declaración",
+      "url": null
+    },
+    {
+      "label": "Anexos  1701FO7_Anexo VII_certificado de autorizaciones",
+      "url": null
+    },
+    {
+      "label": "Anexos  1701FO9_Anexo VIII_certificado",
+      "url": null
+    },
+    {
+      "label": "Anexos  1701FO10_Anexo XI_certificado adecuación",
+      "url": null
+    },
+    {
+      "label": "Anexos  1701FO11_Anexo XII_certificado acreditación",
+      "url": null
+    },
+    {
+      "label": "Anexos  1701FO1_Anexo IV_Certificado del Acta",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.bocm.es/boletin/CM_Orden_BOCM/2025/08/11/BOCM-20250811-18.PDF",
+  "text_inicio": "AL DÍA SIGUIENTE DE LA PUBLICACIÓN DEL EXTRACTO DE LA CONVOCATORIA EN EL BOCM",
+  "text_fin": "UN MES DESDE EL INICIO DEL PLAZO DE PRESENTACIÓN DE SOLICITUDES",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [
+    {
+      "descripcion": "FEADER - FONDO EUROPEO AGRÍCOLA DE DESARROLLO RURAL "
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-08T04:06:10.387Z"
+}

@@ -1,0 +1,68 @@
+{
+  "id": 1105623,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "REGIÓN DE MURCIA",
+    "nivel3": "INSTITUTO MURCIANO DE ACCIÓN SOCIAL (I.M.A.S.)"
+  },
+  "sedeElectronica": "https://sede.carm.es/web/pagina?IDCONTENIDO=1321&IDTIPO=240&RASTRO=c$m40288",
+  "codigoBDNS": "904062",
+  "fechaRecepcion": "2026-05-07",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 700000,
+  "mrr": false,
+  "descripcion": "Resolución de 5 de mayo de 2026 del IMAS, Convocatoria subvenciones. Cofinanciadas por FSE+ a ETS Programas Activación empleabilidad. Prog.2: Inclusión activa de jóvenes en situación de vulnerabilidad social.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "OTROS SERVICIOS",
+      "codigo": "T"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES62 - REGION DE MURCIA"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Orden 30-11-2022 Consej.Mujer,Igualdad,LGTBI,Familia,P.Social y Transp. aprueba bases reguladoras de subv.dirigidas a ETS, para Prog.Activación empleab.personas sit. vulnerab. social (BORM 283 9-12-2022), modificada por Orden 4-8-2025 (BORM 187 14-8-2025)",
+  "urlBasesReguladoras": "Bases reguladoras (BORM nº 283 de 09/12/2022);  Modificación Bases reguladoras (BORM nº187 de 14/08/2025)",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Al día siguiente a la publicación del extracto de la Resolución de Convocatoria en el BORM",
+  "textFin": "15 días naturales a partir del siguiente al de la publicación del extracto de la convocatoria",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [
+    {
+      "descripcion": "FSE+ - FONDO SOCIAL EUROPEO PLUS"
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1450140,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "RESOLUCIÓN CONVOCATORIA.pdf",
+      "long": 2483882,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

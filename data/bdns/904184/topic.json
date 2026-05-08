@@ -1,0 +1,125 @@
+{
+  "source": "bdns",
+  "source_id": "904184",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / COMUNIDAD DE MADRID / CONSEJERÍA DE MEDIO AMBIENTE, AGRICULTURA E INTERIOR",
+  "nuts_codes": [
+    "ES3"
+  ],
+  "nuts_primary": "ES3",
+  "title": "AYUDAS PRODUCTOS PESCA COFINANCIADAS FEMPA 2ª CONVOCATORIA 2026",
+  "title_lang": "es",
+  "summary": "Agricultura, Pesca y Alimentación",
+  "status": "open",
+  "publication_date": "2026-05-07",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 500000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "01",
+      "descripcion": "Agricultura, ganadería, caza y servicios relacionados con las mismas"
+    },
+    {
+      "codigo": "03",
+      "descripcion": "Pesca y acuicultura"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/904184",
+  "documents": [
+    {
+      "label": "Modelo de Solicitud  1738F1_solicitud",
+      "url": null
+    },
+    {
+      "label": "Anexos  1738FO25_Modelo 6_declaración responsable solicitante",
+      "url": null
+    },
+    {
+      "label": "Anexos  1738FO23_Modelo 4_calendario previsto ejecución",
+      "url": null
+    },
+    {
+      "label": "Anexos  1738FO19_Anexo 3_Información técnica",
+      "url": null
+    },
+    {
+      "label": "Anexos  1738FO17_Anexo I_información general",
+      "url": null
+    },
+    {
+      "label": "Anexos  1738FR1_Solicitud de pago",
+      "url": null
+    },
+    {
+      "label": "Anexos  1738FO11_declaración ausencia conflicto intereses",
+      "url": null
+    },
+    {
+      "label": "Anexos  1738FO12_Solicitud",
+      "url": null
+    },
+    {
+      "label": "Anexos  1738FO14_Solicitud modificación proyecto",
+      "url": null
+    },
+    {
+      "label": "Anexos  1738FO15_Declaración no inicio inversiones",
+      "url": null
+    },
+    {
+      "label": "Anexos  1738FO20_Modelo 1_declaración responsable",
+      "url": null
+    },
+    {
+      "label": "Anexos  1738FO24_Modelo 5_certificación cumplimieto requisitos",
+      "url": null
+    },
+    {
+      "label": "Anexos  1738FO22_Modelo 3_modelo declaración criterios",
+      "url": null
+    },
+    {
+      "label": "Anexos  1738FO21_Modelo 2_declaración responsable",
+      "url": null
+    },
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.bocm.es/boletin/CM_Orden_BOCM/2025/05/23/BOCM-20250523-19.PDF.",
+  "text_inicio": "AL DÍA SIGUIENTE DE LA PUBLICACIÓN DEL EXTRACTO DE LA CONVOCATORIA EN EL BOCM",
+  "text_fin": "15 DÍAS HÁBILES A PARTIR DEL DÍA SIGUIENTE DE LA PUBLICACIÓN DEL EXTRACTO DE LA CONVOCATORIA",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [
+    {
+      "descripcion": "FTJ – FONDO DE TRANSICIÓN JUSTA"
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-08T04:06:10.389Z"
+}

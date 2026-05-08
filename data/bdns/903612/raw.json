@@ -1,0 +1,91 @@
+{
+  "id": 1105173,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "CABILDO INSULAR DE TENERIFE",
+    "nivel3": "CABILDO INSULAR DE TENERIFE"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "903612",
+  "fechaRecepcion": "2026-05-05",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 272300,
+  "mrr": false,
+  "descripcion": "Acuerdo de 11/03/2026 del CGI del Excmo. Cabildo Insular de Tenerife, en el que se aprueban las bases y convocatoria de Ayudas para minimizar los daños de la plaga polilla guatemalteca y mejorar calidad de suelos de cultivo en la isla de Tenerife, 2026.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    },
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "AGRICULTURA, GANADERÍA, SILVICULTURA Y PESCA",
+      "codigo": "A"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES709 - Tenerife"
+    }
+  ],
+  "descripcionFinalidad": "Agricultura, Pesca y Alimentación",
+  "descripcionBasesReguladoras": "Ley 38/2003, de 17 de noviembre, General de Subvenciones.",
+  "urlBasesReguladoras": "https://www.boe.es/buscar/pdf/2003/BOE-A-2003-20977-consolidado.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-06-15",
+  "textInicio": "Día siguiente al de la publicación en el BOP de Santa Cruz de Tenerife",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1448826,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "ACUERDO 11.03.2025 CGI_9 Bases y Convocatoria POLILLA 2026.report.pdf",
+      "long": 651288,
+      "datMod": "2026-05-05",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1448830,
+      "descripcion": "Línea de Subv. Polilla 2026-000155",
+      "nombreFic": "LINEA SUBV. 2026-000155.pdf",
+      "long": 95750,
+      "datMod": "2026-05-05",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1448829,
+      "descripcion": "Doc. Contable Fase A 2026002293",
+      "nombreFic": "A_2026002293_ESTABLECIMIENTO_PRACTICAS_AGROECOLOGICA.pdf",
+      "long": 103305,
+      "datMod": "2026-05-05",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1448827,
+      "descripcion": "Bases Reguladoras Polilla 2026",
+      "nombreFic": "Bases_Polilla_Guatemalteca_2026.report.pdf",
+      "long": 463561,
+      "datMod": "2026-05-05",
+      "datPublicacion": "2026-05-07"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

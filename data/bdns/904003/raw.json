@@ -1,0 +1,64 @@
+{
+  "id": 1105564,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "TRES CANTOS",
+    "nivel3": "AYUNTAMIENTO DE TRES CANTOS"
+  },
+  "sedeElectronica": "Sede electrónica de Tres Cantos",
+  "codigoBDNS": "904003",
+  "fechaRecepcion": "2026-05-07",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 310000,
+  "mrr": false,
+  "descripcion": "AYUDAS POR NACIMIENTO O ADOPCIÓN DE MENOR, A FAVOR DE LOS PROGENITORES/AS O ADOPTANTES EMPADRONADOS EN TRES CANTOS EN EL PERIODO COMPRENDIDO ENTRE EL 1 DE ENERO A 31 DE DICIEMBRE DE 2025",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES30 - COMUNIDAD DE MADRID"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "PRESUPUESTOS MUNICIPALES 2026",
+  "urlBasesReguladoras": "https://www.bocm.es/boletin/CM_Orden_BOCM/2025/12/30/BOCM-20251230-100.PDF",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-05-04",
+  "fechaFinSolicitud": "2026-05-18",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1449963,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "883B3E066E1AC9499D67CC10FFB2908E.pdf",
+      "long": 394124,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

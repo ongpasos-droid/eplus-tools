@@ -1,0 +1,72 @@
+{
+  "id": 1105723,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "PARETS DEL VALLÈS",
+    "nivel3": "AYUNTAMIENTO DE PARETS DEL VALLÈS"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "904162",
+  "fechaRecepcion": "2026-05-07",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 10000,
+  "mrr": false,
+  "descripcion": "CONVOCATÒRIA DE SUBVENCIONS PER AL FOMENT DE L`EMPRENEDORIA",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Otras actividades de apoyo a las empresas n.c.o.p.",
+      "codigo": "82.9"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES51 - CATALUÑA"
+    }
+  ],
+  "descripcionFinalidad": "Fomento del Empleo",
+  "descripcionBasesReguladoras": "BASES REGULADORES ESPECÍFIQUES PER L`ATORGAMENT DE SUBVENCIONS AMB L`OBJECTIU DE FOMENTAR L`EMPRENEDORIA I CONTRIBUIR A LA CREACIÓ D`EMPRESES AL MUNICIPI",
+  "urlBasesReguladoras": "https://bop.diba.cat/anunci/3531772/aprovacio-de-les-bases-reguladores-especifiques-per-a-l-atorgament-de-subvencions-amb-l-objectiu-de-fomentar-l-emprenedoria-i-contribuir-a-la-creacio-d-empreses-al-municipi-ajuntament-de-parets-del-valles",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-11-06",
+  "textInicio": "L`ENDEMA DE LA PUBLICACIÓ D`AQUESTA CONVOCATÒRIA",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1450338,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "20260430_Certificat_Certificat_dacords_Certificat_dacord-5.pdf",
+      "long": 792438,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450337,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Convocatòria_emprenedoria_2026-_CASTELLANO.pdf",
+      "long": 309670,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

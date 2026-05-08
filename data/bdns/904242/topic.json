@@ -1,0 +1,96 @@
+{
+  "source": "bdns",
+  "source_id": "904242",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / GALICIA / CONSELLERÍA DE EMPLEO, COMERCIO Y EMIGRACIÓN",
+  "nuts_codes": [
+    "ES11"
+  ],
+  "nuts_primary": "ES11",
+  "title": "Convocatoria 2026 y bases reguladoras para la concesión de las subvenciones del Programa de dinamización comercial dirigido a federaciones o asociaciones de comerciantes de ámbito superior al municipal",
+  "title_lang": "es",
+  "summary": "Comercio, Turismo y Pymes",
+  "status": "open",
+  "publication_date": "2026-05-07",
+  "open_date": "2026-05-19",
+  "deadline": "2026-06-18",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 20000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "47.6",
+      "descripcion": "Comercio al por menor de artículos culturales y recreativos"
+    },
+    {
+      "codigo": "47.3",
+      "descripcion": "Comercio al por menor de combustible para la automoción"
+    },
+    {
+      "codigo": "47.4",
+      "descripcion": "Comercio al por menor de equipos para las tecnologías de la información y las comunicaciones"
+    },
+    {
+      "codigo": "47.5",
+      "descripcion": "Comercio al por menor de otros artículos de uso doméstico"
+    },
+    {
+      "codigo": "47.7",
+      "descripcion": "Comercio al por menor de otros artículos, excepto vehículos de motor y motocicletas"
+    },
+    {
+      "codigo": "47.2",
+      "descripcion": "Comercio al por menor de productos alimenticios, bebidas y tabaco"
+    },
+    {
+      "codigo": "47.8",
+      "descripcion": "Comercio al por menor de vehículos de motor, motocicletas y sus repuestos y accesorios"
+    },
+    {
+      "codigo": "47.1",
+      "descripcion": "Comercio al por menor no especializado"
+    }
+  ],
+  "apply_url": "https://sede.xunta.gal/portada",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/904242",
+  "documents": [
+    {
+      "label": "Texto en otra lengua de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "http://www.xunta.es/dog/",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-08T04:06:10.402Z"
+}

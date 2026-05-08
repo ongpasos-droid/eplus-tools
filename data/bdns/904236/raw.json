@@ -1,0 +1,88 @@
+{
+  "id": 1105797,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "FRONTERA",
+    "nivel3": "AYUNTAMIENTO DE FRONTERA"
+  },
+  "sedeElectronica": "https://ayuntamientodelafrontera.sedelectronica.es/info.0",
+  "codigoBDNS": "904236",
+  "fechaRecepcion": "2026-05-07",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 35000,
+  "mrr": false,
+  "descripcion": "Convocatoria de subvenciones en régimen de concurrencia competitiva, dirigidas al fomento del asociacionismo y la participación ciudadana, ejercicio 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES703 - El Hierro"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Ordenanza General de Subvenciones del Ayuntamiento de La Frontera",
+  "urlBasesReguladoras": "https://www.bopsantacruzdetenerife.es/bopsc2/index.php",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "al día siguiente de la publicación del anuncio en el BOP",
+  "textFin": "30 días naturales contados a partir del siguiente a la publicación en el BOP",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1450582,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "CONVOCATORIA.pdf",
+      "long": 321723,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450591,
+      "descripcion": "ANUNCIO CONVOCATORIA",
+      "nombreFic": "ANUNCIO CONVOCATORIA.pdf",
+      "long": 216694,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450588,
+      "descripcion": "MODELO MEMORIA JUSTIFICACION",
+      "nombreFic": "MODELO MEMORIA JUSTIFICACION.docx",
+      "long": 849909,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450585,
+      "descripcion": "ANEXO SOLICITUD",
+      "nombreFic": "ANEXOS SOLICITUD.pdf",
+      "long": 289046,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

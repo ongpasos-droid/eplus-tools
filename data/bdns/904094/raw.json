@@ -1,0 +1,64 @@
+{
+  "id": 1105655,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "MIERES",
+    "nivel3": "AYUNTAMIENTO DE MIERES (ASTURIAS)"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "904094",
+  "fechaRecepcion": "2026-05-07",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 135000,
+  "mrr": false,
+  "descripcion": "Convocatoria de ayudas al pago de comedor escolar para alumnado de Educación Infantil y Primaria y ayudas a la adquisición de libros y/o material escolar para alumnado de Educación Infantil para el curso 2026/27.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES12 - PRINCIPADO DE ASTURIAS"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Bases reguladoras de las ayudas económicas para el pago del comedor escolar del alumnado de Educación Infantil y Educación Primaria matriculado en centros públicos y concertados del\nmunicipio de Mieres,",
+  "urlBasesReguladoras": "https://miprincipado.asturias.es/bopa/2025/05/09/2025-03607.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "EL DIA SIGUIENTE AL DE LA PUBLICACIÓN DE ESTA CONVOCATORIA EN EL BOPA",
+  "textFin": "a los 10 días hábiles desde el siguiente al de la publicación de esta convocatoria en el BOPA",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1450222,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "1  Resolución de aprobación de convocatoria Ayudas escolares 2026-2027.pdf",
+      "long": 188238,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

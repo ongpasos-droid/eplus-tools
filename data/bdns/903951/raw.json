@@ -1,0 +1,112 @@
+{
+  "id": 1105512,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "AIELO DE MALFERIT",
+    "nivel3": "AYUNTAMIENTO DE AIELO DE MALFERIT"
+  },
+  "sedeElectronica": "https://aielodemalferit.sedelectronica.es",
+  "codigoBDNS": "903951",
+  "fechaRecepcion": "2026-05-06",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 8000,
+  "mrr": false,
+  "descripcion": "Subvenciones destinadas a asociaciones y entidades de ámbito local. Ejercicio 2026",
+  "descripcionLeng": "Subvencions destinades a associacions i entitats d'àmbit local. Exercici 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES523 - Valencia / València"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "La presente convocatoria tiene por objeto la concesión de ayudas económicas a las asociaciones culturales, educativas, deportivas, festivas, sociales y de carácter similar, que promuevan proyectes / actividades con una clara proyección social y/o utilidad",
+  "urlBasesReguladoras": "https://aielodemalferit.sedelectronica.es/transparency/9d41df11-0635-4d60-bc49-8ee908aec8fc/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Dia siguiente a la publicación en el BOP",
+  "textFin": "15 días hábiles desde la fecha de publicación del extracto en el BOP",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1449742,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "BASES AJUDES ordinaries 2026.pdf",
+      "long": 360764,
+      "datMod": "2026-05-06",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1449741,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "BASES AJUDES ordinaries 2026.pdf",
+      "long": 360764,
+      "datMod": "2026-05-06",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1449745,
+      "descripcion": "SOLICITUD",
+      "nombreFic": "INSTANCIA NORMALITZADA subvencions ordinaries 2026.pdf",
+      "long": 612708,
+      "datMod": "2026-05-06",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1449754,
+      "descripcion": "DECLARACIÓN RESPONSABLE",
+      "nombreFic": "ANNEX II Declaracio responsable Valencia i Igualtat.pdf",
+      "long": 741143,
+      "datMod": "2026-05-06",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1449752,
+      "descripcion": "MEMORIA - PROYECTO",
+      "nombreFic": "MEMORIA ACTIVITAT O PROJECTE ordinaries 2026.pdf",
+      "long": 742875,
+      "datMod": "2026-05-06",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1449753,
+      "descripcion": "CUENTA JUSTIFICATIVA",
+      "nombreFic": "COMPTE JUSTIFICATIU 2026.pdf",
+      "long": 474148,
+      "datMod": "2026-05-06",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1449750,
+      "descripcion": "MANTENIMIENTO TERCEROS",
+      "nombreFic": "MANTENIMENT DE TERCERS 2026.pdf",
+      "long": 386486,
+      "datMod": "2026-05-06",
+      "datPublicacion": "2026-05-07"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

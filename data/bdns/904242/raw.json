@@ -1,0 +1,103 @@
+{
+  "id": 1105803,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "GALICIA",
+    "nivel3": "CONSELLERÍA DE EMPLEO, COMERCIO Y EMIGRACIÓN"
+  },
+  "sedeElectronica": "https://sede.xunta.gal/portada",
+  "codigoBDNS": "904242",
+  "fechaRecepcion": "2026-05-07",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 20000,
+  "mrr": false,
+  "descripcion": "Convocatoria 2026 y bases reguladoras para la concesión de las subvenciones del Programa de dinamización comercial dirigido a federaciones o asociaciones de comerciantes de ámbito superior al municipal",
+  "descripcionLeng": "GALEGO",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Comercio al por menor de artículos culturales y recreativos",
+      "codigo": "47.6"
+    },
+    {
+      "descripcion": "Comercio al por menor de combustible para la automoción",
+      "codigo": "47.3"
+    },
+    {
+      "descripcion": "Comercio al por menor de equipos para las tecnologías de la información y las comunicaciones",
+      "codigo": "47.4"
+    },
+    {
+      "descripcion": "Comercio al por menor de otros artículos de uso doméstico",
+      "codigo": "47.5"
+    },
+    {
+      "descripcion": "Comercio al por menor de otros artículos, excepto vehículos de motor y motocicletas",
+      "codigo": "47.7"
+    },
+    {
+      "descripcion": "Comercio al por menor de productos alimenticios, bebidas y tabaco",
+      "codigo": "47.2"
+    },
+    {
+      "descripcion": "Comercio al por menor de vehículos de motor, motocicletas y sus repuestos y accesorios",
+      "codigo": "47.8"
+    },
+    {
+      "descripcion": "Comercio al por menor no especializado",
+      "codigo": "47.1"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES11 - GALICIA"
+    }
+  ],
+  "descripcionFinalidad": "Comercio, Turismo y Pymes",
+  "descripcionBasesReguladoras": "Orden de 28 de abril de 2026 por la que se establecen las bases reguladoras para la concesión de las subvenciones del Programa de dinamización comercial dirigido a federaciones o asociaciones de comerciantes de ámbito superior al municipal, y se procede a",
+  "urlBasesReguladoras": "http://www.xunta.es/dog/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-05-19",
+  "fechaFinSolicitud": "2026-06-18",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1450623,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "CO300B 202_gal_20260507_150711.pdf",
+      "long": 228461,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450622,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "CO300B 2026_es_20260507_150643.pdf",
+      "long": 255644,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

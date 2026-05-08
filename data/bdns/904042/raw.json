@@ -1,0 +1,91 @@
+{
+  "id": 1105603,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "GALICIA",
+    "nivel3": "CONSELLERÍA DE CULTURA, LENGUA Y JUVENTUD"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "904042",
+  "fechaRecepcion": "2026-05-07",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 53460,
+  "mrr": false,
+  "descripcion": "Resolución, de 29 de abril de 2026, por la que se procede a la convocatoria de plazas y becas en las residencias juveniles dependientes de esta consellería (códigos del procedimiento BS303B, BS303C y BS303D)",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    },
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Educación terciaria",
+      "codigo": "85.4"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES11 - GALICIA"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Resolución, de 29 de abril de 2026, por la que se procede a la convocatoria de plazas y becas en las residencias juveniles dependientes de esta consellería (códigos del procedimiento BS303B, BS303C y BS303D)",
+  "urlBasesReguladoras": "https://www.xunta.gal/diario-oficial-galicia/portalPublicoHome.do?fecha=20260507&ruta=Indice84_es.html&lang=es",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-05-21",
+  "fechaFinSolicitud": "2026-06-22",
+  "textInicio": "El día siguiente al de la publicación de esta convocatoria en el Diario Oficial de Galicia.",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1450094,
+      "descripcion": "EXTRACTO da Resolución, do 29 de abril de 2026, pola que se procede á convocatoria de prazas e bolsas nas residencias xuvenís dependentes desta consellería (códigos do procedemento BS303B, BS303C e BS303D)",
+      "nombreFic": "2.1 Extracto resolución DOG_gal_20260507_093452.pdf",
+      "long": 48705,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450093,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "1.1 Resolucion convocatoria DOG_gal_20260507_093416.pdf",
+      "long": 147867,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450092,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "1.2 Resolucion convocatoria DOG_cast_20260507_093333.pdf",
+      "long": 180166,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450095,
+      "descripcion": "EXTRACTO de la Resolución, de 29 de abril de 2026, por la que se procede a la convocatoria de plazas y becas en las residencias juveniles dependientes de esta consellería (códigos del procedimiento BS303B, BS303C y BS303D)",
+      "nombreFic": "2.2 Extracto resolución DOG_cas_20260507_093521.pdf",
+      "long": 68656,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

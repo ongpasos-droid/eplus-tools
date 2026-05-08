@@ -1,0 +1,184 @@
+{
+  "id": 1105745,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "COMUNIDAD DE MADRID",
+    "nivel3": "CONSEJERÍA DE MEDIO AMBIENTE, AGRICULTURA E INTERIOR"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "904184",
+  "fechaRecepcion": "2026-05-07",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 500000,
+  "mrr": false,
+  "descripcion": "AYUDAS PRODUCTOS PESCA COFINANCIADAS FEMPA 2ª CONVOCATORIA 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Agricultura, ganadería, caza y servicios relacionados con las mismas",
+      "codigo": "01"
+    },
+    {
+      "descripcion": "Pesca y acuicultura",
+      "codigo": "03"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES3 - COMUNIDAD DE MADRID"
+    }
+  ],
+  "descripcionFinalidad": "Agricultura, Pesca y Alimentación",
+  "descripcionBasesReguladoras": "ORDEN 1615/2025, DE LA CONSEJERÍA DE MEDIO AMBIENTE, AGRICULTURA E INTERIOR, POR LA QUE SE ESTABLECEN LAS BASES REGULADORAS DE LAS AYUDAS PARA LA PROMOCIÓN, TRANSFORMACIÓN Y COMERCIALIZACIÓN DE PRODUCTOS DE LA PESCA Y DE LA ACUICULTURA",
+  "urlBasesReguladoras": "https://www.bocm.es/boletin/CM_Orden_BOCM/2025/05/23/BOCM-20250523-19.PDF.",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "AL DÍA SIGUIENTE DE LA PUBLICACIÓN DEL EXTRACTO DE LA CONVOCATORIA EN EL BOCM",
+  "textFin": "15 DÍAS HÁBILES A PARTIR DEL DÍA SIGUIENTE DE LA PUBLICACIÓN DEL EXTRACTO DE LA CONVOCATORIA",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [
+    {
+      "descripcion": "FTJ – FONDO DE TRANSICIÓN JUSTA"
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1450425,
+      "descripcion": "Modelo de Solicitud  1738F1_solicitud",
+      "nombreFic": "Modelo de Solicitud  1738F1_solicitud.pdf",
+      "long": 145436,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450437,
+      "descripcion": "Anexos  1738FO25_Modelo 6_declaración responsable solicitante",
+      "nombreFic": "Anexos  1738FO25_Modelo 6_declaración responsable solicitante.pdf",
+      "long": 118186,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450435,
+      "descripcion": "Anexos  1738FO23_Modelo 4_calendario previsto ejecución",
+      "nombreFic": "Anexos  1738FO23_Modelo 4_calendario previsto ejecución.pdf",
+      "long": 159392,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450431,
+      "descripcion": "Anexos  1738FO19_Anexo 3_Información técnica",
+      "nombreFic": "Anexos  1738FO19_Anexo 3_Información técnica.pdf",
+      "long": 214882,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450430,
+      "descripcion": "Anexos  1738FO17_Anexo I_información general",
+      "nombreFic": "Anexos  1738FO17_Anexo I_información general.pdf",
+      "long": 186195,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450438,
+      "descripcion": "Anexos  1738FR1_Solicitud de pago",
+      "nombreFic": "Anexos  1738FR1_Solicitud de pago.pdf",
+      "long": 129818,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450426,
+      "descripcion": "Anexos  1738FO11_declaración ausencia conflicto intereses",
+      "nombreFic": "Anexos  1738FO11_declaración ausencia conflicto intereses.pdf",
+      "long": 133283,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450427,
+      "descripcion": "Anexos  1738FO12_Solicitud",
+      "nombreFic": "Anexos  1738FO12_Solicitud.pdf",
+      "long": 145346,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450428,
+      "descripcion": "Anexos  1738FO14_Solicitud modificación proyecto",
+      "nombreFic": "Anexos  1738FO14_Solicitud modificación proyecto.pdf",
+      "long": 124980,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450429,
+      "descripcion": "Anexos  1738FO15_Declaración no inicio inversiones",
+      "nombreFic": "Anexos  1738FO15_Declaración no inicio inversiones.pdf",
+      "long": 85595,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450432,
+      "descripcion": "Anexos  1738FO20_Modelo 1_declaración responsable",
+      "nombreFic": "Anexos  1738FO20_Modelo 1_declaración responsable.pdf",
+      "long": 201998,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450436,
+      "descripcion": "Anexos  1738FO24_Modelo 5_certificación cumplimieto requisitos",
+      "nombreFic": "Anexos  1738FO24_Modelo 5_certificación cumplimieto requisitos.pdf",
+      "long": 116226,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450434,
+      "descripcion": "Anexos  1738FO22_Modelo 3_modelo declaración criterios",
+      "nombreFic": "Anexos  1738FO22_Modelo 3_modelo declaración criterios.pdf",
+      "long": 145537,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450433,
+      "descripcion": "Anexos  1738FO21_Modelo 2_declaración responsable",
+      "nombreFic": "Anexos  1738FO21_Modelo 2_declaración responsable.pdf",
+      "long": 171758,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450424,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Texto Convocatoria BDNS  ORDEN 1620/2026_anonimizada.pdf",
+      "long": 5087066,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

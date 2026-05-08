@@ -1,0 +1,88 @@
+{
+  "id": 1105810,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "BALAGUER",
+    "nivel3": "AYUNTAMIENTO DE BALAGUER"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "904249",
+  "fechaRecepcion": "2026-05-07",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 120000,
+  "mrr": false,
+  "descripcion": "Convocatoria del programa de ayudas a las entidades deportivas de la ciudad de Balaguer para la realización de actividades, anualidad 2026",
+  "descripcionLeng": "Convocatòria del programa d'ajuts a les entitats esportives de la ciutat de Balaguer per a la realització d'activitats, anualitat 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES513 - Lleida"
+    }
+  ],
+  "descripcionFinalidad": "Otras actuaciones de carácter económico",
+  "descripcionBasesReguladoras": "Convocatoria del programa de ayudas a las entidades deportivas de la ciudad de Balaguer para la realización de actividades, anualidad 2026",
+  "urlBasesReguladoras": "https://ebop.diputaciolleida.cat/aplicacions/bop/bopV1/fitxers/pdf/2016/157/BOP-370900932.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "El día siguiente de la publicación en el BOP",
+  "textFin": "Un mes, a contar desde el día siguiente de la publicación en el BOP",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1450634,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Decret aprovar convocatòra subvencions activitats esportives - versió en castellà.pdf",
+      "long": 252416,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450641,
+      "descripcion": "Extracte de la convocatòria",
+      "nombreFic": "Subvencions esportives - Extracte convocatòria.pdf",
+      "long": 259482,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450640,
+      "descripcion": "Extracto de la convocatoria en castellano",
+      "nombreFic": "Subvencions esportives - Extracto convocatoria en castellano.pdf",
+      "long": 230752,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450637,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "DECRET 2026-0825 Aprovar subvenció convocatòria activitats esportives exercici 2026.pdf",
+      "long": 509253,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,96 @@
+{
+  "id": 1105600,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "AIELO DE MALFERIT",
+    "nivel3": "AYUNTAMIENTO DE AIELO DE MALFERIT"
+  },
+  "sedeElectronica": "https://aielodemalferit.sedelectronica.es",
+  "codigoBDNS": "904039",
+  "fechaRecepcion": "2026-05-07",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 2800,
+  "mrr": false,
+  "descripcion": "La presente convocatoria tiene como objetivos fundamentales: Incentivar los nacimientos o las adopciones en el municipio, proporcionar apoyo económico a las familias y contribuir a las necesidades extraordinarias que comporta el incremento de hijos.",
+  "descripcionLeng": "La present convocatòria té com a objectius fonamentals: Incentivar els naixements o les adopcions en el municipi, proporcionar suport econòmic a les famílies i contribuir a les necessitats extraordinàries que comporta l'increment de fills.",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES523 - Valencia / València"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Concesión de subvenciones para las familias de Aielo de Malferit por el nacimiento y adopción de hijos/se o acogidas durante el año 2025.",
+  "urlBasesReguladoras": "https://aielodemalferit.sedelectronica.es/transparency/a618a264-0b08-4959-a227-fcd05426c44e/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Dia siguiente a la publicación en el BOP",
+  "textFin": "Un mes desde la fecha de publicación del extracto en el BOP",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1450069,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Bases de convocatòria_BASES REGULADORAS NACIMIENTOS 2025 - AÑO 2026.pdf",
+      "long": 292256,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450070,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Bases de convocatòria_BASES REGULADORES NAIXEMENTS EN 2025 - ANY 2026.pdf",
+      "long": 306568,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450074,
+      "descripcion": "Modelo justificación",
+      "nombreFic": "ANNEX III Model sol justi ajudes 2026.pdf",
+      "long": 341766,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450072,
+      "descripcion": "Mantenimiento de terceros",
+      "nombreFic": "ANNEX II. manteniment tercers (2026).pdf",
+      "long": 395357,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450071,
+      "descripcion": "Solicitud",
+      "nombreFic": "ANNEX I Sol·licitud de Subvencio per Naixement, Adopció o Acolliment 2026.pdf",
+      "long": 610353,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

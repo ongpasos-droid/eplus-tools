@@ -1,0 +1,81 @@
+{
+  "source": "bdns",
+  "source_id": "904220",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / ALCÁZAR DE SAN JUAN / AYUNTAMIENTO DE ALCÁZAR DE SAN JUAN",
+  "nuts_codes": [
+    "ES422"
+  ],
+  "nuts_primary": "ES422",
+  "title": "BASES CONVOCATORIA BECAS PARA JÓVENES “TRANSICIÓN A LA VIDA ACTIVA 2026”",
+  "title_lang": "es",
+  "summary": "Fomento del Empleo",
+  "status": "open",
+  "publication_date": "2026-05-07",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 11900,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "Q",
+      "descripcion": "EDUCACIÓN"
+    }
+  ],
+  "apply_url": "https://sede.alcazardesanjuan.es/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=PTS2_HOME",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/904220",
+  "documents": [
+    {
+      "label": "Anexo IV. Ficha de aceptación de beca",
+      "url": null
+    },
+    {
+      "label": "Anexo III. Autobaremación",
+      "url": null
+    },
+    {
+      "label": "Anexo V. Ficha renuncia de beca",
+      "url": null
+    },
+    {
+      "label": "Anexo I. Relación de proyectos",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "Anexo II. Solicitud",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://alcazardesanjuan.es/",
+  "text_inicio": "El día siguiente a la publicación de la presente convocatoria en el B.O.P. de Ciudad Real",
+  "text_fin": "20 días naturales a partir del día siguiente a la publicación en el B.O.P. de Ciudad Real",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-08T04:06:10.399Z"
+}

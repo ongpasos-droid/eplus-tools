@@ -1,0 +1,172 @@
+{
+  "id": 1105724,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "COMUNIDAD DE MADRID",
+    "nivel3": "CONSEJERÍA DE MEDIO AMBIENTE, AGRICULTURA E INTERIOR"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "904163",
+  "fechaRecepcion": "2026-05-07",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 2200000,
+  "mrr": false,
+  "descripcion": "AYUDAS INVERSIONES INFRAESTRUCTURAS AGRARIAS FOMENTO COMPETITIVIDAD 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "AGRICULTURA, GANADERÍA, SILVICULTURA Y PESCA",
+      "codigo": "A"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES3 - COMUNIDAD DE MADRID"
+    }
+  ],
+  "descripcionFinalidad": "Agricultura, Pesca y Alimentación",
+  "descripcionBasesReguladoras": "ORDEN 3058/2025 DE LA CONSEJERÍA DE MEDIO AMBIENTE, AGRICULTURA E INTERIOR POR LA QUE SE ESTABLECEN LAS BASES REGULADORAS DE LAS AYUDAS A INVERSIONES EN INFRAESTRUCTURAS AGRARIAS PARA EL FOMENTO DE LA COMPETITIVIDAD, COFINANCIADAS POR EL FONDO EUROPEO AGR",
+  "urlBasesReguladoras": "https://www.bocm.es/boletin/CM_Orden_BOCM/2025/08/11/BOCM-20250811-18.PDF",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "AL DÍA SIGUIENTE DE LA PUBLICACIÓN DEL EXTRACTO DE LA CONVOCATORIA EN EL BOCM",
+  "textFin": "UN MES DESDE EL INICIO DEL PLAZO DE PRESENTACIÓN DE SOLICITUDES",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [
+    {
+      "descripcion": "FEADER - FONDO EUROPEO AGRÍCOLA DE DESARROLLO RURAL "
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1450345,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Texto Convocatoria BDNS  Orden 1547/2026 anonimizada.pdf",
+      "long": 4989664,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450346,
+      "descripcion": "Modelo de Solicitud  Anexo 1701F1_26",
+      "nombreFic": "Modelo de Solicitud  Anexo 1701F1_26.pdf",
+      "long": 131954,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450347,
+      "descripcion": "Anexos  1701FI1_Anexo II_Ámbito de aplicación",
+      "nombreFic": "Anexos  1701FI1_Anexo II_Ámbito de aplicación.pdf",
+      "long": 291443,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450348,
+      "descripcion": "Anexos  1701F2_AnexoIII_Contenido mínimo",
+      "nombreFic": "Anexos  1701F2_AnexoIII_Contenido mínimo.pdf",
+      "long": 392234,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450349,
+      "descripcion": "Anexos  1701FI3_Anexo XIII_Tipificación incumplimientos",
+      "nombreFic": "Anexos  1701FI3_Anexo XIII_Tipificación incumplimientos.pdf",
+      "long": 42586,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450350,
+      "descripcion": "Anexos  1701FA1_Anexo X_memoria económica justificativa",
+      "nombreFic": "Anexos  1701FA1_Anexo X_memoria económica justificativa.pdf",
+      "long": 98727,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450362,
+      "descripcion": "Anexos  1701FR1_Solicitud de pago",
+      "nombreFic": "Anexos  1701FR1_Solicitud de pago.pdf",
+      "long": 125857,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450352,
+      "descripcion": "Anexos  1701FO2_Anexo V_Certificado de disponiblidad",
+      "nombreFic": "Anexos  1701FO2_Anexo V_Certificado de disponiblidad.pdf",
+      "long": 59630,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450353,
+      "descripcion": "Anexos  1701FO6_Anexo VI_Escrito conjunto declaración",
+      "nombreFic": "Anexos  1701FO6_Anexo VI_Escrito conjunto declaración.pdf",
+      "long": 73947,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450355,
+      "descripcion": "Anexos  1701FO7_Anexo VII_certificado de autorizaciones",
+      "nombreFic": "Anexos  1701FO7_Anexo VII_certificado de autorizaciones.pdf",
+      "long": 60384,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450357,
+      "descripcion": "Anexos  1701FO9_Anexo VIII_certificado",
+      "nombreFic": "Anexos  1701FO9_Anexo VIII_certificado.pdf",
+      "long": 60696,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450358,
+      "descripcion": "Anexos  1701FO10_Anexo XI_certificado adecuación",
+      "nombreFic": "Anexos  1701FO10_Anexo XI_certificado adecuación.pdf",
+      "long": 69453,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450360,
+      "descripcion": "Anexos  1701FO11_Anexo XII_certificado acreditación",
+      "nombreFic": "Anexos  1701FO11_Anexo XII_certificado acreditación.pdf",
+      "long": 120581,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    },
+    {
+      "id": 1450351,
+      "descripcion": "Anexos  1701FO1_Anexo IV_Certificado del Acta",
+      "nombreFic": "Anexos  1701FO1_Anexo IV_Certificado del Acta.pdf",
+      "long": 60716,
+      "datMod": "2026-05-07",
+      "datPublicacion": "2026-05-07"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}
