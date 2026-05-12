@@ -1,0 +1,64 @@
+{
+  "id": 1106202,
+  "organo": {
+    "nivel1": "OTROS",
+    "nivel2": "UNIVERSIDAD REY JUAN CARLOS",
+    "nivel3": null
+  },
+  "sedeElectronica": "https://sede.urjc.es/convocatorias",
+  "codigoBDNS": "904641",
+  "fechaRecepcion": "2026-05-11",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 180000,
+  "mrr": false,
+  "descripcion": "RESOLUCIÓN DE LA UNIVERSIDAD REY JUAN CARLOS CONVOCATORIA 2026 PARA LA CONCESIÓN DE AYUDAS A ESTANCIAS DE INVESTIGACIÓN INTERNACIONALES PARA EL PERSONAL DOCENTE E INVESTIGADOR DE LA UNIVERSIDAD REY JUAN CARLOS",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES30 - COMUNIDAD DE MADRID"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "RESOLUCIÓN DE LA UNIVERSIDAD REY JUAN CARLOS CONVOCATORIA 2026 PARA LA CONCESIÓN DE AYUDAS A ESTANCIAS DE INVESTIGACIÓN INTERNACIONALES PARA EL PERSONAL DOCENTE E INVESTIGADOR DE LA UNIVERSIDAD REY JUAN CARLOS",
+  "urlBasesReguladoras": "https://sede.urjc.es/tablon-oficial",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Al día siguiente de la publicación del extracto en el BOCM",
+  "textFin": "10 días hábiles desde el día siguiente al de su publicación en el BOCM",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1451718,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convocatoria_Estancias Internacionales_2026.pdf",
+      "long": 370870,
+      "datMod": "2026-05-11",
+      "datPublicacion": "2026-05-11"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

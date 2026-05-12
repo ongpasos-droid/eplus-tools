@@ -1,0 +1,96 @@
+{
+  "id": 1106117,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "DIPUTACIÓN PROV. DE VALLADOLID",
+    "nivel3": "DIPUTACIÓN PROVINCIAL DE VALLADOLID"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "904556",
+  "fechaRecepcion": "2026-05-11",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 85000,
+  "mrr": false,
+  "descripcion": "Acuerdo nº 75/26 de la Junta de Gº de 24 de abril de 2026 por el que se aprueba Convocaoria subv. para deportistas destacados de la provincia de Valladolid para gastos generados como consecuencia de la práctica deportiva, 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Prestación de servicios a la comunidad en general",
+      "codigo": "84.2"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES418 - Valladolid"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "BASE REGULADORA GENERAL - ORDENANZA GENERAL DE SUBVENCIONES",
+  "urlBasesReguladoras": "https://www.diputaciondevalladolid.es/documents/10181/1090769/ORDENANZA+GENERAL+DE+SUBVENCIONES/d5d6fb94-fd7a-444b-bb18-6c50ffec90e0",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "desde las 00:00 horas del día siguiente a aquél en que aparezca publicado el anuncio de la convocato",
+  "textFin": "20 días hábiles, contados desde las 00:00 horas del día siguiente a aquél en que aparezca publicado",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1451507,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "1_Bases_CORREGIDAS_FINALES_DEPORTISTAS_DESTACADOS_2026.pdf",
+      "long": 536833,
+      "datMod": "2026-05-11",
+      "datPublicacion": "2026-05-11"
+    },
+    {
+      "id": 1451508,
+      "descripcion": "Anexo I",
+      "nombreFic": "2_Anexo_I_Solicitud_Deportistas_destacados.pdf",
+      "long": 287053,
+      "datMod": "2026-05-11",
+      "datPublicacion": "2026-05-11"
+    },
+    {
+      "id": 1451511,
+      "descripcion": "Acuerdo aprobacion bases",
+      "nombreFic": "07.Acuerdo_Junta_de_Gobierno.pdf",
+      "long": 246159,
+      "datMod": "2026-05-11",
+      "datPublicacion": "2026-05-11"
+    },
+    {
+      "id": 1451510,
+      "descripcion": "Anexo III",
+      "nombreFic": "4_Anexo_III_Cuenta_Justificativa_Deportistas_destacados.pdf",
+      "long": 322177,
+      "datMod": "2026-05-11",
+      "datPublicacion": "2026-05-11"
+    },
+    {
+      "id": 1451509,
+      "descripcion": "Anexo II",
+      "nombreFic": "3_Anexo_II_Ficha_Tesoreria_Deportistas_destacados.pdf",
+      "long": 124531,
+      "datMod": "2026-05-11",
+      "datPublicacion": "2026-05-11"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

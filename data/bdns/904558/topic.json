@@ -1,0 +1,129 @@
+{
+  "source": "bdns",
+  "source_id": "904558",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / DIPUTACIÓN PROV. DE VALLADOLID / DIPUTACIÓN PROVINCIAL DE VALLADOLID",
+  "nuts_codes": [
+    "ES418"
+  ],
+  "nuts_primary": "ES418",
+  "title": "Acuerdo nº 79/26 del Pleno de 24/04/526 por el que se aprueba convocatoria de subvenciones a ONGD para la financiación de proyectos de cooperación internacional para el desarrollo, años 2026 y 2027",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-05-11",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 1092188.7,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "84.2",
+      "descripcion": "Prestación de servicios a la comunidad en general"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/904558",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Acuerdo aprobación bases",
+      "url": null
+    },
+    {
+      "label": "Anexo II-A",
+      "url": null
+    },
+    {
+      "label": "Anexo II.-B",
+      "url": null
+    },
+    {
+      "label": "Anexo III",
+      "url": null
+    },
+    {
+      "label": "Anexo IV-A",
+      "url": null
+    },
+    {
+      "label": "Anexo IV-B",
+      "url": null
+    },
+    {
+      "label": "Anexo V-A",
+      "url": null
+    },
+    {
+      "label": "Anexo V-B",
+      "url": null
+    },
+    {
+      "label": "Anexo VI",
+      "url": null
+    },
+    {
+      "label": "Anexo VII",
+      "url": null
+    },
+    {
+      "label": "Anexo VIII",
+      "url": null
+    },
+    {
+      "label": "Anexo IX-A",
+      "url": null
+    },
+    {
+      "label": "Anexo IX-B",
+      "url": null
+    },
+    {
+      "label": "Anexo X-A",
+      "url": null
+    },
+    {
+      "label": "Anexo X-B",
+      "url": null
+    },
+    {
+      "label": "Anexo XI",
+      "url": null
+    },
+    {
+      "label": "Anexo I",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.diputaciondevalladolid.es/documents/10181/1090769/ORDENANZA+GENERAL+DE+SUBVENCIONES/d5d6fb94-fd7a-444b-bb18-6c50ffec90e0",
+  "text_inicio": "Modalidad A,B Y C desde el día sig. a la public. en BOP. La Mod.C de 2027 el 01/01/27",
+  "text_fin": "Modalidad A,B 30 días naturales. Y C en 2026 hasta 30/10/26 y C en 2027 hasta 30/10/27",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-12T04:05:32.634Z"
+}

@@ -1,0 +1,72 @@
+{
+  "id": 1106164,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "HOSPITALET DE LLOBREGAT, L'",
+    "nivel3": "AYUNTAMIENTO DE HOSPITALET DE LLOBREGAT, L'"
+  },
+  "sedeElectronica": "https://seuelectronica.l-h.cat/tramits/detalltramit_2.aspx?2LlpZ2uzJpElcNhUCPRX5NLLPdNd9RVWyUnto3NyqazCiTmNpW760VH3owqazBqazB",
+  "codigoBDNS": "904603",
+  "fechaRecepcion": "2026-05-11",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 12000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DE LA 20ª EDICIÓN DEL PREMIO LA H CONFIDENCIAL, PREMIO DE NOVELA NEGRA, Y BASES QUE REGULAN SU CONCESIÓN",
+  "descripcionLeng": "CONVOCATÒRIA DE LA 20a EDICIÓ DEL PREMI L’H CONFIDENCIAL, PREMI DE NOVEL·LA NEGRA, I BASES QUE REGULEN LA SEVA CONCESSIÓ",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES511 - Barcelona"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "CONVOCATORIA DE LA 20ª EDICIÓN DEL PREMIO LA H CONFIDENCIAL, PREMIO DE NOVELA NEGRA, Y BASES QUE REGULAN SU CONCESIÓN",
+  "urlBasesReguladoras": "https://bop.diba.cat/boletin-del-dia?bopb_dia%5BtipologiaAnunciant%5D=400",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Al dia siguiente de la publicación del extracto de la convocatoria en el BOP Barcelona",
+  "textFin": "Quince días naturales a contar desde el día siguiente de la publicación del extracto en el BOPB",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1451613,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "L'H Confidencial_Acord JGL 261803_ CAT.pdf",
+      "long": 346621,
+      "datMod": "2026-05-11",
+      "datPublicacion": "2026-05-11"
+    },
+    {
+      "id": 1451612,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "L'H Confidencial_Acord JGL 261803_ CAS.pdf",
+      "long": 204585,
+      "datMod": "2026-05-11",
+      "datPublicacion": "2026-05-11"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

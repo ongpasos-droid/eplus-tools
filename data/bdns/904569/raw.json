@@ -1,0 +1,80 @@
+{
+  "id": 1106130,
+  "organo": {
+    "nivel1": "ESTADO",
+    "nivel2": "MINISTERIO DE IGUALDAD",
+    "nivel3": "INSTITUTO DE LAS MUJERES"
+  },
+  "sedeElectronica": "https://igualdad.sede.gob.es/",
+  "codigoBDNS": "904569",
+  "fechaRecepcion": "2026-05-11",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 140118.34,
+  "mrr": false,
+  "descripcion": "Resolución de 6 de mayo de 2026, de la Dirección del Instituto de las Mujeres, por la que se convocan becas de formación “María Telo” 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES - ESPAÑA "
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Orden IGD/548/2022, de 14 de junio, por la que se establecen las bases reguladoras para la concesión de becas de formación en materia de igualdad de género en el Instituto de las Mujeres",
+  "urlBasesReguladoras": "https://www.boe.es/buscar/doc.php?id=BOE-A-2022-10030",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Día siguiente a la publicación del extracto en el BOE",
+  "textFin": "15 días hábiles desde el día siguiente a la publicación del extracto en el BOE",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1451570,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "01 CONVOCATORIA BECAS2026.pdf.xsig.pdf",
+      "long": 324147,
+      "datMod": "2026-05-11",
+      "datPublicacion": "2026-05-11"
+    },
+    {
+      "id": 1451572,
+      "descripcion": "Correción errores Orden de bases",
+      "nombreFic": "00 CORRECCION ERRORES 18-06-22.pdf",
+      "long": 189777,
+      "datMod": "2026-05-11",
+      "datPublicacion": "2026-05-11"
+    },
+    {
+      "id": 1451571,
+      "descripcion": "Orden de Bases",
+      "nombreFic": "00 ORDEN IGD-548-2022  de 14 de junio.pdf",
+      "long": 285348,
+      "datMod": "2026-05-11",
+      "datPublicacion": "2026-05-11"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

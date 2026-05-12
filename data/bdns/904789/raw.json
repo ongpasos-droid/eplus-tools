@@ -1,0 +1,72 @@
+{
+  "id": 1106350,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "GALICIA",
+    "nivel3": "CONSELLERÍA DE EMPLEO, COMERCIO Y EMIGRACIÓN"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "904789",
+  "fechaRecepcion": "2026-05-11",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 375000,
+  "mrr": false,
+  "descripcion": "Orden conjunta de 5 de mayo de 2026, para la rehabilitación de viviendas destinadas a vivienda habitual de personas trabajadoras en la Comunidad Autónoma de Galicia (TR358E y TR358F). (Medida no sujeta)",
+  "descripcionLeng": "Orde conjunta do 5 de maio de 2026, para a rehabilitación de vivendas destinadas a vivenda habitual de persoas traballadoras na Comunidade Autónoma de Galicia (TR358E e TR358F). (Medida non suxeita) ",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Acabado de edificios",
+      "codigo": "43.3"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES11 - GALICIA"
+    }
+  ],
+  "descripcionFinalidad": "Fomento del Empleo",
+  "descripcionBasesReguladoras": "Orden conjunta de 5 de mayo de 2026, para la rehabilitación de viviendas destinadas a vivienda habitual de personas trabajadoras en la Comunidad Autónoma de Galicia (TR358E y TR358F)",
+  "urlBasesReguladoras": "https://www.xunta.gal/diario-oficial-galicia",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-05-16",
+  "fechaFinSolicitud": "2026-07-15",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1452132,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "1 Orde rehabilit. vivendas_gal_20260511_100440.pdf",
+      "long": 264172,
+      "datMod": "2026-05-11",
+      "datPublicacion": "2026-05-11"
+    },
+    {
+      "id": 1452130,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "2 Orde rehabilit. vivendas_cas_20260511_100316.pdf",
+      "long": 273948,
+      "datMod": "2026-05-11",
+      "datPublicacion": "2026-05-11"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

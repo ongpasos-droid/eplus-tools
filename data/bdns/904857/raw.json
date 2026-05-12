@@ -1,0 +1,88 @@
+{
+  "id": 1106418,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "CONSELL COMARCAL DE VAL D'ARAN",
+    "nivel3": "CONSELL COMARCAL DE VAL D'ARAN"
+  },
+  "sedeElectronica": "https://tauler.seu-e.cat/inici?idEns=8103980001",
+  "codigoBDNS": "904857",
+  "fechaRecepcion": "2026-05-11",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 10000,
+  "mrr": false,
+  "descripcion": "Convocatoria para la concesión de subvenciones en el área de deportes para el año 2026",
+  "descripcionLeng": "Convocatòria entara concession de subvencions en airau d'espòrts entar an 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades deportivas",
+      "codigo": "93.1"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES513 - Lleida"
+    }
+  ],
+  "descripcionFinalidad": "Otras Prestaciones económicas",
+  "descripcionBasesReguladoras": "BASES ESPECÍFICAS PARA LA CONCESIÓN DE SUBVENCIONES EN EL ÁREA DE DEPORTES PARA EL AÑO 2026",
+  "urlBasesReguladoras": "https://tauler.seu-e.cat/inici?idEns=8103980001",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-07-15",
+  "textInicio": "Publicación BOP Lleida y sede electrónica Conselh Generau",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1452398,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convocatoria subvenciones Deportes 2026 (edicto def).docx",
+      "long": 51626,
+      "datMod": "2026-05-11",
+      "datPublicacion": "2026-05-11"
+    },
+    {
+      "id": 1452401,
+      "descripcion": "Declaración responsable",
+      "nombreFic": "Declaracion-responsabla-subv.-espòrts.pdf",
+      "long": 723239,
+      "datMod": "2026-05-11",
+      "datPublicacion": "2026-05-11"
+    },
+    {
+      "id": 1452400,
+      "descripcion": "Modelo de solicitud",
+      "nombreFic": "Model-A-de-sollicitud-de-subvencions.pdf",
+      "long": 923570,
+      "datMod": "2026-05-11",
+      "datPublicacion": "2026-05-11"
+    },
+    {
+      "id": 1452399,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Convocatòria subvencions Espòrts 2026 (edicte def).docx",
+      "long": 51548,
+      "datMod": "2026-05-11",
+      "datPublicacion": "2026-05-11"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,64 @@
+{
+  "id": 1106198,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "GUANCHA, LA",
+    "nivel3": "AYUNTAMIENTO DE LA GUANCHA"
+  },
+  "sedeElectronica": "https://laguancha.sedelectronica.es/info.0",
+  "codigoBDNS": "904637",
+  "fechaRecepcion": "2026-05-11",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 70000,
+  "mrr": false,
+  "descripcion": "Ayudas al estudio, curso 2025/2026, para jóvenes en La Guancha que realicen estudios de Master Habilitante, Grado Universitario, Bachillerato y Ciclos Formativos de Grado Medio y Superior, realizados en el municipio y fuera del municipio",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES709 - Tenerife"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Bases específicas de la convocatoria de ayudas al estudio, curso 2025/2026, para jóvenes residentes en La Guancha que realicen estudios de Máster Habilitante, Grado Universitario, Bachillerato y Ciclos Formativos de Grado Medio y Superior,.",
+  "urlBasesReguladoras": "https://www.bopsantacruzdetenerife.es",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "15 días hábiles contados a partir de la convocatoria en el BOP, de Santa Cruz de Tenerife",
+  "textFin": "Transcurridos los 15 días hábiles de la publicación en el BOP, de Santa Cruz de Tenerife ",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1451711,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "DECRETO 2026-0585 (DECRETO BASES Y CONVOCATORIA). AYUDAS AL ESTUDIO. CURSO 2025-2026.pdf",
+      "long": 824055,
+      "datMod": "2026-05-11",
+      "datPublicacion": "2026-05-11"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

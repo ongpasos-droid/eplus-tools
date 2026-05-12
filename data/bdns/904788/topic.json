@@ -1,0 +1,77 @@
+{
+  "source": "bdns",
+  "source_id": "904788",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / CABILDO INSULAR DE GRAN CANARIA / CONSORCIO DE VIVIENDAS DE GRAN CANARIA",
+  "nuts_codes": [
+    "ES705"
+  ],
+  "nuts_primary": "ES705",
+  "title": "CONVOCATORIA DE SUBVENCIONES PARA OBRAS DE REPARACIÓN DE PRIMERA NECESIDAD EN VIVIENDAS DE PERSONAS EN SITUACIÓN DE VULNERABILIDAD, 2026.",
+  "title_lang": "es",
+  "summary": "Otras actuaciones de carácter económico",
+  "status": "open",
+  "publication_date": "2026-05-11",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 800000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "F",
+      "descripcion": "CONSTRUCCIÓN"
+    }
+  ],
+  "apply_url": "https://viviendagc.sedelectronica.es/info.0",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/904788",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "SOLICITUD DE SUBVENCIÓN DESTINADA A OBRAS DE REPARACIÓN DE PRIMERA  NECESIDAD EN VIVIENDAS DE PERSONAS EN SITUACIÓN DE VULNERABILIDAD CONVOCATORIA 2026",
+      "url": null
+    },
+    {
+      "label": "MODELO NORMALIZADO DE INFORME ACERCA DE LAS CIRCUNSTANCIAS  SOCIOECONÓMICAS DE LOS SOLICITANTES DE SUBVENCIONES PARA OBRAS DE  REPARACIÓN DE PRIMERA NECESIDAD EN VIVIENDAS DE PERSONAS EN SITUACIÓN DE  VULNERABILIDAD, 2026.",
+      "url": null
+    },
+    {
+      "label": "MODELO DE INFORME TÉCNICO PARA LA CONCESIÓN DE SUBVENCIONES PARA OBRAS DE  REPARACIÓN DE PRIMERA NECESIDAD EN VIVIENDAS DE PERSONAS EN SITUACIÓN DE  VULNERABILIDAD, 2026.",
+      "url": null
+    },
+    {
+      "label": "DOCUMENTACIÓN A APORTAR JUNTO AL ANEXO I - SOLICITUD",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://cabildo.grancanaria.com/documents/38405/8534271/3_Ordenanza_General_Subvenciones_CabildoGC.pdf/3c9a7ead-13db-c470-c064-15c902e3f57e?t=1773406350993",
+  "text_inicio": "UN MES, a partir del día siguiente a aquel en el que se produzca la publicación en BOP Las Palmas",
+  "text_fin": "Finalizado el mes de presentación de solicitudes",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-12T04:05:32.711Z"
+}
