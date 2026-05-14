@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "905424",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / BÉTERA / AYUNTAMIENTO DE BÉTERA",
+  "nuts_codes": [
+    "ES523"
+  ],
+  "nuts_primary": "ES523",
+  "title": "Segunda convocatoria concurso para la selección de participantes en el marco del “Proyecto Europeo Erasmus+ KA1 – MINDCRAFT: Youth and AI in Action 2026”",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-05-13",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 10,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "S",
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO"
+    }
+  ],
+  "apply_url": " https://betera.sedelectronica.es/info.13",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/905424",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://betera.sedelectronica.es/transparency/793103b3-be19-4fa3-958e-1631aa3952af/",
+  "text_inicio": "Desde el día siguiente a la publicación del extracto de la convocatoria en el BOP",
+  "text_fin": "Transcurridos 3 días hágiles desde la publicación del extracto de la convocatoria en el BOP",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-14T04:07:23.323Z"
+}

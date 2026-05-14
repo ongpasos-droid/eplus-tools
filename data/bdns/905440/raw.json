@@ -1,0 +1,68 @@
+{
+  "id": 1107001,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "COMUNIDAD DE MADRID",
+    "nivel3": "CONSEJERÍA DE EDUCACIÓN, CIENCIA Y UNIVERSIDADES"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "905440",
+  "fechaRecepcion": "2026-05-13",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 750000,
+  "mrr": false,
+  "descripcion": "SGBA - AYUDAS INDIVIDUALIZADAS DE DESAYUNO ESCOLAR 2026/2027",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades deportivas, recreativas y de entretenimiento",
+      "codigo": "93"
+    },
+    {
+      "descripcion": "Educación",
+      "codigo": "85"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES3 - COMUNIDAD DE MADRID"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "ACUERDO  DE 31 DE OCTUBRE DE 2023, DEL CONSEJO DE GOBIERNO, POR EL QUE SE APRUEBAN LAS NORMAS REGULADORAS PARA LA CONCESIÓN DIRECTA DE AYUDAS INDIVIDUALIZADAS DE DESAYUNO ESCOLAR A LOS ALUMNOS DE SEGUNDO CICLO DE EDUCACIÓN INFANTIL Y DE EDUCACIÓN PRIMARIA",
+  "urlBasesReguladoras": "https://www.bocm.es/boletin/CM_Orden_BOCM/2023/11/08/BOCM-20231108-24.PDF",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "DESDE EL DIA SIGUIENTE A LA PUBLICACION DE LA ORDEN EN FORMA DE EXTRACTO EN EL BOCM",
+  "textFin": "15 DIAS HÁBILES DESDE EL INICIO DEL PLAZO DE SOLICITUD",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1454212,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Texto Convocatoria BDNS  ORDEN FIRMADA.pdf",
+      "long": 313026,
+      "datMod": "2026-05-13",
+      "datPublicacion": "2026-05-13"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

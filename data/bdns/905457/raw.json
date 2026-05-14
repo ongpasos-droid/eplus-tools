@@ -1,0 +1,80 @@
+{
+  "id": 1107018,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "ALMUSSAFES",
+    "nivel3": "AYUNTAMIENTO DE ALMUSSAFES"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "905457",
+  "fechaRecepcion": "2026-05-13",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 5000,
+  "mrr": false,
+  "descripcion": "BASES DE CONVOCATORIA DE CONCESIÓN DE SUBVENCIONES DESTINADAS A LA ORGANIZACIÓN, REALIZACIÓN Y PARTICIPACIÓN DE EVENTOS EXTRAORDINARIOS POR ENTIDADES JUVENILES DE ALMUSSAFES, EJERCICIO 2026",
+  "descripcionLeng": "BASES DE CONVOCATÒRIA DE CONCESSIÓ DE SUBVENCIONS DESTINADES A L'ORGANITZACIÓ, REALITZACIÓ I PARTICIPACIÓ D'ESDEVENIMENTS EXTRAORDINARIS PER ENTITATS JUVENILS D'ALMUSSAFES, EXERCICI 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES523 - Valencia / València"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "BASES DE CONVOCATORIA DE CONCESIÓN DE SUBVENCIONES DESTINADAS A LA ORGANIZACIÓN, REALIZACIÓN Y PARTICIPACIÓN DE EVENTOS EXTRAORDINARIOS POR ENTIDADES JUVENILES DE ALMUSSAFES, EJERCICIO 2026",
+  "urlBasesReguladoras": "https://wp.me/PanQjS-1mA",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "El día siguiente a la publicación de esta convocatoria en el Boletín Oficial de la Provincia.",
+  "textFin": "Hasta el 31 de octubre de 2026.",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1454243,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Bases subvención extraordinaria juventud 2026 - SEFYCU 7975214.pdf",
+      "long": 399552,
+      "datMod": "2026-05-13",
+      "datPublicacion": "2026-05-13"
+    },
+    {
+      "id": 1454245,
+      "descripcion": "Resolución de la Alcaldía nº 1381/2026  de 12/05/2026",
+      "nombreFic": "Resolución Nº 1381 de 12_05_2026 _Aprueba Bases convocatoria Subvención Extraordinarias Entidades Juveniles 2026._ - SEGRA 1170324.pdf",
+      "long": 290625,
+      "datMod": "2026-05-13",
+      "datPublicacion": "2026-05-13"
+    },
+    {
+      "id": 1454244,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Bases subvenció extraordinària joventut 2026 - SEFYCU 7975267.pdf",
+      "long": 397155,
+      "datMod": "2026-05-13",
+      "datPublicacion": "2026-05-13"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

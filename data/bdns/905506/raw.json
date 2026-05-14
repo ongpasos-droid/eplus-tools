@@ -1,0 +1,72 @@
+{
+  "id": 1107067,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "LANGREO",
+    "nivel3": "AYUNTAMIENTO DE LANGREO"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "905506",
+  "fechaRecepcion": "2026-05-13",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 40000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA AYUDAS A FAMILIAS PARA LA INCLUSION DE MENORES EN ACTIVIDADES DEPORTIVAS, MUSICALES O ARTISTICAS EN EL CONCEJO DE LANGREO 2026-27",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades de servicios sociales sin alojamiento",
+      "codigo": "88"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES12 - PRINCIPADO DE ASTURIAS"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "ORDENANZA REGULADORA DEL RÉGIMEN GENERAL DE CONCESIÓN DE SUBV. Y AYUDAS DEL AYUNTAMIENTO DE LANGREO Y SUS ORGANISMOS AUTÓNOMOS",
+  "urlBasesReguladoras": "https://www.langreo.as",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "DESDE DIA SIGUIENTE DE PUBLICACION EN BOPA",
+  "textFin": "VEINTE DIAS DESDE PUBLICACION EN BOPA",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1454358,
+      "descripcion": "SOLICITUD",
+      "nombreFic": "MODELO_SOLICITUD_AYUDAS_DXT_Y_ARTE.pdf",
+      "long": 631361,
+      "datMod": "2026-05-13",
+      "datPublicacion": "2026-05-13"
+    },
+    {
+      "id": 1454357,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "BASES_2026-2027_definitivas.pdf",
+      "long": 587190,
+      "datMod": "2026-05-13",
+      "datPublicacion": "2026-05-13"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,72 @@
+{
+  "id": 1106960,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "CATALUÑA",
+    "nivel3": "DEPARTAMENT D'EDUCACIÓ I FORMACIÓ PROFESSIONAL"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "905399",
+  "fechaRecepcion": "2026-05-13",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 62000000,
+  "mrr": false,
+  "descripcion": "Resolución por la que se abre el procedimiento de convocatoria pública para la concesión de ayudas por el alumnado con necesidad específica de apoyo educativo para el curso 2026-2027",
+  "descripcionLeng": "Resolució per la qual s’obre el procediment de convocatòria pública per a la concessió d’ajuts per l’alumnat amb necessitat específica de suport educatiu per al curs 2026-2027",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Educación",
+      "codigo": "85"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES - ESPAÑA "
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Real Decreto 1721/2007, de 21 de diciembre, por el que se establece el régimen de las becas y ayudas al estudio personalizadas.",
+  "urlBasesReguladoras": "https://www.boe.es/buscar/pdf/2008/BOE-A-2008-821-consolidado.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-05-19",
+  "fechaFinSolicitud": "2026-09-10",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1454075,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "20260512_189_convoajutsne_signed.pdf",
+      "long": 280819,
+      "datMod": "2026-05-13",
+      "datPublicacion": "2026-05-13"
+    },
+    {
+      "id": 1454074,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "20260512_189_convoajutsne_signed_t.pdf",
+      "long": 253063,
+      "datMod": "2026-05-13",
+      "datPublicacion": "2026-05-13"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

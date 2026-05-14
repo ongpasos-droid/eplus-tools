@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "904764",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / VALDEHÚNCAR / AYUNTAMIENTO DE VALDEHÚNCAR",
+  "nuts_codes": [
+    "ES432"
+  ],
+  "nuts_primary": "ES432",
+  "title": "CONVOCATORIA Y BASES REGULADORAS DE CONCESIÓN DE AYUDAS PARA GARANTIZAR EL ACCESO A LOS SUMINISTROS MÍNIMOS VITALES EN EL MUNICIPIO DE VALDEHÚNCAR (PROGRAMA DE COLABORACIÓN ECONÓMICA MUNICIPAL 2026)",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-05-11",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 3573.83,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "R",
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/904764",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "www.sedelectronicavaldehuncar.es",
+  "text_inicio": "Siguiente a la publicación de la convocatoria en el Boletín Oficial de la Provincia de Cáceres",
+  "text_fin": "31/12/2026 o hasta agotar crédito presupuestario",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-14T04:07:23.025Z"
+}

@@ -1,0 +1,70 @@
+{
+  "id": 1106815,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "TORREJÓN DE ARDOZ",
+    "nivel3": "AYUNTAMIENTO DE TORREJÓN DE ARDOZ"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "905254",
+  "fechaRecepcion": "2026-05-13",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 9300,
+  "mrr": false,
+  "descripcion": "BASES DEL XXIX CERTAMEN NACIONAL DE TEATRO PARA DIRECTORAS DE ESCENA CIUDAD DE TORREJÓN DE ARDOZ AÑO 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    },
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    },
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades de creación artística y artes escénicas",
+      "codigo": "90"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES30 - COMUNIDAD DE MADRID"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "ORDENANZA DE BASES REGULADORAS GLES. PARA CONCESION SUBVENCIONES",
+  "urlBasesReguladoras": "https://www.ayto-torrejon.es/sites/default/files/intranet//MiPaginaDescargas/744_Ordenanzas%20subvenciones.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-06-16",
+  "textInicio": "DESDE EL  DIA SIGUIENTE A SU PUBLICACION EN BOCM",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1453675,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "6158895-Certificado_JGL_11_05_2025_PUNTO_13__IGUALDAD_Y_OBRAS_XXIX_CERTAMEN_NACIONAL_DE_DIRECTORAS_DE_ESCENA_CELEBRACION_.PDF",
+      "long": 557941,
+      "datMod": "2026-05-13",
+      "datPublicacion": "2026-05-13"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

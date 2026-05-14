@@ -1,0 +1,80 @@
+{
+  "id": 1106801,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "DIPUTACIÓN PROV. DE VALENCIA",
+    "nivel3": "DIPUTACIÓN PROVINCIAL DE VALENCIA"
+  },
+  "sedeElectronica": "https://www.sede.dival.es/",
+  "codigoBDNS": "905240",
+  "fechaRecepcion": "2026-05-13",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 260000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA ONGD PROYECTOS DE SENSIBILIZACIÓN 2026",
+  "descripcionLeng": "CONVOCATÒRIA ONGD PROJECTES DE SENSIBILITZACIÓ 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Otras actividades asociativas",
+      "codigo": "94.9"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES523 - Valencia / València"
+    }
+  ],
+  "descripcionFinalidad": "Cooperación internacional para el desarrollo y cultural",
+  "descripcionBasesReguladoras": "CONVOCATORIA ONGD PROYECTOS DE SENSIBILIZACIÓN 2026",
+  "urlBasesReguladoras": "https://www.dival.es/sites/default/files/portal-de-transparencia/2024%2012%2004%20OGS.%20Consolidada.2025.CAS_.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-05-18",
+  "fechaFinSolicitud": "2026-06-15",
+  "textInicio": "día siguiente a la publicación del extracto de la Convocatoria en el Boletín Oficial de la Provincia",
+  "textFin": "20 días naturales a partir del día siguiente a la publicación del extracto en el BOP ",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1453646,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "cl_DECRETO PRESIDENTE C. 2026 ONGD...P. SENSIBILIZACIÓN, EpD Y CIUDADANÍA GLOBAL.pdf",
+      "long": 1300661,
+      "datMod": "2026-05-13",
+      "datPublicacion": "2026-05-13"
+    },
+    {
+      "id": 1453648,
+      "descripcion": "DECRETO PRESIDENTE C. 2026 ONGD...P. SENSIBILIZACIÓN, EpD Y CIUDADANÍA GLOBAL",
+      "nombreFic": "cl_DECRETO PRESIDENTE C. 2026 ONGD...P. SENSIBILIZACIÓN, EpD Y CIUDADANÍA GLOBAL.pdf",
+      "long": 1300661,
+      "datMod": "2026-05-13",
+      "datPublicacion": "2026-05-13"
+    },
+    {
+      "id": 1453647,
+      "descripcion": "Extracto Decreto Presidencia_CONVOCATORIA ONGD 2026 PROYECTOS SENSIBILIZACIÓN_cast.val",
+      "nombreFic": "cl_Extracto Decreto Presidencia_CONVOCATORIA ONGD 2026 PROYECTOS SENSIBILIZACIÓN_cast.val.pdf",
+      "long": 113186,
+      "datMod": "2026-05-13",
+      "datPublicacion": "2026-05-13"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

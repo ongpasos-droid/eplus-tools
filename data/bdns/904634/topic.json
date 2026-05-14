@@ -1,0 +1,81 @@
+{
+  "source": "bdns",
+  "source_id": "904634",
+  "source_lang": "es",
+  "level": "otros",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "OTROS / UNIVERSIDAD DE OVIEDO",
+  "nuts_codes": [
+    "ES12"
+  ],
+  "nuts_primary": "ES12",
+  "title": "Resolución del 13 de mayo de 2026, por la que se aprueba el procedimiento de urgencia de 1 beca de colaboración de la \"Cátedra Salud Comunitaria y Promoción de la Salud\", periodo junio-julio 2026 de la Universidad de Oviedo",
+  "title_lang": "es",
+  "summary": "Educación",
+  "status": "open",
+  "publication_date": "2026-05-11",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 921.68,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "Q",
+      "descripcion": "EDUCACIÓN"
+    }
+  ],
+  "apply_url": "https://euniovi.uniovi.es/TramitadorSolicitudes/solicitud/privado/presentarSolicitudAutenticado.xhtml?idProcedimiento=567",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/904634",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "Mod145_es_es",
+      "url": null
+    },
+    {
+      "label": "Anexo III Renuncia",
+      "url": null
+    },
+    {
+      "label": "Anexo IV Declaración responsable",
+      "url": null
+    },
+    {
+      "label": "Anexo I Aceptación y compromisos a la beca-colaboración",
+      "url": null
+    },
+    {
+      "label": "Anexo II Documento becario en formación",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://sede.asturias.es/bopa/2023/05/12/2023-03936.pdf",
+  "text_inicio": "Primer día hábil siguiente a la publicación del extracto en el BOPA (a partir de las 00:00 h)",
+  "text_fin": "10 días hábiles después de la publicación del extracto en BOPA (hasta las 23:59 h del último día)",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-14T04:07:22.964Z"
+}

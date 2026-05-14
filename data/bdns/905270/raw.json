@@ -1,0 +1,64 @@
+{
+  "id": 1106831,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "CANDAMO",
+    "nivel3": "AYUNTAMIENTO DE CANDAMO"
+  },
+  "sedeElectronica": "https://candamo.sede.e-ayuntamiento.es/",
+  "codigoBDNS": "905270",
+  "fechaRecepcion": "2026-05-13",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 23000,
+  "mrr": false,
+  "descripcion": "BASES REGULADORAS DE LAS SUBVENCIONES A CONCEDER POR EL AYUNTAMIENTO DE CANDAMO, DURANTE EL EJERCICIO DE 2026, A LAS ASOCIACIONES MUNICIPALES SIN ÁNIMO DE LUCRO PARA SU FUNCIONAMIENTO Y PARA EL FOMENTO DE ACTIVIDADES CULTURALES, JUVENILES, RECREATIVAS",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES120 - Asturias"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "Acuerdo Junta Gobierno 12/05/2026 por la que se convocan subvenciones para el fomento de actividades culturales, juveniles, recreativas, festivas sociales y deportivas",
+  "urlBasesReguladoras": "https://candamo.sedelectronica.e-ayuntamiento.es/tablondeanuncios/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "El plazo de presentación de solicitudes será de 30 días naturales al siguiente a su publicación bopa",
+  "textFin": "Finalizados los  30 días naturales al siguiente a su publicación en el BOPA",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1453694,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Bases reguladoras de las subvenciones a conceder.pdf",
+      "long": 369496,
+      "datMod": "2026-05-13",
+      "datPublicacion": "2026-05-13"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

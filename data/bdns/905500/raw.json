@@ -1,0 +1,80 @@
+{
+  "id": 1107061,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "BISBAL D'EMPORDÀ, LA",
+    "nivel3": "AYUNTAMIENTO DE BISBAL D'EMPORDÀ, LA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "905500",
+  "fechaRecepcion": "2026-05-13",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 20000,
+  "mrr": false,
+  "descripcion": "Convocatoria para la concesión de subvenciones en regiment de concurrencia competitiva destinadas a entidades de ocio y entidades juveniles.",
+  "descripcionLeng": "Convocatòria per a la concessió de subvencions en règim de concurrència competitiva destinades a entitats de lleure i entitats juvenils. ",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES512 - Girona"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Assegurar el suport a les entitats de la ciutat per tal que aquestes puguin dur a terme les seves activitats i projectes en l’àmbit del lleure. Promoure la participació en el lleure d’infants i joves durant els períodes de vacances escolars.",
+  "urlBasesReguladoras": "www.labisbal.cat",
+  "sePublicaDiarioOficial": true,
+  "abierto": true,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1454318,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "EXTRACTO DE LA CONVOCATORIA DE SUBVENCIONS PARA ENTIDADES LUDICAS Y JUVENILES CAST 13052026.pdf",
+      "long": 345803,
+      "datMod": "2026-05-13",
+      "datPublicacion": "2026-05-13"
+    },
+    {
+      "id": 1454331,
+      "descripcion": "DECRET",
+      "nombreFic": "2026DECR001013 ENTITATS DE LLEURE CASALS D.pdf",
+      "long": 529856,
+      "datMod": "2026-05-13",
+      "datPublicacion": "2026-05-13"
+    },
+    {
+      "id": 1454330,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "EXTRACTO DE LA CONVOCATORIA DE SUBVENCIONS PER ENTITATS DE LLEURE I JUVENILS CAT 2026.pdf",
+      "long": 343879,
+      "datMod": "2026-05-13",
+      "datPublicacion": "2026-05-13"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

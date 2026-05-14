@@ -1,0 +1,80 @@
+{
+  "id": 1107005,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "ASTIGARRAGA",
+    "nivel3": "AYUNTAMIENTO DE ASTIGARRAGA"
+  },
+  "sedeElectronica": "www.astigarraga.eus",
+  "codigoBDNS": "905444",
+  "fechaRecepcion": "2026-05-13",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 600,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DE AYUDAS: Ayudas para realizar cursos en euskera de la UEU y/o universidad de verano de 2026",
+  "descripcionLeng": "DIRULAGUNTZA DEIALDIA: 2026ko UEUko edota udako unibertsitateko euskarazko ikastaroak egiteko laguntza.",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES212 - Gipuzkoa"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "CONVOCATORIA DE AYUDAS: Ayudas para realizar cursos en euskera de la UEU y/o universidad de verano de 2026",
+  "urlBasesReguladoras": "https://www.astigarraga.eus/es/subvenciones",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-09-25",
+  "textInicio": "Desde el día siguiente de la publicación de la convocatoria en el Boletín Oficial de Gipuzkoa (BOG)",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1454216,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "5.5.2.- Udako ikastaroak_oinarriak.pdf",
+      "long": 138279,
+      "datMod": "2026-05-13",
+      "datPublicacion": "2026-05-13"
+    },
+    {
+      "id": 1454218,
+      "descripcion": "Solicitud",
+      "nombreFic": "E025 UEU- eskaera.pdf",
+      "long": 195952,
+      "datMod": "2026-05-13",
+      "datPublicacion": "2026-05-13"
+    },
+    {
+      "id": 1454217,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "5.5.2.- Udako ikastaroak_oinarriak.pdf",
+      "long": 138279,
+      "datMod": "2026-05-13",
+      "datPublicacion": "2026-05-13"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}
