@@ -683,6 +683,9 @@ const Developer = (() => {
   /* ── Sub-tab: Presupuesto ─────────────────────────────────────── */
   async function renderPrepPresupuesto(el) {
     const pid = currentProject.id;
+    // Always sync budget v2 with the calc_state before opening the editor.
+    el.innerHTML = '<p class="text-sm text-on-surface-variant py-8 text-center"><span class="spinner"></span> Sincronizando presupuesto con el Designer...</p>';
+    await _ensureBudgetFresh(pid);
     const data = await API.get('/developer/projects/' + pid + '/prep/presupuesto').catch(() => null);
     prepCache.presupuesto = data;
 
@@ -5417,9 +5420,25 @@ const Developer = (() => {
 
   /* ── Card 5: Estimated budget — Resources (read-only pivot) ── */
 
+  // Coalesce concurrent refresh calls so rendering N WP cards in parallel
+  // only triggers ONE backend rebuild per project.
+  const _budgetRefreshInflight = new Map(); // projectId → Promise
+
+  async function _ensureBudgetFresh(projectId) {
+    if (!projectId) return;
+    if (_budgetRefreshInflight.has(projectId)) return _budgetRefreshInflight.get(projectId);
+    const p = API.post(`/developer/projects/${projectId}/budget/refresh`)
+      .catch(err => console.warn('[Writer] budget refresh failed:', err.message))
+      .finally(() => _budgetRefreshInflight.delete(projectId));
+    _budgetRefreshInflight.set(projectId, p);
+    return p;
+  }
+
   async function _wpRenderBudgetCard(wpId) {
     const host = document.getElementById('wp-card-budget');
     if (!host) return;
+    // Always sync budget v2 with the calc_state before reading.
+    if (currentProject?.id) await _ensureBudgetFresh(currentProject.id);
     let data;
     try { data = await API.get(`/developer/wp/${wpId}/budget`); }
     catch (err) { host.innerHTML = `<span class="text-error text-xs">Error: ${esc(err.message || '')}</span>`; return; }

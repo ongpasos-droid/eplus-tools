@@ -633,6 +633,13 @@ exports.getWpBudget = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
+exports.refreshProjectBudget = async (req, res, next) => {
+  try {
+    const data = await model.refreshProjectBudget(req.params.projectId, req.user.id);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
 exports.listProjectPartners = async (req, res, next) => {
   try {
     const data = await model.listProjectPartners(req.params.projectId, req.user.id);

@@ -88,6 +88,7 @@ router.delete('/tasks/:id',                                requireAuth, ctrl.del
 router.put   ('/tasks/:id/participants/:partnerId',        requireAuth, ctrl.setTaskParticipant);
 router.delete('/tasks/:id/participants/:partnerId',        requireAuth, ctrl.removeTaskParticipant);
 router.get   ('/wp/:wpId/budget',                          requireAuth, ctrl.getWpBudget);
+router.post  ('/projects/:projectId/budget/refresh',       requireAuth, ctrl.refreshProjectBudget);
 router.get   ('/projects/:projectId/partners',             requireAuth, ctrl.listProjectPartners);
 router.post  ('/wp/:wpId/ai-fill',                         requireAuth, ctrl.aiFillWp);
 router.post  ('/wp/:wpId/tasks/resync',                    requireAuth, ctrl.resyncWpTasks);

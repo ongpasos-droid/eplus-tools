@@ -95,6 +95,19 @@ const TASK_TEMPLATES = [
     ]
   },
   {
+    category: 'personal_work',
+    label: 'Personal Work',
+    icon: 'psychology',
+    subtypes: [
+      { key: 'one_to_one_mentoring', label: 'One-to-one mentoring', title: 'Delivery of the One-to-One Mentoring', description: 'This task covers the design and delivery of individual mentoring sessions between a qualified mentor and a participant. It includes goal-setting, structured sessions, and progress documentation. It supports personalised learning, self-awareness, and skill development.' },
+      { key: 'personal_accompaniment', label: 'Personal accompaniment', title: 'Delivery of the Personal Accompaniment', description: 'This task focuses on providing continuous individualised support to each participant throughout the project. It includes follow-up, barrier removal, pathway adaptation, and ongoing reflection. It supports inclusion, retention, and personalised quality.' },
+      { key: 'coaching_pathway', label: 'Coaching pathway', title: 'Delivery of the Coaching Pathway', description: 'This task covers the implementation of a structured coaching process with each participant. It includes goal-setting, action planning, accountability sessions, and reflective practice. It supports the achievement of concrete personal or professional objectives related to the project theme.' },
+      { key: 'reflective_journaling', label: 'Reflective journaling', title: 'Implementation of the Reflective Journaling Practice', description: 'This task introduces reflective journaling as a personal work practice across the project. It includes prompts, structured exercises, and milestones designed to deepen self-awareness and document the learning journey. It supports introspection, evaluation, and personal evidence collection.' },
+      { key: 'individual_portfolio', label: 'Individual portfolio', title: 'Production of the Individual Portfolio', description: 'This task covers the production by each participant of a personal portfolio compiling their work, reflections, and evidence of competence development throughout the project. It supports recognition of learning, personal growth, and the participant\'s future use of their experience.' },
+      { key: 'personal_creation_project', label: 'Personal creation project', title: 'Delivery of the Personal Creation Project', description: 'This task focuses on supporting each participant to design and develop an individual creation project aligned with the project theme. It includes guidance sessions, peer feedback, and a final presentation. It supports creativity, personal contribution, and ownership of project outputs.' },
+    ]
+  },
+  {
     category: 'dissemination',
     label: 'Dissemination',
     icon: 'share',

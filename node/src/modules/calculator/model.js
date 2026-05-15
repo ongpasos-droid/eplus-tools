@@ -1164,14 +1164,21 @@ async function saveFullState(projectId, data) {
       }
     }
 
-    // 5. Insert extra destinations
+    // 5. Insert extra destinations — keep a map { frontendId(_edN) → dbUuid } so
+    //    activities that reference extra_dests as host (Brussels Event, etc.) can
+    //    be persisted with the correct uuid in host_extra_dest_id.
+    const extraDestIdMap = {};
     if (data.extraDests && data.extraDests.length) {
+      let edIdx = 0;
       for (const ed of data.extraDests) {
         if (!ed.name) continue;
+        const newId = genUUID();
+        extraDestIdMap[ed.id] = newId;
         await conn.execute(
-          'INSERT INTO extra_destinations (id, project_id, name, country, accommodation_rate, subsistence_rate) VALUES (?, ?, ?, ?, ?, ?)',
-          [genUUID(), projectId, ed.name, ed.country || null, ed.aloj || 0, ed.mant || 0]
+          'INSERT INTO extra_destinations (id, project_id, name, country, accommodation_rate, subsistence_rate, order_index) VALUES (?, ?, ?, ?, ?, ?, ?)',
+          [newId, projectId, ed.name, ed.country || null, ed.aloj || 0, ed.mant || 0, edIdx]
         );
+        edIdx++;
       }
     }
 
@@ -1195,7 +1202,7 @@ async function saveFullState(projectId, data) {
                act.date_start || null, act.date_end || null, act.online ? 1 : 0, ai,
                act._gantt_start || null, act._gantt_end || null]
             );
-            await insertActivityDetails(conn, actId, act, partnerIds);
+            await insertActivityDetails(conn, actId, act, partnerIds, extraDestIdMap);
           }
         }
       }
@@ -1240,7 +1247,7 @@ async function deleteActivityDetails(conn, actId, type) {
   }
 }
 
-async function insertActivityDetails(conn, actId, act, partnerIds) {
+async function insertActivityDetails(conn, actId, act, partnerIds, extraDestIdMap = {}) {
   // partnerIds = valid partner IDs for this project (used to filter FK references)
   const validPid = pid => !partnerIds || partnerIds.includes(pid);
 
@@ -1253,14 +1260,20 @@ async function insertActivityDetails(conn, actId, act, partnerIds) {
       break;
     }
     case 'meeting': case 'ltta': {
-      const hostValid = act.host && validPid(act.host);
-      if (!hostValid) {
-        console.warn(`[saveFullState] activity ${act.label}: host '${act.host}' not in partners, skipping mobility details`);
+      // Host can be either a partner uuid or an extra_destination frontend id (_edN).
+      const isPartner = act.host && validPid(act.host);
+      const extraDestUuid = act.host && extraDestIdMap[act.host];
+      if (!isPartner && !extraDestUuid) {
+        console.warn(`[saveFullState] activity ${act.label}: host '${act.host}' is neither a valid partner nor a known extra_destination, skipping mobility details`);
         break;
       }
       await conn.execute(
-        'INSERT INTO activity_mobility (id, activity_id, host_partner_id, host_active, pax_per_partner, duration_days, local_pax, local_transport, mat_cost_per_pax) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-        [genUUID(), actId, act.host, act.host_active !== false ? 1 : 0, act.pax || 2, act.days || 3, act.local_pax || 0, act.local_transport || 0, act.mat_cost || 0]
+        'INSERT INTO activity_mobility (id, activity_id, host_partner_id, host_extra_dest_id, host_active, pax_per_partner, duration_days, local_pax, local_transport, mat_cost_per_pax) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [genUUID(), actId,
+         isPartner ? act.host : null,
+         isPartner ? null : extraDestUuid,
+         act.host_active !== false ? 1 : 0,
+         act.pax || 2, act.days || 3, act.local_pax || 0, act.local_transport || 0, act.mat_cost || 0]
       );
       // Participant toggles — only valid partner IDs
       if (act.participants) {
@@ -1374,11 +1387,18 @@ async function loadFullState(projectId) {
     routes[key] = { km: r.distance_km || 0, green: !!r.eco_travel, custom_rate: r.custom_rate != null ? Number(r.custom_rate) : null };
   }
 
-  // Extra destinations
+  // Extra destinations — preservamos el uuid de BD para poder mapear host_extra_dest_id
+  // al _edN del state. El frontend identifica cada extra_dest por su posición (_ed0, _ed1...).
+  // Ordenamos por order_index (migración 102) para garantizar el mismo orden que en el save.
   const [edRows] = await db.execute(
-    'SELECT name, country, accommodation_rate, subsistence_rate FROM extra_destinations WHERE project_id = ?', [projectId]
+    'SELECT id, name, country, accommodation_rate, subsistence_rate FROM extra_destinations WHERE project_id = ? ORDER BY order_index, id', [projectId]
   );
   const extraDests = edRows.map(r => ({ name: r.name, country: r.country || '', aloj: Number(r.accommodation_rate), mant: Number(r.subsistence_rate) }));
+  // El frontend hidrata extraDests con id '_ed1', '_ed2', ... (ver calculator.js:2901
+  // donde map (ed, i) => '_ed' + (i + 1)), empieza en 1, no en 0. Aquí seguimos esa
+  // convención para que el dropdown encuentre el match al renderizar.
+  const extraDestUuidToEdN = {};
+  edRows.forEach((r, idx) => { extraDestUuidToEdN[r.id] = `_ed${idx + 1}`; });
 
   // Work packages + activities + details
   const [wpRows] = await db.execute(
@@ -1404,7 +1424,7 @@ async function loadFullState(projectId) {
         _gantt_end: act.gantt_end_month || null,
       };
       // Load type-specific details
-      await loadActivityDetails(a, act.id, act.type);
+      await loadActivityDetails(a, act.id, act.type, extraDestUuidToEdN);
       activities.push(a);
     }
     wps.push({
@@ -1420,7 +1440,7 @@ async function loadFullState(projectId) {
   return { partnerRates, workerRates, routes, extraDests, wps };
 }
 
-async function loadActivityDetails(a, actId, type) {
+async function loadActivityDetails(a, actId, type, extraDestUuidToEdN = {}) {
   switch (type) {
     case 'mgmt': {
       const [rows] = await db.execute('SELECT rate_applicant, rate_partner FROM activity_management WHERE activity_id = ?', [actId]);
@@ -1428,9 +1448,18 @@ async function loadActivityDetails(a, actId, type) {
       break;
     }
     case 'meeting': case 'ltta': {
-      const [rows] = await db.execute('SELECT host_partner_id, host_active, pax_per_partner, duration_days, local_pax, local_transport, mat_cost_per_pax FROM activity_mobility WHERE activity_id = ?', [actId]);
+      const [rows] = await db.execute('SELECT host_partner_id, host_extra_dest_id, host_active, pax_per_partner, duration_days, local_pax, local_transport, mat_cost_per_pax FROM activity_mobility WHERE activity_id = ?', [actId]);
       if (rows[0]) {
-        a.host = rows[0].host_partner_id; a.pax = rows[0].pax_per_partner; a.days = rows[0].duration_days;
+        // Host puede ser un partner uuid o un extra_destination uuid. Si es extra_dest,
+        // lo mapeamos al _edN que el frontend espera. Si por algún motivo el uuid no
+        // está en el mapa (extra_dest borrado tras el save), devolvemos null para que
+        // el frontend no intente referenciar algo inexistente.
+        if (rows[0].host_extra_dest_id) {
+          a.host = extraDestUuidToEdN[rows[0].host_extra_dest_id] || null;
+        } else {
+          a.host = rows[0].host_partner_id;
+        }
+        a.pax = rows[0].pax_per_partner; a.days = rows[0].duration_days;
         a.local_pax = rows[0].local_pax; a.local_transport = Number(rows[0].local_transport); a.mat_cost = Number(rows[0].mat_cost_per_pax);
       }
       const [parts] = await db.execute('SELECT partner_id, active FROM activity_mobility_participants WHERE activity_id = ?', [actId]);

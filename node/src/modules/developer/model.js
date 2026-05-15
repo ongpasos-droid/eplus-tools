@@ -2291,6 +2291,23 @@ async function getWpBudget(wpId, userId) {
   return { rows: enriched, total, indirect_pct: indirectPct, matched: true };
 }
 
+/* Regenerate the budget v2 (tablas budget_*) from the current calc_state.
+ * Called automatically by the Writer before reading any budget-derived view,
+ * so the Estimated Budget Resources never goes out of sync with the Designer.
+ * Idempotent. Preserves rows with is_user_override=1.
+ *
+ * Asserts ownership of the project before invoking the budget module.
+ */
+async function refreshProjectBudget(projectId, userId) {
+  const [rows] = await db.execute(
+    'SELECT id FROM projects WHERE id = ? AND user_id = ?',
+    [projectId, userId]
+  );
+  if (!rows.length) throw Object.assign(new Error('Project not found'), { status: 404 });
+  const budgetModel = require('../budget/model');
+  return await budgetModel.createFromIntake(userId, projectId);
+}
+
 async function listProjectPartners(projectId, userId) {
   const [rows] = await db.execute(
     `SELECT pa.id, pa.name, pa.legal_name, pa.country, pa.role, pa.order_index
@@ -3875,6 +3892,7 @@ module.exports = {
   setTaskParticipant,
   removeTaskParticipant,
   getWpBudget,
+  refreshProjectBudget,
   listProjectPartners,
   aiFillWp,
   resyncWpTasks,
