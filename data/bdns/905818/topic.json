@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "905818",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / ALCORA, L' / AYUNTAMIENTO DE ALCORA, L'",
+  "nuts_codes": [
+    "ES522"
+  ],
+  "nuts_primary": "ES522",
+  "title": "Prestaciones económicas para el apoyo a la familia e infancia en el periodo estival en el ejercicio 2026",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-05-14",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 11022.69,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "88",
+      "descripcion": "Actividades de servicios sociales sin alojamiento"
+    }
+  ],
+  "apply_url": "https://lalcora.sedelectronica.es/preview-document/4f66df50-e065-4247-a9ea-089307570c39/",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/905818",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://lalcora.sedelectronica.es/preview-document/03adc2c3-439d-4f71-9ac2-1530a34cd1ae/",
+  "text_inicio": "Día siguiente a la publicación del extracto en el BOP",
+  "text_fin": "10 días hábiles desde la publicación del extracto en el BOP",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-15T04:05:37.799Z"
+}

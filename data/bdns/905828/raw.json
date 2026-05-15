@@ -1,0 +1,78 @@
+{
+  "id": 1107389,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "DIPUTACIÓN PROV. DE BARCELONA",
+    "nivel3": "DIPUTACIÓN PROVINCIAL DE BARCELONA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "905828",
+  "fechaRecepcion": "2026-05-14",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 20000,
+  "mrr": false,
+  "descripcion": "PRIMERA EDICIÓN DEL“PREMIO PARA LAS PRÁCTICAS LOCALES DE ABORDAJE DEL EDADISMO\nHACIA LAS PERSONAS MAYORES: PREMIO EDADISMO CERO”",
+  "descripcionLeng": "PRIMERA EDICIÓ DEL “PREMI PER A PRÀCTIQUES LOCALS D’ABORDATGE DE L’EDATISME\nENVERS LES PERSONES GRANS: PREMI EDATISME ZERO\"",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    },
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    },
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Otras actividades de servicios sociales sin alojamiento",
+      "codigo": "88.9"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES511 - Barcelona"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Ordenanza General de Subvenciones",
+  "urlBasesReguladoras": "https://www.diba.cat/documents/446885/0/Ordenan%C3%A7a+General+Subvencions+17.pdf/01e71b5c-561b-4c94-a7a9-584247c623e5",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-01",
+  "fechaFinSolicitud": "2026-07-15",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1455138,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Bases específiques Premi Edatisme Zero català.pdf",
+      "long": 273799,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    },
+    {
+      "id": 1455137,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Bases específiques Premi Edatisme Zero castellà.pdf",
+      "long": 273034,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

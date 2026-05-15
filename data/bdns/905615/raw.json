@@ -1,0 +1,64 @@
+{
+  "id": 1107176,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "ANDALUCÍA",
+    "nivel3": "CONSEJERÍA DE UNIVERSIDAD, INVESTIGACIÓN E INNOVACIÓN"
+  },
+  "sedeElectronica": "https://juntadeandalucia.es/servicios/procedimientos/detalle/25585.html",
+  "codigoBDNS": "905615",
+  "fechaRecepcion": "2026-05-14",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 220000,
+  "mrr": false,
+  "descripcion": "RESOLUCIÓN DE LA DIRECCIÓN GENERAL DE FOMENTO DEL EMPRENDIMIENTO Y LA FORMACIÓN CONTINUA POR LA QUE SE CONVOCA PARA EL AÑO 2026 LA CONCESIÓN DE SUBVENCIONES EN RÉGIMEN DE CONCURRENCIA NO COMPETITIVA, DESTINADAS A ENTIDADES SIN ÁNIMO DE LUCRO QUE FOMENTEN",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Investigación y desarrollo",
+      "codigo": "72"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES61 - ANDALUCIA"
+    }
+  ],
+  "descripcionFinalidad": "Otras Prestaciones económicas",
+  "descripcionBasesReguladoras": "Orden de 3 de septiembre de 2024, por la que se aprueban las bases reguladoras para la concesión de subvenciones en régimen de concurrencia no competitiva destinadas a entidades sin ánimo de lucro que fomenten la cultura emprendedora en Andalucía",
+  "urlBasesReguladoras": "https://juntadeandalucia.es/eboja/2024/175/BOJA24-175-00015-50127-01_00307076.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "DA HÁBIL POSTERIOR AL DIA DE PUBLICACIÓ EN bopja DEL EXTRACTO DE LA CONVOCATORIA",
+  "textFin": "DIEZ DÍAS HÁBILES DESDE EL INICIO DEL PERIODO DE SOLICITUD",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1454592,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "TextoConvocatoria.pdf",
+      "long": 110625,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

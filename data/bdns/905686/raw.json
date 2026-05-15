@@ -1,0 +1,164 @@
+{
+  "id": 1107247,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "PAMPLONA/IRUÑA",
+    "nivel3": "AYUNTAMIENTO DE PAMPLONA/IRUÑA"
+  },
+  "sedeElectronica": "https://sedeelectronica.pamplona.es/FichaTramite.aspx?id=229967TA&idioma=1",
+  "codigoBDNS": "905686",
+  "fechaRecepcion": "2026-05-14",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 15000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DE SUBVENCIONES EN RÉGIMEN DE CONCURRENCIA COMPETITIVA PARA EL PATROCINIO A PRODUCTOS TURÍSTICOS PRIORITARIOS 2026",
+  "descripcionLeng": "LEHENTASUNEZKO PRODUKTU TURISTIKOAK BABESTEKO DIRULAGUNTZA-DEIALDIA 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades de bibliotecas, archivos, museos y otras actividades culturales",
+      "codigo": "91"
+    },
+    {
+      "descripcion": "Actividades de creación artística y artes escénicas",
+      "codigo": "90"
+    },
+    {
+      "descripcion": "Actividades deportivas, recreativas y de entretenimiento",
+      "codigo": "93"
+    },
+    {
+      "descripcion": "Organización de convenciones y ferias de muestras",
+      "codigo": "82.3"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES22 - COMUNIDAD FORAL DE NAVARRA"
+    }
+  ],
+  "descripcionFinalidad": "Comercio, Turismo y Pymes",
+  "descripcionBasesReguladoras": "Aprobación definitiva de la ordenanza general de subvenciones del Excelentísimo Ayuntamiento de Pamplona",
+  "urlBasesReguladoras": "https://bon.navarra.es/es/anuncio/-/texto/2006/21/23",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir del día siguiente de la publicación de esta convocatoria en el Boletín Oficial de Navarra",
+  "textFin": "Plazo de un mes a partir del día siguiente publicación convocatoria en Boletín Oficial de Navarra",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1454729,
+      "descripcion": "Anexo IV_SAT_castellano",
+      "nombreFic": "Anexo IV_SAT.pdf",
+      "long": 564730,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    },
+    {
+      "id": 1454732,
+      "descripcion": "Anexo II_euskera",
+      "nombreFic": "ANEXO II EUS.pdf",
+      "long": 624886,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    },
+    {
+      "id": 1454731,
+      "descripcion": "Anexo I_euskera",
+      "nombreFic": "ANEXO I EUS.pdf",
+      "long": 290491,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    },
+    {
+      "id": 1454730,
+      "descripcion": "Anexo V_castellano",
+      "nombreFic": "ANEXO V.pdf",
+      "long": 641610,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    },
+    {
+      "id": 1454728,
+      "descripcion": "Anexo III (IVA)_castellano",
+      "nombreFic": "ANEXO III (IVA).pdf",
+      "long": 400775,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    },
+    {
+      "id": 1454726,
+      "descripcion": "Anexo II_castellano",
+      "nombreFic": "ANEXO II.pdf",
+      "long": 628935,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    },
+    {
+      "id": 1454736,
+      "descripcion": "Anexo V_euskera",
+      "nombreFic": "ANEXO V EUS.pdf",
+      "long": 639746,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    },
+    {
+      "id": 1454733,
+      "descripcion": "Anexo III (IVA)_euskera",
+      "nombreFic": "ANEXO III (IVA) EUS.pdf",
+      "long": 406068,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    },
+    {
+      "id": 1454734,
+      "descripcion": "Anexo IV_SAT_euskera",
+      "nombreFic": "Anexo IV SAT EUS.pdf",
+      "long": 565339,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    },
+    {
+      "id": 1454724,
+      "descripcion": "Anexo I_castellano",
+      "nombreFic": "ANEXO I.pdf",
+      "long": 289688,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    },
+    {
+      "id": 1454722,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "CC_Subvención_EUS.pdf",
+      "long": 786314,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    },
+    {
+      "id": 1454721,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "CC Subvenciones.pdf",
+      "long": 793023,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

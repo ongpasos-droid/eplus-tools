@@ -1,0 +1,72 @@
+{
+  "id": 1107373,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "URDUÑA/ORDUÑA",
+    "nivel3": "AYUNTAMIENTO DE URDUÑA/ORDUÑA"
+  },
+  "sedeElectronica": "https://www.urduna.com/es-ES/Tramites/Paginas/info-tramite.aspx?idt=33f829a0-a89b-ec11-8506-00237d32158c",
+  "codigoBDNS": "905812",
+  "fechaRecepcion": "2026-05-14",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 15000,
+  "mrr": false,
+  "descripcion": "CONCESIÓN DE AYUDAS EN ESPECIE DESTINADAS A PERSONAS EN SITUACIÓN DE DEPENDENCIA MEDIANTE EL PROGRAMA DE RESPIRO FAMILIAR EN EL HOGAR “ZAINDUZ” Y CONVOCATORIA PARA EL EJERCICIO 2026",
+  "descripcionLeng": "\"ZAINDUZ\" ETXEAN ATSEDEN HARTZEKO PROGRAMAREN BIDEZ MENDEKOTASUNA DUTEN PERTSONEI GAUZAZKO LAGUNTZAK 2026. EKITALDIRAKO DEIALDIA",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades de servicios sociales sin alojamiento para personas mayores o con discapacidad",
+      "codigo": "88.1"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES213 - Bizkaia"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "BASES REGULADORAS PARA LA CONCESIÓN DE AYUDAS EN ESPECIE\nDESTINADAS A PERSONAS EN SITUACIÓN DE DEPENDENCIA MEDIANTE\nEL PROGRAMA DE RESPIRO FAMILIAR EN EL HOGAR “ZAINDUZ” Y\nCONVOCATORIA PARA EL EJERCICIO 2026",
+  "urlBasesReguladoras": "https://www.urduna.com/es-ES/Tramites/Paginas/info-tramite.aspx?idt=33f829a0-a89b-ec11-8506-00237d32158c",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-05-23",
+  "fechaFinSolicitud": "2026-06-22",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1455086,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "BASES REGULADORAS ZAINDUZ 2026.pdf",
+      "long": 601195,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    },
+    {
+      "id": 1455084,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Zainduz programaren oinarri arautzaileak 2026.pdf",
+      "long": 476952,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

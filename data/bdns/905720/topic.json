@@ -1,0 +1,81 @@
+{
+  "source": "bdns",
+  "source_id": "905720",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concesión directa - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / SANT JOSEP DE SA TALAIA / AYUNTAMIENTO DE SANT JOSEP DE SA TALAIA",
+  "nuts_codes": [
+    "ES531"
+  ],
+  "nuts_primary": "ES531",
+  "title": "CONVOCATORIA DE SUBVENCIONES EN MATERIA DE AYUDAS A LA NATALIDAD DE SANT JOSEP DE SA TALAIA “SANT JOSEP CRECE”",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-05-14",
+  "open_date": "2026-05-15",
+  "deadline": "2026-10-15",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 170000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "88",
+      "descripcion": "Actividades de servicios sociales sin alojamiento"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/905720",
+  "documents": [
+    {
+      "label": "DECRETO ALCALDIA",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en lengua cooficial",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.caib.es/eboibfront/es/2025/12088/699929/convocatoria-de-subvenciones-en-materia-de-ayudas-",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [
+    {
+      "numAnuncio": 211864,
+      "titulo": "Convocatoria a regularizar",
+      "tituloLeng": null,
+      "texto": "Convocatoria a regularizar",
+      "textoLeng": null,
+      "url": "https://www.caib.es/eboibfront/es/2026/12274/715267/convocatoria-de-subvenciones-en-materia-de-ayudas-",
+      "cve": null,
+      "desDiarioOficial": "BOIB. B.O. DE LAS ISLAS BALEARES",
+      "datPublicacion": "2026-05-14"
+    }
+  ],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-15T04:05:37.780Z"
+}

@@ -1,0 +1,91 @@
+{
+  "id": 1107200,
+  "organo": {
+    "nivel1": "ESTADO",
+    "nivel2": "MINISTERIO DE EDUCACIÓN, FORMACIÓN PROFESIONAL Y DEPORTES",
+    "nivel3": "SUBSECRETARÍA DE EDUCACIÓN, FORMACIÓN PROFESIONAL Y DEPORTES"
+  },
+  "sedeElectronica": "https://sede.educacion.gob.es",
+  "codigoBDNS": "905639",
+  "fechaRecepcion": "2026-05-14",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 4200000,
+  "mrr": false,
+  "descripcion": "Resolución de 13 de mayo de 2026 de la Subsecretaría de Educación, Formación Profesional y Deportes\npor la que se convocan plazas para auxiliares de conversación extranjeros en\ncentros educativos españoles para el curso académico 2026-2027",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "AT - ÖSTERREICH"
+    },
+    {
+      "descripcion": "BE - BELGIQUE-BELGIË "
+    },
+    {
+      "descripcion": "DE - DEUTSCHLAND "
+    },
+    {
+      "descripcion": "FR - FRANCE"
+    },
+    {
+      "descripcion": "IE - IRELAND"
+    },
+    {
+      "descripcion": "IT - ITALIA "
+    },
+    {
+      "descripcion": "MT - MALTA"
+    },
+    {
+      "descripcion": "PT - PORTUGAL"
+    },
+    {
+      "descripcion": "UK - UNITED KINGDOM"
+    },
+    {
+      "descripcion": "XXX - Regiones o países no europeos, no contemplados en NUTS"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Orden ECI/1305/2005, de 20 de abril, de bases reguladoras de la concesión de subvenciones públicas en régimen de concurrencia competitiva.",
+  "urlBasesReguladoras": "https://www.boe.es/eli/es/o/2005/04/20/eci1305",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-02",
+  "fechaFinSolicitud": "2026-06-30",
+  "textInicio": "2 de junio de 2026 desde las 08:01 horas GMT+1)",
+  "textFin": "30 de junio de 2026 a las 19:59 horas (GMT+1)",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1454611,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convocatoria_AACC_extranjeros_2026_2027_firmada.pdf",
+      "long": 178866,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

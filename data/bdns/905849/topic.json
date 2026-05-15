@@ -1,0 +1,63 @@
+{
+  "source": "bdns",
+  "source_id": "905849",
+  "source_lang": "es",
+  "level": "otros",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "OTROS / CÁMARA DE COMERCIO DE CIUDAD REAL",
+  "nuts_codes": [
+    "ES42"
+  ],
+  "nuts_primary": "ES42",
+  "title": "Convocatoria Pyme Global 2026 de Misión Comercial a Angola, Sudáfrica, Mauricio, Reunión y Comores para empresas de Castilla-La Mancha",
+  "title_lang": "es",
+  "summary": "Otras actuaciones de carácter económico",
+  "status": "open",
+  "publication_date": "2026-05-15",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 57979.01,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "C",
+      "descripcion": "INDUSTRIA MANUFACTURERA"
+    }
+  ],
+  "apply_url": "https://sede.camara.es/sede/ciudadreal",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/905849",
+  "documents": [],
+  "bases_reguladoras_url": "https://www.camaracr.org/internacional/promocion-internacional",
+  "text_inicio": "A las 9:00 desde el día hábil siguiente a la publicación en el DO de CLM",
+  "text_fin": "El 19 de junio de 2026  a las 15:00 horas",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [
+    {
+      "descripcion": "FEDER - FONDO EUROPEO DE DESARROLLO REGIONAL"
+    }
+  ],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-15T04:05:37.806Z"
+}

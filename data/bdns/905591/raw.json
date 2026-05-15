@@ -1,0 +1,72 @@
+{
+  "id": 1107152,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "CATALUÑA",
+    "nivel3": "AGÈNCIA CATALANA DE L'AIGUA (ACA)"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "905591",
+  "fechaRecepcion": "2026-05-14",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 2838988.86,
+  "mrr": false,
+  "descripcion": "Subvenciones en régimen de concurrencia competitiva, para actuaciones de recuperación de riberas y de mejora del estado ecológico en zonas húmedas en el Distrito de cuenca fluvial de Cataluña.",
+  "descripcionLeng": "Subvencions en règim de concurrència competitiva, per a actuacions de recuperació de riberes i de millora de l'estat ecològic en zones humides al Districte de conca fluvial de Catalunya.",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Otras actividades de construcción especializada",
+      "codigo": "43.9"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES51 - CATALUÑA"
+    }
+  ],
+  "descripcionFinalidad": "Otras actuaciones de carácter económico",
+  "descripcionBasesReguladoras": "Resolución TER/1784/2025, de 15 de mayo,  por el que se modifica el Acuerdo por el que se aprueban las bases de una línea de subvenciones para actuaciones de recuperación de riberas y de mejora del estado ecológico en ríos y zonas húmedas",
+  "urlBasesReguladoras": "https://dogc.gencat.cat/es/document-del-dogc/?documentId=1014311",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Des de l’endemà de la publicació en el diari oficial de la convocatòria inicial",
+  "textFin": "30 Dies Naturals",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1454546,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "corr_cat_Resolucio_convocatoria_RRZ002_signed.pdf",
+      "long": 282136,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    },
+    {
+      "id": 1454545,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "corr_es_Resolucio_convocatoria_RRZ002_signed.pdf",
+      "long": 278822,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

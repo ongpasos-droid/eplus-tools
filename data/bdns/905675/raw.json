@@ -1,0 +1,64 @@
+{
+  "id": 1107236,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SANTOS DE MAIMONA, LOS",
+    "nivel3": "AYUNTAMIENTO DE SANTOS DE MAIMONA, LOS"
+  },
+  "sedeElectronica": "ossantosdemaimona.sedelectronica.es/transparency/d2a14862-fec7-49a3-9ca7-f5afd90ae041/",
+  "codigoBDNS": "905675",
+  "fechaRecepcion": "2026-05-14",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 48308.8,
+  "mrr": false,
+  "descripcion": "Convocatoria destinada a regular la concesión directa de ayudas económicas para suministros mínimos vitales durante el ejercicio 2026, dirigidas a unidades de convivencia en situación de vulnerabilidad económica o riesgo de exclusión social del municipio",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES431 - Badajoz"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Convocatoria destinada a regular la concesión directa de ayudas económicas para suministros mínimos vitales durante el ejercicio 2026, dirigidas a unidades de convivencia en situación de vulnerabilidad económica o riesgo de exclusión social del municipio",
+  "urlBasesReguladoras": "ossantosdemaimona.sedelectronica.es/transparency/d2a14862-fec7-49a3-9ca7-f5afd90ae041/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-12-15",
+  "textInicio": "El día siguiente a la publicación del extracto de la convocatoria en el Boletín Oficial de la Provin",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1454715,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "20260512_Otros_Bases de convocatoria_02_EXP 1720-26_BASES CONVOCATORIA_MINIMOS VITALES 2026.pdf",
+      "long": 340962,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-14"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}
