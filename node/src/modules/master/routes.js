@@ -22,9 +22,13 @@
    ═══════════════════════════════════════════════════════════════ */
 
 const express = require('express');
+const multer = require('multer');
 const router = express.Router();
 const { requireAuth } = require('../../middleware/auth');
 const ctrl = require('./controller');
+
+// Multipart upload — 30 MB cap (PDFs típicos de calls están bajo eso)
+const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 30 * 1024 * 1024 } });
 
 /* ── Documents ───────────────────────────────────────────────── */
 router.get   ('/projects/:projectId/documents', requireAuth, ctrl.listMasterDocuments);
@@ -53,7 +57,8 @@ router.get ('/calls/:callId/form-templates', requireAuth, ctrl.listFormTemplates
 router.get ('/form-templates/:id',           requireAuth, ctrl.getFormTemplateFull);
 
 /* ── Call documents (CAG sources) ────────────────────────────── */
-router.get ('/calls/:callId/documents', requireAuth, ctrl.listCallDocuments);
+router.get  ('/calls/:callId/documents', requireAuth, ctrl.listCallDocuments);
+router.post ('/calls/:callId/documents', requireAuth, upload.single('file'), ctrl.uploadCallDocument);
 
 /* ── Diagnoses (read-only) ───────────────────────────────────── */
 router.get ('/documents/:id/diagnoses', requireAuth, ctrl.listDiagnoses);
