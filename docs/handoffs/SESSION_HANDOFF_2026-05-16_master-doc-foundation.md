@@ -9,16 +9,25 @@
 
 ## TL;DR
 
-Construí la base estructural completa para el Documento Maestro:
-truncados eliminados, 12 tablas SQL nuevas, módulo `master/` con
-stubs CRUD, 8 templates de prompts CAG en `docs/PROMPTS_CAG/`, plan
-de implementación con descomposición por fases y horas estimadas.
-**Cero código LLM real ejecutado** (sin gastar API). **Cero push.**
-Todo está en la rama `wip/master-doc-foundation` localmente.
+Sesión nocturna con DOS bloques:
 
-SUSTRAI no se ha tocado. El servidor local está corriendo en :3000
-con las migraciones aplicadas y la nueva ruta `/v1/master/*` activa.
-Brussels Event Participation sigue funcionando como anoche.
+**Bloque 1 (autorizado primero)**: Foundation — truncados eliminados,
+12 tablas SQL nuevas, módulo `master/` con stubs CRUD, 8 templates
+de prompts CAG, plan de implementación, arquitectura canónica.
+
+**Bloque 2 (autorizado tras "PUEDES TRABAJAR YA EN TODO")**: Pipeline
+CAG conectado al LLM + UI mínima de la fase Perfeccionar.
+  - Cliente Anthropic con prompt caching
+  - Runtime `cag-pipeline.js` que carga prompts .md y ejecuta runPrompt
+  - Endpoints reales: compileMasterV1, runDiagnosis (initial+advanced),
+    uploadCallDocument (PDF/DOCX parsing)
+  - Sidebar con nueva opción "Perfeccionar"
+  - UI con compilar/previsualizar coste/diagnóstico
+
+**Cero push.** Todo está en la rama `wip/master-doc-foundation`
+localmente con 5 commits, listos para revisar y mergear.
+
+SUSTRAI intacto. Servidor local corriendo en :3000 con todo lo nuevo.
 
 ---
 
@@ -137,16 +146,108 @@ JSON schema esperado y notas operativas.
 
 ---
 
-## 2. Lo que NO se hizo (y por qué)
+## 1bis. Lo que se añadió en el Bloque 2 (tras "puedes trabajar ya en todo")
+
+### F2.1 — Anthropic client con prompt caching ✅
+
+`node/src/modules/master/anthropic-client.js`:
+- Lazy-init (memoria `feedback-lazy-sdk-init` — evita crash voice 2026-04-26)
+- `callWithCache({ systemBlocks, userBlocks, ... })` — wrapper sobre
+  `@anthropic-ai/sdk` con `cache_control: { type: 'ephemeral' }`
+- Logging unificado en `ai_usage_log` (mismo que ai.js general)
+- `extractJson(text)` robusto: maneja code fences ```json...``` y
+  busca balanced {...} si no hay fences
+- `estimateCostUsd()` con tarifas Sonnet 4: input $3, output $15,
+  cache read $0.30 /Mtok
+- Errores 429 y 5xx con mensajes claros
+
+### F2.2 — CAG pipeline base ✅
+
+`node/src/modules/master/cag-pipeline.js`:
+- Carga templates `.md` de `docs/PROMPTS_CAG/` con frontmatter parser
+- Extrae system prompt + user prompt template de bloques ```code```
+- Sustitución `{{varName}}` con interpolación segura (warning si falta)
+- `runPrompt(promptKey, vars, opts)` → `{ text, parsed, usage, cost }`
+- `dryRun(promptKey, vars, opts)` → preview de coste sin tirar la llamada
+- Cache de templates en memoria con invalidación por mtime
+- `listPrompts()` para introspección
+
+### F2.3 — compileMasterV1 conectado al LLM ✅
+
+`POST /v1/master/documents/:id/compile-v1`:
+- Idempotente: 409 si ya hay capítulos, `force: true` para recompilar
+- `dryRun: true` para previsualizar coste sin tirar la llamada
+- Carga: design enriquecido (sin truncar) + writer draft + interviews
+  + criterios de evaluación de la BD
+- Marca master_documents.status = 'compiling' → 'ready'
+- Llama prompt `01_compile_master_v1` con maxTokens 60k
+- Persiste capítulos vía `createChapter` con char_count
+
+### F3.1 — runDiagnosis conectado al LLM ✅
+
+`POST /v1/master/documents/:id/diagnose`:
+- Body: `{ kind: 'initial' | 'advanced', dryRun?: true }`
+- 409 si el Master no tiene chapters (debe compilarse antes)
+- Llama prompt `02_diagnosis_initial` o `04_diagnosis_advanced`
+- Crea registro `master_diagnoses` con status `running` → `ready`/`failed`
+- Persiste items en `master_diagnosis_items` con classification
+  narrative/economic + severity + anchor
+
+### F6.1 — Upload + parsing PDFs convocatoria ✅
+
+`POST /v1/master/calls/:callId/documents` (admin only):
+- multipart/form-data con campo `file` (max 30 MB)
+- Acepta PDF (pdf-parse), DOCX (mammoth), TXT, MD
+- Body params: `doc_kind` (call_pdf/programme_guide/...), `title`,
+  `language`, `is_core`
+- Extrae texto y persiste en `call_documents.body_text` listo para CAG
+
+### F2.4 + F3.2 — UI mínima viable ✅
+
+`public/index.html`:
+- Sidebar: nueva entrada "Perfeccionar" entre "Escribir" y "Evaluar"
+  - Icono `auto_stories`, color `#16A34A` (verde, mismo que Personal Work)
+  - Visible solo con proyecto activo (sigue el patrón existente)
+- Panel `panel-master` añadido entre developer y evaluator
+
+`public/js/master.js` (nuevo, ~350 líneas):
+- Listado de Master Documents del proyecto activo
+- Botón "Nuevo Maestro" → crea entidad raíz vacía
+- Vista de detalle con capítulos en `<details>` collapsibles
+- Botón "Previsualizar coste" → `dryRun: true`, muestra estimación
+- Botón "Compilar Maestro v1" → confirmación + llamada LLM real
+- Botón "Recompilar (force)" para regenerar
+- Botón "Lanzar diagnóstico" → render por classification y severity
+- Items económicos marcados con 🔒 ("ir a Calculator")
+- Items narrativos en colores info/warning/critical
+- Hooks: `panelShown` event + `hashchange` + `DOMContentLoaded`
+
+`public/js/app.js`:
+- Route 'master' añadida al switch de rutas que invoca `Master.render()`
+
+### Flujo end-to-end probable mañana
+
+1. Login en local
+2. Abrir un proyecto cualquiera (preferentemente SUSTRAI para test real)
+3. Click "Perfeccionar" en sidebar
+4. Click "Nuevo Maestro" → entidad vacía creada
+5. Click "Previsualizar coste" → ver tokens estimados y precio
+6. Click "Compilar Maestro v1" → confirma, espera 1-3 min
+7. Ve los 10 capítulos generados
+8. Click "Lanzar diagnóstico" → lista de items accionables
+
+---
+
+## 2. Lo que NO se hizo (y por qué) — actualizado
 
 | Cosa | Por qué |
 |---|---|
-| Llamadas reales a Anthropic | No estaba confirmado el estado de la API key. Decisión D3 pendiente. |
-| Parsing de PDFs de la convocatoria | Requiere decidir D4 (qué librería). No bloqueante para el resto. |
-| UI nueva | UI necesita prueba en navegador con interacción real, no autónoma sin riesgo. |
-| Mapping de convocatoria piloto | Requiere D1 confirmado + trabajo manual con el PDF oficial delante. |
-| Cualquier push a Git | Regla auto-impuesta de la sesión nocturna: cero push. |
-| Cualquier toque a SUSTRAI | Regla auto-impuesta: cero riesgo al proyecto vivo. |
+| Test E2E real con SUSTRAI | Requiere que Oscar abra navegador + login + click. La integración está LISTA para test pero yo no puedo hacerlo. |
+| Mapping convocatoria piloto (F4) | Requiere trabajo manual con el PDF oficial de SMP-COSME-2026-TOURSME-01 delante. Es la siguiente fase pesada. |
+| Refactor de improveSection del Writer cascada actual | Tiene riesgo de romper SUSTRAI. Mejor hacerlo contigo presente. |
+| Cualquier push a Git | Regla mantenida — la rama wip se mergea con tu `/merge` cuando revises. |
+| Edición inline de capítulos del Master | UI compleja, mejor diseñarla contigo presente. F5 en el plan. |
+| Chat persistente con anclaje visual (paso 9) | F5.2 en el plan, requiere UI rica con sidebar derecha. Pendiente sesión contigo. |
 
 ---
 
@@ -155,8 +256,17 @@ JSON schema esperado y notas operativas.
 ```
 Rama actual:        wip/master-doc-foundation
 Branch from:        dev-local @ 5a404d677 (igual a origin/main)
-Commits locales:    pendientes (ver Bloque 7)
+Commits locales:    5
 Push:               NO realizado
+```
+
+Los 5 commits de la rama (de más viejo a más nuevo):
+```
+20370718d  fix(writer): eliminar truncados del Diseño en el contexto del LLM
+e287b7e71  feat(master): migración 103 + módulo master con stubs CRUD
+9e60ad2f5  docs(master): plan de implementación + 8 prompts CAG + handoff sesión
+072e9d562  feat(master): pipeline CAG conectado — compile-v1 + diagnose + upload PDFs
+327d84831  feat(master): UI mínima fase Perfeccionar
 ```
 
 Ficheros tocados (todos commiteables):
