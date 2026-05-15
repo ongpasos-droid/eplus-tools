@@ -306,7 +306,7 @@ async function generateInterviewQuestions(projectId, userId) {
   // Build activity detail block
   const activityDetail = ctx.wps.map(wp => {
     return `${wp.code} ${wp.title}:\n` + (wp.activities || []).map(a =>
-      `  - ${a.label}${a.subtype ? ' (' + a.subtype + ')' : ''}: ${a.description ? a.description.substring(0, 150) : 'No description'}`
+      `  - ${a.label}${a.subtype ? ' (' + a.subtype + ')' : ''}: ${a.description || 'No description'}`
     ).join('\n');
   }).join('\n\n');
 
@@ -513,7 +513,10 @@ function buildProjectContext(ctx) {
       block += `\n  • ${act.label || act.type}`;
       if (act.subtype) block += ` (${act.subtype})`;
       if (act.date_start && act.date_end) block += ` [${act.date_start} → ${act.date_end}]`;
-      if (act.description) block += `\n    ${act.description.substring(0, 300)}`;
+      // El texto enriquecido del Diseño entra sin truncar (decisión arquitectura 2026-05-16).
+      // El usuario invierte horas redactando descripciones largas — si las cortamos a 300
+      // chars, el modelo nunca ve la sustancia que diferencia un 75 de un 90.
+      if (act.description) block += `\n    ${act.description}`;
     }
     return block;
   }).join('\n');
@@ -572,11 +575,14 @@ async function buildEnrichedContext(projectId, userId) {
       const pifText = pifs[0]?.custom_text || pifs[0]?.adapted_text;
 
       if (pifText) {
-        consortiumBlock += `\n  Profile: ${pifText.substring(0, 600)}`;
+        // PIF text sin truncar — el PIF adaptado del partner es contexto valioso para
+        // justificar capacidades y roles en el writer (arquitectura 2026-05-16).
+        consortiumBlock += `\n  Profile: ${pifText}`;
       } else {
         // Fallback to generic org description
         const [orgs] = await db.execute('SELECT description, activities_experience FROM organizations WHERE id = ?', [pt.organization_id]);
-        if (orgs[0]?.description) consortiumBlock += `\n  Profile: ${orgs[0].description.substring(0, 400)}`;
+        // Profile sin truncar — la descripción enriquecida de la org es contexto valioso.
+        if (orgs[0]?.description) consortiumBlock += `\n  Profile: ${orgs[0].description}`;
       }
 
       // Key staff
@@ -634,13 +640,18 @@ async function buildEnrichedContext(projectId, userId) {
     const leader = ctx.partners.find(p => p.id === wp.leader_id);
     actBlock += `\n${wp.code} — ${wp.title}`;
     if (leader) actBlock += ` (Leader: ${leader.name})`;
-    if (wp.summary) actBlock += `\n  Summary: ${wp.summary.substring(0, 400)}`;
+    // Summary y description del Diseño entran sin truncar (arquitectura 2026-05-16).
+    // Si el usuario escribe párrafos ricos en el campo Summary del WP o en la descripción
+    // de una actividad, lo recibe el modelo entero. Los truncados anteriores (400/250)
+    // descartaban el 95-99% del texto enriquecido y saboteaban el ciclo de iteración.
+    if (wp.summary) actBlock += `\n  Summary: ${wp.summary}`;
     for (const act of (wp.activities || [])) {
       actBlock += `\n  • ${act.label || act.type}`;
-      if (act.description) actBlock += `: ${act.description.substring(0, 250)}`;
+      if (act.description) actBlock += `: ${act.description}`;
       if (act.date_start) actBlock += ` [${act.date_start} → ${act.date_end || '?'}]`;
       for (const t of (act.tasks || [])) {
         actBlock += `\n    - ${t.title}`;
+        if (t.description) actBlock += `\n      ${t.description}`;
         if (t.deliverable) actBlock += ` → Deliverable: ${t.deliverable}`;
         if (t.milestone) actBlock += ` | Milestone: ${t.milestone}`;
         if (t.kpi) actBlock += ` | KPI: ${t.kpi}`;
@@ -1116,7 +1127,10 @@ async function improveSection(text, action, sectionTitle, projectContext, progra
   if (writingRules.ai_detection_rules) system += `\n\nAI detection rules:\n${writingRules.ai_detection_rules}`;
 
   let user = `Section: ${sectionTitle}\n\nInstruction: ${actions[action] || actions.improve}`;
-  if (projectContext) user += `\n\nProject context for reference:\n${projectContext.substring(0, 3000)}`;
+  // El bundle de contexto entra entero (antes 3000 chars, ahora sin truncar). El writer
+  // cascada actual aún troc​ea por sección — la pipeline CAG completa llegará en fase
+  // Perfeccionar (ver docs/PROJECT_MASTER_ARCHITECTURE.md §6).
+  if (projectContext) user += `\n\nProject context for reference:\n${projectContext}`;
   user += `\n\nOriginal text to improve:\n${text}`;
   user += `\n\nOUTPUT: plain prose only. No markdown, no bullets, no tables, no headings, no bold/italics, no backticks. Paragraphs separated by blank lines.`;
 
@@ -1323,7 +1337,8 @@ async function buildWpFocusContext(wpId) {
       block += `  T${(wp.order_index || 0) + 1}.${i + 1} — ${a.label || a.type}`;
       if (a.subtype) block += ` (${a.subtype})`;
       if (a.date_start && a.date_end) block += ` [${a.date_start} → ${a.date_end}]`;
-      if (a.description) block += `\n      ${a.description.substring(0, 400)}`;
+      // WP focus: descripción de actividad sin truncar (arquitectura 2026-05-16).
+      if (a.description) block += `\n      ${a.description}`;
       block += `\n`;
     });
   } else {
@@ -1340,8 +1355,8 @@ async function buildWpFocusContext(wpId) {
       block += `  ${m.code ? m.code + ' — ' : ''}${m.title}`;
       if (m.due_month) block += ` (M${m.due_month})`;
       block += '\n';
-      if (m.description) block += `      ${m.description.substring(0, 300)}\n`;
-      if (m.verification) block += `      Verification: ${m.verification.substring(0, 200)}\n`;
+      if (m.description) block += `      ${m.description}\n`;
+      if (m.verification) block += `      Verification: ${m.verification}\n`;
     });
   }
 
@@ -1357,7 +1372,7 @@ async function buildWpFocusContext(wpId) {
       if (d.dissemination_level) block += ` (${d.dissemination_level})`;
       if (d.due_month) block += ` (M${d.due_month})`;
       block += '\n';
-      if (d.description) block += `      ${d.description.substring(0, 300)}\n`;
+      if (d.description) block += `      ${d.description}\n`;
     });
   }
 
