@@ -63,8 +63,7 @@ router.get  ('/projects/:projectId/cag-documents', requireAuth, ctrl.listCagDocu
 router.get ('/documents/:id/diagnoses', requireAuth, ctrl.listDiagnoses);
 router.get ('/diagnoses/:id',           requireAuth, ctrl.getDiagnosis);
 
-/* ── Placeholders LLM (devuelven 501 hasta que se conecten) ──── */
-// Pipeline de generación con CAG — ver docs/PROJECT_MASTER_IMPLEMENTATION_PLAN.md
+/* ── LLM pipelines ───────────────────────────────────────────── */
 router.post('/documents/:id/compile-v1',          requireAuth, ctrl.compileMasterV1);
 router.post('/documents/:id/regenerate',          requireAuth, ctrl.regenerateWithUnifiedContext);
 router.post('/documents/:id/diagnose',            requireAuth, ctrl.runDiagnosis);

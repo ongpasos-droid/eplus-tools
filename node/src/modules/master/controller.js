@@ -1055,6 +1055,272 @@ function extractSectionCodeFromKey(chapterKey) {
   return [m[1], m[2], m[3]].filter(Boolean).join('.');
 }
 
+/* ── Compresión Master → formulario oficial (prompt 06) ──────────
+   POST /v1/master/documents/:id/compress-to-form
+   Body opcional: { form_template_id?, target_language?='es' }
+   Itera por cada campo textarea del formulario oficial, comprime el
+   capítulo correspondiente del Master respetando el límite, persiste
+   en form_field_values.
+*/
+async function compressToForm(req, res) {
+  try {
+    const masterDocId = req.params.id;
+    const { form_template_id, target_language = 'es', dryRun = false } = req.body || {};
+
+    const masterDoc = await model.getMasterDocument(masterDocId);
+    if (!masterDoc) return bad(res, 404, 'Master document not found');
+    const projectId = masterDoc.project_id;
+    const userId = req.user.id;
+
+    // 1. Localizar form_template y parsear su JSON
+    let template;
+    if (form_template_id) {
+      const [[tpl]] = await pool.query('SELECT id, name, slug, template_json FROM form_templates WHERE id = ?', [form_template_id]);
+      template = tpl;
+    } else {
+      // Default: el primer form_template activo del sistema (eacea_form_part_b)
+      const [[tpl]] = await pool.query(
+        `SELECT id, name, slug, template_json FROM form_templates WHERE active = 1 ORDER BY year DESC, name LIMIT 1`
+      );
+      template = tpl;
+    }
+    if (!template) return bad(res, 404, 'No form template found. Carga uno en Admin → Plus Data primero.');
+
+    let templateJson;
+    try { templateJson = typeof template.template_json === 'string' ? JSON.parse(template.template_json) : template.template_json; }
+    catch (e) { return bad(res, 500, 'form_template.template_json no parseable'); }
+
+    // 2. Extraer fields del template (recursivo: sections → subsections → fields)
+    const fields = extractFormFields(templateJson);
+    if (!fields.length) return bad(res, 422, 'El template no contiene fields textarea procesables');
+
+    // 3. Cargar contexto de calidad + capítulos del Master
+    const qCtx = await model.loadProjectQualityContext(projectId);
+    const chapters = await model.listChapters(masterDocId);
+    const chaptersByKey = Object.fromEntries(chapters.map(c => [c.chapter_key, c]));
+
+    // 4. Localizar o crear form_instance para este proyecto+template
+    let [[instance]] = await pool.query(
+      'SELECT id FROM form_instances WHERE project_id = ? AND template_id = ? LIMIT 1',
+      [projectId, template.id]
+    );
+    const genUUID3 = require('../../utils/uuid');
+    if (!instance) {
+      const newInstanceId = genUUID3();
+      await pool.query(
+        `INSERT INTO form_instances (id, user_id, template_id, program_id, project_id, title, status)
+         SELECT ?, ?, ?, ip.id, ?, ?, 'in_progress'
+           FROM projects p
+           JOIN intake_programs ip ON ip.action_type = p.type
+          WHERE p.id = ? LIMIT 1`,
+        [newInstanceId, userId, template.id, projectId, masterDoc.version_label || 'Form ' + template.name, projectId]
+      );
+      instance = { id: newInstanceId };
+    } else {
+      await pool.query('UPDATE form_instances SET status = "in_progress" WHERE id = ?', [instance.id]);
+    }
+
+    if (dryRun) {
+      const fieldsWithMapping = fields.map(f => ({
+        ...f,
+        mapped_chapter_key: mapFieldToChapter(f.id, chaptersByKey),
+      }));
+      return ok(res, {
+        dryRun: true,
+        template: { id: template.id, name: template.name },
+        instance_id: instance.id,
+        fields: fieldsWithMapping,
+        total_fields: fields.length,
+        mappable: fieldsWithMapping.filter(f => f.mapped_chapter_key).length,
+      });
+    }
+
+    // 5. Iterar por field y comprimir.
+    // Filtramos los fields de la sección 6 (DECLARATIONS): son
+    // declaraciones administrativas (double funding, FSTP justification,
+    // Seal of Excellence) que NO tienen capítulo de Master — las rellena
+    // manualmente el coordinator en el portal EACEA.
+    const processableFields = fields.filter(f => !/^s6_/.test(f.id));
+    const results = [];
+    const errors = [];
+    let totalCostUsd = 0;
+    for (const field of processableFields) {
+      const mappedKey = mapFieldToChapter(field.id, chaptersByKey);
+      if (!mappedKey || !chaptersByKey[mappedKey]) {
+        errors.push({ field_id: field.id, error: 'no master chapter mapped' });
+        continue;
+      }
+      const sectionCode = extractSectionCodeFromKey(mappedKey);
+      const sectionBlock = sectionCode && qCtx.criteriaIndex[sectionCode]
+        ? qCtx.criteriaIndex[sectionCode].block
+        : '(no specific criteria block)';
+      const chapterBody = chaptersByKey[mappedKey].body || '';
+
+      const limitParts = [];
+      if (field.max_chars) limitParts.push(`${field.max_chars} caracteres`);
+      if (field.max_words) limitParts.push(`${field.max_words} palabras`);
+      if (field.max_pages) limitParts.push(`${field.max_pages} páginas`);
+      const limitLabel = limitParts.join(' · ') || 'sin límite especificado';
+
+      const vars = {
+        call_code: qCtx.callCode || '',
+        call_writing_style: qCtx.transversal.writing_style || '',
+        call_ai_detection_rules: qCtx.transversal.ai_detection_rules || '',
+        section_specific_block: sectionBlock,
+        source_chapters: `### ${chaptersByKey[mappedKey].title}\n\n${chapterBody}`,
+        field_id: field.id,
+        question_text: field.question_text || field.label || '',
+        question_hint: field.hint || '(no hint)',
+        question_kind: field.kind || 'narrative',
+        limit_label: limitLabel,
+        target_language: target_language,
+      };
+
+      // Cap output generoso: queremos JSON + body completo, mejor pasarse
+      // a corto que cortar el JSON a la mitad y reventar el parse.
+      const maxTokens = field.max_chars ? Math.min(6000, Math.ceil(field.max_chars / 3) + 500) : 5000;
+      try {
+        const result = await cag.runPrompt('06_form_compression', vars, {
+          maxTokens,
+          temperature: 0.3,
+          ctx: { projectId, userId },
+          endpoint: '/v1/master/documents/:id/compress-to-form',
+        });
+        totalCostUsd += result.costUsd || 0;
+        const parsed = result.parsed;
+        if (!parsed || !parsed.answer_body) {
+          // Fallback: si el LLM devolvió texto plano sin JSON parseable,
+          // tomar el body raw como respuesta (mejor algo que nada).
+          const raw = (result.text || '').trim();
+          if (raw.length > 100 && !raw.startsWith('{')) {
+            const cleaned = raw.replace(/^```(?:json|markdown|md)?\s*/i, '').replace(/```\s*$/, '').trim();
+            console.warn(`[compressToForm] field ${field.id}: JSON parse failed, using raw text (${cleaned.length} chars)`);
+            const [[existing]] = await pool.query(
+              'SELECT id FROM form_field_values WHERE instance_id = ? AND field_id = ? LIMIT 1',
+              [instance.id, field.id]
+            );
+            const meta = JSON.stringify({ char_count: cleaned.length, word_count: cleaned.split(/\s+/).length, missing_facts: [], notes: '(raw text — JSON parse fail)', fallback: true });
+            if (existing) {
+              await pool.query('UPDATE form_field_values SET value_text = ?, value_json = ?, updated_at = NOW() WHERE id = ?', [cleaned, meta, existing.id]);
+            } else {
+              await pool.query('INSERT INTO form_field_values (id, instance_id, field_id, section_path, value_text, value_json) VALUES (?, ?, ?, ?, ?, ?)', [genUUID3(), instance.id, field.id, field.section_path || null, cleaned, meta]);
+            }
+            results.push({ field_id: field.id, chapter_key: mappedKey, char_count: cleaned.length, word_count: cleaned.split(/\s+/).length, missing_facts: [], cost_usd: result.costUsd || 0, fallback: true });
+            continue;
+          }
+          console.warn(`[compressToForm] field ${field.id}: parse fail — text preview: ${raw.substring(0, 300)}`);
+          errors.push({ field_id: field.id, error: 'output sin answer_body parseable (ver server log)' });
+          continue;
+        }
+        const answerBody = parsed.answer_body;
+        // Persistir en form_field_values (upsert)
+        const [[existing]] = await pool.query(
+          'SELECT id FROM form_field_values WHERE instance_id = ? AND field_id = ? LIMIT 1',
+          [instance.id, field.id]
+        );
+        if (existing) {
+          await pool.query(
+            'UPDATE form_field_values SET value_text = ?, value_json = ?, updated_at = NOW() WHERE id = ?',
+            [answerBody, JSON.stringify({ char_count: parsed.char_count, word_count: parsed.word_count, missing_facts: parsed.missing_facts || [], notes: parsed.notes_for_reviewer || '' }), existing.id]
+          );
+        } else {
+          await pool.query(
+            'INSERT INTO form_field_values (id, instance_id, field_id, section_path, value_text, value_json) VALUES (?, ?, ?, ?, ?, ?)',
+            [genUUID3(), instance.id, field.id, field.section_path || null, answerBody,
+             JSON.stringify({ char_count: parsed.char_count, word_count: parsed.word_count, missing_facts: parsed.missing_facts || [], notes: parsed.notes_for_reviewer || '' })]
+          );
+        }
+        results.push({
+          field_id: field.id,
+          chapter_key: mappedKey,
+          char_count: parsed.char_count,
+          word_count: parsed.word_count,
+          missing_facts: parsed.missing_facts || [],
+          cost_usd: result.costUsd || 0,
+        });
+      } catch (e) {
+        errors.push({ field_id: field.id, error: e.message });
+      }
+    }
+
+    await pool.query('UPDATE form_instances SET status = "complete" WHERE id = ?', [instance.id]);
+
+    ok(res, {
+      instance_id: instance.id,
+      project_id: projectId,
+      template: { id: template.id, name: template.name },
+      total_fields: processableFields.length,
+      compressed: results.length,
+      errors: errors.length,
+      total_cost_usd: totalCostUsd,
+      results,
+      error_details: errors,
+    });
+  } catch (e) {
+    console.error('[compressToForm] error:', e);
+    bad(res, 500, e.message || String(e));
+  }
+}
+
+/* Helper: extrae fields textarea recursivamente del JSON del template
+   form_part_b_eacea.json. Devuelve [{id, label, max_chars, max_words,
+   max_pages, kind, section_path}] */
+function extractFormFields(tpl) {
+  const out = [];
+  function visit(node, sectionPath) {
+    if (!node) return;
+    if (Array.isArray(node)) { node.forEach(n => visit(n, sectionPath)); return; }
+    if (typeof node !== 'object') return;
+
+    // Si es un field
+    if (node.id && (node.type === 'textarea' || node.type === 'text')) {
+      if (node.type === 'textarea' || (node.id.endsWith('_text'))) {
+        out.push({
+          id: node.id,
+          label: node.label || '',
+          question_text: node.label || '',
+          hint: Array.isArray(node.guidance) ? node.guidance.join(' ') : (node.guidance || ''),
+          max_chars: node.max_chars || null,
+          max_words: node.max_words || null,
+          max_pages: node.max_pages || null,
+          kind: node.type === 'textarea' ? 'narrative' : node.type,
+          section_path: sectionPath,
+        });
+      }
+    }
+
+    // Recurse en subsections, sections, fields, subsections_groups
+    const childKeys = ['sections', 'subsections', 'subsections_groups', 'fields'];
+    for (const k of childKeys) {
+      if (node[k]) {
+        const newPath = node.number ? `${sectionPath || ''}/${node.number}` : sectionPath;
+        visit(node[k], newPath);
+      }
+    }
+    // Project summary tiene fields directos
+    if (node.fields && node.title) visit(node.fields, node.id || sectionPath);
+  }
+  // Cover/summary también
+  if (tpl.project_summary) visit(tpl.project_summary, 'PS');
+  if (tpl.cover_page) visit(tpl.cover_page, 'cover');
+  if (tpl.sections) visit(tpl.sections, '');
+  return out;
+}
+
+/* Helper: mapea field_id del formulario al chapter_key del Master.
+   Convención: s1_1_text → ch_1_1_*, s2_1_3_text → ch_2_1_3_* */
+function mapFieldToChapter(fieldId, chaptersByKey) {
+  if (!fieldId) return null;
+  if (fieldId === 'summary_text') {
+    return Object.keys(chaptersByKey).find(k => k === 'ch_summary');
+  }
+  const m = fieldId.match(/^s(\d+)_(\d+)(?:_(\d+))?_text$/);
+  if (!m) return null;
+  const code = [m[1], m[2], m[3]].filter(Boolean).join('_');
+  const prefix = 'ch_' + code + '_';
+  return Object.keys(chaptersByKey).find(k => k.startsWith(prefix)) || null;
+}
+
 /* ── Subida de documentos canónicos de la convocatoria (CAG sources) ── */
 
 /* ── Stubs restantes (devolverán 501 hasta que se conecten) ─── */
@@ -1099,9 +1365,9 @@ module.exports = {
   compileMasterV1,
   runDiagnosis,
   refineChapter,
+  compressToForm,
   // placeholders LLM (501 hasta conectar)
   regenerateWithUnifiedContext: notImplemented,
   computeScoreEstimate: notImplemented,
-  compressToForm: notImplemented,
   coherencePass: notImplemented,
 };

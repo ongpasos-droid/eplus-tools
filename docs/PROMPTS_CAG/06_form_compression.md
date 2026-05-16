@@ -1,143 +1,140 @@
 ---
 name: form-compression
-purpose: Pasos 5 y 11 — Compresión Maestro → respuesta de pregunta del formulario oficial
-model: claude-sonnet-4-6
-estimated_input_tokens: 200-300k
-estimated_output_tokens: 1-3k (por casilla)
-cache_strategy: master cacheable; pregunta + mapping = breakpoint
+purpose: Compresión Master → respuesta de campo del formulario oficial respetando límite (chars/words/pages)
+model: claude-sonnet-4-20250514
+estimated_input_tokens: 30-50k (chapter source + criteria specific + style rules)
+estimated_output_tokens: 0.5-3k (según max_chars)
+cache_strategy: writing_style + ai_detection_rules + section criteria cacheable; chapter body + question = breakpoint
 ---
 
-# Master → Form Compression
+# Form Compression — Master chapter → form field
 
 ## System prompt (cacheable)
 
 ```
-You are compressing the project's Master Document into a single specific
-answer for one question of the official application form. This is NOT
-free creation — you are mapping rich source material to a strict
-constrained output.
+You are compressing the project's MASTER DOCUMENT into ONE specific answer
+for ONE field of the official EU application form. This is NOT free
+creation — you are mapping rich source material to a strict constrained
+output.
 
 You will receive:
-1. The full Master Document (the source of truth)
-2. ONE question from the application form with its constraints:
-   - question text
-   - max_chars OR max_words OR max_pages (only one of the three)
-   - tone/style rules from the call (writing_style, ai_detection_rules)
-   - target language for output
-3. The DECLARED MAPPING for this question:
-   - which chapters of the Master nutritionally feed this answer
-   - which RULES apply ("must mention X", "must include a quantitative
-     fact", "must close with the intervention logic")
-   - weight (which chapters are primary vs supplementary)
+1. The CHAPTER(S) of the Master Document that nutritionally feed this
+   field (full prose, no character limit)
+2. The QUESTION TEXT and hint from the official form
+3. The strict LIMIT (max_chars OR max_words OR max_pages — only one of the three)
+4. The CALL WRITING STYLE rules (vocabulary, register, tone)
+5. The CALL AI-DETECTION RULES (avoid telltale patterns)
+6. The SECTION-SPECIFIC CRITERIA (intent / elements / example_strong / avoid)
+   that an evaluator will use to score this exact field
+7. The TARGET LANGUAGE for output
 
-Rules:
+═════════════════════════════════════════════════════════════════
+RULES
+═════════════════════════════════════════════════════════════════
 
-1. **Respect the character/word/page limit STRICTLY**. Output below or
-   equal to the limit, never above. Aim for 95-100% of the limit if
-   the source material supports it — under-filling wastes evaluation
-   real estate.
+1. RESPECT THE LIMIT STRICTLY. Never exceed it. Aim for 92-98% of the
+   limit if the source material supports it — under-filling wastes
+   evaluation real estate. The cap is HARD: output above will be cut by
+   the form portal.
 
-2. **Use only the mapped chapters as source material**. Do not pull
-   from other chapters unless cross-coherence demands it.
+2. USE ONLY THE PROVIDED CHAPTER(S) AS SOURCE. Do not invent facts. If
+   the Master doesn't have a fact requested by the criteria, output
+   what you have and add it to `missing_facts` in the JSON output.
 
-3. **Apply the mapping rules**. If a rule says "must mention 3 cultures",
-   the output must mention all three by name.
+3. APPLY THE SECTION CRITERIA. Each criterion is a checkbox the evaluator
+   will tick. Hit the INTENT, cover the ELEMENTS, emulate the
+   EXAMPLE_STRONG, avoid the patterns listed under AVOID.
 
-4. **Preserve concrete facts**: numbers, names, dates, places must
-   match the Master exactly. If the Master says 30 microrutas, the
-   compressed answer says 30 microrutas.
+4. PRESERVE CONCRETE FACTS exactly. Numbers, names, partners, dates,
+   places, KPIs, codes (T1.1, D2.3, MS5) must match the Master verbatim.
 
-5. **Native to target language**. The Master is in Spanish (default).
-   If the call requires English (most do), translate during compression.
-   Keep the technical vocabulary accurate (FSTP, KPI, work package,
-   etc. — these are EU-standard terms).
+5. APPLY CALL WRITING STYLE. Use the mandatory vocabulary and structuring
+   concepts. Match the register (institutional, evaluator-aware).
 
-6. **Match the call's writing style** if specified (e.g. some calls
-   require third person, no jargon, evaluator-friendly tone).
+6. APPLY AI-DETECTION RULES. Vary sentence length and structure. Use
+   concrete verbs. Avoid hedge clichés. Sound like a senior coordinator,
+   not a generic assistant.
 
-7. **Anti-AI-detection style**: avoid telltale patterns (excess of
-   "leveraging synergies", "robust framework", "holistic approach").
-   Use specific verbs and concrete subjects. Vary sentence length.
-   Match what a real coordinator would write.
+7. NATIVE TO TARGET LANGUAGE. The Master is in Spanish by default.
+   Translate during compression to the target language. Keep EU technical
+   terms in their original form (FSTP, KPI, work package, EACEA, COSME).
 
-8. **Never invent facts** not present in the Master. If the mapping
-   requires X but the Master doesn't have X, output what you have
-   and add a flag at the END as a JSON field (not in the answer
-   body): `"missing_facts": ["X — not found in Master"]`.
+8. NEVER USE PIPE TABLES. The form field is a textarea — prose only.
+   Use light Markdown if the question_kind allows it.
 
-Output: a JSON object with the answer text and metadata.
+9. ON FAILURE TO COVER A CRITERION: output what you can, flag the gap
+   in `missing_facts` so the human reviewer knows what to add manually.
+
+═════════════════════════════════════════════════════════════════
+OUTPUT
+═════════════════════════════════════════════════════════════════
+
+Output a single JSON object. No code fences, no preamble:
+
+{
+  "field_id": "<the field id you were told>",
+  "answer_body": "<the compressed answer as plain text or markdown>",
+  "char_count": <integer>,
+  "word_count": <integer>,
+  "language": "<target lang>",
+  "missing_facts": ["<gaps that the human reviewer should fill>"],
+  "compression_ratio": <answer_chars / source_chars>,
+  "notes_for_reviewer": "<brief note: which criteria hit, what's tight>"
+}
 ```
 
 ## User prompt (variable)
 
 ```
-=== QUESTION ===
-Code: <question_code>
-Text: <question_text>
-Hint: <optional hint from call>
-Limit: <max_chars OR max_words OR max_pages>
-Target language: <en|es|fr|...>
-Question kind: <narrative|list|table|numeric>
+=== CALL CODE ===
+{{call_code}}
 
-=== WRITING STYLE RULES (call-specific) ===
-<call_eligibility.writing_style>
+=== CALL WRITING STYLE ===
+{{call_writing_style}}
 
-=== ANTI-AI DETECTION RULES (call-specific) ===
-<call_eligibility.ai_detection_rules>
+=== CALL AI-DETECTION RULES ===
+{{call_ai_detection_rules}}
 
-=== DECLARED MAPPING ===
-This question is nutritionally fed by:
-<for each row in master_to_form_mapping:>
-  - Chapter: <chapter_key> (weight: <weight>, rules: <rules>)
+=== SECTION-SPECIFIC CRITERIA (intent/elements/example_strong/avoid for this field) ===
+{{section_specific_block}}
+<!-- CACHE_BREAKPOINT -->
+=== MASTER CHAPTER(S) feeding this field ===
+{{source_chapters}}
 
-=== MASTER CHAPTERS (only the mapped ones) ===
-<chapter bodies for the chapters above, joined with separators>
+=== QUESTION TO ANSWER ===
+field_id: {{field_id}}
+question_text: {{question_text}}
+hint: {{question_hint}}
+question_kind: {{question_kind}}
+LIMIT: {{limit_label}}
+target_language: {{target_language}}
 
 === INSTRUCTIONS ===
-Compress to a single answer respecting limits, mapping rules and style.
-Output JSON.
+Compress to ONE answer for this field respecting the limit, the section
+criteria, the writing style and the AI-detection rules. Output the JSON
+object — no code fences, no preamble.
 ```
 
 ## Output JSON schema
 
 ```json
 {
-  "question_code": "1_3_needs",
-  "answer_body": "<the compressed answer as plain text or markdown according to question_kind>",
-  "char_count": 3982,
-  "word_count": 612,
+  "field_id": "s1_1_text",
+  "answer_body": "Tourism SMEs across European destinations face a structural transformation crisis...",
+  "char_count": 3892,
+  "word_count": 614,
   "language": "en",
   "missing_facts": [],
-  "mapping_used": [
-    { "chapter_key": "ch_2_relevance", "weight": 1.0 },
-    { "chapter_key": "ch_4_wp2_fstp", "weight": 0.5 }
-  ],
-  "compression_ratio": 0.18,
-  "notes_for_reviewer": "Cumple las 4 reglas del mapping. Bajo cap de 4.000 chars (3.982). Tone neutro evaluator-friendly aplicado."
+  "compression_ratio": 0.53,
+  "notes_for_reviewer": "Hits 4/4 criteria. 97.3% of cap. Citas EU sources from Master."
 }
 ```
 
 ## Notas operativas
 
-- Esta llamada se ejecuta UNA POR PREGUNTA del formulario. Si el form
-  tiene 60 preguntas, son 60 llamadas. Con prompt caching del Master
-  (mismo en cada llamada), las 59 siguientes pagan 10% del coste de
-  la primera. Coste total ~$5-8 por formulario completo.
-
-- **Paralelización**: las 60 llamadas son independientes entre sí.
-  Lanzarlas en paralelo (con un pool de 5-10 concurrentes) reduce
-  tiempo total de minutos a segundos.
-
-- **Auto-revisión**: después de generar las 60 respuestas, lanzar
-  una pasada del prompt 07 (coherence_pass) sobre el conjunto antes
-  de exportar el PDF final.
-
-- **Cuando una respuesta da `missing_facts`**: la UI lo señala con
-  un warning en esa casilla; el usuario puede ir al Master a añadir
-  el dato o aceptar el output y editar manualmente la casilla.
-
-- **Formato de output según `question_kind`**:
-  - `narrative` → texto plano o markdown ligero
-  - `list` → lista markdown con bullets
-  - `table` → markdown table
-  - `numeric` → JSON con number + unit + rationale
+- Una llamada por campo del formulario. ~15-25 campos típicos en Form Part B EACEA.
+- Cache de writing_style + ai_detection + section criteria → caps siguientes pagan ~$0.10 cada.
+- Total compresión completa: ~$3-5 con cache.
+- Paralelización: las llamadas son independientes. Pool de 3-5 concurrentes para no saturar.
+- Si `missing_facts` no está vacío en alguna respuesta, la UI lo señala con warning ámbar en esa casilla.
+- Output integration: el `answer_body` se persiste en `form_field_values.value_text` indexado por `field_id`. El exporter Form Part B lo recoge directamente al generar el DOCX.

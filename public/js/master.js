@@ -186,6 +186,7 @@
                 ? `<button onclick="Master.previewCompile('${esc(masterDocId)}')" class="px-3 py-2 rounded-lg bg-surface-container-low text-xs font-bold border border-outline-variant/30">Previsualizar coste</button>
                    <button onclick="Master.compileV1('${esc(masterDocId)}')" class="px-3 py-2 rounded-lg bg-[#16A34A] text-white text-xs font-bold">Compilar Maestro v1</button>`
                 : `<button onclick="Master.runDiagnosis('${esc(masterDocId)}', 'initial')" class="px-3 py-2 rounded-lg bg-primary text-white text-xs font-bold">Lanzar diagnóstico</button>
+                   <button onclick="Master.compressToForm('${esc(masterDocId)}')" class="px-3 py-2 rounded-lg bg-[#16A34A] text-white text-xs font-bold inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-base">compress</span>Comprimir a formulario oficial</button>
                    <button onclick="Master.downloadMarkdown('${esc(masterDocId)}')" class="px-3 py-2 rounded-lg bg-surface-container-low text-xs font-bold border border-outline-variant/30 inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-base">download</span>Descargar .md</button>
                    <button onclick="Master.compileV1('${esc(masterDocId)}', false)" class="px-3 py-2 rounded-lg bg-surface-container-low text-xs font-bold border border-outline-variant/30">Reanudar capítulos faltantes</button>
                    <button onclick="Master.compileV1('${esc(masterDocId)}', true)" class="px-3 py-2 rounded-lg bg-red-50 text-red-700 text-xs font-bold border border-red-200">Recompilar todo (force)</button>`
@@ -961,6 +962,88 @@
     }
   }
 
+  /* ── Compresión a formulario oficial ─────────────────────────── */
+  async function compressToForm(masterDocId) {
+    if (!confirm('¿Comprimir el Master al formulario oficial EACEA?\n\nEsto llamará al LLM una vez por cada campo del formulario (~15-20 llamadas) respetando los límites oficiales de cada uno. Coste estimado: $3-5. Tiempo: 2-5 min.')) return;
+    const detailHost = document.getElementById('master-detail-container');
+    const banner = document.createElement('div');
+    banner.id = 'master-compress-banner';
+    banner.className = 'fixed top-16 left-1/2 -translate-x-1/2 bg-primary text-white px-5 py-3 rounded-xl shadow-lg z-50 text-sm font-bold';
+    banner.innerHTML = '<span class="material-symbols-outlined align-middle text-base mr-1 animate-spin">progress_activity</span> Comprimiendo al formulario oficial... (esto puede tardar 2-5 min)';
+    document.body.appendChild(banner);
+    try {
+      const res = await API.post(`/master/documents/${masterDocId}/compress-to-form`, { target_language: 'es' });
+      const data = res.data || res;
+      banner.remove();
+      const okCount = data.compressed || 0;
+      const errCount = data.errors || 0;
+      const cost = data.total_cost_usd || 0;
+      const msg = `${okCount} campos comprimidos${errCount ? ' · ' + errCount + ' errores' : ''} · $${cost.toFixed(3)}`;
+      showToast('Formulario generado', msg, errCount > 0 ? 'warning' : 'success');
+      _renderCompressedResults(masterDocId, data);
+    } catch (e) {
+      banner.remove();
+      showToast('Error al comprimir', e.message || String(e), 'error');
+    }
+  }
+
+  function _renderCompressedResults(masterDocId, data) {
+    const host = document.getElementById('master-detail-container');
+    if (!host) return;
+    const panel = document.createElement('div');
+    panel.className = 'mt-6 bg-white border border-outline-variant/20 rounded-2xl p-6';
+    const fields = (data.results || []).map(r => `
+      <div class="flex items-center gap-3 p-2 border-b border-outline-variant/10 text-xs">
+        <span class="font-mono font-bold text-[10px] text-on-surface-variant">${esc(r.field_id)}</span>
+        <span class="flex-1">→ ${esc(r.chapter_key)}</span>
+        <span class="font-mono text-[10px]">${(r.char_count || 0).toLocaleString('es-ES')} chars</span>
+        ${(r.missing_facts && r.missing_facts.length) ? `<span class="px-2 py-0.5 rounded bg-amber-100 text-amber-700 text-[10px] font-bold">${r.missing_facts.length} gaps</span>` : '<span class="text-green-600 text-[10px]">✓</span>'}
+      </div>
+    `).join('');
+    const errs = (data.error_details || []).map(e => `<li class="text-xs text-red-600">${esc(e.field_id)}: ${esc(e.error)}</li>`).join('');
+    panel.innerHTML = `
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h3 class="font-headline text-base font-bold text-on-surface">Formulario oficial comprimido</h3>
+          <p class="text-xs text-on-surface-variant">${data.template?.name || 'Form template'} · instance ${(data.instance_id || '').substring(0,8)}</p>
+        </div>
+        <button onclick="Master._downloadFormDocx('${esc(data.project_id || '')}')" class="px-3 py-2 rounded-lg bg-[#1b1464] text-[#fbff12] text-xs font-bold inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-base">picture_as_pdf</span>Descargar Form Part B (.docx)</button>
+      </div>
+      <div class="mb-3">
+        <p class="text-xs text-on-surface-variant">${data.compressed}/${data.total_fields} campos generados · coste total <strong>$${(data.total_cost_usd || 0).toFixed(3)}</strong></p>
+      </div>
+      <div class="border border-outline-variant/15 rounded-lg overflow-hidden">${fields}</div>
+      ${errs ? `<div class="mt-3"><p class="text-xs font-bold text-red-600 mb-1">Errores (${data.errors}):</p><ul class="space-y-1">${errs}</ul></div>` : ''}
+    `;
+    host.appendChild(panel);
+  }
+
+  async function _downloadFormDocx(projectId) {
+    if (!projectId) { showToast('Falta project_id', '', 'error'); return; }
+    try {
+      const token = localStorage.getItem('jwt') || localStorage.getItem('token') || '';
+      const res = await fetch(`/v1/exporter/projects/${projectId}/form-part-b.docx`, {
+        headers: token ? { 'Authorization': 'Bearer ' + token } : {},
+        credentials: 'include',
+      });
+      if (!res.ok) {
+        const errText = await res.text().catch(() => '');
+        showToast('Error al generar Form Part B', `HTTP ${res.status} — ${errText.substring(0, 200)}`, 'error');
+        return;
+      }
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Form_Part_B_${projectId.substring(0,8)}.docx`;
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+      showToast('Form Part B descargado', '', 'success');
+    } catch (e) {
+      showToast('Error al descargar', e.message || String(e), 'error');
+    }
+  }
+
   Master.render = render;
   Master.createNewMaster = createNewMaster;
   Master.openMaster = openMaster;
@@ -968,6 +1051,8 @@
   Master.compileV1 = compileV1;
   Master.runDiagnosis = runDiagnosis;
   Master.downloadMarkdown = downloadMarkdown;
+  Master.compressToForm = compressToForm;
+  Master._downloadFormDocx = _downloadFormDocx;
   Master._sendChatMessage = _sendChatMessage;
   Master._validateChapter = _validateChapter;
   Master._applyEdit = _applyEdit;
