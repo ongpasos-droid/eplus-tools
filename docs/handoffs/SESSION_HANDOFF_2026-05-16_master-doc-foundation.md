@@ -9,7 +9,7 @@
 
 ## TL;DR
 
-Sesión nocturna con DOS bloques:
+Sesión nocturna con **TRES** bloques:
 
 **Bloque 1 (autorizado primero)**: Foundation — truncados eliminados,
 12 tablas SQL nuevas, módulo `master/` con stubs CRUD, 8 templates
@@ -24,10 +24,24 @@ CAG conectado al LLM + UI mínima de la fase Perfeccionar.
   - Sidebar con nueva opción "Perfeccionar"
   - UI con compilar/previsualizar coste/diagnóstico
 
-**Cero push.** Todo está en la rama `wip/master-doc-foundation`
-localmente con 5 commits, listos para revisar y mergear.
+**Bloque 3 (autorizado con "trata de mejorar... presupuesto €10")**:
+Testing autónomo nocturno con budget tracker.
 
-SUSTRAI intacto. Servidor local corriendo en :3000 con todo lo nuevo.
+  - Bugs encontrados y arreglados:
+    · Placeholders del template eran `<text>` literal en vez de `{{var}}`
+    · Prompt caching NO funcionaba para el user prompt (87k tokens)
+    · El one-shot de 10 capítulos al final daba JSON truncado/malo
+    · Diagnose devolvía `{narrative:[], economic:[]}` en vez de `{items:[]}`
+  - Arquitectura final: 1 llamada por capítulo (10) con cache hits 9/10
+  - Test E2E SUSTRAI completo: 10/10 caps OK, $1.13 con cache
+  - Diagnose E2E SUSTRAI: 10 items detectados, $0.46
+  - **Budget consumido: $6.87 de $9 (76%)**
+
+**Cero push.** Todo está en la rama `wip/master-doc-foundation`
+localmente con **8 commits**, listos para revisar y mergear.
+
+SUSTRAI intacto. Servidor local corriendo en :3000 con todo lo nuevo
+y validado end-to-end.
 
 ---
 
@@ -235,6 +249,72 @@ JSON schema esperado y notas operativas.
 6. Click "Compilar Maestro v1" → confirma, espera 1-3 min
 7. Ve los 10 capítulos generados
 8. Click "Lanzar diagnóstico" → lista de items accionables
+
+---
+
+## 1ter. Lo que se añadió en el Bloque 3 (testing autónomo nocturno)
+
+### Bugs encontrados y arreglados
+
+| Bug | Cómo se manifestaba | Fix |
+|---|---|---|
+| Placeholders del template eran texto descriptivo `<full enriched bundle...>` | Input al LLM eran solo 1.013 tokens — el LLM generaba JSON vacío y fallaba el parsing | Cambiados a `{{var}}` reales en prompts 01, 02, 04 + creado 01b para single-chapter |
+| One-shot 10 capítulos generaba 36k tokens → JSON truncado | LLM tardaba 15 min, fallaba parsing al final, todo se perdía | Refactor a 1 capítulo por llamada con persistencia inmediata |
+| Cache breakpoint no funcionaba en user prompt | Cada llamada pagaba 87k tokens completos ($0.37/cap) | Marker `<!-- CACHE_BREAKPOINT -->` en templates + lógica de split en cag-pipeline.js |
+| Diagnose devolvía `{narrative:[],economic:[]}` en vez de `{items:[]}` | items: 0 en backend pese a tener contenido real en el raw | Parser tolerante en controller + frontend acepta ambos shapes |
+| force=true no limpiaba capítulos previos | Acumulaba duplicados | force=true ahora borra antes de regenerar |
+| Sin idle timeout en SSE | Si server colgaba, frontend esperaba infinito | Watchdog de 4 min con cancel() del reader |
+
+### Nuevo prompt 01b_compile_single_chapter.md
+
+Genera UN capítulo por llamada. System prompt único (cacheable) + contexto
+del proyecto (cacheable) + spec del capítulo concreto (variable). Output
+JSON de un solo capítulo.
+
+### Modo resume implícito
+
+`POST /v1/master/documents/:id/compile-v1` con `{force: false}` ahora
+detecta capítulos ya creados y solo genera los faltantes. Útil si la
+compilación se interrumpe a mitad.
+
+### Export Markdown
+
+`GET /v1/master/documents/:id/export.md?download=1` devuelve el Master
+completo como Markdown con índice. Botón en UI "Descargar .md".
+
+### Scripts E2E nocturnos
+
+  - `tmp/test-master-compile.js` — compila el Master con budget tracker
+  - `tmp/test-master-diagnose.js` — diagnostica el Master existente
+
+### Resultados E2E validados con SUSTRAI
+
+| Métrica | Valor |
+|---|---|
+| Master compilado | `25435123-f6d8-4966-a500-7828cfa720a3` |
+| Capítulos creados | **10/10** |
+| Cache hits | **10/10** |
+| Total chars generados | **197.403** (≈200 págs) |
+| Coste compilación completa | **$1.13** |
+| Coste diagnose | **$0.46** (cache miss inicial) o $0.13 (cache hit) |
+| Tiempo total compilación | ~17 min (10 caps × ~100s) |
+| Calidad detectada en diagnose | Inconsistencia €1.380.000 vs €1.530.000, KPIs sin verificable, etc. |
+| Budget total nocturno | **$6.87 de $9** |
+
+### Lo que SÍ se puede probar mañana sin más cambios
+
+1. Recarga el navegador (Ctrl+F5)
+2. Login → abre un proyecto cualquiera
+3. Click "Perfeccionar" (sidebar)
+4. **Si ya tiene Master compilado** (SUSTRAI lo tiene, ID `25435123...`):
+   - Verás los 10 capítulos listados
+   - Click "Descargar .md" → tienes el libro completo en tu disco
+   - Click "Lanzar diagnóstico" → corre y muestra los 10 items en cubos narrative/economic
+5. **Si quieres compilar otro proyecto**:
+   - Click "Nuevo Maestro" → entidad vacía
+   - Click "Previsualizar coste" → muestra tokens estimados
+   - Click "Compilar Maestro v1" → corre 10 caps × ~100s = ~17 min
+   - Verás overlay con lápiz animado + lista de capítulos con check verde
 
 ---
 
