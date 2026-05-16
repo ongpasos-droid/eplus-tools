@@ -1,0 +1,84 @@
+{
+  "id": 1107483,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "DIPUTACIÓN PROV. DE GIRONA",
+    "nivel3": "SALUT PÚBLICA DE LA DIPUTACIÓ DE GIRONA (DIPSALUT)"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "905922",
+  "fechaRecepcion": "2026-05-15",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 300000,
+  "mrr": false,
+  "descripcion": "PT15 2026 Convocatòria de subvenció per finançament de socorrisme a piscines d`ús públic de titularitat i/o gestió municipal",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Otras actividades sanitarias",
+      "codigo": "86.9"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES512 - Girona"
+    }
+  ],
+  "descripcionFinalidad": "Sanidad",
+  "descripcionBasesReguladoras": "Bases específiques reguladores de subvencions pel servei de socorrisme a les piscines ús públic i de titularitat municipal i per vigilància, seguretat, salvament i socorrisme a platges",
+  "urlBasesReguladoras": "https://www.dipsalut.cat/sites/default/files/2025-03/Bases_reguladores_Castella_subvencions_servei_socorrisme_platges_piscines.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-05-04",
+  "fechaFinSolicitud": "2026-06-11",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1455401,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "CAT_Convocatoria_subvencions_socorrisme_piscines_PT15_2026.pdf",
+      "long": 224539,
+      "datMod": "2026-05-15",
+      "datPublicacion": "2026-05-15"
+    },
+    {
+      "id": 1455400,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "CAST_Convocatoria_subven_socorrisme_piscines_PT15_2026.pdf",
+      "long": 228203,
+      "datMod": "2026-05-15",
+      "datPublicacion": "2026-05-15"
+    }
+  ],
+  "anuncios": [
+    {
+      "numAnuncio": 211926,
+      "titulo": "Extracto del decreto de 12 de mayo de 2026, de la Presidencia del Organismo Autónomo de Salud Pública de la Diputación de Girona, mediante el qual se aprueba Convocatoria de la subvención para la financiación del servicio de socorrismo en las piscinas de uso público de titularidad y/o gestión municipal (PT15), para el año 2026.",
+      "tituloLeng": "Extracte del decret, de 12 de maig de 2026, de la Presidència de l`Organisme Autònom de Salut Pública de la Diputació de Girona, pel qual s¿aprova la convocatòria de la subvenció per al finançament del servei de socorrisme a les piscines d`ús públic de titularitat i/o gestió municipal (PT15) per a l`any 2026.",
+      "texto": "<p>Extracto del decreto de 12 de mayo de 2026, de la Presidencia del Organismo Autónomo de Salud Pública de la Diputación de Girona, mediante el qual se aprueba Convocatoria de la subvención para la financiación del servicio de socorrismo en las piscinas de uso público de titularidad y/o gestión municipal (PT15), para el año 2026.</p><p>BDNS (Identif.):</p><p></p><p>De conformidad con lo previsto en los artículos 17.3.b i 20.8.a de la Ley 38/2003, de 17 de noviembre, general de subvenciones, se publica el extracto de la convocatoria el texto completo se puede consultar en la base de datos nacional de subvenciones (http://www.pap.minhap.gob.es/bdnstrans):</p><p></p><p></p><p>Primero. Beneficiarios</p><p></p><p>Pueden concurrir a las subvenciones objeto de esta convocatoria todos los ayuntamientos de la demarcación de Girona adheridos al Catálogo de servicios de Dipsalut que dispongan de una o más piscinas de uso público dotadas de servicio de socorrismo.</p><p>En el supuesto de que sea un ente dependiente del ayuntamiento el que lleve a cabo la actividad, el ayuntamiento también tendrá que solicitar la subvención.</p><p>En ningún caso el concesionario del servicio podrá ser beneficiario de la subvención.</p><p></p><p>Solo se otorgará una única ayuda por ayuntamiento y año.</p><p></p><p>Segundo. Objeto</p><p></p><p>El objeto de esta convocatoria es regular las subvenciones que concede el Organisme Autònom de Salut Pública de la Diputació de Girona, en lo sucesivo Dipsalut, a los ayuntamientos de la demarcación de Girona para financiar las actuaciones para el servicio de salvamento y socorrismo en las piscinas de uso público de titularidad y/o gestión municipal, dentro del programa de apoyo económico PT15 del Catálogo de servicios de Dipsalut, de acuerdo con las bases específicas reguladoras publicadas en el BOP de Girona n.º 32, de 14 febrero de 2024.</p><p></p><p>Las actuaciones de salvamento y socorrismo garantizan la seguridad de los usuarios de las piscinas de uso público. Los servicios de socorrismo, junto con las infraestructuras y los recursos humanos necesarios para la gestión adecuada de las piscinas, son factores que hacen que aumente la seguridad de las piscinas. </p><p></p><p>Dipsalut prevé dar el apoyo necesario a los ayuntamientos de las poblaciones que disponen de piscinas de titularidad y/o gestión municipal, que requieren de la presencia de servicio de socorrismo, según la normativa vigente.</p><p></p><p>Solo se concederá una subvención por ayuntamiento y año.</p><p></p><p>El procedimiento de concesión de las subvenciones es el de concurrencia competitiva.</p><p></p><p>El periodo subvencionable es del 1 de octubre de 2025 al 30 de septiembre de 2026.</p><p></p><p></p><p>Tercero. Bases reguladoras</p><p></p><p>Publicadas en el Boletín Oficial de la Provincia de Girona, número 32, de 14 febrero de 2024.</p><p></p><p>Cuarto. Cuantía</p><p></p><p>El importe total máximo destinado a esta convocatoria es de trescientos mil euros (300.000,00 €)</p><p></p><p>Quinto. Plazo de presentación de solicitudes</p><p></p><p>El plazo de presentación de las solicitudes del primer procedimiento empezará el día siguiente a la publicación del extracto de esta convocatoria en el Boletín Oficial de la Provincia de Girona y finalizará el día 11 de junio de 2026.</p><p></p><p>Sexto. Otros datos</p><p></p><p>Para presentar la solicitud será necesario cumplimentar el formulario específico de la solicitud disponible en la Sede electrónica de Dipsalut (https://seu.dipsalut.cat).</p><p></p><p>Esta solicitud deberá presentarse por registro electrónico y deberá ir firmada por el representante legal del ayuntamiento. Se podrán utilizar los sistemas de firma electrónica aceptados por Dipsalut.</p><p></p><p>No se prevé la posibilidad de reformulación de la solicitud. </p><p></p><p>Séptimo. Plazo de justificación</p><p></p><p>El plazo para justificar los gastos objeto de las ayudas económicas de esta convocatoria finaliza el día 15 de octubre de 2026.</p><p></p><p></p><p>Maria Puig i Ferrer</p><p>Presidenta, p.d.</p>",
+      "textoLeng": "<p>Extracte del decret, de 12 de maig de 2026, de la Presidència de l?Organisme Autònom de Salut Pública de la Diputació de Girona, pel qual s?aprova la convocatòria de la subvenció per al finançament del servei de socorrisme a les piscines d?ús públic de titularitat i/o gestió municipal (PT15) per a l?any 2026.</p><p></p><p>BDNS (Identif.):</p><p></p><p>De conformitat amb el que preveuen els articles 17.3.b i 20.8.a de la Llei 38/2003, de 17 de novembre, general de subvencions, es publica l?extracte de la convocatòria, el text complet es pot consultar a la base de dades nacional de subvencions (http://www.pap.minhap.gob.es/bdnstrans):</p><p></p><p></p><p>Primer. Beneficiaris</p><p></p><p>Poden concórrer a les subvencions objecte d?aquesta convocatòria, tots els ajuntaments de la demarcació de Girona adherits al Catàleg de serveis de Dipsalut que disposin d?una o més piscines d?ús públic dotades de servei de socorrisme</p><p>En el cas que sigui un ens dependent de l?ajuntament el que dugui a terme l?activitat, l?ajuntament també haurà de sol·licitar la subvenció.</p><p></p><p>En cap cas el concessionari del servei podrà ser beneficiari de la subvenció.</p><p></p><p>Només s?atorgarà un únic ajut per ajuntament i any.</p><p></p><p>Segon. Objecte</p><p></p><p>L?objecte d?aquesta convocatòria és regular les subvencions que concedeix l?Organisme Autònom de Salut Pública de la Diputació de Girona, en endavant Dipsalut, als ajuntaments de la demarcació de Girona per finançar les actuacions per al servei de salvament i socorrisme de les piscines d?ús públic de titularitat i/o gestió municipal, dins del programa de suport econòmic PT15 del Catàleg de serveis de Dipsalut, d?acord amb les bases específiques reguladores publicades en el BOP de Girona núm. 32, de 14 de febrer de 2024.</p><p></p><p>Les actuacions de salvament i socorrisme garanteixen la seguretat dels usuaris de les piscines d?ús públic. Els serveis de socorrisme, juntament amb les infraestructures i els recursos humans necessaris per a la gestió adequada de les piscines són factors que fan que augmenti la seguretat de les piscines. </p><p></p><p>Dipsalut preveu donar el suport necessari als ajuntaments de les poblacions que disposen de piscines de titularitat i/o gestió municipal, que requereixen de la presència de servei de socorrisme, segons la normativa vigent.</p><p></p><p>Només es concedirà una subvenció per ajuntament i any.</p><p></p><p>El procediment de concessió de les subvencions és el de concurrència competitiva.</p><p></p><p>El període subvencionable és de l?1 d?octubre de 2025 al 30 de setembre de 2026.</p><p></p><p>Tercer. Bases reguladores</p><p></p><p>Publicades en el Butlletí Oficial de la Província de Girona, número 32, de 14 de febrer de 2024.</p><p></p><p>Quart. Quantia</p><p></p><p>L?import total màxim destinat a aquesta convocatòria és de tres-cents mil euros (300.000,00 €).</p><p></p><p>Cinquè. Termini de presentació de sol·licituds.</p><p></p><p>El termini de presentació de les sol·licituds del primer procediment comença l?endemà de la publicació de l?extracte d?aquesta convocatòria en el Butlletí Oficial de la Província de Girona i finalitza el dia 11 de juny de 2026.</p><p></p><p>Sisè. Altres dades</p><p></p><p>Per presentar la sol.licitud, cal omplir el formulari específic de la sol·licitud disponible a la Seu electrònica de Dipsalut (https://seu.dipsalut.cat).</p><p></p><p>Aquesta sol·licitud s?ha de presentar per registre electrònic i ha d?anar signada pel representat legal de l?ajuntament. Es podran utilitzar els sistemes de signatura electrònica acceptats per Dipsalut.</p><p></p><p>No es preveu la possibilitat de reformular la sol·licitud. </p><p></p><p>Setè. Termini de justificació</p><p></p><p>El termini per justificar les despeses objecte dels ajuts econòmics d?aquesta convocatòria finalitza el dia 15 d?octubre de 2026.</p><p></p><p></p><p></p><p>Maria Puig i Ferrer</p><p>Presidenta, p.d.</p>",
+      "url": "https://ssl4.ddgi.cat/bopV1/pdf/2026/95/20269504182.pdf",
+      "cve": null,
+      "desDiarioOficial": "B.O.P. DE GIRONA",
+      "datPublicacion": "2026-05-20"
+    }
+  ],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

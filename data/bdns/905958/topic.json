@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "905958",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / MIRANDA DE EBRO / AYUNTAMIENTO DE MIRANDA DE EBRO",
+  "nuts_codes": [
+    "ES412"
+  ],
+  "nuts_primary": "ES412",
+  "title": "CONVOCATORIA DE SUBVENCIONES PARA EL FOMENTO DE ACTIVIDADES DE UTILIDAD PÚBLICA O INTERÉS SOCIAL QUE COADYUVEN O COMPLEMENTEN AQUELLAS DE COMPETENCIA MUNICIPAL DURANTE EL EJERCICIO 2026",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-05-15",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 157820,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "S",
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO"
+    },
+    {
+      "codigo": "R",
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES"
+    }
+  ],
+  "apply_url": "https://sede.mirandadeebro.es/",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/905958",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.mirandadeebro.es/NdSite/OnLineCache/FMS/02/14/fe0c685c95de7dbf6f5eb37a39ea5ab5/Modificaci%F3n%20Ordenanza%20General%20de%20Subvenciones%20BOP%20186%20de%2029-09-21.pdf",
+  "text_inicio": "Desde el día siguiente al de la publicación de las Bases en el BOPBUR.",
+  "text_fin": "Quince días, a contar desde el día siguiente a la publicación de las Bases en el BOPBUR. ",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-16T04:05:13.468Z"
+}

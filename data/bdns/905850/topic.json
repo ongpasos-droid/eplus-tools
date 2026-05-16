@@ -1,0 +1,73 @@
+{
+  "source": "bdns",
+  "source_id": "905850",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / ALGINET / AYUNTAMIENTO DE ALGINET",
+  "nuts_codes": [
+    "ES523"
+  ],
+  "nuts_primary": "ES523",
+  "title": "Resolución Alcaldia nºº 814/2026 aprobación  de les bases de la convocatoria dels I Premis a l'Ús del Valencià en el comerCIO",
+  "title_lang": "es",
+  "summary": "Otras Prestaciones económicas",
+  "status": "open",
+  "publication_date": "2026-05-15",
+  "open_date": "2026-05-06",
+  "deadline": "2026-06-26",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 2250,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "Q",
+      "descripcion": "EDUCACIÓN"
+    }
+  ],
+  "apply_url": "https://alginet.sede.dival.es/default.aspx",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/905850",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en lengua cooficial",
+      "url": null
+    },
+    {
+      "label": "Resolucion 814/2026 bases convocatoria I premios uso valenciano comercio local",
+      "url": null
+    },
+    {
+      "label": "RA 814/2026 I premis us valencia",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://alginet.sede.dival.es/default.aspx",
+  "text_inicio": "https://alginet.sede.dival.es/tablondeanuncios/default.aspx",
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-16T04:05:13.447Z"
+}

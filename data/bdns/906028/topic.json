@@ -1,0 +1,69 @@
+{
+  "source": "bdns",
+  "source_id": "906028",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / BENALMÁDENA / AYUNTAMIENTO DE BENALMÁDENA",
+  "nuts_codes": [
+    "ES617"
+  ],
+  "nuts_primary": "ES617",
+  "title": "CONVOCATORIA SUBVENCIONES CONCURRENCIA NO COMPETITIVA COMERCIANTES Y HOSTELEROS AFECTADOS/AS POR OBRAS MUNICIPALES EN VIA PUBLICA EN BENALMADENA 2026.",
+  "title_lang": "es",
+  "summary": "Comercio, Turismo y Pymes",
+  "status": "open",
+  "publication_date": "2026-05-15",
+  "open_date": "2026-05-20",
+  "deadline": "2026-06-20",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 71000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "G",
+      "descripcion": "COMERCIO AL POR MAYOR Y AL POR MENOR"
+    },
+    {
+      "codigo": "I",
+      "descripcion": "HOSTELERÍA"
+    }
+  ],
+  "apply_url": "https://www.benalmadena.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/906028",
+  "documents": [
+    {
+      "label": "Resolución Convocatoria",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.benalmadena.es/contenido_transparencia.php?m=benalmadena-transparencia&s=subvenciones",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-16T04:05:13.487Z"
+}

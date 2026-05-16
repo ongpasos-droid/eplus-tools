@@ -1,0 +1,80 @@
+{
+  "id": 1107531,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "MUNGIA",
+    "nivel3": "AYUNTAMIENTO DE MUNGIA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "905970",
+  "fechaRecepcion": "2026-05-15",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 8000,
+  "mrr": false,
+  "descripcion": "CONCESIÓN DE SUBVENCIONES DESTINADAS AL APRENDIZAJE DEL EUSKERA DURANTE EL CURSO 2025-2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Educación",
+      "codigo": "85"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES213 - Bizkaia"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "ORDENANZA REGULADORAS DE LA CONCESIÓN DE SUBVENCIONES PARA EL APRENDIZAJE DEL EUSKERA",
+  "urlBasesReguladoras": "https://www.mungia.eus/documents/39611/0/BAI_OINARRIAK+EUSKALTEGI+EUSKARAZ+%281%29.pdf/4b667e14-0b9d-ac40-989e-523ae7d778b8?t=1694775451203",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-01",
+  "fechaFinSolicitud": "2026-06-21",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1455495,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "02 resolución.pdf",
+      "long": 586995,
+      "datMod": "2026-05-15",
+      "datPublicacion": "2026-05-15"
+    },
+    {
+      "id": 1455496,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "02 resolución.pdf",
+      "long": 586995,
+      "datMod": "2026-05-15",
+      "datPublicacion": "2026-05-15"
+    },
+    {
+      "id": 1455499,
+      "descripcion": "ORDENANZA",
+      "nombreFic": "01convocatoria erderaz.pdf",
+      "long": 9877106,
+      "datMod": "2026-05-15",
+      "datPublicacion": "2026-05-15"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

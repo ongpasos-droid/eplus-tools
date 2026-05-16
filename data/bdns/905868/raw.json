@@ -1,0 +1,80 @@
+{
+  "id": 1107429,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "BOECILLO",
+    "nivel3": "AYUNTAMIENTO DE BOECILLO"
+  },
+  "sedeElectronica": "www.boecillo.es",
+  "codigoBDNS": "905868",
+  "fechaRecepcion": "2026-05-15",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 8000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DE SUBVENCION PARA LAS ASOCIACIONES MUNICIPALES DE BOECILLO PARA EL EJERCICIO DEL 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES41 - CASTILLA Y LEON"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "ORDENANZA GENERAL DE SUBVENCIONES DEL AYUNTAMIENTO DE BOECILLO",
+  "urlBasesReguladoras": "https://boecillo.sedelectronica.es/traparenty",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir del siguiente día de publicación",
+  "textFin": "15 dias habiles a partir de la publicacion en el Boletín Oficial de la Provincia de Valladolid",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1455265,
+      "descripcion": "ANEXO VI, CUENTA JUSTIFICATIVA Y RELACION DE FACTURA 2026",
+      "nombreFic": "ANEXO VI. CUENTA JUSTIFICADA Y RELACION DE FACTURAS 2026.pdf",
+      "long": 328498,
+      "datMod": "2026-05-15",
+      "datPublicacion": "2026-05-15"
+    },
+    {
+      "id": 1455263,
+      "descripcion": "ANEXOS I, II, III, IV y V",
+      "nombreFic": "ANEXOS I,II,III,IV y V. SUBV. ASOCIACIONES CULTURALES 2026.pdf",
+      "long": 509550,
+      "datMod": "2026-05-15",
+      "datPublicacion": "2026-05-15"
+    },
+    {
+      "id": 1455261,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "BASES Y ANEXOS SUBV. ASOCIACIONES CULTURALES BOECILLO 2026.pdf",
+      "long": 509972,
+      "datMod": "2026-05-15",
+      "datPublicacion": "2026-05-15"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

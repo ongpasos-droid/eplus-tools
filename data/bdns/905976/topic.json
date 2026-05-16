@@ -1,0 +1,69 @@
+{
+  "source": "bdns",
+  "source_id": "905976",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / SAN JAVIER / AYUNTAMIENTO DE SAN JAVIER",
+  "nuts_codes": [
+    "ES62"
+  ],
+  "nuts_primary": "ES62",
+  "title": "CONVOCATORIA PARA LA CONCESIÓN, EN RÉGIMEN DE CONCURRENCIA COMPETITIVA, DE SUBVENCIONES A PERSONAS FÍSICAS O JURÍDICAS POR LA REALIZACIÓN DE ACTIVIDADES DE TRANSPORTE MARÍTIMO DE PERSONAS EN EL MUNICIPIO DE SAN JAVIER, DURANTE EL AÑO 2026",
+  "title_lang": "es",
+  "summary": "Infraestructuras",
+  "status": "open",
+  "publication_date": "2026-05-15",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 75000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "H",
+      "descripcion": "TRANSPORTE Y ALMACENAMIENTO"
+    }
+  ],
+  "apply_url": "https://www.sanjavier.es/",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/905976",
+  "documents": [
+    {
+      "label": "SOLICITUD Y ANEXOS",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.borm.es/#/home/sumario/02-10-2024",
+  "text_inicio": "20 días naturales a partir de la publicación del extracto de la convocatoria en el BORM",
+  "text_fin": "Transcurridos 20 días naturales desde la publicación en el BORM",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [
+    {
+      "descripcion": "FEDER - FONDO EUROPEO DE DESARROLLO REGIONAL"
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-16T04:05:13.473Z"
+}

@@ -1,0 +1,80 @@
+{
+  "id": 1107625,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "BISBAL D'EMPORDÀ, LA",
+    "nivel3": "AYUNTAMIENTO DE BISBAL D'EMPORDÀ, LA"
+  },
+  "sedeElectronica": "www.labisbal.cat",
+  "codigoBDNS": "906064",
+  "fechaRecepcion": "2026-05-15",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 12700,
+  "mrr": false,
+  "descripcion": "Subvenciones a asociaciones culturales anualidad 2026",
+  "descripcionLeng": "Subvencions a associacions culturals anualitat 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES512 - Girona"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "Text Refòs de les Bases específiques reguladores de subvencions de les diverses àrees municipals",
+  "urlBasesReguladoras": "www.labisbal.cat",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "L'endemà de la publicació al BOP de Girona",
+  "textFin": "15 dies hàbils a comptar de l’endemà de la publicació de la convocatòria al BOP de Girona",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1455780,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Extracte convocatoria castellà.pdf",
+      "long": 203464,
+      "datMod": "2026-05-15",
+      "datPublicacion": "2026-05-15"
+    },
+    {
+      "id": 1455781,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Extracte convocatoria català.pdf",
+      "long": 204713,
+      "datMod": "2026-05-15",
+      "datPublicacion": "2026-05-15"
+    },
+    {
+      "id": 1455782,
+      "descripcion": "Resolución de convocatoria",
+      "nombreFic": "Decret convocatoria.pdf",
+      "long": 309031,
+      "datMod": "2026-05-15",
+      "datPublicacion": "2026-05-15"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}
