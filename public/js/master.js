@@ -187,6 +187,7 @@
                    <button onclick="Master.compileV1('${esc(masterDocId)}')" class="px-3 py-2 rounded-lg bg-[#16A34A] text-white text-xs font-bold">Compilar Maestro v1</button>`
                 : `<button onclick="Master.runDiagnosis('${esc(masterDocId)}', 'initial')" class="px-3 py-2 rounded-lg bg-primary text-white text-xs font-bold">Lanzar diagnóstico</button>
                    <button onclick="Master.compressToForm('${esc(masterDocId)}')" class="px-3 py-2 rounded-lg bg-[#16A34A] text-white text-xs font-bold inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-base">compress</span>Comprimir a formulario oficial</button>
+                   <button onclick="Master._downloadFormDocx('${esc(doc.project_id || '')}')" class="px-3 py-2 rounded-lg bg-[#1b1464] text-[#fbff12] text-xs font-bold inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-base">picture_as_pdf</span>Descargar Form Part B (.docx)</button>
                    <button onclick="Master.downloadMarkdown('${esc(masterDocId)}')" class="px-3 py-2 rounded-lg bg-surface-container-low text-xs font-bold border border-outline-variant/30 inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-base">download</span>Descargar .md</button>
                    <button onclick="Master.compileV1('${esc(masterDocId)}', false)" class="px-3 py-2 rounded-lg bg-surface-container-low text-xs font-bold border border-outline-variant/30">Reanudar capítulos faltantes</button>
                    <button onclick="Master.compileV1('${esc(masterDocId)}', true)" class="px-3 py-2 rounded-lg bg-red-50 text-red-700 text-xs font-bold border border-red-200">Recompilar todo (force)</button>`
@@ -1021,7 +1022,7 @@
   async function _downloadFormDocx(projectId) {
     if (!projectId) { showToast('Falta project_id', '', 'error'); return; }
     try {
-      const token = localStorage.getItem('jwt') || localStorage.getItem('token') || '';
+      const token = (typeof API !== 'undefined' && API.getToken) ? API.getToken() : '';
       const res = await fetch(`/v1/exporter/projects/${projectId}/form-part-b.docx`, {
         headers: token ? { 'Authorization': 'Bearer ' + token } : {},
         credentials: 'include',

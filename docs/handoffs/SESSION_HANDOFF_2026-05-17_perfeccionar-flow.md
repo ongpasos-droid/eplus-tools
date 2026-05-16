@@ -154,6 +154,102 @@ en 3 sub-tabs con flujo guiado (decidido pero no implementado).
 
 ---
 
+## Bloque extra cerrado entre los dos último commits (botón download + bug token)
+
+- Fix `_downloadFormDocx` en master.js: usaba `localStorage.getItem('jwt')`
+  pero el token vive en `API.getToken()` (variable en memoria). Daba 401.
+  Cambio a `API.getToken()`.
+- Botón **"Descargar Form Part B (.docx)"** movido al header del panel
+  Master (al lado de Lanzar diagnóstico / Comprimir / Descargar .md)
+  para que sea siempre accesible, no solo dentro del panel de resultados
+  de compress.
+- Pasa `doc.project_id` (no instance_id como antes — el exporter va
+  por project_id: `/v1/exporter/projects/:projectId/form-part-b.docx`).
+
+---
+
+## Hallazgos del último round de Q&A con Oscar (importante para mañana)
+
+### Aclaración terminológica "Prep Studio"
+
+**No existe pestaña con el nombre "Prep Studio" en la UI actual**. Lo que
+internamente se llamaba "Prep Studio v2" son las 5 sub-pestañas del
+módulo Escribir:
+
+```
+Cronograma · Consorcio · Relevancia · Actividades · Tareas · Entregables · Escribir · Revisar
+```
+
+Cuando hables con el usuario, NO uses "Prep Studio" — usa los nombres
+visibles ("pestaña Relevancia", "pestaña Consorcio", etc.).
+
+### Qué se lee REALMENTE de la pestaña Escribir al compilar el Master
+
+Después de Q&A exhaustivo con Oscar, queda claro: **TODO lo que el
+usuario rellena en las pestañas visibles se inyecta al compile**.
+
+| Pestaña visible en Escribir | Tabla BD donde guarda | Se lee al compilar? |
+|---|---|---|
+| Cronograma | `work_packages.duration_from/to` | ✅ vía enriched_context |
+| Consorcio (datos socios + staff) | `partners`, `partner_staff`, etc. | ✅ vía enriched_context |
+| **Relevancia (Problem / Target groups / Approach)** | **`intake_contexts`** | **✅ vía enriched_context** (líneas 693-700 de developer/model.js) |
+| Actividades / Tareas / Entregables (WPs) | `work_packages.summary`, `wp_tasks`, `milestones`, `deliverables` | ✅ vía enriched_context + wp_explicit_items |
+| Escribir (cascade Writer general) | `writer_sections` | Vacío en SUSTRAI (tabla legacy del cascade antiguo, opcional) |
+| Resumen / Project Summary (lo que ves arriba del proyecto) | **`projects.interview_summary` (4.151 chars en SUSTRAI)** | **❌ NO se lee — pendiente cablear** |
+
+**Mi error durante la sesión**: dije "Relevancia vacía" mirando
+`writer_sections` (tabla legacy obsoleta) cuando la tabla activa es
+`intake_contexts` y SÍ está llena con 4.818 chars (problem 1.650 +
+target_groups 1.525 + approach 1.643).
+
+### TAREA pendiente añadida para mañana (5 min)
+
+**Cablear `projects.interview_summary` al compile**:
+
+En `node/src/modules/master/controller.js::compileMasterV1`, leer
+también `projects.interview_summary` y `projects.description` (4.151
+chars en SUSTRAI) e inyectarlos al prompt como una variable nueva
+`{{project_executive_summary}}` o concatenarlos al `enriched_context`
+debajo de un header `═══ EXECUTIVE SUMMARY (del usuario) ═══`.
+
+Coste: 5 min de código. Beneficio: el compile ya tiene la voz
+ejecutiva del usuario sobre el proyecto, no solo el desglose técnico.
+
+### Diagnóstico final de calidad del Master del 17/5
+
+El Master compilado tiene **216.715 chars (~173 págs)** + los patches
+aplicados manualmente desde `SUSTRAI_Project_Document_AMPLIO.docx`.
+La calidad es alta. **Lo que falta detalle operativo (10+10+10, 2
+rondas FSTP con meses, 4 reuniones transnacionales con ubicación, 5
+fuentes ingreso post-proyecto, códigos T/D/MS) es CONTEXTO no metido
+en el design del Intake** — no es bug de prompt sino que el modelo
+de datos del Intake no contempla esos campos. Subsanado vía patches
+manuales para SUSTRAI.
+
+A futuro: si Oscar mete esa información en los WP summaries o en
+campos nuevos del schema, el compile lo absorberá sin más.
+
+---
+
+## Lista actualizada de TAREAS para mañana (en orden)
+
+1. **[5 min]** Cablear `projects.interview_summary` al compile como
+   variable nueva.
+2. **[2h]** Refactor UX Perfeccionar en 3 sub-tabs (detalle arriba):
+   1. Crear versión extendida
+   2. Diagnóstico + chat refinement (Opción A — chat solo desde items)
+   3. Preparar formulario oficial
+3. **[30 min]** Verificar end-to-end que el exporter Form Part B
+   (`/v1/exporter/projects/:projectId/form-part-b.docx`) lee
+   correctamente de `form_field_values` tras un compress-to-form
+   y genera DOCX válido para EACEA.
+4. **[opcional]** Si tras los tres anteriores hay tiempo: empezar a
+   modelar campos de schema para meeting locations + revenue sources
+   post-project (esas dos dimensiones del doc ref no encajan en
+   ningún sitio del design hoy).
+
+---
+
 ## Estado git al cierre
 
 ```
