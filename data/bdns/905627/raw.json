@@ -1,0 +1,96 @@
+{
+  "id": 1107188,
+  "organo": {
+    "nivel1": "ESTADO",
+    "nivel2": "MINISTERIO DE DERECHOS SOCIALES, CONSUMO Y AGENDA 2030",
+    "nivel3": "DIRECCIÓN GENERAL DE DIVERSIDAD FAMILIAR Y SERVICIOS SOCIALES"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "905627",
+  "fechaRecepcion": "2026-05-14",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 108204560.17,
+  "mrr": false,
+  "descripcion": "Resolución de 12 de mayo de 2026, de la Secretaría de Estado de Derechos Sociales, por la que se convocan subvenciones para la realización de actividades de interés general consideradas de interés social.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES - ESPAÑA "
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Real Decreto 821/2021, de 28 de septiembre, que establece las bases reguladoras de la concesión de subvenciones para la realización de actividades de interés general consideradas de interés social, de a la Secretaría de Estado de Derechos Sociales",
+  "urlBasesReguladoras": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-16033",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Día siguiente a la publicación del extracto en BOE",
+  "textFin": "Treinta días desde la fecha de inicio de la solicitud",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1454596,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "report_Resolucion convocatoria 0,7_con anexos_1.pdf",
+      "long": 1812101,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-18"
+    },
+    {
+      "id": 1454599,
+      "descripcion": "Anexo I",
+      "nombreFic": "Anexo I.pdf",
+      "long": 191987,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-18"
+    },
+    {
+      "id": 1454607,
+      "descripcion": "Anexo IV",
+      "nombreFic": "Anexo IV.pdf",
+      "long": 135371,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-18"
+    },
+    {
+      "id": 1454606,
+      "descripcion": "Anexo III",
+      "nombreFic": "Anexo III.pdf",
+      "long": 270222,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-18"
+    },
+    {
+      "id": 1454600,
+      "descripcion": "Anexo II",
+      "nombreFic": "Anexo II.pdf",
+      "long": 195788,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-18"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

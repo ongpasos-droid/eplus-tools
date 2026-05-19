@@ -1,0 +1,96 @@
+{
+  "id": 1107750,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SAN BARTOLOMÉ DE TIRAJANA",
+    "nivel3": "AYUNTAMIENTO DE SAN BARTOLOMÉ DE TIRAJANA"
+  },
+  "sedeElectronica": "www.maspalomas.com",
+  "codigoBDNS": "906189",
+  "fechaRecepcion": "2026-05-18",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 200000,
+  "mrr": false,
+  "descripcion": "RESOLUCIÓN Nº 2026-3162 DE FECHA 15/05/2026 POR LA QUE SE APRUEBA LA CONVOCATORIA DE SUBVENCIONES DE AYUDAS AL ALQUILER DE VIVIENDA HABITUAL Y PERMANENTE EN EL MUNICIPIO DE SAN BARTOLOMÉ DE TIRAJANA. PERÍODO SUBVENCIONABLE 01/01/2025 al 31/12/2025.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES INMOBILIARIAS",
+      "codigo": "M"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES705 - Gran Canaria"
+    }
+  ],
+  "descripcionFinalidad": "Otras Prestaciones económicas",
+  "descripcionBasesReguladoras": "ORDENANZA ESPECÍFICA REGULADORA DE LAS BASES PARA LA CONCESIÓN DE SUBVENCIONES DE AYUDAS AL ALQUILER  DE VIVIENDA HABITUAL Y PERMANENTE EN EL MUNICIPIO DE SAN BARTOLOMÉ DE TIRAJANA, MEDIANTE EL PROCEDIMIENTO DE CONCURRENCIA COMPETITIVA.",
+  "urlBasesReguladoras": "www.maspalomas.com",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "DÍA SIGUIENTE A LA PUBLICACIÓN EN EL BOLETÍN OFICIAL DE LA PROVINCIA DE LAS PALMAS DE GRAN CANARIA",
+  "textFin": "QUINCE (15) DÍAS HÁBILES CONTADOS A PARTIR DEL DÍA SIGUIENTE A LA PUBLICACIÓN EN EL BOLETÍN OFICIAL ",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1456131,
+      "descripcion": "ANEXO II. DECLARACIÓN RESPONSABLE",
+      "nombreFic": "04.2 ANEXO II DECLARACION RESPONSABLE.pdf",
+      "long": 85929,
+      "datMod": "2026-05-18",
+      "datPublicacion": "2026-05-18"
+    },
+    {
+      "id": 1456133,
+      "descripcion": "ANEXO III. REQUERIMIENTO AYUDA ALQUILER AYTO SBT 2025",
+      "nombreFic": "04.3 ANEXO III REQUERIMIENTO AYUDA ALQUILER AYTO SBT 2025.pdf",
+      "long": 185953,
+      "datMod": "2026-05-18",
+      "datPublicacion": "2026-05-18"
+    },
+    {
+      "id": 1456135,
+      "descripcion": "ANEXO IV. REQUERIMIENTO SUBSANACIÓN PRESENCIAL",
+      "nombreFic": "04.4 ANEXO IV REQUERIMIENTO SUBSANACIÓN PRESENCIAL.pdf",
+      "long": 191384,
+      "datMod": "2026-05-18",
+      "datPublicacion": "2026-05-18"
+    },
+    {
+      "id": 1456127,
+      "descripcion": "ANEXO I. SOLICITUD AYUDA ALQUILER AYTO SBT 2025",
+      "nombreFic": "04.1 ANEXO I SOLICITUD AYUDA ALQUILER AYTO SBT 2025.pdf",
+      "long": 220980,
+      "datMod": "2026-05-18",
+      "datPublicacion": "2026-05-18"
+    },
+    {
+      "id": 1456124,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "12 ANUNCIO PUBLICACI_N CONVOCATORIA AYUDAS ALQUILER.PDF",
+      "long": 444647,
+      "datMod": "2026-05-18",
+      "datPublicacion": "2026-05-18"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

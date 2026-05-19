@@ -1,0 +1,84 @@
+{
+  "id": 1107766,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "BISBAL D'EMPORDÀ, LA",
+    "nivel3": "AYUNTAMIENTO DE BISBAL D'EMPORDÀ, LA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "906205",
+  "fechaRecepcion": "2026-05-18",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 7500,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DE SUBVENCIONES PARA LA MEJORA, REHABILITACIÓN Y NUEVA IMPLEMENTACIÓN DE ESTABLECIMIENTOS COMERCIALES, DE RESTAURACIÓN, DE OFICINAS-SERVICIOS Y DE ACTIVIDADES TRADICIONALES Y ARTESANÍA SITUADOS A PIE DE CALLE. ANUALIDAD 2026",
+  "descripcionLeng": "CONVOCATÒRIA DE SUBVENCIONS PER A LA MILLORA, REHABILITACIÓ I NOVA IMPLEMENTACIÓ D’ESTABLIMENTS COMERCIALS, DE RESTAURACIÓ, D’OFICINES-SERVEIS I D’ACTIVITATS TRADICIONALS I ARTESANIA SITUATS A PEU DE CARRER. ANUALITAT 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "COMERCIO AL POR MAYOR Y AL POR MENOR",
+      "codigo": "G"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES512 - Girona"
+    }
+  ],
+  "descripcionFinalidad": "Comercio, Turismo y Pymes",
+  "descripcionBasesReguladoras": "CONVOCATORIA DE SUBVENCIONES PARA LA MEJORA, REHABILITACIÓN Y NUEVA IMPLEMENTACIÓN DE ESTABLECIMIENTOS COMERCIALES, DE RESTAURACIÓN, DE OFICINAS-SERVICIOS Y DE ACTIVIDADES TRADICIONALES Y ARTESANÍA SITUADOS A PIE DE CALLE. ANUALIDAD 2026",
+  "urlBasesReguladoras": "www.ddgi.cat",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-05-22",
+  "fechaFinSolicitud": "2026-09-30",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [
+    {
+      "descripcion": "FEDER - FONDO EUROPEO DE DESARROLLO REGIONAL"
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1456184,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "EXTRACTO CONVOCATORIA FOMENT COMERÇ 2026 CAST.pdf",
+      "long": 185148,
+      "datMod": "2026-05-18",
+      "datPublicacion": "2026-05-18"
+    },
+    {
+      "id": 1456188,
+      "descripcion": "decret",
+      "nombreFic": "DECRET convocatoria.pdf",
+      "long": 309035,
+      "datMod": "2026-05-18",
+      "datPublicacion": "2026-05-18"
+    },
+    {
+      "id": 1456185,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "EXTRACTE CONVOCATORIA FOMENT COMERÇ 2026 CAT.pdf",
+      "long": 298115,
+      "datMod": "2026-05-18",
+      "datPublicacion": "2026-05-18"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

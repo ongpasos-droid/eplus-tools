@@ -1,0 +1,96 @@
+{
+  "source": "bdns",
+  "source_id": "906181",
+  "source_lang": "es",
+  "level": "otros",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "OTROS / CÁMARA DE COMERCIO DE CÓRDOBA",
+  "nuts_codes": [
+    "ES613"
+  ],
+  "nuts_primary": "ES613",
+  "title": "Convocatoria Programa Pyme Global 2026 - Visita a la feria SUMMER FANCY FOOD SHOW para empresas de la provincia de Córdoba",
+  "title_lang": "es",
+  "summary": "Otras actuaciones de carácter económico",
+  "status": "open",
+  "publication_date": "2026-05-18",
+  "open_date": "2026-05-22",
+  "deadline": "2026-06-01",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 9124.96,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "46.6",
+      "descripcion": "Comercio al por mayor de otra maquinaria, equipos y suministros"
+    },
+    {
+      "codigo": "46.3",
+      "descripcion": "Comercio al por mayor de productos alimenticios, bebidas y tabaco"
+    },
+    {
+      "codigo": "47.2",
+      "descripcion": "Comercio al por menor de productos alimenticios, bebidas y tabaco"
+    },
+    {
+      "codigo": "11",
+      "descripcion": "Fabricación de bebidas"
+    },
+    {
+      "codigo": "10",
+      "descripcion": "Industria alimentaria"
+    },
+    {
+      "codigo": "46.1",
+      "descripcion": "Intermediarios del comercio al por mayor"
+    }
+  ],
+  "apply_url": "https://sede.camara.es/sede/cordoba",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/906181",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "Anexo II. Declaraciones responsables",
+      "url": null
+    },
+    {
+      "label": "Anexo I. Tipología de gastos elegibles y justificación",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://camaracordoba.com/visita-a-la-feria-summer-fancy-food-show-2026-apertura-de-convocatoria/",
+  "text_inicio": "A las 10:00 horas",
+  "text_fin": "A las 14:00 horas",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [
+    {
+      "descripcion": "FEDER - FONDO EUROPEO DE DESARROLLO REGIONAL"
+    }
+  ],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-19T04:08:38.285Z"
+}

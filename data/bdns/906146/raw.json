@@ -1,0 +1,72 @@
+{
+  "id": 1107707,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "CATALUÑA",
+    "nivel3": "DEPARTAMENT D'EDUCACIÓ I FORMACIÓ PROFESSIONAL"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "906146",
+  "fechaRecepcion": "2026-05-18",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 13660500,
+  "mrr": false,
+  "descripcion": "Subvenciones para dotar de financiación adicional los centros privados que prestan el Servicio de Educación de Cataluña en entornos de características socioeconómicas desfavorecidas, para el curso 2024-2025.",
+  "descripcionLeng": "Subvencions per dotar de finanament addicional els centres privats que presten el Servei d'Educació de Catalunya en entorns de característiques socioeconòmiques desafavorides, per al curs 2025-2026.",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Educación",
+      "codigo": "85"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES51 - CATALUÑA"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Orden por la que se aprueban las BR que deben regir la concesión de subvenciones para dotar de financiación adicional a los centros privados que prestan el Servicio de Educación de Catalunya en entornos de características socioeconómicas desfavorecidas",
+  "urlBasesReguladoras": "https://dogc.gencat.cat/es/document-del-dogc/?documentId=1041542",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Des de l’endemà de la publicació en el diari oficial de la convocatòria inicial",
+  "textFin": "10 Dies Hàbils",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1456001,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "20260515_105_convoaddicional_signed.pdf",
+      "long": 206762,
+      "datMod": "2026-05-18",
+      "datPublicacion": "2026-05-18"
+    },
+    {
+      "id": 1456000,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "20260515_105_convoaddicional_t_signed.pdf",
+      "long": 202942,
+      "datMod": "2026-05-18",
+      "datPublicacion": "2026-05-18"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

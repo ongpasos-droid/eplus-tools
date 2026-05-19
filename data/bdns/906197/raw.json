@@ -1,0 +1,92 @@
+{
+  "id": 1107758,
+  "organo": {
+    "nivel1": "ESTADO",
+    "nivel2": "MINISTERIO DE JUVENTUD E INFANCIA",
+    "nivel3": "INSTITUTO DE LA JUVENTUD"
+  },
+  "sedeElectronica": "https://juventudeinfancia.sede.gob.es/",
+  "codigoBDNS": "906197",
+  "fechaRecepcion": "2026-05-18",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 20000,
+  "mrr": false,
+  "descripcion": "Resolución del Organismo Autónomo  Instituto de  la  Juventud, por  la que se convocan los Premios Injuve de Periodismo y Comunicación en el año 2026.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES DE EDICIÓN, RADIODIFUSIÓN Y PRODUCCIÓN Y DISTRIBUCIÓN DE CONTENIDOS",
+      "codigo": "J"
+    },
+    {
+      "descripcion": "TELECOMUNICACIONES, PROGRAMACIÓN INFORMÁTICA, CONSULTORÍA, INFRAESTRUCTURA INFORMÁTICA Y OTROS SERVICIOS DE INFORMACIÓN",
+      "codigo": "K"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES - ESPAÑA "
+    }
+  ],
+  "descripcionFinalidad": "Fomento del Empleo",
+  "descripcionBasesReguladoras": "Orden SCB/498/2019, de 23 de abril, por la que se establecen las bases reguladoras para la concesión de los Premios INJUVE de Periodismo y Comunicación\nOrden DSA/234/2023, de 27 de febrero, por la que se modifica la Orden SCB/498/2019, de 23 de abril",
+  "urlBasesReguladoras": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2019-6540    https://www.boe.es/buscar/doc.php?id=BOE-A-2023-6276",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "El siguiente día hábil a su publicación en el BOE",
+  "textFin": "Pasados 20 días hábiles a partir del día siguiente de su publicación en el BOE",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1456104,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Resolucion Convocatoria Premios Periodismo 2026.pdf.xsig.pdf",
+      "long": 179180,
+      "datMod": "2026-05-18",
+      "datPublicacion": "2026-05-18"
+    },
+    {
+      "id": 1456107,
+      "descripcion": "Anexo II - Autorización para representación",
+      "nombreFic": "Anexo_II_Autorizacion_para_representacion_2026.pdf",
+      "long": 1239993,
+      "datMod": "2026-05-18",
+      "datPublicacion": "2026-05-18"
+    },
+    {
+      "id": 1456106,
+      "descripcion": "Anexo I - Solicitud colectiva",
+      "nombreFic": "Anexo_I_Solicitud_Premios_Injuve_Periodismo_y_Comunicacion_colectiva_2026.pdf",
+      "long": 1890672,
+      "datMod": "2026-05-18",
+      "datPublicacion": "2026-05-18"
+    },
+    {
+      "id": 1456105,
+      "descripcion": "Anexo I - Solicitud individual",
+      "nombreFic": "Anexo_I_Solicitud_Premios_Injuve_Periodismo_y_Comunicacion_individual_2026.pdf",
+      "long": 1689480,
+      "datMod": "2026-05-18",
+      "datPublicacion": "2026-05-18"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

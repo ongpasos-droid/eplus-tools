@@ -1,0 +1,72 @@
+{
+  "id": 1107870,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "AIGUAVIVA",
+    "nivel3": "AYUNTAMIENTO DE AIGUAVIVA"
+  },
+  "sedeElectronica": "www.aiguaviva.cat",
+  "codigoBDNS": "906309",
+  "fechaRecepcion": "2026-05-18",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 840,
+  "mrr": false,
+  "descripcion": "Resolución de Alcaldia de fecha 13 de mayo de 2026 de aprobación de la Convocatoria del concurso de \"Premios Sant Joan 2026\" de narrativa, fotografía y diseño del cartel de la Fiesta Mayor de Aiguaviva",
+  "descripcionLeng": "Resolució d'Alcaldia de data 13 de maig de 2026 d'aprovació de la Convocatoria del concurs de \"Premis Sant Joan 2026\" de narrativa, fotografía i disseny del cartell de la Festa Major d'Aiguaviva",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES512 - Girona"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "Bases reguladoras para la Concesión de premios como resultado de concursos organizados por el Ayuntamiento de Aiguaviva",
+  "urlBasesReguladoras": "https://www.aiguaviva.cat/media/sites/238/Bases-Sant-Joan-2026-Castella.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-06-15",
+  "textInicio": "Al día siguiente de la fecha de publicación del extracto del anuncio de la convocatoria ",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1456498,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "convocatoria_premis_SantJoan_2026.pdf",
+      "long": 650778,
+      "datMod": "2026-05-18",
+      "datPublicacion": "2026-05-18"
+    },
+    {
+      "id": 1456497,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convo_castella.pdf",
+      "long": 432147,
+      "datMod": "2026-05-18",
+      "datPublicacion": "2026-05-18"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

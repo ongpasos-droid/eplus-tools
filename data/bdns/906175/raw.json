@@ -1,0 +1,68 @@
+{
+  "id": 1107736,
+  "organo": {
+    "nivel1": "ESTADO",
+    "nivel2": "MINISTERIO DE DERECHOS SOCIALES, CONSUMO Y AGENDA 2030",
+    "nivel3": "DIRECCIÓN GENERAL DE AGENDA 2030"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "906175",
+  "fechaRecepcion": "2026-05-18",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 9299970.22,
+  "mrr": false,
+  "descripcion": "Convocatoria 2026 de las subvenciones para la realización de actividades relacionadas con la promoción e implementación de la Agenda 2030 para el Desarrollo Sostenible.",
+  "descripcionLeng": "Convocatoria 2026 de las subvenciones para la realización de actividades relacionadas con la promoción e implementación de la Agenda 2030 para el Desarrollo Sostenible.",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    },
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES - ESPAÑA "
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Orden DSA/921/2021, de 1 de septiembre, por la que se establecen las bases reguladoras para la concesión de subvenciones destinadas a actividades relacionadas con la promoción e implementación de la Agenda 2030 para el Desarrollo Sostenible en España.",
+  "urlBasesReguladoras": "https://www.boe.es/boe/dias/2021/09/03/pdfs/BOE-A-2021-14515.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Día siguiente de la publicación de la convocatoria en el BOE.",
+  "textFin": "1 mes desde la publicación de la convocatoria en el BOE.",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1456092,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "report_Convocatoria EESS 2026__definitiva.pdf",
+      "long": 653926,
+      "datMod": "2026-05-18",
+      "datPublicacion": "2026-05-18"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}
