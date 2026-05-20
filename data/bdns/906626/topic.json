@@ -1,0 +1,77 @@
+{
+  "source": "bdns",
+  "source_id": "906626",
+  "source_lang": "es",
+  "level": "otros",
+  "programme": "Concesión directa - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "OTROS / UNIVERSIDAD DE LAS PALMAS DE GRAN CANARIA",
+  "nuts_codes": [
+    "ES70"
+  ],
+  "nuts_primary": "ES70",
+  "title": "Resolución del Vicerrector por la que se convoca Erasmus+ STT 2026/2027 para personal docente y no docente: UE, asociados y terceros no asociados",
+  "title_lang": "es",
+  "summary": "Educación",
+  "status": "open",
+  "publication_date": "2026-05-19",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 4820000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "Q",
+      "descripcion": "EDUCACIÓN"
+    }
+  ],
+  "apply_url": "Mi ULPGC > Mis Utilidades > Mi Movilidad",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/906626",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://internacional.ulpgc.es/download/convocatoria-erasmus-fines-formativos-para-personal-docente-y-no-docente-2026-2027-staff-mobility-for-training-stt-08-05-2026/",
+  "text_inicio": "15 días hábiles desde el día siguiente a la publicación en el BOC, BOULPGC u otro Boletín Oficial",
+  "text_fin": "Al cumplirse 15 días siguiente hábiles desde el día siguiente a la publicación en el BOC, BOULPGC ",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [
+    {
+      "descripcion": "FGI - FONDOS DE GESTIÓN INDIRECTA (ART. 58.1.C RGTO. UE Nº 966/2012)"
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [
+    {
+      "numAnuncio": 212225,
+      "titulo": "Convocatoria a regularizar",
+      "tituloLeng": null,
+      "texto": "Convocatoria a regularizar",
+      "textoLeng": null,
+      "url": "https://www.ulpgc.es/sites/default/files/ArchivosULPGC/boulpgc/BOULPGC/boulpgc_no_7_de_08_de_mayo_de_2026.pdf",
+      "cve": null,
+      "desDiarioOficial": "Boletín Oficial de la Universidad",
+      "datPublicacion": "2026-05-08"
+    }
+  ],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-20T04:06:22.070Z"
+}

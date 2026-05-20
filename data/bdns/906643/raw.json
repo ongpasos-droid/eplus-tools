@@ -1,0 +1,88 @@
+{
+  "id": 1108204,
+  "organo": {
+    "nivel1": "OTROS",
+    "nivel2": "UNIVERSIDAD DE LAS PALMAS DE GRAN CANARIA",
+    "nivel3": null
+  },
+  "sedeElectronica": "Mi ULPGC > Mis Utilidades > Mi Movilidad",
+  "codigoBDNS": "906643",
+  "fechaRecepcion": "2026-05-19",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 4535000,
+  "mrr": false,
+  "descripcion": "Resolución del Vicerrector de Internacionalización y Cooperación por la que se convoca el programa Erasmus+ STA KA131 2026/2027 para movilidad académica de personal docente con países de la UE, asociados y terceros no asociados",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES70 - CANARIAS"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Bases reguladoras indefinidas de plazas y ayudas del programa Erasmus+ STA KA131 para movilidad con fines académicos de personal docente con países de la UE, asociados y terceros no asociados",
+  "urlBasesReguladoras": "https://internacional.ulpgc.es/download/bases-reguladoras-indefinidas-erasmus-fines-academicos-para-personal-docente-staff-mobility-for-teaching-sta/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "15 días hábiles desde el día siguiente a la publicación en el BOC, BOULPGC u otro Boletín Oficial",
+  "textFin": "Al cumplirse 15 días siguiente hábiles desde el día siguiente a la publicación en el BOC, BOULPGC ",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [
+    {
+      "descripcion": "FGI - FONDOS DE GESTIÓN INDIRECTA (ART. 58.1.C RGTO. UE Nº 966/2012)"
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1457475,
+      "descripcion": "Bases Reguladoras",
+      "nombreFic": "Bases-INDEFINIDAS-KA131-STA-2026-2027.pdf",
+      "long": 473653,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457474,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Resolución Convocatoria-STA-2026-2027.pdf",
+      "long": 540323,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    }
+  ],
+  "anuncios": [
+    {
+      "numAnuncio": 212229,
+      "titulo": "Convocatoria a regularizar",
+      "tituloLeng": null,
+      "texto": "Convocatoria a regularizar",
+      "textoLeng": null,
+      "url": "https://www.ulpgc.es/sites/default/files/ArchivosULPGC/boulpgc/BOULPGC/boulpgc_no_7_de_08_de_mayo_de_2026.pdf",
+      "cve": null,
+      "desDiarioOficial": "Boletín Oficial de la Universidad",
+      "datPublicacion": "2026-05-08"
+    }
+  ],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

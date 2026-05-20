@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "906578",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / SANT PERE DE VILAMAJOR / AYUNTAMIENTO DE SANT PERE DE VILAMAJOR",
+  "nuts_codes": [
+    "ES511"
+  ],
+  "nuts_primary": "ES511",
+  "title": "CONVOCATÓRIA PARA LA CONCESIÓN DE AJUDAS DE CASAL DE VERANO DEL AÑO 2026 Y PARA LA CONCESIÓN DE AJUDAS DE MATERIAL, LIBROS, TRANSPORTE Y COMEDOR DEL CURSO ESCOLAR 2026-2027",
+  "title_lang": "es",
+  "summary": "Educación",
+  "status": "open",
+  "publication_date": "2026-05-19",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 17500,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "Q",
+      "descripcion": "EDUCACIÓN"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/906578",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://bop.diba.cat/anunci/3215161/bases-reguladores-per-a-la-concessio-dels-ajuts-municipals-de-material-i-llibres-escolars-transport-escolar-logopedia-menjador-escolar-i-casal-d-estiu-versio-en-castella-ajuntament-de-sant-pere-de-vilamajor",
+  "text_inicio": "se iniciará el dia siguiente a la publicación en el BOP Barcelona",
+  "text_fin": "finalizará el dia 12 de junio de 2026",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-20T04:06:22.060Z"
+}

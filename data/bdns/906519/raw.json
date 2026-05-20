@@ -1,0 +1,168 @@
+{
+  "id": 1108080,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "CANTABRIA",
+    "nivel3": "INSTITUTO CÁNTABRO DE SERVICIOS SOCIALES"
+  },
+  "sedeElectronica": "https://rec.cantabria.es/rec/bienvenida.htm",
+  "codigoBDNS": "906519",
+  "fechaRecepcion": "2026-05-19",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 640000,
+  "mrr": false,
+  "descripcion": "Resolución de la Consejera de Inclusión Social, Juventud, Familias e Igualdad por la que se aprueba la convocatoria para la concesión de subvenciones a entidades privadas sin ánimo de lucro en materia de servicios sociales en el año 2026.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES130 - Cantabria"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Orden ISO/2/2026, de 16 de abril, por la que se establecen las bases reguladoras para la concesión de subvenciones a entidades privadas sin ánimo de lucro en materia de servicios sociales.",
+  "urlBasesReguladoras": "https://boc.cantabria.es/boces/boletines.do?boton=siguiente&id=44645",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Desde el día siguiente a la publicación del extracto de la correspondiente convocatoria en el Boletí",
+  "textFin": "Un mes contado desde el día siguiente a la publicación del extracto de la convocatoria en el Boc",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1457136,
+      "descripcion": "Anexos",
+      "nombreFic": "Anexo_6-Dietas_2026.pdf",
+      "long": 358470,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457135,
+      "descripcion": "Anexos",
+      "nombreFic": "Anexo_5B-Memoria_Económica_Justificativa_Mantenimiento_2026.pdf",
+      "long": 374286,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457134,
+      "descripcion": "Anexos",
+      "nombreFic": "Anexo_5B1-Certificado_Imputación_Facturas_Mantenimiento_2026.pdf",
+      "long": 258223,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457133,
+      "descripcion": "Anexos",
+      "nombreFic": "Anexo_5A-Memoria_Económica_Justificativa_Programa_2026.pdf",
+      "long": 393639,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457132,
+      "descripcion": "Anexos",
+      "nombreFic": "Anexo_5A1-Certificado_Imputación_Facturas_Programa_2026.pdf",
+      "long": 258970,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457141,
+      "descripcion": "Anexos",
+      "nombreFic": "Anexo_7-Logotipo_2026.pdf",
+      "long": 130143,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457131,
+      "descripcion": "Anexos",
+      "nombreFic": "Anexo_4B-Memoria_Justificativa_Mantenimiento_2026.pdf",
+      "long": 340677,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457127,
+      "descripcion": "Anexos",
+      "nombreFic": "Anexo_3B-Memoria_Mantenimiento_2026.pdf",
+      "long": 385261,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457126,
+      "descripcion": "Anexos",
+      "nombreFic": "Anexo_3A-Memoria_Programa_2026.pdf",
+      "long": 399266,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457125,
+      "descripcion": "Anexos",
+      "nombreFic": "Anexo_2-Memoria_Entidad_2026.pdf",
+      "long": 231275,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457124,
+      "descripcion": "Anexos",
+      "nombreFic": "Anexo_1B-Declaración_2026.pdf",
+      "long": 148873,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457123,
+      "descripcion": "Anexos",
+      "nombreFic": "Anexo_1A-Solicitud_2026.pdf",
+      "long": 278705,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457103,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "3._Resolucion_convocatoria_subvenciones_a_entidades_sin_animo_de_lucro__ESAL_2026.report.pdf",
+      "long": 389921,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457130,
+      "descripcion": "Anexos",
+      "nombreFic": "Anexo_4A-Memoria_Justificativa_Programa_2026.pdf",
+      "long": 382066,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

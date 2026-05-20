@@ -10,7 +10,7 @@
   "status": "open",
   "statusCode": "31094502",
   "opening": "2026-02-18",
-  "deadline": "2026-05-19",
+  "deadline": "2026-05-21",
   "deadlineModel": "single-stage",
   "actionType": "UCPM Project Grants",
   "actionCode": "UCPM-PJG",
@@ -132,5 +132,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-19T04:05:16.838Z"
+  "fetchedAt": "2026-05-20T04:03:00.909Z"
 }

@@ -1,0 +1,108 @@
+{
+  "id": 1108154,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "COMUNIDAD DE MADRID",
+    "nivel3": "CONSEJERÍA DE EDUCACIÓN, CIENCIA Y UNIVERSIDADES"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "906593",
+  "fechaRecepcion": "2026-05-19",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 44000,
+  "mrr": false,
+  "descripcion": "DGBCE/26 PREMIOS EXTRAORDINARIOS FORMACIÓN PROFESIONAL GRADO SUPERIOR 25/26",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades deportivas, recreativas y de entretenimiento",
+      "codigo": "93"
+    },
+    {
+      "descripcion": "Educación",
+      "codigo": "85"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES30 - COMUNIDAD DE MADRID"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "ORDEN 3308/2021, DE 5 DE NOVIEMBRE, DE LA CONSEJERIA DE EDUCACION , UNIVERSIDADES, CIENCIA Y PORTAVOCIA POR LA QUE SE MODIFICAN DIVERSAS ORDENES POR LAS QUE SE APRUEBAN LAS BASES REGULAD. DE LOS PREMIOS EXTRAORD.DE BACHILLERATO, ENSEÑ. ARTIST Y FORM.PROF.",
+  "urlBasesReguladoras": "https://www.bocm.es/boletin/CM_Orden_BOCM/2021/11/18/BOCM-20211118-16.PDF",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "DESDE EL DÍA SIGUIENTE A LA PUBLICACIÓN DEL EXTRACTO EN EL BOCM.",
+  "textFin": "A LOS 7 DÍAS HÁBILES A CONTAR DESDE EL INICIO",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1457344,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Texto Convocatoria BDNS.pdf",
+      "long": 1026547,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457345,
+      "descripcion": "Otros documentos  PLAN ESTRATÉGICO",
+      "nombreFic": "Otros documentos  PLAN ESTRATÉGICO.pdf",
+      "long": 695097,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457349,
+      "descripcion": "Anexos  1.3.3 1294FR2_26",
+      "nombreFic": "Anexos  1.3.3 1294FR2_26.pdf",
+      "long": 84755,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457347,
+      "descripcion": "Anexos  1.3.1 1294F1_26",
+      "nombreFic": "Anexos  1.3.1 1294F1_26.pdf",
+      "long": 133360,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457348,
+      "descripcion": "Anexos  1.3.2 1294FR1_26",
+      "nombreFic": "Anexos  1.3.2 1294FR1_26.pdf",
+      "long": 141531,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457346,
+      "descripcion": "Anexos  1.3.0 Anexo I_Baremación FPGS",
+      "nombreFic": "Anexos  1.3.0 Anexo I_Baremación FPGS.pdf",
+      "long": 41675,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

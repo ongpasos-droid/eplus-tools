@@ -1,0 +1,72 @@
+{
+  "id": 1107245,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "COMUNITAT VALENCIANA",
+    "nivel3": "SECRETARÍA AUTONÓMICA DE SALUD PÚBLICA Y DEL SISTEMA SANITARIO PÚBLICO"
+  },
+  "sedeElectronica": "https://www.san.gva.es/es/web/ayudas-y-subvenciones",
+  "codigoBDNS": "905684",
+  "fechaRecepcion": "2026-05-14",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 30000,
+  "mrr": false,
+  "descripcion": "LÍNEA S0149. Resolución del conseller de Sanidad , que efectúa la convocatoria ayudas en materia de proyectos de apoyo a las asociaciones de personas consumidoras en el ámbito de la seguridad alimentaria",
+  "descripcionLeng": "Resolució del conseller de Sanitat, per la qual s'efectua la convocatòria de les ajudes en matèria de projectes de suport a associacions de persones consumidores en l'àmbit de la seguretat alimentària.",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES52 - COMUNIDAD VALENCIANA"
+    }
+  ],
+  "descripcionFinalidad": "Sanidad",
+  "descripcionBasesReguladoras": "ORDEN 2/2026, de 27 de marzo, de la Conselleria de  Sanidad, por la que se aprueban las bases reguladoras de las subvenciones destinadas a  financiar proyectos relacionados con la Salud Pública.  [2026/9722]",
+  "urlBasesReguladoras": "https://dogv.gva.es/datos/2026/04/01/pdf/2026_9722_es.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir del día siguiente de la publicación en DOGV de la Resolución de convocatoria",
+  "textFin": "10 días hábiles a partir del día siguiente de la publicación en DOGV de la Resolución convocatoria.",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1456847,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Convo Asoc Consumidores_2026 cas_firmado.pdf",
+      "long": 279029,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1456848,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "Convo Asoc Consumidores_2026 cas_26-004221_trad_firmado.pdf",
+      "long": 323050,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,72 @@
+{
+  "id": 1107983,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "CATALUÑA",
+    "nivel3": "AGÈNCIA CATALANA DE COOPERACIÓ AL DESENVOLUPAMENT"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "906422",
+  "fechaRecepcion": "2026-05-19",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 4860000,
+  "mrr": false,
+  "descripcion": "Subvenciones a convenios de acción humanitaria para responder a crisis de aparición repentina generadas por catástrofes naturales o de origen humano y crisis de larga duración o infrafinanciadas para el período 2026-2027",
+  "descripcionLeng": "Subvencions a convenis d'acció humanitària per respondre a crisis d'aparició sobtada generades per catàstrofes naturals o d'origen humà i crisis de llarga durada o infrafinanades per al període 2026-2027",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "XXXX - TODO EL MUNDO"
+    }
+  ],
+  "descripcionFinalidad": "Cooperación internacional para el desarrollo y cultural",
+  "descripcionBasesReguladoras": "RESOLUCIÓN EXT/2476/2024, de 4 de julio, por la que se aprueban las bases reguladoras de subvenciones a convenios de acción humanitaria para responder a crisis de aparición repentina generadas por catástrofes naturales o de origen humano...",
+  "urlBasesReguladoras": "https://dogc.gencat.cat/es/document-del-dogc/index.html?documentId=989767",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Des de l’endemà de la publicació en el diari oficial de la convocatòria inicial",
+  "textFin": "20 Dies Hàbils",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1456815,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "20260515_INF_Convocatoria_AH2026_cat_CA.pdf",
+      "long": 469531,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1456814,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "20260515_INF_Convocatoria_AH2026_es_CA.pdf",
+      "long": 453120,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

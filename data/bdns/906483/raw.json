@@ -1,0 +1,136 @@
+{
+  "id": 1108044,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SABIÑÁNIGO",
+    "nivel3": "AYUNTAMIENTO DE SABIÑÁNIGO"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "906483",
+  "fechaRecepcion": "2026-05-19",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 30000,
+  "mrr": false,
+  "descripcion": "Decreto de Alcaldía nº 1137 de 18 de mayo de 2026, por el que se convocan las subvenciones del Ayuntamiento de Sabiñánigo, en régimen de concurrencia pública, en materias de cultura, deportes, educación y juventud, año 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades asociativas",
+      "codigo": "94"
+    },
+    {
+      "descripcion": "Actividades de bibliotecas, archivos, museos y otras actividades culturales",
+      "codigo": "91"
+    },
+    {
+      "descripcion": "Actividades de creación artística y artes escénicas",
+      "codigo": "90"
+    },
+    {
+      "descripcion": "Actividades deportivas, recreativas y de entretenimiento",
+      "codigo": "93"
+    },
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES241 - Huesca"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "Ordenanza general reguladora de la concesión de subvenciones por el Ayuntamiento de Sabiñánigo",
+  "urlBasesReguladoras": "https://bop.dphuesca.es/index.php/mod.bopanuncios/mem.visualizarpdf/relcategoria.60008/idbopanuncio.233090/chk.28861ddbe6281ee90ce816479b8f4d7d.html",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "El día siguiente a aquél en el que se publique el Extracto en el Boletín Oficial de la Provincia",
+  "textFin": "UN MES a contar desde el siguiente a aquél en el que se publique el Extracto en el Boletín",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1457142,
+      "descripcion": "Anexo III - Presupuesto ingresos-gastos subv cultura, deporte 2026",
+      "nombreFic": "anexo iii editable cultura.pdf",
+      "long": 83905,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457138,
+      "descripcion": "Anexo I - Solicitud subv cultura, deporte, educación 2026",
+      "nombreFic": "anexo i editable cultura.pdf",
+      "long": 91650,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457139,
+      "descripcion": "Anexo II - Declaración responable subv cultura, deporte 2026",
+      "nombreFic": "anexo ii editable cultura.pdf",
+      "long": 99694,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457146,
+      "descripcion": "Anexo VII - Certificado aprobación actividad subv cultura, deporte 2026",
+      "nombreFic": "anexo vii certificado aprobación actividad editable cultura.pdf",
+      "long": 69564,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457143,
+      "descripcion": "Anexo IV - Ficha de terceros subv cultura, deporte 2026",
+      "nombreFic": "anexo iv ficha de terceros editable cultura definitivo.pdf",
+      "long": 65401,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457144,
+      "descripcion": "Anexo V - Solicitud abono (justificación) subv cultura, deporte 2026",
+      "nombreFic": "anexo v editable cultura.pdf",
+      "long": 91801,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457145,
+      "descripcion": "Anexo VI - Índice numerado (justificación) subv cultura, deporte 2026",
+      "nombreFic": "anexo vi editable cultura.pdf",
+      "long": 202217,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1457023,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Resolución aprobación convocatoria subvenciones en materia de cultura, deporte, educación y juventud.pdf",
+      "long": 884143,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

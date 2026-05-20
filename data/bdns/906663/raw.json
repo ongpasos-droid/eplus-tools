@@ -1,0 +1,68 @@
+{
+  "id": 1108224,
+  "organo": {
+    "nivel1": "ESTADO",
+    "nivel2": "MINISTERIO DE IGUALDAD",
+    "nivel3": "DELEGACIÓN DEL GOBIERNO CONTRA LA VIOLENCIA DE GÉNERO"
+  },
+  "sedeElectronica": "https://igualdad.sede.gob.es/procedimiento/portada?idProc=134586  ",
+  "codigoBDNS": "906663",
+  "fechaRecepcion": "2026-05-19",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 7000000,
+  "mrr": false,
+  "descripcion": "Resolución 14/05/2026 de subvenciones  públicas destinadas  a  programas  y  proyectos  para  la  concienciación,  prevención,  sensibilización, investigación e innovación para la erradicación de las distintas formas de violencia contra las mujeres.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    },
+    {
+      "descripcion": "OTROS SERVICIOS",
+      "codigo": "T"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES - ESPAÑA "
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Orden IGD/393/2026, 22 de abril, modifica Orden IGD/239/2022, 25 marzo, aprueban BBRR concesión subv. públicas, régimen concurrencia competitiva a programas y proyectos concienciación, prevención, investigación e innovación formas violencia mujeres",
+  "urlBasesReguladoras": "https://www.boe.es/eli/es/o/2026/04/22/igd393",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Día hábil siguiente a la publicación del extracto en el BOE",
+  "textFin": "15 días habiles desde el inicio del plazo de solicitud ",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1457604,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Resolución + Anexos.pdf.xsig.pdf",
+      "long": 923255,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

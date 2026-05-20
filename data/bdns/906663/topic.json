@@ -1,0 +1,63 @@
+{
+  "source": "bdns",
+  "source_id": "906663",
+  "source_lang": "es",
+  "level": "estado",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "ESTADO / MINISTERIO DE IGUALDAD / DELEGACIÓN DEL GOBIERNO CONTRA LA VIOLENCIA DE GÉNERO",
+  "nuts_codes": [],
+  "nuts_primary": null,
+  "title": "Resolución 14/05/2026 de subvenciones  públicas destinadas  a  programas  y  proyectos  para  la  concienciación,  prevención,  sensibilización, investigación e innovación para la erradicación de las distintas formas de violencia contra las mujeres.",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-05-19",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 7000000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "R",
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES"
+    },
+    {
+      "codigo": "T",
+      "descripcion": "OTROS SERVICIOS"
+    }
+  ],
+  "apply_url": "https://igualdad.sede.gob.es/procedimiento/portada?idProc=134586  ",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/906663",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.boe.es/eli/es/o/2026/04/22/igd393",
+  "text_inicio": "Día hábil siguiente a la publicación del extracto en el BOE",
+  "text_fin": "15 días habiles desde el inicio del plazo de solicitud ",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-20T04:06:22.078Z"
+}

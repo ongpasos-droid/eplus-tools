@@ -1,0 +1,64 @@
+{
+  "id": 1108139,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SANT PERE DE VILAMAJOR",
+    "nivel3": "AYUNTAMIENTO DE SANT PERE DE VILAMAJOR"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "906578",
+  "fechaRecepcion": "2026-05-19",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 17500,
+  "mrr": false,
+  "descripcion": "CONVOCATÓRIA PARA LA CONCESIÓN DE AJUDAS DE CASAL DE VERANO DEL AÑO 2026 Y PARA LA CONCESIÓN DE AJUDAS DE MATERIAL, LIBROS, TRANSPORTE Y COMEDOR DEL CURSO ESCOLAR 2026-2027",
+  "descripcionLeng": "CONVOCATÒRIA PER A LA CONCESSIÓ D’AJUTS DE CASAL D’ESTIU PER L’ANY 2026 I PER A LA CONCESSIÓ D’AJUTS DE MATERIAL, LLIBRES,  TRANSPORT I MENJADOR PER AL CURS ESCOLAR 2026-2027",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES511 - Barcelona"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "BASES REGULADORAS PARA LA CONCESIÓN DE LAS AYUDAS MUNICIPALES DE MATERIAL Y LIBROS ESCOLARES, TRANSPORTE ESCOLAR, LOGOPEDIA, COMEDOR ESCOLAR Y CASALES DE VERANO",
+  "urlBasesReguladoras": "https://bop.diba.cat/anunci/3215161/bases-reguladores-per-a-la-concessio-dels-ajuts-municipals-de-material-i-llibres-escolars-transport-escolar-logopedia-menjador-escolar-i-casal-d-estiu-versio-en-castella-ajuntament-de-sant-pere-de-vilamajor",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "se iniciará el dia siguiente a la publicación en el BOP Barcelona",
+  "textFin": "finalizará el dia 12 de junio de 2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1457313,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "EXP 1322-2026. Certificado JGL Convocatoria ayudas libros, material, transporte, comedor curso 2026-2027 i casal de verano 2026.docx",
+      "long": 146334,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

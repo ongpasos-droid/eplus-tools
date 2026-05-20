@@ -10,7 +10,7 @@
   "status": "open",
   "statusCode": "31094502",
   "opening": "2026-04-03",
-  "deadline": "2026-05-26",
+  "deadline": "2026-05-29",
   "deadlineModel": "",
   "actionType": "",
   "actionCode": null,
@@ -22,5 +22,5 @@
   "submissionUrl": null,
   "topicUrl": "https://webgate.ec.europa.eu/prospect/external/publishedcalls.htm?callId=186548",
   "documents": [],
-  "fetchedAt": "2026-05-19T04:05:17.453Z"
+  "fetchedAt": "2026-05-20T04:03:00.912Z"
 }

@@ -1,0 +1,88 @@
+{
+  "id": 1108014,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "CONSELL COMARCAL DEL SEGRIA",
+    "nivel3": "CONSELL COMARCAL DE SEGRIÀ"
+  },
+  "sedeElectronica": "www.segria.cat",
+  "codigoBDNS": "906453",
+  "fechaRecepcion": "2026-05-19",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 7500000,
+  "mrr": false,
+  "descripcion": "Convocatoria para la concesión de ayudas individuales de comedor dirigidas al alumnado de enseñanzas obligatorias\ny de educación infantil de centros educativos sufragados con fondos públicos para el curso 2026-2027 (Exp. 943/2026)",
+  "descripcionLeng": "Convocatòria per a la concessió d'ajuts individuals de menjador adreçats a l'alumnat\nd'ensenyaments obligatoris i d'educació infantil de centres educatius sufragats amb\nfons públics per al curs 2026-2027 (Exp. 943/2026)",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    },
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES513 - Lleida"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Ayudas individuales de comedor dirigidas al alumnado de enseñanzas obligatorias y de educación infantil de centros educativos sufragados con fondos públicos para el curso 2026-2027, aprobadas por acuerdo de Pleno de 15 de abril de 2026",
+  "urlBasesReguladoras": "https://ebop.diputaciolleida.cat/aplicacions/bop/bopV1/fitxers/pdf/2026/73/20267302916.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-05-20",
+  "fechaFinSolicitud": "2026-06-05",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1456894,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Convocatòria català.pdf",
+      "long": 108669,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    },
+    {
+      "id": 1456893,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convocatòria català (1).pdf",
+      "long": 99416,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    }
+  ],
+  "anuncios": [
+    {
+      "numAnuncio": 212153,
+      "titulo": "Convocatoria para la concesión de ayudas individuales de comedor dirigidas al alumnado de enseñanzas obligatorias y de educación infantil de centros educativos sufragados con fondos públicos para el curso 2026-2027 (Exp. 943/2026)",
+      "tituloLeng": "Convocatòria per a la concessió d'ajuts individuals de menjador adreçats a l'alumnat d'ensenyaments obligatoris i d'educació infantil de centres educatius sufragats amb fons públics per al curs 2026-2027 (Exp. 943/2026)",
+      "texto": "<p>a) Bases reguladoras: de ayudas individuales de comedor dirigidas al alumnado de enseñanzasobligatorios y de educación infantil de centros educativos sufragados con fondos públicos para el curso2026-2027, aprobadas por acuerdo de Pleno de 15 de abril de 2026.b) Diario oficial en el que estén publicadas: BOP de Lleida número 94, de 20 de mayo de 2026.c) Créditos presupuestarios a los que se imputa: 2026/07/326/4810010/01, condicionados alfinanciación del Departamento de Educación de la Generalidad de Cataluña para el curso2026/2027.d) Cantidad total máxima: 7.500.000,00 €.e) Aprobar el gasto plurianual, para los ejercicios 2026 y 2027.f) Autorizar el gasto con cargo a la partida presupuestaria 2026/07/326/4810010/01,por un importe máximo de 3.000.000,00€.Para el resto de ejercicio queda la autorización de gasto condicionado a la existencia decrédito adecuado y suficiente en el presupuesto del ejercicio 2027.g) Carácter de la distribución: limitativo.h) Objeto, condiciones y finalidad de la concesión de la subvención: es el otorgamiento de ayudasindividuales de comedor, en especie, en los cursos de segundo y tercero de las enseñanzasde primer ciclo de infantil, en aquellas escuelas de titularidad de la Generalitat donde se hayaimplantado, y cualquiera de los cursos de las enseñanzas de segundo ciclo de infantil yde enseñanzas obligatorias, usuarios del servicio de comedor de los centros escolares de lacomarca del Segrià, a los que no corresponda la gratuidad del servicio de comedor concarácter preceptivo y no se encuentren en acogimiento residencial. Se considera en acogimientoresidencial cualquier alumno que esté residiendo en un centro de acogida para niños y niñas yadolescentes (CRAE), de acuerdo con los criterios recibidos del Departamento de Educación yFormación profesional para todos los Consejos Comarcales.i) Régimen de concesión: concurrencia competitiva.j) Requisitos para solicitar la subvención y forma de acreditarlos: son los sujetos beneficiarioslos alumnos matriculados en los cursos de segundo y tercero de las enseñanzas de primer ciclode infantil, en aquellas escuelas de titularidad de la Generalitat donde se haya implantado y cualquierade los cursos de la enseñanza de segundo ciclo de educación infantil y de enseñanzasobligatorios de la comarca del Segrià.</p><p>k) Indicación de los órganos competentes para la instrucción y resolución del procedimiento: latramitación corresponde al Área de Enseñanza del Consejo Comarcal de El Segrià la cualevaluará y propondrá la resolución que será dictada por Presidencia del Consejo Comarcal yde la que se dará cuenta al Plenol) Plazo de presentación de las solicitudes:Desde el día 20 de mayo al 5 de junio de 2026, ambos inclusiveLa solicitud se formulará de forma telemática mediante el siguiente enlace de la sedeelectrónica del Consejo Comarcal:https://ccsegria.eadministracio.cat/catalog/t/b09e28d5-6ffe-4a42-9575-4d2844f65770También se podrán presentar las solicitudes de manera presencial en los centros escolares, tantopúblicos como concertados y en el Consejo Comarcal del Segrià (C. del Canyeret, 12 de Lleida)según el modelo normalizado que se podrá descargar de la web www.segria.cat,acompañada de la documentación que se indica en las bases y firmada por el solicitante ymiembros de la unidad familiar mayores de 18 años.m) Plazo de resolución y notificación:El plazo máximo para resolver será de seis meses a contar desde la finalización del plazode presentación de solicitudes. La falta de resolución dentro de ese plazo tendrá carácterdesestimatorio de la petición.El acto de resolución de la subvención agota la vía administrativa. De acuerdo con lo quedispone el artículo 112 de la Ley 39/2015 de 1 de octubre del procedimiento administrativo comúnde las administraciones públicas, podrá interponerse recurso potestativo de reposición en elplazo de un mes a contar desde el siguiente de la recepción de la notificación, o bien directamenterecurso contencioso-administrativo ante el juzgado de lo Contencioso Administrativo de Lleida.n) Documentos e informaciones que deben acompañarse a la petición:La documentación a presentar es la prevista en el ANEXO 1 de las bases.En la página web del Consejo https://www.segria.cat estará disponible el material desoporte, documentos de ayuda y se habilitará el teléfono 973054800 para consulta y dirección deconsulta enseñanza@segria.cat.o) Posibilidad de reformulación de solicitudes: síp) Agotamiento de la vía administrativa por parte de la convocatoria: síq) Criterios de valoración de las solicitudes: los previstos en el anexo de las bases.r) Medio de notificación: personal, mediante sms certificado.</p>",
+      "textoLeng": "<p>a) Bases reguladores: d'ajuts individuals de menjador adreçats a l'alumnat d'ensenyamentsobligatoris i d'educació infantil de centres educatius sufragats amb fons públics per al curs2026-2027, aprovades per acord de Ple de 15 d’abril de 2026.b) Diari oficial on estiguin publicades: BOP de Lleida número 94, de 20 de maig de 2026.c) Crèdits pressupostaris als quals s’imputa: 2026/07/326/4810010/01, condicionats alfinançament del Departament d’Educació de la Generalitat de Catalunya per al curs2026/2027.d) Quantitat total màxima: 7.500.000,00 €.e) Aprovar la despesa plurianual, per als exercicis 2026 i 2027.f) Autoritzar la despesa amb càrrec a la partida pressupostària 2026/07/326/4810010/01,per un import màxim de 3.000.000,00 €.Per a la resta d’exercici queda l’autorització de despesa condicionada a l’existència decrèdit adequat i suficient en el pressupost de l’exercici 2027.g) Caràcter de la distribució: limitatiu.h) Objecte, condicions i finalitat de la concessió de la subvenció: és l'atorgament d'ajutsindividuals de menjador, en espècie, en els cursos de segon i tercer dels ensenyamentsde primer cicle d’infantil, en aquelles escoles de titularitat de la Generalitat on s’hagiimplantat, i qualsevol dels cursos dels ensenyaments de segon cicle d’infantil id’ensenyaments obligatoris, usuaris del servei de menjador dels centres escolars de lacomarca del Segrià, als quals no correspongui la gratuïtat del servei de menjador ambcaràcter preceptiu i no estiguin en acolliment residencial. Es considera en acollimentresidencial qualsevol alumne que estigui residint en un centre d’acolliment per a infants iadolescents (CRAE), d'acord amb els criteris rebuts del Departament d'Educació iFormació Professional per a tots els Consells Comarcals.i) Règim de concessió: concurrència competitiva.j) Requisits per a sol&#42895;licitar la subvenció i forma d’acreditar-los: són els subjectes beneficiarisels alumnes matriculats en els cursos de segon i tercer dels ensenyaments de primer cicled’infantil, en aquelles escoles de titularitat de la Generalitat on s’hagi implantat i qualsevoldels cursos de l’ensenyament de segon cicle d’educació infantil i d’ensenyamentsobligatoris de la comarca del Segrià.</p><p>k) Indicació dels òrgans competents per a la instrucció i resolució del procediment: latramitació correspon a l’Àrea d’Ensenyament del Consell Comarcal del Segrià la qualavaluarà i proposarà la resolució que serà dictada per Presidència del Consell Comarcal ide la qual se’n donarà compte al Plel) Termini de presentació de les sol&#42895;licituds:Des del dia 20 de maig al 5 de juny de 2026, ambdós inclososLa sol&#42895;licitud es formularà de manera telemàtica mitjançant el següent enllaç de la seuelectrònica del Consell Comarcal:https://ccsegria.eadministracio.cat/catalog/t/b09e28d5-6ffe-4a42-9575-4d2844f65770També es podran presentar les sol&#42895;licituds de manera presencial als centres escolars, tantpúblics com concertats i al Consell Comarcal del Segrià (C. del Canyeret, 12 de Lleida)segons el model normalitzat el qual es podrà descarregar de la web www.segria.cat,acompanyada de la documentació que s’indica en les bases i signada pel sol&#42895;licitant imembres de la unitat familiar majors de 18 anys.m) Termini de resolució i notificació:El termini màxim per resoldre serà de sis mesos a comptar des de la finalització del terminide presentació de sol&#42895;licituds. La manca de resolució dins d’aquest termini tindrà caràcterdesestimatori de la petició.L’acte de resolució de la subvenció esgota la via administrativa. D’acord amb el quedisposa l’article 112 de la Llei 39/2015 d’1 d’octubre del procediment administratiu comúde les administracions públiques, podrà interposar-se recurs potestatiu de reposició en eltermini d’un mes a comptar del següent de la recepció de la notificació, o bé directamentrecurs contenciós- administratiu davant el jutjat Contenciós Administratiu de Lleida.n) Documents i informacions que cal acompanyar a la petició:La documentació a presentar és la prevista a l’ANNEX 1 de les bases.A la pàgina web del Consell https://www.segria.cat hi haurà disponible el material desuport, documents d’ajut i s’habilitarà el telèfon 973054800 per a consulta i adreça deconsulta ensenyament@segria.cat.o) Possibilitat de reformulació de sol&#42895;licituds: síp) Exhauriment de la via administrativa per part de la convocatòria: síq) Criteris de valoració de les sol&#42895;licituds: els previstos a l’annex de les bases.r) Mitjà de notificació: personal, mitjançant sms certificat.</p>",
+      "url": "https://ebop.diputaciolleida.cat/aplicacions/bop/bopV1/fitxers/pdf/2026/94/20269404043.pdf",
+      "cve": null,
+      "desDiarioOficial": "B.O.P. DE LLEIDA",
+      "datPublicacion": "2026-05-20"
+    }
+  ],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

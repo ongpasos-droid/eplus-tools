@@ -1,0 +1,59 @@
+{
+  "source": "bdns",
+  "source_id": "906487",
+  "source_lang": "es",
+  "level": "estado",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "ESTADO / MINISTERIO DE TRANSPORTES Y MOVILIDAD SOSTENIBLE / DIRECCIÓN GENERAL DE TRANSPORTE POR CARRETERA",
+  "nuts_codes": [],
+  "nuts_primary": null,
+  "title": "AYUDAS PARA LA FORMACION EN RELACION CON EL TRANSPORTE POR CARRETERA - 2026",
+  "title_lang": "es",
+  "summary": "Subvenciones al transporte",
+  "status": "open",
+  "publication_date": "2026-05-19",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 3858000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "49.4",
+      "descripcion": "Transporte de mercancías por carretera y servicios de mudanza"
+    }
+  ],
+  "apply_url": "https://sede.transportes.gob.es/areas-actividad/transporte-terrestre/ayudas-subvenciones-sector-transporte-terrestre/ayudas-formacion-sector-transporte-carretera",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/906487",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2008-20042",
+  "text_inicio": "Al día siguiente de la publicación en BOE",
+  "text_fin": "Un mes desde el día siguiente a publicación en BOE",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-20T04:06:22.034Z"
+}

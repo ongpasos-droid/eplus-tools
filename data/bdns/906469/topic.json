@@ -1,0 +1,92 @@
+{
+  "source": "bdns",
+  "source_id": "906469",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / VALENCIA / FUNDACIÓN DE LA CV PARA LA PROMOCIÓN ESTRATÉGICA, EL DESARROLLO Y LA INNOVACIÓN URBANA (INNDEA)",
+  "nuts_codes": [
+    "ES523"
+  ],
+  "nuts_primary": "ES523",
+  "title": "Convocatoria de Subvenciones, en régimen de concurrencia competitiva, en el ámbito musical de Innovación Social y Urbana, Investigación, Economía Creativa y Sostenibilidad Cultural en el marco de la estrategia Valencia Music City",
+  "title_lang": "es",
+  "summary": "Investigación, desarrollo e innovación",
+  "status": "open",
+  "publication_date": "2026-05-19",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 200000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "90.3",
+      "descripcion": "Actividades de apoyo a la creación artística y a las artes escénicas"
+    },
+    {
+      "codigo": "90.2",
+      "descripcion": "Actividades de artes escénicas"
+    },
+    {
+      "codigo": "90.1",
+      "descripcion": "Actividades de creación artística"
+    },
+    {
+      "codigo": "72.2",
+      "descripcion": "Investigación y desarrollo experimental en ciencias sociales y humanidades"
+    },
+    {
+      "codigo": "74.9",
+      "descripcion": "Otras actividades profesionales, científicas y técnicas n.c.o.p."
+    },
+    {
+      "codigo": "93.2",
+      "descripcion": "Otras actividades recreativas y de entretenimiento"
+    }
+  ],
+  "apply_url": "https://valenciainnovationcapital.typeform.com/eventosmusic-26",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/906469",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "Declaración responsable_deducción IVA",
+      "url": null
+    },
+    {
+      "label": "Anexo I (memoria)",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://valenciainnovationcapital.com/wp-content/uploads/2026/05/Bases-VLCMUSIC-CITY-2026-1.pdf",
+  "text_inicio": "Desde el día siguiente a la publicación en el BOP ",
+  "text_fin": "20 días naturales desde el día siguiente a la publicación en el BOP",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-20T04:06:22.026Z"
+}

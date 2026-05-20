@@ -1,0 +1,64 @@
+{
+  "id": 1107973,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "ALAQUÀS",
+    "nivel3": "AYUNTAMIENTO DE ALAQUÀS"
+  },
+  "sedeElectronica": "https://alaquas.sedelectronica.es/info.0",
+  "codigoBDNS": "906412",
+  "fechaRecepcion": "2026-05-19",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 24000,
+  "mrr": false,
+  "descripcion": "Convocatoria de concesión de subvenciones destinadas a la activación del pequeño comercio local, ejercida a través de las asociaciones de comerciantes. Ejercicio 2026.",
+  "descripcionLeng": "Convocatòria de concessió de subvencions destinades a l'activació del xicotet comerç local, exercida per mitjà de les associacions de comerciants. Exercici 2026. ",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "COMERCIO AL POR MAYOR Y AL POR MENOR",
+      "codigo": "G"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES523 - Valencia / València"
+    }
+  ],
+  "descripcionFinalidad": "Comercio, Turismo y Pymes",
+  "descripcionBasesReguladoras": "Bases de la convocatoria de concesión de subvenciones destinadas a la activación del pequeño comercio local, ejercida a través de las asociaciones de comerciantes. Ejercicio 2026.",
+  "urlBasesReguladoras": "www.alaquas.org",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Al día siguiente a su publicación en el BOP Valencia",
+  "textFin": "10 días hábiles a partir del siguiente a la publicación en el BOP Valencia",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1456781,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "2026-05-19 - Bases Subvenciones destinadas a la activación del pequeño comercio local (Asociaciones). Ejercicio 2026.pdf",
+      "long": 1632884,
+      "datMod": "2026-05-19",
+      "datPublicacion": "2026-05-19"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}
