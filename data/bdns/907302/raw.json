@@ -1,0 +1,76 @@
+{
+  "id": 1108863,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "CAMBRILS",
+    "nivel3": "AYUNTAMIENTO DE CAMBRILS"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "907302",
+  "fechaRecepcion": "2026-05-21",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 20000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DE SUBVENCIONES PARA LA REALIZACIÓN DE ACTIVIDADES QUE PROMUEVAN LA SALUD PÚBLICA DURANTE EL AÑO 2026",
+  "descripcionLeng": "CONVOCATÒRIA DE SUBVENCIONS PER A LA REALITZACIÓ D’ACTIVITATS QUE PROMOGUIN LA SALUT PÚBLICA DURANT L’ANY 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    },
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES514 - Tarragona"
+    }
+  ],
+  "descripcionFinalidad": "Sanidad",
+  "descripcionBasesReguladoras": "Bases reguladoras para el otorgamiento de subvenciones para la realización de actividades que promuevan la salud pública",
+  "urlBasesReguladoras": "https://www.cambrils.cat/ca/serveis/salut/promocio/subvencions-per-activitats-que-promoguin-la-salut/texto-refundido-bases-reguladoras-de-las-subvenciones-para-la-realizacion-de-actividades-que-promuevan-la-salud-publica.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir del día siguiente de la publicación en el BOPT",
+  "textFin": "Durante 20 días hábiles",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1459741,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "EDIC2026000041A002.pdf",
+      "long": 506892,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    },
+    {
+      "id": 1459740,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "EDIC2026000041INFD.pdf",
+      "long": 485809,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

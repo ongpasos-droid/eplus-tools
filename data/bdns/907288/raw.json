@@ -1,0 +1,79 @@
+{
+  "id": 1108849,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "DIPUTACIÓN FORAL DE BIZKAIA",
+    "nivel3": "DIPUTACIÓN FORAL DE BIZKAIA"
+  },
+  "sedeElectronica": "https://www.ebizkaia.eus/es/catalogo-de-tramites-y-servicios",
+  "codigoBDNS": "907288",
+  "fechaRecepcion": "2026-05-21",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 560000,
+  "mrr": false,
+  "descripcion": "Decreto Foral 50/2026, de 21 de mayo, de la Diputación Foral de Bizkaia, que aprueba las bases reguladoras y la convocatoria de su bvenciones destinadas a financiar los gastos de preproducción, producción y promoción de proyectos audiovisuales en 2026.",
+  "descripcionLeng": "Bizkaiko Foru Aldundiaren maiatzaren 21eko 50/2026 Foru Dekretua, 2026an ikus-entzunezko proiektuen preprodukzio, ekoizpen eta sustapen gastuak finantzatzeko dirulaguntzen deialdia eta oinarri arautzaileak onartzen dituena",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades de creación artística y artes escénicas",
+      "codigo": "90"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES213 - Bizkaia"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "Decreto Foral 50/2026, de 21 de mayo, de la Diputación Foral de Bizkaia, que aprueba las bases reguladoras y la convocatoria de su bvenciones destinadas a financiar los gastos de preproducción, producción y promoción de proyectos audiovisuales en 2026.",
+  "urlBasesReguladoras": "-------------",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "al dia siguiente de la publicación del decreto regulador en el BOB",
+  "textFin": "tras 20 días hábiles contados a partir del dia siguiente al de la publicación",
+  "ayudaEstado": "SA.999999",
+  "urlAyudaEstado": "https://competition-cases.ec.europa.eu/cases/SA.999999",
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 651/2014, DE 17 DE JUNIO, de exención de notificación",
+    "orden": null
+  },
+  "objetivos": [
+    {
+      "descripcion": "ART. 54 REGÍMENES DE AYUDA PARA OBRAS AUDIOVISUALES"
+    }
+  ],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1459735,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "DLD_KEK_2026_AUDIOBISUALAK_KTS_1776759383926_20260511_091253.pdf",
+      "long": 742717,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    },
+    {
+      "id": 1459734,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "DLD_KEK_2026_AUDIOBISUALAK_KTS_1776759383926_20260511_091253.pdf",
+      "long": 742717,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

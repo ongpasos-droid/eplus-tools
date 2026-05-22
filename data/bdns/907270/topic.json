@@ -1,0 +1,73 @@
+{
+  "source": "bdns",
+  "source_id": "907270",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / ÁGREDA / AYUNTAMIENTO DE ÁGREDA",
+  "nuts_codes": [
+    "ES417"
+  ],
+  "nuts_primary": "ES417",
+  "title": "CONVOCATORIA SUBVENCIONES PARA LA REALIZACIÓN DE ACTIVIDADES CULTURALES Y JUVENILES AÑO 2025",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-05-21",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 4000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "S",
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO"
+    },
+    {
+      "codigo": "P",
+      "descripcion": "ADMINISTRACIÓN PÚBLICA Y DEFENSA; SEGURIDAD SOCIAL OBLIGATORIA"
+    }
+  ],
+  "apply_url": "https://agreda.sedelectronica.es/info.7",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/907270",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "ANEXOS",
+      "url": null
+    },
+    {
+      "label": "Convocatoria y Bases Subvención para la Realización de Actividades Culturales y Juveniles año 2025",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://agreda.sedelectronica.es/transparency/fcd8d95e-d191-4973-bd21-8f27a7e7ddc3/",
+  "text_inicio": "10 días nat a contar desde la fecha de publicación del extracto de la presente convocatoria en BOP",
+  "text_fin": "10 días nat a contar desde la fecha de publicación del extracto de la presente convocatoria en BOP",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-22T04:06:27.965Z"
+}

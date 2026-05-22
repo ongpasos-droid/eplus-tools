@@ -1,0 +1,72 @@
+{
+  "source": "bdns",
+  "source_id": "907154",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concesión directa - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / DIPUTACIÓN FORAL DE BIZKAIA / DIPUTACIÓN FORAL DE BIZKAIA",
+  "nuts_codes": [
+    "ES213"
+  ],
+  "nuts_primary": "ES213",
+  "title": "Decreto Foral 51/2026, de 21 de mayo, de la Diputación Foral de Bizkaia, por el que se aprueban las bases reguladoras de ayudas a las Asociaciones de personas productoras del sector agrícola del Territorio Histórico de Bizkaia y convocatoria para el ejerc",
+  "title_lang": "es",
+  "summary": "Agricultura, Pesca y Alimentación",
+  "status": "open",
+  "publication_date": "2026-05-21",
+  "open_date": "2026-05-26",
+  "deadline": "2026-06-26",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 100000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "A",
+      "descripcion": "AGRICULTURA, GANADERÍA, SILVICULTURA Y PESCA"
+    }
+  ],
+  "apply_url": "https://www.ebizkaia.eus/es/catalogo-de-tramites-y-servicios",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/907154",
+  "documents": [
+    {
+      "label": "Texto en otra lengua de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://web.bizkaia.eus/es/bob",
+  "text_inicio": "1 mes desde el día siguiente a la publicación en el BOB.",
+  "text_fin": "1 mes desde el día siguiente a la publicación en el BOB.",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": "SA.111111",
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "PRODUCCIÓN AGRÍCOLA PRIMARIA - REG (UE) 2022/2472, de 14 DE DICIEMBRE, de exención de notificación (vigente desde 01-01-2023)",
+    "orden": null
+  },
+  "objetivos": [
+    {
+      "descripcion": "ART. 22 AYUDAS DESTINADAS A SERVICIOS DE ASESORAMIENTO"
+    }
+  ],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-22T04:06:27.946Z"
+}

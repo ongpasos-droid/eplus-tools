@@ -1,0 +1,69 @@
+{
+  "source": "bdns",
+  "source_id": "907175",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / MISLATA / AYUNTAMIENTO DE MISLATA",
+  "nuts_codes": [
+    "ES523"
+  ],
+  "nuts_primary": "ES523",
+  "title": "Convocatoria y Bases Reguladoras 15 becas de formación para estudiantes Mislata te Beca 2026",
+  "title_lang": "es",
+  "summary": "Fomento del Empleo",
+  "status": "open",
+  "publication_date": "2026-05-21",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 19910.4,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "85",
+      "descripcion": "Educación"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/907175",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Extracto convocatoria Mislata te Beca 2026",
+      "url": null
+    },
+    {
+      "label": "Bases Reguladoras Mislata te Beca 2026",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.mislata.es/es/administracion/subvenciones/convocatorias-de-subvenciones-en-tramitacion/becas-de-formacion-para-estudiantes-mislata-te-beca-0",
+  "text_inicio": "Desde el día siguiente de la publicación del extracto en el BOP",
+  "text_fin": "Diez días después de la publicación del extracto en el BOP",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-22T04:06:27.949Z"
+}

@@ -1,0 +1,100 @@
+{
+  "id": 1108655,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "PAMPLONA/IRUÑA",
+    "nivel3": "AYUNTAMIENTO DE PAMPLONA/IRUÑA"
+  },
+  "sedeElectronica": "https://sedeelectronica.pamplona.es/FichaTramite.aspx?id=229967TA&idioma=1",
+  "codigoBDNS": "907094",
+  "fechaRecepcion": "2026-05-21",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 100000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DE SUBVENCIONES EN RÉGIMEN DE CONCURRENCIA COMPETITIVA PARA ASOCIACIONES DE COMERCIANTES DE PAMPLONA PARA LA REALIZACIÓN DE ACTIVIDADES DE DINAMIZACIÓN, PROMOCIÓN, FOMENTO Y URBANISMO COMERCIAL DEL 01 DE OCTUBRE 2025 AL 30 DE SEPTIEMBRE 2026",
+  "descripcionLeng": "DIRULAGUNTZAK NORGEHIAGOKAKO ARAUBIDEAN EMATEKO DEIALDIA, IRUÑEKO MERKATARIEN ELKARTEEK MERKATARITZA DINAMIZATZEKO, BULTZATZEKO ETA SUSTATZEKO JARDUERAK, ETA MERKATARITZA-HIRIGINTZAKOAK EGIN DITZATEN 2025EKO URRIAREN 1ETIK 2026KO IRAILAREN 30ERA ",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades asociativas",
+      "codigo": "94"
+    },
+    {
+      "descripcion": "Comercio al por menor",
+      "codigo": "47"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES22 - COMUNIDAD FORAL DE NAVARRA"
+    }
+  ],
+  "descripcionFinalidad": "Comercio, Turismo y Pymes",
+  "descripcionBasesReguladoras": "Aprobación definitiva de la ordenanza general de subvenciones del Excelentísimo Ayuntamiento de Pamplona",
+  "urlBasesReguladoras": "https://bon.navarra.es/es/anuncio/-/texto/2006/21/23",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir del día siguiente de la publicación de esta convocatoria en el Boletín Oficial de Navarra",
+  "textFin": "Plazo de un mes a partir del día siguiente publicación convocatoria en Boletín Oficial de Navarra",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1459190,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "CC_Subvencion_2026_EUS.pdf",
+      "long": 838503,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    },
+    {
+      "id": 1459194,
+      "descripcion": "Anexos_formulario_castellano",
+      "nombreFic": "Anexos_formulario.docx",
+      "long": 78053,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    },
+    {
+      "id": 1459189,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "CC_Subvencion_2026.pdf",
+      "long": 842995,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    },
+    {
+      "id": 1459199,
+      "descripcion": "Anexo V_Guía_Eventos_Sostenibles",
+      "nombreFic": "guia-para-eventos-sostenibles-pamplonasin-portada.pdf",
+      "long": 2084496,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    },
+    {
+      "id": 1459196,
+      "descripcion": "Anexos_formulario_euskera",
+      "nombreFic": "Anexos_formulario_EUS.docx",
+      "long": 75595,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "907195",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / CONSELL INSULAR D’EIVISSA / CONSELL INSULAR DE IBIZA",
+  "nuts_codes": [
+    "ES531"
+  ],
+  "nuts_primary": "ES531",
+  "title": "Subvenció directa a favor de Creu Roja Espanyola per a l'execució del projecte Unitat Mòbil d'emergencia UES 2025",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-05-21",
+  "open_date": "2026-04-17",
+  "deadline": "2026-10-23",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 110000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "88.9",
+      "descripcion": "Otras actividades de servicios sociales sin alojamiento"
+    }
+  ],
+  "apply_url": "https://seu.conselldeivissa.es/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=PTS2_HOME",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/907195",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.caib.es/eboibfront/es/2026/12265/714553/acuerdo-del-consejo-ejecutivo-en-relacion-con-la-c",
+  "text_inicio": "El Consejo Ejecutivo del Consejo Insular de Eivissa, en reunión ordinaria de fecha 17 de abril de 20",
+  "text_fin": "https://seu.conselldeivissa.es/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=PTS2_HOME",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-22T04:06:27.952Z"
+}

@@ -1,0 +1,88 @@
+{
+  "id": 1108790,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "COMUNITAT VALENCIANA",
+    "nivel3": "SECRETARÍA AUTONÓMICA DE  FAMILIA Y SERVICIOS SOCIALES"
+  },
+  "sedeElectronica": "www.gva.es",
+  "codigoBDNS": "907229",
+  "fechaRecepcion": "2026-05-21",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 1400000,
+  "mrr": false,
+  "descripcion": "S0317 - ESTANCIAS VACACIONALES PARA PERSONAS CON DISCAPACIDAD - 2026",
+  "descripcionLeng": "S0317 - ESTADES VACACIONALS PER A PERSONES AMB DISCAPACITAT - 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES52 - COMUNIDAD VALENCIANA"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "RESOLUCIÓN de 21 de abril de 2026, por la que se establecen las bases reguladoras para la concesión de subvenciones dentro del ámbito competencial propio de la Dirección General de las Personas con Discapacidad.",
+  "urlBasesReguladoras": "https://dogv.gva.es/datos/2026/04/24/pdf/2026_11817_es.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-05-11",
+  "fechaFinSolicitud": "2026-06-01",
+  "textInicio": "Será desde el día siguiente al de la publiación en el DOGV de la Generalitat Valenciana",
+  "textFin": "Será de 15 días a contar desde el día siguiente de la publicación en el DOGV",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1459605,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "RESOLUCIÓN CONVOCATORIA EEVV 2026_firmado.pdf",
+      "long": 265528,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    },
+    {
+      "id": 1459608,
+      "descripcion": "Anexo II",
+      "nombreFic": "Anexo II.pdf",
+      "long": 1545077,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    },
+    {
+      "id": 1459607,
+      "descripcion": "Anexo I",
+      "nombreFic": "Anexo I.pdf",
+      "long": 1655639,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    },
+    {
+      "id": 1459606,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "RESOLUCIN CONVOCATORIA EEVV 2026_26-003867_trad_firmado.pdf",
+      "long": 261736,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

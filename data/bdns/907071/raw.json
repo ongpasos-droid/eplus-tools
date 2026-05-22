@@ -1,0 +1,64 @@
+{
+  "id": 1108632,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "CASTILLA Y LEÓN",
+    "nivel3": "CONSEJERÍA DE CULTURA, TURISMO Y DEPORTE"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "907071",
+  "fechaRecepcion": "2026-05-21",
+  "instrumentos": [
+    {
+      "descripcion": "OTROS INSTRUMENTOS DE AYUDA"
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 1,
+  "mrr": false,
+  "descripcion": "Orden de 15 de mayo de 2026, de la Consejería de Cultura, Turismo y Deporte por la que se convocan becas para deportistas en las residencias deportivas de la Comunidad de Castilla y León para el curso 2026-2027",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades deportivas",
+      "codigo": "93.1"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES41 - CASTILLA Y LEON"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "Orden CYT/656/2021, de 20 de mayo, por la que se establecen las bases reguladoras para la concesión de becas para deportistas en las Residencias Deportivas de la Comunidad de Castilla y León.",
+  "urlBasesReguladoras": "https://bocyl.jcyl.es/boletines/2021/06/11/pdf/BOCYL-D-11062021-10.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Primera convocatoria: día siguiente  segunda convocatoria: 1 de septiembre de 2026",
+  "textFin": "Primera convocatoria: 15 días hábiles  segunda convocatoria. 21 de septiembre de 2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1459157,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "ORDEN_CONVOCATORIA_BECAS_RESIDENCIAS_DEPORTISTAS_2026-2027.pdf",
+      "long": 303709,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

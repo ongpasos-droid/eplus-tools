@@ -1,0 +1,80 @@
+{
+  "id": 1108736,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "MISLATA",
+    "nivel3": "AYUNTAMIENTO DE MISLATA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "907175",
+  "fechaRecepcion": "2026-05-21",
+  "instrumentos": [
+    {
+      "descripcion": "OTROS INSTRUMENTOS DE AYUDA"
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 19910.4,
+  "mrr": false,
+  "descripcion": "Convocatoria y Bases Reguladoras 15 becas de formación para estudiantes Mislata te Beca 2026",
+  "descripcionLeng": "Convocatoria y Bases Reguladoras 15 becas de formación para estudiantes Mislata te Beca 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Educación",
+      "codigo": "85"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES523 - Valencia / València"
+    }
+  ],
+  "descripcionFinalidad": "Fomento del Empleo",
+  "descripcionBasesReguladoras": "Concesión de 15 becas de formación para estudiantes Mislata te Beca 2026",
+  "urlBasesReguladoras": "https://www.mislata.es/es/administracion/subvenciones/convocatorias-de-subvenciones-en-tramitacion/becas-de-formacion-para-estudiantes-mislata-te-beca-0",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Desde el día siguiente de la publicación del extracto en el BOP",
+  "textFin": "Diez días después de la publicación del extracto en el BOP",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1459386,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Resolución Nº 2172 de 19_05_2026 _Aprobación convocatoria y bases concesión 15 becas de práctic.pdf",
+      "long": 401927,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    },
+    {
+      "id": 1459388,
+      "descripcion": "Extracto convocatoria Mislata te Beca 2026",
+      "nombreFic": "Extracto convocatoria Mislata te Beca 2026 - SEFYCU 8180492.pdf",
+      "long": 322424,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    },
+    {
+      "id": 1459387,
+      "descripcion": "Bases Reguladoras Mislata te Beca 2026",
+      "nombreFic": "Convocatoria y bases Mislata Te Beca 2026 revisadas - SEFYCU 8160267.pdf",
+      "long": 414450,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

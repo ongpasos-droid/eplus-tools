@@ -1,0 +1,71 @@
+{
+  "source": "bdns",
+  "source_id": "907086",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / TORREDONJIMENO / AYUNTAMIENTO DE TORREDONJIMENO",
+  "nuts_codes": [],
+  "nuts_primary": null,
+  "title": "CONVOCATORIA DE SUBVENCIONES PARA ACTIVIDADES EDUCATIVAS A FAVOR DE AMPAS Y DEMAS ASOCIACIONES DE CARÁCTER EDUCATIVO, 2026",
+  "title_lang": "es",
+  "summary": "Educación",
+  "status": "open",
+  "publication_date": "2026-05-21",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 25000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "85",
+      "descripcion": "Educación"
+    }
+  ],
+  "apply_url": "https://tosiria.sedelectronica.es/info.1",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/907086",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://tosiria.sedelectronica.es/info.1",
+  "text_inicio": "DIA SIGUIENTE PUBLICACION EXTRACTO EN EL BOP",
+  "text_fin": "30 DIAS NATURALES DESDE PUBLICACION EXTRACTO EN EL BOP",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [
+    {
+      "numAnuncio": 212378,
+      "titulo": "CONVOCATORIA DE AYUDAS PARA LA ADQUISICIÓN DE MATERIAL ESCOLAR PARA EL CURSO ACADÉMICO 2026/2027",
+      "tituloLeng": null,
+      "texto": "<p>Primero. Beneficiarios:</p><p>Podrán acogerse a esta convocatoria las Asociaciones de Madres y Padres de Alumnos (AMPAS) y demás asociaciones de carácter educativo, cuya actividad esté vinculada o represente al municipio de Torredonjimeno.</p><p>Estas asociaciones deben estar legalmente constituidas, dotadas de personalidad jurídica propia y tener entre sus fines estatutarios la promoción y desarrollo de proyectos, programas o actividades cuyo objeto sea el definido en la presente convocatoria. Asimismo, deberán cumplir con los requisitos establecidos en el artículo 4 de la convocatoria.</p><p>Segundo. Objeto.</p><p>Es objeto de esta convocatoria regular la concesión de subvenciones, en el marco de los objetivos estratégicos del PES municipal, para actividades, programas y proyectos dirigidos al fomento y la promoción de actividades educativas a través de Asociaciones de Madres y Padres de Alumnos (AMPAS) y demás asociaciones de carácter educativo.</p><p>El procedimiento de concesión de subvenciones se tramitará en régimen de concurrencia competitiva, de acuerdo con lo prevenido en el artículo 22.1 de la Ley 38/2003, de 17 de noviembre, General de Subvenciones</p><p>Tercero. Bases reguladoras.</p><p>Bases reguladoras específicas de la convocatoria de subvenciones para actividades educativas a favor de AMPAS y demás asociaciones de carácter educativo, ejercicio 2026, Bases de ejecución del Presupuesto del Ayuntamiento de Torredonjimeno 2026 y Ordenanza Municipal reguladora de subvenciones Municipales.</p><p>Cuarto. Cuantía.</p><p>La cuantía de las subvenciones a otorgar consistirá en una cantidad resultante al aplicar los criterios de valoración del artículo 10 de la convocatoria, a cuyo efecto se tomará el presupuesto de la actividad o Plan Financiero presentado por el solicitante, o sus modificaciones posteriores, como referencia para su determinación.</p><p>Las subvenciones se concederán con cargo a la aplicación presupuestaria 2026.326.48900 del Presupuesto 2026, dotada con un importe de 25.000,00 euros, no pudiendo concederse subvenciones por importe superior a la cuantía total máxima fijada en la convocatoria.</p><p>Quinto. Plazo de presentación de solicitudes.</p><p>El plazo máximo de presentación de solicitudes será de 30 días naturales a contar desde el siguiente a la publicación del extracto de la convocatoria en el Boletín Oficial de la Provincia de Jaén, sin perjuicio de su inserción en la sede electrónica del Ayuntamiento de Torredonjimeno y en el tablón de anuncios.</p><p>La presentación de las solicitudes de subvención, debidamente suscritas por el representante legal, se realizará a través de la sede electrónica del Ayuntamiento de Torredonjimeno que se encuentra en la dirección http://tosiria.sedelectronica.es/. Las solicitudes y demás documentación a presentar deberán estar firmadas digitalmente por los solicitantes o sus representantes.</p><p>Sexto.- Plazo de ejecución y de justificación de la actividad subvencionada</p><p>El plazo de ejecución de las actividades o proyectos objeto de subvención será del 01/07/2025 al 30/06/2026, admitiéndose los gastos y justificantes que acrediten su realización, producidos con anterioridad a la notificación del acto administrativo de concesión, pero siempre que hayan tenido lugar en el período antes señalado.</p><p>El plazo máximo para la presentación de la documentación justificativa de la realización de las actividades será de tres meses desde la finalización del plazo de ejecución.</p>",
+      "textoLeng": null,
+      "url": "http://bop.dipujaen.es/validaCVE?cve=BOP-2026-2427",
+      "cve": "BOP-2026-2427",
+      "desDiarioOficial": "B.O.P. DE JAÉN",
+      "datPublicacion": "2026-05-22"
+    }
+  ],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-22T04:06:27.915Z"
+}

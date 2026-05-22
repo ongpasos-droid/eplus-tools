@@ -1,0 +1,75 @@
+{
+  "id": 1108813,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "TORDERA",
+    "nivel3": "AYUNTAMIENTO DE TORDERA"
+  },
+  "sedeElectronica": "https://www.seu-e.cat/ca/web/tordera/ ",
+  "codigoBDNS": "907252",
+  "fechaRecepcion": "2026-05-21",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 11000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA PARA EL OTORGAMIENTO DE SUBVENCIONES A PERSONAS MAYORES DE 65 AÑOS Y COLECTIVOS VULNERABLES, PARA EL AÑO 2026",
+  "descripcionLeng": "CONVOCATORIA PER L'OTORGAMENT DE SUBVENCIONS A PERSONES MAJORS DE 65 ANYS I COL·LECTIUS VULNERABLES PER A L'ANY 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    },
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES511 - Barcelona"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "BBRR PARA EL OTORGAMIENTO DE SUBVENCIONES A FAVOR DE PERSONAS MAYORES DE 65 AÑOS QUE VIVEN SOLAS, DE PAREJAS MAYORES DE 65 AÑOS QUE VIVEN SOLAS,DE FAMILIAS MONOPARENTALES, DE VIUDOS Y VIUDAS, DE FAMILIAS CON TODOS SUS MIEMBROS EN SITUACIÓN DE DESEMPLEO",
+  "urlBasesReguladoras": "https://seu-e.cat/documents/1437609/10843174/Bases+reguladoras+subvenciones+diversos+colectivos+majores+65+a%C3%B1os.pdf/dad77eb8-fe8f-4887-b9ea-1fcbb99c6950",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-06-12",
+  "textInicio": "Día después de la publicación de esta convocatoria en el BOPB",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1459662,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "03_Convocatòria subvencions majors de 65 anys i col·lecctius vulnerables 2026.pdf",
+      "long": 1000799,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    },
+    {
+      "id": 1459661,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "03_Convocatoria subvenciones mayores de 65 años 2026 CAST.pdf",
+      "long": 1006140,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

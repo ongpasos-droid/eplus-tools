@@ -1,0 +1,104 @@
+{
+  "id": 1108843,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "GALICIA",
+    "nivel3": "CONSELLERÍA DE EDUCACIÓN, CIENCIA, UNIVERSIDADES E FORMACIÓN PROFESIONAL"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "907282",
+  "fechaRecepcion": "2026-05-21",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 265000,
+  "mrr": false,
+  "descripcion": "Orden de 11 de mayo de 2026 por la que se convocan ayudas dirigidas a escuelas de música públicas y escuelas de música privadas dependientes de instituciones sin ánimo de lucro",
+  "descripcionLeng": "Orde do 11 de maio de 2026 pola que se convocan axudas dirixidas a escolas de música públicas e escolas de música privadas dependentes de institucións sen ánimo de lucro ",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Educación",
+      "codigo": "85"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES11 - GALICIA"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Orde do 11 de maio de 2026 pola que se convocan axudas dirixidas a escolas de música públicas e escolas de música privadas dependentes de institucións sen ánimo de lucro ",
+  "urlBasesReguladoras": "https://www.xunta.gal/diario-oficial-galicia/portalPublicoHome.do?fecha=20260521&ruta=Indice93_es.html&lang=es",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Dende o día seguinte á publicación da convocatoria",
+  "textFin": "31/07/2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1459720,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "-Orde_axudas_2026_DOG_es_20260511_con data_20260521_140209.pdf",
+      "long": 344606,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    },
+    {
+      "id": 1459721,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "-Orde_axudas_2026_DOG_gal_20260508_con data_20260521_140252.pdf",
+      "long": 321112,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    },
+    {
+      "id": 1459725,
+      "descripcion": "ANEXO ED314E-G",
+      "nombreFic": "-ED314E-G_20260521_140112.pdf",
+      "long": 146261,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    },
+    {
+      "id": 1459723,
+      "descripcion": "ANEXO ED314D-G",
+      "nombreFic": "-ED314D-G_20260521_135413.pdf",
+      "long": 155078,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    },
+    {
+      "id": 1459724,
+      "descripcion": "ANEXO ED314E-C",
+      "nombreFic": "-ED314E-C_20260521_135449.pdf",
+      "long": 146950,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    },
+    {
+      "id": 1459722,
+      "descripcion": "ANEXO ED314D-C",
+      "nombreFic": "-ED314D-C_20260521_135325.pdf",
+      "long": 155663,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

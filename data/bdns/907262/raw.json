@@ -1,0 +1,81 @@
+{
+  "id": 1108823,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "VILAFRANCA DEL PENEDÈS",
+    "nivel3": "AYUNTAMIENTO DE VILAFRANCA DEL PENEDÈS"
+  },
+  "sedeElectronica": "https://seu.vilafranca.cat/",
+  "codigoBDNS": "907262",
+  "fechaRecepcion": "2026-05-21",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 25000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA PÚBLICA CONCESIÓN AYUDAS Y SUBVENCIONES, A LAS ENTIDADES PRIVADAS QUE EJECUTEN ACTIVIDADES EN EL ÁMBITO DE LA SALUD DE LAS PERSONAS, AÑO 2026",
+  "descripcionLeng": "CONVOCATÒRIA PÚBLICA CONCESSIÓ AJUDES I SUBVENCIONS, A LES ENTITATS PRIVADES QUE EXECUTIN ACTIVITATS EN L'ÀMBIT DE LA SALUT DE LES PERSONES, ANY 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "GRAN EMPRESA"
+    },
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    },
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    },
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "OTROS SERVICIOS",
+      "codigo": "T"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES511 - Barcelona"
+    }
+  ],
+  "descripcionFinalidad": "Sanidad",
+  "descripcionBasesReguladoras": "CONVOCATORIA PÚBLICA CONCESIÓN AYUDAS Y SUBVENCIONES, A LAS ENTIDADES PRIVADAS QUE EJECUTEN ACTIVIDADES EN EL ÁMBITO DE LA SALUD DE LAS PERSONAS, AÑO 2026",
+  "urlBasesReguladoras": "https://seu.vilafranca.cat/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "DIA SIGUIENTE A LA PUBLICACIÓN DE LA CONVOCATORIA EL BOPB",
+  "textFin": "30 DIAS NATURALES A PARTIR DE LA PUBLICACIÓN EN EL BOPB",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1459683,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Convoc-Subv-Entitats-Salut-2026 Trasllat acord JGL-català.pdf",
+      "long": 200129,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    },
+    {
+      "id": 1459682,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convoc-Subv-Entitats-Salut-2026 Trasllat acord JGL-castellà.pdf",
+      "long": 198412,
+      "datMod": "2026-05-21",
+      "datPublicacion": "2026-05-21"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}
