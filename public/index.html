@@ -1702,6 +1702,72 @@ tailwind.config = {
             <button data-section="all-docs" class="px-4 py-2.5 text-sm border-b-2 border-transparent text-on-surface-variant transition-colors hover:text-primary whitespace-nowrap">Todos los docs</button>
             <button data-section="platform-docs" class="px-4 py-2.5 text-sm border-b-2 border-transparent text-on-surface-variant transition-colors hover:text-primary whitespace-nowrap">Docs oficiales</button>
             <button data-section="library" class="px-4 py-2.5 text-sm border-b-2 border-transparent text-on-surface-variant transition-colors hover:text-primary whitespace-nowrap">Biblioteca</button>
+            <button data-section="patterns" class="px-4 py-2.5 text-sm border-b-2 border-transparent text-on-surface-variant transition-colors hover:text-primary whitespace-nowrap">Patrones Evaluadores</button>
+          </div>
+
+          <!-- ── Pattern Library (Diagnose & Improve, TASK-007) ───── -->
+          <div id="admin-sec-patterns" class="admin-section hidden">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
+                <span class="material-symbols-outlined text-secondary-fixed text-xl">policy</span>
+              </div>
+              <div>
+                <h2 class="text-xl font-bold text-on-surface">Pattern Library — Evaluadores EACEA</h2>
+                <p class="text-xs text-on-surface-variant">Patrones agregados desde cartas de evaluador. Activo defensible del producto.</p>
+              </div>
+            </div>
+
+            <!-- Stats row -->
+            <div id="patterns-stats" class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4"></div>
+
+            <!-- Filters -->
+            <div class="flex items-center gap-3 mb-3 text-sm">
+              <label class="text-on-surface-variant">Filtrar:</label>
+              <select id="patterns-filter-scope" class="border border-outline-variant/40 rounded-lg px-3 py-1.5 text-sm bg-surface">
+                <option value="">Todos los scopes</option>
+                <option value="universal">Universal</option>
+                <option value="programme">Programme-specific</option>
+                <option value="emergent">Emergent (N=1)</option>
+              </select>
+              <select id="patterns-filter-programme" class="border border-outline-variant/40 rounded-lg px-3 py-1.5 text-sm bg-surface">
+                <option value="">Todos los programas</option>
+              </select>
+            </div>
+
+            <!-- Patterns table -->
+            <div class="overflow-x-auto border border-outline-variant/30 rounded-xl bg-surface">
+              <table class="w-full text-sm">
+                <thead class="bg-surface-variant/30 text-xs uppercase text-on-surface-variant">
+                  <tr>
+                    <th class="text-left p-3 font-medium">Scope</th>
+                    <th class="text-left p-3 font-medium">Programa</th>
+                    <th class="text-left p-3 font-medium">Patrón</th>
+                    <th class="text-left p-3 font-medium">Criterio</th>
+                    <th class="text-center p-3 font-medium">N</th>
+                    <th class="text-left p-3 font-medium">Severidad</th>
+                  </tr>
+                </thead>
+                <tbody id="patterns-tbody"></tbody>
+              </table>
+            </div>
+
+            <!-- Letters list (audit trail) -->
+            <h3 class="text-lg font-bold mt-8 mb-3 text-on-surface">Cartas en el corpus</h3>
+            <div class="overflow-x-auto border border-outline-variant/30 rounded-xl bg-surface">
+              <table class="w-full text-sm">
+                <thead class="bg-surface-variant/30 text-xs uppercase text-on-surface-variant">
+                  <tr>
+                    <th class="text-left p-3 font-medium">Acronym</th>
+                    <th class="text-left p-3 font-medium">Programa</th>
+                    <th class="text-left p-3 font-medium">Score / Threshold</th>
+                    <th class="text-left p-3 font-medium">Resultado</th>
+                    <th class="text-left p-3 font-medium">Formato</th>
+                    <th class="text-center p-3 font-medium">Findings</th>
+                  </tr>
+                </thead>
+                <tbody id="patterns-letters-tbody"></tbody>
+              </table>
+            </div>
           </div>
 
           <!-- ── Convocatorias ─────────────────────────────────── -->

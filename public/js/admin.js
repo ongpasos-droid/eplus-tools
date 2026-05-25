@@ -44,6 +44,7 @@ const Admin = (() => {
       case 'all-docs':      loadAllDocs(); break;
       case 'platform-docs': loadPlatformDocs(); break;
       case 'library':       loadAdminLibrary(); break;
+      case 'patterns':      loadPatterns(); break;
     }
   }
 
@@ -4683,6 +4684,173 @@ KEY EVALUATOR FOCUS:
       }
     }
   });
+
+  /* ═════════════════════════════════════════════════════════════════
+     Pattern Library (Diagnose & Improve, TASK-007)
+     ════════════════════════════════════════════════════════════════ */
+
+  let _patternsCache = null;
+  let _lettersCache = null;
+  let _patternsStatsCache = null;
+
+  async function loadPatterns() {
+    const tbody = document.getElementById('patterns-tbody');
+    const lettersTbody = document.getElementById('patterns-letters-tbody');
+    if (tbody) tbody.innerHTML = '<tr><td colspan="6" class="py-6 text-center text-on-surface-variant text-sm">Cargando…</td></tr>';
+    if (lettersTbody) lettersTbody.innerHTML = '<tr><td colspan="6" class="py-6 text-center text-on-surface-variant text-sm">Cargando…</td></tr>';
+
+    try {
+      const [stats, patterns, letters] = await Promise.all([
+        API.get('/diagnose/stats'),
+        API.get('/diagnose/patterns'),
+        API.get('/diagnose/letters'),
+      ]);
+      _patternsStatsCache = stats;
+      _patternsCache = patterns;
+      _lettersCache = letters;
+
+      renderPatternsStats(stats);
+      renderProgrammeFilter(stats.programmes || []);
+      renderPatternsTable();
+      renderLettersTable(letters);
+
+      // bind filters once
+      const scopeSel = document.getElementById('patterns-filter-scope');
+      const progSel = document.getElementById('patterns-filter-programme');
+      if (scopeSel && !scopeSel.dataset.bound) {
+        scopeSel.dataset.bound = '1';
+        scopeSel.addEventListener('change', renderPatternsTable);
+      }
+      if (progSel && !progSel.dataset.bound) {
+        progSel.dataset.bound = '1';
+        progSel.addEventListener('change', renderPatternsTable);
+      }
+    } catch (e) {
+      if (tbody) tbody.innerHTML = `<tr><td colspan="6" class="py-6 text-center text-error text-sm">Error: ${e.message || e}</td></tr>`;
+    }
+  }
+
+  function renderPatternsStats(stats) {
+    const wrap = document.getElementById('patterns-stats');
+    if (!wrap) return;
+    const by = stats.patterns_by_scope || {};
+    const card = (label, value, hint) =>
+      `<div class="bg-surface border border-outline-variant/30 rounded-xl p-3">
+         <div class="text-2xl font-bold text-on-surface">${value}</div>
+         <div class="text-xs text-on-surface-variant">${label}</div>
+         ${hint ? `<div class="text-[10px] text-on-surface-variant/70 mt-1">${hint}</div>` : ''}
+       </div>`;
+    wrap.innerHTML =
+      card('Cartas', stats.letters_total || 0) +
+      card('Findings', stats.findings_total || 0) +
+      card('Patrones', stats.patterns_active || 0) +
+      card('Universales', by.universal || 0, 'N≥2 cartas en ≥2 programas') +
+      card('Por programa', by.programme || 0, 'N≥2 en mismo programa');
+  }
+
+  function renderProgrammeFilter(programmes) {
+    const sel = document.getElementById('patterns-filter-programme');
+    if (!sel) return;
+    const opts = ['<option value="">Todos los programas</option>']
+      .concat((programmes || []).map(p =>
+        `<option value="${p.programme_code}">${escapeHTML(p.programme_name || p.programme_code)}</option>`));
+    sel.innerHTML = opts.join('');
+  }
+
+  function renderPatternsTable() {
+    const tbody = document.getElementById('patterns-tbody');
+    if (!tbody) return;
+    const patterns = _patternsCache?.data || _patternsCache || [];
+    const scope = document.getElementById('patterns-filter-scope')?.value || '';
+    const prog = document.getElementById('patterns-filter-programme')?.value || '';
+
+    const filtered = patterns.filter(p => {
+      if (scope && p.scope !== scope) return false;
+      if (prog) {
+        if (p.scope === 'universal') return true;
+        if (p.programme_code !== prog) return false;
+      }
+      return true;
+    });
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" class="py-6 text-center text-on-surface-variant text-sm">Sin patrones con esos filtros.</td></tr>';
+      return;
+    }
+
+    const scopeBadge = (s) => {
+      const colors = {
+        universal: 'bg-primary/10 text-primary',
+        programme: 'bg-tertiary/10 text-tertiary',
+        emergent:  'bg-on-surface-variant/15 text-on-surface-variant',
+      };
+      return `<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold ${colors[s] || ''}">${s.toUpperCase()}</span>`;
+    };
+    const sevBadge = (s) => {
+      const colors = {
+        critical:    'bg-error/15 text-error',
+        high:        'bg-error/10 text-error',
+        medium_high: 'bg-orange-500/10 text-orange-700',
+        medium:      'bg-yellow-500/10 text-yellow-800',
+        medium_low:  'bg-yellow-500/5 text-yellow-700',
+        low:         'bg-on-surface-variant/10 text-on-surface-variant',
+        positive:    'bg-green-500/10 text-green-700',
+      };
+      return `<span class="px-2 py-0.5 rounded text-[10px] font-medium ${colors[s] || ''}">${s}</span>`;
+    };
+
+    tbody.innerHTML = filtered.map(p => `
+      <tr class="border-t border-outline-variant/20">
+        <td class="p-3 align-top">${scopeBadge(p.scope)}</td>
+        <td class="p-3 align-top text-xs text-on-surface-variant">${escapeHTML(p.programme_name || (p.scope === 'universal' ? '— todos —' : '—'))}</td>
+        <td class="p-3 align-top">
+          <div class="font-medium text-on-surface">${escapeHTML(p.pattern_text)}</div>
+          ${p.writer_rule_text ? `<div class="text-xs text-on-surface-variant mt-1 italic">→ ${escapeHTML(p.writer_rule_text)}</div>` : ''}
+        </td>
+        <td class="p-3 align-top text-xs text-on-surface-variant">${escapeHTML(p.criterion || '—')}</td>
+        <td class="p-3 align-top text-center font-bold">${p.occurrences_count}</td>
+        <td class="p-3 align-top">${sevBadge(p.severity_avg)}</td>
+      </tr>
+    `).join('');
+  }
+
+  function renderLettersTable(lettersResp) {
+    const tbody = document.getElementById('patterns-letters-tbody');
+    if (!tbody) return;
+    const letters = lettersResp?.data || lettersResp || [];
+    if (letters.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" class="py-6 text-center text-on-surface-variant text-sm">Sin cartas cargadas.</td></tr>';
+      return;
+    }
+    const resultBadge = (r) => {
+      const map = {
+        awarded:             { txt: 'Concedido',    cls: 'bg-green-500/10 text-green-700' },
+        rejected_threshold:  { txt: 'No threshold', cls: 'bg-error/15 text-error' },
+        rejected_ranking:    { txt: 'No ranking',   cls: 'bg-orange-500/10 text-orange-700' },
+        unknown:             { txt: 'Desconocido',  cls: 'bg-on-surface-variant/10 text-on-surface-variant' },
+      };
+      const x = map[r] || map.unknown;
+      return `<span class="px-2 py-0.5 rounded text-[10px] font-medium ${x.cls}">${x.txt}</span>`;
+    };
+    tbody.innerHTML = letters.map(l => `
+      <tr class="border-t border-outline-variant/20">
+        <td class="p-3 align-top font-bold">${escapeHTML(l.proposal_acronym || '—')}</td>
+        <td class="p-3 align-top text-xs">${escapeHTML(l.programme_name || l.programme_code || '—')}</td>
+        <td class="p-3 align-top text-xs">${l.total_score != null ? `${l.total_score} / ${l.total_threshold || '—'}` : '<span class="text-on-surface-variant">—</span>'}</td>
+        <td class="p-3 align-top">${resultBadge(l.result)}</td>
+        <td class="p-3 align-top text-xs text-on-surface-variant">${escapeHTML(l.source_format)}</td>
+        <td class="p-3 align-top text-center">
+          <span class="font-bold">${l.findings_count}</span>
+          <span class="text-[10px] text-on-surface-variant">(+${l.positives_count} pos)</span>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  function escapeHTML(s) {
+    if (s == null) return '';
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
 
   return { init, openEdit, confirmDelete };
 })();
