@@ -283,6 +283,7 @@ const App = (() => {
       developer:        'Escribir',
       master:           'Diagnóstico',
       diagnose:         'Diagnóstico',
+      'import-proposal':'Importar proyecto',
       calculator:       'Calculator',
       planner:          'Planner',
       evaluator:        'Evaluar',
@@ -319,6 +320,7 @@ const App = (() => {
     if (route === 'convocatorias' && typeof Convocatorias !== 'undefined') Convocatorias.init();
     if (route === 'developer' && typeof Developer !== 'undefined') Developer.init();
     if (route === 'diagnose' && typeof Diagnose !== 'undefined') Diagnose.init();
+    if (route === 'import-proposal' && typeof ImportProposal !== 'undefined') ImportProposal.init();
     if (route === 'evaluator' && typeof Evaluator !== 'undefined') Evaluator.init();
     if (route === 'budget' && typeof Budget !== 'undefined') Budget.init();
   }

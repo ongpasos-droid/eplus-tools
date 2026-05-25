@@ -1,11 +1,16 @@
 /* ── Diagnose Routes — /v1/diagnose/* ───────────────────────────────────
    Admin endpoints over pattern_library, evaluation_letters and evaluation_findings.
-   Future phases add: /v1/diagnose/run, /v1/diagnose/upload-proposal,
-   /v1/diagnose/upload-letter, /v1/improve/*.
+   Plus user endpoints: /run, /runs/:id, /upload-proposal, /paste-proposal.
 */
 const router = require('express').Router();
+const multer = require('multer');
 const { requireAuth } = require('../../middleware/auth');
 const ctrl = require('./controller');
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 50 * 1024 * 1024 },  // 50MB
+});
 
 function requireAdminOrScribe(req, res, next) {
   const role = req.user?.role;
@@ -38,5 +43,11 @@ router.get('/stats',                             guard, ctrl.getStats);
 router.post('/run',                              requireAuth, ctrl.runDiagnosis);
 router.get('/runs/:runId',                       requireAuth, ctrl.getRun);
 router.get('/runs/project/:projectId/latest',    requireAuth, ctrl.getLatestRunForProject);
+
+/* ── Import proposal (Fase 3) ────────────────────────────────────────── */
+// Door B (audit) / Door C (recycling): user uploads an external Form Part B.
+// We create a new imported project and parse the Word into form_field_values.
+router.post('/upload-proposal',                  requireAuth, upload.single('file'), ctrl.uploadProposal);
+router.post('/paste-proposal',                   requireAuth, ctrl.pasteProposal);
 
 module.exports = router;

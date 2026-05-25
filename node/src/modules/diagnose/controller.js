@@ -1,6 +1,7 @@
 /* ── Diagnose controller — admin endpoints for pattern_library + letters ─── */
 const model = require('./model');
 const engine = require('./engine');
+const importer = require('./import/import-proposal');
 
 function ok(res, data) {
   return res.json({ ok: true, data });
@@ -64,7 +65,7 @@ exports.runDiagnosis = async (req, res, next) => {
   try {
     const { projectId } = req.body || {};
     if (!projectId) return bad(res, 'BAD_REQUEST', 'projectId is required');
-    const run = await engine.runDiagnosis(projectId, { userId: req.user?.sub });
+    const run = await engine.runDiagnosis(projectId, { userId: req.user?.id });
     ok(res, run);
   } catch (e) {
     if (/not found|nothing to diagnose/i.test(e.message)) {
@@ -88,4 +89,49 @@ exports.getLatestRunForProject = async (req, res, next) => {
     if (!run) return ok(res, null);
     ok(res, run);
   } catch (e) { next(e); }
+};
+
+/* ── Import proposal (Fase 3) — Door B / Door C ─────────────────────── */
+
+exports.uploadProposal = async (req, res, next) => {
+  try {
+    if (!req.file) return bad(res, 'BAD_REQUEST', 'A .docx file is required (multipart field "file").');
+    const { programId, projectName } = req.body || {};
+    if (!programId) return bad(res, 'BAD_REQUEST', 'programId is required.');
+
+    const out = await importer.importWordProposal({
+      buffer: req.file.buffer,
+      programId,
+      userId: req.user?.id,
+      projectName,
+    });
+    ok(res, out);
+  } catch (e) {
+    if (/not found|did not yield/i.test(e.message)) {
+      return bad(res, 'BAD_REQUEST', e.message);
+    }
+    next(e);
+  }
+};
+
+exports.pasteProposal = async (req, res, next) => {
+  try {
+    const { programId, projectName, fields } = req.body || {};
+    if (!programId) return bad(res, 'BAD_REQUEST', 'programId is required.');
+    if (!fields || typeof fields !== 'object') {
+      return bad(res, 'BAD_REQUEST', 'fields object (field_id -> text) is required.');
+    }
+    const out = await importer.importPasteProposal({
+      fields,
+      programId,
+      userId: req.user?.id,
+      projectName,
+    });
+    ok(res, out);
+  } catch (e) {
+    if (/not found|must contain/i.test(e.message)) {
+      return bad(res, 'BAD_REQUEST', e.message);
+    }
+    next(e);
+  }
 };
