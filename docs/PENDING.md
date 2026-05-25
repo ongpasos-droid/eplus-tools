@@ -8,6 +8,48 @@
 
 ## 1 · En curso · bloqueadas en pre-requisito
 
+### TASK-007 — Diagnose & Improve (replanteo de Perfeccionar)
+**Status:** APROBADO el diseño · LISTO PARA EMPEZAR Fase 1
+**Owner:** Local Claude (eplus-tools)
+**Doc canónico:** `docs/DIAGNOSE_AND_IMPROVE_PLAN.md`
+**Fecha plan:** 2026-05-25
+**Reemplaza:** `PROJECT_MASTER_ARCHITECTURE.md` y `PROJECT_MASTER_IMPLEMENTATION_PLAN.md` (quedan obsoletos)
+
+**Qué incluye:**
+- **Eliminar el Master** como artefacto intermedio. Form Part B pasa a ser el documento canónico.
+- **Pestaña "Diagnóstico"** como puerta única que acepta 3 puertas: greenfield, audit, reciclaje. Funciona como triaje (rediseñar/perfeccionar/exportar).
+- **Pattern library de evaluadores EACEA** como activo defensible del producto. Seed corpus: 4 cartas analizadas (CoVE, FOCUS, RISE, DANCE+).
+- **Catálogo controlado**: cada proyecto y carta atados a `call_id` del Admin Data E+.
+- **Perfeccionar dirigido** con ediciones puntuales + diff visible + accept/reject por cambio.
+
+**4 leyes universales EACEA confirmadas con N=4 cartas:**
+1. Sustainability sin financiación post-proyecto concreta
+2. Methodology con huecos de detalle
+3. Inconsistencias objectives↔activities↔WP descriptions
+4. Temas transversales mencionados pero no traducidos a tareas
+
+**Decisiones cerradas (2026-05-25):**
+- Borrar Masters existentes (borrador interno, sin clientes externos)
+- Diagnóstico gratis limitado + Perfeccionar de pago
+- MVP: todos los calls EACEA Form Part B cargados en Admin Data E+
+- Formato input: Word EACEA + paste por sección. PDFs sueltos descartados
+- Carta evaluador: opcional. Con carta = diagnóstico dirigido premium
+
+**Plan por fases (10–12 semanas total):**
+1. **Fase 1** (1.5–2 sem): Backend DB + parser cartas + seed corpus cargado
+2. **Fase 2** (2 sem): Diagnóstico sin carta sobre proyectos de la app
+3. **Fase 3** (1.5 sem): Upload de proyecto externo (Word EACEA + paste)
+4. **Fase 4** (2 sem): Upload carta + diagnóstico dirigido
+5. **Fase 5** (2–3 sem): Perfeccionar dirigido con diff y versionado
+6. **Fase 6** (1 sem): Leyes universales como reglas duras del Writer
+
+**Pendiente de decisión (no bloqueante):**
+- Anonymización seed corpus
+- Nombre comercial del producto
+- Política de retención de cartas
+- Tier (Premium-only o también Standard)
+- Disclaimer RGPD
+
 ### TASK-001 — Refactor del directorio de entidades
 **Status:** APROBADO el diseño · BLOQUEADO en pre-requisito
 **Owner del bloqueo:** Oscar

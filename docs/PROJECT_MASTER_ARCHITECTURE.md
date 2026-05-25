@@ -1,5 +1,10 @@
 # E+ Tools — Arquitectura canónica del producto
 
+> ⚠️ **OBSOLETO desde 2026-05-25** — el concepto de "Documento Maestro" descrito
+> aquí se elimina en el replanteo del sistema. Ver `docs/DIAGNOSE_AND_IMPROVE_PLAN.md`
+> como documento canónico actual. Este archivo se mantiene como referencia histórica
+> hasta completar la Fase 5 del plan nuevo; luego se elimina.
+
 > Documento canónico de la arquitectura del producto E+ Tools tras la sesión
 > de diseño 2026-05-15/16. Recoge las decisiones cerradas para que cualquier
 > sesión futura (con Claude Local, Claude VPS, o cualquier desarrollador)

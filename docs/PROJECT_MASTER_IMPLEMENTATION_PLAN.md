@@ -1,5 +1,10 @@
 # E+ Tools — Plan de implementación del Documento Maestro
 
+> ⚠️ **OBSOLETO desde 2026-05-25** — el plan original del "Documento Maestro" se
+> sustituye por el replanteo descrito en `docs/DIAGNOSE_AND_IMPROVE_PLAN.md` (TASK-007).
+> Este archivo se mantiene como referencia histórica hasta completar la Fase 5 del
+> plan nuevo; luego se elimina.
+
 > Plan ejecutable derivado de `docs/PROJECT_MASTER_ARCHITECTURE.md`.
 >
 > Cada paso del roadmap §16 descompuesto en sub-tareas de 2-4 horas,
