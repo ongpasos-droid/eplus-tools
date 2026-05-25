@@ -32,4 +32,11 @@ router.get('/letters/:id',                       guard, ctrl.getLetter);
 /* ── Stats (dashboard) ────────────────────────────────────────────────── */
 router.get('/stats',                             guard, ctrl.getStats);
 
+/* ── Diagnose runs (Fase 2) ──────────────────────────────────────────── */
+// Any authenticated user can run/read diagnoses on projects they own.
+// The engine validates ownership through the project_id chain.
+router.post('/run',                              requireAuth, ctrl.runDiagnosis);
+router.get('/runs/:runId',                       requireAuth, ctrl.getRun);
+router.get('/runs/project/:projectId/latest',    requireAuth, ctrl.getLatestRunForProject);
+
 module.exports = router;
