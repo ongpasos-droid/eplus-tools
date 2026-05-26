@@ -138,7 +138,10 @@ const Diagnose = (() => {
       alert('Error cargando historial: ' + (e.message || e));
     }
   }
-  function closeHistory() { state.showHistory = false; render(); }
+  function closeHistory() {
+    state.showHistory = false;
+    document.getElementById('diagnose-history-modal')?.remove();
+  }
 
   async function rollback(versionId) {
     if (!confirm('¿Restaurar esta versión? Se creará un snapshot del estado actual primero (puedes volver atrás).')) return;
@@ -204,7 +207,14 @@ const Diagnose = (() => {
     }
 
     body.innerHTML = renderSplit();
-    if (state.showHistory) renderHistoryModal();
+    // Ensure the modal reflects current state — remove if showHistory=false,
+    // (re)render if true. The modal lives in document.body, not in
+    // #diagnose-body, so render() does not affect it implicitly.
+    if (state.showHistory) {
+      renderHistoryModal();
+    } else {
+      document.getElementById('diagnose-history-modal')?.remove();
+    }
   }
 
   function renderEmpty() {
