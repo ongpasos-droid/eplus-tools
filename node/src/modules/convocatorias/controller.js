@@ -74,9 +74,11 @@ exports.list = (req, res, next) => {
     //  - Nunca mostramos calls con deadline pasado, aunque su status sea 'open'
     //    (los datos de SEDIA/BDNS a veces tardan en marcarse 'closed').
     //  - Excluimos source='salto' porque las movilidades tienen su propia pestaña.
+    //  - Excluimos source='bdns' (subvenciones nacionales ES): no encajan con el foco EU.
     const today = new Date().toISOString().slice(0, 10);
     let rows = all.filter(r => {
       if (String(r.source || '').toLowerCase() === 'salto') return false;
+      if (String(r.source || '').toLowerCase() === 'bdns') return false;
       if (String(r.status || '').toLowerCase() === 'closed') return false;
       if (r.deadline && String(r.deadline) < today) return false;
       return true;
