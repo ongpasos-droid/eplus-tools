@@ -178,6 +178,45 @@ const Convocatorias = (() => {
       const card = e.target.closest('[data-call-id]');
       if (card) openDetail(card.dataset.callId);
     });
+
+    // Semantic search
+    const semQ = document.getElementById('convocatorias-semantic-q');
+    const semGo = document.getElementById('convocatorias-semantic-go');
+    const semClear = document.getElementById('convocatorias-semantic-clear');
+    semGo?.addEventListener('click', () => runSemanticSearch(semQ.value));
+    semQ?.addEventListener('keydown', e => { if (e.key === 'Enter') runSemanticSearch(semQ.value); });
+    semClear?.addEventListener('click', () => {
+      semQ.value = '';
+      semClear.classList.add('hidden');
+      render();
+    });
+  }
+
+  async function runSemanticSearch(query) {
+    if (!query || query.trim().length < 3) return;
+    const list = document.getElementById('convocatorias-list');
+    list.innerHTML = '<div class="col-span-full text-center text-on-surface-variant py-12 text-sm"><span class="spinner"></span> Buscando con IA…</div>';
+    try {
+      const res = await API.get('/convocatorias/search-semantic?q=' + encodeURIComponent(query) + '&top=12');
+      const items = res.items || [];
+      if (!items.length) {
+        list.innerHTML = '<div class="col-span-full text-center text-on-surface-variant py-12 text-sm">Sin resultados. Prueba con otras palabras clave.</div>';
+        return;
+      }
+      // Marry semantic results with full feed data (for budget, badges, etc.)
+      const enriched = items.map(it => {
+        const full = allItems.find(x => x.source_id === it.source_id) || it;
+        return { ...full, _semanticScore: it.score, _semanticSnippet: it.snippet };
+      });
+      list.innerHTML = enriched.map(item => {
+        const card = renderCard(item);
+        const snippetBlock = `<div class="mt-3 pt-3 border-t border-outline-variant/15 text-[11px] text-on-surface-variant italic">… ${escapeHtml((item._semanticSnippet || '').slice(0, 200))} …</div>`;
+        return card.replace('</article>', snippetBlock + '</article>');
+      }).join('');
+      document.getElementById('convocatorias-semantic-clear')?.classList.remove('hidden');
+    } catch (e) {
+      list.innerHTML = `<div class="col-span-full text-center text-error py-12 text-sm">Error: ${escapeHtml(e.message || e)}</div>`;
+    }
   }
 
   async function createProjectFromCall(btn) {
@@ -407,12 +446,112 @@ const Convocatorias = (() => {
 
         ${docs ? `<div><div class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-2">Documentos</div><ul class="list-disc list-inside space-y-1">${docs}</ul></div>` : ''}
 
+        <div class="pt-4 border-t border-outline-variant/20">
+          <button type="button" id="conv-chat-open"
+            data-source-id="${escapeHtml(item.source_id || '')}"
+            data-title="${escapeHtml(item.title || '')}"
+            class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-purple-50 border-2 border-purple-200 text-purple-800 text-sm font-bold hover:bg-purple-100 transition-colors">
+            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1">smart_toy</span>
+            Chat con esta convocatoria
+          </button>
+        </div>
+
         <div class="flex items-center justify-between pt-4 border-t border-outline-variant/20 flex-wrap gap-3">
           <div>${details}</div>
           <div>${apply}</div>
         </div>
       </div>
     `;
+  }
+
+  /* ── per-call chat ───────────────────────────────────────── */
+  let _chatThread = []; // [{role, content}]
+  function openChat(sourceId, title) {
+    _chatThread = [];
+    const content = document.getElementById('convocatorias-drawer-content');
+    if (!content) return;
+    content.innerHTML = `
+      <div class="flex flex-col h-full">
+        <div class="flex items-center gap-2 pb-3 border-b border-outline-variant/20 mb-3">
+          <button type="button" id="conv-chat-back" class="text-on-surface-variant hover:text-primary">
+            <span class="material-symbols-outlined">arrow_back</span>
+          </button>
+          <div class="flex-1 min-w-0">
+            <div class="text-[10px] uppercase tracking-wider text-on-surface-variant">Chat con la convocatoria</div>
+            <div class="text-sm font-bold text-on-surface truncate">${escapeHtml(title)}</div>
+          </div>
+        </div>
+        <div id="conv-chat-messages" class="flex-1 overflow-y-auto space-y-3 mb-3 min-h-[300px]">
+          <div class="text-xs text-on-surface-variant text-center py-6">
+            Pregúntame lo que quieras sobre esta convocatoria: presupuesto, quién puede aplicar, criterios de evaluación, fechas, qué entregar… Solo respondo en base al documento oficial.
+          </div>
+        </div>
+        <div class="border-t border-outline-variant/20 pt-3">
+          <form id="conv-chat-form" class="flex gap-2">
+            <input id="conv-chat-input" type="text" placeholder="Escribe tu pregunta..."
+              class="flex-1 px-3 py-2 rounded-xl border border-outline-variant/40 focus:border-primary focus:outline-none text-sm">
+            <button type="submit" class="px-4 py-2 rounded-xl bg-primary text-[#fbff12] text-sm font-bold hover:bg-primary/80">Enviar</button>
+          </form>
+          <div class="mt-2 flex flex-wrap gap-1.5 text-[10px]">
+            ${['¿Cuál es el presupuesto?','¿Quién puede aplicar?','¿Qué documentos hay que entregar?','¿Cuáles son los criterios de evaluación?'].map(s =>
+              `<button type="button" class="conv-chat-suggest px-2 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant" data-q="${escapeHtml(s)}">${escapeHtml(s)}</button>`
+            ).join('')}
+          </div>
+        </div>
+      </div>`;
+
+    document.getElementById('conv-chat-back')?.addEventListener('click', () => {
+      const item = allItems.find(i => i.source_id === sourceId);
+      if (item) content.innerHTML = renderDetail(item);
+    });
+    document.getElementById('conv-chat-form')?.addEventListener('submit', async e => {
+      e.preventDefault();
+      const input = document.getElementById('conv-chat-input');
+      const q = input.value.trim();
+      if (!q) return;
+      input.value = '';
+      await sendChat(sourceId, q);
+    });
+    document.querySelectorAll('.conv-chat-suggest').forEach(btn => {
+      btn.addEventListener('click', () => sendChat(sourceId, btn.dataset.q));
+    });
+  }
+
+  async function sendChat(sourceId, q) {
+    const msgs = document.getElementById('conv-chat-messages');
+    if (!msgs) return;
+    if (_chatThread.length === 0) msgs.innerHTML = ''; // clear placeholder
+    _chatThread.push({ role: 'user', content: q });
+    msgs.insertAdjacentHTML('beforeend', `
+      <div class="flex justify-end">
+        <div class="max-w-[80%] px-3 py-2 rounded-2xl rounded-tr-sm bg-primary text-white text-sm">${escapeHtml(q)}</div>
+      </div>`);
+    const thinkingId = 'thinking_' + Date.now();
+    msgs.insertAdjacentHTML('beforeend', `
+      <div id="${thinkingId}" class="flex justify-start">
+        <div class="max-w-[80%] px-3 py-2 rounded-2xl rounded-tl-sm bg-surface-container text-on-surface-variant text-sm"><span class="spinner inline-block"></span> Pensando…</div>
+      </div>`);
+    msgs.scrollTop = msgs.scrollHeight;
+    try {
+      const res = await API.post(`/convocatorias/${encodeURIComponent(sourceId)}/chat`, { messages: _chatThread });
+      const ans = res.answer || '(sin respuesta)';
+      _chatThread.push({ role: 'assistant', content: ans });
+      document.getElementById(thinkingId)?.remove();
+      msgs.insertAdjacentHTML('beforeend', `
+        <div class="flex justify-start">
+          <div class="max-w-[85%] px-3 py-2 rounded-2xl rounded-tl-sm bg-purple-50 border border-purple-200 text-on-surface text-sm whitespace-pre-wrap">${escapeHtml(ans)}</div>
+        </div>`);
+      msgs.scrollTop = msgs.scrollHeight;
+    } catch (e) {
+      document.getElementById(thinkingId)?.remove();
+      const msg = (e && (e.code === 'NO_VECTORS' || /no vectors/i.test(e.message || '')))
+        ? 'Esta convocatoria aún no está indexada para chat. Aparecerán pronto las nuevas.'
+        : 'Error: ' + (e.message || e);
+      msgs.insertAdjacentHTML('beforeend', `
+        <div class="flex justify-start">
+          <div class="max-w-[85%] px-3 py-2 rounded-2xl rounded-tl-sm bg-red-50 border border-red-200 text-error text-sm">${escapeHtml(msg)}</div>
+        </div>`);
+    }
   }
 
   function openDetail(callId) {
@@ -440,6 +579,14 @@ const Convocatorias = (() => {
         if (!overlay.classList.contains('hidden')) closeDetail();
       });
     }
+    // Drawer-level delegation: chat button (re-renders on each open, so bind inside drawer scope)
+    content.addEventListener('click', (e) => {
+      const btn = e.target.closest('#conv-chat-open');
+      if (btn) {
+        e.preventDefault();
+        openChat(btn.dataset.sourceId, btn.dataset.title);
+      }
+    });
   }
 
   function closeDetail() {

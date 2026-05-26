@@ -1470,6 +1470,19 @@ tailwind.config = {
             <button type="button" data-status="forthcoming" class="conv-chip">Próximas</button>
           </div>
 
+          <!-- Semantic search bar -->
+          <div class="mb-3 flex items-center gap-2">
+            <div class="flex-1 relative">
+              <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary text-[20px]" style="font-variation-settings:'FILL' 1">auto_awesome</span>
+              <input id="convocatorias-semantic-q" type="text" placeholder="Búsqueda semántica con IA: ej. 'subvenciones para audiovisuales' o 'movilidad de jóvenes investigadores'"
+                class="w-full pl-10 pr-32 py-3 rounded-xl bg-white border-2 border-primary/30 text-on-surface text-sm placeholder:text-on-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20">
+              <button id="convocatorias-semantic-go" type="button"
+                class="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-lg bg-primary text-[#fbff12] text-xs font-bold hover:bg-primary/80 transition-colors">Buscar IA</button>
+            </div>
+            <button id="convocatorias-semantic-clear" type="button"
+              class="hidden text-xs text-on-surface-variant hover:text-error">Limpiar</button>
+          </div>
+
           <!-- Toolbar -->
           <div class="bg-surface-container-low rounded-2xl border border-outline-variant/20 p-4 mb-6 flex gap-3 items-center flex-wrap">
             <div class="flex-1 min-w-[240px] relative">

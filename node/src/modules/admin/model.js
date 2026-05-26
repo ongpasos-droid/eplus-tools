@@ -70,22 +70,34 @@ async function importProgramFromFeed(sourceId) {
     return { id: existing[0].id, action_type: actionType, already_existed: true };
   }
 
+  // If we have an LLM-structured extract for this call, prefer it (Spanish summary,
+  // more accurate budget/cofin/duration/min_partners than the raw feed).
+  let s = null;
+  try {
+    const sPath = path.join(__dirname, '..', '..', '..', '..', 'data', 'call_structured', actionType + '.json');
+    if (fs.existsSync(sPath)) s = JSON.parse(fs.readFileSync(sPath, 'utf8'));
+  } catch {}
+
+  const pick = (feedVal, structuredVal) =>
+    (feedVal !== null && feedVal !== undefined) ? feedVal : (structuredVal ?? null);
+
   const slug = ('imp_' + actionType.toLowerCase().replace(/[^a-z0-9]+/g, '_')).slice(0, 60);
-  const summary = (item.summary_es || item.summary_en || '').slice(0, 4000) || null;
+  const summary = (s?.scope_summary_es || item.summary_es || item.summary_en || '').slice(0, 4000) || null;
 
   const newId = await upsertProgram({
     program_id: slug,
     name: (item.title || actionType).slice(0, 200),
     action_type: actionType,
-    deadline: item.deadline || null,
-    eu_grant_max: item.budget_per_project_max_eur || null,
-    cofin_pct: item.cofinancing_pct || null,
-    duration_min_months: item.duration_months || null,
-    duration_max_months: item.duration_months || null,
+    deadline: pick(item.deadline, s?.deadline),
+    eu_grant_max: pick(item.budget_per_project_max_eur, s?.budget_per_project_max_eur) ?? pick(item.budget_total_eur, s?.budget_total_eur),
+    cofin_pct: pick(item.cofinancing_pct, s?.cofinancing_pct),
+    duration_min_months: pick(item.duration_months, s?.duration_months_min),
+    duration_max_months: pick(item.duration_months, s?.duration_months_max),
+    min_partners: s?.min_partners || 2,
     call_summary: summary,
     active: 0,
   });
-  return { id: newId, action_type: actionType, already_existed: false };
+  return { id: newId, action_type: actionType, already_existed: false, used_structured: !!s };
 }
 
 async function listActiveActionTypes() {

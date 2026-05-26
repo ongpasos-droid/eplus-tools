@@ -28,6 +28,9 @@ const DATA_PATH = path.join(__dirname, '..', 'data', 'funding_unified.json');
 const OUT_DIR   = path.join(__dirname, '..', 'data', 'call_pdfs');
 const INDEX_PATH = path.join(OUT_DIR, '_index.json');
 
+// Boilerplate detection. Two layers:
+//   1. exact-match labels (case-insensitive, trimmed)
+//   2. prefix-based regex (catches all variants of application/evaluation forms etc.)
 const BOILERPLATE_LABELS = new Set([
   'rules for legal entity validation, lear appointment and financial capacity assessment',
   'funding & tenders portal terms and conditions',
@@ -36,15 +39,41 @@ const BOILERPLATE_LABELS = new Set([
   'eu grants aga - annotated model grant agreement',
   'online manual',
   'horizon europe programme guide',
-  'annex a',
-  'he specific programme decision 2021/764',
   'lump sum mga',
+  'he mga',
+  'esf and socpl mga',
+  'decision',
+  'he specific programme decision 2021/764',
+  'he framework programme and rules for participation regulation 2021/695',
+  'associated countries to horizon europe',
+  'list of participating countries in horizon europe',
   'he main work programme 2026-2027 – 1. general introduction',
   'he main work programme 2026-2027 - 1. general introduction',
-  'standard application form (esf and socpl)',
-  'standard application form',
-  'esf and socpl mga',
 ]);
+const BOILERPLATE_PATTERNS = [
+  /^standard application form/i,
+  /^standard evaluation form/i,
+  /^annex [a-z]\b/i,
+  /^he main work programme/i,        // entire Horizon WP is boilerplate (every call references it)
+  /^call for proposals corrigendum/i,
+  /^rules of contest$/i,
+  /lump sums.*what do i need to know/i,
+  /^framework partnership agreement/i,
+  /^horizon europe mga$/i,
+  /^he unit mga$/i,
+  /^dep mga$/i,
+  /^draft guidance/i,
+  /^draft direct agreement/i,
+  /^direct agreement corrigendum/i,
+  /^model grant agreement/i,
+  /^mga$/i,
+];
+function isBoilerplate(label) {
+  const lbl = (label || '').toLowerCase().trim();
+  if (!lbl) return false;
+  if (BOILERPLATE_LABELS.has(lbl)) return true;
+  return BOILERPLATE_PATTERNS.some(rx => rx.test(lbl));
+}
 
 const TIMEOUT_MS = 20_000;
 const CONCURRENCY = 4;
@@ -56,17 +85,14 @@ const ONLY  = (() => { const a = args.find(x => x.startsWith('--only=')); return
 
 function pickPdf(docs) {
   if (!docs || !docs.length) return null;
-  // 1. Explicit "call document"
+  // 1. Explicit "call document" (label or URL pattern)
   let hit = docs.find(d =>
     (/call.document/i.test(d.label || '') || /call-fiche|call_fiche/i.test(d.url || '')) &&
     /\.pdf($|\?)/i.test(d.url || '')
   );
   if (hit) return { strategy: 'call_document_label', doc: hit };
   // 2. First non-boilerplate PDF
-  hit = docs.find(d => {
-    const lbl = (d.label || '').toLowerCase().trim();
-    return /\.pdf($|\?)/i.test(d.url || '') && !BOILERPLATE_LABELS.has(lbl);
-  });
+  hit = docs.find(d => /\.pdf($|\?)/i.test(d.url || '') && !isBoilerplate(d.label));
   if (hit) return { strategy: 'non_boilerplate_pdf', doc: hit };
   return null;
 }

@@ -6,6 +6,29 @@ const adminModel = require('../admin/model');
 
 const DATA_PATH = path.join(__dirname, '..', '..', '..', '..', 'data', 'funding_unified.json');
 const META_PATH = path.join(__dirname, '..', '..', '..', '..', 'data', 'funding_unified.meta.json');
+const STRUCTURED_DIR = path.join(__dirname, '..', '..', '..', '..', 'data', 'call_structured');
+
+// Load structured extracts (LLM-generated). Light cache; rebuild every 5 min.
+let _structured = null;
+let _structuredUntil = 0;
+function loadStructured() {
+  if (_structured && Date.now() < _structuredUntil) return _structured;
+  const map = new Map();
+  try {
+    if (fs.existsSync(STRUCTURED_DIR)) {
+      for (const f of fs.readdirSync(STRUCTURED_DIR)) {
+        if (!f.endsWith('.json')) continue;
+        try {
+          const j = JSON.parse(fs.readFileSync(path.join(STRUCTURED_DIR, f), 'utf8'));
+          map.set(j.source_id, j);
+        } catch {}
+      }
+    }
+  } catch {}
+  _structured = map;
+  _structuredUntil = Date.now() + 5 * 60_000;
+  return map;
+}
 
 // In-memory cache of action_types active in intake_programs. Refreshed every 30s.
 let activeActionCache = null;
@@ -43,8 +66,11 @@ function loadData() {
 }
 
 /* Card-level shape — recortado y normalizado para el grid frontend.
-   El detalle completo se sirve en getById. */
-function toCard(c) {
+   El detalle completo se sirve en getById.
+   Enriquece campos null con la extracción LLM (call_structured/<id>.json). */
+function toCard(c, structured) {
+  const s = structured && structured.get ? structured.get(c.source_id) : null;
+  const pick = (feedVal, structuredVal) => (feedVal !== null && feedVal !== undefined ? feedVal : (structuredVal ?? null));
   return {
     call_id: c.call_id,
     source: c.source,
@@ -56,17 +82,18 @@ function toCard(c) {
     title: c.title,
     title_lang: c.title_lang,
     summary_en: c.summary_en,
-    summary_es: c.summary_es,
+    summary_es: pick(c.summary_es, s?.scope_summary_es),
+    has_ai_summary: !!(s?.scope_summary_es && !c.summary_es),
     status: c.status,
     open_date: c.open_date,
     deadline: c.deadline,
-    deadline_model: c.deadline_model,
-    budget_total_eur: c.budget_total_eur,
-    budget_per_project_min_eur: c.budget_per_project_min_eur,
-    budget_per_project_max_eur: c.budget_per_project_max_eur,
-    expected_grants: c.expected_grants,
-    cofinancing_pct: c.cofinancing_pct,
-    duration_months: c.duration_months,
+    deadline_model: pick(c.deadline_model, s?.deadline_model),
+    budget_total_eur: pick(c.budget_total_eur, s?.budget_total_eur),
+    budget_per_project_min_eur: pick(c.budget_per_project_min_eur, s?.budget_per_project_min_eur),
+    budget_per_project_max_eur: pick(c.budget_per_project_max_eur, s?.budget_per_project_max_eur),
+    expected_grants: pick(c.expected_grants, s?.expected_grants),
+    cofinancing_pct: pick(c.cofinancing_pct, s?.cofinancing_pct),
+    duration_months: pick(c.duration_months, s?.duration_months_max),
     eligible_countries: c.eligible_countries || [],
     crossCuttingPriorities: c.crossCuttingPriorities || [],
     keywords: (c.keywords || []).slice(0, 8),
@@ -111,9 +138,10 @@ exports.list = async (req, res, next) => {
       });
     }
 
+    const structured = loadStructured();
     const total = rows.length;
     const items = rows.slice(offset, offset + limit).map(c => {
-      const card = toCard(c);
+      const card = toCard(c, structured);
       card.available_in_efs = activeSet.has(c.source_id) || activeSet.has(c.call_id);
       return card;
     });
@@ -139,8 +167,38 @@ exports.getById = (req, res, next) => {
     const id  = String(req.params.id || '');
     const row = all.find(r => r.call_id === id || r.source_id === id);
     if (!row) return res.status(404).json({ ok: false, error: 'not_found' });
-    res.json({ ok: true, data: row });
+    const structured = loadStructured().get(row.source_id) || null;
+    res.json({ ok: true, data: { ...row, structured } });
   } catch (err) {
     next(err);
   }
+};
+
+const rag = require('./rag');
+
+exports.searchSemantic = async (req, res, next) => {
+  try {
+    const q = (req.query.q || '').trim();
+    if (!q) return res.status(400).json({ ok: false, error: { code: 'BAD_REQUEST', message: 'q required' } });
+    const topK = Math.min(parseInt(req.query.top, 10) || 10, 30);
+    const result = await rag.searchSemantic(q, topK);
+    res.json({ ok: true, data: result });
+  } catch (e) { next(e); }
+};
+
+exports.chat = async (req, res, next) => {
+  try {
+    const sourceId = req.params.sourceId;
+    const messages = Array.isArray(req.body?.messages) ? req.body.messages : [];
+    if (!messages.length) return res.status(400).json({ ok: false, error: { code: 'BAD_REQUEST', message: 'messages required' } });
+    const result = await rag.chatWithCall(sourceId, messages);
+    res.json({ ok: true, data: result });
+  } catch (e) {
+    if (e.status === 404) return res.status(404).json({ ok: false, error: { code: e.code || 'NOT_FOUND', message: e.message } });
+    next(e);
+  }
+};
+
+exports.ragStatus = (req, res, next) => {
+  try { res.json({ ok: true, data: rag.readinessStatus() }); } catch (e) { next(e); }
 };

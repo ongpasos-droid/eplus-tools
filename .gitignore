@@ -23,3 +23,10 @@ video/
 #   node scripts/extract-call-text.js
 data/call_pdfs/
 data/call_extracts/
+
+# LLM-structured extracts (small, but regenerable from extracts with API cost ~$5):
+#   node scripts/structure-call.js
+# Per-call vector embeddings (~500 MB total, regenerable ~$0.50):
+#   node scripts/embed-calls.js
+data/call_structured/
+data/call_vectors/
