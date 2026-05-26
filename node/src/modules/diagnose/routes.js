@@ -70,4 +70,7 @@ router.post('/actions/:actionId/modify',         requireAuth, ctrl.modifyAction)
 router.get('/projects/:projectId/versions',      requireAuth, ctrl.listVersions);
 router.post('/projects/:projectId/rollback',     requireAuth, ctrl.rollbackToVersion);
 
+/* ── Manual field edit (Fase 5.x) ────────────────────────────────────── */
+router.put('/projects/:projectId/fields/:fieldId', requireAuth, ctrl.saveFieldManual);
+
 module.exports = router;

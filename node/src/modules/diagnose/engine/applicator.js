@@ -113,7 +113,7 @@ async function loadAction(actionId) {
 
 /* ── Snapshot + rollback ──────────────────────────────────────────────────── */
 
-async function snapshotForm(projectId, instanceId, userId, notes) {
+async function snapshotForm(projectId, instanceId, userId, notes, triggeredBy = 'improvement_action') {
   // Get next version number
   const [vRows] = await pool.query(
     `SELECT COALESCE(MAX(version_number), 0) + 1 AS next FROM proposal_versions WHERE project_id = ?`,
@@ -142,8 +142,8 @@ async function snapshotForm(projectId, instanceId, userId, notes) {
   await pool.query(
     `INSERT INTO proposal_versions
      (id, project_id, version_number, triggered_by, snapshot_json, notes, created_by_user_id)
-     VALUES (?, ?, ?, 'improvement_action', ?, ?, ?)`,
-    [versionId, projectId, versionNumber, JSON.stringify(snapshot), notes, userId || null]
+     VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    [versionId, projectId, versionNumber, triggeredBy, JSON.stringify(snapshot), notes, userId || null]
   );
   return versionId;
 }
@@ -236,6 +236,49 @@ function computeNewText(currentText, action) {
   throw new Error(`Unknown change_type: ${ct}`);
 }
 
+/**
+ * Save a manual edit to a single field. Snapshots the form first, then
+ * overwrites the field value. Returns { versionId, fieldId, newLength }.
+ *
+ * If the new text equals the current text, no-op (no snapshot, no update).
+ */
+async function saveManualEdit(projectId, fieldId, newText, userId) {
+  if (!projectId || !fieldId) throw new Error('projectId and fieldId required');
+  if (typeof newText !== 'string') throw new Error('value_text must be a string');
+
+  const [rows] = await pool.query(
+    `SELECT i.id AS instance_id, v.id AS value_id, v.value_text
+     FROM form_instances i
+     JOIN form_field_values v ON v.instance_id = i.id
+     WHERE i.project_id = ? AND v.field_id = ?
+     ORDER BY i.updated_at DESC
+     LIMIT 1`,
+    [projectId, fieldId]
+  );
+  if (rows.length === 0) {
+    throw new Error(`Section ${fieldId} not found in this project's form`);
+  }
+  const { instance_id: instanceId, value_id: valueId, value_text: currentText } = rows[0];
+
+  if ((currentText || '') === newText) {
+    return { versionId: null, fieldId, newLength: newText.length, noChange: true };
+  }
+
+  const versionId = await snapshotForm(projectId, instanceId, userId, `manual edit: ${fieldId}`, 'manual_save');
+
+  await pool.query(
+    `UPDATE form_field_values SET value_text = ? WHERE id = ?`,
+    [newText, valueId]
+  );
+  // Touch instance updated_at so future loadProjectForm picks this as latest
+  await pool.query(
+    `UPDATE form_instances SET updated_at = CURRENT_TIMESTAMP WHERE id = ?`,
+    [instanceId]
+  );
+
+  return { versionId, fieldId, newLength: newText.length, noChange: false };
+}
+
 module.exports = {
   applyAction,
   rejectAction,
@@ -245,4 +288,5 @@ module.exports = {
   listVersions,
   snapshotForm,
   computeNewText,
+  saveManualEdit,
 };

@@ -365,3 +365,18 @@ exports.rollbackToVersion = async (req, res, next) => {
     next(e);
   }
 };
+
+exports.saveFieldManual = async (req, res, next) => {
+  try {
+    const { projectId, fieldId } = req.params;
+    const { value_text } = req.body || {};
+    if (typeof value_text !== 'string') {
+      return bad(res, 'BAD_REQUEST', 'value_text (string) is required.');
+    }
+    const r = await applicator.saveManualEdit(projectId, fieldId, value_text, req.user?.id);
+    ok(res, r);
+  } catch (e) {
+    if (/not found|required/i.test(e.message)) return bad(res, 'BAD_REQUEST', e.message);
+    next(e);
+  }
+};

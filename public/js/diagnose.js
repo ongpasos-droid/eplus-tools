@@ -12,12 +12,14 @@ const Diagnose = (() => {
     projectId: null,
     workspace: null,      // { project, instance, template_sections, fields }
     run: null,            // diagnose run with findings + latest_action
-    fieldsMap: {},        // field_id -> value_text
+    fieldsMap: {},        // field_id -> value_text (server state)
+    editsMap: {},         // field_id -> value_text (in-flight unsaved edits)
     activeFieldId: null,  // currently displayed in editor
     activeFindingId: null,
     loading: false,
     error: null,
     proposingFindingId: null,  // while a propose call is in flight
+    savingField: false,
     showHistory: false,
     versions: [],
     filter: { severity: '', source: '' },
@@ -107,6 +109,8 @@ const Diagnose = (() => {
       state.workspace = ws;
       state.fieldsMap = {};
       for (const f of (ws?.fields || [])) state.fieldsMap[f.field_id] = f.value_text || '';
+      // Discard any pending manual edits on fields that just got updated by IA
+      state.editsMap = {};
       state.run = await API.get(`/diagnose/runs/project/${state.projectId}/latest`);
       render();
       Toast.show?.('Cambio aplicado', 'ok');
@@ -368,17 +372,21 @@ const Diagnose = (() => {
           <p class="text-sm mt-2">Selecciona una sección a la izquierda para verla.</p>
         </div>`;
     }
-    const text = state.fieldsMap[state.activeFieldId] || '';
+    const savedText = state.fieldsMap[state.activeFieldId] || '';
+    const editedText = state.editsMap[state.activeFieldId];
+    const currentText = editedText != null ? editedText : savedText;
+    const hasUnsaved = editedText != null && editedText !== savedText;
+
     const findingsHere = (state.run?.findings || []).filter(f =>
       f.applies_to_section === state.activeFieldId && f.state === 'open'
     );
-    // Is there an active finding with a proposal to render diff?
     const activeFinding = state.activeFindingId
       ? state.run.findings.find(f => f.id === state.activeFindingId)
       : null;
     const activeAction = activeFinding?.latest_action;
     const showDiff = activeAction && activeAction.state === 'proposed'
-                     && activeAction.where_field_id === state.activeFieldId;
+                     && activeAction.where_field_id === state.activeFieldId
+                     && !hasUnsaved;  // hide diff overlay while user is editing
 
     return `
       <div class="flex items-center justify-between mb-3">
@@ -386,14 +394,35 @@ const Diagnose = (() => {
           <div class="text-[10px] uppercase font-bold text-on-surface-variant">Sección</div>
           <h3 class="text-lg font-bold text-on-surface font-mono">${esc(state.activeFieldId)}</h3>
         </div>
-        <div class="text-xs text-on-surface-variant">${text.length} chars · ${findingsHere.length} hallazgos abiertos</div>
+        <div class="flex items-center gap-3">
+          <div class="text-xs text-on-surface-variant">${currentText.length} chars · ${findingsHere.length} hallazgos abiertos</div>
+          ${hasUnsaved ? `
+            <button onclick="Diagnose.discardEdits()" class="px-2 py-1 text-xs text-on-surface-variant hover:text-error">Descartar</button>
+            <button onclick="Diagnose.saveField()" ${state.savingField ? 'disabled' : ''}
+                    class="inline-flex items-center gap-1 px-3 py-1.5 bg-green-600 text-white rounded-lg text-xs font-bold hover:bg-green-700 disabled:opacity-50">
+              ${state.savingField ? '<span class="material-symbols-outlined text-xs animate-spin">progress_activity</span>' : '<span class="material-symbols-outlined text-xs">save</span>'}
+              ${state.savingField ? 'Guardando…' : 'Guardar cambios'}
+            </button>
+          ` : ''}
+        </div>
       </div>
 
-      ${showDiff ? renderDiffPanel(activeAction, text) : ''}
+      ${showDiff ? renderDiffPanel(activeAction, savedText) : ''}
 
-      <div class="prose prose-sm max-w-none">
-        <pre class="whitespace-pre-wrap font-sans text-sm leading-relaxed text-on-surface bg-surface-variant/20 p-4 rounded-lg border border-outline-variant/30" id="diagnose-editor-text">${renderTextWithHighlights(text, showDiff ? activeAction : null)}</pre>
-      </div>
+      ${hasUnsaved ? `
+        <div class="bg-yellow-500/10 border border-yellow-500/30 rounded-lg px-3 py-1.5 mb-2 text-xs text-yellow-800">
+          <span class="material-symbols-outlined text-xs align-middle">edit</span>
+          Estás editando — los cambios no se guardan hasta que pulses "Guardar cambios".
+        </div>
+      ` : ''}
+
+      <textarea
+        id="diagnose-editor-textarea"
+        class="w-full font-sans text-sm leading-relaxed text-on-surface bg-surface p-4 rounded-lg border ${hasUnsaved ? 'border-yellow-500/50 ring-1 ring-yellow-500/30' : 'border-outline-variant/30'} focus:outline-none focus:ring-2 focus:ring-primary/30 resize-vertical"
+        style="min-height:400px;"
+        oninput="Diagnose.onEditorInput(this.value)"
+        spellcheck="false"
+      >${esc(currentText)}</textarea>
     `;
   }
 
@@ -612,7 +641,86 @@ const Diagnose = (() => {
 
   /* ── Handlers exposed ──────────────────────────────────────────── */
 
-  function setActiveField(fieldId) { state.activeFieldId = fieldId; state.activeFindingId = null; render(); }
+  function setActiveField(fieldId) {
+    // Warn if there are unsaved edits in the current field
+    if (state.activeFieldId && state.editsMap[state.activeFieldId] != null) {
+      const dirty = state.editsMap[state.activeFieldId] !== state.fieldsMap[state.activeFieldId];
+      if (dirty && !confirm('Tienes cambios sin guardar en esta sección. ¿Cambiar de sección y descartar?')) {
+        return;
+      }
+      // Discard the dirty edit on the previous section
+      delete state.editsMap[state.activeFieldId];
+    }
+    state.activeFieldId = fieldId;
+    state.activeFindingId = null;
+    render();
+    // Focus the textarea for immediate typing
+    setTimeout(() => document.getElementById('diagnose-editor-textarea')?.focus(), 50);
+  }
+
+  function onEditorInput(newText) {
+    if (!state.activeFieldId) return;
+    state.editsMap[state.activeFieldId] = newText;
+    // Re-render just the small bits (save button + char count) — full render
+    // would steal focus. We update DOM in place.
+    const wrapper = document.getElementById('diagnose-body');
+    if (wrapper) {
+      // Re-render only the editor block (preserving textarea focus is OK
+      // because we already typed into it; full editor re-render restores
+      // selection at end which is fine for short bursts).
+      const sel = document.activeElement;
+      const isTextarea = sel?.id === 'diagnose-editor-textarea';
+      const caretStart = isTextarea ? sel.selectionStart : null;
+      const caretEnd = isTextarea ? sel.selectionEnd : null;
+      // Light render: only update the editor center column
+      const center = document.querySelector('#diagnose-body section.bg-surface');
+      if (center) {
+        center.innerHTML = renderEditor();
+        if (caretStart != null) {
+          const ta = document.getElementById('diagnose-editor-textarea');
+          if (ta) {
+            ta.focus();
+            ta.setSelectionRange(caretStart, caretEnd);
+          }
+        }
+      }
+    }
+  }
+
+  async function saveField() {
+    if (!state.activeFieldId) return;
+    const fieldId = state.activeFieldId;
+    const newText = state.editsMap[fieldId];
+    if (newText == null) return;
+    state.savingField = true;
+    render();
+    try {
+      const r = await fetch(`/v1/diagnose/projects/${state.projectId}/fields/${fieldId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + (window.API?.token || localStorage.getItem('token')),
+        },
+        body: JSON.stringify({ value_text: newText }),
+      });
+      const data = await r.json();
+      if (!data.ok) throw new Error(data.error?.message || 'Save failed');
+      state.fieldsMap[fieldId] = newText;
+      delete state.editsMap[fieldId];
+      Toast.show?.('Cambios guardados', 'ok');
+    } catch (e) {
+      alert('No se pudo guardar: ' + (e.message || e));
+    }
+    state.savingField = false;
+    render();
+  }
+
+  function discardEdits() {
+    if (!state.activeFieldId) return;
+    if (!confirm('¿Descartar tus cambios y volver al texto guardado?')) return;
+    delete state.editsMap[state.activeFieldId];
+    render();
+  }
   function setFilter(key, value) { state.filter[key] = state.filter[key] === value ? '' : value; if (key === 'severity' && value) state.filter.source = ''; if (key === 'source' && value) state.filter.severity = ''; render(); }
   function selectFinding(findingId, fieldId) {
     state.activeFindingId = findingId;
@@ -639,5 +747,8 @@ const Diagnose = (() => {
     openHistory,
     closeHistory,
     rollback,
+    onEditorInput,
+    saveField,
+    discardEdits,
   };
 })();
