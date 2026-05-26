@@ -1,0 +1,148 @@
+{
+  "id": 1109316,
+  "organo": {
+    "nivel1": "ESTADO",
+    "nivel2": "MINISTERIO DE SANIDAD",
+    "nivel3": "ORGANIZACIÓN NACIONAL DE TRASPLANTES"
+  },
+  "sedeElectronica": "https://sede.mscbs.gob.es/ciudadanos/procAdministrativos.do?tipo=listarxOrgano&id=EA0044080",
+  "codigoBDNS": "907755",
+  "fechaRecepcion": "2026-05-25",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 3000000,
+  "mrr": false,
+  "descripcion": "Resolución de la Dirección de la Organización Nacional de Trasplantes O.A. de 22 de mayo de 2026, por la que se convocan subvenciones destinadas a entidades sin fines de lucro para fomentar la donación y el trasplante de órganos, tejidos y células.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    },
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES - ESPAÑA "
+    }
+  ],
+  "descripcionFinalidad": "Sanidad",
+  "descripcionBasesReguladoras": "Orden SND/503/2020, de 3 de junio, por la que se establecen las bases reguladoras para la concesión de subvenciones destinadas a entidades sin fines de lucro para fomentar la donación y el trasplante de órganos, tejidos y células",
+  "urlBasesReguladoras": "https://www.boe.es/eli/es/o/2020/06/03/snd503",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Día hábil posterior a la publicación en el BOE",
+  "textFin": "Un mes desde el siguiente a la publicación ",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1461009,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "9. CONVOCATORIA 2026 firmada.pdf",
+      "long": 118025,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461010,
+      "descripcion": "Anexo solicitud oficinas y centros de coordinación",
+      "nombreFic": "ANEXO 0_EDITABLE.pdf",
+      "long": 678337,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461012,
+      "descripcion": "Anexo Centro Hospitalarios Gestión Pública",
+      "nombreFic": "ANEXO 1 1_EDITABLE.pdf",
+      "long": 320324,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461013,
+      "descripcion": "Anexo Centro Hospitalarios Gestión privada",
+      "nombreFic": "ANEXO 1 2_EDITABLE.pdf",
+      "long": 244689,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461015,
+      "descripcion": "Anexo solicitud de formación",
+      "nombreFic": "ANEXO 2 EDITABLE.pdf",
+      "long": 869176,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461021,
+      "descripcion": "Plan formativo y recomendaciones para cumplimentar Anexo 3",
+      "nombreFic": "PLAN FORMATIVO Y RECOMENDACIONES ANEXO 3 SUBVENCIONES 2026.pdf",
+      "long": 732004,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461017,
+      "descripcion": "Anexo Declaración Responsable",
+      "nombreFic": "ANEXO 4_EDITABLE.pdf",
+      "long": 347251,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461018,
+      "descripcion": "Anexo Declaración Responsable de estructura y capacidad",
+      "nombreFic": "ANEXO 5_EDITABLE.pdf",
+      "long": 299966,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461019,
+      "descripcion": "Anexo Memoria económica para justificación",
+      "nombreFic": "ANEXO 6_EDITABLE.pdf",
+      "long": 442914,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461020,
+      "descripcion": "Instrucciones de cumplimentación",
+      "nombreFic": "INSTRUCCIONES DE CUMPLIMENTACIÓN.pdf",
+      "long": 978495,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461016,
+      "descripcion": "Anexo Memoria de la actividad docente",
+      "nombreFic": "ANEXO 3 EDITABLE.pdf",
+      "long": 735175,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

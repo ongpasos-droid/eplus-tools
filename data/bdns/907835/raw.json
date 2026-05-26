@@ -1,0 +1,128 @@
+{
+  "id": 1109396,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SANTA CRUZ DE LA PALMA",
+    "nivel3": "AYUNTAMIENTO DE SANTA CRUZ DE LA PALMA"
+  },
+  "sedeElectronica": "https://sede.santacruzdelapalma.es/",
+  "codigoBDNS": "907835",
+  "fechaRecepcion": "2026-05-25",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 24000,
+  "mrr": false,
+  "descripcion": "Subvenciones en régimen de concurrencia competitiva destinadas al desarrollo de proyectos vinculados a la actividad educativa por parte de asociaciones de madres y padres de alumnos y alumnas del municipio de Santa Cruz de La Palma para la anualidad 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES707 - La Palma"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Bases que con vigencia indefinida han de regir la concesión de subvenciones en régimen de concurrencia competitiva destinadas al desarrollo de proyectos vinculados a la actividad educativa por parte de Asociaciones de Madres y Padres de alumnos/as",
+  "urlBasesReguladoras": "http://www.bopsantacruzdetenerife.es/bopsc2/sumario.php?codigopub=1&fecha_mas_reciente=2023-05-24",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Día siguiente de su publicación en Boletín Oficial de la Provincia",
+  "textFin": "10 días hábiles a partir del día siguiente a la publicación de la convocatoria en BOP",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1461130,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Resolucion aprobacion convocatoria subvenciones AMPAS 2026.pdf",
+      "long": 257675,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461140,
+      "descripcion": "SOLICITUD",
+      "nombreFic": "ANEXO I Solicitud.pdf",
+      "long": 72870,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461148,
+      "descripcion": "MEMORIA",
+      "nombreFic": "ANEXO II Memoria Técnica.pdf",
+      "long": 63639,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461211,
+      "descripcion": "CERTIFICADO DE REPRESENTACIÓN",
+      "nombreFic": "ANEXO III Certificado de representación.pdf",
+      "long": 58668,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461266,
+      "descripcion": "CUENTA JUSTIFICATIVA",
+      "nombreFic": "ANEXO VIII Cuenta Justificativa.pdf",
+      "long": 63305,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461257,
+      "descripcion": "ACEPTACIÓN",
+      "nombreFic": "ANEXO V Aceptación de subvención.pdf",
+      "long": 58309,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461259,
+      "descripcion": "MEMORIA JUSTIFICATIVA",
+      "nombreFic": "ANEXO VI Memoria Justificativa.pdf",
+      "long": 54915,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461264,
+      "descripcion": "DECLARACIÓN RESPONSABLE II",
+      "nombreFic": "ANEXO VII Declaración Responsable destino fondos.pdf",
+      "long": 59408,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461255,
+      "descripcion": "DECLARACIÓN RESPONSABLE I",
+      "nombreFic": "ANEXO IV Declaración responsable.pdf",
+      "long": 61341,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

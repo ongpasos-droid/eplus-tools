@@ -1,0 +1,81 @@
+{
+  "source": "bdns",
+  "source_id": "907696",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / GUARDAMAR DEL SEGURA / AYUNTAMIENTO DE GUARDAMAR DEL SEGURA",
+  "nuts_codes": [
+    "ES521"
+  ],
+  "nuts_primary": "ES521",
+  "title": "BASES REGULADORAS Y CONVOCATORIA I CONCURSO DE ESCAPARATE \"GUARDAMAR ORGULLOSA 2026\"",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-05-25",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 500,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "96",
+      "descripcion": "Servicios personales"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/907696",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Anexo I",
+      "url": null
+    },
+    {
+      "label": "Edicto publicación en el BOP",
+      "url": null
+    },
+    {
+      "label": "Anexo III",
+      "url": null
+    },
+    {
+      "label": "Anexo IV",
+      "url": null
+    },
+    {
+      "label": "Anexo II",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://guardamardelsegura.sedelectronica.es/transparency/e001ffbd-049d-4efa-8ff9-9f16fc1858a6/",
+  "text_inicio": "a partir del día siguiente a la publicación en el BOP",
+  "text_fin": "hasta el 10 de junio de 2026",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-26T04:09:04.589Z"
+}

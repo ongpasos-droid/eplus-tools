@@ -1,0 +1,67 @@
+{
+  "id": 1109359,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "COMUNIDAD FORAL DE NAVARRA",
+    "nivel3": "DEPARTAMENTO DE DESARROLLO RURAL Y MEDIO AMBIENTE"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "907798",
+  "fechaRecepcion": "2026-05-25",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 61200,
+  "mrr": false,
+  "descripcion": "Ayudas destinadas a compensar las dificultades de recogida de la leche en explotaciones de vacuno de alta montaña, y zonas con especial dificultad, acogidas al régimen de minimis, año 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Producción ganadera",
+      "codigo": "01.4"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES22 - COMUNIDAD FORAL DE NAVARRA"
+    }
+  ],
+  "descripcionFinalidad": "Agricultura, Pesca y Alimentación",
+  "descripcionBasesReguladoras": "RESOLUCIÓN 255E/2026, de 21 de mayo, del director general de Agricultura ",
+  "urlBasesReguladoras": "http://www.navarra.es/home_es/Servicios/ficha/7735/Ayuda-destinada-a-compensar-las-dificultades-de-recogida-de-la-leche-en-explotaciones-de-vacuno-de-alta-montana",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Desde la publicación en el BON",
+  "textFin": "Un mes desde la publicación en el BON",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1461121,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Texto a publicar recogida de leche de vaca.pdf",
+      "long": 364644,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

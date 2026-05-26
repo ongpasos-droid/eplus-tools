@@ -1,0 +1,96 @@
+{
+  "id": 1109446,
+  "organo": {
+    "nivel1": "ESTADO",
+    "nivel2": "MINISTERIO DE IGUALDAD",
+    "nivel3": "INSTITUTO DE LAS MUJERES"
+  },
+  "sedeElectronica": "https://igualdad.sede.gob.es",
+  "codigoBDNS": "907885",
+  "fechaRecepcion": "2026-05-25",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 550000,
+  "mrr": false,
+  "descripcion": "Resolución de 25/05/2026 del Instituto de las Mujeres, O.A. que aprueba convocatoria de subvenciones a organizaciones sindicales para el ejercicio de las funciones de negociación, elaboración, implantación, seguimiento y evaluación de planes de igualdad",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades sindicales",
+      "codigo": "94.2"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES - ESPAÑA "
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Orden IGD/723/2022, de 26 de julio, bases reguladoras subvenciones a organizaciones sindicales para el ejercicio de las funciones de negociación, elaboración, implantación, seguimiento y evaluación de planes de igualdad de ámbito estatal o supraautonómico",
+  "urlBasesReguladoras": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2022-12639",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Desde el día siguiente a la publicación del extracto ",
+  "textFin": "Plazo de 10 días hábiles a contar desde el día siguiente a la publicación del extracto",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1461404,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Resolución convocatoria 2026.pdf.xsig.pdf",
+      "long": 1255577,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461406,
+      "descripcion": "Anexo I Solicitud",
+      "nombreFic": "Anexo_I Solicitud 2026.docx",
+      "long": 37271,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461410,
+      "descripcion": "Anexo IV Declaración responsable reintegros",
+      "nombreFic": "Anexo_IV Dcl_responsab_Reintegro.docx",
+      "long": 26803,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461409,
+      "descripcion": "Anexo III Declaración responsable prohibiciones",
+      "nombreFic": "Anexo_III Dcl_responsab_Prohibic.docx",
+      "long": 30459,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461408,
+      "descripcion": "Anexo II Memoria del proyecto",
+      "nombreFic": "Anexo_II Memoria_Proyecto.docx",
+      "long": 53481,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

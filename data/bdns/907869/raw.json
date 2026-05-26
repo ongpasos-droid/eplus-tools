@@ -1,0 +1,88 @@
+{
+  "id": 1109430,
+  "organo": {
+    "nivel1": "OTROS",
+    "nivel2": "UNIVERSITAT DE VALÈNCIA (ESTUDI GENERAL)",
+    "nivel3": null
+  },
+  "sedeElectronica": "https://www.uv.es/sede-electronica/es/sede-electronica-uv.html",
+  "codigoBDNS": "907869",
+  "fechaRecepcion": "2026-05-25",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 5500,
+  "mrr": false,
+  "descripcion": "Ayudas al transporte por la realización de prácticas externas curriculares curso 2025-26 para estudiantes de grado y máster de la Facultat de CC Socials",
+  "descripcionLeng": "Ajudes al transport per la realització de pràctiques externes curriculars curs 2025-26 per a estudiants de grau i màster de la Facultat de CC Socials",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades auxiliares a la educación",
+      "codigo": "85.6"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES523 - Valencia / València"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Ayudas al transporte por la realización de las prácticas externas curriculares para los estudiantes de grado y máster de la Facultat de Ciències Socials de la Universitat de València",
+  "urlBasesReguladoras": "https://go.uv.es/VMiHn0a",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Inicia el dia después de su publicación en el DOGV",
+  "textFin": "Finaliza el 25 de julio de 2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1461390,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Convocatoria-castellano.pdf",
+      "long": 389029,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461393,
+      "descripcion": "Solicitud en castellano",
+      "nombreFic": "impreso-solicitud-castellano.pdf",
+      "long": 92721,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461392,
+      "descripcion": "solicitud en valenciano",
+      "nombreFic": "impres-sol.licitud-valenciano.pdf",
+      "long": 93223,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1461391,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "Convocatoria-valenciano.pdf",
+      "long": 412063,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

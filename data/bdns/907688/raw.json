@@ -1,0 +1,72 @@
+{
+  "id": 1109249,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "AMPOSTA",
+    "nivel3": "AYUNTAMIENTO DE AMPOSTA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "907688",
+  "fechaRecepcion": "2026-05-25",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 600,
+  "mrr": false,
+  "descripcion": "XIX PREMIO DE INVESTIGACIÓN EN BACHILLERATO “CIUTAT D’AMPOSTA” 2026",
+  "descripcionLeng": "XIX PREMI DE RECERCA A BATXILLERAT “CIUTAT D’AMPOSTA” 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Educación secundaria y educación postsecundaria no terciaria",
+      "codigo": "85.3"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES514 - Tarragona"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "XIX PREMIO DE INVESTIGACIÓN EN BACHILLERATO “CIUTAT D’AMPOSTA” 2026",
+  "urlBasesReguladoras": "www.amposta.cat",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir de la publicación de la presente convocatoria al BOPT y a la BDNS",
+  "textFin": "30/06/2025",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1460770,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convocatoria_del_XIX_Premio_de_investigacion_en_bachillerato__Ciutat_d_Amposta__2026_-_CASTELLA_.pdf",
+      "long": 113924,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1460771,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Convocatoria_del_XIX_Premi_de_recerca_a_batxillerat__Ciutat_d_Amposta__2026_-_CATALA.pdf",
+      "long": 108748,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

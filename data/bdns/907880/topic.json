@@ -1,0 +1,68 @@
+{
+  "source": "bdns",
+  "source_id": "907880",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / COMUNITAT VALENCIANA / INSTITUTO VALENCIANO DE COMPETITIVIDAD EMPRESARIAL (IVACE)",
+  "nuts_codes": [
+    "ES52"
+  ],
+  "nuts_primary": "ES52",
+  "title": "RESOLUCIÓN 22/05/2026 de la presidenta del IVACE, por la que se convocan subvenciones a proyectos de inversiones transformadoras en digitalización en empresas industriales de mediana capitalización y tamaño intermedio de la Comunitat Valenciana para 2026",
+  "title_lang": "es",
+  "summary": "Industria y Energía",
+  "status": "open",
+  "publication_date": "2026-05-25",
+  "open_date": "2026-05-29",
+  "deadline": "2026-07-03",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 1500000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "GRAN EMPRESA",
+  "eligible_orgs": [
+    "GRAN EMPRESA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "C",
+      "descripcion": "INDUSTRIA MANUFACTURERA"
+    }
+  ],
+  "apply_url": "https://www.ivace.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/907880",
+  "documents": [
+    {
+      "label": "Texto en otra lengua de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://dogv.gva.es/es/resultat-dogv?signatura=2026/15263",
+  "text_inicio": "29/05/2026",
+  "text_fin": "03/07/2026",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-26T04:09:04.685Z"
+}

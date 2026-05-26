@@ -1,0 +1,128 @@
+{
+  "id": 1109298,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "DIPUTACIÓN PROV. DE LEÓN",
+    "nivel3": "DIPUTACIÓN PROVINCIAL DE LEÓN"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "907737",
+  "fechaRecepcion": "2026-05-25",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 424000,
+  "mrr": false,
+  "descripcion": "Elaboración censo de instalaciones y emplazamientos con amianto 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades de recogida, tratamiento y eliminación de residuos ",
+      "codigo": "38"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES413 - León"
+    }
+  ],
+  "descripcionFinalidad": "Infraestructuras",
+  "descripcionBasesReguladoras": "ORD. GNRAL. DE SUBVENCIONES 2022",
+  "urlBasesReguladoras": "https://transparencia.dipuleon.es/export/sites/transparencia/.galleries/Normativa/Ordenanzas-y-Reglamentos/Subvenciones/Ordenanza-General-de-Subvenciones.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "DÍA SIGUENTE A LA PUBLICACIÓN EXTRACTO BOP",
+  "textFin": "20 DÍAS HÁBILES DESDE EL SIGUIENTE A LA PUBLICACIÓN EXTRACTO BOP",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1460959,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "BASES_CENSO_AMIANTO_2026_(sin_anexos.pdf",
+      "long": 238478,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1460960,
+      "descripcion": "ANEXO I (SOLICITUD)",
+      "nombreFic": "ANEXO_I.pdf",
+      "long": 153925,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1460961,
+      "descripcion": "ANEXO II (SOLICITUD ABONO SUBV.)",
+      "nombreFic": "ANEXO_II.pdf",
+      "long": 92290,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1460962,
+      "descripcion": "ANEXO III (CUENTA JUSTIFICATIVA)",
+      "nombreFic": "ANEXO_III.pdf",
+      "long": 103176,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1460967,
+      "descripcion": "CERTIFICACIÓN ACUERDO JUNTA GOBIERNO",
+      "nombreFic": "Certif.nºSP1_(JG_30-04-26).-Aprobación_bases_Subv.Elaboración_censo_instalaciones_amianto_2026_-_SEFYCU.pdf",
+      "long": 701522,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1460964,
+      "descripcion": "ANEXO V (MODELO INVENTARIO)",
+      "nombreFic": "ANEXO_V.pdf",
+      "long": 91473,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1460965,
+      "descripcion": "ANEXO VI (MODELO FICHA REGISTRO MCA)",
+      "nombreFic": "ANEXO_VI.pdf",
+      "long": 108579,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1460966,
+      "descripcion": "ANEXO VII (MODELO CENSO)",
+      "nombreFic": "ANEXO_VII.pdf",
+      "long": 86927,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1460963,
+      "descripcion": "ANEXO IV (FICHA DE TERCEROS)",
+      "nombreFic": "ANEXO_IV.pdf",
+      "long": 108332,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

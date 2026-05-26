@@ -1,0 +1,80 @@
+{
+  "id": 1109285,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "ARUCAS",
+    "nivel3": "AYUNTAMIENTO DE ARUCAS"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "907724",
+  "fechaRecepcion": "2026-05-25",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 1700,
+  "mrr": false,
+  "descripcion": "CONCURSO DE PINTURA RÁPIDA AL AIRE LIBRE \"CIUDAD DE ARUCAS\" - FIESTAS PATRONALES DE SAN JUAN BAUTISTA DE ARUCAS 2026.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "OTROS SERVICIOS",
+      "codigo": "T"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES705 - Gran Canaria"
+    }
+  ],
+  "descripcionFinalidad": "Otras Prestaciones económicas",
+  "descripcionBasesReguladoras": "BASES REGULADORAS DEL CONCURSO DE PINTURA RÁPIDA \"CIUDAD DE ARUCAS\" - PUBLICADA EN EL BOP Nº 151, miércoles 17/12/2025.",
+  "urlBasesReguladoras": "www.arucas.org",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "07 DE JUNIO DE 2026 A LAS 08:30 H ",
+  "textFin": "07 DE JUNIO DE 2026 A LAS 10:00 H",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1460936,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "20260522_Otros_DECRETO 2026-2784 [Decreto Convocatoria Concurso Pintura Rápida 2026].pdf",
+      "long": 349961,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1460942,
+      "descripcion": "BASES REGULADORAS DEL CONCURSO DE PINTURA RÁPIDA \"CIUDAD DE ARUCAS\" SAN JUAN 2026",
+      "nombreFic": "20260311_Otros_PUBLICACIÓN BASES BOP DE LAS PALAMAS - Concurso de Pintura Rapida ``Ciudad de Arucas´´ de las Fiestas Patronales de San Juan Bautista de Arucas 2026-2.pdf",
+      "long": 100715,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1460940,
+      "descripcion": "ANEXO I - SOLICITUD DE INSCRIPCIÓN",
+      "nombreFic": "ANEXO I - SOLICITUD DE PARTICIPACIÓN.pdf",
+      "long": 158902,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

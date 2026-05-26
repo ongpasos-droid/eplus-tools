@@ -1,0 +1,62 @@
+{
+  "source": "bdns",
+  "source_id": "907534",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / SORIA / AYUNTAMIENTO DE SORIA",
+  "nuts_codes": [
+    "ES417"
+  ],
+  "nuts_primary": "ES417",
+  "title": "Convocatoria de ayudas de rehabilitación de edificios en el Área Preferente de Eco-inversión para el ejercicio 2026",
+  "title_lang": "es",
+  "summary": "Acceso a la vivienda y fomento de la edificación",
+  "status": "open",
+  "publication_date": "2026-05-22",
+  "open_date": null,
+  "deadline": "2026-07-15",
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 84786.74,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA; PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "41",
+      "descripcion": "Construcción de edificios"
+    }
+  ],
+  "apply_url": "https://soria.sedelectronica.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/907534",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://bop.dipsoria.es/index.php/mod.documentos/mem.descargar/fichero.documentos_63_42781fc2%232E%23pdf",
+  "text_inicio": "Al día siguiente de la publicación del extracto en el Boletín Oficial de la Provincia de Soria",
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-26T04:09:04.545Z"
+}

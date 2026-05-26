@@ -1,0 +1,104 @@
+{
+  "id": 1109257,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "GUARDAMAR DEL SEGURA",
+    "nivel3": "AYUNTAMIENTO DE GUARDAMAR DEL SEGURA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "907696",
+  "fechaRecepcion": "2026-05-25",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 500,
+  "mrr": false,
+  "descripcion": "BASES REGULADORAS Y CONVOCATORIA I CONCURSO DE ESCAPARATE \"GUARDAMAR ORGULLOSA 2026\"",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Servicios personales",
+      "codigo": "96"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES521 - Alicante / Alacant"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "BASES REGULADORAS Y CONVOCATORIA I CONCURSO DE ESCAPARATE \"GUARDAMAR ORGULLOSA 2026\"",
+  "urlBasesReguladoras": "https://guardamardelsegura.sedelectronica.es/transparency/e001ffbd-049d-4efa-8ff9-9f16fc1858a6/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "a partir del día siguiente a la publicación en el BOP",
+  "textFin": "hasta el 10 de junio de 2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1460792,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "DECRETO 2026-2594 [Resolución PR_2026_2390 - Actuación genérica con fiscalización].pdf",
+      "long": 1742796,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1460793,
+      "descripcion": "Anexo I",
+      "nombreFic": "ANEXO I. SOLICITUD MODELO NORMALIZADO.pdf",
+      "long": 366806,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1460797,
+      "descripcion": "Edicto publicación en el BOP",
+      "nombreFic": "EDICTO 2026-0090 [EDICTO I CONCURSO ESCAPARATES GUARDAMAR ORGULLOSA 2026].pdf",
+      "long": 226450,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1460795,
+      "descripcion": "Anexo III",
+      "nombreFic": "ANEXO III. MODELO AEAT CONSENTIMIENTO RECABAR DATOS TRIBUTARIOS.pdf",
+      "long": 58124,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1460796,
+      "descripcion": "Anexo IV",
+      "nombreFic": "ANEXO IV. CONSENTIMIENTO RECABAR DATO SEGURIDAD SOCIAL.pdf",
+      "long": 535368,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    },
+    {
+      "id": 1460794,
+      "descripcion": "Anexo II",
+      "nombreFic": "ANEXO II. DECLARACION RESPONSABLE ESTABLECIMIENTO.pdf",
+      "long": 93643,
+      "datMod": "2026-05-25",
+      "datPublicacion": "2026-05-25"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}
