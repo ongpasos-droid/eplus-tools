@@ -1,0 +1,64 @@
+{
+  "id": 1109692,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "MANCOMUNIDAD INTEGRAL DE LA COMARCA DE OLIVENZA",
+    "nivel3": "MANCOMUNIDAD INTEGRAL DE LA COMARCA DE OLIVENZA"
+  },
+  "sedeElectronica": "https://mancomunidadolivenza.sedelectronica.es/info.0",
+  "codigoBDNS": "908131",
+  "fechaRecepcion": "2026-05-26",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 26179.41,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DEL PROGRAMA DE COLABORACIÓN\nECONÓMICA MUNICIPAL DEL SERVICIO RESPIRO FAMILIAR A PERSONAS\nCUIDADORAS HABITUALES NO PROFESIONALES EN LA MANCOMUNIDAD INTEGRAL\nDE LA COMARCA DE OLIVENZA, 2026.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES431 - Badajoz"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "CONVOCATORIA DEL PROGRAMA DE COLABORACIÓN\nECONÓMICA MUNICIPAL DEL SERVICIO RESPIRO FAMILIAR A PERSONAS\nCUIDADORAS HABITUALES NO PROFESIONALES EN LA MANCOMUNIDAD INTEGRAL\nDE LA COMARCA DE OLIVENZA, 2026.",
+  "urlBasesReguladoras": "https://mancomunidadolivenza.sedelectronica.es/info.0",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "01/01/2026",
+  "textFin": "31/12/2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1461955,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "20260514_Otros_BASES RESPIRO FAMILIAR 2026-2.pdf",
+      "long": 504121,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

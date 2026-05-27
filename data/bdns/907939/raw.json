@@ -1,0 +1,64 @@
+{
+  "id": 1109500,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "LORIGUILLA",
+    "nivel3": "AYUNTAMIENTO DE LORIGUILLA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "907939",
+  "fechaRecepcion": "2026-05-26",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 7000,
+  "mrr": false,
+  "descripcion": "BECAS FORMATIVAS PARA JÓVENES ESTUDIANTES MEDIANTE LA REALIZACIÓN DE PRÁCTICAS FORMATIVAS EN EL AYUNTAMIENTO DE LORIGUILLA “LORITEBECA\" 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Educación secundaria y educación postsecundaria no terciaria",
+      "codigo": "85.3"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES523 - Valencia / València"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "ORDENANZA GENERAL SUBVENCIONES AYUNTAMIENTO LORIGUILLA",
+  "urlBasesReguladoras": "https://bop.dival.es/bop/downloads?anuncioNumReg=2020/10280&lang=va",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "El plazo para la presentación de solicitudes será de 10 días naturales tras la publicación del extra",
+  "textFin": "El plazo para la presentación de solicitudes será de 10 días naturales tras la publicación del extra",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1461556,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "20260525_Resolución_Decreto de Alcaldía _ Decreto de Presidencia _DECRETO 2026-0361 [LORITEBECA 2026 - DECRETO DE ALCALDÍA].pdf",
+      "long": 420125,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

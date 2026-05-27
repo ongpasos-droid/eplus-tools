@@ -1,0 +1,71 @@
+{
+  "id": 1109537,
+  "organo": {
+    "nivel1": "ESTADO",
+    "nivel2": "MINISTERIO DE EDUCACIÓN, FORMACIÓN PROFESIONAL Y DEPORTES",
+    "nivel3": "SECRETARÍA DE ESTADO DE EDUCACIÓN"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "907976",
+  "fechaRecepcion": "2026-05-26",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 534700,
+  "mrr": false,
+  "descripcion": "RESOLUCIÓN DE LA SECRETARÍA DE ESTADO DE EDUCACIÓN POR LA QUE SE CONVOCAN AYUDAS PARA SUFRAGAR LOS SERVICIOS DE TRANSPORTE ESCOLAR PARA EL ALUMNADO MATRICULADO EN CENTROS PÚBLICOS DOCENTES NO UNIVERSITARIOS EN CEUTA Y MELILLA EN EL CURSO 2026-2027",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    },
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES63 - CIUDAD AUTONOMA DE CEUTA"
+    },
+    {
+      "descripcion": "ES64 - CIUDAD AUTONOMA DE MELILLA"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Orden ECI/1815/2005, de 6 de junio (BOE de 15 de junio), por la que se establecen las bases reguladoras de la concesión de becas y ayudas al estudio por el Ministerio de Educación y Ciencia",
+  "urlBasesReguladoras": "https://www.boe.es/buscar/doc.php?id=BOE-A-2005-10175",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir del día siguiente a la fecha de publicación del extracto en BOE",
+  "textFin": "15 días hábiles a partir del día siguiente al de la publicación del extracto en BOE",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1461657,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "report_01 Convocatoria TRANSPORTE 26-27.pdf",
+      "long": 476472,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

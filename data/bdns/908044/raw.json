@@ -1,0 +1,76 @@
+{
+  "id": 1109605,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "REGIÓN DE MURCIA",
+    "nivel3": "FUNDACIÓN SÉNECA (AGENCIA REGIONAL DE CIENCIA Y TECNOLOGÍA)"
+  },
+  "sedeElectronica": "https://fseneca.es/web/convocatoria/729",
+  "codigoBDNS": "908044",
+  "fechaRecepcion": "2026-05-26",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 40000,
+  "mrr": false,
+  "descripcion": "Ayudas a la Organización de Congresos y Reuniones Científico-Técnicas de la Fundación séneca-Agencia de ciencia y tecnología de la Región de Murcia",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Investigación y desarrollo",
+      "codigo": "72"
+    },
+    {
+      "descripcion": "Otras actividades profesionales, científicas y técnicas",
+      "codigo": "74"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES62 - REGION DE MURCIA"
+    }
+  ],
+  "descripcionFinalidad": "Investigación, desarrollo e innovación",
+  "descripcionBasesReguladoras": "Bases reguladoras de la concesión, en régimen de concurrencia competitiva, de las Ayudas a la Organización de Congresos y Reuniones Científico-Técnicas de la Fundación séneca-Agencia de ciencia y tecnología de la Región de Murcia",
+  "urlBasesReguladoras": "https://www.borm.es/services/anuncio/ano/2022/numero/3502/pdf?id=808766",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-05-26",
+  "fechaFinSolicitud": "2026-06-16",
+  "textInicio": "Desde la fecha de publicación de la convocatoria en la BDNS",
+  "textFin": "16 de junio de 2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1461789,
+      "descripcion": "Bases Reguladoras y Modificaciones",
+      "nombreFic": "Bases BORM OC 2018+ modificaciones 2019+ modificaciones 2022.pdf",
+      "long": 1051982,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    },
+    {
+      "id": 1461788,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convocatoria OC 2026 firmada.pdf",
+      "long": 374003,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

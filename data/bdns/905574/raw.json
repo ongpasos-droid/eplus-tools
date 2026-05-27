@@ -1,0 +1,88 @@
+{
+  "id": 1107135,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "RIOLA",
+    "nivel3": "AYUNTAMIENTO DE RIOLA"
+  },
+  "sedeElectronica": "https://riola.sedelectronica.es",
+  "codigoBDNS": "905574",
+  "fechaRecepcion": "2026-05-14",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 700000,
+  "mrr": false,
+  "descripcion": "SEGUNDA CONVOCATORIA DEL PROCEDIMIENTO DE CONCESIÓN DE AYUDAS ECONÓMICAS PARA LAS PERSONAS FÍSICAS RESIDENTES EN RIOLA AFECTADAS POR LAS INUNDACIONES SUFRIDAS EL 29 DE OCTUBRE DE 2024 EN EL MUNICIPIO DE RIOLA. \"FUNDACIÓN AMANCIO ORTEGA GAONA\"",
+  "descripcionLeng": "SEGONA CONVOCATÒRIA DEL PROCEDIMENT DE CONCESSIÓ D'AJUDES ECONÒMIQUES PER A LES PERSONES FÍSIQUES RESIDENTS A RIOLA AFECTADES PER LES INUNDACIONS PATIDES EL 29 D'OCTUBRE DE 2024 EN EL MUNICIPI DE RIOLA. \"FUNDACIÓ AMANCIO ORTEGA GAONA\"",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Administración pública y defensa; seguridad social obligatoria",
+      "codigo": "84"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES523 - Valencia / València"
+    }
+  ],
+  "descripcionFinalidad": "Otras actuaciones de carácter económico",
+  "descripcionBasesReguladoras": "Bases Reguladoras de la segunda convocatoria del procedimiento de concesión de ayudas económicas para las personas física residentes en Riola afectadas por las inundaciones sufridas el 29 de octubre de 2024 \"Fundación Amacio Ortega Gaona\"",
+  "urlBasesReguladoras": "https://riola.sedelectronica.es",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Desde el día siguiente a la publicación en el BOP",
+  "textFin": "10 días hábiles desde la fecha de inicio",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1454482,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "20260507_Uns altres_BASES CASTELLANO AMANCIO (1).pdf",
+      "long": 4560766,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-26"
+    },
+    {
+      "id": 1454487,
+      "descripcion": "DECLARACIÓN RESPONSABLE",
+      "nombreFic": "20260504_Uns altres_PLANTILLA DECLARACIÓN RESPONSABLE (1).pdf",
+      "long": 4660477,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-26"
+    },
+    {
+      "id": 1454485,
+      "descripcion": "SOLICITUD",
+      "nombreFic": "20260504_Uns altres_PLANTILLA SOLICITUD (1).pdf",
+      "long": 7310227,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-26"
+    },
+    {
+      "id": 1454483,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "20260507_Uns altres_BASES VALENCIÀ AMANCIO (1) (1).pdf",
+      "long": 4382989,
+      "datMod": "2026-05-14",
+      "datPublicacion": "2026-05-26"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,69 @@
+{
+  "source": "bdns",
+  "source_id": "908067",
+  "source_lang": "es",
+  "level": "otros",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "OTROS / ADRI PALOMARES - ASOCIACIÓN DE DESARROLLO RURAL INTEGRAL  PALOMARES (VIA DE LA PLATA - SALINAS - NORTE DUERO)",
+  "nuts_codes": [
+    "ES419"
+  ],
+  "nuts_primary": "ES419",
+  "title": "CONVOCATORIA PARA CONCESIÓN DE SUBVENCIONES A ENTIDADES LOCALES DEL ÁMBITO DE ACTUACIÓN DE ADRI PALOMARES PARA INVERSIONES DE CARÁCTER NO PRODUCTIVO EN EL MARCO DE LA INTERVENCIÓN 7119 LEADER DEL PEPAC 2023-2027",
+  "title_lang": "es",
+  "summary": "Infraestructuras",
+  "status": "open",
+  "publication_date": "2026-05-26",
+  "open_date": "2026-06-01",
+  "deadline": "2026-08-03",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 315440.54,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "84.1",
+      "descripcion": "Administración pública y de la política económica, social y medioambiental"
+    }
+  ],
+  "apply_url": "https://particulares.ayg.jcyl.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908067",
+  "documents": [
+    {
+      "label": "Memoria del Solicitante de Proy. NO Productivos",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://bocyl.jcyl.es/boletines/2024/02/26/pdf/BOCYL-D-26022024-13.pdf",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [
+    {
+      "descripcion": "FEADER - FONDO EUROPEO AGRÍCOLA DE DESARROLLO RURAL "
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-27T04:09:29.063Z"
+}

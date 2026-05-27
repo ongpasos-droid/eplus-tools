@@ -1,0 +1,63 @@
+{
+  "source": "bdns",
+  "source_id": "906098",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / CONSELL COMARCAL DE OSONA / CONSELL COMARCAL DE OSONA",
+  "nuts_codes": [],
+  "nuts_primary": null,
+  "title": "CONVOCATORIA DE SUBVENCIONES PARA PROYECTOS DE COOPERACION AL DESARROLLO EN EL ÁMBITO INTERNACIONAL PARA ENTIDADES SIN ANIMO DE LUCRO CON DOMICILIO EN LA COMARCA DE OSONA PARA EL AÑO 2026",
+  "title_lang": "es",
+  "summary": "Cooperación internacional para el desarrollo y cultural",
+  "status": "open",
+  "publication_date": "2026-05-15",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 8364,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "V",
+      "descripcion": "ORGANISMOS EXTRATERRITORIALES"
+    }
+  ],
+  "apply_url": "https://www.seu-e.cat/ca/web/ccosona/tramits-i-gestions",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/906098",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en lengua cooficial",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://bop.diba.cat/anunci/3617607/aprovacio-inicial-de-les-bases-reguladores-per-a-la-concessio-de-subvencions-de-suport-a-projectes-de-cooperacio-al-desenvolupament-en-l-ambit-internacional-per-a-entitats-sense-finalitat-de-lucre-amb-domicili-a-la-coma",
+  "text_inicio": "Un dia después de la publicacion de la convocatoria",
+  "text_fin": "Un mes des del dia despues de la publicacion de la convocatoria",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-27T04:09:28.324Z"
+}

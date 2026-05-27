@@ -1,0 +1,77 @@
+{
+  "source": "bdns",
+  "source_id": "908016",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / PALAFRUGELL / AYUNTAMIENTO DE PALAFRUGELL",
+  "nuts_codes": [
+    "ES512"
+  ],
+  "nuts_primary": "ES512",
+  "title": "Convocatoria de subvenciones para actividades económicas de ámbito cultural",
+  "title_lang": "es",
+  "summary": "Comercio, Turismo y Pymes",
+  "status": "open",
+  "publication_date": "2026-05-26",
+  "open_date": "2026-05-29",
+  "deadline": "2026-06-30",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 20000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "T",
+      "descripcion": "OTROS SERVICIOS"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908016",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en lengua cooficial",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://seu.palafrugell.cat/images/documents/reglaments/bases-generals-reguladores-subvencions-2026.pdf",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [
+    {
+      "numAnuncio": 212736,
+      "titulo": "Extracto de la resolución del Ayuntamiento de Palafrugell de 21 de mayo de 2026, de convocatoria de subvenciones por actividades económicas de ámbito cultural",
+      "tituloLeng": "Extracte de la resolució de l'Ajuntament de Palafrugell de 21 de maig de 2026, de convocatòria de subvencions per activitats econòmiques de caire cultural",
+      "texto": "<p>Objeto de la subvención</p><p>El objeto de esta convocatoria es el fomento de la actividad económica en el ámbito cultural mediante el apoyo a la inversión para la implantación de nuevos negocios o proyectos en locales vacíos situados a la zona centro de Palafrugell (ver Anexo Y). Se pretende promover la recuperación del espacio urbano y la dinamización del tejido comercial de cariz cultural.</p><p>Destinatarios</p><p>Podrán ser beneficiarias las personas profesionales autónomos/se que estén dados de alta en el régimen especial de los trabajadores por cuenta propia o autónomos (RETA), las empresas individuales, asociadas o agrupadas, dadas de alta en el censo del impuesto de actividades económicas, que creen actividades económicas de cariz cultural, específicamente aquellas que hayan hecho inversión dedicada a la creación cultural y/o a la venta de producto cultural. (ver anexo II)</p><p>Cuantía de las subvenciones</p><p>El importe de la subvención será como máximo el 90% del coste justificado como gasto de inversión por el solicitante y en ningún caso podrá exceder de 10.000 euros por beneficiario.</p><p>Plazo de presentación de solicitudes</p><p>Plazo de presentación de solicitudes: 30 de junio de 2026</p><p>Bases convocatoria</p><p>https://promocioeconomica.palafrugell.cat/contenido/cms/files/55344/convocatoria-i-bases-def.pdf</p><p> </p><p> </p>",
+      "textoLeng": "<p>Objecte de la subvenció</p><p>L’objecte d’aquesta convocatòria és el foment de l'activitat econòmica en l'àmbit cultural mitjançant el suport a la inversió per a la implantació de nous negocis o projectes en locals buits situats a la zona centre de Palafrugell (veure Annex I). Es pretén promoure la recuperació de l'espai urbà i la dinamització del teixit comercial de caire cultural.</p><p>Destinataris</p><p>Podran ser beneficiàries les persones professionals autònoms/es que estiguin donats d’alta en el règim especial dels treballadors per compte propi o autònoms (RETA), les empreses individuals, associades o agrupades, donades d’alta en el cens de l'impost d’activitats econòmiques, que creïn activitats econòmiques de caire cultural, específicament aquelles que hagin fet inversió dedicada a la creació cultural i/o a la venda de producte cultural. (veure annex II)</p><p>Quantia de les subvencions</p><p>L’import de la subvenció serà com a màxim el 90% del cost justificat com a despesa d’inversió pel sol·licitant i en cap cas podrà excedir de 10.000 euros per beneficiari.</p><p>Termini de presentació de sol·licituds</p><p>Termini de presentació de sol·licituds: 30 de juny de 2026</p><p>Bases convocatòria</p><p>https://promocioeconomica.palafrugell.cat/contenido/cms/files/55344/convocatoria-i-bases-def.pdf</p><p> </p><p> </p><p> </p>",
+      "url": "https://ssl4.ddgi.cat/bopV1/pdf/2026/102/202610204543.pdf",
+      "cve": null,
+      "desDiarioOficial": "B.O.P. DE GIRONA",
+      "datPublicacion": "2026-05-29"
+    }
+  ],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-27T04:09:29.040Z"
+}

@@ -1,0 +1,76 @@
+{
+  "id": 1109688,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "VILALBA SASSERRA",
+    "nivel3": "AYUNTAMIENTO DE VILALBA SASSERRA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "908127",
+  "fechaRecepcion": "2026-05-26",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 2000,
+  "mrr": false,
+  "descripcion": "DECRETO DE ALCALDIA 2026-206 DE FECHA 26 DE MAYO DE 2026 DE CONVOCATORIA PARA LA CONCESIÓN DE PRESTACIONES SOCIALES DE CARÁCTER ECONÓMICO EN RÉGIMEN DE CONCURRENCIA COMPETITIVA LA ESCOLARIDAD EL CURSO ESCOLAR 2026-2027",
+  "descripcionLeng": "DECRET D'ALCALDIA 2026-206 DE DATA 26 DE MAIG DE 2026 DE CONVOCATÒRIA PER A LA CONCESSIÓ DE PRESTACIONS SOCIALS DE CARÀCTER ECONÒMIC EN RÈGIM DE CONCURRÈNCIA COMPETITIVA A L’ ESCOLARITAT PEL CURS ESCOLAR 2026-2027",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    },
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES511 - Barcelona"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Convocatoria de",
+  "urlBasesReguladoras": "https://bop-diba-cat.translate.goog/anunci/3055345/bases-reguladores-per-a-la-concessio-de-prestacions-socials-de-caracter-economic-en-regim-de-concurrencia-competitiva-a-l-escolaritat-ajuntament-de-vilalba-sasserra?_x_tr_sl=ca&_x_tr_tl=es&_x_tr_hl=en",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2027-02-28",
+  "textInicio": "Al dia siguiente al de la publicacion en el diario oficial",
+  "textFin": "28/02/2027",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1461904,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Convocatoria en catala.pdf",
+      "long": 453397,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    },
+    {
+      "id": 1461902,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convocatoria en castellano.pdf",
+      "long": 306299,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

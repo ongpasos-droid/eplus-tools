@@ -1,0 +1,124 @@
+{
+  "id": 1109731,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "AGUILAR DE CAMPOO",
+    "nivel3": "AYUNTAMIENTO DE AGUILAR DE CAMPOO"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "908170",
+  "fechaRecepcion": "2026-05-26",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 45000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DE SUBVENCIONES PARA LA PROMOCIÓN DEPORTIVA Y REALIZACIÓN DE ACTIVIDADES DEPORTIVAS EN EL MUNICIPIO DE AGUILAR DE CAMPOO 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    },
+    {
+      "descripcion": "ADMINISTRACIÓN PÚBLICA Y DEFENSA; SEGURIDAD SOCIAL OBLIGATORIA",
+      "codigo": "P"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES414 - Palencia"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "CONVOCATORIA DE SUBVENCIONES PARA LA PROMOCIÓN DEPORTIVA Y REALIZACIÓN DE ACTIVIDADES DEPORTIVAS EN EL MUNICIPIO DE AGUILAR DE CAMPOO 2026",
+  "urlBasesReguladoras": "https://aguilardecampoo.sedelectronica.es/preview-document/e18ee36b-9e95-4615-b46b-62434b39c820",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "El día siguiente a la publicación en el Boletín Oficial de la Provincia de Palencia",
+  "textFin": "En el plazo de un mes desde la publicación en el Boletín Oficial de la Provincia de Palencia",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1462030,
+      "descripcion": "ANEXO I",
+      "nombreFic": "ANEXO I.docx",
+      "long": 50633,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    },
+    {
+      "id": 1462034,
+      "descripcion": "ANEXO IV",
+      "nombreFic": "ANEXO IV.docx",
+      "long": 14311,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    },
+    {
+      "id": 1462033,
+      "descripcion": "ANEXO III",
+      "nombreFic": "ANEXO III.docx",
+      "long": 14353,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    },
+    {
+      "id": 1462027,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "BASES CONSEJO MUNICIPAL DE DEPORTES 2026.pdf",
+      "long": 532515,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    },
+    {
+      "id": 1462031,
+      "descripcion": "ANEXO II",
+      "nombreFic": "ANEXO II.docx",
+      "long": 13345,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    },
+    {
+      "id": 1462035,
+      "descripcion": "ANEXO V",
+      "nombreFic": "ANEXO V.docx",
+      "long": 33507,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    },
+    {
+      "id": 1462037,
+      "descripcion": "ANEXO VII",
+      "nombreFic": "ANEXO VII.docx",
+      "long": 17553,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    },
+    {
+      "id": 1462036,
+      "descripcion": "ANEXO VI",
+      "nombreFic": "ANEXO VI.docx",
+      "long": 23941,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

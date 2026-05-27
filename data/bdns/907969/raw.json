@@ -1,0 +1,80 @@
+{
+  "id": 1109530,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "VILADECAVALLS",
+    "nivel3": "AYUNTAMIENTO DE VILADECAVALLS"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "907969",
+  "fechaRecepcion": "2026-05-26",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 500,
+  "mrr": false,
+  "descripcion": "Subvención concurrencia competitiva para el concurso del Cartel de fiesta Mayor de Viladecavalls 2026",
+  "descripcionLeng": "Subvenció concurrència competitiva per el concurs del Cartell de Festa Major de Viladecavalls 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES - ESPAÑA "
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "Bases reguladoras para la concesión de subvención en régimen de concurrencia competitiva para el concurso del Cartel de Fiesta Mayor de Viladecavalls",
+  "urlBasesReguladoras": "https://bop.diba.cat/anunci/3929802/aprovacio-inicial-de-la-modificacio-de-les-bases-reguladores-del-concurs-de-cartells-de-la-festa-major-ajuntament-de-viladecavalls",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-06-04",
+  "textInicio": "Día después de la publicación de la convocatoria en el B.O.P.B.",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1461600,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "1-Convocatoria para la concesión de subvención para el concurso del cartel de fiesta mayor 2026-sig-25-05-26 cast.pdf",
+      "long": 166637,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    },
+    {
+      "id": 1461603,
+      "descripcion": "Decret 2026/662 22/05/2026 aprovació convocatòria",
+      "nombreFic": "1-Decret 26-662 de 22-05-26 Convocatòria per concessió subvenció concurs del cartell festa major 2026 còpia autèntica.pdf",
+      "long": 315295,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    },
+    {
+      "id": 1461602,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "1-Convocatòria per a la concessió de subvenció per el concurs del cartell de festa major 2026-sig 25-05-26-cat.pdf",
+      "long": 175782,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

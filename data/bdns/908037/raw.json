@@ -1,0 +1,76 @@
+{
+  "id": 1109598,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "REGIÓN DE MURCIA",
+    "nivel3": "FUNDACIÓN SÉNECA (AGENCIA REGIONAL DE CIENCIA Y TECNOLOGÍA)"
+  },
+  "sedeElectronica": "https://fseneca.es/web/convocatoria/730",
+  "codigoBDNS": "908037",
+  "fechaRecepcion": "2026-05-26",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 160000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DE AYUDAS A LA REALIZACIÓN DE ESTANCIAS DE INVESTIGADORES DE LA REGIÓN EN CENTROS INTERNACIONALES DE LA FUNDACIÓN SÉNECA-AGENCIA DE CIENCIA Y TECNOLOGÍA DE LA REGIÓN DE MURCIA",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Investigación y desarrollo",
+      "codigo": "72"
+    },
+    {
+      "descripcion": "Otras actividades profesionales, científicas y técnicas",
+      "codigo": "74"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES62 - REGION DE MURCIA"
+    }
+  ],
+  "descripcionFinalidad": "Investigación, desarrollo e innovación",
+  "descripcionBasesReguladoras": "Bases reguladoras de la concesión, en régimen de concurrencia competitiva, de las Ayudas a la realización de Estancias de Investigadores de la Región en Centros Internacionales de la Fundación Séneca-Agencia de Ciencia y Tecnología de la Región de Murcia",
+  "urlBasesReguladoras": "https://www.borm.es/#/home/anuncio/22-06-2022/3292",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-05-26",
+  "fechaFinSolicitud": "2026-06-16",
+  "textInicio": "Desde la fecha de publicación de la convocatoria en la BDNS",
+  "textFin": "16 de junio de 2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1461765,
+      "descripcion": "Bases Reguladoras y modificaciones",
+      "nombreFic": "Bases BORM EE 2018+ modificaciones 2019+Modificaciones 2022.pdf",
+      "long": 1058039,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    },
+    {
+      "id": 1461763,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convocatoria EE-26 firmada.pdf",
+      "long": 417379,
+      "datMod": "2026-05-26",
+      "datPublicacion": "2026-05-26"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

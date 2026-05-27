@@ -1,0 +1,69 @@
+{
+  "source": "bdns",
+  "source_id": "908037",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / REGIÓN DE MURCIA / FUNDACIÓN SÉNECA (AGENCIA REGIONAL DE CIENCIA Y TECNOLOGÍA)",
+  "nuts_codes": [
+    "ES62"
+  ],
+  "nuts_primary": "ES62",
+  "title": "CONVOCATORIA DE AYUDAS A LA REALIZACIÓN DE ESTANCIAS DE INVESTIGADORES DE LA REGIÓN EN CENTROS INTERNACIONALES DE LA FUNDACIÓN SÉNECA-AGENCIA DE CIENCIA Y TECNOLOGÍA DE LA REGIÓN DE MURCIA",
+  "title_lang": "es",
+  "summary": "Investigación, desarrollo e innovación",
+  "status": "open",
+  "publication_date": "2026-05-26",
+  "open_date": "2026-05-26",
+  "deadline": "2026-06-16",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 160000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "72",
+      "descripcion": "Investigación y desarrollo"
+    },
+    {
+      "codigo": "74",
+      "descripcion": "Otras actividades profesionales, científicas y técnicas"
+    }
+  ],
+  "apply_url": "https://fseneca.es/web/convocatoria/730",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908037",
+  "documents": [
+    {
+      "label": "Bases Reguladoras y modificaciones",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.borm.es/#/home/anuncio/22-06-2022/3292",
+  "text_inicio": "Desde la fecha de publicación de la convocatoria en la BDNS",
+  "text_fin": "16 de junio de 2026",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-27T04:09:29.050Z"
+}
