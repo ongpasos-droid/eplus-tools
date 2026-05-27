@@ -133,11 +133,15 @@ exports.list = async (req, res, next) => {
     //  - Excluimos source='salto' porque las movilidades tienen su propia pestaña.
     //  - Excluimos source='bdns' (subvenciones nacionales ES): no encajan con el foco EU.
     const today = new Date().toISOString().slice(0, 10);
+    const curationMap = curation.getAll();
+    const admin = isAdmin(req);
     let rows = all.filter(r => {
       if (String(r.source || '').toLowerCase() === 'salto') return false;
       if (String(r.source || '').toLowerCase() === 'bdns') return false;
       if (String(r.status || '').toLowerCase() === 'closed') return false;
       if (r.deadline && String(r.deadline) < today) return false;
+      // Hidden by admin: invisible to normal users; admins can see them but mark them as such on the card.
+      if (!admin && curationMap[r.source_id]?.hidden) return false;
       return true;
     });
     if (status)    rows = rows.filter(r => String(r.status || '').toLowerCase() === status);
@@ -156,6 +160,8 @@ exports.list = async (req, res, next) => {
     const items = rows.slice(offset, offset + limit).map(c => {
       const card = toCard(c, structured);
       card.available_in_efs = activeSet.has(c.source_id) || activeSet.has(c.call_id);
+      // Attach curation only for admins; users don't even know it exists.
+      if (admin) card.curation = curationMap[c.source_id] || null;
       return card;
     });
 
@@ -188,6 +194,12 @@ exports.getById = (req, res, next) => {
 };
 
 const rag = require('./rag');
+const curation = require('./curation');
+
+function isAdmin(req) {
+  const role = req.user?.role;
+  return role === 'admin' || role === 'scribe';
+}
 
 exports.searchSemantic = async (req, res, next) => {
   try {
@@ -214,4 +226,26 @@ exports.chat = async (req, res, next) => {
 
 exports.ragStatus = (req, res, next) => {
   try { res.json({ ok: true, data: rag.readinessStatus() }); } catch (e) { next(e); }
+};
+
+exports.curationList = (req, res, next) => {
+  try {
+    if (!isAdmin(req)) return res.status(403).json({ ok: false, error: { code: 'FORBIDDEN', message: 'admin only' } });
+    res.json({ ok: true, data: curation.getAll() });
+  } catch (e) { next(e); }
+};
+
+exports.curationPatch = (req, res, next) => {
+  try {
+    if (!isAdmin(req)) return res.status(403).json({ ok: false, error: { code: 'FORBIDDEN', message: 'admin only' } });
+    const sid = req.params.sourceId;
+    const body = req.body || {};
+    const allowed = {};
+    if ('hidden' in body)   allowed.hidden = body.hidden;
+    if ('reviewed' in body) allowed.reviewed = body.reviewed;
+    if ('add_note' in body) allowed.add_note = body.add_note;
+    if ('delete_note_index' in body) allowed.delete_note_index = body.delete_note_index;
+    const result = curation.patch(sid, allowed, req.user);
+    res.json({ ok: true, data: result });
+  } catch (e) { next(e); }
 };

@@ -9,7 +9,10 @@ const Convocatorias = (() => {
   let allItems = [];
   let loaded   = false;
   let bound    = false;
-  const state  = { q: '', status: '', programme: '', sort: 'deadline' };
+  let isAdmin  = false;  // set on init() based on App.isAdmin()
+  const state  = { q: '', status: '', programme: '', sort: 'deadline', curation: '', availability: '' };
+  // curation filter values (admin): '' (all), 'unreviewed', 'reviewed', 'in_efs', 'hidden'
+  // availability filter values (public): '' (all), 'efs' (only available in EFS)
 
   /* ── helpers ─────────────────────────────────────────────── */
 
@@ -90,10 +93,33 @@ const Convocatorias = (() => {
   /* ── lifecycle ───────────────────────────────────────────── */
 
   async function init() {
+    isAdmin = !!(typeof App !== 'undefined' && App.isAdmin && App.isAdmin());
     bindEvents();
     if (!loaded) await load();
     populateProgrammes();
+    renderAdminToolbar();
     render();
+  }
+
+  function renderAdminToolbar() {
+    if (!isAdmin) return;
+    const host = document.getElementById('convocatorias-status-chips');
+    if (!host || host.querySelector('[data-curation]')) return;
+    const html = `
+      <span class="text-[10px] text-on-surface-variant ml-3 mr-1 self-center">|  Admin:</span>
+      <button type="button" data-curation="" class="conv-chip is-active">Todas</button>
+      <button type="button" data-curation="unreviewed" class="conv-chip">Sin revisar</button>
+      <button type="button" data-curation="reviewed"   class="conv-chip">Revisadas</button>
+      <button type="button" data-curation="in_efs"     class="conv-chip">En EFS</button>
+      <button type="button" data-curation="hidden"     class="conv-chip">Ocultas</button>`;
+    host.insertAdjacentHTML('beforeend', html);
+    host.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-curation]');
+      if (!btn) return;
+      state.curation = btn.dataset.curation;
+      host.querySelectorAll('[data-curation]').forEach(b => b.classList.toggle('is-active', b === btn));
+      render();
+    });
   }
 
   async function load() {
@@ -158,16 +184,36 @@ const Convocatorias = (() => {
 
     if (chips) {
       chips.addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-status]');
-        if (!btn) return;
-        chips.querySelectorAll('.conv-chip').forEach(c => c.classList.remove('is-active'));
-        btn.classList.add('is-active');
-        state.status = btn.dataset.status;
-        render();
+        // Public status chips
+        const statusBtn = e.target.closest('[data-status]');
+        if (statusBtn) {
+          chips.querySelectorAll('[data-status]').forEach(c => c.classList.remove('is-active'));
+          statusBtn.classList.add('is-active');
+          state.status = statusBtn.dataset.status;
+          render();
+          return;
+        }
+        // Availability chip ("Disponibles en EFS") — independent toggle
+        const availBtn = e.target.closest('[data-availability]');
+        if (availBtn) {
+          const wasActive = availBtn.classList.contains('is-active');
+          availBtn.classList.toggle('is-active', !wasActive);
+          state.availability = wasActive ? '' : availBtn.dataset.availability;
+          render();
+          return;
+        }
       });
     }
 
     document.getElementById('convocatorias-list')?.addEventListener('click', (e) => {
+      // Admin curation toolbar — intercept BEFORE generic card click.
+      const adminBtn = e.target.closest('.conv-admin-act');
+      if (adminBtn) {
+        e.stopPropagation();
+        const toolbar = adminBtn.closest('.conv-admin-toolbar');
+        handleAdminAction(toolbar.dataset.sourceId, adminBtn.dataset.act);
+        return;
+      }
       // Create-project button — intercept BEFORE generic card click.
       const btn = e.target.closest('.conv-create-project');
       if (btn) {
@@ -219,6 +265,135 @@ const Convocatorias = (() => {
     }
   }
 
+  async function handleAdminAction(sourceId, action) {
+    if (!sourceId || !action) return;
+    const item = allItems.find(i => i.source_id === sourceId);
+    if (!item) return;
+    const cur = item.curation || {};
+    try {
+      if (action === 'hidden') {
+        const updated = await API.patch(`/convocatorias/curation/${encodeURIComponent(sourceId)}`, { hidden: !cur.hidden });
+        item.curation = updated;
+      } else if (action === 'reviewed') {
+        const updated = await API.patch(`/convocatorias/curation/${encodeURIComponent(sourceId)}`, { reviewed: !cur.reviewed_at });
+        item.curation = updated;
+      } else if (action === 'notes') {
+        await openNotesModal(item);
+        return;
+      } else if (action === 'import') {
+        if (!confirm(`¿Importar "${item.title}" a Data E+ (queda INACTIVA, abre el editor)?`)) return;
+        const r = await API.post('/admin/data/programs/import-from-feed', { source_id: sourceId });
+        // Navigate to Admin and open the editor for this program — same flow
+        // as the "Importar de catálogo EU" modal in admin.
+        location.hash = '#admin';
+        // Wait one tick so app.js navigate() calls Admin.init() before we ask
+        // for the editor (init mounts the DOM).
+        setTimeout(() => {
+          if (typeof Admin !== 'undefined' && Admin.openConvocatoria) {
+            Admin.openConvocatoria(r.id, item.title);
+          }
+        }, 150);
+        return;
+      }
+      render();
+    } catch (e) {
+      alert('Error: ' + (e.message || e));
+    }
+  }
+
+  function fmtTimestamp(iso) {
+    if (!iso) return '';
+    const d = new Date(iso);
+    if (isNaN(d)) return iso;
+    return d.toLocaleString('es-ES', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  }
+
+  async function openNotesModal(item) {
+    let modal = document.getElementById('conv-notes-modal');
+    if (modal) modal.remove();
+    modal = document.createElement('div');
+    modal.id = 'conv-notes-modal';
+    modal.className = 'fixed inset-0 z-50 bg-black/40 flex items-start justify-center p-6 overflow-y-auto';
+    const renderInner = () => {
+      const log = (item.curation && item.curation.notes_log) || [];
+      const entries = log.length === 0
+        ? '<p class="text-sm text-on-surface-variant text-center py-6">Sin notas aún. Añade la primera abajo.</p>'
+        : log.map((n, i) => `
+          <div class="flex gap-3 px-3 py-3 rounded-lg bg-surface-container-low border border-outline-variant/15">
+            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <span class="text-[10px] font-bold text-primary">${escapeHtml((n.author_name || '?').slice(0,2).toUpperCase())}</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <div class="text-[11px] font-bold text-on-surface">${escapeHtml(n.author_name || '—')}</div>
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] text-on-surface-variant">${escapeHtml(fmtTimestamp(n.created_at))}</span>
+                  <button type="button" class="conv-note-del text-on-surface-variant/40 hover:text-error transition-colors" data-idx="${i}" title="Eliminar">
+                    <span class="material-symbols-outlined text-[14px]">delete</span>
+                  </button>
+                </div>
+              </div>
+              <div class="text-[13px] text-on-surface whitespace-pre-wrap">${escapeHtml(n.text || '')}</div>
+            </div>
+          </div>`).join('');
+
+      modal.innerHTML = `
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl mt-10 max-h-[85vh] flex flex-col">
+          <div class="flex items-center justify-between px-6 py-4 border-b border-outline-variant/20">
+            <div class="min-w-0 flex-1 pr-3">
+              <h3 class="font-headline text-base font-bold text-primary truncate">Notas admin · ${escapeHtml(item.title || '')}</h3>
+              <p class="text-[11px] text-on-surface-variant mt-0.5 font-mono">${escapeHtml(item.source_id || '')}</p>
+            </div>
+            <button id="conv-notes-close" type="button" class="text-on-surface-variant hover:text-error flex-shrink-0">
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+          <div class="flex-1 overflow-y-auto px-6 py-4 space-y-2">
+            ${entries}
+          </div>
+          <div class="px-6 py-4 border-t border-outline-variant/20 bg-surface-container-low rounded-b-2xl">
+            <textarea id="conv-note-text" rows="2" placeholder="Escribe una nota (visible solo para admins)…"
+              class="w-full px-3 py-2 rounded-lg border border-outline-variant/40 focus:border-primary focus:outline-none text-sm resize-y"></textarea>
+            <div class="flex items-center justify-end mt-2">
+              <button id="conv-note-add" type="button" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-[#fbff12] text-xs font-bold hover:bg-primary/80 disabled:opacity-50">
+                <span class="material-symbols-outlined text-[14px]">add</span> Añadir nota
+              </button>
+            </div>
+          </div>
+        </div>`;
+      bindModal();
+    };
+    const bindModal = () => {
+      modal.querySelector('#conv-notes-close')?.addEventListener('click', () => modal.remove());
+      modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
+      modal.querySelector('#conv-note-add')?.addEventListener('click', async () => {
+        const ta = modal.querySelector('#conv-note-text');
+        const text = (ta.value || '').trim();
+        if (!text) return;
+        const btn = modal.querySelector('#conv-note-add');
+        btn.disabled = true;
+        try {
+          const updated = await API.patch(`/convocatorias/curation/${encodeURIComponent(item.source_id)}`, { add_note: text });
+          item.curation = updated;
+          ta.value = '';
+          renderInner();
+          render();
+        } catch (e) { alert('Error: ' + (e.message || e)); btn.disabled = false; }
+      });
+      modal.querySelectorAll('.conv-note-del').forEach(b => b.addEventListener('click', async () => {
+        if (!confirm('¿Eliminar esta nota?')) return;
+        try {
+          const updated = await API.patch(`/convocatorias/curation/${encodeURIComponent(item.source_id)}`, { delete_note_index: parseInt(b.dataset.idx, 10) });
+          item.curation = updated;
+          renderInner();
+          render();
+        } catch (e) { alert('Error: ' + (e.message || e)); }
+      }));
+    };
+    document.body.appendChild(modal);
+    renderInner();
+  }
+
   async function createProjectFromCall(btn) {
     const actionType = btn.dataset.actionType;
     const title      = btn.dataset.title || actionType;
@@ -264,6 +439,17 @@ const Convocatorias = (() => {
 
     if (state.status) out = out.filter(i => String(i.status || '').toLowerCase() === state.status);
     if (state.programme) out = out.filter(i => i.programme === state.programme);
+    if (state.availability === 'efs') out = out.filter(i => !!i.available_in_efs);
+
+    // Admin curation filters (only meaningful when isAdmin)
+    if (isAdmin && state.curation) {
+      switch (state.curation) {
+        case 'unreviewed': out = out.filter(i => !i.curation?.reviewed_at && !i.curation?.hidden); break;
+        case 'reviewed':   out = out.filter(i => !!i.curation?.reviewed_at); break;
+        case 'in_efs':     out = out.filter(i => !!i.available_in_efs); break;
+        case 'hidden':     out = out.filter(i => !!i.curation?.hidden); break;
+      }
+    }
 
     if (state.q) {
       const needle = state.q.toLowerCase();
@@ -273,18 +459,27 @@ const Convocatorias = (() => {
       );
     }
 
-    if (state.sort === 'deadline') {
-      out.sort((a, b) => {
+    // Secondary sort comparator (deadline/budget/title)
+    const secondary = (a, b) => {
+      if (state.sort === 'deadline') {
         if (!a.deadline && !b.deadline) return 0;
         if (!a.deadline) return 1;
         if (!b.deadline) return -1;
         return a.deadline.localeCompare(b.deadline);
-      });
-    } else if (state.sort === 'budget') {
-      out.sort((a, b) => (Number(b.budget_total_eur) || 0) - (Number(a.budget_total_eur) || 0));
-    } else if (state.sort === 'title') {
-      out.sort((a, b) => (a.title || '').localeCompare(b.title || ''));
-    }
+      }
+      if (state.sort === 'budget') return (Number(b.budget_total_eur) || 0) - (Number(a.budget_total_eur) || 0);
+      if (state.sort === 'title')  return (a.title || '').localeCompare(b.title || '');
+      return 0;
+    };
+    // Primary sort: convocatorias YA disponibles en EFS aparecen primero.
+    // Son las que el usuario puede usar para crear un proyecto AHORA, así que
+    // queremos dirigir la atención ahí.
+    out.sort((a, b) => {
+      const aEfs = a.available_in_efs ? 1 : 0;
+      const bEfs = b.available_in_efs ? 1 : 0;
+      if (aEfs !== bEfs) return bEfs - aEfs; // true first
+      return secondary(a, b);
+    });
     return out;
   }
 
@@ -337,16 +532,49 @@ const Convocatorias = (() => {
          </div>`
       : '';
 
-    return `
-    <article data-call-id="${id}"
-      class="bg-surface rounded-2xl border border-outline-variant/30 p-5 hover:shadow-lg hover:border-primary/40 transition-all cursor-pointer flex flex-col gap-3">
+    const cur = item.curation || {};
+    const isHidden    = !!cur.hidden;
+    const isReviewed  = !!cur.reviewed_at;
+    const notesLog    = Array.isArray(cur.notes_log) ? cur.notes_log : [];
+    const notesCount  = notesLog.length;
+    const lastNote    = notesCount ? notesLog[notesCount - 1] : null;
+    const isInEfs     = !!item.available_in_efs;
+    const cardClasses = isHidden
+      ? 'bg-surface/60 rounded-2xl border-2 border-dashed border-on-surface-variant/30 p-5 opacity-60 hover:opacity-100 transition-all cursor-pointer flex flex-col gap-3'
+      : 'bg-surface rounded-2xl border border-outline-variant/30 p-5 hover:shadow-lg hover:border-primary/40 transition-all cursor-pointer flex flex-col gap-3';
 
-      <div class="flex items-start gap-2 justify-between flex-wrap">
+    const adminToolbar = isAdmin ? `
+      <div class="conv-admin-toolbar absolute top-2 right-2 flex items-center gap-1 bg-white/95 backdrop-blur rounded-full px-1.5 py-1 shadow-sm border border-outline-variant/20" data-source-id="${escapeHtml(item.source_id || '')}">
+        <button type="button" class="conv-admin-act w-7 h-7 rounded-full flex items-center justify-center hover:bg-surface-container transition-colors ${isHidden ? 'text-red-500' : 'text-on-surface-variant/50'}"
+          data-act="hidden" title="${isHidden ? 'Oculta — click para mostrar' : 'Ocultar al público'}">
+          <span class="material-symbols-outlined text-[16px]" style="font-variation-settings:'FILL' ${isHidden ? 1 : 0}">${isHidden ? 'visibility_off' : 'visibility'}</span>
+        </button>
+        <button type="button" class="conv-admin-act w-7 h-7 rounded-full flex items-center justify-center hover:bg-surface-container transition-colors ${isReviewed ? 'text-emerald-600' : 'text-on-surface-variant/50'}"
+          data-act="reviewed" title="${isReviewed ? 'Revisada' + (cur.reviewed_at ? ' ('+cur.reviewed_at.slice(0,10)+')' : '') + ' — click para desmarcar' : 'Marcar como revisada'}">
+          <span class="material-symbols-outlined text-[16px]" style="font-variation-settings:'FILL' ${isReviewed ? 1 : 0}">${isReviewed ? 'task_alt' : 'radio_button_unchecked'}</span>
+        </button>
+        <button type="button" class="conv-admin-act relative w-7 h-7 rounded-full flex items-center justify-center hover:bg-surface-container transition-colors ${notesCount ? 'text-amber-600' : 'text-on-surface-variant/50'}"
+          data-act="notes" title="${notesCount ? notesCount + ' nota'+(notesCount!==1?'s':'')+' · última: ' + escapeHtml((lastNote.author_name||'?')) + ' ' + escapeHtml((lastNote.created_at||'').slice(0,10)) : 'Añadir nota admin'}">
+          <span class="material-symbols-outlined text-[16px]" style="font-variation-settings:'FILL' ${notesCount ? 1 : 0}">${notesCount ? 'sticky_note_2' : 'edit_note'}</span>
+          ${notesCount ? `<span class="absolute -top-1 -right-1 min-w-[14px] h-[14px] px-[3px] rounded-full bg-amber-500 text-white text-[8px] font-bold flex items-center justify-center">${notesCount}</span>` : ''}
+        </button>
+        ${isInEfs
+          ? `<span class="w-7 h-7 rounded-full flex items-center justify-center text-emerald-600" title="Ya importada en EFS"><span class="material-symbols-outlined text-[16px]" style="font-variation-settings:'FILL' 1">verified</span></span>`
+          : `<button type="button" class="conv-admin-act w-7 h-7 rounded-full flex items-center justify-center hover:bg-primary/10 text-primary transition-colors" data-act="import" title="Importar a EFS"><span class="material-symbols-outlined text-[16px]">download</span></button>`}
+      </div>` : '';
+
+    return `
+    <article data-call-id="${id}" data-source-id="${escapeHtml(item.source_id || '')}"
+      class="${cardClasses} relative">
+
+      ${adminToolbar}
+
+      <div class="flex items-start gap-2 justify-between flex-wrap ${isAdmin ? 'pr-32' : ''}">
         ${availabilityBadge(item) || sourceBadge(item.source)}
         ${deadlinePill(item)}
       </div>
 
-      <h3 class="text-base font-bold text-on-surface leading-tight" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${escapeHtml(item.title || '')}</h3>
+      <h3 class="text-base font-bold text-on-surface leading-tight ${isHidden ? 'line-through' : ''}" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${escapeHtml(item.title || '')}</h3>
 
       ${programme ? `<div class="text-[11px] font-semibold text-primary uppercase tracking-wider truncate">${escapeHtml(programme)}</div>` : ''}
 

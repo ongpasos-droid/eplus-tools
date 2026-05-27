@@ -1468,6 +1468,10 @@ tailwind.config = {
             <button type="button" data-status="" class="conv-chip is-active">Todas</button>
             <button type="button" data-status="open" class="conv-chip">Abiertas</button>
             <button type="button" data-status="forthcoming" class="conv-chip">Próximas</button>
+            <button type="button" data-availability="efs" class="conv-chip conv-chip-efs">
+              <span class="material-symbols-outlined text-[14px] align-middle" style="font-variation-settings:'FILL' 1">check_circle</span>
+              Disponibles en EFS
+            </button>
           </div>
 
           <!-- Semantic search bar -->
@@ -2876,6 +2880,12 @@ tailwind.config = {
   }
   .conv-chip:hover { border-color: rgb(var(--primary) / .5); }
   .conv-chip.is-active { background: #1b1464; color: #fbff12; border-color: #1b1464; }
+  /* Disponibles-en-EFS chip: distintivo verde para resaltar las que se pueden usar ya */
+  .conv-chip-efs {
+    background: #ecfdf5; color: #047857; border-color: #6ee7b7;
+  }
+  .conv-chip-efs:hover { border-color: #10b981; }
+  .conv-chip-efs.is-active { background: #10b981; color: #fff; border-color: #047857; }
 </style>
 
 <!-- ═══ MOBILITY DRAWER (right slide-in, mirrors entity-ficha pattern) ═══ -->

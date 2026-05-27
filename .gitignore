@@ -30,3 +30,7 @@ data/call_extracts/
 #   node scripts/embed-calls.js
 data/call_structured/
 data/call_vectors/
+
+# Admin curation state — per-environment (local and VPS keep their own).
+# Copy by scp if you want to migrate the admin's review work.
+data/call_curation.json

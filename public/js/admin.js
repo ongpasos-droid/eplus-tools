@@ -4951,5 +4951,34 @@ KEY EVALUATOR FOCUS:
     return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
 
-  return { init, openEdit, confirmDelete };
+  // Opens the convocatorias editor directly. Works whether the Admin section
+  // is already mounted or being navigated to. Used by Convocatorias tab to
+  // jump to the editor after importing a call from the public feed.
+  async function openConvocatoria(programId, programName) {
+    if (!programId) return;
+    // Make sure the admin DOM is ready and the convocatorias section is loaded.
+    if (typeof activeSection !== 'undefined') activeSection = 'convocatorias';
+    document.querySelectorAll('.admin-section').forEach(s => s.classList.add('hidden'));
+    const sec = document.getElementById('admin-sec-convocatorias');
+    if (sec) sec.classList.remove('hidden');
+    // Highlight the convocatorias tab if visible
+    document.querySelectorAll('.admin-tab').forEach(b => {
+      const isThis = b.dataset.section === 'convocatorias';
+      b.classList.toggle('border-b-2', isThis);
+      b.classList.toggle('border-secondary-fixed', isThis);
+      b.classList.toggle('text-primary', isThis);
+      b.classList.toggle('font-bold', isThis);
+      b.classList.toggle('text-on-surface-variant', !isThis);
+    });
+    // Fetch program meta so we can pass `prog` to convOpenProgram
+    try {
+      const programs = await API.get('/admin/data/programs/full');
+      const prog = programs.find(p => p.id === programId);
+      convOpenProgram(programId, programName || prog?.name || '', prog);
+    } catch (e) {
+      convOpenProgram(programId, programName || '');
+    }
+  }
+
+  return { init, openEdit, confirmDelete, openConvocatoria };
 })();
