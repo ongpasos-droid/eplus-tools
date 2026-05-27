@@ -654,13 +654,47 @@ const Convocatorias = (() => {
       </div>`;
   }
 
+  // True when an FAQ answer means "the LLM couldn't find this in the document".
+  // Hide those — better silence than a useless "no se especifica".
+  function isUnansweredFaq(text) {
+    if (!text) return true;
+    const t = String(text).toLowerCase().trim();
+    if (t.length < 6) return true;
+    const patterns = [
+      /\bel documento no\b/,
+      /\bel texto no\b/,
+      /\bla convocatoria no\b/,
+      /\bla call no\b/,
+      /\bno se especifica\b/,
+      /\bno se indica\b/,
+      /\bno se menciona\b/,
+      /\bno especifica\b/,
+      /\bno indica\b/,
+      /\bno detalla\b/,
+      /\bno proporciona\b/,
+      /\bno se proporciona\b/,
+      /\bno está especific/,
+      /\bno se aclara\b/,
+      /\bno aclara\b/,
+      /\bno se define\b/,
+      /\bno se detalla\b/,
+      /\bsin información\b/,
+    ];
+    return patterns.some(rx => rx.test(t));
+  }
+
   function renderFaq(item) {
     if (!item.faq || !item.faq.length) return '';
+    const visible = item.faq.filter(f => !isUnansweredFaq(f.a));
+    if (!visible.length) return '';
+    const hiddenCount = item.faq.length - visible.length;
+    const hiddenNote = hiddenCount > 0
+      ? `<span class="text-[10px] text-on-surface-variant/60 ml-2">(${hiddenCount} pregunta${hiddenCount !== 1 ? 's' : ''} sin respuesta clara ocultas)</span>` : '';
     return `
       <div>
-        <div class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-2">Preguntas frecuentes</div>
+        <div class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-2">Preguntas frecuentes${hiddenNote}</div>
         <div class="space-y-1.5">
-          ${item.faq.map((f, i) => `
+          ${visible.map((f, i) => `
             <details class="group rounded-lg bg-surface-container-low border border-outline-variant/15 px-3 py-2.5 ${i === 0 ? 'open' : ''}" ${i === 0 ? 'open' : ''}>
               <summary class="cursor-pointer text-sm font-semibold text-on-surface flex items-center gap-2 list-none">
                 <span class="material-symbols-outlined text-[16px] text-primary transition-transform group-open:rotate-90">chevron_right</span>
