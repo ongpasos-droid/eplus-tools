@@ -1,0 +1,77 @@
+{
+  "source": "bdns",
+  "source_id": "907210",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / DIPUTACIÓN PROV. DE GRANADA / DIPUTACIÓN PROVINCIAL DE GRANADA",
+  "nuts_codes": [
+    "ES614"
+  ],
+  "nuts_primary": "ES614",
+  "title": "ACUERDO DEL PRESIDENTE ASISTIDO POR JUNTA DE GOBIERNO, DE LA DIPUTACIÓN DE GRANADA, DE FECHA 19 DE MAYO DE 2026, POR EL QUE SE APRUEBA LA CONVOCATORIA PARA LA CONCESIÓN DE SUBVENCIONES DESTINADAS A LA ADQUISICIÓN DE MATERIAL DEPORTIVO INVENTARIABLE 2026.",
+  "title_lang": "es",
+  "summary": "Otras actuaciones de carácter económico",
+  "status": "open",
+  "publication_date": "2026-05-21",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 150000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "P",
+      "descripcion": "ADMINISTRACIÓN PÚBLICA Y DEFENSA; SEGURIDAD SOCIAL OBLIGATORIA"
+    }
+  ],
+  "apply_url": "https://sede.dipgra.es/opencms/system/modules/sede/elements/secciones/index",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/907210",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "ANEXO II",
+      "url": null
+    },
+    {
+      "label": "ANEXO I",
+      "url": null
+    },
+    {
+      "label": "ACUERDO JUNTA DE GOBIERNO",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.dipgra.es/servicios/areas/deportes/instalaciones-deportivas/adquisicion-de-equipamiento-deportivo-inventariable/",
+  "text_inicio": "DÍA SIGUIENTE PUBLICACIÓN BOLETÍN OFICIAL PROVINCIA",
+  "text_fin": "15 DÍAS HÁBILES DESPUÉS DEL INICIO DEL PLAZO DE SOLICITUD",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [
+    {
+      "descripcion": "FEDER - FONDO EUROPEO DE DESARROLLO REGIONAL"
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-28T04:09:29.630Z"
+}

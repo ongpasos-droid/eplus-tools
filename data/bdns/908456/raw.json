@@ -1,0 +1,64 @@
+{
+  "id": 1110017,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "COMARCA DE BAJO CINCA/BAIX CINCA",
+    "nivel3": "COMARCA DE BAJO CINCA/BAIX CINCA"
+  },
+  "sedeElectronica": "http://bajocinca.sedelectronica.es/info.0",
+  "codigoBDNS": "908456",
+  "fechaRecepcion": "2026-05-27",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 20000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DE SUBVENCIONES PARA ACTIVIDADES DE LA ENTIDADES SIN ÁNIMO DE LUCRO DE LA COMARCA DEL BAJO CINCA/ BAIX CINCA PARA EL EJERCICIO 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "OTROS SERVICIOS",
+      "codigo": "T"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES241 - Huesca"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "ORDENANZA GENERAL POR LA QUE SE APRUEBAN LAS BASES REGULADORAS PARA LA CONCESIÓN DE SUBVENCIONES POR LA COMARCA DEL BAJO CINCA/ BAIX CINCA",
+  "urlBasesReguladoras": "https://bop.dphuesca.es/index.php/mod.bopanuncios/mem.visualizarpdf/relcategoria.60008/idbopanuncio.194052/chk.3105ed26961e071b63efd30f0ccdbec6.html",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Día siguiente a su publicación en el Boletín Oficial de la Provincia de Huesca",
+  "textFin": "20 días hábiles",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1462740,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "CONVOCATORIA ACTIVIDADES ASOCIACIONES.pdf",
+      "long": 467399,
+      "datMod": "2026-05-27",
+      "datPublicacion": "2026-05-27"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,74 @@
+{
+  "source": "bdns",
+  "source_id": "908556",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / CASTILLA-LA MANCHA / VICECONSEJERÍA DE MEDIO AMBIENTE",
+  "nuts_codes": [
+    "ES42"
+  ],
+  "nuts_primary": "ES42",
+  "title": "Resolución de la Viceconsejería de Medio Ambiente, por la que se realiza la convocatoria para el año 2026 de las ayudas para plantaciones de chopos en Castilla-La Mancha a través del Fondo Europeo Agrícola de Desarrollo Rural (FEADER)",
+  "title_lang": "es",
+  "summary": "Agricultura, Pesca y Alimentación",
+  "status": "open",
+  "publication_date": "2026-05-27",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 140000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "GRAN EMPRESA; PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA; PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "GRAN EMPRESA",
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "02",
+      "descripcion": "Silvicultura y explotación forestal"
+    }
+  ],
+  "apply_url": "www.jccm.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908556",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://docm.jccm.es/docm/descargarArchivo.do?ruta=2025/09/25/pdf/2025_7132.pdf&tipo=rutaDocm",
+  "text_inicio": "desde el día siguiente al de la publicación de la convocatoria en el DOCM",
+  "text_fin": "Dos meses desde el día siguiente al de la publicación de la convocatoria en DOCM",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": "SA.109374",
+  "fondos": [
+    {
+      "descripcion": "FEADER - FONDO EUROPEO AGRÍCOLA DE DESARROLLO RURAL "
+    }
+  ],
+  "reglamento": {
+    "descripcion": "PRODUCCIÓN AGRÍCOLA PRIMARIA - REG (UE) 2022/2472, de 14 DE DICIEMBRE, de exención de notificación (vigente desde 01-01-2023)",
+    "orden": null
+  },
+  "objetivos": [
+    {
+      "descripcion": "ART. 50 AYUDAS DESTINADAS A LAS INVERSIONES EN TECNOLOGÍAS FORESTALES Y EN LA TRANSFORMACIÓN, MOVILIZACIÓN Y COMERCIALIZACIÓN DE PRODUCTOS FORESTALES"
+    }
+  ],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-28T04:09:30.065Z"
+}

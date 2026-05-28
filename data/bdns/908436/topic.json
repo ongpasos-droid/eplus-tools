@@ -1,0 +1,69 @@
+{
+  "source": "bdns",
+  "source_id": "908436",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / SANT MARTÍ VELL / AYUNTAMIENTO DE SANT MARTÍ VELL",
+  "nuts_codes": [
+    "ES512"
+  ],
+  "nuts_primary": "ES512",
+  "title": "convocatoria de subvenciones del casal de verano 2026 de los niños de Sant Martí Vell",
+  "title_lang": "es",
+  "summary": "Educación",
+  "status": "open",
+  "publication_date": "2026-05-27",
+  "open_date": "2026-06-01",
+  "deadline": "2026-06-22",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 2625,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "S",
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO"
+    },
+    {
+      "codigo": "Q",
+      "descripcion": "EDUCACIÓN"
+    }
+  ],
+  "apply_url": "https://seu-e.cat/ca/web/santmartivell/tramits-i-gestions/-/tramits/tramit/21172806?p_auth=1cQMKQxR",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908436",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en lengua cooficial",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.ddgi.cat/municipis/SantMartiVell/BASES%20RE GULADORES%20SUBVENCI%C3%93%20CASAL%202024.pdf",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-28T04:09:30.041Z"
+}

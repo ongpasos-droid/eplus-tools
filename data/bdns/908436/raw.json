@@ -1,0 +1,76 @@
+{
+  "id": 1109997,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SANT MARTÍ VELL",
+    "nivel3": "AYUNTAMIENTO DE SANT MARTÍ VELL"
+  },
+  "sedeElectronica": "https://seu-e.cat/ca/web/santmartivell/tramits-i-gestions/-/tramits/tramit/21172806?p_auth=1cQMKQxR",
+  "codigoBDNS": "908436",
+  "fechaRecepcion": "2026-05-27",
+  "instrumentos": [
+    {
+      "descripcion": "OTROS INSTRUMENTOS DE AYUDA"
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 2625,
+  "mrr": false,
+  "descripcion": "convocatoria de subvenciones del casal de verano 2026 de los niños de Sant Martí Vell",
+  "descripcionLeng": "convocatòria de subvencions del casal d'estiu 2026 dels nens de Sant Martí Vell",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    },
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES512 - Girona"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "EDICTO DE APROBACIÓN DEFINITIVA DE LAS BASES REGULADORAS DE UNAS SUBVENCIONES",
+  "urlBasesReguladoras": "https://www.ddgi.cat/municipis/SantMartiVell/BASES%20RE GULADORES%20SUBVENCI%C3%93%20CASAL%202024.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-01",
+  "fechaFinSolicitud": "2026-06-22",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1462687,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "convocatòria en català.pdf",
+      "long": 194986,
+      "datMod": "2026-05-27",
+      "datPublicacion": "2026-05-27"
+    },
+    {
+      "id": 1462685,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "convoatòria en castellà.pdf",
+      "long": 186089,
+      "datMod": "2026-05-27",
+      "datPublicacion": "2026-05-27"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

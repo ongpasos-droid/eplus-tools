@@ -1,0 +1,72 @@
+{
+  "id": 1110032,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "CONSELL COMARCAL DE PLA DE L'ESTANY",
+    "nivel3": "CONSELL COMARCAL DE PLA DE L'ESTANY"
+  },
+  "sedeElectronica": "https://www.plaestanyjove.cat/Portals/jove/01_%20ANNEX01%20-%20Formulari%20inscripcio%20PUJA%20AQUI%20DALT%20I%20CANTA.pdf",
+  "codigoBDNS": "908471",
+  "fechaRecepcion": "2026-05-27",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 1011.2,
+  "mrr": false,
+  "descripcion": "Aprovación bases reguladoras de la convocatoria del concurso musical \"Puja aquí dalt i canta!\"",
+  "descripcionLeng": "Aprovació bases reguladores de la convocatòria del concurs musical \"Puja aquí dalt i canta!\"",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES512 - Girona"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "Aprovació bases reguladores de la convocatòria del concurs musical \"Puja aquí dalt i canta!\"",
+  "urlBasesReguladoras": "https://seu-e.cat/ca/web/ccpladelestany/govern-obert-i-transparencia/accio-de-govern-i-normativa/normativa-plans-i-programes/bases-reguladores-225",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-05-18",
+  "fechaFinSolicitud": "2026-06-09",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1462769,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Bases reguladores Puja aquí dalt i canta!.pdf",
+      "long": 654195,
+      "datMod": "2026-05-27",
+      "datPublicacion": "2026-05-27"
+    },
+    {
+      "id": 1462768,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Bases reguladoras castellano.pdf",
+      "long": 648176,
+      "datMod": "2026-05-27",
+      "datPublicacion": "2026-05-27"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

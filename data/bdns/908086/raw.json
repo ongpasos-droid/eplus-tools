@@ -1,0 +1,80 @@
+{
+  "id": 1109647,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SANTA MARGARIDA DE MONTBUI",
+    "nivel3": "AYUNTAMIENTO DE SANTA MARGARIDA DE MONTBUI"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "908086",
+  "fechaRecepcion": "2026-05-26",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 5000,
+  "mrr": false,
+  "descripcion": "Convocatoria ayudas escolarización 2026",
+  "descripcionLeng": "Convocatòria ajuts escolarització 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES511 - Barcelona"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "MODIFICACIÓ de les bases generals per a l`atorgament de subvencions a famílies per a les despeses d`escolarització",
+  "urlBasesReguladoras": "http://bop.diba.cat/anunci/3756357/aprovacio-inicial-de-la-modificacio-de-les-bases-generals-per-a-l-atorgament-de-subvencions-a-families-per-a-les-despeses-d-escolaritzacio-ajuntament-de-santa-margarida-de-montbuihttp://bop.diba.cat/anunci/3756357/aprovacio-inicial-de-la-modificacio-de-les-bases-ge",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Dia després de la seva publicació al BOPB",
+  "textFin": "20 dies naturals des de l`endemà de la seva publicació",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1462735,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "EDICTO_CONVOCATORIA_AYUDAS_ESCOLARIZACIÓN.pdf",
+      "long": 443263,
+      "datMod": "2026-05-27",
+      "datPublicacion": "2026-05-27"
+    },
+    {
+      "id": 1462737,
+      "descripcion": "Certificat d`acord",
+      "nombreFic": "Certificat_dacord.pdf",
+      "long": 627478,
+      "datMod": "2026-05-27",
+      "datPublicacion": "2026-05-27"
+    },
+    {
+      "id": 1462736,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "EDICTE_CONVOCATÒRIA_ESCOLARITZACIÓ_MÉS_BASES_CAT.pdf",
+      "long": 1078566,
+      "datMod": "2026-05-27",
+      "datPublicacion": "2026-05-27"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

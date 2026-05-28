@@ -1,0 +1,72 @@
+{
+  "id": 1110153,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "DIPUTACIÓN PROV. DE TARRAGONA",
+    "nivel3": "DIPUTACIÓN PROVINCIAL DE TARRAGONA"
+  },
+  "sedeElectronica": "https://seuelectronica.dipta.cat",
+  "codigoBDNS": "908592",
+  "fechaRecepcion": "2026-05-27",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 3400,
+  "mrr": false,
+  "descripcion": "2026 Incendios Forestales Agrupaciones defensa forestal ",
+  "descripcionLeng": "2026-Incendis Forestals ADFs",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Otras actividades profesionales, científicas y técnicas n.c.o.p.",
+      "codigo": "74.9"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES51 - CATALUÑA"
+    }
+  ],
+  "descripcionFinalidad": "Otras actuaciones de carácter económico",
+  "descripcionBasesReguladoras": "Bases generales de subvenciones de la Diputació de Tarragona y de sus Organismos Autónomos",
+  "urlBasesReguladoras": "https://www.diputaciodetarragona.cat/ebop/index.php?op=anunci&id=1723&ebop_any=2019",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-07-20",
+  "textInicio": "Des del dia siguiente a la publicación del extracto de la convocatoria en el eBopt.",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1462994,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "01_CONVOCATORIA_ADF_2026_CAT.PDF",
+      "long": 257439,
+      "datMod": "2026-05-27",
+      "datPublicacion": "2026-05-27"
+    },
+    {
+      "id": 1462993,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "01_CONVOCATORIA_ADF_2026_CAST.PDF",
+      "long": 245408,
+      "datMod": "2026-05-27",
+      "datPublicacion": "2026-05-27"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

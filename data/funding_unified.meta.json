@@ -1,25 +1,25 @@
 {
-  "generatedAt": "2026-05-27T04:09:31.093Z",
-  "total": 4791,
+  "generatedAt": "2026-05-28T04:09:32.018Z",
+  "total": 4896,
   "bySource": {
-    "sedia": 694,
-    "bdns": 4011,
-    "salto": 86
+    "sedia": 696,
+    "bdns": 4116,
+    "salto": 84
   },
   "byCategory": {
-    "call_for_proposals": 4705,
-    "training": 86
+    "call_for_proposals": 4812,
+    "training": 84
   },
   "byLevel": {
     "eu": 780,
-    "ccaa": 916,
-    "estado": 162,
-    "local": 2578,
-    "otros": 355
+    "ccaa": 932,
+    "estado": 170,
+    "local": 2645,
+    "otros": 369
   },
   "byStatus": {
-    "open": 4481,
-    "forthcoming": 307,
+    "open": 4589,
+    "forthcoming": 304,
     "closed": 3
   },
   "byProgramme": {
@@ -29,21 +29,21 @@
     "Creative Europe": 7,
     "Just Transition": 2,
     "Digital Europe": 15,
-    "ERC": 1,
+    "ERC": 2,
     "Pericles IV": 1,
     "EP": 5,
     "EU Anti-Fraud": 8,
     "NDICI / EuropeAid": 48,
     "Horizon Europe": 497,
-    "Concurrencia competitiva - canónica": 3568,
-    "Concesión directa - canónica": 443,
+    "Concurrencia competitiva - canónica": 3661,
+    "Concesión directa - canónica": 455,
     "Single Market Programme": 3,
     "UCPM": 2,
     "ESF+": 3,
     "EUBA": 3,
     "ISF": 4,
-    "Pilot Projects": 6,
-    "Erasmus+ Youth (SALTO)": 86,
+    "Pilot Projects": 7,
+    "Erasmus+ Youth (SALTO)": 84,
     "European Defence Fund": 38,
     "EaSI / SOCPL": 2,
     "CERV": 4,
@@ -54,6 +54,6 @@
     "I3": 2
   },
   "curatedEnrichmentCount": 1,
-  "sumBudgetEur": 290885075268.19995,
+  "sumBudgetEur": 291905946309.99,
   "summaryEsPendingCount": 780
 }

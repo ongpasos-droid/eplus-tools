@@ -90,6 +90,13 @@
       "is_downloadable": true
     },
     {
+      "section": "Application and evaluation forms and model grant agreement (MGA):",
+      "label": "HE MSCA DN Guide for Applicants",
+      "url": "https://circabc.europa.eu/ui/group/0d6109dc-828d-4995-b5ac-e28e88ec5d49/library/ff7724fd-0246-41e3-8079-d7574552decf/details",
+      "ext": "",
+      "is_downloadable": false
+    },
+    {
       "section": "Additional documents:",
       "label": "HE Main Work Programme 2026-2027 – 1. General Introduction",
       "url": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/horizon/wp-call/2026-2027/wp-1-general-introduction_horizon-2026-2027_en.pdf",
@@ -174,5 +181,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-27T04:06:04.911Z"
+  "fetchedAt": "2026-05-28T04:06:10.154Z"
 }

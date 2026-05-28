@@ -1,0 +1,73 @@
+{
+  "source": "bdns",
+  "source_id": "908494",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / ERRENTERIA / AYUNTAMIENTO DE ERRENTERIA",
+  "nuts_codes": [
+    "ES212"
+  ],
+  "nuts_primary": "ES212",
+  "title": "Convocatoria para la concesión de subvenciones del departamento de Igualdad correspondientes al año 2026. Línea de subvención: 8.1. Mujeres: encuentros y participación social. Curso 2026-2027.",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-05-27",
+  "open_date": null,
+  "deadline": "2026-07-01",
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 40000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "T",
+      "descripcion": "OTROS SERVICIOS"
+    }
+  ],
+  "apply_url": "www.errenteria.eus",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908494",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en lengua cooficial",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "Bases generales",
+      "url": null
+    },
+    {
+      "label": "Bases específicas",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://uzt.gipuzkoa.eus/home.do?De=CA06712331",
+  "text_inicio": "A partir del día siguiente a la publicación de la convocatoria en el Boletín Oficial de Gipuzkoa",
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-28T04:09:30.054Z"
+}
