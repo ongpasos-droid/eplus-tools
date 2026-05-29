@@ -1,0 +1,64 @@
+{
+  "id": 1110408,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "VILLA DE MAZO",
+    "nivel3": "AYUNTAMIENTO DE VILLA DE MAZO"
+  },
+  "sedeElectronica": "WWW.SEDELECTRONICA.VILLADEMAZO.ES",
+  "codigoBDNS": "908847",
+  "fechaRecepcion": "2026-05-28",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 80695,
+  "mrr": false,
+  "descripcion": "AYUDAS AL FOMENTO DE LA REHABILITACION DE VIVIENDAS DE TITULARIDAD PRIVADA DENTRO DEL PROGRAMA PARA COMBATIR LA DESPOBLACIÓN EN EL MEDIO RURAL DEL PLAN DE VIVIENDA DE CANANRIAS 2020-2025, DEL AÑO 2025",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "CONSTRUCCIÓN",
+      "codigo": "F"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES707 - La Palma"
+    }
+  ],
+  "descripcionFinalidad": "Acceso a la vivienda y fomento de la edificación",
+  "descripcionBasesReguladoras": "BASES REGULADORAS QUE RIGEN LA CONCESION DE SUBVENCIONES EN REGIMEN DE CONCURRENCIA COMPETITIVA EN EL AYUNTAMIENTO DE VILLA DE MAZO(BOP SANTA CRUZ DE TENERIFE 108 DE 6 DE SEPTIEMBRE DE 2024)",
+  "urlBasesReguladoras": "https://www.bopsantacruzdetenerife.es/bopsc2/index.php",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A PARTIR DEL DIA SIGUIENTE DE LA PUBLICACION DEL EXTRACTO DE LA CONVOCATORIA EN EL BOP de S/C TFE.",
+  "textFin": "QUINCE DIAS HABILES A PARTIR DE LA FECHA DE INICIO",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1463742,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "20260520_Resolución_RESOLUCIONES ALCALDIA 2026 2026-0429 [6. RESOLUCIÓN APROBACIÓN CONVOCATORIA].pdf",
+      "long": 857511,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

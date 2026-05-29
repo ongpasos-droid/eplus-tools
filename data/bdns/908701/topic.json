@@ -1,0 +1,85 @@
+{
+  "source": "bdns",
+  "source_id": "908701",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / JEREZ DE LOS CABALLEROS / AYUNTAMIENTO DE JEREZ DE LOS CABALLEROS",
+  "nuts_codes": [
+    "ES431"
+  ],
+  "nuts_primary": "ES431",
+  "title": "ACUERDO DE 15/05/2026 DE LA JUNTA DE GOBIERNO LOCAL APROBANDO LAS BASES QUE HAN DE REGIR LA CONVOCATORIA PÚBLICA PARA LA CONCESIÓN DE SUBVENCIONES A LAS ASOCIACIONES MUNICIPALES SIN ÁNIMO DE LUCRO Y CONVOCATORIA 2026 EN RÉGIMEN DE CONCURRENCIA COMPETITIVA",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-05-28",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 52000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "S",
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO"
+    },
+    {
+      "codigo": "R",
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES"
+    },
+    {
+      "codigo": "Q",
+      "descripcion": "EDUCACIÓN"
+    }
+  ],
+  "apply_url": "https://jerezdeloscaballeros.sedelectronica.es/",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908701",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "ANEXO I",
+      "url": null
+    },
+    {
+      "label": "ANEXO IV",
+      "url": null
+    },
+    {
+      "label": "ANEXO III",
+      "url": null
+    },
+    {
+      "label": "ANEXO II",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://jerezcaballeros.es/",
+  "text_inicio": "A partir del día siguiente a la publicación en el BOP de Badajoz",
+  "text_fin": "15 días hábiles contados a partir del día siguiente a la publicación en el BOP de Badajoz",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-29T04:05:18.881Z"
+}

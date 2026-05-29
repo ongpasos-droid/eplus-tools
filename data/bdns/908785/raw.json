@@ -1,0 +1,72 @@
+{
+  "id": 1110346,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "CASTRILLÓN",
+    "nivel3": "AYUNTAMIENTO DE CASTRILLÓN"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "908785",
+  "fechaRecepcion": "2026-05-28",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 102606.94,
+  "mrr": false,
+  "descripcion": "Acuerdo de Junta de Gobierno Local, de 15/5/2026, de Convocatoria Ayudas Finalistas para “Programa de vivienda\", \"Apoyo económico de suficiencia energética” y “Programa de apoyo a familias con menores a cargo”, año 2026.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES120 - Asturias"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Ordenanza General de Subvenciones del Ayto. de Castrillón y de sus organismos autónomos y entidades dependientes.",
+  "urlBasesReguladoras": "ayto-castrillon.es/attachments/article/287/bopa_20060220.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-11-30",
+  "textInicio": "Desde publicación en Bopa",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1463623,
+      "descripcion": "Anexos Ayudas Finalistas",
+      "nombreFic": "Anexos Ayudas Finalistas 2026.pdf",
+      "long": 2576693,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    },
+    {
+      "id": 1463619,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Certificado acuerdo JGL - Ayudas económicas finalistas año 2026_ aprobación convocatoria y bases - SEFYCU 143964.pdf",
+      "long": 748349,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

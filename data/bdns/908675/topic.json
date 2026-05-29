@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "908675",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / DIPUTACIÓN PROV. DE BURGOS / SOCIEDAD PARA EL DESARROLLO DE LA PROVINCIA DE BURGOS",
+  "nuts_codes": [
+    "ES412"
+  ],
+  "nuts_primary": "ES412",
+  "title": "Por Acuerdo de 14/05/2026 del Consejo de Administración de SODEBUR, por el que se convoca la concesión de subvenciones dirigidas al mantenimiento y activación de los servicios empresariales que mejoren la calidad de vida en el medio rural de la Provincia",
+  "title_lang": "es",
+  "summary": "Otras actuaciones de carácter económico",
+  "status": "open",
+  "publication_date": "2026-05-28",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 300000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "T",
+      "descripcion": "OTROS SERVICIOS"
+    }
+  ],
+  "apply_url": "https://registro.diputaciondeburgos.es/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=CATALOGO",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908675",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.burgos.es/diputacion/informacion/documentos/ordenanza-general-de-subvenciones",
+  "text_inicio": "A partir del día hábil siguiente al de la publicación del extracto de esta convocatoria en el BOPBUR",
+  "text_fin": "Las solicitudes se podrán presentar en el plazo de veinte días hábiles",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-29T04:05:18.872Z"
+}

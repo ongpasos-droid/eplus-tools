@@ -1,0 +1,80 @@
+{
+  "id": 1110538,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SILLA",
+    "nivel3": "AYUNTAMIENTO DE SILLA"
+  },
+  "sedeElectronica": "https://silla.sede.dival.es/",
+  "codigoBDNS": "908977",
+  "fechaRecepcion": "2026-05-28",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 68000,
+  "mrr": false,
+  "descripcion": "Convocatoria de las ayudas económicas para material escolar del alumnado de infantil, primaria y secundaria, y aulas de infantil, para sufragar materiales y acciones\neducativas de los proyectos de innovación educativa, para el curso 2026-2027.",
+  "descripcionLeng": "Convocatòria de les ajudes econòmiques per a material escolar de l’alumnat d’infantil, primària i secundària, i per a les aules d’infantil per sufragar materials i accions educatives del projectes d’innovació educativa, per al curs 2026-2027.",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES523 - Valencia / València"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Ordenanza Reguladora de las bases para conceder ayudas para material escolar al alumnado de infantil, primaria y secundaria y a las aulas de infantil para sufragar materiales y acciones educativas de los proyectos de innovación educativa",
+  "urlBasesReguladoras": "https://bop.dival.es/bop/downloads?anuncioNumReg=2023/01539&lang=va",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-06-22",
+  "textInicio": "desde el día siguiente a la publicación en el BOP ",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1464116,
+      "descripcion": "Resolución de Alcaldía 1231 de 21-05-2026",
+      "nombreFic": "Resolución Nº 1231 de 21_05_2026 _Resolució d.pdf",
+      "long": 471607,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    },
+    {
+      "id": 1464114,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Extracte Convocatòria _xec escolar 2026-2027_ - SEFYCU 8048632.pdf",
+      "long": 417436,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    },
+    {
+      "id": 1464113,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Extrato Convocatoria _cheque escolar 2026-2027_ - SEFYCU 8048731.pdf",
+      "long": 381296,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,73 @@
+{
+  "source": "bdns",
+  "source_id": "908780",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / PUERTOLLANO / AYUNTAMIENTO DE PUERTOLLANO",
+  "nuts_codes": [
+    "ES422"
+  ],
+  "nuts_primary": "ES422",
+  "title": "CONVOCATORIA PÚBLICA DE SUBVENCIONES DESTINADA A MURGAS, COMPARSAS Y CHIRIGOTAS DE CARNAVAL DE PUERTOLLANO PARA EL AÑO 2026",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-05-28",
+  "open_date": "2026-06-01",
+  "deadline": "2026-06-22",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 5000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "S",
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO"
+    }
+  ],
+  "apply_url": "https://www.puertollano.es/sede-electronica",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908780",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://puertollano.sedelectronica.es/preview-document/f36e99ea-6d6f-4f47-bcfb-668f982e4c92/",
+  "text_inicio": "DESDE DÍA SIGUIENTE PUBLICACIÓN EN EL BOP",
+  "text_fin": "22/06/2026",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [
+    {
+      "numAnuncio": 213004,
+      "titulo": "CONVOCATORIA PÚBLICA DE SUBVENCIONES DESTINADA A MURGAS, COMPARSAS Y CHIRIGOTAS DE CARNAVAL DE PUERTOLLANO PARA EL AÑO 2026",
+      "tituloLeng": null,
+      "texto": "<p>Es objeto de esta convocatoria la concesión de ayudas a murgas, comparsas y chirigotas locales para el año 2026, para que lleven a cabo su proyecto de concursar fuera de nuestra ciudad en certámenes de estas categorías, que fomenten la imagen de calidad de la ciudad, las costumbres, el talento, la música, el humor bien entendido, el señorío, la cultura y el civismo de nuestra localidad y sus habitantes, así como incentivar el mérito, la superación y la evolución.</p><p>Para el año 2026 la cantidad destinada a subvenciones será de 5.000 euros y el importe máximo que se pueda conceder al proyecto o actividad presentada para el 2026, es de 2.000 euros, sin que este pueda incrementarse por ningún motivo.</p><p>Las solicitudes se presentarán a través de la Sede Electrónica de la página web del Ayuntamiento de Puertollano https://www.puertollano.es/sede-electronica (Mis datos/catálogo de trámites/ Instancia general) e irán dirigidas a la Concejalía de Festejos.</p><p>El plazo de presentación de solicitudes será de 15 días hábiles a contar desde el siguiente de la publicación en el Boletín Oficial de la Provincia (BOP).</p>",
+      "textoLeng": null,
+      "url": "https://se1.dipucr.es:4443/SIGEM_BuscadorDocsWeb/getDocument.do?entidad=005&doc=7567581",
+      "cve": "L9w55+xNKRj5ovZbtuXH",
+      "desDiarioOficial": "B.O.P. DE CIUDAD REAL",
+      "datPublicacion": "2026-05-29"
+    }
+  ],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-29T04:05:18.899Z"
+}

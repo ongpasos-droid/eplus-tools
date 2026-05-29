@@ -1,0 +1,88 @@
+{
+  "id": 1110443,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "ORDIZIA",
+    "nivel3": "AYUNTAMIENTO DE ORDIZIA"
+  },
+  "sedeElectronica": "https://uzt.gipuzkoa.eus/PortalV/7.00/Default.aspx?idAyto=76&idioma=eu-ES",
+  "codigoBDNS": "908882",
+  "fechaRecepcion": "2026-05-28",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 6000,
+  "mrr": false,
+  "descripcion": "Subvenciones para proyectos culturales de entidades culturales sin ánimo de lucro de Ordizia y para programas especiales de grupos que celebren su 25, 50, 75 aniversario o centenario durante el 2026.",
+  "descripcionLeng": "2026an Ordiziako irabazi asmorik gabeko kultur erakundeen kultur proiektuetarako eta 2026. Ekitaldian 25., 50., 75. urteurrena edo mendeurrena ospatzen duten taldeen programa berezientzat dirulaguntzak.",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES212 - Gipuzkoa"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "Ordiziako udaleko dirulaguntzak emateko ordenantza",
+  "urlBasesReguladoras": "https://www.ordizia.eus/images/dirulaguntzak_emateko_ordenantzak.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Día siguiente al de la publicación de la convocatoria en el Boletín Oficial de Gipuzkoa.",
+  "textFin": "20 días hábiles a partir del siguiente al de la publicación de la convocatoria en el BOG",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1463766,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "CONVOCATORIA.docx",
+      "long": 22829,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    },
+    {
+      "id": 1463792,
+      "descripcion": "Bases",
+      "nombreFic": "Oinarriak.pdf",
+      "long": 310042,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    },
+    {
+      "id": 1463774,
+      "descripcion": "Modelo de solicitud",
+      "nombreFic": "2026GOIO0002-004-001Kulturako dirulaguntza eskaera 2026.pdf",
+      "long": 903367,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    },
+    {
+      "id": 1463767,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "DEIALDIA.docx",
+      "long": 21785,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

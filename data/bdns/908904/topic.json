@@ -1,0 +1,105 @@
+{
+  "source": "bdns",
+  "source_id": "908904",
+  "source_lang": "es",
+  "level": "otros",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "OTROS / UNIVERSIDAD REY JUAN CARLOS",
+  "nuts_codes": [
+    "ES30"
+  ],
+  "nuts_primary": "ES30",
+  "title": "Resolución Universidad Rey Juan Carlos, convocatoria, mediante procedimiento de concurrencia competitiva, de la VII edición de la convocatoria de ayudas para la realización de proyectos de aprendizaje servicio (APS) de la Universidad Rey Juan Carlos",
+  "title_lang": "es",
+  "summary": "Educación",
+  "status": "open",
+  "publication_date": "2026-05-28",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 13000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "Q",
+      "descripcion": "EDUCACIÓN"
+    }
+  ],
+  "apply_url": "https://sede.urjc.es/convocatorias",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908904",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "Anexo-A.-Solicitud-de-Gastos-Propuesta-APS-2026-2027",
+      "url": null
+    },
+    {
+      "label": "Anexo F Criterios de Valoración para la propuesta Inicial de Proyecto ApS 2026-27",
+      "url": null
+    },
+    {
+      "label": "Anexo-E.-Estudiantes-participantes-en-el-proyecto-2026-2027",
+      "url": null
+    },
+    {
+      "label": "Anexo-V-de-Colaboracion-entre-la-URJC-y-la-Entidad-2026.2027",
+      "url": null
+    },
+    {
+      "label": "Anexo G Criterios de valoración para la Justificación técnica. (Memoria Final) 2026-27",
+      "url": null
+    },
+    {
+      "label": "Anexo-B.-Memoria-Economica-2026-2027",
+      "url": null
+    },
+    {
+      "label": "Anexo-C.-Relacion-de-entidades-colaboradoras-con-el-proyecto-de-ApS-Memoria-Final-2026-2027",
+      "url": null
+    },
+    {
+      "label": "Anexo-D.-Docentes-participantes-en-el-proyecto-2026-2027",
+      "url": null
+    },
+    {
+      "label": "Anexo IV - Aceptacion de la financiacion_ Aps 2026-27",
+      "url": null
+    },
+    {
+      "label": "Anexo-III-de-Compromiso-de-confidencialidad-y-secreto-2026-2027",
+      "url": null
+    },
+    {
+      "label": "Anexo-II-Informe-favorable-Coordinador-Titulacion-2026-2027",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://sede.urjc.es/tablon-de-anuncios",
+  "text_inicio": "Al día siguiente de su publicación en el BOCM",
+  "text_fin": "10 días hábiles contados a partir del día siguiente a la fecha de publicación en el BOCM",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-29T04:05:18.933Z"
+}

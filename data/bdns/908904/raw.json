@@ -1,0 +1,152 @@
+{
+  "id": 1110465,
+  "organo": {
+    "nivel1": "OTROS",
+    "nivel2": "UNIVERSIDAD REY JUAN CARLOS",
+    "nivel3": null
+  },
+  "sedeElectronica": "https://sede.urjc.es/convocatorias",
+  "codigoBDNS": "908904",
+  "fechaRecepcion": "2026-05-28",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 13000,
+  "mrr": false,
+  "descripcion": "Resolución Universidad Rey Juan Carlos, convocatoria, mediante procedimiento de concurrencia competitiva, de la VII edición de la convocatoria de ayudas para la realización de proyectos de aprendizaje servicio (APS) de la Universidad Rey Juan Carlos",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES30 - COMUNIDAD DE MADRID"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Resolución Universidad Rey Juan Carlos, convocatoria, mediante procedimiento de concurrencia competitiva, de la VII edición de la convocatoria de ayudas para la realización de proyectos de aprendizaje servicio (APS) de la Universidad Rey Juan Carlos",
+  "urlBasesReguladoras": "https://sede.urjc.es/tablon-de-anuncios",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Al día siguiente de su publicación en el BOCM",
+  "textFin": "10 días hábiles contados a partir del día siguiente a la fecha de publicación en el BOCM",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1463899,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convocatoria Subvenciones APS 2026 final_justificante.pdf",
+      "long": 328760,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    },
+    {
+      "id": 1463917,
+      "descripcion": "Anexo-A.-Solicitud-de-Gastos-Propuesta-APS-2026-2027",
+      "nombreFic": "Anexo-A.-Solicitud-de-Gastos-Propuesta-APS-2026-2027.docx",
+      "long": 29935,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    },
+    {
+      "id": 1463931,
+      "descripcion": "Anexo F Criterios de Valoración para la propuesta Inicial de Proyecto ApS 2026-27",
+      "nombreFic": "Anexo F Criterios de Valoración para la propuesta Inicial de Proyecto ApS 2026-27.pdf",
+      "long": 149558,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    },
+    {
+      "id": 1463927,
+      "descripcion": "Anexo-E.-Estudiantes-participantes-en-el-proyecto-2026-2027",
+      "nombreFic": "Anexo-E.-Estudiantes-participantes-en-el-proyecto-2026-2027.docx",
+      "long": 33982,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    },
+    {
+      "id": 1463916,
+      "descripcion": "Anexo-V-de-Colaboracion-entre-la-URJC-y-la-Entidad-2026.2027",
+      "nombreFic": "Anexo-V-de-Colaboracion-entre-la-URJC-y-la-Entidad-2026.2027.docx",
+      "long": 687606,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    },
+    {
+      "id": 1463933,
+      "descripcion": "Anexo G Criterios de valoración para la Justificación técnica. (Memoria Final) 2026-27",
+      "nombreFic": "Anexo G Criterios de valoración para la Justificación técnica. (Memoria Final) 2026-27.pdf",
+      "long": 130604,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    },
+    {
+      "id": 1463922,
+      "descripcion": "Anexo-B.-Memoria-Economica-2026-2027",
+      "nombreFic": "Anexo-B.-Memoria-Economica-2026-2027.docx",
+      "long": 45482,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    },
+    {
+      "id": 1463923,
+      "descripcion": "Anexo-C.-Relacion-de-entidades-colaboradoras-con-el-proyecto-de-ApS-Memoria-Final-2026-2027",
+      "nombreFic": "Anexo-C.-Relacion-de-entidades-colaboradoras-con-el-proyecto-de-ApS-Memoria-Final-2026-2027.docx",
+      "long": 676982,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    },
+    {
+      "id": 1463924,
+      "descripcion": "Anexo-D.-Docentes-participantes-en-el-proyecto-2026-2027",
+      "nombreFic": "Anexo-D.-Docentes-participantes-en-el-proyecto-2026-2027.docx",
+      "long": 47141,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    },
+    {
+      "id": 1463915,
+      "descripcion": "Anexo IV - Aceptacion de la financiacion_ Aps 2026-27",
+      "nombreFic": "Anexo IV - Aceptacion de la financiacion_ Aps 2026-27.docx",
+      "long": 57016,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    },
+    {
+      "id": 1463913,
+      "descripcion": "Anexo-III-de-Compromiso-de-confidencialidad-y-secreto-2026-2027",
+      "nombreFic": "Anexo-III-de-Compromiso-de-confidencialidad-y-secreto-2026-2027.docx",
+      "long": 674942,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    },
+    {
+      "id": 1463911,
+      "descripcion": "Anexo-II-Informe-favorable-Coordinador-Titulacion-2026-2027",
+      "nombreFic": "Anexo-II-Informe-favorable-Coordinador-Titulacion-2026-2027.docx",
+      "long": 684292,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

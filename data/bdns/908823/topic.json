@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "908823",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / PASO, EL / AYUNTAMIENTO DE PASO, EL",
+  "nuts_codes": [
+    "ES707"
+  ],
+  "nuts_primary": "ES707",
+  "title": "BASES REGULADORAS QUE RIGEN LAS AYUDAS AL FOMENTO DE LA REHABILITACIÓN DE VIVIENDAS DE TITULARIDAD PRIVADA DENTRO DEL PROGRAMA PARA COMBATIR LA DESPOBLACIÓN EN EL MEDIO RURAL DEL PLAN DE VIVIENDA DE CANARIAS 2020-2025, ANUALIDAD 2025",
+  "title_lang": "es",
+  "summary": "Acceso a la vivienda y fomento de la edificación",
+  "status": "open",
+  "publication_date": "2026-05-28",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 128465.01,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "43",
+      "descripcion": "Actividades de construcción especializada"
+    },
+    {
+      "codigo": "42",
+      "descripcion": "Ingeniería civil"
+    }
+  ],
+  "apply_url": "https://sede.elpaso.es/",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908823",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://sede.elpaso.es/",
+  "text_inicio": "30 días naturales, a contar desde el día siguiente a la publicación de la presente convocatoria ",
+  "text_fin": "Último día hábil dentro del periodo de los 30 días naturales establecido",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-29T04:05:18.914Z"
+}

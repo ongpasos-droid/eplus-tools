@@ -1,0 +1,76 @@
+{
+  "id": 1110341,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "PUERTOLLANO",
+    "nivel3": "AYUNTAMIENTO DE PUERTOLLANO"
+  },
+  "sedeElectronica": "https://www.puertollano.es/sede-electronica",
+  "codigoBDNS": "908780",
+  "fechaRecepcion": "2026-05-28",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 5000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA PÚBLICA DE SUBVENCIONES DESTINADA A MURGAS, COMPARSAS Y CHIRIGOTAS DE CARNAVAL DE PUERTOLLANO PARA EL AÑO 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES422 - Ciudad Real"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "CONVOCATORIA PÚBLICA DE SUBVENCIONES DESTINADA A MURGAS, COMPARSAS YCHIRIGOTAS DEL CARNAVAL DE PUERTOLLANO PARA EL AÑO 2026",
+  "urlBasesReguladoras": "https://puertollano.sedelectronica.es/preview-document/f36e99ea-6d6f-4f47-bcfb-668f982e4c92/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-01",
+  "fechaFinSolicitud": "2026-06-22",
+  "textInicio": "DESDE DÍA SIGUIENTE PUBLICACIÓN EN EL BOP",
+  "textFin": "22/06/2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1463621,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "DECRETO 2026-2292 (BASES CONVOCATORIA SUBVENCIÓN).pdf",
+      "long": 1266869,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    }
+  ],
+  "anuncios": [
+    {
+      "numAnuncio": 213004,
+      "titulo": "CONVOCATORIA PÚBLICA DE SUBVENCIONES DESTINADA A MURGAS, COMPARSAS Y CHIRIGOTAS DE CARNAVAL DE PUERTOLLANO PARA EL AÑO 2026",
+      "tituloLeng": null,
+      "texto": "<p>Es objeto de esta convocatoria la concesión de ayudas a murgas, comparsas y chirigotas locales para el año 2026, para que lleven a cabo su proyecto de concursar fuera de nuestra ciudad en certámenes de estas categorías, que fomenten la imagen de calidad de la ciudad, las costumbres, el talento, la música, el humor bien entendido, el señorío, la cultura y el civismo de nuestra localidad y sus habitantes, así como incentivar el mérito, la superación y la evolución.</p><p>Para el año 2026 la cantidad destinada a subvenciones será de 5.000 euros y el importe máximo que se pueda conceder al proyecto o actividad presentada para el 2026, es de 2.000 euros, sin que este pueda incrementarse por ningún motivo.</p><p>Las solicitudes se presentarán a través de la Sede Electrónica de la página web del Ayuntamiento de Puertollano https://www.puertollano.es/sede-electronica (Mis datos/catálogo de trámites/ Instancia general) e irán dirigidas a la Concejalía de Festejos.</p><p>El plazo de presentación de solicitudes será de 15 días hábiles a contar desde el siguiente de la publicación en el Boletín Oficial de la Provincia (BOP).</p>",
+      "textoLeng": null,
+      "url": "https://se1.dipucr.es:4443/SIGEM_BuscadorDocsWeb/getDocument.do?entidad=005&doc=7567581",
+      "cve": "L9w55+xNKRj5ovZbtuXH",
+      "desDiarioOficial": "B.O.P. DE CIUDAD REAL",
+      "datPublicacion": "2026-05-29"
+    }
+  ],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

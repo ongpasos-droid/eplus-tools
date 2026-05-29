@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "908779",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / INGENIO / AYUNTAMIENTO DE INGENIO",
+  "nuts_codes": [
+    "ES705"
+  ],
+  "nuts_primary": "ES705",
+  "title": "BASES REGULADORAS DEL RÉGIMEN DE CONCESIÓN DE SUBVENCIONES DEL AYUNTAMIENTO DE INGENIO, PARA LA PROMOCIÓN CULTURAL A LAS ASOCIACIONES Y COLECTIVOS CULTURALES DEL MUNICIPIO, PARA EL AÑO 2026.",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-05-28",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 68000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "S",
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO"
+    }
+  ],
+  "apply_url": "www.ingenio.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908779",
+  "documents": [
+    {
+      "label": "RESOLUCIÓN DE APROBACIÓN",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "www.ingenio.es",
+  "text_inicio": "01/01/2026",
+  "text_fin": "31/12/2026",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-05-29T04:05:18.898Z"
+}

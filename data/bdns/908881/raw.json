@@ -1,0 +1,72 @@
+{
+  "id": 1110442,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "CONSELL COMARCAL DE VALLÈS OCCIDENTAL",
+    "nivel3": "CONSELL COMARCAL DE VALLÈS OCCIDENTAL"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "908881",
+  "fechaRecepcion": "2026-05-28",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 22900033.67,
+  "mrr": false,
+  "descripcion": "Convocatoria de ayudas individuales de comedor escolar para el curso 2026-2027, de acuerdo con las bases reguladoras.",
+  "descripcionLeng": "Convocatòria d'ajuts individuals per a menjador escolar pel curs 2026-2027, d'acord amb les bases reguladores.",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES51 - CATALUÑA"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Bases reguladoras de las ayudas individuales de comedor escolar para el curso 2026-2027",
+  "urlBasesReguladoras": "https://bop.diba.cat/anunci/3931956/aprovacio-inicial-de-les-bases-reguladores-per-a-l-atorgament-d-ajuts-individuals-de-menjador-escolar-curs-2026-2027-consell-comarcal-del-valles-occidental",
+  "sePublicaDiarioOficial": true,
+  "abierto": true,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "El dia siguiente de la publicación en el Diario Oficial de la Generalitat de Catalunya (DOGC)",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1463827,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "BDNS extracte català curs 26-27.docx",
+      "long": 17780,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    },
+    {
+      "id": 1463825,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "BDNS extracto castellano curs 26-27.docx",
+      "long": 19414,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

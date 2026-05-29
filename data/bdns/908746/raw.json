@@ -1,0 +1,72 @@
+{
+  "id": 1110307,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SANTA CRISTINA D'ARO",
+    "nivel3": "AYUNTAMIENTO DE SANTA CRISTINA D'ARO"
+  },
+  "sedeElectronica": "www.santacristina.cat",
+  "codigoBDNS": "908746",
+  "fechaRecepcion": "2026-05-28",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 3000,
+  "mrr": false,
+  "descripcion": "Convocatoria para el otorgamiento de ayudas para familias con vulnerabilidad económica para la realización de actividades extraescolares en materia de deportes para el curso 2025-2026",
+  "descripcionLeng": "Convocatòria per a l'atorgament d'ajuts per a famílies amb vulnerabilitat econòmica per a la realització d'activitats extraescolars en matèria d'esports pel curs 2025-2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades deportivas",
+      "codigo": "93.1"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES512 - Girona"
+    }
+  ],
+  "descripcionFinalidad": "Otras Prestaciones económicas",
+  "descripcionBasesReguladoras": "Bases específicas reguladoras para el otorgamiento de ayudas para familias con vulnerabilidad económica para la realización de actividades extraescolares en materia de deportes para el curso 2025-2026",
+  "urlBasesReguladoras": "https://cido.diba.cat/subvencions/21414456/ajuts-per-a-families-amb-vulnerabilitat-economica-per-a-la-realitzacio-dactivitats-extraescolars-en-materia-desports-curs-2025-2026-ajuntament-de-santa-cristina-daro",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir del día siguiente a la publicación ",
+  "textFin": "A los 10 días hábiles posteriores a la publicación",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1463548,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Convocatòria d'ajuts en matèria d'esports curs 2025-2026.pdf",
+      "long": 593406,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    },
+    {
+      "id": 1463547,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convocatoria de ayudas en materia de deportes curso 2025-2026.pdf",
+      "long": 649845,
+      "datMod": "2026-05-28",
+      "datPublicacion": "2026-05-28"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}
