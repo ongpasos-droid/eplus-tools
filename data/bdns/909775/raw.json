@@ -1,0 +1,55 @@
+{
+  "id": 1111336,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "ILLES BALEARS",
+    "nivel3": "SERVICIO DE OCUPACIÓN DE LAS ISLAS BALEARES (SOIB)"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "909775",
+  "fechaRecepcion": "2026-06-02",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 1000000,
+  "mrr": false,
+  "descripcion": "Convocatoria de subvenciones para la concesión de ayudas del Programa \"Cheque formación 2026-2028\", con el objeto de financiar formación en el trabajo dirigido a personas desempleadas y ocupadas",
+  "descripcionLeng": "convocatòria de subvencions per a la concessió d’ajuts del Programa «Xec formació 2026-2028», amb l’objectiu de finançar formació en el treball adreçada a persones treballadores desocupades i ocupades",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades relacionadas con el empleo",
+      "codigo": "78"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES53 - ILLES BALEARS"
+    }
+  ],
+  "descripcionFinalidad": "Fomento del Empleo",
+  "descripcionBasesReguladoras": "ORDEN 16/2023 del consejero de Modelo Económico, Turismo y Trabajo por la que se establecen las bases reguladorea de las subvenciones en materia de políticas activas de empleo gestionadas por el SOIB",
+  "urlBasesReguladoras": "https://www.caib.es/eboibfront/eli/es-ib/o/2023/05/17/16/dof/spa/html",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "L'endemà d'haver-se publicat al BOIB i el primer dia de gener, abril, juliol i octubre 27 i març 28",
+  "textFin": "20.10.26 i 20 dies després de gener, abril juliol i octubre del 2027 i març del 2028",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

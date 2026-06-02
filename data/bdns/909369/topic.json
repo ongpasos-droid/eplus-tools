@@ -1,0 +1,80 @@
+{
+  "source": "bdns",
+  "source_id": "909369",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / COMUNITAT VALENCIANA / SECRETARÍA AUTONÓMICA DE AGRICULTURA, GANADERÍA Y PESCA",
+  "nuts_codes": [
+    "ES52"
+  ],
+  "nuts_primary": "ES52",
+  "title": "RESOLUCIÓN de la DGPAG por la que se convocan para el ejercicio 2026, las ayudas para la evaluación genética de las hembras de la especie bovina, ovina y caprina mediante el control oficial del rendimiento lechero",
+  "title_lang": "es",
+  "summary": "Agricultura, Pesca y Alimentación",
+  "status": "open",
+  "publication_date": "2026-06-01",
+  "open_date": "2025-06-04",
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 54000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "A",
+      "descripcion": "AGRICULTURA, GANADERÍA, SILVICULTURA Y PESCA"
+    }
+  ],
+  "apply_url": "sede.gva.es/es/proc636",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909369",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "EXTRACTE CONVOCATORIA VALENCIANO",
+      "url": null
+    },
+    {
+      "label": "EXTRACTO CONVOCATORIA CASTELLANO",
+      "url": null
+    },
+    {
+      "label": "Texto en otra lengua de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://dogv.gva.es/es/eli/es-vc/o/2024/08/01/4/dof/spa/html",
+  "text_inicio": "a partir del día siguiente de la publicación del extracto de la presente resolución en el DOGV",
+  "text_fin": "un mes contado a partir del día siguiente de publicación del extracto de la presente resolución DOGV",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": "SA.108725",
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 2022/2473, DE 14 DE DICIEMBRE, de exención de notificación (vigente desde 01-01-2023)",
+    "orden": null
+  },
+  "objetivos": [
+    {
+      "descripcion": "ART. 41 AYUDAS DESTINADAS A MEDIDAS ZOOSANITARIAS Y DE BIENESTAR ANIMAL"
+    }
+  ],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-02T04:05:59.568Z"
+}

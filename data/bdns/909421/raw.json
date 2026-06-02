@@ -1,0 +1,72 @@
+{
+  "id": 1110982,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "LA RIOJA",
+    "nivel3": "CONSEJERÍA DE EDUCACIÓN Y EMPLEO"
+  },
+  "sedeElectronica": "https://web.larioja.org/oficina-electronica/tramite?n=20987",
+  "codigoBDNS": "909421",
+  "fechaRecepcion": "2026-06-01",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 605000,
+  "mrr": false,
+  "descripcion": "Ayudas a la adquisición de libros de texto, curso 2026/2027",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Educación",
+      "codigo": "85"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES230 - La Rioja"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "por la que se regula el programa de gratuidad de libros de texto y las ayudas destinadas a financiar la adquisición de libros de texto",
+  "urlBasesReguladoras": "https://web.larioja.org/normativa?n=dyn-na02483",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-04",
+  "fechaFinSolicitud": "2026-06-18",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1465423,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "BOFr_78_Resol_46_2026_29mayo_ayudaslibros_2627.pdf",
+      "long": 426216,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465543,
+      "descripcion": "Solicitud",
+      "nombreFic": "ANEXO_SOLICITUD_AYUDA_LIBROS_2627.docx",
+      "long": 65703,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,80 @@
+{
+  "id": 1111178,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "PALAMÓS",
+    "nivel3": "AYUNTAMIENTO DE PALAMÓS"
+  },
+  "sedeElectronica": "http://www.palamos.cat/",
+  "codigoBDNS": "909617",
+  "fechaRecepcion": "2026-06-01",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 30000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DE CONCESIÓN DE SUBVENCIONES EN RÉGIMEN DE CONCURRENCIA NO COMPETITIVA POR REHABILITACIÓN DE FACHADAS, EL DESMONTAJE De ELEMENTOS FIJAS De ESTRUCTURAS SITUADAS A LA VÍA PÚBLICA, Y LA MEJORA DE La ACCESIBILIDAD Y SUPRESIÓN DE BARRERRAS",
+  "descripcionLeng": "CONVOCATÒRIA DE CONCESSIÓ DE SUBVENCIONS EN RÈGIM DE CONCURRÈNCIA NO COMPETITIVA PER REHABILITACIÓ DE FAÇANES, EL DESMUNTATGE D’ELEMENTS FIXES D’ESTRUCTURES SITUADES A LA VIA PÚBLICA, LA MILLORA DE L’ACCESSIBILITAT I SUPRESSIÓ DE BARRERES ARQUITECTÓNIQUES",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Otras actividades de servicios sociales sin alojamiento",
+      "codigo": "88.9"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES512 - Girona"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "CONVOCATORIA DE CONCESIÓN DE SUBVENCIONES EN RÉGIMEN DE CONCURRENCIA NO COMPETITIVA POR REHABILITACIÓN DE FACHADAS, EL DESMONTAJE De ELEMENTOS FIJAS De ESTRUCTURAS SITUADAS A LA VÍA PÚBLICA, Y LA MEJORA DE La ACCESIBILIDAD Y SUPRESIÓN DE BARRERRAS",
+  "urlBasesReguladoras": "http://www.palamos.cat/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-09-30",
+  "textInicio": "Dia siguiente de la publicación de la convocatoria en el BOP ",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1465863,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convocatòria subvenció façanes 2026 castellà.pdf",
+      "long": 498731,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465865,
+      "descripcion": "Acord JGL aprovació convocatòria",
+      "nombreFic": "20260528_Certificat_Certificat d.pdf",
+      "long": 649253,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465864,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Convocatòria subvenció façanes 2026.pdf",
+      "long": 347945,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

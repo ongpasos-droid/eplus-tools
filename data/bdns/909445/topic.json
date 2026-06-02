@@ -1,0 +1,101 @@
+{
+  "source": "bdns",
+  "source_id": "909445",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concesión directa - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / EJEA DE LOS CABALLEROS / AYUNTAMIENTO DE EJEA DE LOS CABALLEROS",
+  "nuts_codes": [
+    "ES243"
+  ],
+  "nuts_primary": "ES243",
+  "title": "CRITERIOS ESPECÍFICOS DE LA CONVOCATORIA DEL PROGRAMA DE AYUDAS “BONO COMERCIO DE EJEA” PARA EL FOMENTO DEL CONSUMO EN EL COMERCIO LOCAL (EJERCICIO 2026)",
+  "title_lang": "es",
+  "summary": "Comercio, Turismo y Pymes",
+  "status": "open",
+  "publication_date": "2026-06-01",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 35000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "79",
+      "descripcion": "Actividades de agencias de viajes, operadores turísticos, servicios de reservas y actividades relacionadas "
+    },
+    {
+      "codigo": "74.2",
+      "descripcion": "Actividades de fotografía"
+    },
+    {
+      "codigo": "47.6",
+      "descripcion": "Comercio al por menor de artículos culturales y recreativos"
+    },
+    {
+      "codigo": "47.4",
+      "descripcion": "Comercio al por menor de equipos para las tecnologías de la información y las comunicaciones"
+    },
+    {
+      "codigo": "47.5",
+      "descripcion": "Comercio al por menor de otros artículos de uso doméstico"
+    },
+    {
+      "codigo": "47.7",
+      "descripcion": "Comercio al por menor de otros artículos, excepto vehículos de motor y motocicletas"
+    },
+    {
+      "codigo": "47.2",
+      "descripcion": "Comercio al por menor de productos alimenticios, bebidas y tabaco"
+    },
+    {
+      "codigo": "47.1",
+      "descripcion": "Comercio al por menor no especializado"
+    },
+    {
+      "codigo": "96.2",
+      "descripcion": "Peluquería, tratamientos de belleza, spas y actividades similares"
+    }
+  ],
+  "apply_url": "www.ejea.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909445",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "DECLARACIÓN",
+      "url": null
+    },
+    {
+      "label": "SOLICITUD ADHESIÓN",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.ejea.es/bono-comercio-ejea-2026",
+  "text_inicio": "A partir del día siguiente al de la publicación en el BOPZ",
+  "text_fin": "Durante toda la vigencia del programa",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-02T04:05:59.590Z"
+}

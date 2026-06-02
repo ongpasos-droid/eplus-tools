@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "909636",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / EXTREMADURA / DIRECCIÓN GENERAL DE JÓVENES Y DEPORTES",
+  "nuts_codes": [
+    "ES43"
+  ],
+  "nuts_primary": "ES43",
+  "title": "Ayudas 2026 Infraestructuras Deportivas LÍNEA ACCESIBILIDAD según Resolución de 26 de mayo de 2026 que la convoca.",
+  "title_lang": "es",
+  "summary": "Infraestructuras",
+  "status": "open",
+  "publication_date": "2026-06-01",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 150000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "84.1",
+      "descripcion": "Administración pública y de la política económica, social y medioambiental"
+    }
+  ],
+  "apply_url": "https://www.juntaex.es/w/0631122",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909636",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://doe.juntaex.es/pdfs/doe/2026/690o/26040035.pdf",
+  "text_inicio": "DÍA SIGUIENTE PUBLICACIÓN EN DOE",
+  "text_fin": "15 DÍAS HÁBILES DESDE SIGUIENTE A PUBLICACIÓN",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-02T04:05:59.649Z"
+}

@@ -1,0 +1,112 @@
+{
+  "id": 1111006,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "EJEA DE LOS CABALLEROS",
+    "nivel3": "AYUNTAMIENTO DE EJEA DE LOS CABALLEROS"
+  },
+  "sedeElectronica": "www.ejea.es",
+  "codigoBDNS": "909445",
+  "fechaRecepcion": "2026-06-01",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 35000,
+  "mrr": false,
+  "descripcion": "CRITERIOS ESPECÍFICOS DE LA CONVOCATORIA DEL PROGRAMA DE AYUDAS “BONO COMERCIO DE EJEA” PARA EL FOMENTO DEL CONSUMO EN EL COMERCIO LOCAL (EJERCICIO 2026)",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades de agencias de viajes, operadores turísticos, servicios de reservas y actividades relacionadas ",
+      "codigo": "79"
+    },
+    {
+      "descripcion": "Actividades de fotografía",
+      "codigo": "74.2"
+    },
+    {
+      "descripcion": "Comercio al por menor de artículos culturales y recreativos",
+      "codigo": "47.6"
+    },
+    {
+      "descripcion": "Comercio al por menor de equipos para las tecnologías de la información y las comunicaciones",
+      "codigo": "47.4"
+    },
+    {
+      "descripcion": "Comercio al por menor de otros artículos de uso doméstico",
+      "codigo": "47.5"
+    },
+    {
+      "descripcion": "Comercio al por menor de otros artículos, excepto vehículos de motor y motocicletas",
+      "codigo": "47.7"
+    },
+    {
+      "descripcion": "Comercio al por menor de productos alimenticios, bebidas y tabaco",
+      "codigo": "47.2"
+    },
+    {
+      "descripcion": "Comercio al por menor no especializado",
+      "codigo": "47.1"
+    },
+    {
+      "descripcion": "Peluquería, tratamientos de belleza, spas y actividades similares",
+      "codigo": "96.2"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES243 - Zaragoza"
+    }
+  ],
+  "descripcionFinalidad": "Comercio, Turismo y Pymes",
+  "descripcionBasesReguladoras": "CRITERIOS ESPECÍFICOS DE LA CONVOCATORIA DEL PROGRAMA DE AYUDAS “BONO COMERCIO DE EJEA” PARA EL FOMENTO DEL CONSUMO EN EL COMERCIO LOCAL (EJERCICIO 2026)",
+  "urlBasesReguladoras": "https://www.ejea.es/bono-comercio-ejea-2026",
+  "sePublicaDiarioOficial": true,
+  "abierto": true,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir del día siguiente al de la publicación en el BOPZ",
+  "textFin": "Durante toda la vigencia del programa",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1465414,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Anexo_._Criterios_reguladores firmados.pdf",
+      "long": 684268,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465418,
+      "descripcion": "DECLARACIÓN",
+      "nombreFic": "Bono-comercio-2026-Declaracion.pdf",
+      "long": 1322999,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465416,
+      "descripcion": "SOLICITUD ADHESIÓN",
+      "nombreFic": "Bono-comercio-2026-SolicitudAdhesion.pdf",
+      "long": 1371905,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

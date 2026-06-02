@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "909479",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / MÁLAGA / AYUNTAMIENTO DE MÁLAGA",
+  "nuts_codes": [
+    "ES617"
+  ],
+  "nuts_primary": "ES617",
+  "title": "CONVOCATORIA XXVII CONCURSO PARA SELECCIONAR EL CARTEL ANUNCIADOR DE LA FERIA DE CAMPANILLAS DEL AÑO 2026, JUNTA DE DISTRITO 9, CAMPANILLAS",
+  "title_lang": "es",
+  "summary": "Otras actuaciones de carácter económico",
+  "status": "open",
+  "publication_date": "2026-06-01",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 600,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "S",
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909479",
+  "documents": [
+    {
+      "label": "CONVOCATORIA",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.pap.hacienda.gob.es/bdnstrans/GE/es/inicio",
+  "text_inicio": "DESDE LA PUBLICACIÓN DEL EXTRACTO DE LA CONVOCATORIA EN EL BOPMA",
+  "text_fin": "A LOS 10 DÍAS HÁBILES DESDE LA PUBLICACIÓN DEL EXTRACTO DE LA CONVOCATORIA",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-02T04:05:59.604Z"
+}

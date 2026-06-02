@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "908902",
+  "source_lang": "es",
+  "level": "estado",
+  "programme": "Concesión directa - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "ESTADO / MINISTERIO DE TRABAJO Y ECONOMÍA SOCIAL / DIRECCIÓN PROVINCIAL DEL SEPE DE HUESCA",
+  "nuts_codes": [
+    "ES241"
+  ],
+  "nuts_primary": "ES241",
+  "title": "CONVOCATORIA PLAN DE FOMENTO DEL EMPLEO AGRARIO ARAGÓN 2026 - HUESCA",
+  "title_lang": "es",
+  "summary": "Fomento del Empleo",
+  "status": "open",
+  "publication_date": "2026-05-28",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 355658.84,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "84.1",
+      "descripcion": "Administración pública y de la política económica, social y medioambiental"
+    }
+  ],
+  "apply_url": "https://sede.sepe.gob.es/portalSede/es/procedimientos-y-servicios/empresas/empleo/programa-fomento-empleo-agrario",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908902",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.boe.es/eli/es/rd/1997/06/20/939",
+  "text_inicio": "Día siguiente de la publicación de la convocatoria",
+  "text_fin": "Una vez concluido un mes desde el inicio",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-02T04:05:59.426Z"
+}

@@ -1,0 +1,99 @@
+{
+  "id": 1111103,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "BETANCURIA",
+    "nivel3": "AYUNTAMIENTO DE BETANCURIA"
+  },
+  "sedeElectronica": "https://betancuria.sedelectronica.es/info.0",
+  "codigoBDNS": "909542",
+  "fechaRecepcion": "2026-06-01",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 12000,
+  "mrr": false,
+  "descripcion": "Convocatoria del Ayuntamiento de Betancuria en régimen de ayudas y subvenciones en materia de deportes 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    },
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES704 - Fuerteventura"
+    }
+  ],
+  "descripcionFinalidad": "Otras actuaciones de carácter económico",
+  "descripcionBasesReguladoras": "Bases reguladoras del Régimen de Subvenciones en materia de fomento del deporte (Boletín Oficial de Las palmas nº130 de 27 de octubre de 2023)",
+  "urlBasesReguladoras": "https://www.boplaspalmas.net/nbop2/index.php",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Desde el día siguiente a la publicación en el Boletín Oficial de la Provincia de Las palmas",
+  "textFin": "Plazo de 10 días hábiles desde que se publique en el Boletín Oficial de Las Palmas",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1465697,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "CONVOCATORIA SUBVENCIONES DEPORTES 2026..pdf",
+      "long": 895354,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465653,
+      "descripcion": "Anexo I Modelo de solicitud",
+      "nombreFic": "Anexo I. Modelo Solicitud. Deportes 2026.pdf",
+      "long": 127718,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465659,
+      "descripcion": "Anexo III. Memoria y Plan de Financiación",
+      "nombreFic": "Anexo III Memoria y Plan de Financiación.pdf",
+      "long": 166165,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465657,
+      "descripcion": "Anexo II.B para Clubs Deportivos",
+      "nombreFic": "Anexo II.B Clubs deportivos.pdf",
+      "long": 373889,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465656,
+      "descripcion": "Anexo II.A para deportistas individuales",
+      "nombreFic": "Anexo II.A Deportistas individuales.pdf",
+      "long": 383790,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

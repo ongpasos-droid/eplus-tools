@@ -1,0 +1,78 @@
+{
+  "source": "bdns",
+  "source_id": "909542",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / BETANCURIA / AYUNTAMIENTO DE BETANCURIA",
+  "nuts_codes": [
+    "ES704"
+  ],
+  "nuts_primary": "ES704",
+  "title": "Convocatoria del Ayuntamiento de Betancuria en régimen de ayudas y subvenciones en materia de deportes 2026",
+  "title_lang": "es",
+  "summary": "Otras actuaciones de carácter económico",
+  "status": "open",
+  "publication_date": "2026-06-01",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 12000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA; PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "S",
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO"
+    }
+  ],
+  "apply_url": "https://betancuria.sedelectronica.es/info.0",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909542",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "Anexo I Modelo de solicitud",
+      "url": null
+    },
+    {
+      "label": "Anexo III. Memoria y Plan de Financiación",
+      "url": null
+    },
+    {
+      "label": "Anexo II.B para Clubs Deportivos",
+      "url": null
+    },
+    {
+      "label": "Anexo II.A para deportistas individuales",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.boplaspalmas.net/nbop2/index.php",
+  "text_inicio": "Desde el día siguiente a la publicación en el Boletín Oficial de la Provincia de Las palmas",
+  "text_fin": "Plazo de 10 días hábiles desde que se publique en el Boletín Oficial de Las Palmas",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-02T04:05:59.624Z"
+}

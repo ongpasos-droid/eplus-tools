@@ -1,0 +1,69 @@
+{
+  "source": "bdns",
+  "source_id": "909601",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / COMUNITAT VALENCIANA / SECRETARÍA AUTONÓMICA DE  FAMILIA Y SERVICIOS SOCIALES",
+  "nuts_codes": [
+    "ES52"
+  ],
+  "nuts_primary": "ES52",
+  "title": "CONVOCATORIA 2026 ITINERARIOS PARA LA INTEGRACIÓN SOCIOLABORAL DE PERSONAS EN  SITUACIÓN DE RIESGO DE EXCLUSIÓN SOCIAL  S0383",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-06-01",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 7000000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "88",
+      "descripcion": "Actividades de servicios sociales sin alojamiento"
+    }
+  ],
+  "apply_url": "https:/sede.gva.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909601",
+  "documents": [
+    {
+      "label": "Texto en otra lengua de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "no disponible",
+  "text_inicio": "S0383 CONVOCATORIA 2026 ITINERARIOS PARA LA INTEGRACIÓN SOCIOLABORAL DE PERSONAS EN  SITUACIÓN DE RI",
+  "text_fin": "S0383 CONVOCATÒRIA 2026 ITINERARIS PER LA INTEGRACIÓ SOCIOLABORAL DE PERSONES EN SIUACIÓ DE RISC D'E",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [
+    {
+      "descripcion": "FSE+ - FONDO SOCIAL EUROPEO PLUS"
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-02T04:05:59.638Z"
+}

@@ -1,0 +1,80 @@
+{
+  "source": "bdns",
+  "source_id": "909745",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concesión directa - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / CANARIAS / CONSEJERÍA DE TRANSICIÓN ECOLÓGICA Y ENERGÍA",
+  "nuts_codes": [
+    "ES70"
+  ],
+  "nuts_primary": "ES70",
+  "title": "SUBVENCIONES PARA LA MOVILIDAD URBANA 2026 (FEDER 2021-2027)",
+  "title_lang": "es",
+  "summary": "Industria y Energía",
+  "status": "open",
+  "publication_date": "2026-06-01",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 625000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "47.9",
+      "descripcion": "Actividades de servicios de intermediación para el comercio al por menor"
+    },
+    {
+      "codigo": "46.7",
+      "descripcion": "Comercio al por mayor de vehículos de motor, motocicletas y sus repuestos y accesorios"
+    },
+    {
+      "codigo": "47.8",
+      "descripcion": "Comercio al por menor de vehículos de motor, motocicletas y sus repuestos y accesorios"
+    },
+    {
+      "codigo": "46.1",
+      "descripcion": "Intermediarios del comercio al por mayor"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909745",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.gobiernodecanarias.org/boc/2025/097/index.html",
+  "text_inicio": "Se iniciará a las 9:00h del segundo día hábil siguiente de la publicación del Extracto",
+  "text_fin": "Finalizará transcurridos 30 días naturales",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [
+    {
+      "descripcion": "FEDER - FONDO EUROPEO DE DESARROLLO REGIONAL"
+    }
+  ],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-02T04:05:59.682Z"
+}

@@ -1,0 +1,76 @@
+{
+  "source": "bdns",
+  "source_id": "909013",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / COMUNITAT VALENCIANA / SECRETARÍA AUTONÓMICA DE HACIENDA Y FINANCIACIÓN",
+  "nuts_codes": [
+    "ES52"
+  ],
+  "nuts_primary": "ES52",
+  "title": "RESOLUCIÓN de la Vicepresidencia Segunda y Conselleria de Presidencia, por la que se convocan subvenciones que tienen como objetivo apoyar la participación en programas europeos mediante acciones de comunicación y capitalización de r",
+  "title_lang": "es",
+  "summary": "Otras actuaciones de carácter económico",
+  "status": "open",
+  "publication_date": "2026-05-29",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 300000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "S",
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO"
+    }
+  ],
+  "apply_url": "https://www.gva.es/es/inicio/procedimientos?id_proc=G19826",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909013",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Extracto convocatoria firmado ",
+      "url": null
+    },
+    {
+      "label": "Resolución convocatoria",
+      "url": null
+    },
+    {
+      "label": "Texto en otra lengua de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "http://www.dogv.gva.es/datos/2021/02/02/pdf/2021_816.pdf",
+  "text_inicio": "El día siguiente de la publicación de la convocatoria",
+  "text_fin": "15 días hábiles desde el día siguiente a la publicación",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-02T04:05:59.461Z"
+}

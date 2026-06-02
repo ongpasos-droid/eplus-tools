@@ -1,0 +1,92 @@
+{
+  "id": 1111022,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "GALICIA",
+    "nivel3": "CONSELLERÍA DEL MAR"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "909461",
+  "fechaRecepcion": "2026-06-01",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 103680,
+  "mrr": false,
+  "descripcion": "ORDEN del 22 de mayo de 2026 , por la que se aprueban las bases que regirán la convocatoria de becas de formación en régimen de empresa tutelada para los/las titulados/as en ciclos formativos de acuicultura, y se procede a su convocatoria. (cód PE601C)",
+  "descripcionLeng": "ORDE do 22 de maio de 2026  pola que se aproban as bases que rexerán a convocatoria de bolsas de formación en réxime de empresa tutelada para os/as titulados/as en ciclos formativos de acuicultura, e se procede á súa convocatoria. (código de proc. PE601C)",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Acuicultura",
+      "codigo": "03.2"
+    },
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES11 - GALICIA"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "ORDEN del 22 de mayo de 2026 , por la que se aprueban las bases que regirán la convocatoria de becas de formación en régimen de empresa tutelada para los/las titulados/as en ciclos formativos de acuicultura, y se procede a su convocatoria. (cód PE601C)",
+  "urlBasesReguladoras": "https://www.xunta.gal/dog/Publicados",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-04",
+  "fechaFinSolicitud": "2026-07-03",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1465520,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Orde bolsas IGAFA PE601C CAS_20260601_101346.pdf",
+      "long": 128477,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465523,
+      "descripcion": "Anexo en galego",
+      "nombreFic": "PE601C-G_20260601_101529.pdf",
+      "long": 118385,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465522,
+      "descripcion": "Anexos en castellano",
+      "nombreFic": "PE601C-C_20260601_101457.pdf",
+      "long": 119040,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465521,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "Orde bolsas IGAFA PE601C GAL_20260601_101414.pdf",
+      "long": 127679,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

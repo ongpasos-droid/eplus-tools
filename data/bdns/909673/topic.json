@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "909673",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / MATARÓ / AYUNTAMIENTO DE MATARÓ",
+  "nuts_codes": [
+    "ES511"
+  ],
+  "nuts_primary": "ES511",
+  "title": "Convocatoria de ayudas individuales para la asistencia escolar y para el servicio de comedor fijo de los niños matriculados en las guarderías municipales. Curso 2026-2027",
+  "title_lang": "es",
+  "summary": "Educación",
+  "status": "open",
+  "publication_date": "2026-06-01",
+  "open_date": "2026-06-18",
+  "deadline": "2026-07-03",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 124000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "Q",
+      "descripcion": "EDUCACIÓN"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909673",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en lengua cooficial",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "http://bop.diba.cat/anunci/3614671/aprovacio-inicial-de-les-bases-reguladores-per-a-la-concessio-d-ajuts-individuals-per-a-l-assistencia-escolar-i-per-al-servei-de-menjador-fix-dels-infants-matriculats-a-les-escoles-bressol-municipals-ajuntament-de-mataro",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-02T04:05:59.665Z"
+}

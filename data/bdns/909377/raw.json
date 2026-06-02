@@ -1,0 +1,91 @@
+{
+  "id": 1110938,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "CONSELL COMARCAL DE CERDANYA",
+    "nivel3": "CONSELL COMARCAL DE CERDANYA"
+  },
+  "sedeElectronica": "https://cccerdanya.eadministracio.cat/citizen-service/84586a92-a04c-4593-9880-fb1269afe4b5",
+  "codigoBDNS": "909377",
+  "fechaRecepcion": "2026-06-01",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 2,
+  "mrr": false,
+  "descripcion": "Convocatoria y bases reguladoras para la concesión de ayudas individuales de comedor dirigidas al alumnado de enseñanza obligatoria y del segundo ciclo de educación infantil de la comarca de la Cerdanya para el curso 2026/2027",
+  "descripcionLeng": "Convocatòria i bases reguladores per a la concessió d'ajuts individuals de menjador adreçats a l'alumnat d'ensenyament obligatori i del segon cicle d'educació infantil de la comarca de la Cerdanya per al curs 2026/2027",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES512 - Girona"
+    },
+    {
+      "descripcion": "ES513 - Lleida"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "BASES REGULADORAS PARA LA CONCESIÓN DE AYUDAS INDIVIDUALES DE COMEDOR ESCOLAR DIRIGIDAS AL ALUMNADO DE ENSEÑANZA OBLIGATORIA Y DE SEGUNDO CICLO DE EDUCACIÓN INFANTIL DE LA COMARCA DE LA CERDANYA PARA EL CURSO 2026-2027",
+  "urlBasesReguladoras": "https://www.cerdanya.cat/tramits/menjador-i-transort-escolar/",
+  "sePublicaDiarioOficial": true,
+  "abierto": true,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [
+    {
+      "descripcion": "FEAD - FONDO DE AYUDA A LOS MÁS DESFAVORECIDOS"
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1465186,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "BASES REGULADORES AIM CURS 2026 2027.pdf",
+      "long": 297431,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465190,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "BASES REGULADORAS AIM CURSO 2026 2027.pdf",
+      "long": 445254,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    }
+  ],
+  "anuncios": [
+    {
+      "numAnuncio": 213230,
+      "titulo": "EXTRACTO DE LA CONVOCATORIA DE AYUDAS INDIVIDUALES DE COMEDOR ESCOLAR DIRIGIDAS AL ALUMNADO DE ENSEÑANZA OBLIGATORIA Y DE SEGUNDO CICLO DE EDUCACIÓN INFANTIL DE LA COMARCA DE LA CERDANYA PARA EL CURSO 2026-2027",
+      "tituloLeng": "EXTRACTE DE LA CONVOCATÒRIA D’AJUTS INDIVIDUALS DE MENJADOR ESCOLAR ADREÇATS A L’ALUMNAT D’ENSENYAMENT OBLIGATORI I DE SEGON CICLE D’EDUCACIÓ INFANTIL DE LA COMARCA DE LA CERDANYA PER AL CURS 2026-2027",
+      "texto": "<p>BDNS (Identif.): 909377</p><p>De conformidad con lo previsto en los artículos 17.3.b y 20.8.a de la Ley 38/2003, de 17 de noviembre, General de Subvenciones, se publica el extracto de la convocatoria cuyo texto completo puede consultarse en la Base de Datos Nacional de Subvenciones (BDNS) y en la sede electrónica del Consell Comarcal de la Cerdanya.</p><p>Primero. Objeto</p><p>La presente convocatoria tiene por objeto la concesión de ayudas individuales de comedor escolar para el alumnado de enseñanza obligatoria y de segundo ciclo de educación infantil matriculado en centros educativos sostenidos con fondos públicos de la comarca de la Cerdanya durante el curso escolar 2026-2027.</p><p>Segundo. Personas beneficiarias</p><p>Podrá solicitar la ayuda el alumnado que reúna los siguientes requisitos:</p><p>a) Tener residencia en Cataluña.</p><p>b) Estar matriculado en un centro educativo sostenido con fondos públicos de Cataluña, en cualquiera de los cursos del segundo ciclo de educación infantil o de las enseñanzas obligatorias durante el curso 2026-2027, así como en los cursos de segundo y tercero del primer ciclo de educación infantil en aquellos centros de titularidad de la Generalitat donde se haya implantado.</p><p>c) No disfrutar del servicio de comedor con carácter gratuito.</p><p>d) No encontrarse en acogimiento residencial.</p><p>e) Hacer uso efectivo del servicio de comedor escolar.</p><p>Tercero. Bases reguladoras</p><p>Las bases reguladoras de la presente convocatoria fueron aprobadas por el Consell Comarcal de la Cerdanya y publicadas en el Boletín Oficial de la Provincia de Girona, en el Boletín Oficial de la Provincia de Lleida, en el Diari Oficial de la Generalitat de Catalunya y en la sede electrónica de la corporación.</p><p>Cuarto. Crédito presupuestario y cuantía</p><p>La cuantía total de la convocatoria queda condicionada al importe que el Departament de Educació i Formació Professional de la Generalitat de Cataluña transfiera al Consell Comarcal de la Cerdanya para la financiación de las ayudas individuales de comedor correspondientes al curso 2026-2027.</p><p>Las ayudas podrán cubrir hasta el 70 % o hasta el 100 % del coste del servicio de comedor escolar, de acuerdo con los requisitos y criterios establecidos en las bases reguladoras, sin superar en ningún caso el precio máximo fijado por el Departament de Educació i Formació Professional en función de la duración del espacio de mediodía.</p><p>Quinto. Criterios de otorgamiento</p><p>Las ayudas se concederán en régimen de concurrencia no competitiva, de acuerdo con los criterios económicos, sociales y familiares establecidos en las bases reguladoras y, en particular, en función de la renta de la unidad familiar, su composición y las circunstancias específicas acreditadas.</p><p>Sexto. Plazo de presentación de solicitudes</p><p>El plazo ordinario de presentación de solicitudes será del 12 de mayo al 12 de junio de 2026, ambos incluidos.</p><p>De conformidad con la Resolución 17/XI del Parlamento de Cataluña, la convocatoria permanecerá abierta durante todo el curso escolar para la presentación de solicitudes fuera del plazo ordinario y para aquellas derivadas de cambios sobrevenidos que impliquen modificaciones sustanciales de la situación socioeconómica de la unidad familiar.</p><p>Séptimo. Forma y lugar de presentación</p><p>Las solicitudes deberán formalizarse mediante el modelo normalizado aprobado por el Consell Comarcal de la Cerdanya y podrán presentarse:</p><p>Preferentemente a través del registro electrónico del Consell Comarcal de la Cerdanya.</p><p>Presencialmente en el Registro General del Consell Comarcal de la Cerdanya, plaza del Rec, núm. 5, 17520 Puigcerdà.</p><p>Las solicitudes deberán ir acompañadas de la documentación exigida en las bases reguladoras.</p><p>Octavo. Órgano competente para la resolución</p><p>La competencia para resolver la convocatoria corresponde a la Presidencia del Consell Comarcal de la Cerdanya.</p><p>Noveno. Recursos</p><p>Contra la resolución de concesión o denegación de las ayudas, que pone fin a la vía administrativa, podrá interponerse recurso potestativo de reposición ante la Presidencia del Consell Comarcal en el plazo de un mes a contar desde su publicación, sin perjuicio de cualquier otro recurso que se estime procedente.</p><p>BDNS (Identif.): 909377</p><p>Primero. Objeto</p><p>La presente convocatoria tiene por objeto la concesión de ayudas individuales de comedor escolar para el alumnado de enseñanza obligatoria y de segundo ciclo de educación infantil matriculado en centros educativos sostenidos con fondos públicos de la comarca de la Cerdanya durante el curso escolar 2026-2027.</p><p>Segundo. Personas beneficiarias</p><p>Podrá solicitar la ayuda el alumnado que reúna los siguientes requisitos:</p><p>a) Tener residencia en Cataluña.</p><p>b) Estar matriculado en un centro educativo sostenido con fondos públicos de Cataluña, en cualquiera de los cursos del segundo ciclo de educación infantil o de las enseñanzas obligatorias durante el curso 2026-2027, así como en los cursos de segundo y tercero del primer ciclo de educación infantil en aquellos centros de titularidad de la Generalitat donde se haya implantado.</p><p>c) No disfrutar del servicio de comedor con carácter gratuito.</p><p>d) No encontrarse en acogimiento residencial.</p><p>e) Hacer uso efectivo del servicio de comedor escolar.</p><p>Tercero. Bases reguladoras</p><p>Las bases reguladoras de la presente convocatoria fueron aprobadas por el Consell Comarcal de la Cerdanya y publicadas en el Boletín Oficial de la Provincia de Girona, en el Boletín Oficial de la Provincia de Lleida, en el Diari Oficial de la Generalitat de Catalunya y en la sede electrónica de la corporación.</p><p>Cuarto. Crédito presupuestario y cuantía</p><p>La cuantía total de la convocatoria queda condicionada al importe que el Departament de Educació i Formació Professional de la Generalitat de Cataluña transfiera al Consell Comarcal de la Cerdanya para la financiación de las ayudas individuales de comedor correspondientes al curso 2026-2027.</p><p>Las ayudas podrán cubrir hasta el 70 % o hasta el 100 % del coste del servicio de comedor escolar, de acuerdo con los requisitos y criterios establecidos en las bases reguladoras, sin superar en ningún caso el precio máximo fijado por el Departament de Educació i Formació Professional en función de la duración del espacio de mediodía.</p><p>Quinto. Criterios de otorgamiento</p><p>Las ayudas se concederán en régimen de concurrencia no competitiva, de acuerdo con los criterios económicos, sociales y familiares establecidos en las bases reguladoras y, en particular, en función de la renta de la unidad familiar, su composición y las circunstancias específicas acreditadas.</p><p>Sexto. Plazo de presentación de solicitudes</p><p>El plazo ordinario de presentación de solicitudes será del 12 de mayo al 12 de junio de 2026, ambos incluidos.</p><p>De conformidad con la Resolución 17/XI del Parlamento de Cataluña, la convocatoria permanecerá abierta durante todo el curso escolar para la presentación de solicitudes fuera del plazo ordinario y para aquellas derivadas de cambios sobrevenidos que impliquen modificaciones sustanciales de la situación socioeconómica de la unidad familiar.</p><p>Séptimo. Forma y lugar de presentación</p><p>Las solicitudes deberán formalizarse mediante el modelo normalizado aprobado por el Consell Comarcal de la Cerdanya y podrán presentarse:</p><p>Preferentemente a través del registro electrónico del Consell Comarcal de la Cerdanya.</p><p>Presencialmente en el Registro General del Consell Comarcal de la Cerdanya, plaza del Rec, núm. 5, 17520 Puigcerdà.</p><p>Las solicitudes deberán ir acompañadas de la documentación exigida en las bases reguladoras.</p><p>Octavo. Órgano competente para la resolución</p><p>La competencia para resolver la convocatoria corresponde a la Presidencia del Consell Comarcal de la Cerdanya.</p><p>Noveno. Recursos</p><p>Contra la resolución de concesión o denegación de las ayudas, que pone fin a la vía administrativa, podrá interponerse recurso potestativo de reposición ante la Presidencia del Consell Comarcal en el plazo de un mes a contar desde su publicación, sin perjuicio de cualquier otro recurso que se estime procedente.</p><p> </p><p>Puigcerdà, 1 de junio de 2026</p>",
+      "textoLeng": "<p>BDNS (Identif.): 909377</p><p>Primer. Objecte</p><p>La present convocatòria té per objecte la concessió d’ajuts individuals de menjador escolar per a l’alumnat d’ensenyament obligatori i de segon cicle d’educació infantil matriculat en centres educatius sostinguts amb fons públics de la comarca de la Cerdanya durant el curs escolar 2026-2027.</p><p>Segon. Persones beneficiàries</p><p>Podrà sol·licitar l’ajut l’alumnat que compleixi els requisits següents:</p><p>a) Tenir residència a Catalunya.</p><p>b) Estar matriculat en un centre educatiu sostingut amb fons públics de Catalunya, en qualsevol dels cursos del segon cicle d’educació infantil o dels ensenyaments obligatoris durant el curs 2026-2027, així com en els cursos de segon i tercer del primer cicle d’educació infantil en aquells centres de titularitat de la Generalitat on s’hagi implantat.</p><p>c) No disposar del servei de menjador amb caràcter gratuït.</p><p>d) No trobar-se en situació d’acolliment residencial.</p><p>e) Fer ús efectiu del servei de menjador escolar.</p><p>Tercer. Bases reguladores</p><p>Les bases reguladores de la present convocatòria han estat aprovades pel Consell Comarcal de la Cerdanya i publicades al Butlletí Oficial de la Província de Girona, al Butlletí Oficial de la Província de Lleida, al Diari Oficial de la Generalitat de Catalunya i a la seu electrònica de la corporació.</p><p>Quart. Crèdit pressupostari i quantia</p><p>La quantia total de la convocatòria resta condicionada a l’import que el Departament d’Educació i Formació Professional de la Generalitat de Catalunya transfereixi al Consell Comarcal de la Cerdanya per al finançament dels ajuts individuals de menjador corresponents al curs 2026-2027.</p><p>Els ajuts podran cobrir fins al 70 % o fins al 100 % del cost del servei de menjador escolar, d’acord amb els requisits i criteris establerts a les bases reguladores, sense superar en cap cas el preu màxim fixat pel Departament d’Educació i Formació Professional en funció de la durada de l’espai de migdia.</p><p>Cinquè. Criteris d’atorgament</p><p>Els ajuts s’atorgaran en règim de concurrència no competitiva, d’acord amb els criteris econòmics, socials i familiars establerts a les bases reguladores i, en particular, en funció de la renda de la unitat familiar, la seva composició i les circumstàncies específiques acreditades.</p><p>Sisè. Termini de presentació de sol·licituds</p><p>El termini ordinari de presentació de sol·licituds serà del 12 de maig al 12 de juny de 2026, ambdós inclosos.</p><p>De conformitat amb la Resolució 17/XI del Parlament de Catalunya, la convocatòria romandrà oberta durant tot el curs escolar per a la presentació de sol·licituds fora del termini ordinari i per a aquelles derivades de canvis sobrevinguts que impliquin modificacions substancials de la situació socioeconòmica de la unitat familiar.</p><p>Setè. Forma i lloc de presentació</p><p>Les sol·licituds s’hauran de formalitzar mitjançant el model normalitzat aprovat pel Consell Comarcal de la Cerdanya i es podran presentar:</p><p>Preferentment a través del registre electrònic del Consell Comarcal de la Cerdanya.</p><p>Presencialment al Registre General del Consell Comarcal de la Cerdanya, plaça del Rec, núm. 5, 17520 Puigcerdà.</p><p>Les sol·licituds hauran d’anar acompanyades de la documentació exigida a les bases reguladores.</p><p>Vuitè. Òrgan competent per a la resolució</p><p>La competència per resoldre la convocatòria correspon a la Presidència del Consell Comarcal de la Cerdanya.</p><p>Novè. Recursos</p><p>Contra la resolució de concessió o denegació dels ajuts, que exhaureix la via administrativa, es podrà interposar recurs potestatiu de reposició davant la Presidència del Consell Comarcal en el termini d’un mes comptador des de la seva publicació, sens perjudici de qualsevol altre recurs que es consideri procedent.</p><p> </p><p>Puigcerdà, 1 de juny de 2026</p>",
+      "url": "https://ssl4.ddgi.cat/bopV1/pdf/2026/106/202610604830.pdf",
+      "cve": null,
+      "desDiarioOficial": "B.O.P. DE GIRONA",
+      "datPublicacion": "2026-06-04"
+    }
+  ],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

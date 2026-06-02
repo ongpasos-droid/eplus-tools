@@ -1,0 +1,72 @@
+{
+  "source": "bdns",
+  "source_id": "909774",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / ILLES BALEARS / DIRECCIÓN GENERAL DE POLÍTICA INDUSTRIAL",
+  "nuts_codes": [
+    "ES53"
+  ],
+  "nuts_primary": "ES53",
+  "title": "EXPORT AYUDAS COSTE TRANSPORTE EXPORTACION MERCANCIAS",
+  "title_lang": "es",
+  "summary": "Industria y Energía",
+  "status": "open",
+  "publication_date": "2026-06-02",
+  "open_date": "2026-06-01",
+  "deadline": "2026-06-30",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 2000000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "GRAN EMPRESA; PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "GRAN EMPRESA",
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "S",
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO"
+    },
+    {
+      "codigo": "A",
+      "descripcion": "AGRICULTURA, GANADERÍA, SILVICULTURA Y PESCA"
+    },
+    {
+      "codigo": "C",
+      "descripcion": "INDUSTRIA MANUFACTURERA"
+    },
+    {
+      "codigo": "95.3",
+      "descripcion": "Reparación y mantenimiento de vehículos de motor y motocicletas"
+    }
+  ],
+  "apply_url": "INDUSTRIA.CAIB.ES",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909774",
+  "documents": [],
+  "bases_reguladoras_url": "https://intranet.caib.es/eboibfront/eli/es-ib/o/2024/03/19/9/dof/spa/html",
+  "text_inicio": null,
+  "text_fin": "UN MES",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-02T04:05:59.687Z"
+}

@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "909646",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / MOLLET DEL VALLÈS / AYUNTAMIENTO DE MOLLET DEL VALLÈS",
+  "nuts_codes": [
+    "ES51"
+  ],
+  "nuts_primary": "ES51",
+  "title": "CONVOCATORIA PARA LA CONCESION DE PREMIOS A LOS DEPORTISTAS LOCALES QUE HAYAN PARTICIPADO EN COMPETICIONES DEPORTIVAS OFICIALES LA TEMPORADA 2025-2026",
+  "title_lang": "es",
+  "summary": "Educación",
+  "status": "open",
+  "publication_date": "2026-06-01",
+  "open_date": "2026-09-01",
+  "deadline": "2026-09-20",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 10000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "93.1",
+      "descripcion": "Actividades deportivas"
+    }
+  ],
+  "apply_url": "https://seu.molletvalles.cat/",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909646",
+  "documents": [
+    {
+      "label": "Texto en otra lengua de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.molletvalles.cat/",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-02T04:05:59.658Z"
+}

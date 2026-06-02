@@ -1,0 +1,120 @@
+{
+  "id": 1110976,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "MOCEJÓN",
+    "nivel3": "AYUNTAMIENTO DE MOCEJÓN"
+  },
+  "sedeElectronica": "SEDE ELECTRONICA AYUNTAMIENTO DE MOCEJON",
+  "codigoBDNS": "909415",
+  "fechaRecepcion": "2026-06-01",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 9000,
+  "mrr": false,
+  "descripcion": "SUBVENCIÓN DEPORTISTAS NO PROFESIONALES 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades deportivas, recreativas y de entretenimiento",
+      "codigo": "93"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES425 - Toledo"
+    }
+  ],
+  "descripcionFinalidad": "Sanidad",
+  "descripcionBasesReguladoras": "SUBVENCIÓN DEPORTISTAS NO PROFESIONALES 2026",
+  "urlBasesReguladoras": "SUBVENCIÓN DEPORTISTAS NO PROFESIONALES 2026",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-01",
+  "fechaFinSolicitud": "2026-11-15",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1465383,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "BASES SUBVENCIONES DEPORTISTAS NO PROFESIONALES 2026.pdf",
+      "long": 1379505,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465384,
+      "descripcion": "1. SOLICITUD GENERAL",
+      "nombreFic": "ANEXO I. SOLICITUD DEPORTISTAS 2026.pdf",
+      "long": 260418,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465388,
+      "descripcion": "1 BIS SOLICITUD MENORES",
+      "nombreFic": "ANEXO 1. SOLICITUD MENORES DEPORTISTAS 2026.pdf",
+      "long": 110883,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465407,
+      "descripcion": "6. FICHA DE TERCEROS",
+      "nombreFic": "ANEXO VI FICHA DE TERCEROS.pdf",
+      "long": 102886,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465395,
+      "descripcion": "3. DECLARACION APLICACION DE LOS FONDOS A LOS FINES DE LA SUBVENCION",
+      "nombreFic": "ANEXO III DECLARACION RESPONSABLE DEPORTISTAS 2026.pdf",
+      "long": 69956,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465398,
+      "descripcion": "4. CUENTA JUSTIFICATIVA",
+      "nombreFic": "ANEXO IV CUENTA JUSTIFICATIVA DEPORTISTAS 2026.pdf",
+      "long": 72247,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465406,
+      "descripcion": "5. DECLARACION OTRAS AYUDAS",
+      "nombreFic": "ANEXO V. DECLARACION OTRAS AYUDAS.pdf",
+      "long": 72020,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465392,
+      "descripcion": "2. SOLICITUD PAGO SUBVENCIÓN",
+      "nombreFic": "ANEXO II. DEPORTISTAS 2026.pdf",
+      "long": 177762,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

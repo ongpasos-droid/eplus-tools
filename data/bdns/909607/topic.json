@@ -1,0 +1,89 @@
+{
+  "source": "bdns",
+  "source_id": "909607",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / SANTANDER / AYUNTAMIENTO DE SANTANDER",
+  "nuts_codes": [
+    "ES130"
+  ],
+  "nuts_primary": "ES130",
+  "title": "Convocatoria del procedimiento de subvenciones en régimen de concurrencia competitiva de la Fundación Santander Creativa para el desarrollo de proyectos culturales en la ciudad de Santander 2026",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-06-01",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 522000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "91.1",
+      "descripcion": "Actividades de bibliotecas y archivos"
+    },
+    {
+      "codigo": "90",
+      "descripcion": "Actividades de creación artística y artes escénicas"
+    },
+    {
+      "codigo": "91.2",
+      "descripcion": "Actividades de museos, colecciones de arte, sitios históricos y monumentos"
+    },
+    {
+      "codigo": "91.3",
+      "descripcion": "Conservación, restauración y otras actividades de apoyo al patrimonio cultural"
+    },
+    {
+      "codigo": "58.1",
+      "descripcion": "Edición de libros, periódicos y otras actividades editoriales, excepto la edición de programas informáticos"
+    },
+    {
+      "codigo": "59",
+      "descripcion": "Producción cinematográfica, de vídeo y de programas de televisión, grabación de sonido y edición musical"
+    }
+  ],
+  "apply_url": "www.santandercreativa.com",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909607",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "II. Datos del proyecto",
+      "url": null
+    },
+    {
+      "label": "I. Datos del solicitante",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://boc.cantabria.es/boces/verAnuncioAction.do?idAnuBlob=436157",
+  "text_inicio": "A partir del día siguiente al de la publicación del extracto de la convocatoria en el BOC",
+  "text_fin": "A las 14h del decimosexto día hábil tras la publicación del extracto de la convocatoria en el BOC",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-02T04:05:59.641Z"
+}

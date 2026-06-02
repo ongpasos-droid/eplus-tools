@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "909685",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concesión directa - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / SESTAO / AYUNTAMIENTO DE SESTAO",
+  "nuts_codes": [
+    "ES213"
+  ],
+  "nuts_primary": "ES213",
+  "title": "Convocatoria de concesión de subvenciones económicas por parte del Ayuntamiento de Sestao para el desarrollo de actividades en el ámbito de la Igualdad entre Mujeres y Hombres durante el ejercicio de 2026",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-06-01",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 14970,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "88",
+      "descripcion": "Actividades de servicios sociales sin alojamiento"
+    }
+  ],
+  "apply_url": "https://www.sestao.eus",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909685",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en lengua cooficial",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.sestao.eus/es-ES/Ayuntamiento/servicios/Igualdad/Paginas/Igualdad_07Subvenciones.aspx",
+  "text_inicio": "Primer día hábil siguiente al de la publicación del extracto de convocatoria en el BOB",
+  "text_fin": "30 días hábiles desde el día siguiente a la Publicación de convocatoria en BOB",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-02T04:05:59.666Z"
+}

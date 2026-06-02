@@ -1,0 +1,70 @@
+{
+  "id": 1111248,
+  "organo": {
+    "nivel1": "OTROS",
+    "nivel2": "UNIVERSIDAD DE GRANADA",
+    "nivel3": null
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "909687",
+  "fechaRecepcion": "2026-06-01",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 140000,
+  "mrr": false,
+  "descripcion": "RESOLUCIÓN DEL VICERRECTOR DE ESTUDIANTES (29-5-26) CONVOCANDO BECAS PARA INICIAR ESTUDIOS DURANTE EL PRÓXIMO CURSO 2026/2027, PARA ESTUDIANTES MARROQUÍES QUE HAYAN CURSADO ESTUDIOS EN CENTROS ESPAÑOLES EN MARRUECOS DE ENSEÑANZA SECUNDARIA.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Educación terciaria",
+      "codigo": "85.4"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES614 - Granada"
+    },
+    {
+      "descripcion": "ES630 - Ceuta"
+    },
+    {
+      "descripcion": "ES640 - Melilla"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Resolución de 3-6-2022 por la que se establecen las bases reguladoras para la concesión de las becas y ayudas al estudiantado, recogidas en el Plan Propio de Becas y Ayudas al estudio que se\naprueban anualmente por Consejo de Gobierno",
+  "urlBasesReguladoras": "https://www.juntadeandalucia.es/boja/2022/108/10",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Ayudas nuevas: 4 junio. Renovar: 15 julio 2026",
+  "textFin": "Ayudas nuevas: 10 julio. Renovar: 30 septiembre 2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1465992,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convocatoria Convenio Marruecos 2026-2027.pdf",
+      "long": 394348,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

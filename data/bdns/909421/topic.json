@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "909421",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concesión directa - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / LA RIOJA / CONSEJERÍA DE EDUCACIÓN Y EMPLEO",
+  "nuts_codes": [
+    "ES230"
+  ],
+  "nuts_primary": "ES230",
+  "title": "Ayudas a la adquisición de libros de texto, curso 2026/2027",
+  "title_lang": "es",
+  "summary": "Educación",
+  "status": "open",
+  "publication_date": "2026-06-01",
+  "open_date": "2026-06-04",
+  "deadline": "2026-06-18",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 605000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "85",
+      "descripcion": "Educación"
+    }
+  ],
+  "apply_url": "https://web.larioja.org/oficina-electronica/tramite?n=20987",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909421",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Solicitud",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://web.larioja.org/normativa?n=dyn-na02483",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-02T04:05:59.585Z"
+}

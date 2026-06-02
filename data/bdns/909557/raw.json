@@ -1,0 +1,80 @@
+{
+  "id": 1111118,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "RAFELBUNYOL",
+    "nivel3": "AYUNTAMIENTO DE RAFELBUNYOL"
+  },
+  "sedeElectronica": "https://rafelbunyol.sedelectronica.es/info.0",
+  "codigoBDNS": "909557",
+  "fechaRecepcion": "2026-06-01",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 2500,
+  "mrr": false,
+  "descripcion": "Convocatoria ayudas familias numerosas 2026",
+  "descripcionLeng": "Convocatòrias ajudes families nombroses 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES523 - Valencia / València"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Ordenanza municipal de las Bases Reguladoras para la concesión de ayudas para familias numerosas",
+  "urlBasesReguladoras": "https://gobiernoabierto.rafelbunyol.es/t/normativa",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "15/06/2026",
+  "textFin": "29/06/2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1465741,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Conv. Numerosas 2026.pdf",
+      "long": 389210,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465745,
+      "descripcion": "Aprobación de la convocatoria",
+      "nombreFic": "DECRET 2026-0915 aprovació convocatòria ajuda families nombroses 2026.pdf",
+      "long": 630913,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    },
+    {
+      "id": 1465742,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Conv Nombroses Val 2026.pdf",
+      "long": 402690,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-01"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}
