@@ -72,7 +72,8 @@ const ImportProposal = (() => {
     try {
       const resp = await fetch('/v1/diagnose/upload-proposal', {
         method: 'POST',
-        headers: { Authorization: 'Bearer ' + (window.API?.token || localStorage.getItem('token')) },
+        headers: { Authorization: 'Bearer ' + API.getToken() },
+        credentials: 'include',
         body: fd,
       });
       const data = await resp.json();
@@ -332,7 +333,8 @@ const ImportProposal = (() => {
     try {
       const resp = await fetch('/v1/diagnose/upload-letter', {
         method: 'POST',
-        headers: { Authorization: 'Bearer ' + (window.API?.token || localStorage.getItem('token')) },
+        headers: { Authorization: 'Bearer ' + API.getToken() },
+        credentials: 'include',
         body: fd,
       });
       const data = await resp.json();

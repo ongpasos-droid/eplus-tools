@@ -17,6 +17,16 @@ function requireAdminOrScribe(req, res, next) {
 
 const guard = [requireAuth, requireAdminOrScribe];
 
+// Stricter guard: admin only (scribes excluded). Protects the prompt inspector
+// and prompt-block editor — the product IP must never reach a non-admin.
+function requireAdminOnly(req, res, next) {
+  if (req.user?.role !== 'admin') {
+    return res.status(403).json({ ok: false, error: { code: 'FORBIDDEN', message: 'Admin only' } });
+  }
+  next();
+}
+const adminGuard = [requireAuth, requireAdminOnly];
+
 /* ── Convocatorias (intake_programs) ─────────────────────────── */
 router.get   ('/data/programs/full',   guard, ctrl.listProgramsWithCounts);
 router.get   ('/data/programs',        guard, ctrl.listPrograms);
@@ -97,5 +107,13 @@ router.get   ('/data/forms/instances/:id/values',   guard, ctrl.getFormValues);
 router.put   ('/data/forms/instances/:id/values',   guard, ctrl.saveFormValues);
 router.patch ('/data/forms/instances/:id',          guard, ctrl.updateFormInstance);
 router.delete('/data/forms/instances/:id',          guard, ctrl.deleteFormInstance);
+
+/* ── TASK-008 · Prompt inspector + prompt blocks (admin-only) ──── */
+router.get  ('/inspector/generations',        adminGuard, ctrl.listGenerations);
+router.get  ('/inspector/generations/:id',    adminGuard, ctrl.getGeneration);
+router.get  ('/inspector/projects/:projectId/facts', adminGuard, ctrl.listProjectFactsAdmin);
+router.get  ('/prompt-blocks',                adminGuard, ctrl.listPromptBlocks);
+router.get  ('/prompt-blocks/:name',          adminGuard, ctrl.getPromptBlock);
+router.put  ('/prompt-blocks/:name',          adminGuard, ctrl.upsertPromptBlock);
 
 module.exports = router;

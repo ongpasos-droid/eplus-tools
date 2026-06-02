@@ -12,6 +12,11 @@ const Admin = (() => {
     if (initialized) { loadSection(activeSection); return; }
     initialized = true;
     bindNav();
+    // Inspector nav is admin-only (scribes excluded) — IP protection.
+    try {
+      const role = (window.App && App.getCurrentUser && App.getCurrentUser()?.role) || null;
+      if (role === 'admin') document.getElementById('admin-nav-inspector')?.classList.remove('hidden');
+    } catch (_) {}
     loadSection('convocatorias');
   }
 
@@ -45,6 +50,7 @@ const Admin = (() => {
       case 'platform-docs': loadPlatformDocs(); break;
       case 'library':       loadAdminLibrary(); break;
       case 'patterns':      loadPatterns(); break;
+      case 'inspector':     loadInspector(); break;
     }
   }
 
@@ -630,25 +636,29 @@ const Admin = (() => {
       const prog = programs.find(p => p.id === ev.programId);
       const templates = await API.get('/admin/data/forms/templates');
 
-      if (!prog?.form_template_id) {
-        // No template linked — show selector
+      if (!prog?.form_template_id || fm.forceTemplateSelect) {
+        // No template linked (or admin chose to change it) — show selector
+        const current = prog?.form_template_id || '';
         content.innerHTML = `
           <div class="max-w-lg">
             <div class="flex items-center gap-3 mb-4">
               <div class="w-2 h-10 rounded-full bg-purple-500"></div>
               <div>
                 <div class="text-[10px] font-bold uppercase tracking-widest text-primary">FORM TEMPLATE</div>
-                <h3 class="font-headline text-lg font-extrabold text-on-surface tracking-tight">Vincular formulario</h3>
+                <h3 class="font-headline text-lg font-extrabold text-on-surface tracking-tight">${current ? 'Cambiar formulario' : 'Vincular formulario'}</h3>
               </div>
             </div>
-            <p class="text-sm text-on-surface-variant mb-4">Esta convocatoria no tiene un template de formulario vinculado. Selecciona uno:</p>
+            <p class="text-sm text-on-surface-variant mb-4">Elige el formulario de esta convocatoria. Los formularios de Agencia Nacional (copia-pega) no se suben como documento.</p>
             <select id="conv-template-select" class="w-full px-3 py-2.5 rounded-xl border border-outline-variant/30 text-sm mb-3">
               <option value="">— Seleccionar template —</option>
-              ${templates.map(t => `<option value="${t.id}">${esc(t.name)} (v${t.version}, ${t.year || '—'})</option>`).join('')}
+              ${templates.map(t => `<option value="${t.id}" ${t.id === current ? 'selected' : ''}>${esc(t.name)} (v${t.version}${t.year ? ', ' + t.year : ''})</option>`).join('')}
             </select>
-            <button id="conv-link-template" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-[#fbff12] bg-[#1b1464] hover:bg-[#1b1464]/80 transition-colors">
-              <span class="material-symbols-outlined text-sm">link</span> Vincular template
-            </button>
+            <div class="flex items-center gap-2">
+              <button id="conv-link-template" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-[#fbff12] bg-[#1b1464] hover:bg-[#1b1464]/80 transition-colors">
+                <span class="material-symbols-outlined text-sm">link</span> ${current ? 'Actualizar' : 'Vincular'} template
+              </button>
+              ${current ? '<button id="conv-cancel-template" class="text-xs text-on-surface-variant hover:underline px-3">Cancelar</button>' : ''}
+            </div>
           </div>`;
         document.getElementById('conv-link-template')?.addEventListener('click', async () => {
           const tplId = document.getElementById('conv-template-select').value;
@@ -656,8 +666,13 @@ const Admin = (() => {
           try {
             await API.patch('/admin/data/programs/' + ev.programId, { form_template_id: tplId });
             Toast.show('Template vinculado', 'ok');
+            fm.forceTemplateSelect = false; fm.activeSection = null;
             convRenderFormTab(content);
           } catch (e) { Toast.show('Error: ' + e.message, 'err'); }
+        });
+        document.getElementById('conv-cancel-template')?.addEventListener('click', () => {
+          fm.forceTemplateSelect = false;
+          convRenderFormTab(content);
         });
         return;
       }
@@ -719,16 +734,10 @@ const Admin = (() => {
           convRenderFormTab(content);
         });
       });
-      // Bind change template
-      document.getElementById('conv-change-template')?.addEventListener('click', async () => {
-        const newTplId = prompt('Template ID to link (or leave empty to unlink):');
-        if (newTplId === null) return;
-        try {
-          await API.patch('/admin/data/programs/' + ev.programId, { form_template_id: newTplId || null });
-          Toast.show('Template actualizado', 'ok');
-          fm.activeSection = null;
-          convRenderFormTab(content);
-        } catch (e) { Toast.show('Error: ' + e.message, 'err'); }
+      // Bind change template — show the dropdown selector (pre-selected)
+      document.getElementById('conv-change-template')?.addEventListener('click', () => {
+        fm.forceTemplateSelect = true;
+        convRenderFormTab(content);
       });
 
       // Render active section
@@ -4977,6 +4986,180 @@ KEY EVALUATOR FOCUS:
       convOpenProgram(programId, programName || prog?.name || '', prog);
     } catch (e) {
       convOpenProgram(programId, programName || '');
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     TASK-008 · Prompt Inspector (admin-only)
+     Reads ai_generations + prompt_blocks. The product IP lives here and
+     never reaches a non-admin (server enforces requireAdminOnly).
+     ═══════════════════════════════════════════════════════════════ */
+  const SEG_LABEL = {
+    base_persona: 'Persona base', writing_style: 'Estilo de escritura', ai_detection: 'Anti-detección IA',
+    antipatterns: 'Anti-patrones', output_format: 'Formato de salida', canonical_facts: 'Hechos invariables',
+    project_context: 'Contexto del proyecto', wp_focus: 'Foco del WP', mandatory_constraint: 'Restricción obligatoria',
+    eval_criteria: 'Criterios del evaluador', rag: 'Docs de convocatoria (RAG)', research: 'Investigación temática',
+    previous_sections: 'Secciones previas', now_write: 'Instrucción final',
+  };
+
+  function loadInspector() {
+    bindInspectorTabs();
+    loadGenerations();
+  }
+
+  function bindInspectorTabs() {
+    const tg = document.getElementById('insp-tab-gen');
+    const tb = document.getElementById('insp-tab-blocks');
+    const pg = document.getElementById('insp-pane-gen');
+    const pb = document.getElementById('insp-pane-blocks');
+    if (!tg || tg._bound) return;
+    tg._bound = true;
+    const activate = (which) => {
+      const gen = which === 'gen';
+      tg.className = `px-3 py-1.5 text-sm rounded-lg ${gen ? 'bg-primary text-secondary-fixed font-semibold' : 'bg-surface-variant text-on-surface-variant'}`;
+      tb.className = `px-3 py-1.5 text-sm rounded-lg ${!gen ? 'bg-primary text-secondary-fixed font-semibold' : 'bg-surface-variant text-on-surface-variant'}`;
+      pg.classList.toggle('hidden', !gen);
+      pb.classList.toggle('hidden', gen);
+      if (gen) loadGenerations(); else loadPromptBlocks();
+    };
+    tg.addEventListener('click', () => activate('gen'));
+    tb.addEventListener('click', () => activate('blocks'));
+  }
+
+  async function loadGenerations() {
+    const pane = document.getElementById('insp-pane-gen');
+    if (!pane) return;
+    pane.innerHTML = '<p class="text-sm text-on-surface-variant py-6">Cargando generaciones…</p>';
+    try {
+      const rows = await API.get('/admin/inspector/generations?kind=writer-section&limit=100');
+      if (!rows.length) { pane.innerHTML = '<p class="text-sm text-on-surface-variant py-6">Aún no hay generaciones registradas. Genera una sección en el Writer y vuelve aquí.</p>'; return; }
+      pane.innerHTML = `
+        <div class="overflow-x-auto border border-outline-variant/40 rounded-xl">
+          <table class="w-full text-sm">
+            <thead class="bg-surface-variant/40 text-on-surface-variant text-xs">
+              <tr><th class="text-left px-3 py-2">Fecha</th><th class="text-left px-3 py-2">Proyecto</th><th class="text-left px-3 py-2">Sección</th><th class="text-right px-3 py-2">Prompt</th><th class="text-right px-3 py-2">Salida</th><th class="text-right px-3 py-2">ms</th><th></th></tr>
+            </thead>
+            <tbody>
+              ${rows.map(r => `
+                <tr class="border-t border-outline-variant/30 hover:bg-surface-variant/30 cursor-pointer" data-gen="${r.id}">
+                  <td class="px-3 py-2 whitespace-nowrap text-xs">${new Date(r.created_at).toLocaleString('es')}</td>
+                  <td class="px-3 py-2">${esc(r.project_name || '—')}</td>
+                  <td class="px-3 py-2 font-mono text-xs">${esc(r.section_id || r.pass || '')}</td>
+                  <td class="px-3 py-2 text-right text-xs">${((r.system_len||0)+(r.user_len||0)).toLocaleString('es')} ch</td>
+                  <td class="px-3 py-2 text-right text-xs">${(r.output_len||0).toLocaleString('es')} ch</td>
+                  <td class="px-3 py-2 text-right text-xs ${r.status==='error'?'text-error':''}">${r.status==='error'?'ERR':(r.duration_ms||'')}</td>
+                  <td class="px-3 py-2 text-right"><span class="material-symbols-outlined text-base text-on-surface-variant">chevron_right</span></td>
+                </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+        <div id="insp-gen-detail" class="mt-4"></div>`;
+      pane.querySelectorAll('[data-gen]').forEach(tr => tr.addEventListener('click', () => openGeneration(tr.dataset.gen)));
+    } catch (e) {
+      pane.innerHTML = `<p class="text-sm text-error py-6">Error: ${esc(e.message || 'no se pudo cargar')}</p>`;
+    }
+  }
+
+  async function openGeneration(id) {
+    const box = document.getElementById('insp-gen-detail');
+    if (!box) return;
+    box.innerHTML = '<p class="text-sm text-on-surface-variant py-4">Cargando prompt…</p>';
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    try {
+      const g = await API.get('/admin/inspector/generations/' + id);
+      let segs = [];
+      try { segs = typeof g.segments === 'string' ? JSON.parse(g.segments) : (g.segments || []); } catch (_) {}
+      const totalCh = segs.reduce((s, x) => s + (x.chars || 0), 0) || 1;
+      box.innerHTML = `
+        <div class="border border-outline-variant/40 rounded-xl p-4 bg-surface-variant/20">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="font-bold text-primary">${esc(g.project_name || '')} · ${esc(g.section_id || g.pass || '')}</h3>
+            <span class="text-xs text-on-surface-variant">${new Date(g.created_at).toLocaleString('es')} · ${g.duration_ms||'?'} ms</span>
+          </div>
+          <div class="space-y-2 mb-4">
+            ${segs.length ? segs.map((s, i) => `
+              <div class="border border-outline-variant/40 rounded-lg overflow-hidden">
+                <button class="w-full flex items-center justify-between px-3 py-2 text-left hover:bg-surface-variant/40" data-seg="${i}">
+                  <span class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm text-on-surface-variant">expand_more</span>
+                    <span class="font-semibold text-sm">${esc(SEG_LABEL[s.name] || s.name)}</span>
+                    <span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-variant text-on-surface-variant font-mono">${esc(s.source||'')}</span>
+                  </span>
+                  <span class="flex items-center gap-2 text-xs text-on-surface-variant">
+                    <span class="inline-block h-1.5 rounded bg-primary/60" style="width:${Math.max(4, Math.round((s.chars||0)/totalCh*120))}px"></span>
+                    ${(s.chars||0).toLocaleString('es')} ch
+                  </span>
+                </button>
+                <pre class="hidden px-3 py-2 text-xs whitespace-pre-wrap bg-surface text-on-surface border-t border-outline-variant/30 max-h-80 overflow-auto" data-seg-body="${i}">${esc(s.content||'')}</pre>
+              </div>`).join('') : '<p class="text-xs text-on-surface-variant">Sin segmentos (generación antigua). Mostrando prompt completo abajo.</p>'}
+          </div>
+          <details class="mb-2"><summary class="text-sm font-semibold cursor-pointer text-on-surface-variant">System prompt (${(g.system_prompt||'').length.toLocaleString('es')} ch)</summary><pre class="mt-2 px-3 py-2 text-xs whitespace-pre-wrap bg-surface rounded max-h-96 overflow-auto">${esc(g.system_prompt||'')}</pre></details>
+          <details class="mb-2"><summary class="text-sm font-semibold cursor-pointer text-on-surface-variant">User prompt (${(g.user_prompt||'').length.toLocaleString('es')} ch)</summary><pre class="mt-2 px-3 py-2 text-xs whitespace-pre-wrap bg-surface rounded max-h-96 overflow-auto">${esc(g.user_prompt||'')}</pre></details>
+          <details><summary class="text-sm font-semibold cursor-pointer text-primary">Salida generada (${(g.raw_response||'').length.toLocaleString('es')} ch)</summary><pre class="mt-2 px-3 py-2 text-xs whitespace-pre-wrap bg-surface rounded max-h-96 overflow-auto">${esc(g.raw_response||'')}</pre></details>
+        </div>`;
+      box.querySelectorAll('[data-seg]').forEach(btn => btn.addEventListener('click', () => {
+        const body = box.querySelector(`[data-seg-body="${btn.dataset.seg}"]`);
+        if (body) body.classList.toggle('hidden');
+      }));
+    } catch (e) {
+      box.innerHTML = `<p class="text-sm text-error py-4">Error: ${esc(e.message || '')}</p>`;
+    }
+  }
+
+  async function loadPromptBlocks() {
+    const pane = document.getElementById('insp-pane-blocks');
+    if (!pane) return;
+    pane.innerHTML = '<p class="text-sm text-on-surface-variant py-6">Cargando bloques…</p>';
+    try {
+      const blocks = await API.get('/admin/prompt-blocks');
+      pane.innerHTML = `
+        <p class="text-sm text-on-surface-variant mb-3">Bloques de prompt editables. Editarlos cambia lo que recibe la IA en las próximas generaciones. Los marcados <em>default</em> aún viven en código — al guardar creas la versión 1 editable.</p>
+        <div class="space-y-2">
+          ${blocks.filter(b => b.program_id === null).map(b => `
+            <div class="border border-outline-variant/40 rounded-xl p-3">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="font-semibold text-sm">${esc(b.name)}</span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded ${b.is_default ? 'bg-surface-variant text-on-surface-variant' : 'bg-primary/15 text-primary'} ml-2">${b.is_default ? 'default (código)' : 'v'+b.version}</span>
+                  <span class="text-xs text-on-surface-variant ml-2">${(b.chars||0).toLocaleString('es')} ch</span>
+                </div>
+                <button class="text-sm px-3 py-1 rounded-lg bg-primary text-secondary-fixed font-semibold" data-edit-block="${esc(b.name)}">Editar</button>
+              </div>
+              <div class="hidden mt-3" data-block-editor="${esc(b.name)}"></div>
+            </div>`).join('')}
+        </div>`;
+      pane.querySelectorAll('[data-edit-block]').forEach(btn => btn.addEventListener('click', () => editPromptBlock(btn.dataset.editBlock)));
+    } catch (e) {
+      pane.innerHTML = `<p class="text-sm text-error py-6">Error: ${esc(e.message || '')}</p>`;
+    }
+  }
+
+  async function editPromptBlock(name) {
+    const box = document.querySelector(`[data-block-editor="${CSS.escape(name)}"]`);
+    if (!box) return;
+    if (!box.classList.contains('hidden')) { box.classList.add('hidden'); return; }
+    box.classList.remove('hidden');
+    box.innerHTML = '<p class="text-xs text-on-surface-variant py-2">Cargando…</p>';
+    try {
+      const b = await API.get('/admin/prompt-blocks/' + encodeURIComponent(name));
+      box.innerHTML = `
+        <textarea class="w-full h-64 p-3 text-xs font-mono border border-outline-variant rounded-lg bg-surface" data-block-text>${esc(b.content || '')}</textarea>
+        <div class="flex items-center gap-2 mt-2">
+          <button class="text-sm px-4 py-1.5 rounded-lg bg-primary text-secondary-fixed font-semibold" data-save-block>Guardar versión nueva</button>
+          <span class="text-xs text-on-surface-variant" data-block-msg></span>
+        </div>`;
+      box.querySelector('[data-save-block]').addEventListener('click', async () => {
+        const content = box.querySelector('[data-block-text]').value;
+        const msg = box.querySelector('[data-block-msg]');
+        msg.textContent = 'Guardando…';
+        try {
+          const r = await API.put('/admin/prompt-blocks/' + encodeURIComponent(name), { content });
+          msg.textContent = `Guardado · v${r.version}`;
+          loadPromptBlocks();
+        } catch (e) { msg.textContent = 'Error: ' + (e.message || ''); }
+      });
+    } catch (e) {
+      box.innerHTML = `<p class="text-xs text-error py-2">Error: ${esc(e.message || '')}</p>`;
     }
   }
 

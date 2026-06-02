@@ -64,6 +64,27 @@ exports.saveField = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
+// GET /v1/developer/instances/:id/eform-answers
+// Ordered Q/A for National-Agency copy-paste (on-screen report with copy buttons).
+exports.getEformAnswers = async (req, res, next) => {
+  try {
+    const data = await model.getEformAnswers(req.params.id, req.user.id);
+    if (!data) return res.status(404).json({ ok: false, error: { code: 'NOT_FOUND', message: 'Instance not found' } });
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+// GET /v1/developer/instances/:id/eform-export.docx
+exports.exportEformDocx = async (req, res, next) => {
+  try {
+    const out = await model.buildEformDocx(req.params.id, req.user.id);
+    if (!out) return res.status(404).json({ ok: false, error: { code: 'NOT_FOUND', message: 'Instance not found' } });
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+    res.setHeader('Content-Disposition', `attachment; filename="${out.filename}"`);
+    res.send(out.buffer);
+  } catch (err) { next(err); }
+};
+
 // GET /v1/developer/eval-criteria
 exports.getEvalCriteria = async (req, res, next) => {
   try {
@@ -861,6 +882,35 @@ exports.aiEvaluateRisks = async (req, res, next) => {
   try {
     const data = await model.aiEvaluateProjectRisks(req.params.projectId, req.user.id);
     res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+// ── TASK-008 · Facts ledger (user surface) ──
+// GET /v1/developer/projects/:projectId/facts
+exports.listFacts = async (req, res, next) => {
+  try {
+    await model.assertProjectOwned(req.params.projectId, req.user.id);
+    const data = await model.listProjectFacts(req.params.projectId, req.query.status || null);
+    res.json({ ok: true, data });
+  } catch (err) { next(err); }
+};
+
+// POST /v1/developer/projects/:projectId/facts  { key, value, status? }
+exports.upsertFact = async (req, res, next) => {
+  try {
+    await model.assertProjectOwned(req.params.projectId, req.user.id);
+    const { key, value, status } = req.body || {};
+    await model.upsertProjectFact(req.params.projectId, key, value, status, req.user.id);
+    res.json({ ok: true });
+  } catch (err) { next(err); }
+};
+
+// PATCH /v1/developer/projects/:projectId/facts/:factId  { status }
+exports.setFactStatus = async (req, res, next) => {
+  try {
+    await model.assertProjectOwned(req.params.projectId, req.user.id);
+    await model.setFactStatus(req.params.factId, (req.body || {}).status, req.user.id);
+    res.json({ ok: true });
   } catch (err) { next(err); }
 };
 

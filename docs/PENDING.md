@@ -96,6 +96,38 @@ Sesión auditando el desajuste Consortium↔Directorio en LIVE. Confirmado contr
 
 ## 2 · Pendientes sin bloqueante (cuando se quiera)
 
+### TASK-008 — Libro de Hechos del Proyecto + Inspector de Prompts
+**Status:** IMPLEMENTADO (F1–F5) · pendiente verificación en UI por Oscar · sin commit/push
+**Owner:** Local Claude (eplus-tools)
+**Doc canónico:** `docs/CANONICAL_FACTS_AND_PROMPT_INSPECTOR.md`
+**Fecha plan:** 2026-05-30 · **Implementado:** 2026-05-30
+**Origen:** sesión 2026-05-29 (Writer 3 palancas) — el A/B SUSTRAI reveló drift WP-leader entre runs
+
+**Implementado 2026-05-30 (las 5 fases):**
+- Migración `117_facts_ledger_and_prompt_inspector.js` (ai_generations.segments + section_id, tablas `project_facts` y `prompt_blocks`). Aplicada en local.
+- `model.js`: `buildCanonicalFacts()` (hechos duros derivados + soft canónicos), `getPromptBlock()`, `_logWriterGen()`, `extractCandidateFacts()` (Haiku), CRUD facts, inspector (`listGenerations`/`getGeneration`), prompt_blocks CRUD. `generateSection()` refactor: inyecta canonical facts antes de YOUR PROJECT, captura segmentos nombrados, loguea a `ai_generations`, dispara extracción de candidatos.
+- Endpoints: developer `/projects/:id/facts` (GET/POST/PATCH, ownership); admin `/inspector/generations`, `/inspector/generations/:id`, `/prompt-blocks`, `/prompt-blocks/:name` (PUT) — todos bajo `requireAdminOnly` (scribes excluidos).
+- Frontend: admin.js pestaña "Inspector IA" (admin-only, generaciones desglosadas por segmento + editor de bloques versionado); developer.js panel "Datos que la IA mantiene coherentes" (confirmar/descartar candidatos, no bloqueante).
+- Verificado sin coste: buildCanonicalFacts deriva €/WP+socios+WP→leader (NOVA), inspector lee segmentos, bucle candidate→confirmar→inyección OK.
+- **Pendiente:** que Oscar genere una sección real en el Writer y confirme log + extracción en vivo; decidir commit/MERGE.
+
+**Decisiones resueltas (2026-05-30):** granularidad = segmentos nombrados con contenido · alcance = las 5 fases · validación de hechos blandos en ambas superficies (usuario en Writer, admin en inspector) · extractor = LLM barato (Haiku 4.5).
+
+**Qué incluye:**
+- **Libro de hechos del proyecto** (facts ledger): hechos duros DERIVADOS en runtime de Diseñar/Planner/Calculator (socios, €/WP, actividades, deliverables, tareas, hitos) inyectados como invariables en CADA pregunta del Writer. Regla dura: derivar, no duplicar.
+- **Hechos blandos + compuerta de validación**: datos emergentes de la redacción entran como `candidate`, solo pasan a `canonical` tras validación. Evita canonizar alucinaciones (lección PIC/LoI inventados del A/B).
+- **Inspector de prompts admin-only**: reutiliza tabla `ai_generations` (migr 093) — hoy solo la escribe `dms-generator.js`, NO el Writer cascade. Cablear `generateSection()` para loguear. Vista Admin con prompt desglosado + historial de runs + comparar drift.
+- **Principio rector DOS SUPERFICIES**: usuario final solo ve SUS datos en lenguaje normal (nunca prompts); Oscar (admin) ve todo. IP protegida: el prompt NUNCA se serializa al navegador, inspector blindado `role=admin`, bloques en BD server-side.
+
+**Plan por fases:**
+1. **F1** (~0.5d): log `generateSection()` → `ai_generations` con segmentos nombrados
+2. **F2** (~1d): `buildCanonicalFacts()` derivado + inyección + re-run A/B (mata drift)
+3. **F3** (~1.5d): inspector admin-only (vista + endpoint `role=admin`)
+4. **F4** (~2d): tabla `project_facts` + extractor candidatos + UI usuario no bloqueante
+5. **F5** (~2d, opcional): externalizar bloques hardcoded a `prompt_blocks` + versionado
+
+**Decisiones abiertas (no bloqueantes):** granularidad log (segmentos vs strings crudos), alcance de la tanda, propósito inspector (auditar vs iterar en vivo), quién valida hechos blandos, extractor candidatos (regla vs LLM).
+
 ### TASK-006 — Experience RAG (auto-redacción de Capacity con proyectos pasados)
 **Status:** DISEÑADO · BLOQUEADO en VPS Claude (Pieza 1)
 **Owner del bloqueo:** VPS Claude (Pieza 1+2+3) · Local Claude (Pieza 4 cuando llegue)

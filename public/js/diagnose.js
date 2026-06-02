@@ -705,16 +705,7 @@ const Diagnose = (() => {
     state.savingField = true;
     render();
     try {
-      const r = await fetch(`/v1/diagnose/projects/${state.projectId}/fields/${fieldId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + (window.API?.token || localStorage.getItem('token')),
-        },
-        body: JSON.stringify({ value_text: newText }),
-      });
-      const data = await r.json();
-      if (!data.ok) throw new Error(data.error?.message || 'Save failed');
+      await API.put(`/diagnose/projects/${state.projectId}/fields/${fieldId}`, { value_text: newText });
       state.fieldsMap[fieldId] = newText;
       delete state.editsMap[fieldId];
       Toast.show?.('Cambios guardados', 'ok');

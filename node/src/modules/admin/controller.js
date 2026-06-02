@@ -105,3 +105,26 @@ exports.getFormValues       = wrap(async (req, res) => { ok(res, await m.getForm
 exports.saveFormValues      = wrap(async (req, res) => { await m.saveFormValues(req.params.id, req.body.values); ok(res, null); });
 exports.updateFormInstance  = wrap(async (req, res) => { await m.updateFormInstance(req.params.id, req.body); ok(res, null); });
 exports.deleteFormInstance  = wrap(async (req, res) => { await m.deleteFormInstance(req.params.id); ok(res, null); });
+
+/* ── TASK-008 · Prompt inspector + prompt blocks (admin-only) ──────
+   Reads the developer model. Prompts NEVER reach a non-admin: these
+   handlers sit behind requireAdminOnly in routes.js. */
+const dev = require('../developer/model');
+
+exports.listGenerations = wrap(async (req, res) => {
+  ok(res, await dev.listGenerations({
+    projectId: req.query.project_id || null,
+    kind: req.query.kind || null,
+    sectionId: req.query.section_id || null,
+    limit: req.query.limit || 50,
+  }));
+});
+exports.getGeneration  = wrap(async (req, res) => { ok(res, await dev.getGeneration(req.params.id)); });
+exports.listProjectFactsAdmin = wrap(async (req, res) => { ok(res, await dev.listProjectFacts(req.params.projectId, req.query.status || null)); });
+
+exports.listPromptBlocks = wrap(async (req, res) => { ok(res, await dev.listPromptBlocks()); });
+exports.getPromptBlock   = wrap(async (req, res) => { ok(res, await dev.getPromptBlockFull(req.params.name, req.query.program_id || null)); });
+exports.upsertPromptBlock = wrap(async (req, res) => {
+  const { content, program_id } = req.body || {};
+  ok(res, await dev.upsertPromptBlock(req.params.name, program_id || null, content || '', req.user.id));
+});

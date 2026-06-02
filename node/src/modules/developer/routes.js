@@ -24,6 +24,10 @@ router.post('/instances/:id/refine', requireAuth, ctrl.refineField);
 router.post('/instances/:id/refine/evaluate', requireAuth, ctrl.refineEvaluate);
 router.post('/instances/:id/refine/apply', requireAuth, ctrl.refineApply);
 
+// National-Agency copy-paste report (on-screen Q/A + Word export)
+router.get('/instances/:id/eform-answers', requireAuth, ctrl.getEformAnswers);
+router.get('/instances/:id/eform-export.docx', requireAuth, ctrl.exportEformDocx);
+
 // Eval criteria (read-only)
 router.get('/eval-criteria', requireAuth, ctrl.getEvalCriteria);
 
@@ -124,6 +128,11 @@ router.post  ('/projects/:projectId/risks/ai-generate', requireAuth, ctrl.aiGene
 router.post  ('/projects/:projectId/risks/ai-evaluate', requireAuth, ctrl.aiEvaluateRisks);
 router.patch ('/risks/:id',                             requireAuth, ctrl.updateRisk);
 router.delete('/risks/:id',                             requireAuth, ctrl.deleteRisk);
+
+// TASK-008 — Facts ledger (user surface: own data only, never prompts)
+router.get   ('/projects/:projectId/facts',          requireAuth, ctrl.listFacts);
+router.post  ('/projects/:projectId/facts',          requireAuth, ctrl.upsertFact);
+router.patch ('/projects/:projectId/facts/:factId',  requireAuth, ctrl.setFactStatus);
 
 // Comments thread on D / MS rows
 router.get   ('/projects/:projectId/dms/comments',  requireAuth, ctrl.dmsListComments);

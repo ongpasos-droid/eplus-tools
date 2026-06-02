@@ -1735,6 +1735,26 @@ tailwind.config = {
             <button data-section="platform-docs" class="px-4 py-2.5 text-sm border-b-2 border-transparent text-on-surface-variant transition-colors hover:text-primary whitespace-nowrap">Docs oficiales</button>
             <button data-section="library" class="px-4 py-2.5 text-sm border-b-2 border-transparent text-on-surface-variant transition-colors hover:text-primary whitespace-nowrap">Biblioteca</button>
             <button data-section="patterns" class="px-4 py-2.5 text-sm border-b-2 border-transparent text-on-surface-variant transition-colors hover:text-primary whitespace-nowrap">Patrones Evaluadores</button>
+            <button data-section="inspector" id="admin-nav-inspector" class="px-4 py-2.5 text-sm border-b-2 border-transparent text-on-surface-variant transition-colors hover:text-primary whitespace-nowrap hidden">Inspector IA</button>
+          </div>
+
+          <!-- ── Prompt Inspector (TASK-008, admin-only) ───── -->
+          <div id="admin-sec-inspector" class="admin-section hidden">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
+                <span class="material-symbols-outlined text-secondary-fixed text-xl">frame_inspect</span>
+              </div>
+              <div>
+                <h2 class="text-lg font-bold text-primary">Inspector de Prompts</h2>
+                <p class="text-sm text-on-surface-variant">Qué recibe la IA en cada generación · solo admin · nunca llega al usuario</p>
+              </div>
+            </div>
+            <div class="flex gap-2 mb-4">
+              <button id="insp-tab-gen" class="px-3 py-1.5 text-sm rounded-lg bg-primary text-secondary-fixed font-semibold">Generaciones</button>
+              <button id="insp-tab-blocks" class="px-3 py-1.5 text-sm rounded-lg bg-surface-variant text-on-surface-variant">Bloques de prompt</button>
+            </div>
+            <div id="insp-pane-gen"></div>
+            <div id="insp-pane-blocks" class="hidden"></div>
           </div>
 
           <!-- ── Pattern Library (Diagnose & Improve, TASK-007) ───── -->

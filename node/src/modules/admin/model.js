@@ -676,10 +676,15 @@ async function generateEvalFromTemplate(programId, templateId) {
       );
       let qOrder = 0;
       for (const sub of subsections) {
+        // Bind the eval question to its form field id + character limit so the
+        // Writer (data-driven path) resolves criteria/limits without a hardcoded map.
+        const f = (sub.fields || [])[0] || {};
+        const charLimit = f.char_limit || null;
         await conn.query(
-          `INSERT INTO eval_questions (id, section_id, code, title, description, sort_order, max_score, weight)
-           VALUES (?,?,?,?,?,?,0,0)`,
-          [uuid(), secId, sub.number || '', sub.title || '', (sub.guidance || []).join('\n\n'), qOrder++]
+          `INSERT INTO eval_questions (id, section_id, code, title, description, field_id, char_limit, word_limit, sort_order, max_score, weight)
+           VALUES (?,?,?,?,?,?,?,?,?,0,0)`,
+          [uuid(), secId, sub.number || '', sub.title || '', (sub.guidance || []).join('\n\n'),
+           f.id || null, charLimit, charLimit ? Math.floor(charLimit / 7) : null, qOrder++]
         );
       }
       return secId;

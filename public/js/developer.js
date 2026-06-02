@@ -128,6 +128,10 @@ const Developer = (() => {
         templateJson = typeof instance.template_json === 'string' ? JSON.parse(instance.template_json) : instance.template_json;
         flatSections = flattenSections(templateJson, projectWps);
       }
+      // NA (National-Agency) forms are pasted field-by-field into the EU web eForm
+      // — surfaces the "Copiar al eForm" tab.
+      window.__isNaForm = !!(templateJson && templateJson.meta &&
+        (templateJson.meta.output_mode === 'copy_paste' || templateJson.meta.no_upload));
 
       // Load persisted field values so refreshing the page doesn't lose work
       try {
@@ -154,14 +158,57 @@ const Developer = (() => {
     }
   }
 
+  /* ── Work-package content selection (mirror of backend) ────── */
+  // Which Intake WPs receive the per-WP CONTENT questions. The management WP
+  // (WP1) is excluded — NA forms model management as a fixed section. MUST stay
+  // identical to selectContentWps() in node/src/modules/developer/model.js.
+  function selectContentWps(wps) {
+    if (!wps || !wps.length) return [];
+    const isMgmt = w => /manage|coordinat|gesti[oó]n|administ/i.test([w.category, w.code, w.title].filter(Boolean).join(' '));
+    const flagged = wps.filter(isMgmt);
+    if (flagged.length) return wps.filter(w => !isMgmt(w));
+    const sorted = [...wps].sort((a, b) => (a.order_index || 0) - (b.order_index || 0));
+    return sorted.slice(1);
+  }
+
   /* ── Flatten template sections into linear list ────────────── */
   // `wps` is the array of Work Packages defined in Intake for this project.
   // When a subsection contains `work_package_template`, we spawn one cascade
-  // step per WP instead of a single monolithic section.
+  // step per WP instead of a single monolithic section. Sections flagged
+  // `per_wp` (NA forms) expand EACH of their questions once per content WP.
   function flattenSections(tmpl, wps) {
     wps = wps || [];
     const flat = [];
     for (const sec of (tmpl.sections || [])) {
+      // NA per-WP section: every question is repeated for each content WP.
+      if (sec.per_wp) {
+        const subs = sec.subsections || (sec.subsections_groups || []).flatMap(g => g.subsections || []);
+        for (const wp of selectContentWps(wps)) {
+          const code = wp.code || ('WP' + ((wp.order_index || 0) + 1));
+          for (const sub of subs) {
+            for (const field of (sub.fields || [])) {
+              if (field.type !== 'textarea' && field.type !== 'table') continue;
+              flat.push({
+                id: sub.id + '__wp_' + wp.id,
+                fieldId: field.id + '__wp__' + wp.id,
+                number: (sub.number || '').replace(/^WPx/, code),
+                title: code + ' — ' + (wp.title || 'Work Package') + ' · ' + sub.title,
+                guidance: (sub.guidance || []).join('\n'),
+                charLimit: field.char_limit || null,
+                parent: sec.number + '. ' + sec.title,
+                parentNumber: sec.number,
+                wpMeta: {
+                  id: wp.id,
+                  project_id: wp.project_id || (currentProject && currentProject.id),
+                  code: wp.code, title: wp.title, order_index: wp.order_index,
+                  leader_id: wp.leader_id, category: wp.category,
+                },
+              });
+            }
+          }
+        }
+        continue;
+      }
       // Collect all subsections — handle both direct subsections and subsections_groups
       const allSubs = [];
       if (sec.subsections) {
@@ -209,6 +256,7 @@ const Developer = (() => {
               number: sub.number,
               title: sub.title,
               guidance: (sub.guidance || []).join('\n'),
+              charLimit: field.char_limit || null,
               parent,
               parentNumber,
             });
@@ -240,7 +288,14 @@ const Developer = (() => {
     { id: 'entregables',  label: 'Entregables',  icon: 'inventory_2' },
     { id: 2,  label: 'Escribir',     icon: 'edit_note' },
     { id: 4,  label: 'Revisar',      icon: 'fact_check' },
+    // National-Agency calls only (copy-paste into the EU web eForm, no Word upload)
+    { id: 'eform', label: 'Copiar al eForm', icon: 'content_copy', naOnly: true },
   ];
+
+  // The eForm copy-paste tab only applies to NA forms (set when the template loads)
+  function visiblePhaseTabs() {
+    return PHASE_TABS.filter(t => !t.naOnly || window.__isNaForm);
+  }
 
   function renderPhaseTabs(active) {
     return `
@@ -249,7 +304,7 @@ const Developer = (() => {
           <span class="material-symbols-outlined text-xl">arrow_back</span>
         </button>
         <span class="font-headline text-sm font-bold text-primary mr-4 truncate max-w-[200px] shrink-0">${esc(currentProject?.name)}</span>
-        ${PHASE_TABS.map(t => {
+        ${visiblePhaseTabs().map(t => {
           const isPrep = typeof t.id === 'string';
           const onclick = isPrep ? `Developer._prepTab('${t.id}')` : `Developer._phase(${t.id})`;
           return `
@@ -2984,6 +3039,9 @@ const Developer = (() => {
         </div>
       </div>
 
+      <!-- TASK-008 · Facts the AI uses (user surface — own data, never prompts) -->
+      <div id="dev-facts-panel" class="mb-4"></div>
+
       <div class="flex gap-0 -mx-4 items-start">
         <!-- Left: Section nav (collapsible) -->
         <div class="${navWidth} shrink-0 border-r border-outline-variant/20 py-2 transition-[width] duration-200 relative" id="dev-cascade-nav"></div>
@@ -3016,7 +3074,62 @@ const Developer = (() => {
     renderCascadeNav();
     renderCascadeSection();
     renderAIPanel();
+    renderFactsPanel();
     _bindWriterShortcuts();
+  }
+
+  /* ── TASK-008 · Facts panel (user surface) ──────────────────────
+     Shows the project facts the AI keeps consistent across sections.
+     Candidates (auto-detected while writing) can be confirmed/discarded.
+     NEVER shows prompts — only the user's own data. */
+  async function renderFactsPanel() {
+    const box = document.getElementById('dev-facts-panel');
+    if (!box || !currentProject) return;
+    let facts = [];
+    try { facts = await API.get('/developer/projects/' + currentProject.id + '/facts'); } catch (_) { return; }
+    const candidates = facts.filter(f => f.status === 'candidate');
+    const canonical = facts.filter(f => f.status === 'canonical');
+    if (!facts.length) { box.innerHTML = ''; return; }
+    const esc = (s) => { const d = document.createElement('div'); d.textContent = s == null ? '' : s; return d.innerHTML; };
+    box.innerHTML = `
+      <details class="border border-outline-variant/30 rounded-xl bg-surface-container-low/40" ${candidates.length ? 'open' : ''}>
+        <summary class="flex items-center gap-2 px-4 py-2.5 cursor-pointer text-sm font-semibold text-on-surface-variant">
+          <span class="material-symbols-outlined text-base text-primary">fact_check</span>
+          Datos que la IA mantiene coherentes
+          <span class="text-xs font-normal">&middot; ${canonical.length} confirmados${candidates.length ? ` &middot; <span class="text-primary font-bold">${candidates.length} por revisar</span>` : ''}</span>
+        </summary>
+        <div class="px-4 pb-3 space-y-3">
+          ${candidates.length ? `
+            <div>
+              <p class="text-xs text-on-surface-variant mb-1.5">La IA detect&oacute; estos datos al escribir. Conf&iacute;rmalos para que se mantengan id&eacute;nticos en toda la propuesta:</p>
+              <div class="space-y-1.5">
+                ${candidates.map(f => `
+                  <div class="flex items-center gap-2 text-sm bg-surface rounded-lg px-3 py-1.5 border border-outline-variant/30">
+                    <span class="flex-1 min-w-0"><span class="text-on-surface-variant">${esc(f.fact_key.replace(/_/g, ' '))}:</span> ${esc(f.fact_value)}</span>
+                    <button class="px-2 py-0.5 text-xs rounded bg-primary text-secondary-fixed font-semibold" data-fact-ok="${f.id}">Confirmar</button>
+                    <button class="px-2 py-0.5 text-xs rounded bg-surface-variant text-on-surface-variant" data-fact-no="${f.id}">Descartar</button>
+                  </div>`).join('')}
+              </div>
+            </div>` : ''}
+          ${canonical.length ? `
+            <div>
+              <p class="text-xs text-on-surface-variant mb-1.5">Confirmados:</p>
+              <div class="flex flex-wrap gap-1.5">
+                ${canonical.map(f => `<span class="text-xs bg-primary/10 text-primary rounded-full px-2.5 py-1" title="${esc(f.fact_key)}">${esc(f.fact_value)}</span>`).join('')}
+              </div>
+            </div>` : ''}
+        </div>
+      </details>`;
+    box.querySelectorAll('[data-fact-ok]').forEach(b => b.addEventListener('click', () => setFact(b.dataset.factOk, 'canonical')));
+    box.querySelectorAll('[data-fact-no]').forEach(b => b.addEventListener('click', () => setFact(b.dataset.factNo, 'rejected')));
+  }
+
+  async function setFact(factId, status) {
+    if (!currentProject) return;
+    try {
+      await API.patch('/developer/projects/' + currentProject.id + '/facts/' + factId, { status });
+      renderFactsPanel();
+    } catch (_) {}
   }
 
   function _toggleAiDrawer() {
@@ -4308,8 +4421,118 @@ const Developer = (() => {
   }
 
   function goPrepTab(tab) {
+    if (tab === 'eform') { renderEformReport(); return; }
     prepSubTab = tab;
     renderPrepStudio(tab);
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     NA copy-paste report: each question + answer + copy button,
+     plus a Word download. Only reachable for National-Agency forms.
+     ══════════════════════════════════════════════════════════════ */
+  async function renderEformReport() {
+    phase = 'eform';
+    const el = document.getElementById('developer-content');
+    el.innerHTML = renderPhaseTabs('eform') + `
+      <div class="max-w-3xl py-16 text-center text-on-surface-variant">
+        <span class="material-symbols-outlined animate-spin">progress_activity</span> Cargando respuestas...
+      </div>`;
+
+    if (!currentInstance) {
+      el.innerHTML = renderPhaseTabs('eform') + `<p class="text-sm text-error py-8 text-center">Genera primero el borrador en la pestaña Escribir.</p>`;
+      return;
+    }
+
+    let data;
+    try {
+      data = await API.get('/developer/instances/' + currentInstance.id + '/eform-answers');
+    } catch (e) {
+      el.innerHTML = renderPhaseTabs('eform') + `<p class="text-sm text-error py-8 text-center">Error: ${esc(e.message)}</p>`;
+      return;
+    }
+
+    const totalAnswered = (data.sections || []).reduce((n, s) => n + s.questions.filter(q => q.text && q.text.trim()).length, 0);
+
+    const sectionsHtml = (data.sections || []).map(sec => {
+      const qsHtml = sec.questions.map(q => {
+        const over = q.char_limit && q.chars > q.char_limit;
+        const counter = q.char_limit
+          ? `<span class="text-[11px] font-bold ${over ? 'text-error' : 'text-on-surface-variant'}">${q.chars}/${q.char_limit} car.${over ? ' ¡excede!' : ''}</span>`
+          : `<span class="text-[11px] text-on-surface-variant">${q.chars} car.</span>`;
+        const hasText = q.text && q.text.trim();
+        const encoded = encodeURIComponent(q.text || '');
+        return `
+          <div class="rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-4 mb-3">
+            <div class="flex items-start justify-between gap-3 mb-2">
+              <div class="text-sm font-bold text-on-surface">${q.number ? esc(q.number) + ' ' : ''}${esc(q.title)}</div>
+              <div class="flex items-center gap-2 shrink-0">
+                ${counter}
+                <button onclick="Developer._copyAnswer(this, '${encoded}')" ${hasText ? '' : 'disabled'}
+                  class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold ${hasText ? 'text-[#fbff12] bg-[#1b1464] hover:bg-[#1b1464]/85' : 'text-on-surface-variant bg-surface-container-low cursor-not-allowed'} transition-colors">
+                  <span class="material-symbols-outlined text-xs">content_copy</span> Copiar
+                </button>
+              </div>
+            </div>
+            <div class="text-[13px] leading-relaxed whitespace-pre-wrap ${hasText ? 'text-on-surface' : 'text-on-surface-variant/60 italic'}">${hasText ? esc(q.text) : 'Sin redactar todavía'}</div>
+          </div>`;
+      }).join('');
+      return `
+        <div class="mb-6">
+          <h3 class="font-headline text-sm font-extrabold uppercase tracking-wide text-primary mb-3">${sec.number ? esc(sec.number) + '. ' : ''}${esc(sec.title)}</h3>
+          ${qsHtml}
+        </div>`;
+    }).join('');
+
+    el.innerHTML = renderPhaseTabs('eform') + `
+      <div class="max-w-3xl">
+        <div class="flex items-start justify-between gap-4 mb-2">
+          <div>
+            <h2 class="font-headline text-xl font-bold">Copiar al formulario web</h2>
+            <p class="text-sm text-on-surface-variant">Esta convocatoria <b>no se sube como documento</b>: copia cada respuesta en su campo del eForm de la Agencia Nacional. ${totalAnswered} respuestas redactadas.</p>
+          </div>
+          <button id="eform-dl" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold text-primary border border-primary/30 hover:bg-primary/5 transition-colors shrink-0">
+            <span class="material-symbols-outlined text-sm">download</span> Descargar Word
+          </button>
+        </div>
+        <div class="mt-5">${sectionsHtml || '<p class="text-sm text-on-surface-variant py-8 text-center">Aún no hay respuestas. Genera el borrador en la pestaña Escribir.</p>'}</div>
+      </div>`;
+
+    document.getElementById('eform-dl')?.addEventListener('click', downloadEform);
+  }
+
+  async function downloadEform() {
+    try {
+      const res = await fetch('/v1/developer/instances/' + currentInstance.id + '/eform-export.docx', {
+        headers: { Authorization: `Bearer ${localStorage.getItem('jwt') || ''}` },
+      });
+      if (!res.ok) throw new Error('Export failed');
+      const blob = await res.blob();
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `${(currentProject?.name || 'project').replace(/[^a-z0-9._-]/gi, '_')}_eForm.docx`;
+      document.body.appendChild(a); a.click();
+      setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+    } catch (e) { Toast.show('Error al descargar: ' + e.message, 'err'); }
+  }
+
+  function copyAnswer(btn, encoded) {
+    const text = decodeURIComponent(encoded || '');
+    if (!text) return;
+    const done = () => {
+      const prev = btn.innerHTML;
+      btn.innerHTML = '<span class="material-symbols-outlined text-xs">check</span> Copiado';
+      setTimeout(() => { btn.innerHTML = prev; }, 1500);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+    } else { fallbackCopy(text, done); }
+  }
+  function fallbackCopy(text, done) {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) { Toast.show('No se pudo copiar', 'err'); }
+    ta.remove();
   }
 
   /* ── Consorcio actions ──────────────────────────────────────── */
@@ -5785,6 +6008,7 @@ const Developer = (() => {
     _deleteDoc: deleteDoc,
     _phase: goPhase,
     _prepTab: goPrepTab,
+    _copyAnswer: copyAnswer,
     _linkOrg: linkOrg,
     _selectVariant: selectVariant,
     _generateVariant: generateVariant,
