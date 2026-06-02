@@ -148,7 +148,7 @@ add_action( 'wp_body_open', function () {
 				<span class="efs-topbar__logo" aria-hidden="true"></span>
 				<span class="efs-topbar__name">EU Funding School</span>
 			</a>
-			<nav class="efs-topbar__nav" aria-label="Primary">
+			<nav class="efs-topbar__nav" id="efs-topbar-nav" aria-label="Primary">
 				<?php
 				wp_nav_menu( array(
 					'theme_location' => 'efs_primary',
@@ -164,8 +164,38 @@ add_action( 'wp_body_open', function () {
 					Iniciar sesión
 				</a>
 			</div>
+			<button type="button" class="efs-topbar__toggle" id="efs-topbar-toggle"
+					aria-label="Abrir menú" aria-controls="efs-topbar-nav" aria-expanded="false">
+				<span class="efs-topbar__bars" aria-hidden="true"></span>
+			</button>
 		</div>
 	</header>
+	<?php
+} );
+
+/* -------------------------------------------------------------------------
+ * Toggle del menú superior en móvil (≤720px). El nav se oculta y se despliega
+ * con el botón hamburguesa. Replicado en public/index.html del tool.
+ * ------------------------------------------------------------------------- */
+add_action( 'wp_footer', function () {
+	?>
+	<script>
+	(function(){
+		var btn = document.getElementById('efs-topbar-toggle');
+		var nav = document.getElementById('efs-topbar-nav');
+		if (!btn || !nav) return;
+		function close(){ nav.classList.remove('is-open'); btn.setAttribute('aria-expanded','false'); }
+		btn.addEventListener('click', function(e){
+			e.stopPropagation();
+			var open = nav.classList.toggle('is-open');
+			btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+		});
+		nav.addEventListener('click', function(e){ if (e.target.closest('a')) close(); });
+		document.addEventListener('click', function(e){
+			if (nav.classList.contains('is-open') && !nav.contains(e.target) && e.target !== btn) close();
+		});
+	})();
+	</script>
 	<?php
 } );
 
