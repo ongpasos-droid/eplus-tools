@@ -83,10 +83,22 @@ tailwind.config = {
   padding: .35rem .85rem; background: #fbff12; color: #1b1464;
   border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 13px; transition: transform .15s; }
 .efs-topbar__login:hover { transform: translateY(-1px); }
+.efs-topbar__toggle { display: none; background: none; border: 0; color: #fff; cursor: pointer;
+  padding: .25rem; line-height: 0; }
+.efs-topbar__toggle .material-symbols-outlined { font-size: 26px; }
 @media (max-width: 720px) {
-  .efs-topbar__inner { gap: .75rem; padding: 0 .75rem; }
-  .efs-topbar__nav { display: none; }
+  .efs-topbar__inner { gap: .5rem; padding: 0 .75rem; }
   .efs-topbar__brand .efs-topbar__name { display: none; }
+  .efs-topbar__toggle { display: inline-flex; align-items: center; }
+  .efs-topbar__nav { position: absolute; top: 48px; left: 0; right: 0; flex: none; display: none;
+    background: #1b1464; border-bottom: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+  .efs-topbar__nav.is-open { display: block; }
+  .efs-topbar__menu { flex-direction: column; gap: 0; padding: .25rem 0; }
+  .efs-topbar__menu li { padding: 0 1.25rem; }
+  .efs-topbar__menu a { display: block; padding: .7rem 0; border-bottom: none; }
+  .efs-topbar__menu .is-current > a,
+  .efs-topbar__menu .current-menu-item > a { border-bottom: none; color: #fbff12; }
 }
 </style>
 </head>
@@ -100,7 +112,7 @@ tailwind.config = {
       <span class="efs-topbar__logo" aria-hidden="true"></span>
       <span class="efs-topbar__name">EU Funding School</span>
     </a>
-    <nav class="efs-topbar__nav" aria-label="Primary">
+    <nav class="efs-topbar__nav" id="efs-topbar-nav" aria-label="Primary">
       <ul class="efs-topbar__menu">
         <li><a href="https://eufundingschool.com/recursos/" target="_top">Recursos</a></li>
         <li><a href="https://eufundingschool.com/academia/" target="_top">Academia</a></li>
@@ -117,6 +129,10 @@ tailwind.config = {
         Mi cuenta · <span id="topbar-user-name">…</span>
       </a>
     </div>
+    <button type="button" class="efs-topbar__toggle" id="efs-topbar-toggle"
+            aria-label="Abrir menú" aria-controls="efs-topbar-nav" aria-expanded="false">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
   </div>
 </header>
 <!-- En dev (localhost), reescribir enlaces del topbar a eufundingschool.test -->
@@ -125,6 +141,24 @@ tailwind.config = {
   if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') return;
   document.querySelectorAll('.efs-topbar a[href*="eufundingschool.com"]').forEach(function(a){
     a.href = a.href.replace('https://eufundingschool.com', 'http://eufundingschool.test');
+  });
+})();
+</script>
+<!-- Toggle del menú superior en móvil -->
+<script>
+(function(){
+  var btn = document.getElementById('efs-topbar-toggle');
+  var nav = document.getElementById('efs-topbar-nav');
+  if (!btn || !nav) return;
+  function close(){ nav.classList.remove('is-open'); btn.setAttribute('aria-expanded','false'); }
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open = nav.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.addEventListener('click', function(e){ if (e.target.closest('a')) close(); });
+  document.addEventListener('click', function(e){
+    if (nav.classList.contains('is-open') && !nav.contains(e.target) && e.target !== btn) close();
   });
 })();
 </script>
