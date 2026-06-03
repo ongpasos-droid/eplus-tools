@@ -1,0 +1,77 @@
+{
+  "source": "bdns",
+  "source_id": "910098",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / SANT QUIRZE DEL VALLÈS / AYUNTAMIENTO DE SANT QUIRZE DEL VALLÈS",
+  "nuts_codes": [
+    "ES511"
+  ],
+  "nuts_primary": "ES511",
+  "title": "Convocatoria para la concesión de subvenciones en régimen de concurrencia competitiva a deportistas locales de Sant Quirze del Vallès para 2026",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-06-02",
+  "open_date": "2026-06-03",
+  "deadline": "2026-07-01",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 9000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "93.1",
+      "descripcion": "Actividades deportivas"
+    }
+  ],
+  "apply_url": "https://www.santquirzevalles.cat/",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910098",
+  "documents": [
+    {
+      "label": "Texto en otra lengua de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.santquirzevalles.cat/",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [
+    {
+      "numAnuncio": 213480,
+      "titulo": "Procedimiento Beta",
+      "tituloLeng": null,
+      "texto": "Procedimiento Beta",
+      "textoLeng": null,
+      "url": "https://bop.diba.cat/anunci/3948140/convocatoria-per-a-la-concessio-de-subvencions-en-regim-de-concurrencia-competitiva-a-esportistes-locals-per-a-l-any-2026-ajuntament-de-sant-quirze-del-valles",
+      "cve": null,
+      "desDiarioOficial": "B.O.P. DE BARCELONA",
+      "datPublicacion": "2026-06-02"
+    }
+  ],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-03T04:09:22.318Z"
+}

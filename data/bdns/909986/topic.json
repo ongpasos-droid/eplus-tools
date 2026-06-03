@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "909986",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / SESTAO / AYUNTAMIENTO DE SESTAO",
+  "nuts_codes": [
+    "ES213"
+  ],
+  "nuts_primary": "ES213",
+  "title": "Convocatoria concesión subvenciones económicas por Ayuntamiento Sestao realización programas acogimiento menores, residentes en países extranjeros especialmente desfavorecidas, que sean acogidos temporalmente en 2026 en familias de Sestao",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-06-02",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 5000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "88",
+      "descripcion": "Actividades de servicios sociales sin alojamiento"
+    }
+  ],
+  "apply_url": "https://www.sestao.eus",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909986",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en lengua cooficial",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.sestao.eus/es-ES/Ayuntamiento/servicios/Accion-Social/Paginas/bases-concesion-subvenciones-programas-acogimiento-2026.aspx",
+  "text_inicio": "Primer día hábil siguiente al de la publicación del extracto de convocatoria en el BOB",
+  "text_fin": "trigésimo día hábil siguiente al día de inicio de presentacion de solicitudes",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-03T04:09:22.295Z"
+}

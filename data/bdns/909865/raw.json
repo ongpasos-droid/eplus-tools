@@ -1,0 +1,86 @@
+{
+  "id": 1111426,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "CATALUÑA",
+    "nivel3": "INSTITUT CATALÀ DE LES EMPRESES CULTURALS (ICEC)"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "909865",
+  "fechaRecepcion": "2026-06-02",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 500000,
+  "mrr": false,
+  "descripcion": "Resolución de convocatoria para la concesión de subvenciones para proyectos de internacionalización de empresas del sector del libro",
+  "descripcionLeng": "Resolució de convocatòria per a la concessió de subvencions a projectes d'internacionalització d'empreses del sector del llibre",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "GRAN EMPRESA"
+    },
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades de servicios de intermediación para el comercio al por menor",
+      "codigo": "47.9"
+    },
+    {
+      "descripcion": "Comercio al por menor de artículos culturales y recreativos",
+      "codigo": "47.6"
+    },
+    {
+      "descripcion": "Edición de libros, periódicos y otras actividades editoriales, excepto la edición de programas informáticos",
+      "codigo": "58.1"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES51 - CATALUÑA"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "bases específicas que regirán la concesión de subvenciones a proyectos de internacionalización de empresas del sector del libro",
+  "urlBasesReguladoras": "https://portaldogc.gencat.cat/utilsEADOP/PDF/8663/1905367.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-09",
+  "fechaFinSolicitud": "2026-06-22",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1467376,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "Internacionalització Llibre_catsigned.pdf",
+      "long": 254616,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    },
+    {
+      "id": 1467375,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Internacionalització Llibre_cast.pdf",
+      "long": 123099,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "909805",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / CASTILLA-LA MANCHA / VICECONSEJERÍA DE RELACIONES INSTITUCIONALES",
+  "nuts_codes": [
+    "ES42"
+  ],
+  "nuts_primary": "ES42",
+  "title": "Resolución de 28 de mayo de 2026, de la Dirección General de Asuntos Europeos, por la que se convocan becas para la formación de especialistas en asuntos relacionados con la Unión Europea.",
+  "title_lang": "es",
+  "summary": "Educación",
+  "status": "open",
+  "publication_date": "2026-06-02",
+  "open_date": null,
+  "deadline": "2026-07-09",
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 57138.74,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "P",
+      "descripcion": "ADMINISTRACIÓN PÚBLICA Y DEFENSA; SEGURIDAD SOCIAL OBLIGATORIA"
+    }
+  ],
+  "apply_url": "www.castillalamancha.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909805",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://docm.jccm.es/docm/descargarArchivo.do?ruta=2026/05/18/pdf/2026_3712.pdf&tipo=rutaDocm",
+  "text_inicio": "El día siguiente al de la publicación de la Convocatoria en el DOCM.",
+  "text_fin": "09.07.2026",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-03T04:09:22.244Z"
+}

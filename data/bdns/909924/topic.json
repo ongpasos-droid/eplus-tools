@@ -1,0 +1,75 @@
+{
+  "source": "bdns",
+  "source_id": "909924",
+  "source_lang": "es",
+  "level": "estado",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "ESTADO / MINISTERIO DE DERECHOS SOCIALES, CONSUMO Y AGENDA 2030 / INSTITUTO DE MAYORES Y SERVICIOS SOCIALES",
+  "nuts_codes": [
+    "ES63",
+    "ES64"
+  ],
+  "nuts_primary": "ES63",
+  "title": "Resolución del Imserso, por la que se convoca la concesión de subvenciones a personas mayores, personas con discapacidad y personas en situación de dependencia residentes en las Ciudades de Ceuta y de Melilla, durante el 2026.",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-06-02",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 1217922.6,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA; PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "R",
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES"
+    },
+    {
+      "codigo": "Q",
+      "descripcion": "EDUCACIÓN"
+    }
+  ],
+  "apply_url": "https://imserso.es/web/sede-electronica",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909924",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "ONG",
+      "url": null
+    },
+    {
+      "label": "Individual",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.boe.es/eli/es/o/2015/03/09/ssi420",
+  "text_inicio": "A partir del dia siguiente al de la publicación del extracto de la convocatoria en el BOE",
+  "text_fin": "Un mes contado a partir del dia siguiente al de la publicación del extracto en el BOE",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-03T04:09:22.278Z"
+}

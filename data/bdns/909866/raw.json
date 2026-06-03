@@ -1,0 +1,76 @@
+{
+  "id": 1111427,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "BADALONA",
+    "nivel3": "AYUNTAMIENTO DE BADALONA"
+  },
+  "sedeElectronica": "https:// seu.badalona.cat",
+  "codigoBDNS": "909866",
+  "fechaRecepcion": "2026-06-02",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 7000,
+  "mrr": false,
+  "descripcion": "Convocatoria de subvenciones por concurrencia competitiva en materia de Educación (E1- Actividades extraordinarias del centro docente) correspondiente al año 2026",
+  "descripcionLeng": "Convocatòria de subvencions per concurrència competitiva en matèria d'Educació (E1- Activitats extraordinàries del centre docent) corresponent a l'any 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES511 - Barcelona"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Aprovació de les Bases especifiques que regiran la convocatòria per a l'atorgament de subvencions per concurrència competitiva de l'any 2026",
+  "urlBasesReguladoras": "https://bop.diba.cat/anunci/3929665/bases-especifiques-reguladores-de-la-convocatoria-de-subvencions-destinades-a-entitats-que-realitzin-activitats-o-programes-referits-a-l-educacio-participacio-cultura-esports-joventut-politiques-d-igualtat-feminismes-i-",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "L'endemà de la publicació de la convocatòria al BOPB",
+  "textFin": "20 dies hàbils a comptar des de l'endemà de la publicació de la convocatòria al BOPB",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [
+    {
+      "descripcion": "FEDER - FONDO EUROPEO DE DESARROLLO REGIONAL"
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1467191,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "2. Resolució convocatòria Educació-E1 Activitats.pdf",
+      "long": 198798,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    },
+    {
+      "id": 1467188,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Resolución convocatoria Educación-E1 Actividades.pdf",
+      "long": 224034,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

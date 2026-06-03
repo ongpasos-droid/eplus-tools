@@ -1,0 +1,73 @@
+{
+  "source": "bdns",
+  "source_id": "910061",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / MEDINA DE RIOSECO / AYUNTAMIENTO DE MEDINA DE RIOSECO",
+  "nuts_codes": [
+    "ES418"
+  ],
+  "nuts_primary": "ES418",
+  "title": "CONVOCATORIA PARA LA CONCESIÓN DE AYUDAS ECONÓMICAS PARA EL FOMENTO DE LA NATALIDAD -MEDIDAS CONTRA EL DESPOBLAMIENTO- EN EL MUNICIPIO DE MEDINA DE RIOSECO, AÑO 2026.",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-06-02",
+  "open_date": null,
+  "deadline": "2026-10-31",
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 5000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "R",
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910061",
+  "documents": [
+    {
+      "label": "ANEXO I SOLICITUD",
+      "url": null
+    },
+    {
+      "label": "ANEXO III DECLARACIÓN RESPONSABLE",
+      "url": null
+    },
+    {
+      "label": "ANEXO II COMPROMISO DE EMPADRONAMIENTO",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://medinaderioseco.sedelectronica.es/transparency/a12e2147-500a-402b-9df7-2d9c32d1c012/",
+  "text_inicio": "DESDE EL DÍA SIGUIENTE A LA PUBLICACIÓN EN EL BOLETÍN OFICIAL DE LA PROVINCIA DE VALLADOLID",
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-03T04:09:22.310Z"
+}

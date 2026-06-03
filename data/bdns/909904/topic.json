@@ -1,0 +1,73 @@
+{
+  "source": "bdns",
+  "source_id": "909904",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / CASTELLAR DEL VALLÈS / AYUNTAMIENTO DE CASTELLAR DEL VALLÈS",
+  "nuts_codes": [
+    "ES511"
+  ],
+  "nuts_primary": "ES511",
+  "title": "ACUERDO DE JUNTA DE GOBIERNO LOCAL DE APROBACION DE LAS BASES REGULADORAS  Y CONVOCATORIA DE AYUDAS PARA LA ADQUISICION DE VEHICULOS EFICIENTES HIBRIDOS O ELECTRICOS O DE MAS DE 5 PLAZAS, PARA LA PRESTACION DEL SERVICIO DE TAXI A CASTELLAR DEL VALLES 2026",
+  "title_lang": "es",
+  "summary": "Subvenciones al transporte",
+  "status": "open",
+  "publication_date": "2026-06-02",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 9000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "49.3",
+      "descripcion": "Otro transporte terrestre de pasajeros"
+    }
+  ],
+  "apply_url": "https://seu.castellarvalles.cat/33033/tramit/318/",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909904",
+  "documents": [
+    {
+      "label": "Texto en otra lengua de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Certificat aprovació Junta de Govern Local",
+      "url": null
+    },
+    {
+      "label": "Certificado aprobación Junta de Gobierno Local",
+      "url": null
+    },
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://seu.castellarvalles.cat/33033/tramit/318/",
+  "text_inicio": "A partir de l'endemà de la publicació en el BOP DE BARCELONA",
+  "text_fin": "31 d'octubre de 2026, ambdós inclosos",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-03T04:09:22.271Z"
+}

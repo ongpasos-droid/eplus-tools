@@ -1,0 +1,72 @@
+{
+  "id": 1111456,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "LA RÀPITA",
+    "nivel3": "AYUNTAMIENTO DE LA RÀPITA"
+  },
+  "sedeElectronica": "larapita.cat",
+  "codigoBDNS": "909895",
+  "fechaRecepcion": "2026-06-02",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 10000,
+  "mrr": false,
+  "descripcion": "Convocatoria 2026 de concesión de ayudas económicas para acceder a productos de primera necesidad",
+  "descripcionLeng": "Convocatòria 2026 de concessió d'ajudes econòmiques per a accedir a productes de primera necessidad",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Otras actividades de servicios sociales sin alojamiento",
+      "codigo": "88.9"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES514 - Tarragona"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Bases reguladoras de la concesión de ayudas economica para acceder a productos de primera necesidad",
+  "urlBasesReguladoras": "https://larapita.cat/ajuts-i-subvencions/productes-de-primera-necessitat/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Al dia siguiente de su publicación en el BOPT",
+  "textFin": "30/09/2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1467539,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Convocatoria per l_atorgament d_ajuts per a productes de primera necessitat_.pdf",
+      "long": 259386,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    },
+    {
+      "id": 1467538,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convocatoria para la concesión de ayudas para productos de primera necesidad.pdf",
+      "long": 349924,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

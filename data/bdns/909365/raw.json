@@ -1,0 +1,72 @@
+{
+  "id": 1110926,
+  "organo": {
+    "nivel1": "OTROS",
+    "nivel2": "UNIVERSIDAD DE SALAMANCA",
+    "nivel3": null
+  },
+  "sedeElectronica": "https://sede.usal.es/registro-electronico",
+  "codigoBDNS": "909365",
+  "fechaRecepcion": "2026-05-31",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 25000,
+  "mrr": false,
+  "descripcion": "PROGRAMA MERCURIALIS DE DEPORTE UNIVERSITARIO",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES41 - CASTILLA Y LEON"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Bases Reguladoras de la concesión de becas y ayudas a los estudiantes de la Universidad de Salamanca (BOCYL 3/10/2017)",
+  "urlBasesReguladoras": "https://becas.usal.es/normativa/Bases%20Reguladoras%20Ayudas%20USAL.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-09-30",
+  "textInicio": "Desde el día siguiente a la publicación en BOCYL",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1465153,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convocatoria de Ayudas a Deportistas 2025_2026 Firmado.pdf",
+      "long": 344106,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-02"
+    },
+    {
+      "id": 1465152,
+      "descripcion": "Modelo de Solicitud",
+      "nombreFic": "Modelo_Solicitud_Mercurialis_2025-2026 (1).pdf",
+      "long": 138938,
+      "datMod": "2026-06-01",
+      "datPublicacion": "2026-06-02"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,64 @@
+{
+  "id": 1111474,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "CABILDO INSULAR DE LA PALMA",
+    "nivel3": "EXCMO. CABILDO INSULAR DE LA PALMA"
+  },
+  "sedeElectronica": "https://sedeelectronica.cabildodelapalma.es/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=CATALOGO&DETALLE=6269000063178007207769",
+  "codigoBDNS": "909913",
+  "fechaRecepcion": "2026-06-02",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 30000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA PARA LA CONCESIÓN DE SUBVENCIONES A EMPRESAS, AUTÓNOMOS, ETC., PARA EL FOMENTO DE PROGRAMAS DE DESARROLLO TURÍSTICO, DINAMIZACIÓN TURÍSTICA INSULAR PARA LA ISLA DE LA PALMA (ANUALIDAD 2026)",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Otras actividades recreativas y de entretenimiento",
+      "codigo": "93.2"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES707 - La Palma"
+    }
+  ],
+  "descripcionFinalidad": "Comercio, Turismo y Pymes",
+  "descripcionBasesReguladoras": "ACUERDO DE LA COMISIÓN DE PLENO DE TURISMO POR EL QUE SE APRUEBAN LAS BASES REGULADORAS DE LAS SUBVENCIONES A EMPRESAS PRIVADAS, TRABAJADORES AUTÓNOMOS Y EMPRESARIOS INDIVIDUALES PARA EL FOMENTO DE PROGRAMAS DE DESARROLLO TCO Y DINAMIZACIÓN TCA",
+  "urlBasesReguladoras": "https://www.bopsantacruzdetenerife.es/bopsc2/sumario.php?codigopub=1&fecha_mas_reciente=2024-07-12",
+  "sePublicaDiarioOficial": true,
+  "abierto": true,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "DÍA SIGUIENTE PUBLICACIÓN BOP",
+  "textFin": "15 DÍAS TRAS PUBLICACIÓN BOP",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1467622,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Resolución Consejero/a de Turismo.PDF",
+      "long": 275375,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

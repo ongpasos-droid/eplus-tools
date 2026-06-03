@@ -1,0 +1,72 @@
+{
+  "id": 1111516,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "MONFORTE DE LEMOS",
+    "nivel3": "AYUNTAMIENTO DE MONFORTE DE LEMOS"
+  },
+  "sedeElectronica": "www.monfortedelemos.es",
+  "codigoBDNS": "909955",
+  "fechaRecepcion": "2026-06-02",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 35000,
+  "mrr": false,
+  "descripcion": "BASES DE LA CONVOCATORIA DE AYUDAS PARA LA ADQUISICIÓN DE LIBROS DE TEXTO Y MATERIAL ESCOLAR \nCOMPLEMENTARIO PARA EL CURSO ESCOLAR 2026/2027",
+  "descripcionLeng": "BASES DA CONVOCATORIA DE AXUDAS PARA A ADQUISICIÓN DE LIBROS DE TEXTO E MATERIAL ESCOLAR \nCOMPLEMENTARIO PARA O CURSO ESCOLAR 2026/2027",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Educación",
+      "codigo": "85"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES112 - Lugo"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "BASES DE LA CONVOCATORIA DE AYUDAS PARA LA ADQUISICIÓN DE LIBROS DE TEXTO Y MATERIAL ESCOLAR \nCOMPLEMENTARIO PARA EL CURSO ESCOLAR 2026/2027",
+  "urlBasesReguladoras": "https://www.monfortedelemos.es/sites/default/files/pdf/convocatorias_becas_subvenciones/BASES_AYUDAS_MATERIAL_ESCOLAR_Y_LIBROS_TEXTO_2026_2027.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "a partir del día siguiente a la  publicación del extracto de las bases de la convocatoria en el BOP",
+  "textFin": "20 días hábiles contados a partir del día siguiente a la publicación en el BOP",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1467677,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "BASES AXUDAS MATERIAL ESCOLAR E LIBROS TEXTO 2026 2027.pdf",
+      "long": 356887,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    },
+    {
+      "id": 1467676,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "BASES AYUDAS MATERIAL ESCOLAR Y LIBROS TEXTO 2026 2027.pdf",
+      "long": 1118175,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

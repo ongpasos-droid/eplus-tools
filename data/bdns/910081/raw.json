@@ -1,0 +1,83 @@
+{
+  "id": 1111642,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "CORUÑA, A",
+    "nivel3": "AYUNTAMIENTO DE CORUÑA, A"
+  },
+  "sedeElectronica": "https://sede.coruna.gal",
+  "codigoBDNS": "910081",
+  "fechaRecepcion": "2026-06-02",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 157500,
+  "mrr": false,
+  "descripcion": "Resolución de 27/05/2026 de la concejala responsable de Infraestructuras y Movilidad, por la que se convocan ayudas de apoyo al taxi para la adquisición de vehículos adaptados, vehículos eléctricos puros y vehículos con combustibles alternativos",
+  "descripcionLeng": "Resolución de 27/05/2026 da concelleira responsable de Infraestruturas e Mobilidade, pola que se convocan axudas de apoio ao taxi para a adquisición de vehículos adaptados, vehículos eléctricos puros e vehículos con combustibles alternativos",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Otro transporte terrestre de pasajeros",
+      "codigo": "49.3"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES111 - A Coruña"
+    }
+  ],
+  "descripcionFinalidad": "Subvenciones al transporte",
+  "descripcionBasesReguladoras": "Ordenanza municipal de bases reguladoras generales para la concesión de subvenciones por el Ayuntamiento de A Coruña y sus organismos públicos",
+  "urlBasesReguladoras": "https://bop.dacoruna.gal/bopportal/publicado/2024/08/16/2024_0000005745.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Al día siguiente al de la publicación del extracto en el BOP",
+  "textFin": "Diez días naturales a partir del día siguiente a la publicación del extracto en el BOP",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1468005,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "1-BASES CASTELLANO.pdf",
+      "long": 1147212,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    },
+    {
+      "id": 1468007,
+      "descripcion": "Aprobación de la convocatoria",
+      "nombreFic": "RESOL_APROBACION CONVOCATORIA.pdf",
+      "long": 462200,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    },
+    {
+      "id": 1468006,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "1-BASES CONVOCATORIA VERSION GALEGO.pdf",
+      "long": 1085248,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

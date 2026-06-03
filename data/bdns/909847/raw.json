@@ -1,0 +1,92 @@
+{
+  "id": 1111408,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SANT MARTÍ DE LLÉMENA",
+    "nivel3": "AYUNTAMIENTO DE SANT MARTÍ DE LLÉMENA"
+  },
+  "sedeElectronica": "https://seu-e.cat/ca/web/santmartidellemena",
+  "codigoBDNS": "909847",
+  "fechaRecepcion": "2026-06-02",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 5000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DE SUBVENCIONES EN RÉGIMEN DE CONCURRENCIA COMPETITIVA PARA ASOCIACIONES Y ENTIDADES DE SANT\nMARTÍ DE LLÉMENA 2026",
+  "descripcionLeng": "CONVOCATÒRIA DE SUBVENCIONS EN RÈGIM DE CONCURRÈNCIA COMPETITIVA PER ASSOCIACIONS I ENTITATS DE SANT MARTÍ DE\nLLÉMENA 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES512 - Girona"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "BASES REGULADORAS PARA LA CONCESIÓN DE SUBVENCIONES EN RÉGIMEN DE CONCURRENCIA COMPETITIVA PARA\nASOCIACIONES Y ENTIDADE DE SANT MARTÍ DE LLÉMENA",
+  "urlBasesReguladoras": "https://smartillemena.cat/media/sites/193/O.R-24-GENERAL-DE-SUBVENCIONS.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir del día siguiente de la publicación del extracto de la convocatoria en el BOPG",
+  "textFin": "15/06/2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1466432,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "ext_castella.pdf",
+      "long": 151417,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    },
+    {
+      "id": 1466448,
+      "descripcion": "MODELO DE SOLICITUD",
+      "nombreFic": "DOC_AMPLIA_SOL_DECLRACIO_RESPOSNABLE.pdf",
+      "long": 309837,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    },
+    {
+      "id": 1466438,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "ext_catala.pdf",
+      "long": 152948,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    }
+  ],
+  "anuncios": [
+    {
+      "numAnuncio": 213409,
+      "titulo": "Extracto de la resolució del Ayuntamiento de Sant Martí de Llémena de 25 de mayo de 2026, de convocatoria de subvenciones a entidades y/o asociaciones del municipio sin finalidad lucrativa que desarrollen actividades culturales y/o sociales 2026",
+      "tituloLeng": "Extracte de la resolució de l’Ajuntament de Sant Martí de Llémena de 25 de maig de 2026, de convocatòria de subvencions a entitats i/o associacions del municipi sense finalitat lucrativa que desenvolupin activitats culturals i/o socials 2026.",
+      "texto": "<p>1. Dotación presupuestariaPara atender las obligaciones de contenido económico derivadas de la concesión de las subvenciones objeto de esta convocatoria, se reserva la cantidad total de 5.000,00 €, con cargo a la partida 334/48900.2. Plazo de presentación de solicitudesEl plazo de presentación de solicitudes comenzará a partir del día siguiente a la publicación del extracto de la convocatoria en el BOPG y hasta el día 15 de junio del año de la convocatoria.3. Forma de presentación de solicitudesLa solicitud de subvención deberá incluir la siguiente documentación:1. Formulario específico de solicitud, que incluye:</p><p>a. Declaración responsable de:</p><p>i. La concurrencia de los requisitos para obtener la condición de beneficiaria.ii. El compromiso de cumplir las condiciones impuestas para la concesión de la subvención.iii. Las subvenciones u otros ingresos obtenidos para la misma finalidad, o el compromiso de comunicarlos si se obtienen en el futuro.</p><p>iv. No estar obligada a presentar los certificados de estar al corriente de pago de las obligaciones tributarias y con la Seguridad Social (en el caso de entidades).v. Las retribuciones anuales de los órganos de dirección o administración, si son beneficiarias.</p><p>b. Consentimiento para el tratamiento de datos personales.</p><p>2. Escritura de constitución, Estatutos o documentación equivalente en caso de que haya habido alguna modificación y no se haya notificado previamente mediante instancia al Ayuntamiento.</p><p>3. Memoria del proyecto, programa o actividad.</p><p>4. Presupuesto del proyecto, programa o actividad, con indicación detallada de los ingresos y gastos, así como de las ayudas recibidas y/o solicitadas a otras administraciones. El modelo normalizado de solicitud estará disponible en la página web municipal.</p><p>Las solicitudes, junto con la documentación exigida, deberán presentarse en la sede electrónica del Ayuntamiento mediante el E-TRAM (Servicio AOC).La presentación de la solicitud de subvención presume el conocimiento y la aceptación de las normas que la regulan.</p>",
+      "textoLeng": "<p>1. Consignació pressupostària</p><p>Per a atendre les obligacions de contingut econòmic que es derivin de la concessió de les subvencions objecte d’aquesta convocatòria es reserva la quantitat total de 5.000,00€ euros amb càrrec a la partida 334/48900.</p><p>2. Termini de presentació de sol·licituds</p><p>El termini de presentació de sol·licituds començarà a partir de l’endemà de la publicació de l’extracte de la convocatòria al BOPG i fins el dia 15 de juny de l’any de la convocatòria.</p><p>3. Forma de presentació de sol·licituds</p><p>A la sol·licitud de subvenció ha de constar la documentació següent:</p><p>1) Formulari específic de sol·licitud que inclou:</p><p>a) Declaració responsable de:</p><p>i) La concurrència dels requisits per obtenir la condició de beneficiària.</p><p>ii) El compromís de compliment de les condicions imposades per a l’atorgament de la subvenció.</p><p>iii) Les subvencions o altres ingressos obtinguts per a la mateixa finalitat, o compromís de comunicar-les si s’obtenen en el futur.</p><p>iv) No estar obligada a la presentació de les certificacions d’estar al corrent de pagament de les obligacions tributàries i de la Seguretat Social (en el cas d’entitats).</p><p>v) Les retribucions anuals dels òrgans de direcció o administració, si són beneficiàries.</p><p>b) Consentiment del tractament de dades personals.</p><p>2) Escriptura de constitució, Estatuts o documentació equivalent en el cas de que hi hagi hagut alguna modificació i no s’hagi notificat amb anterioritat a través d’instància a l’Ajuntament.</p><p>3) Memòria del projecte, programa o activitat.</p><p> 4) Pressupost del projecte, programa o activitat, amb indicació detallada dels ingressos i les despeses, i també dels ajuts rebuts i/o sol·licitats a altres administracions.</p><p>El model normalitzat de sol·licitud, podrà trobar-se a la web municipal.</p><p>Les sol·licituds conjuntament amb la documentació exigida s’hauran de presentar a la seu electrònica de l’Ajuntament mitjançant l’E-TRAM (Servei AOC).La presentació de la sol·licitud de subvenció presumeix el coneixement i l’acceptació de les normes que la regulen.</p><p>Sant Martí de Llémena</p>",
+      "url": "https://ssl4.ddgi.cat/bopV1/pdf/2026/107/202610704908.pdf",
+      "cve": null,
+      "desDiarioOficial": "B.O.P. DE GIRONA",
+      "datPublicacion": "2026-06-05"
+    }
+  ],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

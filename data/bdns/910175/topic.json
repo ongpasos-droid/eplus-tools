@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "910175",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / MENGÍBAR / AYUNTAMIENTO DE MENGÍBAR",
+  "nuts_codes": [
+    "ES616"
+  ],
+  "nuts_primary": "ES616",
+  "title": "Subvenciones por procedimiento de concurrencia competitiva para ENTIDADES SIN ANIMO DE LUCRO PARA EL DESARROLLO DE PROYECTOS QUE COMPLEMENTEN LAS COMPETENCIAS Y ACTIVIDADES MUNICIPALES 2026",
+  "title_lang": "es",
+  "summary": "Otras actuaciones de carácter económico",
+  "status": "open",
+  "publication_date": "2026-06-02",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 50000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "94",
+      "descripcion": "Actividades asociativas"
+    }
+  ],
+  "apply_url": "https://aytomengibar.sedelectronica.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910175",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://aytomengibar.sedelectronica.es/board",
+  "text_inicio": "Dia siguiente de la publicación en el BOP Jaén",
+  "text_fin": "10 dias hábiles a partir del día de la publicación",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-03T04:09:22.327Z"
+}

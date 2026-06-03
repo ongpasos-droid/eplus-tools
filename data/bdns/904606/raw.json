@@ -1,0 +1,68 @@
+{
+  "id": 1106167,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "ARAGÓN",
+    "nivel3": "SERVICIOS CENTRALES IASS"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "904606",
+  "fechaRecepcion": "2026-05-11",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 2200000,
+  "mrr": false,
+  "descripcion": "Convocatoria de subvenciones ejercicio 2026, del programa ISEAL (Iniciativas Sociales de Empleo en el Ámbito Local) línea de transporte social adaptado, en el marco del Programa FSE+ Aragón 2021-2027, Objetivo de inversión en empleo y crecimiento",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES24 - ARAGON"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Orden CDS/329/2023, de 21 de marzo, por la que se establecen las bases reguladoras para la concesión de subvenciones en el ámbito del IASS",
+  "urlBasesReguladoras": "https://www.boa.aragon.es/cgi-bin/EBOA/BRSCGI?CMD=VEROBJ&MLKOB=1269075290303",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-04",
+  "fechaFinSolicitud": "2026-06-25",
+  "textInicio": "15 días hábiles siguientes a la publicación de la Orden de la Convocatoria",
+  "textFin": "fin periodo de presentación solicitudes ",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [
+    {
+      "descripcion": "FSE - FONDO SOCIAL EUROPEO "
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1451614,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "BORRADOR ORDEN ISEAL Incorporaciones Fondos 2026.docx",
+      "long": 217684,
+      "datMod": "2026-05-11",
+      "datPublicacion": "2026-06-02"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

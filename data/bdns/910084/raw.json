@@ -1,0 +1,64 @@
+{
+  "id": 1111645,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "LEIOA",
+    "nivel3": "AYUNTAMIENTO DE LEIOA"
+  },
+  "sedeElectronica": "https://udaletxean.leioa.eus",
+  "codigoBDNS": "910084",
+  "fechaRecepcion": "2026-06-02",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 120000,
+  "mrr": false,
+  "descripcion": "BASES REGULADORAS Y CONVOCATORIA DE SUBVENCIONES DE CARÁCTER ORDINARIO PARA APOYAR EL ESTABLECIMIENTO Y CONSOLIDACIÓN DE EMPRESAS UBICADAS EN EL MUNICIPIO DE LEIOA: “LEIOAN ERROTZEN” DURANTE EL EJERCICIO 2026",
+  "descripcionLeng": "2026KO EKITALDIAN LEIOAKO UDALERRIAN DAUDEN ENPRESAK EZARTZEN ETA FINKATZEN LAGUNTZEKO: \"LEIOAN ERROTZEN\" OHIKO DIRU-LAGUNTZEN OINARRI ARAUTZAILEAK ETA DEIALDIA",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades relacionadas con el empleo",
+      "codigo": "78"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES213 - Bizkaia"
+    }
+  ],
+  "descripcionFinalidad": "Comercio, Turismo y Pymes",
+  "descripcionBasesReguladoras": "BASES REGULADORAS Y CONVOCATORIA DE SUBVENCIONES DE CARÁCTER ORDINARIO PARA APOYAR EL ESTABLECIMIENTO Y CONSOLIDACIÓN DE EMPRESAS UBICADAS EN EL MUNICIPIO DE LEIOA: “LEIOAN ERROTZEN” DURANTE EL EJERCICIO 2026",
+  "urlBasesReguladoras": "https://udaletxean.leioa.eus",
+  "sePublicaDiarioOficial": true,
+  "abierto": true,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "El día siguiente al de publicación en el BOB",
+  "textFin": "un mes desde la publicación en el BOB",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1468016,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Resolución.PDF",
+      "long": 341359,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,84 @@
+{
+  "id": 1111580,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "ANSOÁIN/ANTSOAIN",
+    "nivel3": "AYUNTAMIENTO DE ANSOÁIN/ANTSOAIN"
+  },
+  "sedeElectronica": "https://sedeelectronica.ansoain.es/",
+  "codigoBDNS": "910019",
+  "fechaRecepcion": "2026-06-02",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 25000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DE SUBVENCIONES DESTINADAS A LA REHABILITACIÓN DE EDIFICIOS EN ANSOAIN AÑO 2026",
+  "descripcionLeng": "ANTSOAINEN ERAIKINAK BIRGAITZEKO DIRULAGUNTZEN DEIALDIA, 2026. URTEA",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ADMINISTRATIVAS Y SERVICIOS AUXILIARES",
+      "codigo": "O"
+    },
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    },
+    {
+      "descripcion": "ACTIVIDADES INMOBILIARIAS",
+      "codigo": "M"
+    },
+    {
+      "descripcion": "CONSTRUCCIÓN",
+      "codigo": "F"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES22 - COMUNIDAD FORAL DE NAVARRA"
+    }
+  ],
+  "descripcionFinalidad": "Otras Prestaciones económicas",
+  "descripcionBasesReguladoras": "Ordenanza Reguladora de Ayudas a la Rehabilitación de Edificios del Ayuntamiento de Ansoáin",
+  "urlBasesReguladoras": "https://www.ansoain.es/wp-content/uploads/2024/06/Ord-ayudas-rehabilitacion-cast.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-12-31",
+  "textInicio": "DESDE EL DIA SIGUIENTE A LA PUBLICACIÓN EN EL BOLETIN OFICIAL DE NAVARRA",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1467866,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Bases de la convocatoria.pdf",
+      "long": 269904,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    },
+    {
+      "id": 1467864,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Bases de la convocatoria.pdf",
+      "long": 269904,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

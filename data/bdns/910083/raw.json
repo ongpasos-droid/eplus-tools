@@ -1,0 +1,80 @@
+{
+  "id": 1111644,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "ELORRIO",
+    "nivel3": "AYUNTAMIENTO DE ELORRIO"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "910083",
+  "fechaRecepcion": "2026-06-02",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 4248,
+  "mrr": false,
+  "descripcion": "Subvención del Ayuntamiento de Elorrio para el programa “Comedor Nagusi Aktiboen Jantokia” en 2026.",
+  "descripcionLeng": "Elorrioko Udalak 2026ko “Nagusi Aktiboen Jantokia” programarako dirulaguntza.",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "HOSTELERÍA",
+      "codigo": "I"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES213 - Bizkaia"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Bases Reguladoras de la convocatoria de subvención del Ayuntamiento de Elorrio para el programa \"Comedor Nagusi Aktiboen Jantokia\", en 2026.",
+  "urlBasesReguladoras": "http://www.elorrio.eus/es-ES/Ayuntamiento/Subvenciones/Ordenanza_subvenciones/20120210a029A%20(3).pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-11-01",
+  "textInicio": "A partir del día siguiente de la publicación del anuncio en el Boletín Oficial de Bizkaia (BOB).",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1467996,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "2026-00660 08_01 BAO iragarkia (Elebi).pdf",
+      "long": 416304,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    },
+    {
+      "id": 1467997,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "2026-00660 08_01 BAO iragarkia (Elebi).pdf",
+      "long": 416304,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    },
+    {
+      "id": 1468004,
+      "descripcion": "SOLICITUD",
+      "nombreFic": "2026-00660 01_02 Eskaera.pdf",
+      "long": 407231,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

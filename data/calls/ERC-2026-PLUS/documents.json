@@ -29,8 +29,8 @@
   },
   {
     "section": "3. Proposal submission and description",
-    "label": "ERC Information for Applicants",
-    "url": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/horizon/guidance/information-for-applicants_he-erc-adg_en.pdf",
+    "label": "ERC Plus Information for Applicants",
+    "url": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/horizon/guidance/information-for-applicants_he-erc-plus_en.pdf",
     "ext": ".pdf",
     "is_downloadable": true
   },
@@ -45,13 +45,6 @@
     "section": "6. Legal and financial set-up of the grants",
     "label": "MGA used for ERC actions under Horizon Europe (HE General MGA)",
     "url": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/common/agr-contr/general-mga_horizon-euratom_en.pdf",
-    "ext": ".pdf",
-    "is_downloadable": true
-  },
-  {
-    "section": "7. Open Science",
-    "label": "Information for Applicants to the ERC Plus Grants 2026 call",
-    "url": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/horizon/guidance/information-for-applicants_he-erc-plus_en.pdf",
     "ext": ".pdf",
     "is_downloadable": true
   },

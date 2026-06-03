@@ -1,0 +1,63 @@
+{
+  "source": "bdns",
+  "source_id": "909978",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / SANTA CRUZ DE TENERIFE / AYUNTAMIENTO DE SANTA CRUZ DE TENERIFE",
+  "nuts_codes": [],
+  "nuts_primary": null,
+  "title": "ACUERDO DE LA JUNTA DE GOBIERNO, DE FECHA 1 DE JUNIO DE 2026, POR EL QUE SE ACUERDA LA CONVOCATORIA ANTICIPADA DE LOS PREMIOS A OTORGAR POR EL EXCMO. AYUNTAMIENTO DE SANTA CRUZ DE TENERIFE EN LA XXI EDICIÓN DEL CERTAMEN DE RELATOS BREVES MUJERES",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-06-02",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 3600,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "S",
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO"
+    },
+    {
+      "codigo": "P",
+      "descripcion": "ADMINISTRACIÓN PÚBLICA Y DEFENSA; SEGURIDAD SOCIAL OBLIGATORIA"
+    }
+  ],
+  "apply_url": "https://sede.santacruzdetenerife.es/sede/tramite/t353",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909978",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.bopsantacruzdetenerife.es/boletines/2024/17-7-24/17-7-24.pdf",
+  "text_inicio": "A partir del día siguiente la publicación en el B.O.P.",
+  "text_fin": "Hasta 9 de octubre de 2026 (mayores de 18 años) y 4 de noviembre las 14:00 horas (de 15 a 17 años).",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-03T04:09:22.293Z"
+}

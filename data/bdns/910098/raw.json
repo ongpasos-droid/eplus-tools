@@ -1,0 +1,84 @@
+{
+  "id": 1111659,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SANT QUIRZE DEL VALLÈS",
+    "nivel3": "AYUNTAMIENTO DE SANT QUIRZE DEL VALLÈS"
+  },
+  "sedeElectronica": "https://www.santquirzevalles.cat/",
+  "codigoBDNS": "910098",
+  "fechaRecepcion": "2026-06-02",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 9000,
+  "mrr": false,
+  "descripcion": "Convocatoria para la concesión de subvenciones en régimen de concurrencia competitiva a deportistas locales de Sant Quirze del Vallès para 2026",
+  "descripcionLeng": "Convocatòria per a la concessió de subvencions en règim de concurrència competitiva a esportistes locals de Sant Quirze del Vallès per 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades deportivas",
+      "codigo": "93.1"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES511 - Barcelona"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "Bases reguladores per a la concessió de subvencions en règim de concurrència competitiva a esportistes locals de Sant Quirze del Vallès.",
+  "urlBasesReguladoras": "https://www.santquirzevalles.cat/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-03",
+  "fechaFinSolicitud": "2026-07-01",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1468035,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "Anunci BOPB 020626.PDF",
+      "long": 138946,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    },
+    {
+      "id": 1468034,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Anunci convocatòria BDNS cast.PDF",
+      "long": 320600,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    }
+  ],
+  "anuncios": [
+    {
+      "numAnuncio": 213480,
+      "titulo": "Procedimiento Beta",
+      "tituloLeng": null,
+      "texto": "Procedimiento Beta",
+      "textoLeng": null,
+      "url": "https://bop.diba.cat/anunci/3948140/convocatoria-per-a-la-concessio-de-subvencions-en-regim-de-concurrencia-competitiva-a-esportistes-locals-per-a-l-any-2026-ajuntament-de-sant-quirze-del-valles",
+      "cve": null,
+      "desDiarioOficial": "B.O.P. DE BARCELONA",
+      "datPublicacion": "2026-06-02"
+    }
+  ],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

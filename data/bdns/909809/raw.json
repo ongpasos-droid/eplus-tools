@@ -1,0 +1,76 @@
+{
+  "id": 1111370,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "CENES DE LA VEGA",
+    "nivel3": "AYUNTAMIENTO DE CENES DE LA VEGA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "909809",
+  "fechaRecepcion": "2026-06-02",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 7000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DE AYUDAS EN ESPECIE CONSISTENTES EN LA ENTREGA\nDE MATERIAL ESCOLAR PARA LOS/AS ALUMNOS/AS DE CENES DE LA VEGA\nPARA EL CURSO ACADÉMICO 2026-2027",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Educación preprimaria",
+      "codigo": "85.1"
+    },
+    {
+      "descripcion": "Educación primaria",
+      "codigo": "85.2"
+    },
+    {
+      "descripcion": "Educación secundaria y educación postsecundaria no terciaria",
+      "codigo": "85.3"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES614 - Granada"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "ORDENANZA GENERAL DE SUBVENCIONES DEL AYUNTAMIENTO DE CENES DE LA VEGA",
+  "urlBasesReguladoras": "https://cenesdelavega.sedelectronica.es/preview-document/a46c01c8-e6cd-4a73-b59a-99de87f85215/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "El plazo para la presentación de las solicitudes será de 15 días hábiles, a contar desde el siguient",
+  "textFin": "15 días hábiles después de la publicación en el BOP Granada",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [
+    {
+      "descripcion": "FEDER - FONDO EUROPEO DE DESARROLLO REGIONAL"
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1466332,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "20260601_Diligencia_CONVOCATORIA MATERIAL ESCOLAR 2026-2027 DILIGENCIA (1).pdf",
+      "long": 496833,
+      "datMod": "2026-06-02",
+      "datPublicacion": "2026-06-02"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

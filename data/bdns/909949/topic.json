@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "909949",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concesión directa - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / SESTAO / AYUNTAMIENTO DE SESTAO",
+  "nuts_codes": [
+    "ES213"
+  ],
+  "nuts_primary": "ES213",
+  "title": "Convocatoria de concesión de subvenciones económicas por parte del Ayuntamiento de Sestao para el desarrollo de actividades en el ámbito de Acción Social durante el ejercicio de 2026",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-06-02",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 40000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "88",
+      "descripcion": "Actividades de servicios sociales sin alojamiento"
+    }
+  ],
+  "apply_url": "https://www.sestao.eus",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909949",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en lengua cooficial",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.sestao.eus/es-ES/Ayuntamiento/servicios/Accion-Social/Paginas/bases-concesion-subvenciones-desarrollo-actividades-accion-social-2026.aspx",
+  "text_inicio": "a partir del día siguiente a publicación de extracto de la convocatoria de el BOB",
+  "text_fin": "trigésimo día hábil siguiente al día de inicio de presentacion de solicitudes",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-03T04:09:22.284Z"
+}
