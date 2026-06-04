@@ -9,6 +9,7 @@ import { reelVoiced } from "./lessons/reel-voiced";
 import { exampleLesson } from "./lessons/example-ka2";
 import { kaLinesLesson } from "./lessons/ka-lines";
 import { ka3QueEsLesson } from "./lessons/ka3-que-es";
+import { ka3QueEsEnLesson } from "./lessons/ka3-que-es-en";
 import { assignBankImages } from "./lessons/assignImages";
 import { CtaOutro, calculateCtaFrames } from "./compositions/CtaOutro";
 import { LessonWithCta } from "./compositions/LessonWithCta";
@@ -23,6 +24,8 @@ import {
 } from "./lessons/reels-collection";
 import kaLinesManifest from "./audio/ka-lines/manifest.json";
 import ka3QueEsManifest from "./audio/ka3-que-es/manifest.json";
+import ka3QueEsEnManifest from "./audio/ka3-que-es-en/manifest.json";
+import ctaOutroEnManifest from "./audio/cta-outro-en/manifest.json";
 
 const FPS = 30;
 
@@ -52,6 +55,49 @@ export const RemotionRoot: React.FC = () => {
   };
   const ka3FullFrames =
     calculateTotalFrames(ka3NoOutro, FPS, ka3QueEsManifest) + ctaFrames;
+
+  // ── EN: misma estructura/temas/imágenes, contenido traducido ──
+  const ka3QueEsEnData = assignBankImages(
+    ka3QueEsEnLesson,
+    bank,
+    ka3QueEsEnManifest,
+    FPS
+  );
+  const ka3EnNoOutro = {
+    ...ka3QueEsEnData,
+    slides: ka3QueEsEnData.slides.slice(0, -1),
+  };
+  const ctaEnFrames = calculateCtaFrames(ctaOutroEnManifest[0]?.duration ?? 16, FPS);
+  const ka3FullEnFrames =
+    calculateTotalFrames(ka3EnNoOutro, FPS, ka3QueEsEnManifest) + ctaEnFrames;
+
+  // Textos del CTA en inglés
+  const ctaEnContent = {
+    audioFile: "audio/cta-outro-en/slide-00.ogg",
+    tagText: "EU Funding School",
+    headline: "Discover all the possibilities",
+    accentWord: "all",
+    profilesLine: "Companies · Schools · Public bodies · NGOs",
+    projectChips: [
+      "KA1 Mobility · €120,000",
+      "KA2 Cooperation · €400,000",
+      "KA3 Youth · €500,000",
+      "CoVE VET · €4,000,000",
+      "European Youth Together · €500,000",
+      "Small-scale · €60,000",
+      "Capacity Building · €1,000,000",
+      "Alliances · €4,000,000",
+    ],
+    profileChips: [
+      "Companies",
+      "Schools",
+      "Universities",
+      "Local councils",
+      "NGOs & associations",
+      "Public administration",
+      "Vocational training",
+    ],
+  };
 
   return (
     <>
@@ -115,6 +161,25 @@ export const RemotionRoot: React.FC = () => {
         }}
       />
 
+      {/* ── KA3 COMPLETO · ENGLISH ── */}
+      <Composition
+        id="KA3-Full-EN"
+        component={LessonWithCta}
+        durationInFrames={ka3FullEnFrames}
+        fps={FPS}
+        width={VIDEO.width}
+        height={VIDEO.height}
+        defaultProps={{
+          data: ka3EnNoOutro,
+          audioFolder: "ka3-que-es-en",
+          audioManifest: ka3QueEsEnManifest,
+          sfxTransition: "sfx/whoosh.wav",
+          ctaImages: ctaImages,
+          ctaDurationFrames: ctaEnFrames,
+          ctaContent: ctaEnContent,
+        }}
+      />
+
       {/* ── CTA OUTRO reutilizable (~17s, horizontal) ── */}
       <Composition
         id="CTA-Outro"
@@ -124,6 +189,16 @@ export const RemotionRoot: React.FC = () => {
         width={VIDEO.width}
         height={VIDEO.height}
         defaultProps={{ images: ctaImages }}
+      />
+
+      <Composition
+        id="CTA-Outro-EN"
+        component={CtaOutro}
+        durationInFrames={ctaEnFrames}
+        fps={FPS}
+        width={VIDEO.width}
+        height={VIDEO.height}
+        defaultProps={{ images: ctaImages, ...ctaEnContent }}
       />
 
       {/* ── REELS (vertical 1080x1920) ── */}

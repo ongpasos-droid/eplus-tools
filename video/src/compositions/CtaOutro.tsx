@@ -12,8 +12,8 @@ import { COLORS, FONTS } from "../theme";
 import { RotatingImage } from "../components/RotatingImage";
 import { useFadeIn, useScaleIn, useFloat, useGlow } from "../components/animations";
 
-// Tipos de proyecto + importe y perfiles destinatarios — flotan de fondo.
-const PROJECT_CHIPS = [
+// Defaults en español. Para otros idiomas se pasan por props.
+const DEFAULT_PROJECT_CHIPS = [
   "KA1 Movilidad · 120.000€",
   "KA2 Cooperación · 400.000€",
   "KA3 Juventud · 500.000€",
@@ -23,7 +23,7 @@ const PROJECT_CHIPS = [
   "Capacity Building · 1.000.000€",
   "Alianzas · 4.000.000€",
 ];
-const PROFILE_CHIPS = [
+const DEFAULT_PROFILE_CHIPS = [
   "Empresas",
   "Centros educativos",
   "Universidades",
@@ -36,32 +36,37 @@ const PROFILE_CHIPS = [
 interface Chip {
   text: string;
   kind: "project" | "profile";
-  x: number; // % horizontal (sesgado a los lados, centro libre)
-  baseY: number; // % vertical inicial
-  speed: number; // % de altura por frame (hacia arriba)
+  x: number;
+  baseY: number;
+  speed: number;
   phase: number;
 }
 
-// Layout determinista: chips en las bandas izquierda y derecha, centro limpio.
-const CHIPS: Chip[] = [...PROJECT_CHIPS, ...PROFILE_CHIPS].map((text, i) => {
-  const leftSide = i % 2 === 0;
-  const band = leftSide ? 3 + (i * 7) % 22 : 70 + (i * 11) % 27;
-  return {
-    text,
-    kind: i < PROJECT_CHIPS.length ? "project" : "profile",
-    x: band,
-    baseY: (i * 37) % 100,
-    speed: 0.12 + (i % 4) * 0.04,
-    phase: i * 1.3,
-  };
-});
+// Layout determinista: bandas izquierda y derecha, centro libre para el cartel.
+function buildChips(projectChips: string[], profileChips: string[]): Chip[] {
+  const all = [
+    ...projectChips.map((t) => ({ t, kind: "project" as const })),
+    ...profileChips.map((t) => ({ t, kind: "profile" as const })),
+  ];
+  return all.map(({ t, kind }, i) => {
+    const leftSide = i % 2 === 0;
+    const band = leftSide ? 3 + (i * 7) % 22 : 70 + (i * 11) % 27;
+    return {
+      text: t,
+      kind,
+      x: band,
+      baseY: (i * 37) % 100,
+      speed: 0.12 + (i % 4) * 0.04,
+      phase: i * 1.3,
+    };
+  });
+}
 
-const FloatingChips: React.FC = () => {
+const FloatingChips: React.FC<{ chips: Chip[] }> = ({ chips }) => {
   const frame = useCurrentFrame();
   return (
     <AbsoluteFill style={{ overflow: "hidden", zIndex: 5 }}>
-      {CHIPS.map((c, i) => {
-        // Movimiento ascendente continuo con wrap.
+      {chips.map((c, i) => {
         const travelled = c.baseY - frame * c.speed;
         const y = ((travelled % 120) + 120) % 120 - 10; // -10%..110%
         // Opacidad media (visibles en primer plano, sin saturar) con fundido en bordes.
@@ -85,9 +90,7 @@ const FloatingChips: React.FC = () => {
               whiteSpace: "nowrap",
               fontFamily: FONTS.family,
               fontSize: isProject ? 30 : 26,
-              fontWeight: isProject
-                ? FONTS.weights.bold
-                : FONTS.weights.semiBold,
+              fontWeight: isProject ? FONTS.weights.bold : FONTS.weights.semiBold,
               color: isProject ? COLORS.accent : COLORS.white,
               border: `1.5px solid ${
                 isProject ? "rgba(231,235,0,0.6)" : "rgba(255,255,255,0.5)"
@@ -105,14 +108,41 @@ const FloatingChips: React.FC = () => {
   );
 };
 
+function renderHeadline(headline: string, accentWord?: string): React.ReactNode {
+  if (!accentWord) return headline;
+  const idx = headline.toLowerCase().indexOf(accentWord.toLowerCase());
+  if (idx < 0) return headline;
+  return (
+    <>
+      {headline.slice(0, idx)}
+      <span style={{ color: COLORS.accent }}>
+        {headline.slice(idx, idx + accentWord.length)}
+      </span>
+      {headline.slice(idx + accentWord.length)}
+    </>
+  );
+}
+
 interface CtaOutroProps {
   images: string[];
   audioFile?: string;
+  projectChips?: string[];
+  profileChips?: string[];
+  tagText?: string;
+  headline?: string;
+  accentWord?: string;
+  profilesLine?: string;
 }
 
 export const CtaOutro: React.FC<CtaOutroProps> = ({
   images,
   audioFile = "audio/cta-outro/slide-00.ogg",
+  projectChips = DEFAULT_PROJECT_CHIPS,
+  profileChips = DEFAULT_PROFILE_CHIPS,
+  tagText = "EU Funding School",
+  headline = "Conoce todas las posibilidades",
+  accentWord = "todas",
+  profilesLine = "Empresas · Centros educativos · Administraciones · ONGs",
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -124,15 +154,15 @@ export const CtaOutro: React.FC<CtaOutroProps> = ({
   const urlAnim = useFadeIn(40);
   const urlGlow = useGlow(0.5, 1, 0.05, 0);
 
-  // Entrada en muelle del panel central
   const panelIn = spring({ frame: frame - 4, fps, config: { damping: 18, stiffness: 90 } });
+  const chips = buildChips(projectChips, profileChips);
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.primary, fontFamily: FONTS.family }}>
-      {/* Fondo: fotos rotando (proyectos reales) */}
+      {/* Fondo: fotos rotando */}
       <RotatingImage images={images} maxSecondsPerImage={4} />
 
-      {/* Scrim de marca + viñeta para que nada compita con el texto */}
+      {/* Scrim de marca + viñeta */}
       <AbsoluteFill
         style={{
           background:
@@ -147,16 +177,11 @@ export const CtaOutro: React.FC<CtaOutroProps> = ({
       />
 
       {/* Chips flotantes (tipos de proyecto + importes + perfiles) */}
-      <FloatingChips />
+      <FloatingChips chips={chips} />
 
-      {/* Panel central — siempre legible por encima de todo */}
+      {/* Panel central */}
       <AbsoluteFill
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          zIndex: 2,
-        }}
+        style={{ display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2 }}
       >
         <div
           style={{
@@ -176,7 +201,6 @@ export const CtaOutro: React.FC<CtaOutroProps> = ({
             maxWidth: 1250,
           }}
         >
-          {/* Tag */}
           <div
             style={{
               ...tagAnim,
@@ -190,10 +214,9 @@ export const CtaOutro: React.FC<CtaOutroProps> = ({
               textTransform: "uppercase",
             }}
           >
-            EU Funding School
+            {tagText}
           </div>
 
-          {/* Headline */}
           <h1
             style={{
               ...headAnim,
@@ -203,14 +226,12 @@ export const CtaOutro: React.FC<CtaOutroProps> = ({
               lineHeight: 1.05,
               fontWeight: FONTS.weights.extraBold,
               color: COLORS.white,
+              maxWidth: 1050,
             }}
           >
-            Conoce <span style={{ color: COLORS.accent }}>todas</span>
-            <br />
-            las posibilidades
+            {renderHeadline(headline, accentWord)}
           </h1>
 
-          {/* Perfiles destinatarios */}
           <p
             style={{
               ...profilesAnim,
@@ -221,10 +242,9 @@ export const CtaOutro: React.FC<CtaOutroProps> = ({
               opacity: profilesAnim.opacity * 0.85,
             }}
           >
-            Empresas · Centros educativos · Administraciones · ONGs
+            {profilesLine}
           </p>
 
-          {/* URL */}
           <div
             style={{
               ...urlAnim,
@@ -241,7 +261,6 @@ export const CtaOutro: React.FC<CtaOutroProps> = ({
         </div>
       </AbsoluteFill>
 
-      {/* Barra de acento inferior */}
       <div
         style={{
           position: "absolute",

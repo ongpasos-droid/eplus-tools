@@ -10,6 +10,16 @@ interface AudioManifestEntry {
   duration: number | null;
 }
 
+interface CtaContent {
+  audioFile?: string;
+  projectChips?: string[];
+  profileChips?: string[];
+  tagText?: string;
+  headline?: string;
+  accentWord?: string;
+  profilesLine?: string;
+}
+
 interface LessonWithCtaProps {
   data: LessonData;
   audioFolder?: string;
@@ -18,6 +28,7 @@ interface LessonWithCtaProps {
   sfxTransition?: string;
   ctaImages: string[];
   ctaDurationFrames: number;
+  ctaContent?: CtaContent;
 }
 
 /**
@@ -33,6 +44,7 @@ export const LessonWithCta: React.FC<LessonWithCtaProps> = ({
   sfxTransition,
   ctaImages,
   ctaDurationFrames,
+  ctaContent,
 }) => {
   const { fps } = useVideoConfig();
   const lessonFrames = calculateTotalFrames(data, fps, audioManifest);
@@ -49,7 +61,7 @@ export const LessonWithCta: React.FC<LessonWithCtaProps> = ({
         />
       </Series.Sequence>
       <Series.Sequence durationInFrames={ctaDurationFrames}>
-        <CtaOutro images={ctaImages} />
+        <CtaOutro images={ctaImages} {...ctaContent} />
       </Series.Sequence>
     </Series>
   );

@@ -120,8 +120,37 @@ scripts/generate-audio.js    → TTS ElevenLabs (--speed)
 public/images/bank/          → banco (gitignored, regenerable)
 ```
 
-## 11. Próximos saltos (pendientes)
+## 11. Multi-idioma (patrón PROBADO — inglés ya hecho)
 
-- **Multi-idioma:** mismo `LessonData` + themes; traducir `narration` y textos en pantalla; regenerar audio por idioma; render `<id>-<lang>.mp4`. El motor se re-temporiza solo.
-- **Comando de producción en masa:** `npm run produce -- --script X --langs es,en,fr`.
+Cada idioma es una **capa fina** sobre el mismo motor. El banco de imágenes y los
+componentes se reutilizan tal cual; solo cambian textos + narración + audio.
+Referencia viva: `ka3-que-es.ts` (ES) ↔ `ka3-que-es-en.ts` (EN).
+
+**Pasos para añadir un idioma `<lang>` (ej. `fr`):**
+
+1. **Lección traducida:** copiar `src/lessons/<id>.ts` → `src/lessons/<id>-<lang>.ts`.
+   - Traducir TODO el texto visible (`title`, `subtitle`, `tag`, `text`, `bullets`,
+     `steps[].description`, `stats[].label`/`suffix`) **y** `narration`.
+   - **No tocar** `theme`, `type`, `variant`, `imagePosition` (son agnósticos al idioma → mismas imágenes).
+2. **Audio del idioma:**
+   `node scripts/generate-audio.js --lesson <id>-<lang> --provider elevenlabs --speed 1.12`
+   `cp src/audio/<id>-<lang>/*.ogg public/audio/<id>-<lang>/`
+   - Misma voz (`eleven_multilingual_v2` habla ~29 idiomas). Si se quiere voz nativa por idioma,
+     pasar otra `--voice <id>` o cambiar `ELEVENLABS_VOICE_ID`.
+3. **CTA del idioma:** crear `src/lessons/cta-outro-<lang>.ts` (solo `narration`), generar su audio,
+   y definir un objeto `cta<Lang>Content` con `audioFile`, `headline`, `accentWord`, `profilesLine`,
+   `projectChips`, `profileChips` traducidos (ver `ctaEnContent` en `Root.tsx`).
+   - `CtaOutro.tsx` recibe esos textos por props; el español es el default.
+4. **Registrar en `Root.tsx`:** importar lección + manifests (`<id>-<lang>` y `cta-outro-<lang>`),
+   `assignBankImages` (asignación independiente → 0 repeticiones también en ese idioma),
+   y una `<Composition id="<ID>-<LANG>">` con `LessonWithCta` (lección sin outro + `ctaContent`).
+5. **Render:** `npx remotion render src/index.ts <ID>-<LANG> out/<id>-<lang>.mp4`
+
+> El auto-timing re-ajusta solo: el audio de cada idioma tiene otra duración y los slides/captions
+> se recalculan. No hay tiempos que tocar a mano.
+
+## 12. Próximos saltos (pendientes)
+
+- **Comando de producción en masa:** `npm run produce -- --script X --langs es,en,fr` que automatice §11 en bucle.
 - **Vídeo de stock en movimiento:** Pexels Video API como fondo (la misma key sirve) — el siguiente nivel de "siempre pasando algo".
+- **Voces nativas por idioma:** opcional, mapa `lang → ELEVENLABS_VOICE_ID`.
