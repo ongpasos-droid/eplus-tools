@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "910659",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / ALCÚDIA, L' / AYUNTAMIENTO DE ALCÚDIA, L'",
+  "nuts_codes": [
+    "ES52"
+  ],
+  "nuts_primary": "ES52",
+  "title": "Decreto de la Alcaldía en funciones del Ayuntamiento de l’Alcúdia 945/2026, por el que se convocan becas de formación del programa «L’Alcúdia et Beca 2026» para estudiantes universitarios y de ciclos formativos de grado superior",
+  "title_lang": "es",
+  "summary": "Educación",
+  "status": "open",
+  "publication_date": "2026-06-04",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 10200,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "85",
+      "descripcion": "Educación"
+    }
+  ],
+  "apply_url": "https://opensea.lalcudia.com:8443/OpenSEA/login.jsp",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910659",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en lengua cooficial",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.lalcudia.com/ajuntament/portaltransparencia/190523_Ordenanca%20general%20de%20subvencions%20i%20premis%20de%20lAlcudia%20BOP%20N%2077%20DE%2025-04-2022.pdf",
+  "text_inicio": "El día siguiente al de la publicación del extracto de la convocatoria en el BOP",
+  "text_fin": "Diez días naturales contados a partir del día siguiente al de la publicación del BOP",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-05T04:06:47.118Z"
+}

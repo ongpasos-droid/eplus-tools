@@ -1,0 +1,64 @@
+{
+  "id": 1110108,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SANT CUGAT DEL VALLÈS",
+    "nivel3": "ORGANISME MUNICIPAL D'EDUCACIÓ DE SANT CUGAT DEL VALLÈS"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "908547",
+  "fechaRecepcion": "2026-05-27",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 58900,
+  "mrr": false,
+  "descripcion": "Convocatoria para la concesión de subvenciones, en régimen de concurrencia no competitiva, para proyectos del Plan Educativo de Entorno 2025-2026 del Organismo Autónomo Municipal de Educación del Ayuntamiento de Sant Cugat del Vallès.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES51 - CATALUÑA"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "BASES REGULADORAS DE LA CONVOCATORIA PARA LA CONCESIÓN DE SUBVENCIONES, EN RÉGIMEN DE CONCURRENCIA NO COMPETITIVA, PARA PROYECTOS DEL PLA EDUCATIU D’ENTORN 2025-2026 DEL ORGANISME AUTÒNOM MUNICIPAL D’EDUCACIÓ DE SANT CUGAT DEL VALLÈS.",
+  "urlBasesReguladoras": "https://seu.santcugat.cat/seu/ProcedimientoTabs.aspx?tab=1&idProc=258&idnct=492&x=ikQGfMPby% 2fPXHH8TAq4wZQ",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-01",
+  "fechaFinSolicitud": "2026-06-30",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1462902,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convocatòria subvencions PEE.pdf",
+      "long": 949195,
+      "datMod": "2026-05-27",
+      "datPublicacion": "2026-06-04"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,92 @@
+{
+  "id": 1112117,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "PAMPLONA/IRUÑA",
+    "nivel3": "AYUNTAMIENTO DE PAMPLONA/IRUÑA"
+  },
+  "sedeElectronica": "https://sedeelectronica.pamplona.es",
+  "codigoBDNS": "910556",
+  "fechaRecepcion": "2026-06-04",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 50000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DE AYUDAS A ASOCIACIONES DEL SECTOR TURÍSTICO PARA LA REALIZACIÓN DE ACTIVIDADES DE DINAMIZACIÓN, PROMOCIÓN Y ASESORAMIENTO TURÍSTICO DEL 01 DE OCTUBRE DE 2025 A 30 SEPTIEMBRE DE 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades asociativas",
+      "codigo": "94"
+    },
+    {
+      "descripcion": "HOSTELERÍA",
+      "codigo": "I"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES22 - COMUNIDAD FORAL DE NAVARRA"
+    }
+  ],
+  "descripcionFinalidad": "Comercio, Turismo y Pymes",
+  "descripcionBasesReguladoras": "Aprobación definitiva de la ordenanza general de subvenciones del Excelentísimo Ayuntamiento de Pamplona",
+  "urlBasesReguladoras": "https://bon.navarra.es/es/anuncio/-/texto/2006/21/23",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir del día siguiente de la publicación de esta convocatoria en el Boletín Oficial de Navarra",
+  "textFin": "Plazo de un mes a partir del día siguiente publicación convocatoria en Boletín Oficial de Navarra",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1469279,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "CC_Subvención.PDF",
+      "long": 1054264,
+      "datMod": "2026-06-04",
+      "datPublicacion": "2026-06-04"
+    },
+    {
+      "id": 1469282,
+      "descripcion": "Anexos castellano",
+      "nombreFic": "ANEXOS CASTELLANO.pdf",
+      "long": 1276969,
+      "datMod": "2026-06-04",
+      "datPublicacion": "2026-06-04"
+    },
+    {
+      "id": 1469281,
+      "descripcion": "Anexos euskera",
+      "nombreFic": "FUSIÓN ANEXOS EUS.PDF",
+      "long": 568745,
+      "datMod": "2026-06-04",
+      "datPublicacion": "2026-06-04"
+    },
+    {
+      "id": 1469280,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "CC_Subvención_EUS.pdf",
+      "long": 838680,
+      "datMod": "2026-06-04",
+      "datPublicacion": "2026-06-04"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

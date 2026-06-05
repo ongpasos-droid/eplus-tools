@@ -1,0 +1,88 @@
+{
+  "id": 1112137,
+  "organo": {
+    "nivel1": "OTROS",
+    "nivel2": "UNIVERSITAT DE VALÈNCIA (ESTUDI GENERAL)",
+    "nivel3": null
+  },
+  "sedeElectronica": "https://www.uv.es/seu-electronica/ca/electronica-uv.html",
+  "codigoBDNS": "910576",
+  "fechaRecepcion": "2026-06-04",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 1500,
+  "mrr": false,
+  "descripcion": "XIV Ed. del Premio Jane Addams a la inclusión de la perspectiva de género en Trabajos de Fin de Grado (TFG) en la Facultad de Ciencias Sociales, curso 25-26",
+  "descripcionLeng": "XIV Ed. del Premi Jane Addams a la inclusió de la perspectiva de gènere en Treballs de Fi de Grau (TFG) en la Facultat de Ciències Socials, curs 25-26",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades auxiliares a la educación",
+      "codigo": "85.6"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES523 - Valencia / València"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Resolución de la decana de la Facultad de Ciencias Sociales de la UV por la cual convoca la XIV Ed. del Premio Jane Addams a la inclusión de la perspectiva de género en los TFG de la F. de CC Sociales, curso 25-26",
+  "urlBasesReguladoras": "https://go.uv.es/FAz6hDq",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Inicia al día siguiente de la publicación en el DOGV",
+  "textFin": "Finaliza el 30 de septiembre de 2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1469352,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "resolucion_y_bases-cs.pdf",
+      "long": 325879,
+      "datMod": "2026-06-04",
+      "datPublicacion": "2026-06-04"
+    },
+    {
+      "id": 1469355,
+      "descripcion": "Modelo de solicitud en castellano",
+      "nombreFic": "impreso-solicitud-cs.pdf",
+      "long": 115485,
+      "datMod": "2026-06-04",
+      "datPublicacion": "2026-06-04"
+    },
+    {
+      "id": 1469354,
+      "descripcion": "Modelo solicitud en valenciano",
+      "nombreFic": "impres-sol.licitud-val.pdf",
+      "long": 170837,
+      "datMod": "2026-06-04",
+      "datPublicacion": "2026-06-04"
+    },
+    {
+      "id": 1469353,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "resolucio_i_bases-val.pdf",
+      "long": 346868,
+      "datMod": "2026-06-04",
+      "datPublicacion": "2026-06-04"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

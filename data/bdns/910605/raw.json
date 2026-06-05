@@ -1,0 +1,72 @@
+{
+  "id": 1112166,
+  "organo": {
+    "nivel1": "OTROS",
+    "nivel2": "UNIVERSITAT DE VALÈNCIA (ESTUDI GENERAL)",
+    "nivel3": null
+  },
+  "sedeElectronica": "https://www.uv.es/seu-electronica/ca/electronica-uv.html#",
+  "codigoBDNS": "910605",
+  "fechaRecepcion": "2026-06-04",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 350000,
+  "mrr": false,
+  "descripcion": "Programa de movilidad Erasmus Prácticas de la UV para el curso 2026-27",
+  "descripcionLeng": "Programa de mobilitat Erasmus Pràctiques de la UV per al curs 2026-27",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Educación terciaria",
+      "codigo": "85.4"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES523 - Valencia / València"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Resolución de la vicerectora de Internacionalitzación, Cooperación y Multilingüísmo de la UV por la que se aprueba la convocatoria del programa de movilidad Erasmus Prácticas de la Universitat de València para el curso académico 2026-27",
+  "urlBasesReguladoras": "https://links.uv.es/h7qPdqB",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Inicia al día siguiente de la publicación en el DOGV",
+  "textFin": "Hay cuatro plazos: hasta 10/7/26  del 5 al 23/10/26  del 18/1 al 5/2/27 y del 15 al 30/4/27",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1469402,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "convocatoria_valenciano.pdf",
+      "long": 432328,
+      "datMod": "2026-06-04",
+      "datPublicacion": "2026-06-04"
+    },
+    {
+      "id": 1469401,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "convocatoria_castellano.pdf",
+      "long": 405628,
+      "datMod": "2026-06-04",
+      "datPublicacion": "2026-06-04"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,77 @@
+{
+  "source": "bdns",
+  "source_id": "910556",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / PAMPLONA/IRUÑA / AYUNTAMIENTO DE PAMPLONA/IRUÑA",
+  "nuts_codes": [
+    "ES22"
+  ],
+  "nuts_primary": "ES22",
+  "title": "CONVOCATORIA DE AYUDAS A ASOCIACIONES DEL SECTOR TURÍSTICO PARA LA REALIZACIÓN DE ACTIVIDADES DE DINAMIZACIÓN, PROMOCIÓN Y ASESORAMIENTO TURÍSTICO DEL 01 DE OCTUBRE DE 2025 A 30 SEPTIEMBRE DE 2026",
+  "title_lang": "es",
+  "summary": "Comercio, Turismo y Pymes",
+  "status": "open",
+  "publication_date": "2026-06-04",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 50000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "94",
+      "descripcion": "Actividades asociativas"
+    },
+    {
+      "codigo": "I",
+      "descripcion": "HOSTELERÍA"
+    }
+  ],
+  "apply_url": "https://sedeelectronica.pamplona.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910556",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Anexos castellano",
+      "url": null
+    },
+    {
+      "label": "Anexos euskera",
+      "url": null
+    },
+    {
+      "label": "Texto en otra lengua de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://bon.navarra.es/es/anuncio/-/texto/2006/21/23",
+  "text_inicio": "A partir del día siguiente de la publicación de esta convocatoria en el Boletín Oficial de Navarra",
+  "text_fin": "Plazo de un mes a partir del día siguiente publicación convocatoria en Boletín Oficial de Navarra",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-05T04:06:47.091Z"
+}

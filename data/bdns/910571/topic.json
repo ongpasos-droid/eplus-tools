@@ -1,0 +1,89 @@
+{
+  "source": "bdns",
+  "source_id": "910571",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / EIVISSA / AYUNTAMIENTO DE EIVISSA",
+  "nuts_codes": [
+    "ES531"
+  ],
+  "nuts_primary": "ES531",
+  "title": "Acuerdo del día 01 de junio de 2026 de la Junta de Gobierno Local del Ayuntamiento de Ibiza que aprueba la convocatoria de ayudas para la adquisición del libros de texto para el alumnado del municipio de Eivissa 2026",
+  "title_lang": "es",
+  "summary": "Educación",
+  "status": "open",
+  "publication_date": "2026-06-04",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 100000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "Q",
+      "descripcion": "EDUCACIÓN"
+    }
+  ],
+  "apply_url": "https://eivissa.sedelectronica.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910571",
+  "documents": [
+    {
+      "label": "Relació classificada de despeses i inversions (M210)",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en lengua cooficial",
+      "url": null
+    },
+    {
+      "label": "Relación clasificada de gastos e inversiones (M210)",
+      "url": null
+    },
+    {
+      "label": "Sol·licitud d'alta dades bancàries",
+      "url": null
+    },
+    {
+      "label": "Declaración responsable (M240)",
+      "url": null
+    },
+    {
+      "label": "Declaració responsable (M240)",
+      "url": null
+    },
+    {
+      "label": "Solicitud alta datos bancarios",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.caib.es/eboibfront/pdf/es/2026/49/1217181",
+  "text_inicio": "15 días hábiles contados a partir del siguiente al de la publicación de esta convocatoria en el BOIB",
+  "text_fin": "15 días hábiles contados a partir del siguiente al de la publicación de esta convocatoria en el BOIB",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-05T04:06:47.096Z"
+}

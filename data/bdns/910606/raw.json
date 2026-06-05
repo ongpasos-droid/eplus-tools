@@ -1,0 +1,76 @@
+{
+  "id": 1112167,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "DIPUTACIÓN FORAL DE BIZKAIA",
+    "nivel3": "DIPUTACIÓN FORAL DE BIZKAIA"
+  },
+  "sedeElectronica": "https://www.ebizkaia.eus/es/catalogo-de-tramites-y-servicios",
+  "codigoBDNS": "910606",
+  "fechaRecepcion": "2026-06-04",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 40000,
+  "mrr": false,
+  "descripcion": "DECRETO FORAL 56/2026, de 4 de junio, de la Diputación Foral de Bizkaia por el que se establecen las bases reguladoras y la convocatoria para el 2026 de las ayudas para el fomento de la apicultura en el Territorio Histórico de Bizkaia.",
+  "descripcionLeng": "Bizkaiko Foru Aldundiaren 56/2026 FORU DEKRETUA, ekainaren 4koa. Horren bidez, Bizkaiko Lurralde Historikoan erlezaintza sustatzeko 2026rako laguntzen oinarri arautzaileak eta deialdia ezartzen dira.",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "AGRICULTURA, GANADERÍA, SILVICULTURA Y PESCA",
+      "codigo": "A"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES213 - Bizkaia"
+    }
+  ],
+  "descripcionFinalidad": "Agricultura, Pesca y Alimentación",
+  "descripcionBasesReguladoras": "DECRETO FORAL de la Diputación Foral de Bizkaia por el que se establecen las bases reguladoras y la convocatoria para el 2026 de las ayudas para el fomento de la apicultura en el Territorio Histórico de Bizkaia.",
+  "urlBasesReguladoras": "HTTPS://WWW.BIZKAIA.EUS/ES/BOB",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-11",
+  "fechaFinSolicitud": "2026-06-24",
+  "textInicio": "10 días hábiles desde el día siguiente a la publicación en el BOB",
+  "textFin": "10 días hábiles desde el día siguiente a la publicación en el BOB",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [
+    {
+      "descripcion": "FEAGA - FONDO EUROPEO AGRÍCOLA DE GARANTÍA"
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1469408,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "00 DF Bases y Convo apicultura 2026 EKIN 2_1778843692402_20260521_114743.pdf",
+      "long": 630264,
+      "datMod": "2026-06-04",
+      "datPublicacion": "2026-06-04"
+    },
+    {
+      "id": 1469407,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "00 DF Bases y Convo apicultura 2026 EKIN 2_1778843692402_20260521_114743.pdf",
+      "long": 630264,
+      "datMod": "2026-06-04",
+      "datPublicacion": "2026-06-04"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

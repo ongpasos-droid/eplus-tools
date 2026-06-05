@@ -1,0 +1,67 @@
+{
+  "id": 1112090,
+  "organo": {
+    "nivel1": "ESTADO",
+    "nivel2": "MINISTERIO DE LA PRESIDENCIA, JUSTICIA Y RELACIONES CON LAS CORTES",
+    "nivel3": "CENTRO DE ESTUDIOS POLÍTICOS Y CONSTITUCIONALES"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "910529",
+  "fechaRecepcion": "2026-06-04",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 137960,
+  "mrr": false,
+  "descripcion": "Convocatoria de un máximo de 13 ayudas a la formación para jóvenes con titulación universitaria superior en el marco del Máster Universitario Oficial de Derecho Constitucional.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES - ESPAÑA "
+    },
+    {
+      "descripcion": "XXX - Regiones o países no europeos, no contemplados en NUTS"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Orden PRE/1982/2010, de 15 de julio, por la que se aprueban las bases reguladoras para la concesión por el CEPC de ayudas o becas de formación de titulados universitarios superiores en Derecho Constitucional, Ciencia Política y otras áreas de interés.",
+  "urlBasesReguladoras": "https://www.boe.es/boe/dias/2010/07/22/pdfs/BOE-A-2010-11718.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Día siguiente de la publicación del extracto de la convocatoria en el BOE",
+  "textFin": "Decimoquinto día hábil, a las 14:00 horas de Madrid",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1469190,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "05 20260603 Resolución Convocatoria ayudas Máster 26-27 report.pdf",
+      "long": 765766,
+      "datMod": "2026-06-04",
+      "datPublicacion": "2026-06-04"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}
