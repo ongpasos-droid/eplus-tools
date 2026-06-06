@@ -1,0 +1,66 @@
+{
+  "source": "bdns",
+  "source_id": "911008",
+  "source_lang": "es",
+  "level": "otros",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "OTROS / UNIVERSIDAD DE SALAMANCA",
+  "nuts_codes": [
+    "ES411",
+    "ES415"
+  ],
+  "nuts_primary": "ES411",
+  "title": "CONVOCATORIA DE 20 BECAS PARA ESTUDIANTES DE GRADO EN MEDICINA DE LA UNIVERSIDAD DE SALAMANCA PARA REALIZACIÓN DE PRÁCTICAS ACADÉMICAS DEL PROGRAMA PRÁCTICAS ACADÉMICAS EXTERNAS DE MEDICINA EN EL MEDIO RURAL. CURSO 2025-26.",
+  "title_lang": "es",
+  "summary": "Educación",
+  "status": "open",
+  "publication_date": "2026-06-05",
+  "open_date": "2026-06-05",
+  "deadline": "2026-06-14",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 24000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "86",
+      "descripcion": "Actividades sanitarias"
+    },
+    {
+      "codigo": "85",
+      "descripcion": "Educación"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911008",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://becas.usal.es/normativa/Bases%20Reguladoras%20Ayudas%20USAL.pdf",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-06T04:05:45.049Z"
+}

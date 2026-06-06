@@ -1,0 +1,72 @@
+{
+  "id": 1112495,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "MONTMELÓ",
+    "nivel3": "AYUNTAMIENTO DE MONTMELÓ"
+  },
+  "sedeElectronica": "https://ajuntamentdemontmelo.eadministracio.cat/catalog/t/16e728a5-88fa-4e43-a556-c304e36b8723",
+  "codigoBDNS": "910934",
+  "fechaRecepcion": "2026-06-05",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 10000,
+  "mrr": false,
+  "descripcion": "APROBACIÓN CONVOCATORIA MEFO EMPRESAS 2026",
+  "descripcionLeng": "APROVACIÓ CONVOCATÒRIA MEFO EMPRESES 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades relacionadas con el empleo",
+      "codigo": "78"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES511 - Barcelona"
+    }
+  ],
+  "descripcionFinalidad": "Comercio, Turismo y Pymes",
+  "descripcionBasesReguladoras": "AprovacióN inicial de las bases reguladoras específicass para la concessión de subvenciones para el fomento de la contractación de personas paradas (Projecte MEFO-Empreses) de l'Ajuntament de Montmeló.",
+  "urlBasesReguladoras": "https://bop.diba.cat/anunci/3922357/aprovacio-inicial-de-les-bases-reguladores-especifiques-per-a-la-concessio-de-subvencions-per-al-foment-de-la-contractacio-de-persones-aturades-projecte-mefo-empreses-de-l-ajuntament-de-montmelo-ajuntament-de-montmelo",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-03",
+  "fechaFinSolicitud": "2026-12-31",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1470075,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Anunci Convocatòria MEFO Empreses 2026.docx",
+      "long": 48462,
+      "datMod": "2026-06-05",
+      "datPublicacion": "2026-06-05"
+    },
+    {
+      "id": 1470074,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Anuncio Convocatoria MEFO Empresas 2026.docx",
+      "long": 48794,
+      "datMod": "2026-06-05",
+      "datPublicacion": "2026-06-05"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

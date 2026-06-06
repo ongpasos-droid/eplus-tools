@@ -1,0 +1,88 @@
+{
+  "id": 1112498,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "IRURA",
+    "nivel3": "AYUNTAMIENTO DE IRURA"
+  },
+  "sedeElectronica": "https://www.irura.eus/eu",
+  "codigoBDNS": "910937",
+  "fechaRecepcion": "2026-06-05",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 2000,
+  "mrr": false,
+  "descripcion": "Convocatoria de Subvenciones a las familias del municipio de Irura para la realización de salidas escolares de niños/as matriculados en Educación Infantil, Primaria o ESO que en el curso 2025/2026.",
+  "descripcionLeng": "Irurako udalerriko familientzako dirulaguntzen deialdia, Haur Hezkuntzan, Lehen Hezkuntzan edo DBHn matrikulatutako haurren eskola-irteerak egiteko, 2025/2026 ikasturtean.",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES212 - Gipuzkoa"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Bases para la concesión de subvenciones a las familias del municipio de Irura, para la realización de salidas escolares de niños/as matriculados en Educación Infantil, Primaria o ESO.",
+  "urlBasesReguladoras": "https://www.irura.eus/eu/hasiera",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Argitaratu eta hurrengo egunetik hasita / Desde el dia siguiente de la fecha de publicación",
+  "textFin": "20 lanegun / 20 dias habiles",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1470117,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "DEIALDIA 2026.pdf",
+      "long": 317123,
+      "datMod": "2026-06-05",
+      "datPublicacion": "2026-06-05"
+    },
+    {
+      "id": 1470118,
+      "descripcion": "Bases",
+      "nombreFic": "Oinarriak.pdf",
+      "long": 312562,
+      "datMod": "2026-06-05",
+      "datPublicacion": "2026-06-05"
+    },
+    {
+      "id": 1470116,
+      "descripcion": "Eskaera orria",
+      "nombreFic": "ESKAERA elebiz.pdf",
+      "long": 193268,
+      "datMod": "2026-06-05",
+      "datPublicacion": "2026-06-05"
+    },
+    {
+      "id": 1470115,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "DEIALDIA 2026.pdf",
+      "long": 317123,
+      "datMod": "2026-06-05",
+      "datPublicacion": "2026-06-05"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

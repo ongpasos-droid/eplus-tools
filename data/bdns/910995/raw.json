@@ -1,0 +1,72 @@
+{
+  "id": 1112556,
+  "organo": {
+    "nivel1": "OTROS",
+    "nivel2": "UNIVERSIDAD JAUME I DE CASTELLÓN",
+    "nivel3": null
+  },
+  "sedeElectronica": "ujiapps.uji.es/seu/info-adm/tao/convocatoriesRH?pArId=86528",
+  "codigoBDNS": "910995",
+  "fechaRecepcion": "2026-06-05",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 4086.72,
+  "mrr": false,
+  "descripcion": "Dos becas de iniciación a la investigación a cargo del proyecto «MODALITAT B: NOVES AJUDES COMPLEMENTÀRIES ALS PROJECTES D’INVESTIGACIÓ CAPTATS PEL PERSONAL INVESTIGADOR DE LA UNIVERSITAT JAUME I DINS DEL PEICTI (ACCIÓ 5.1)» – Código 24I632",
+  "descripcionLeng": "Dues beques d’iniciació a la investigació a càrrec del projecte «MODALITAT B: NOVES AJUDES COMPLEMENTÀRIES ALS PROJECTES D’INVESTIGACIÓ CAPTATS PEL PERSONAL INVESTIGADOR DE LA UNIVERSITAT JAUME I DINS DEL PEICTI (ACCIÓ 5.1)» – Codi 24I632",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Educación terciaria",
+      "codigo": "85.4"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES52 - COMUNIDAD VALENCIANA"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Dos becas de iniciación a la investigación a cargo del proyecto «MODALITAT B: NOVES AJUDES COMPLEMENTÀRIES ALS PROJECTES D’INVESTIGACIÓ CAPTATS PEL PERSONAL INVESTIGADOR DE LA UNIVERSITAT JAUME I DINS DEL PEICTI (ACCIÓ 5.1)» – Código 24I632",
+  "urlBasesReguladoras": "ujiapps.uji.es/seu/info-adm/tao/convocatoriesRH?pArId=86528",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Periodo de entrega de solicitudes abierto desde  hasta .",
+  "textFin": "Periodo de de entrega de solicitudes cerrado el dia .",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1470265,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "24I632_C_V2.pdf",
+      "long": 231684,
+      "datMod": "2026-06-05",
+      "datPublicacion": "2026-06-05"
+    },
+    {
+      "id": 1470264,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "24I632_Ccs_V2.pdf",
+      "long": 232991,
+      "datMod": "2026-06-05",
+      "datPublicacion": "2026-06-05"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

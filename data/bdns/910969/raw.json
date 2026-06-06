@@ -1,0 +1,64 @@
+{
+  "id": 1112530,
+  "organo": {
+    "nivel1": "OTROS",
+    "nivel2": "UNIVERSIDAD DE LEÓN",
+    "nivel3": null
+  },
+  "sedeElectronica": "https://servicios.unileon.es/actividad-estudiantil/convocatoria-de-ayudas-de-alojamiento-en-los-colegios-mayores-san-isidoro-y-la-tebaida-para-deportistas-curso-2026-2027/",
+  "codigoBDNS": "910969",
+  "fechaRecepcion": "2026-06-05",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 32200,
+  "mrr": false,
+  "descripcion": "Convocatoria de 5 de junio de 2026, del Rectorado de la Universidad de León, por la que se convocan 6 ayudas de de alojamiento en los Colegios Mayores San Isidoro y la Tebaida para deportistas en el curso 2026-2027.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES413 - León"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Bases Reguladoras de las becas y ayudas para estudiantes de Grado y Máster de la Universidad de León publicadas en el B.O.C. y L. del 08/11/2024, la Ley 38/2003, de 17 de noviembre, General de Subvenciones y el resto de la normativa vigente aplicable.",
+  "urlBasesReguladoras": "chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.unileon.es/modelos/archivo/norregint/202411413481884_n_bases_reguladoras_para_estudiantes_de_grado_y_master.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-05",
+  "fechaFinSolicitud": "2026-07-13",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1470206,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Bases Becas Colegio mayor deportistas 26_27.report.pdf",
+      "long": 301271,
+      "datMod": "2026-06-05",
+      "datPublicacion": "2026-06-05"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

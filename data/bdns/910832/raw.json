@@ -1,0 +1,68 @@
+{
+  "id": 1112393,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "PATERNA",
+    "nivel3": "AYUNTAMIENTO DE PATERNA"
+  },
+  "sedeElectronica": "https://sede.paterna.es/opensiac/informacionpublica/tramites_enter.action#34",
+  "codigoBDNS": "910832",
+  "fechaRecepcion": "2026-06-05",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 50000,
+  "mrr": false,
+  "descripcion": "Convocatoria solicitud ayudas 2026 para fomento proyectos educativos innovadores y/o buenas prácticas en centros educativos de Paterna, que vayan en consonancia con los objetivos de la Carta de Ciudades Educadoras y Plan Local de Infancia y Adolescencia",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    },
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES523 - Valencia / València"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Ordenanza reguladora de las Bases que rigen la concesión de ayudas a proyectos educativos innovadores realizados por centros educativos del municipio de Paterna",
+  "urlBasesReguladoras": "https://sede.paterna.es/opensiac/informacionpublica/infopublica.action?edictos=1#l1",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "22/06/2026",
+  "textFin": "30/09/2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1469839,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "TEXTO ÍNTEGRO CONVOCATORIA AYUDAS ECONÓMICAS PARA EL FOMENTO DE PROYECTOS EDUCATIVOS INNOVADORES YO BUENAS PRÁCTICAS EN CENTROS EDUCATIVOS DEL MUNICIPIO DE PATERNA, QUE VAYAN EN CONSONANCIA CON LOS OBJETIVOS DE LA CARTA DE.pdf",
+      "long": 222490,
+      "datMod": "2026-06-05",
+      "datPublicacion": "2026-06-05"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

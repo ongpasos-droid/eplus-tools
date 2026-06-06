@@ -1,0 +1,59 @@
+{
+  "source": "bdns",
+  "source_id": "910984",
+  "source_lang": "es",
+  "level": "otros",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "OTROS / UNIVERSIDAD DE SALAMANCA",
+  "nuts_codes": [],
+  "nuts_primary": null,
+  "title": "Resolución del Vicerrectorado de Estudiantes, Inclusión, Igualdad y\nCompromiso Social, por la que se convocan becas de colaboración en servicios universitarios durante el\ncurso académico 2026/2027, Anexo 2.",
+  "title_lang": "es",
+  "summary": "Educación",
+  "status": "open",
+  "publication_date": "2026-06-05",
+  "open_date": null,
+  "deadline": "2026-09-30",
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 14726.8,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "Q",
+      "descripcion": "EDUCACIÓN"
+    }
+  ],
+  "apply_url": "https://sede.usal.es/procedimientos?param1=BECOSA",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910984",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://becas.usal.es/normativa/Bases%20Reguladoras%20Ayudas%20USAL.pdf",
+  "text_inicio": "A partir del día siguiente a la publicación en BOCYL",
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-06T04:05:45.039Z"
+}

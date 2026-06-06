@@ -1,0 +1,69 @@
+{
+  "source": "bdns",
+  "source_id": "911097",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / ALMORADÍ / AYUNTAMIENTO DE ALMORADÍ",
+  "nuts_codes": [
+    "ES521"
+  ],
+  "nuts_primary": "ES521",
+  "title": "EXP. 4424/2026.- CONVOCATORIA PARA LA CONCESIÓN, EN REGIMEN DE CONCURRENCIA COMPETITIVA, DE LOS PREMIOS DEL VIII CONCURSO DEL CARTEL ANUNCIADOR DEL LIBRO DE LA FERIA Y FIESTAS EN HONOR A LOS SANTOS ABDÓN Y SENÉN, ANUALIDAD 2026.",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-06-05",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 450,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "90.3",
+      "descripcion": "Actividades de apoyo a la creación artística y a las artes escénicas"
+    }
+  ],
+  "apply_url": "www.almoradi.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911097",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Bases reguladoras.",
+      "url": null
+    },
+    {
+      "label": "Modelo solicitud participación convocatoria.",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://almoradi.sedelectronica.es/board/",
+  "text_inicio": "Día siguiente a la publicación del extracto de la convocatoria en el B.O.P. de Alicante.",
+  "text_fin": "Finalizará el 17 de junio de 2026.",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-06T04:05:45.076Z"
+}

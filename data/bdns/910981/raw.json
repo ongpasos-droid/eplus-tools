@@ -1,0 +1,72 @@
+{
+  "id": 1112542,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "CATALUÑA",
+    "nivel3": "AGENCIA DE LA VIVIENDA DE CATALUÑA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "910981",
+  "fechaRecepcion": "2026-06-05",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 1160000,
+  "mrr": false,
+  "descripcion": "Resolución TER//2026, de 4 de junio, por la que se abre la convocatoria para la concesión, en régimen de concurrencia pública no competitiva, de las subvenciones para obras de adecuación en el interior de las viviendas para personas mayores para el 2026",
+  "descripcionLeng": "Resolució TER/ /2026, de 4 de juny, per la qual s’obre la convocatòria per a la concessió, en règim de concurrència pública no competitiva, de les subvencions per a obres d’arranjament en l’interior dels habitatges per a persones grans per a l’any 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Administración pública y de la política económica, social y medioambiental",
+      "codigo": "84.1"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES51 - CATALUÑA"
+    }
+  ],
+  "descripcionFinalidad": "Acceso a la vivienda y fomento de la edificación",
+  "descripcionBasesReguladoras": "RESOLUCIÓN TES/1095/2020, de 19 de mayo, por la que se aprueban las bases reguladoras para la concesión, en régimen de concurrencia pública no competitiva, de subvenciones para obras de adecuación en el interior de las viviendas para personas mayores",
+  "urlBasesReguladoras": "https://dogc.gencat.cat/es/document-del-dogc/index.html?documentId=873726",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-07-01",
+  "fechaFinSolicitud": "2026-09-30",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1470234,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "260604 CAT_CONV_RehabSubvPersonesGrans_2026.pdf",
+      "long": 287601,
+      "datMod": "2026-06-05",
+      "datPublicacion": "2026-06-05"
+    },
+    {
+      "id": 1470233,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "260604 CAST_CONV_RehabSubvPersonesGrans_2026.pdf",
+      "long": 119765,
+      "datMod": "2026-06-05",
+      "datPublicacion": "2026-06-05"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}
