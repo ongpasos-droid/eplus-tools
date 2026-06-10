@@ -1,0 +1,104 @@
+{
+  "id": 1113163,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "FUENTES DE EBRO",
+    "nivel3": "AYUNTAMIENTO DE FUENTES DE EBRO"
+  },
+  "sedeElectronica": "https://fuentesdeebro.sedelectronica.es",
+  "codigoBDNS": "911602",
+  "fechaRecepcion": "2026-06-09",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 25000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DE SUBVENCIONES EN MATERIA DE DEPORTES. DEPORTE FEDERADO. TEMPORADA 2025-2026.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES24 - ARAGON"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "Convocatoria de Subvenciones en materia de DEPORTES. DEPORTE FEDERADO. TEMPORADA 2025-2026.",
+  "urlBasesReguladoras": "https://fuentesdeebro.sedelectronica.es",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Día siguiente a la publicación de la convocatoria en el Boletín Oficial de la Provincia",
+  "textFin": "Decimoquinto día desde la publicación de la convocatoria en el Boletín Oficial de la Provincia",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472131,
+      "descripcion": "ANEXO IV CERTIFICACION DE GASTOS",
+      "nombreFic": "ANEXO IV CERTIFICACION GASTOS.pdf",
+      "long": 437914,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1472118,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "20260608_Otros_ANEXO 1 CONVOCATORIA PARA LA CONCESION DE SUBVENCIONES DEPORTES(1).pdf",
+      "long": 316906,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1472128,
+      "descripcion": "ANEXO III ACEPTACION",
+      "nombreFic": "ANEXO III ACEPTACION.pdf",
+      "long": 202932,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1472132,
+      "descripcion": "CERTIFICADO DC",
+      "nombreFic": "CERTIFICADO DC.pdf",
+      "long": 182172,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1472124,
+      "descripcion": "ANEXO 1 SOLICITUD",
+      "nombreFic": "ANEXO 1 SOLICITUD.pdf",
+      "long": 201859,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1472127,
+      "descripcion": "ANEXO II DECLARACION",
+      "nombreFic": "ANEXO II DECLARACION.pdf",
+      "long": 207226,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "911453",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / COMUNIDAD FORAL DE NAVARRA / DEPARTAMENTO DE DESARROLLO RURAL Y MEDIO AMBIENTE",
+  "nuts_codes": [
+    "ES22"
+  ],
+  "nuts_primary": "ES22",
+  "title": "Convocatoria para las ayudas a la mejora de la producción y comercialización de los productos de la apicultura en el marco de la Intervención Sectorial Apícola, recogida en el PEPAC, para la campaña del año 2026",
+  "title_lang": "es",
+  "summary": "Agricultura, Pesca y Alimentación",
+  "status": "open",
+  "publication_date": "2026-06-09",
+  "open_date": "2026-07-11",
+  "deadline": "2026-08-03",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 134053.12,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "01.4",
+      "descripcion": "Producción ganadera"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911453",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.navarra.es/es/tramites/on/-/line/ayudas-al-fomento-de-la-produccion-y-comercializacion-de-productos-apicolas-2026",
+  "text_inicio": "Al día siguiente de la publicación de la convocatoria en el BON",
+  "text_fin": "El plazo de la presentación de la solicitud de ayuda finalizará el 1 de agosto de 2026",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [
+    {
+      "descripcion": "FEAGA - FONDO EUROPEO AGRÍCOLA DE GARANTÍA"
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-10T04:07:58.363Z"
+}

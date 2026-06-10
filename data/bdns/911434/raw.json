@@ -1,0 +1,76 @@
+{
+  "id": 1112995,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SON SERVERA",
+    "nivel3": "AYUNTAMIENTO DE SON SERVERA"
+  },
+  "sedeElectronica": "https://sonservera.eadministracio.cat/info.0",
+  "codigoBDNS": "911434",
+  "fechaRecepcion": "2026-06-09",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 90000,
+  "mrr": false,
+  "descripcion": "Acuerdo de la Junta de Gobierno Local de 03/06/2026, por el que se aprueba la convocatoria de ayudas destinadas a familias para contribuir en los gastos derivados de la inscripción de niños y jóvenes a actividades deportivas y de ocio de verano 2026.",
+  "descripcionLeng": "Acord de la Junta de Govern Local de 03/06/2026, per el qual s'aprova la convocatòria d’ajudes destinades a famílies per contribuir en les despeses derivades de la inscripció d’infants i joves a activitats\nesportives i de lleure d’estiu per a l’any 2026.",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    },
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES532 - Mallorca"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "BASES DEL PROCEDIMIENTO DE CONCESIÓN DE AYUDAS DESTINADAS A FAMILIAS PARA CONTRIBUIR CON LOS GASTOS\nDERIVADOS DE LA INSCRIPCIÓN DE NIÑOS Y JÓVENES A ACTIVIDADES DEPORTIVAS Y DE OCIO DE VERANO",
+  "urlBasesReguladoras": "https://www.caib.es/eboibfront/es/2025/12116/702683/apro",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir del día siguiente al de la publicación del extracto de la convocatoria en el BOIB.",
+  "textFin": "Hasta agotar el crédito o el 30 de septiembre de 2026.",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1471627,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "20260608_Certificat_Certificat_CERTIFICAT 2026-0174 [Certificat acord JGL exp 4735 2026]-1.pdf",
+      "long": 388677,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1471640,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convocatòria 2026 CAST.pdf",
+      "long": 188272,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

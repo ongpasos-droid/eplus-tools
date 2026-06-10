@@ -1,0 +1,83 @@
+{
+  "id": 1113081,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "ARTEIXO",
+    "nivel3": "AYUNTAMIENTO DE ARTEIXO"
+  },
+  "sedeElectronica": "https://sede.arteixo.org/sxc/gl/",
+  "codigoBDNS": "911520",
+  "fechaRecepcion": "2026-06-09",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 42000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA PARA LA CONCESIÓN DE SUBVENCIONES MEDIANTE CONCURENCIA COMPETITIVA A LAS ENTIDADES LOCALES PARA LAS ACTIVIDADES Y EQUIPAMIENTOS CULTURALES PARA EL AÑO 2026 EN EL AYUNTAMIENTO DE ARTEIXO.",
+  "descripcionLeng": "CONVOCATORIA PARA A CONCESIÓN DE SUBVENCIÓNS MEDIANTE CONCORRENCIA COMPETITIVA ÁS ENTIDADES LOCAIS PARA AS ACTIVIDADES E EQUIPAMENTOS CULTURAIS PARA O ANO 2026 NO CONCELLO DE ARTEIXO.",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    },
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES111 - A Coruña"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "BASES PARA LA CONCESIÓN DE SUBVENCIONES A LAS ENTIDADES LOCALES MEDIANTE CONCURRENCIA COMPETITIVA PARA ACTIVIDADES Y EQUIPAMIENTOS CULTURALES EN EL AYUNTAMIENTO DE ARTEIXO",
+  "urlBasesReguladoras": "https://bop.dacoruna.gal/bopportal/publicado/2020/12/16/2020_0000009397.html",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "el día posterior a su publicación en el BOP",
+  "textFin": "15 días naturales a contar desde el día posterior a su publicación en el BOP",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1471931,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "CONVOCATORIA EN IDIOMA COOFICIAL.pdf",
+      "long": 310315,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1471932,
+      "descripcion": "MODELOS DE SOLICITUD Y JUSTIFICACIÓN DE LA SUBVENCIÓN",
+      "nombreFic": "ANEXOS DE SOLICITUDE E DE XUSTIFICACIÓN.pdf",
+      "long": 656288,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1471943,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "CONVOCATORIA EN CASTELLANO.pdf",
+      "long": 326466,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

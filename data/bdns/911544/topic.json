@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "911544",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / COMUNITAT VALENCIANA / SECRETARÍA AUTONÓMICA DE  FAMILIA Y SERVICIOS SOCIALES",
+  "nuts_codes": [
+    "ES52"
+  ],
+  "nuts_primary": "ES52",
+  "title": "RESOLUCIÓN de la Conselleria Servicios Sociales, Familia e Infancia, por la que se convocan para el ejercicio 2026, las subvenciones para la supresión de barreras arquitectónicas para personas mayores.",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-06-09",
+  "open_date": "2026-06-12",
+  "deadline": "2026-07-13",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 1092987.5,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "S",
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO"
+    }
+  ],
+  "apply_url": "https://sede.gva.es/va/detall-tramit?id_proc=G106842",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911544",
+  "documents": [
+    {
+      "label": "Texto en otra lengua de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://dogv.gva.es/datos/2024/06/06/pdf/2024_5268.pdf",
+  "text_inicio": "un mes contado a partir del día siguiente al de la publicación del extracto de la resolución",
+  "text_fin": "un mes contado a partir del día siguiente al de la publicación del extracto de la  resolución",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-10T04:07:58.393Z"
+}

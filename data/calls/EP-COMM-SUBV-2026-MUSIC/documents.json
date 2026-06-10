@@ -91,6 +91,13 @@
     "is_downloadable": true
   },
   {
+    "section": "Call document and annexes:",
+    "label": "Questions & Answers related to this Call",
+    "url": "https://www.europarl.europa.eu/contracts-and-grants/files/grants/media-and-events/2026/eye-village-coordination/en-qa-2026-eye-village.pdf",
+    "ext": ".pdf",
+    "is_downloadable": true
+  },
+  {
     "section": "Additional documents:",
     "label": "EU Financial Regulation 2024/2509",
     "url": "https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=OJ:L_202402509",

@@ -1,0 +1,89 @@
+{
+  "source": "bdns",
+  "source_id": "911596",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / JIJONA/XIXONA / AYUNTAMIENTO DE JIJONA/XIXONA",
+  "nuts_codes": [
+    "ES521"
+  ],
+  "nuts_primary": "ES521",
+  "title": "Resol. 2026/807 de 29 de mayo, del Concejal delegado de Comercio del Ayuntamiento de Xixona, por la que se aprueba la convocatoria de ayudas a las inversiones en los establecimientos comerciales y de servicios de la ciudad de Xixona.",
+  "title_lang": "es",
+  "summary": "Comercio, Turismo y Pymes",
+  "status": "open",
+  "publication_date": "2026-06-09",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 30000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "O",
+      "descripcion": "ACTIVIDADES ADMINISTRATIVAS Y SERVICIOS AUXILIARES"
+    },
+    {
+      "codigo": "S",
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO"
+    },
+    {
+      "codigo": "L",
+      "descripcion": "ACTIVIDADES FINANCIERAS Y DE SEGUROS"
+    },
+    {
+      "codigo": "M",
+      "descripcion": "ACTIVIDADES INMOBILIARIAS"
+    },
+    {
+      "codigo": "N",
+      "descripcion": "ACTIVIDADES PROFESIONALES, CIENTÍFICAS Y TÉCNICAS"
+    },
+    {
+      "codigo": "R",
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES"
+    },
+    {
+      "codigo": "G",
+      "descripcion": "COMERCIO AL POR MAYOR Y AL POR MENOR"
+    },
+    {
+      "codigo": "T",
+      "descripcion": "OTROS SERVICIOS"
+    }
+  ],
+  "apply_url": "https: sede.xixona.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911596",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "http://www.xixona.es/es-es",
+  "text_inicio": "El día siguiente a la publicación en el BOP",
+  "text_fin": "Un mes a partir del día siguiente a la publicación en el BOP",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-10T04:07:58.408Z"
+}

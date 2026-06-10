@@ -1,0 +1,157 @@
+{
+  "source": "bdns",
+  "source_id": "911585",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / GALICIA / CONSELLERÍA DE EMPLEO, COMERCIO Y EMIGRACIÓN",
+  "nuts_codes": [
+    "ES11"
+  ],
+  "nuts_primary": "ES11",
+  "title": "Orde do 27 de maio de 2026 pola que se establecen as bases reguladoras para a concesión, en réxime de concorrencia competitiva, das subvencións para a promoción da artesanía galega e o fomento da súa comercialización, e se convocan para o ano 2026 (código",
+  "title_lang": "es",
+  "summary": "Comercio, Turismo y Pymes",
+  "status": "open",
+  "publication_date": "2026-06-09",
+  "open_date": "2026-06-13",
+  "deadline": "2026-07-13",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 50000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "90.3",
+      "descripcion": "Actividades de apoyo a la creación artística y a las artes escénicas"
+    },
+    {
+      "codigo": "90.1",
+      "descripcion": "Actividades de creación artística"
+    },
+    {
+      "codigo": "74.1",
+      "descripcion": "Actividades de diseño especializado"
+    },
+    {
+      "codigo": "74.2",
+      "descripcion": "Actividades de fotografía"
+    },
+    {
+      "codigo": "18",
+      "descripcion": "Artes gráficas y reproducción de soportes grabados"
+    },
+    {
+      "codigo": "91.3",
+      "descripcion": "Conservación, restauración y otras actividades de apoyo al patrimonio cultural"
+    },
+    {
+      "codigo": "30.1",
+      "descripcion": "Construcción naval"
+    },
+    {
+      "codigo": "23.7",
+      "descripcion": "Corte, tallado y acabado de la piedra"
+    },
+    {
+      "codigo": "58.1",
+      "descripcion": "Edición de libros, periódicos y otras actividades editoriales, excepto la edición de programas informáticos"
+    },
+    {
+      "codigo": "32.1",
+      "descripcion": "Fabricación de artículos de joyería, bisutería y similares"
+    },
+    {
+      "codigo": "17.2",
+      "descripcion": "Fabricación de artículos de papel y de cartón"
+    },
+    {
+      "codigo": "27.4",
+      "descripcion": "Fabricación de equipos de iluminación"
+    },
+    {
+      "codigo": "32.2",
+      "descripcion": "Fabricación de instrumentos musicales"
+    },
+    {
+      "codigo": "32.4",
+      "descripcion": "Fabricación de juegos y juguetes"
+    },
+    {
+      "codigo": "31",
+      "descripcion": "Fabricación de muebles"
+    },
+    {
+      "codigo": "23.4",
+      "descripcion": "Fabricación de otros productos cerámicos"
+    },
+    {
+      "codigo": "24.1",
+      "descripcion": "Fabricación de productos básicos de hierro, acero y ferroaleaciones"
+    },
+    {
+      "codigo": "23.2",
+      "descripcion": "Fabricación de productos cerámicos refractarios"
+    },
+    {
+      "codigo": "23.1",
+      "descripcion": "Fabricación de vidrio y productos de vidrio"
+    },
+    {
+      "codigo": "25.4",
+      "descripcion": "Forja y modelado de metales y metalurgia de polvos"
+    },
+    {
+      "codigo": "16",
+      "descripcion": "Industria de la madera y del corcho, excepto muebles; cestería y espartería"
+    },
+    {
+      "codigo": "15",
+      "descripcion": "Industria del cuero y productos relacionados de otros materiales"
+    },
+    {
+      "codigo": "13",
+      "descripcion": "Industria textil"
+    },
+    {
+      "codigo": "32.9",
+      "descripcion": "Industrias manufactureras n.c.o.p."
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911585",
+  "documents": [
+    {
+      "label": "Texto en otra lengua de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "www.xunta.gal/diario-oficial-galicia",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-10T04:07:58.405Z"
+}

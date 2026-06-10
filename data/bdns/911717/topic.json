@@ -1,0 +1,66 @@
+{
+  "source": "bdns",
+  "source_id": "911717",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / CASTILLA-LA MANCHA / VICECONSEJERÍA DE CULTURA Y DEPORTES",
+  "nuts_codes": [
+    "ES42"
+  ],
+  "nuts_primary": "ES42",
+  "title": "SUBV. FEDERACIONES DEPORTIVAS DE CLM 2026",
+  "title_lang": "es",
+  "summary": "Educación",
+  "status": "open",
+  "publication_date": "2026-06-09",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 1450000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "GRAN EMPRESA; PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "GRAN EMPRESA",
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "93",
+      "descripcion": "Actividades deportivas, recreativas y de entretenimiento"
+    }
+  ],
+  "apply_url": "www.jccm.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911717",
+  "documents": [
+    {
+      "label": "Extracto convocatoria Federaciones 2026",
+      "url": null
+    },
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://docm.jccm.es/docm/descargarArchivo.do?ruta=2016/07/04/pdf/2016_7203.pdf&tipo=rutaDocm",
+  "text_inicio": "Día siguiente al de la publicación del extracto de la convocatoria en el DOCM",
+  "text_fin": "Quince días hábiles contados desde el día siguiente al de la publicación del extracto de la convocat",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-10T04:07:58.443Z"
+}

@@ -1,0 +1,67 @@
+{
+  "id": 1113187,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "ANDALUCÍA",
+    "nivel3": "CONSEJERÍA DE EMPLEO, EMPRESA Y TRABAJO AUTÓNOMO"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "911626",
+  "fechaRecepcion": "2026-06-09",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 258000,
+  "mrr": false,
+  "descripcion": "Resolución de 8 de junio de 2026, de la D.G. Trabajo, Seguridad y Salud Laboral por la que se conv. para 2026 sub en rég.de conc.comp. a pyme para proyectos de prevención de riesgos laborales, Línea 1 Inversiones en PRL: minimi pesca y acuicultura",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Pesca y acuicultura",
+      "codigo": "03"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES61 - ANDALUCIA"
+    }
+  ],
+  "descripcionFinalidad": "Otras Prestaciones económicas",
+  "descripcionBasesReguladoras": "Orden de 12 de mayo de 2021, por la que se establecen las b.r. para la concesión de subvenciones a microempresas,pequeñas y medianas empresas, para el desarrollo de proyectos de prevención de riesgos laborales en la C.A. de Andalucía,en rég. de conc.comp.",
+  "urlBasesReguladoras": "https://juntadeandalucia.es/boja/2021/93/BOJA21-093-00039-8316-01_00192192.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Al día siguiente de la publicación en BOJA",
+  "textFin": "Un mes a partir del día siguiente de la publicación del extracto en BOJA",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 717/2014 de minimis, Pesca y acuicultura",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472224,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "TextoConvocatoria.pdf",
+      "long": 1109803,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

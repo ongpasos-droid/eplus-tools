@@ -1,0 +1,75 @@
+{
+  "id": 1113278,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "CASTILLA-LA MANCHA",
+    "nivel3": "VICECONSEJERÍA DE CULTURA Y DEPORTES"
+  },
+  "sedeElectronica": "www.jccm.es",
+  "codigoBDNS": "911717",
+  "fechaRecepcion": "2026-06-09",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 1450000,
+  "mrr": false,
+  "descripcion": "SUBV. FEDERACIONES DEPORTIVAS DE CLM 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "GRAN EMPRESA"
+    },
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades deportivas, recreativas y de entretenimiento",
+      "codigo": "93"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES42 - CASTILLA LA MANCHA"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Orden de 29/06/2016, de la Consejería de Educación, Cultura y Deportes, por la que se aprueban las bases reguladoras para la concesión de subvenciones para la organización y gestión de las Federaciones Deportivas de Castilla-La Mancha (D.O.C.M. núm. 129,",
+  "urlBasesReguladoras": "https://docm.jccm.es/docm/descargarArchivo.do?ruta=2016/07/04/pdf/2016_7203.pdf&tipo=rutaDocm",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Día siguiente al de la publicación del extracto de la convocatoria en el DOCM",
+  "textFin": "Quince días hábiles contados desde el día siguiente al de la publicación del extracto de la convocat",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472416,
+      "descripcion": "Extracto convocatoria Federaciones 2026",
+      "nombreFic": "EXTRACTO CONVOCATORIA FEDERACIONES 2026_181713.PDF",
+      "long": 97231,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1472415,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "RESOLUCIÓN CONVOCATORIA FEDERACIONES 2026_181649.PDF",
+      "long": 452449,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,68 @@
+{
+  "id": 1113014,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "COMUNIDAD FORAL DE NAVARRA",
+    "nivel3": "DEPARTAMENTO DE DESARROLLO RURAL Y MEDIO AMBIENTE"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "911453",
+  "fechaRecepcion": "2026-06-09",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 134053.12,
+  "mrr": false,
+  "descripcion": "Convocatoria para las ayudas a la mejora de la producción y comercialización de los productos de la apicultura en el marco de la Intervención Sectorial Apícola, recogida en el PEPAC, para la campaña del año 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Producción ganadera",
+      "codigo": "01.4"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES22 - COMUNIDAD FORAL DE NAVARRA"
+    }
+  ],
+  "descripcionFinalidad": "Agricultura, Pesca y Alimentación",
+  "descripcionBasesReguladoras": "Bases reguladoras 2025-2027 y convocatoria para las ayudas a la mejora de la producción y comercialización de los productos de la apicultura en el marco de la Intervención Sectorial Apícola, recogida en el PEPAC, para la campaña del año 2026",
+  "urlBasesReguladoras": "https://www.navarra.es/es/tramites/on/-/line/ayudas-al-fomento-de-la-produccion-y-comercializacion-de-productos-apicolas-2026",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-07-11",
+  "fechaFinSolicitud": "2026-08-03",
+  "textInicio": "Al día siguiente de la publicación de la convocatoria en el BON",
+  "textFin": "El plazo de la presentación de la solicitud de ayuda finalizará el 1 de agosto de 2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [
+    {
+      "descripcion": "FEAGA - FONDO EUROPEO AGRÍCOLA DE GARANTÍA"
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1471734,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "R.348_2026.pdf",
+      "long": 3313872,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

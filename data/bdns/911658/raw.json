@@ -1,0 +1,64 @@
+{
+  "id": 1113219,
+  "organo": {
+    "nivel1": "OTROS",
+    "nivel2": "UNIVERSIDAD DE OVIEDO",
+    "nivel3": null
+  },
+  "sedeElectronica": "https://www.uniovi.es/es/investiga/financiacion/convocatorias/todas",
+  "codigoBDNS": "911658",
+  "fechaRecepcion": "2026-06-09",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 225000,
+  "mrr": false,
+  "descripcion": "Resolución de 9 de junio de 2026 de la Vicerrectora de Investigación de la Universidad de Oviedo por la que se aprueba la convocatoria de ayudas económicas destinadas a grupos de investigación de la Universidad de Oviedo 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES12 - PRINCIPADO DE ASTURIAS"
+    }
+  ],
+  "descripcionFinalidad": "Investigación, desarrollo e innovación",
+  "descripcionBasesReguladoras": "Resolución de 6 de febrero de 2025 del Rector de la Universidad de Oviedo por la que se establecen las bases reguladoras de las ayudas destinadas al personal docente e investigador que se concedan por el II Plan Plurianual de Inv. y RRHH de la UO",
+  "urlBasesReguladoras": "https://miprincipado.asturias.es/bopa/2025/02/13/2025-01026.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Primer día hábil siguiente a la publicación en el BOPA",
+  "textFin": "10  días hábiles a partir del siguiente de la publicación en el BOPA",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472270,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convocatoria ayudas Grupos 2026_firmada.pdf",
+      "long": 437052,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

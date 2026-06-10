@@ -1,0 +1,107 @@
+{
+  "id": 1113016,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "PARRES",
+    "nivel3": "AYUNTAMIENTO DE PARRES"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "911455",
+  "fechaRecepcion": "2026-06-09",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 2100,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA SUBVENCIONES PARA EL XXXV CERTAMEN DE LA CASTAÑA Y PRODUCTOS DE LA HUERTA, EJERCICIO 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    },
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "AGRICULTURA, GANADERÍA, SILVICULTURA Y PESCA",
+      "codigo": "A"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES120 - Asturias"
+    }
+  ],
+  "descripcionFinalidad": "Agricultura, Pesca y Alimentación",
+  "descripcionBasesReguladoras": "CONVOCATORIA SUBVENCIONES PARA EL XXXV CERTAMEN DE LA CASTAÑA Y PRODUCTOS DE LA HUERTA, EJERCICIO 2026",
+  "urlBasesReguladoras": "https://www.ayto-parres.es/noticia/-/asset_publisher/bb7c8be44268/content/not-sub-ayu#.Xplii0AzaUk",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-10-23",
+  "textInicio": "Solicitud al día siguiente de la publicación en BOPA",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1471701,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convocatoria 2026.pdf",
+      "long": 78886,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1471705,
+      "descripcion": "Modelo inscripción",
+      "nombreFic": "INSCRIPCION 2026.pdf",
+      "long": 233102,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1471709,
+      "descripcion": "Ordenandza general de subvenciones",
+      "nombreFic": "ordenanza subvenciones_bases.pdf",
+      "long": 1331731,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1471707,
+      "descripcion": "Extracto de la convocatoria",
+      "nombreFic": "Extracto Convocatoria.pdf",
+      "long": 79227,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1471708,
+      "descripcion": "Ficha acreedor",
+      "nombreFic": "anexo 1b ficha acreedor.pdf",
+      "long": 118128,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1471706,
+      "descripcion": "Modelo inscripción carteles",
+      "nombreFic": "concurso cartels castaña.pdf",
+      "long": 209233,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

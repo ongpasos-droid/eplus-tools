@@ -1,0 +1,71 @@
+{
+  "id": 1112338,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "CANTABRIA",
+    "nivel3": "SERVICIO CÁNTABRO DE EMPLEO"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "910777",
+  "fechaRecepcion": "2026-06-04",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 1300000,
+  "mrr": false,
+  "descripcion": "Orden por la que se aprueba la convocatoria de subvenciones para 2026 correspondiente al programa “Talento y Empleo”: formación profesional a medida de las empresas en sectores estratégicos:  Automoción.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ADMINISTRACIÓN PÚBLICA Y DEFENSA; SEGURIDAD SOCIAL OBLIGATORIA",
+      "codigo": "P"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES130 - Cantabria"
+    }
+  ],
+  "descripcionFinalidad": "Fomento del Empleo",
+  "descripcionBasesReguladoras": "Orden EPS/21/2021, de 10 de junio, por la que se establecen las bases reguladoras del Programa “Talento y Empleo”: formación profesional a medida de las empresas en sectores estratégicos",
+  "urlBasesReguladoras": "https://boc.cantabria.es/boces/verAnuncioAction.do?idAnuBlob=362873",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-15",
+  "fechaFinSolicitud": "2026-07-14",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": "SA.12345",
+  "urlAyudaEstado": "https://competition-cases.ec.europa.eu/cases/SA.12345",
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 651/2014, DE 17 DE JUNIO, de exención de notificación",
+    "orden": null
+  },
+  "objetivos": [
+    {
+      "descripcion": "ART. 31 AYUDAS A LA FORMACIÓN."
+    }
+  ],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1471961,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "24_Convocatoria_Talento_y_Empleo_Automocion_2026-Firma_y_publicacion.report.pdf",
+      "long": 443262,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

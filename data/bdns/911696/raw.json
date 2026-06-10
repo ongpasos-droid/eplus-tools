@@ -1,0 +1,80 @@
+{
+  "id": 1113257,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "MASNOU, EL",
+    "nivel3": "AYUNTAMIENTO DE MASNOU, EL"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "911696",
+  "fechaRecepcion": "2026-06-09",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 40000,
+  "mrr": false,
+  "descripcion": "Convocatoria 2026 Subvenciones destinadas al arreglo de viviendas para favorecer la accesibilidad y  mejorar la calidad de vida de las personas dentro de su domicilio",
+  "descripcionLeng": "Convocatòria 2026 - subvencions destinades a l¿arranjament d¿habitatges per afavorir l¿accessibilitat i millorar la qualitat de vida de les persones dins el seu domicili",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES511 - Barcelona"
+    }
+  ],
+  "descripcionFinalidad": "Otras actuaciones de carácter económico",
+  "descripcionBasesReguladoras": "Bases reguladoras específicas para el otorgamiento de subvenciones destinadas al arreglo de viviendas para favorecer la accesibilidad y mejorar la calidad de vida de las personas dentro de su domicilio",
+  "urlBasesReguladoras": "http://bop.diba.cat/anunci/3900009/aprovacio-definitiva-de-les-bases-reguladores-especifiques-per-a-l-atorgament-de-subvencions-destinades-a-l-arranjament-d-habitatges-per-afavorir-l-accessibilitat-i-millorar-la-qualitat-de-vida-de-les-persones-dins-el-seu-domicili-ajuntament-del-masnou",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-18",
+  "fechaFinSolicitud": "2026-10-31",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472358,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "EDICTE_CAST.pdf",
+      "long": 558195,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1472360,
+      "descripcion": "Certificado aprobación convocatoria",
+      "nombreFic": "Certificat_aprovació_convo.pdf",
+      "long": 662668,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1472359,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "EDICTE_CAT.pdf",
+      "long": 565365,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

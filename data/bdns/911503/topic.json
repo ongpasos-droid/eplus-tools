@@ -1,0 +1,81 @@
+{
+  "source": "bdns",
+  "source_id": "911503",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / BURLADA/BURLATA / AYUNTAMIENTO DE BURLADA/BURLATA",
+  "nuts_codes": [
+    "ES22"
+  ],
+  "nuts_primary": "ES22",
+  "title": "CONVOCATORIA DE AYUDAS A ENTIDADES CULTURALES DE BURLADA PARA LA REALIZACIÓN DE ACTIVIDADES ARTÍSTICAS Y CULTURALES 2026",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-06-09",
+  "open_date": "2025-11-01",
+  "deadline": "2026-10-31",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 18000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "S",
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911503",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "Anexo I. Modelo de Solicitud",
+      "url": null
+    },
+    {
+      "label": "Anexo II. Ficha de la actividad",
+      "url": null
+    },
+    {
+      "label": "Anexo III. Memoria económica (presentar en formato Excel. Solicitar en Cultura)",
+      "url": null
+    },
+    {
+      "label": "Anexo IV. Memoria de la actividad",
+      "url": null
+    },
+    {
+      "label": "Anexo V. Modelo plan gestión de residuos",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://bon.navarra.es/es/anuncio/-/texto/2021/185/8",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-10T04:07:58.382Z"
+}

@@ -1,0 +1,120 @@
+{
+  "id": 1113137,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "FRONTERA",
+    "nivel3": "AYUNTAMIENTO DE FRONTERA"
+  },
+  "sedeElectronica": "https://ayuntamientodelafrontera.sedelectronica.es/info.0",
+  "codigoBDNS": "911576",
+  "fechaRecepcion": "2026-06-09",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 6000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA EN REGIMEN DE CONCURRENCIA COMPETITIVA, DE SUBVENCIONES DIRIGIDAS A DEPORTISTAS INDIVIDUALES DEL MUNICIPIO DE LA FRONTERA, 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES703 - El Hierro"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Ordenanza General de Subvenciones del Ayuntamiento de La Frontera",
+  "urlBasesReguladoras": "https://www.bopsantacruzdetenerife.es/bopsc2/index.php",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "al día siguiente de la publicación del anuncio en el BOP",
+  "textFin": "30 días naturales contados a partir del siguiente a la publicación en el BOP",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472071,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "ANUNCIO BOP AYUDAS INDIVIDUALES.pdf",
+      "long": 219872,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1472073,
+      "descripcion": "ANEXO II",
+      "nombreFic": "otros ANEXO II.pdf",
+      "long": 358107,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1472072,
+      "descripcion": "CONVOCATORIA",
+      "nombreFic": "CONVOCATORIA SUBVENCIONES EN CONCURRENCIA COMPETITIVA DEPORTISTAS INDIVIDUALES.pdf",
+      "long": 351676,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1472075,
+      "descripcion": "ANEXO III",
+      "nombreFic": "20260518_Otros_ANEXO III.pdf",
+      "long": 151130,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1472077,
+      "descripcion": "ANEXO V",
+      "nombreFic": "20260518_Otros_ANEXO V.pdf",
+      "long": 126741,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1472076,
+      "descripcion": "ANEXO IV",
+      "nombreFic": "20260518_Otros_ANEXO IV ALTA A TERCEROS.pdf",
+      "long": 24550,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1472078,
+      "descripcion": "ANEXO VI",
+      "nombreFic": "20260518_Otros_ANEXO VI.pdf",
+      "long": 214563,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1472079,
+      "descripcion": "ANEXO VII",
+      "nombreFic": "20260518_Otros_ANEXO VII.pdf",
+      "long": 180014,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

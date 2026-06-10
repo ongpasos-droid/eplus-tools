@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "911486",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / MOIÀ / AYUNTAMIENTO DE MOIÀ",
+  "nuts_codes": [
+    "ES511"
+  ],
+  "nuts_primary": "ES511",
+  "title": "CONVOCATÒRIA CONCURS JUVENIL PEL DISSENY DELS GOTS DE LA FESTA MAJOR DE MOIÀ",
+  "title_lang": "es",
+  "summary": "Comercio, Turismo y Pymes",
+  "status": "open",
+  "publication_date": "2026-06-09",
+  "open_date": "2026-06-01",
+  "deadline": "2026-12-31",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 300,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "84.1",
+      "descripcion": "Administración pública y de la política económica, social y medioambiental"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911486",
+  "documents": [
+    {
+      "label": "Texto en otra lengua de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://bop.diba.cat/anunci/3947903/aprovacio-de-les-bases-reguladores-per-al-concurs-juvenil-pel-disseny-dels-gots-de-la-festa-major-de-moia-ajuntament-de-moia",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-10T04:07:58.376Z"
+}

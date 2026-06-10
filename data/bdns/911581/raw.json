@@ -1,0 +1,104 @@
+{
+  "id": 1113142,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SANTANDER",
+    "nivel3": "AYUNTAMIENTO DE SANTANDER"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "911581",
+  "fechaRecepcion": "2026-06-09",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 700000,
+  "mrr": false,
+  "descripcion": "Ascensores 2026.- Acuerdo de la Junta de Gobierno Local de 8 de junio de 2026 del Ayuntamiento de Santander por el que se convocan ayudas para la realización de obras de primera instalación de ascensores en edificios residencial preexistentes.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Acabado de edificios",
+      "codigo": "43.3"
+    },
+    {
+      "descripcion": "Actividades de construcción especializada en la construcción de edificios",
+      "codigo": "43.4"
+    },
+    {
+      "descripcion": "Construcción de edificios",
+      "codigo": "41"
+    },
+    {
+      "descripcion": "Instalaciones eléctricas, de fontanería y otras instalaciones en obras de construcción",
+      "codigo": "43.2"
+    },
+    {
+      "descripcion": "Otras actividades de construcción especializada",
+      "codigo": "43.9"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES13 - CANTABRIA"
+    }
+  ],
+  "descripcionFinalidad": "Acceso a la vivienda y fomento de la edificación",
+  "descripcionBasesReguladoras": "Bases específicas para la concesión de ayudas para la realización de obras de primera instalación de ascensores para el año 2026, en edificios residenciales preexistentes.",
+  "urlBasesReguladoras": "https://aplicacionesweb.cantabria.es/boces/verAnuncioAction.do?idAnuBlob=435865",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Al día siguiente de la publicación de la convocatoria.",
+  "textFin": "2 meses desde la fecha de publicación de la convocatoria",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472042,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Acuerdo Convocatoria.pdf",
+      "long": 216619,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1472048,
+      "descripcion": "Cartel publicidad obra subvencionada",
+      "nombreFic": "Ayudas Ascensores - CARTEL.pdf",
+      "long": 581416,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1472044,
+      "descripcion": "Bases específicas 2026",
+      "nombreFic": "Bases reguladoras - BOC.pdf",
+      "long": 370638,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1472043,
+      "descripcion": "Modelo de solicitud 2026",
+      "nombreFic": "Ascensores_Solicitud_2026.pdf",
+      "long": 698886,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

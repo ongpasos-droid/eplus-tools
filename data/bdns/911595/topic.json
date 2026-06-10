@@ -1,0 +1,73 @@
+{
+  "source": "bdns",
+  "source_id": "911595",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / COMARCA DE BAJO ARAGÓN / COMARCA DE BAJO ARAGÓN",
+  "nuts_codes": [
+    "ES242"
+  ],
+  "nuts_primary": "ES242",
+  "title": "Convocatoria y Bases de Las Subvenciones Para  Asociaciones Para La Realización De  Recreaciones Históricas En La Comarca Del Bajo Aragón A Lo Largo Del Año 2026.",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-06-09",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 4000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "91",
+      "descripcion": "Actividades de bibliotecas, archivos, museos y otras actividades culturales"
+    }
+  ],
+  "apply_url": "https://bajoaragon.sedipualba.es/",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911595",
+  "documents": [
+    {
+      "label": "Anexo II Instancia Abono",
+      "url": null
+    },
+    {
+      "label": "Anexo III",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "Anexo I Solicitud",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://bajoaragon.sedipualba.es/firma/documento.aspx?csv=VDCAACDPM7XWPJHAVUDR&modo=abrir",
+  "text_inicio": "Tras publicación de la Convocatoria en el BOPTE",
+  "text_fin": "15 días naturales  tras la publicación en el BOPTE del extracto de la convocatoria en el BOPTE",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-10T04:07:58.407Z"
+}

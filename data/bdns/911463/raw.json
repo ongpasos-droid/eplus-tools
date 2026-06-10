@@ -1,0 +1,79 @@
+{
+  "id": 1113024,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "COMUNITAT VALENCIANA",
+    "nivel3": "SECRETARÍA AUTONÓMICA DE AGRICULTURA, GANADERÍA Y PESCA"
+  },
+  "sedeElectronica": "https://www.gva.es/es/inicio/procedimientos?id_proc=22018",
+  "codigoBDNS": "911463",
+  "fechaRecepcion": "2026-06-09",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 80000,
+  "mrr": false,
+  "descripcion": "Resolución de la Conselleria de Agricultura, Agua, Ganadería y Pesca, por la que se convocan para el ejercicio 2026, ayudas a la ganadería ecológica en prácticas extensivas en la Comunitat Valenciana",
+  "descripcionLeng": "Resolució de la Conselleria d'Agricultura, Aigua, Ramaderia i Pesca, per la qual es convoquen per a l'exercici 2026 ajudes a la ramaderia ecològica en pràctiques extensives en la Comunitat Valenciana",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Producción ganadera",
+      "codigo": "01.4"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES52 - COMUNIDAD VALENCIANA"
+    }
+  ],
+  "descripcionFinalidad": "Agricultura, Pesca y Alimentación",
+  "descripcionBasesReguladoras": "ORDEN 7/2024, de 11 de septiembre, de la Conselleria de Agricultura, Agua, Ganadería y Pesca, por la que se establecen las bases reguladoras de las ayudas a la ganadería ecológica en prácticas extensivas en la Comunitat Valenciana",
+  "urlBasesReguladoras": "https://dogv.gva.es/es/resultat-dogv?signatura=2024/9267",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Al día siguiente de su publicación en el DOGV",
+  "textFin": "A los 15 días hábiles desde su publicación en el DOGV",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 1408/2013 de minimis, Agrícola",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectoresProductos": [
+    {
+      "descripcion": "Todos"
+    }
+  ],
+  "documentos": [
+    {
+      "id": 1471786,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "Resol_Convoc_Ayuda_Ganaderia_Ecologica_2026_V2_VAL_firmado.pdf",
+      "long": 559105,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1471785,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Resol_Convoc_Ayuda_Ganaderia_Ecologica_2026_V2_CAST_firmado.pdf",
+      "long": 552351,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

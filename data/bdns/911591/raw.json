@@ -1,0 +1,64 @@
+{
+  "id": 1113152,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "DIPUTACIÓN PROV. DE CUENCA",
+    "nivel3": "DIPUTACIÓN PROVINCIAL DE CUENCA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "911591",
+  "fechaRecepcion": "2026-06-09",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 100000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA SUBVENCIONES A ORGANIZACIONES PROFESIONALES AGRARIAS (OPAS) 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Agricultura, ganadería, caza y servicios relacionados con las mismas",
+      "codigo": "01"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES423 - Cuenca"
+    }
+  ],
+  "descripcionFinalidad": "Agricultura, Pesca y Alimentación",
+  "descripcionBasesReguladoras": "ORDENANZA GENERAL DE SUBVENCIONES",
+  "urlBasesReguladoras": "https://www.dipucuenca.es/documents/12423/560665/ORDENANZA+REGULADORA+DE+SUBVENCIONES.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Dia siguiente a la publicacion ee la Convocatoiria en el BOE Cuencae",
+  "textFin": "El plazo de presentación de las solicitudes será de 15 dias, desde el siguiente su publicacion",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472110,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Decreto_Nº_4143_de_02_06_2026__DECRETO_DE_CONVOCATORIA_Y_APROBACION_DE_NORMAS_DE_LAS_AYUDAS_A_OPAS_2026__-_SEGRA_1022802.pdf",
+      "long": 580652,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

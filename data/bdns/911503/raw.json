@@ -1,0 +1,104 @@
+{
+  "id": 1113064,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "BURLADA/BURLATA",
+    "nivel3": "AYUNTAMIENTO DE BURLADA/BURLATA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "911503",
+  "fechaRecepcion": "2026-06-09",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 18000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DE AYUDAS A ENTIDADES CULTURALES DE BURLADA PARA LA REALIZACIÓN DE ACTIVIDADES ARTÍSTICAS Y CULTURALES 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES22 - COMUNIDAD FORAL DE NAVARRA"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "Ordenanza municipal general de subvenciones del Ayuntamiento de Burlada",
+  "urlBasesReguladoras": "https://bon.navarra.es/es/anuncio/-/texto/2021/185/8",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2025-11-01",
+  "fechaFinSolicitud": "2026-10-31",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1471868,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "CONVOCATORIA DE AYUDAS A ENTIDADES CULTURALES DE BURLADA 2026..pdf",
+      "long": 1198704,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1471892,
+      "descripcion": "Anexo I. Modelo de Solicitud",
+      "nombreFic": "ANEXO I Modelo de solicitud.pdf",
+      "long": 280412,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1471893,
+      "descripcion": "Anexo II. Ficha de la actividad",
+      "nombreFic": "ANEXO II Ficha de la actividad.pdf",
+      "long": 327173,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1471900,
+      "descripcion": "Anexo III. Memoria económica (presentar en formato Excel. Solicitar en Cultura)",
+      "nombreFic": "ANEXO III. Memoria económica.pdf",
+      "long": 395991,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1471901,
+      "descripcion": "Anexo IV. Memoria de la actividad",
+      "nombreFic": "ANEXO IV Memoria de la actividad.pdf",
+      "long": 226339,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1471902,
+      "descripcion": "Anexo V. Modelo plan gestión de residuos",
+      "nombreFic": "ANEXO V. Modelo plan gestión de residuos.pdf",
+      "long": 228557,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

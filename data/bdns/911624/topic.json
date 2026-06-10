@@ -1,0 +1,352 @@
+{
+  "source": "bdns",
+  "source_id": "911624",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / ANDALUCÍA / CONSEJERÍA DE EMPLEO, EMPRESA Y TRABAJO AUTÓNOMO",
+  "nuts_codes": [
+    "ES61"
+  ],
+  "nuts_primary": "ES61",
+  "title": "Resolución de 8 de junio de 2026, de la D.G. Trabajo, Seguridad y Salud Laboral por la que se conv. para 2026 sub en rég.de conc.comp. a pyme para proyectos de prevención de riesgos laborales, Línea 1 Inversiones en PRL: minimi general",
+  "title_lang": "es",
+  "summary": "Otras Prestaciones económicas",
+  "status": "open",
+  "publication_date": "2026-06-09",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 1625000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "82",
+      "descripcion": "Actividades administrativas de oficina y otras actividades auxiliares a las empresas"
+    },
+    {
+      "codigo": "94",
+      "descripcion": "Actividades asociativas"
+    },
+    {
+      "codigo": "85.6",
+      "descripcion": "Actividades auxiliares a la educación"
+    },
+    {
+      "codigo": "77",
+      "descripcion": "Actividades de alquiler"
+    },
+    {
+      "codigo": "01.6",
+      "descripcion": "Actividades de apoyo a la agricultura, a la ganadería y de preparación posterior a la cosecha"
+    },
+    {
+      "codigo": "91",
+      "descripcion": "Actividades de bibliotecas, archivos, museos y otras actividades culturales"
+    },
+    {
+      "codigo": "43",
+      "descripcion": "Actividades de construcción especializada"
+    },
+    {
+      "codigo": "90",
+      "descripcion": "Actividades de creación artística y artes escénicas"
+    },
+    {
+      "codigo": "39",
+      "descripcion": "Actividades de descontaminación y otros servicios de gestión de residuos"
+    },
+    {
+      "codigo": "99",
+      "descripcion": "Actividades de organizaciones y organismos extraterritoriales"
+    },
+    {
+      "codigo": "60.2",
+      "descripcion": "Actividades de programación de televisión, emisión y distribución de vídeos"
+    },
+    {
+      "codigo": "60.1",
+      "descripcion": "Actividades de radiodifusión y distribución de audio"
+    },
+    {
+      "codigo": "38",
+      "descripcion": "Actividades de recogida, tratamiento y eliminación de residuos "
+    },
+    {
+      "codigo": "47.9",
+      "descripcion": "Actividades de servicios de intermediación para el comercio al por menor"
+    },
+    {
+      "codigo": "88",
+      "descripcion": "Actividades de servicios sociales sin alojamiento"
+    },
+    {
+      "codigo": "93",
+      "descripcion": "Actividades deportivas, recreativas y de entretenimiento"
+    },
+    {
+      "codigo": "68.1",
+      "descripcion": "Actividades inmobiliarias por cuenta propia y promoción inmobiliaria"
+    },
+    {
+      "codigo": "53",
+      "descripcion": "Actividades postales y de mensajería"
+    },
+    {
+      "codigo": "78",
+      "descripcion": "Actividades relacionadas con el empleo"
+    },
+    {
+      "codigo": "75",
+      "descripcion": "Actividades veterinarias"
+    },
+    {
+      "codigo": "55.2",
+      "descripcion": "Alojamientos turísticos y otros alojamientos de corta estancia"
+    },
+    {
+      "codigo": "68.2",
+      "descripcion": "Alquiler de bienes inmobiliarios por cuenta propia"
+    },
+    {
+      "codigo": "18",
+      "descripcion": "Artes gráficas y reproducción de soportes grabados"
+    },
+    {
+      "codigo": "87",
+      "descripcion": "Asistencia en establecimientos residenciales"
+    },
+    {
+      "codigo": "55.3",
+      "descripcion": "Campings y aparcamientos para caravanas"
+    },
+    {
+      "codigo": "36",
+      "descripcion": "Captación, depuración y distribución de agua"
+    },
+    {
+      "codigo": "46",
+      "descripcion": "Comercio al por mayor"
+    },
+    {
+      "codigo": "47.8",
+      "descripcion": "Comercio al por menor de vehículos de motor, motocicletas y sus repuestos y accesorios"
+    },
+    {
+      "codigo": "14",
+      "descripcion": "Confección de prendas de vestir"
+    },
+    {
+      "codigo": "41",
+      "descripcion": "Construcción de edificios"
+    },
+    {
+      "codigo": "52",
+      "descripcion": "Depósito, almacenamiento y actividades auxiliares del transporte "
+    },
+    {
+      "codigo": "85.1",
+      "descripcion": "Educación preprimaria"
+    },
+    {
+      "codigo": "11",
+      "descripcion": "Fabricación de bebidas"
+    },
+    {
+      "codigo": "28",
+      "descripcion": "Fabricación de maquinaria y equipo n.c.o.p."
+    },
+    {
+      "codigo": "31",
+      "descripcion": "Fabricación de muebles"
+    },
+    {
+      "codigo": "30",
+      "descripcion": "Fabricación de otro material de transporte"
+    },
+    {
+      "codigo": "27.9",
+      "descripcion": "Fabricación de otro material y equipo eléctrico"
+    },
+    {
+      "codigo": "23",
+      "descripcion": "Fabricación de otros productos minerales no metálicos"
+    },
+    {
+      "codigo": "22",
+      "descripcion": "Fabricación de productos de caucho y plásticos"
+    },
+    {
+      "codigo": "21",
+      "descripcion": "Fabricación de productos farmacéuticos"
+    },
+    {
+      "codigo": "26",
+      "descripcion": "Fabricación de productos informáticos, electrónicos y ópticos"
+    },
+    {
+      "codigo": "25",
+      "descripcion": "Fabricación de productos metálicos, excepto maquinaria y equipo"
+    },
+    {
+      "codigo": "29.3",
+      "descripcion": "Fabricación de repuestos y accesorios de vehículos de motor"
+    },
+    {
+      "codigo": "55.1",
+      "descripcion": "Hoteles y alojamientos similares"
+    },
+    {
+      "codigo": "10",
+      "descripcion": "Industria alimentaria"
+    },
+    {
+      "codigo": "16",
+      "descripcion": "Industria de la madera y del corcho, excepto muebles; cestería y espartería"
+    },
+    {
+      "codigo": "15",
+      "descripcion": "Industria del cuero y productos relacionados de otros materiales"
+    },
+    {
+      "codigo": "17",
+      "descripcion": "Industria del papel"
+    },
+    {
+      "codigo": "12",
+      "descripcion": "Industria del tabaco"
+    },
+    {
+      "codigo": "20",
+      "descripcion": "Industria química"
+    },
+    {
+      "codigo": "13",
+      "descripcion": "Industria textil"
+    },
+    {
+      "codigo": "63",
+      "descripcion": "Infraestructura informática, tratamiento de datos, alojamiento de datos y otras actividades de servicios de información"
+    },
+    {
+      "codigo": "42",
+      "descripcion": "Ingeniería civil"
+    },
+    {
+      "codigo": "24",
+      "descripcion": "Metalurgia"
+    },
+    {
+      "codigo": "86.9",
+      "descripcion": "Otras actividades sanitarias"
+    },
+    {
+      "codigo": "55.9",
+      "descripcion": "Otros alojamientos"
+    },
+    {
+      "codigo": "84.2",
+      "descripcion": "Prestación de servicios a la comunidad en general"
+    },
+    {
+      "codigo": "35.2",
+      "descripcion": "Producción de gas y distribución por tubería de combustibles gaseosos"
+    },
+    {
+      "codigo": "37",
+      "descripcion": "Recogida y tratamiento de aguas residuales"
+    },
+    {
+      "codigo": "33",
+      "descripcion": "Reparación, mantenimiento e instalación de maquinaria y equipos"
+    },
+    {
+      "codigo": "95",
+      "descripcion": "Reparación y mantenimiento de ordenadores, artículos personales y enseres domésticos y vehículos de motor y motocicletas"
+    },
+    {
+      "codigo": "56.1",
+      "descripcion": "Restaurantes y puestos de comidas"
+    },
+    {
+      "codigo": "65",
+      "descripcion": "Seguros, reaseguros y planes de pensiones, excepto seguridad social obligatoria"
+    },
+    {
+      "codigo": "81",
+      "descripcion": "Servicios a edificios y actividades de jardinería"
+    },
+    {
+      "codigo": "56.3",
+      "descripcion": "Servicios de bebidas"
+    },
+    {
+      "codigo": "56.2",
+      "descripcion": "Servicios de catering y otros servicios de comidas"
+    },
+    {
+      "codigo": "80",
+      "descripcion": "Servicios de investigación y seguridad"
+    },
+    {
+      "codigo": "96",
+      "descripcion": "Servicios personales"
+    },
+    {
+      "codigo": "02",
+      "descripcion": "Silvicultura y explotación forestal"
+    },
+    {
+      "codigo": "61",
+      "descripcion": "Telecomunicaciones"
+    },
+    {
+      "codigo": "51",
+      "descripcion": "Transporte aéreo"
+    },
+    {
+      "codigo": "50",
+      "descripcion": "Transporte marítimo y por vías navegables interiores"
+    },
+    {
+      "codigo": "49",
+      "descripcion": "Transporte terrestre y por tubería"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911624",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://juntadeandalucia.es/boja/2021/93/BOJA21-093-00039-8316-01_00192192.pdf",
+  "text_inicio": "Al día siguiente de la publicación en BOJA",
+  "text_fin": "Un mes a partir del día siguiente de la publicación del extracto en BOJA",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-10T04:07:58.419Z"
+}

@@ -1,0 +1,68 @@
+{
+  "source": "bdns",
+  "source_id": "911628",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / ANDALUCÍA / CONSEJERÍA DE EMPLEO, EMPRESA Y TRABAJO AUTÓNOMO",
+  "nuts_codes": [
+    "ES61"
+  ],
+  "nuts_primary": "ES61",
+  "title": "Resolución de 8 de junio de 2026, de la D.G. Trabajo, Seguridad y Salud Laboral por la que se conv. para 2026 sub en rég.de conc.comp. a pyme para proyectos de prevención de riesgos laborales, Línea 2 Actividades PRL: minimi agrícola",
+  "title_lang": "es",
+  "summary": "Otras Prestaciones económicas",
+  "status": "open",
+  "publication_date": "2026-06-09",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 220000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "01",
+      "descripcion": "Agricultura, ganadería, caza y servicios relacionados con las mismas"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911628",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://juntadeandalucia.es/boja/2021/93/BOJA21-093-00039-8316-01_00192192.pdf",
+  "text_inicio": "Al día siguiente de la publicación en BOJA",
+  "text_fin": "Un mes a partir del día siguiente de la publicación del extracto en BOJA",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 1408/2013 de minimis, Agrícola",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectores_productos": [
+    {
+      "descripcion": "Todos"
+    }
+  ],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-10T04:07:58.422Z"
+}

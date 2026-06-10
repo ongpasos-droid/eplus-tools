@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "909507",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / ALCOBENDAS / AYUNTAMIENTO DE ALCOBENDAS",
+  "nuts_codes": [
+    "ES30"
+  ],
+  "nuts_primary": "ES30",
+  "title": "Subvención concurrencia competitiva Entidades Deportivas 2026",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-06-01",
+  "open_date": "2026-06-10",
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 304339.5,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "93",
+      "descripcion": "Actividades deportivas, recreativas y de entretenimiento"
+    }
+  ],
+  "apply_url": "www.alcobendas.org",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909507",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "http://www.bocm.es/boletin/CM_Orden_BOCM/2009/02/20/2 009-02-20_19022009_0001.pdf",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-10T04:07:57.626Z"
+}

@@ -1,0 +1,164 @@
+{
+  "id": 1113146,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "GALICIA",
+    "nivel3": "CONSELLERÍA DE EMPLEO, COMERCIO Y EMIGRACIÓN"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "911585",
+  "fechaRecepcion": "2026-06-09",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 50000,
+  "mrr": false,
+  "descripcion": "Orde do 27 de maio de 2026 pola que se establecen as bases reguladoras para a concesión, en réxime de concorrencia competitiva, das subvencións para a promoción da artesanía galega e o fomento da súa comercialización, e se convocan para o ano 2026 (código",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades de apoyo a la creación artística y a las artes escénicas",
+      "codigo": "90.3"
+    },
+    {
+      "descripcion": "Actividades de creación artística",
+      "codigo": "90.1"
+    },
+    {
+      "descripcion": "Actividades de diseño especializado",
+      "codigo": "74.1"
+    },
+    {
+      "descripcion": "Actividades de fotografía",
+      "codigo": "74.2"
+    },
+    {
+      "descripcion": "Artes gráficas y reproducción de soportes grabados",
+      "codigo": "18"
+    },
+    {
+      "descripcion": "Conservación, restauración y otras actividades de apoyo al patrimonio cultural",
+      "codigo": "91.3"
+    },
+    {
+      "descripcion": "Construcción naval",
+      "codigo": "30.1"
+    },
+    {
+      "descripcion": "Corte, tallado y acabado de la piedra",
+      "codigo": "23.7"
+    },
+    {
+      "descripcion": "Edición de libros, periódicos y otras actividades editoriales, excepto la edición de programas informáticos",
+      "codigo": "58.1"
+    },
+    {
+      "descripcion": "Fabricación de artículos de joyería, bisutería y similares",
+      "codigo": "32.1"
+    },
+    {
+      "descripcion": "Fabricación de artículos de papel y de cartón",
+      "codigo": "17.2"
+    },
+    {
+      "descripcion": "Fabricación de equipos de iluminación",
+      "codigo": "27.4"
+    },
+    {
+      "descripcion": "Fabricación de instrumentos musicales",
+      "codigo": "32.2"
+    },
+    {
+      "descripcion": "Fabricación de juegos y juguetes",
+      "codigo": "32.4"
+    },
+    {
+      "descripcion": "Fabricación de muebles",
+      "codigo": "31"
+    },
+    {
+      "descripcion": "Fabricación de otros productos cerámicos",
+      "codigo": "23.4"
+    },
+    {
+      "descripcion": "Fabricación de productos básicos de hierro, acero y ferroaleaciones",
+      "codigo": "24.1"
+    },
+    {
+      "descripcion": "Fabricación de productos cerámicos refractarios",
+      "codigo": "23.2"
+    },
+    {
+      "descripcion": "Fabricación de vidrio y productos de vidrio",
+      "codigo": "23.1"
+    },
+    {
+      "descripcion": "Forja y modelado de metales y metalurgia de polvos",
+      "codigo": "25.4"
+    },
+    {
+      "descripcion": "Industria de la madera y del corcho, excepto muebles; cestería y espartería",
+      "codigo": "16"
+    },
+    {
+      "descripcion": "Industria del cuero y productos relacionados de otros materiales",
+      "codigo": "15"
+    },
+    {
+      "descripcion": "Industria textil",
+      "codigo": "13"
+    },
+    {
+      "descripcion": "Industrias manufactureras n.c.o.p.",
+      "codigo": "32.9"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES11 - GALICIA"
+    }
+  ],
+  "descripcionFinalidad": "Comercio, Turismo y Pymes",
+  "descripcionBasesReguladoras": "Orde do 27 de maio de 2026 pola que se establecen as bases reguladoras para a concesión, en réxime de concorrencia competitiva, das subvencións para a promoción da artesanía galega e o fomento da súa comercialización, e se convocan para o ano 2026 (código",
+  "urlBasesReguladoras": "www.xunta.gal/diario-oficial-galicia",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-13",
+  "fechaFinSolicitud": "2026-07-13",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472163,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "Orde IN201G_gal-2026_conselleiro_20260609_130240.pdf",
+      "long": 632596,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    },
+    {
+      "id": 1472162,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Orde IN201G_cas-2026_20260609_130152.pdf",
+      "long": 559334,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-09"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}
