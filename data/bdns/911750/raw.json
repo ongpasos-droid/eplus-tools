@@ -1,0 +1,83 @@
+{
+  "id": 1113311,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "CASTILLA-LA MANCHA",
+    "nivel3": "VICECONSEJERÍA DE CULTURA Y DEPORTES"
+  },
+  "sedeElectronica": "www.jccm.es",
+  "codigoBDNS": "911750",
+  "fechaRecepcion": "2026-06-10",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 1300000,
+  "mrr": false,
+  "descripcion": "SUBV. CLUBES Y S.A. DEPORTIVAS 2025/2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "GRAN EMPRESA"
+    },
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades deportivas, recreativas y de entretenimiento",
+      "codigo": "93"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES42 - CASTILLA LA MANCHA"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Orden de 09/05/2016, de la Consejería de Educación, Cultura y Deportes, por la que se establecen las bases reguladoras para la concesión de subvenciones de apoyo a clubes y sociedades anónimas deportivas de máximo nivel de Castilla-La Mancha  (D.O.C.M. nú",
+  "urlBasesReguladoras": "https://docm.jccm.es/docm/descargarArchivo.do?ruta=2016/05/12/pdf/2016_5156.pdf&tipo=rutaDocm",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "El día siguiente al de la publicación del extracto de la convocatoria en el DOCM",
+  "textFin": "10 días hábiles contados desde el día siguiente al de la publicación del extracto de la convocatoria",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472522,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "RESOLUCIÓN CONVOCATORIA CLUBES DEPORTIVOS 2026_183637.PDF",
+      "long": 402597,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472524,
+      "descripcion": "Extracto convocatoria",
+      "nombreFic": "EXTRACTO CONVOCATORIA CLUBES DEPORTIVOS 2026_084655.PDF",
+      "long": 164991,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472523,
+      "descripcion": "Extracto convocatoria clubes deportivos 2026",
+      "nombreFic": "EXTRACTO CONVOCATORIA CLUBES DEPORTIVOS 2026_183655.PDF",
+      "long": 164905,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

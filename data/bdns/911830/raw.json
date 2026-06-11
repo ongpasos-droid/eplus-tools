@@ -1,0 +1,95 @@
+{
+  "id": 1113391,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "COMUNITAT VALENCIANA",
+    "nivel3": "DIRECCIÓN GENERAL DE EMPLEO Y FORMACIÓN"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "911830",
+  "fechaRecepcion": "2026-06-10",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 600000,
+  "mrr": false,
+  "descripcion": "Resolución 08/06/2026  del director general de LABORA Servicio Valenciano de Empleo y Formación, por la que se convocan para el ejercicio 2026 las subvenciones destinadas al programa de empleo con apoyo en empresas del mercado ordinario de",
+  "descripcionLeng": "Resolució 08/06/2026 del director general de LABORA - Servici Valencià d'Ocupació i Formació, per la qual es convoquen per a l'exercici 2026 les subvencions destinades al programa d'ocupació amb suport en empreses del mercat ordinari de",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades relacionadas con el empleo",
+      "codigo": "78"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES52 - COMUNIDAD VALENCIANA"
+    }
+  ],
+  "descripcionFinalidad": "Fomento del Empleo",
+  "descripcionBasesReguladoras": "ORDEN 21/2016, de 20 de octubre, de la Conselleria de Economía Sostenible, Sectores Productivos, Comercio y Trabajo, por la que se establecen las bases reguladoras de las subvenciones destinadas al programa de empleo con apoyo en empresas del mercado ordi",
+  "urlBasesReguladoras": "https://dogv.gva.es/datos/2016/10/25/pdf/2016_8364.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-16",
+  "fechaFinSolicitud": "2026-07-15",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": "SA.62888",
+  "urlAyudaEstado": "https://competition-cases.ec.europa.eu/cases/SA.62888",
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 651/2014, DE 17 DE JUNIO, de exención de notificación",
+    "orden": null
+  },
+  "objetivos": [
+    {
+      "descripcion": "ART. 34 AYUDAS AL EMPLEO. PARA COMPENSAR LOS COSTES ADICIONALES DEL EMPLEO DE TRABAJADORES CON DISCAPACIDAD."
+    }
+  ],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472754,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "CONVOCATORIA ECONAP 2026  post intervención y reg comisión bis_firmado.pdf",
+      "long": 282426,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472757,
+      "descripcion": "Extracto firmado valenciano",
+      "nombreFic": "EXTRACTO ECONAP 2026_25-004085_trad_firmado.pdf",
+      "long": 224005,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472756,
+      "descripcion": "Extracto firmado",
+      "nombreFic": "EXTRACTO ECONAP 2026_firmado.pdf",
+      "long": 220960,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472755,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "CONVOCATORIA ECONAP 2026  post intervención y reg comisión bis_26-003394_trad_firmado.pdf",
+      "long": 287582,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

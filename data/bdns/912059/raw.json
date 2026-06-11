@@ -1,0 +1,64 @@
+{
+  "id": 1113620,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "PRINCIPADO DE ASTURIAS",
+    "nivel3": "SERVICIO PÚBLICO DE EMPLEO DEL PRINCIPADO DE ASTURIAS"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "912059",
+  "fechaRecepcion": "2026-06-10",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 3621282,
+  "mrr": false,
+  "descripcion": "SUBVENCIONES PARA LA REALIZACION DE PROGRAMAS DE ACOMPAÑAMIENTO PARA EL EMPLEO 2025/26",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Administración pública y de la política económica, social y medioambiental",
+      "codigo": "84.1"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES12 - PRINCIPADO DE ASTURIAS"
+    }
+  ],
+  "descripcionFinalidad": "Fomento del Empleo",
+  "descripcionBasesReguladoras": "Resolución de 12 de julio de 2024, de la Consejería de Ciencia, Empresas, Formación y Empleo, por la que se modifican las bases reguladoras de las subvenciones para la puesta en práctica de programas de acompañamiento para el empleo",
+  "urlBasesReguladoras": "https://sede.asturias.es/bopa/2024/07/18/2024-06316.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A PARTIR DIA SIGUIENTE PUBLICACION",
+  "textFin": "10 DIAS HABILES A PARTIR DIA SIGUIENTE PUBLICACION",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1473245,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Resolucion_del_Servicio_Publico_de_Empleo_con_Validacion_SGT_con_logo_SEPEPA.pdf",
+      "long": 420060,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

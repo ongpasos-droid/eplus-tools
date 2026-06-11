@@ -1,0 +1,85 @@
+{
+  "source": "bdns",
+  "source_id": "907744",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / ARAGÓN / SERVICIOS CENTRALES IASS",
+  "nuts_codes": [
+    "ES24"
+  ],
+  "nuts_primary": "ES24",
+  "title": "ORDEN DBF/___/2026, por la que se hace pública la convocatoria de subvenciones para el año 2026 del Programa de Inclusión Activa: proyectos de inserción sociolaboral a través de itinerarios en el marco del Programa del Fondo Social Europeo Plus 2021-2027",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-05-25",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 2900000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "R",
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES"
+    },
+    {
+      "codigo": "Q",
+      "descripcion": "EDUCACIÓN"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/907744",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "Anexo I.- Ficha técnica INCLUSION ACTIVA 2026",
+      "url": null
+    },
+    {
+      "label": "Anexo IV.- Ficha económica de gastos a justificar INCLUSION ACTIVA 2026",
+      "url": null
+    },
+    {
+      "label": "Anexo III.- Renuncia INCLUSION ACTIVA 2026",
+      "url": null
+    },
+    {
+      "label": "Anexo II.- Ficha económica coste previsto del Proyecto INCLUSION ACTIVA 2026",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.boa.aragon.es/cgi bin/EBOA/BRSCGI?CMD=VEROBJ&MLKOB=1269075290303",
+  "text_inicio": "Día siguiente al de la publicación de la convocatoria en el Boletín Oficial de Aragón",
+  "text_fin": "Quince días hábiles después del inicio",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [
+    {
+      "descripcion": "FSE+ - FONDO SOCIAL EUROPEO PLUS"
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-11T04:09:40.078Z"
+}

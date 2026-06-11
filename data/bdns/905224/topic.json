@@ -1,0 +1,77 @@
+{
+  "source": "bdns",
+  "source_id": "905224",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / POBLA, SA / AYUNTAMIENTO DE POBLA, SA",
+  "nuts_codes": [
+    "ES532"
+  ],
+  "nuts_primary": "ES532",
+  "title": "BASES DE SUBVENCIONES PARA EL FOMENTO DE LA REUTILIZACIÓN DE LIBROS DE TEXTO Y MATERIAL\nDIDÁCTICO EN LOS CENTROS EDUCATIVOS DE SA POBLA SUFRAGADOS CON FONDOS PÚBLICOS.",
+  "title_lang": "es",
+  "summary": "Educación",
+  "status": "open",
+  "publication_date": "2026-05-12",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 12000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "Q",
+      "descripcion": "EDUCACIÓN"
+    }
+  ],
+  "apply_url": "https://sapobla.eadministracio.cat/info.5",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/905224",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en lengua cooficial",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://sapobla.eadministracio.cat/transparency/f8d14638-ce98-4ef8-8dd9-29e62ea0b547/",
+  "text_inicio": "quince días hábiles (15) posteriores a la publicación de la convocatoria en el BOIB.",
+  "text_fin": "quince días hábiles (15) posteriores a la publicación de la convocatoria en el BOIB.",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [
+    {
+      "numAnuncio": 214196,
+      "titulo": "EXTRACTO DE LA APROBACIÓN DE LAS BASES DE SUBVENCIONES PARA EL FOMENTO DE LA REUTILIZACIÓN DE LIBROS DE TEXTO Y MATERIAL DIDÁCTICO EN LOS CENTROS EDUCATIVOS DE SA POBLA SUFRAGADOS CON FONDOS PÚBLICOS 2026.",
+      "tituloLeng": null,
+      "texto": "<p>Primero. Finalidad:</p><p> </p><p>Las finalidades de esta subvención son, entre otros, compensar las desigualdades económicas y sociales, incentivar el estudio y la cura de libros y material didáctico, procurar la participación de las familias en el proceso educativo e impulsar aquellas iniciativas que favorezcan la innovación pedagógica y curricular.</p><p> </p><p>Segundo. Beneficiarios:</p><p> </p><p>Pueden participar en esta convocatoria los centros educativos públicos y privados financiados con fondos públicos de SA POBLA que imparten enseñanzas de educación primaria y/o educación secundaria obligatoria, y que cumplan los siguientes requisitos:</p><p> </p><p> </p><p>a- Estar al corriente de las obligaciones tributarias ante el Estado, la CAIB y el Ayuntamiento y de las obligaciones ante la Hacienda pública y la Seguridad Social.</p><p> </p><p>b- No encontrarse en ninguna de las circunstancias que prevé el artículo 13.2 de la Ley 38/2003, de 17 de noviembre, general de subvenciones, que imposibilitan para ser beneficiario de la subvención.</p><p> </p><p>c- Estar al corriente de pago de obligaciones de reintegro y justificación de subvenciones anteriormente otorgadas por el Ayuntamiento.</p><p> </p><p>d- Cumplir con el resto de requisitos establecidos en la ordenanza General de Subvenciones del Ayuntamiento de sa Pobla, BOIB n.º 106, de 9 de agosto de 2025.</p><p> </p><p>Tercero. Bases reguladoras:</p><p>https://sapobla.eadministracio.cat/transparency/8f020405-27dc-4e54-a7ae-af13fc033054/</p><p> </p><p>Cuarto. Importe:</p><p> </p><p>El importe destinado a esta subvención es de 12.000,00 euros, que actuará como límite global del gasto, prevista a la aplicación presupuestaria siguiente:</p><p> </p><p>323 4891901 «Millorar la qualitat educativa».</p><p> </p><p> </p><p> </p><p> </p><p>Quinto. Plazo de presentación de solicitudes:</p><p> </p><p>5.1 Las solicitudes, junto con la documentación indicada en el apartado 8.2 de las bases, serán presentadas por los representantes de los centros, dentro del plazo de quince días hábiles (15) posteriores a la publicación de la convocatoria al BOIB.</p><p> </p><p>5.2 Si en la presentación de la solicitud se observa alguna deficiencia, incoherencia o falta alguno de los documentos necesarios por la valoración de la ayuda, el Ayuntamiento lo notificará directamente al interesado/da para que en el plazo de diez días hábiles (10) pueda enmendar la falta. Si a este plazo no se produce la enmienda y/o no se aporta la documentación solicitada, se entenderá que se ceja en la petición y previa resolución, se archivará sin más trámites.</p><p> </p>",
+      "textoLeng": null,
+      "url": null,
+      "cve": null,
+      "desDiarioOficial": "BOIB. B.O. DE LAS ISLAS BALEARES",
+      "datPublicacion": "2026-06-23"
+    }
+  ],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-11T04:09:39.128Z"
+}

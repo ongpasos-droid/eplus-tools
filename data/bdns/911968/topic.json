@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "911968",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / MIRANDA DE EBRO / AYUNTAMIENTO DE MIRANDA DE EBRO",
+  "nuts_codes": [
+    "ES412"
+  ],
+  "nuts_primary": "ES412",
+  "title": "BASES ESPECIFICAS REGULADORAS Y CONVOCATORIA DEL EJERCICIO 2026 PARA LA CONCESIÓN DE SUBVENCIONES PARA LA EJECUCIÓN DE PROYECTOS EN EL ÁMBITO DE LA ACCIÓN SOCIAL PROPUESTOS POR EL CONSEJO DE SERVICIOS SOCIALES.",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-06-10",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 38966.55,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "R",
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911968",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.mirandadeebro.es/documentacion/convocatoria-2025-para-la-financiacion-de-proyectos-en-el-ambito-de-la-accion-social-a-propuesta-del-consejo-de-servicios-sociales/",
+  "text_inicio": "Al día siguiente a su publicación en el Boletín Oficial de la Provincia (BOPBUR)",
+  "text_fin": "15 días después de su publicación en el Bopbur",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-11T04:09:41.680Z"
+}

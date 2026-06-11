@@ -1,0 +1,72 @@
+{
+  "id": 1113359,
+  "organo": {
+    "nivel1": "OTROS",
+    "nivel2": "UNIVERSITAT DE VALÈNCIA (ESTUDI GENERAL)",
+    "nivel3": null
+  },
+  "sedeElectronica": "https://www.uv.es/sede-electronica/es/sede-electronica-uv.html",
+  "codigoBDNS": "911798",
+  "fechaRecepcion": "2026-06-10",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 1500,
+  "mrr": false,
+  "descripcion": "II Ed. premio investigación ecosocial Ernest García",
+  "descripcionLeng": "II Ed. Premi d’Investigació Ecosocial Ernest García",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades auxiliares a la educación",
+      "codigo": "85.6"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES523 - Valencia / València"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Resolución de la decana de la Facultat de Ciències Socials de la Universitat de València, por la que se convocan y establecen las bases reguladoras de la II Ed. del Premio de Investigación Ecosocial Ernest García. Curso 2025-26",
+  "urlBasesReguladoras": "https://go.uv.es/p7IKILn",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Inicia el día siguiente a la publicación del extracto en el DOGV",
+  "textFin": "Finaliza el 30 de septiembre de 2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472616,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "resolucio_i_bases-val.pdf",
+      "long": 342921,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472615,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "resolucion_y_bases-cas.pdf",
+      "long": 326252,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

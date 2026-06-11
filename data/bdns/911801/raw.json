@@ -1,0 +1,100 @@
+{
+  "id": 1113362,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "GIJÓN",
+    "nivel3": "AYUNTAMIENTO DE GIJÓN"
+  },
+  "sedeElectronica": "https://sedeelectronica.gijon.es/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=SEDE_HOME ",
+  "codigoBDNS": "911801",
+  "fechaRecepcion": "2026-06-10",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 500000,
+  "mrr": false,
+  "descripcion": "Convocatoria de subvenciones para proyectos de inclusión sociolaboral y actuaciones de dinamización de la actividad económica 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    },
+    {
+      "descripcion": "COMERCIO AL POR MAYOR Y AL POR MENOR",
+      "codigo": "G"
+    },
+    {
+      "descripcion": "CONSTRUCCIÓN",
+      "codigo": "F"
+    },
+    {
+      "descripcion": "HOSTELERÍA",
+      "codigo": "I"
+    },
+    {
+      "descripcion": "OTROS SERVICIOS",
+      "codigo": "T"
+    },
+    {
+      "descripcion": "TRANSPORTE Y ALMACENAMIENTO",
+      "codigo": "H"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES12 - PRINCIPADO DE ASTURIAS"
+    }
+  ],
+  "descripcionFinalidad": "Fomento del Empleo",
+  "descripcionBasesReguladoras": "Ordenanza general de subvenciones del Ayuntamiento de Gijón/Xixón",
+  "urlBasesReguladoras": "https://www.gijon.es/es/publicaciones/ordenanza-subvenciones",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Desde el día siguiente a la publicación del extracto de las bases de la convocatoria en el BOPA",
+  "textFin": "Máximo 20 días naturales a contar desde el día siguiente a la publicación del extracto en BOPA",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472571,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "BASES_REGULADORAS_plazo_unico.pdf",
+      "long": 752884,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472573,
+      "descripcion": "Presupuesto",
+      "nombreFic": "Prespuesto inclusión 2026.pdf",
+      "long": 89983,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472572,
+      "descripcion": "Acuerdo Junta Gobierno",
+      "nombreFic": "Acuerdo_de_Junta_de_Gobierno__Automatico_.pdf",
+      "long": 170067,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

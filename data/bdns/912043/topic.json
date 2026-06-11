@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "912043",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / PONTEVEDRA / AYUNTAMIENTO DE PONTEVEDRA",
+  "nuts_codes": [
+    "ES114"
+  ],
+  "nuts_primary": "ES114",
+  "title": "Subvenciones plurianuales destinadas al desarrollo de la modalidad de prestación de servicio de taxi denominada “Coche de Punto”, consistente en servicios de taxi compartido a varias personas usuarias",
+  "title_lang": "es",
+  "summary": "Subvenciones al transporte",
+  "status": "open",
+  "publication_date": "2026-06-10",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 402500,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "49.3",
+      "descripcion": "Otro transporte terrestre de pasajeros"
+    }
+  ],
+  "apply_url": "https://sede.pontevedra.gal",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912043",
+  "documents": [
+    {
+      "label": "Texto en otra lengua de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://sede.pontevedra.gal/public/publications/list/municipalregulations/ORDE/details/7152677",
+  "text_inicio": "día siguiente de publicacion BOP",
+  "text_fin": "15 días hábiles desde publicacion BOP",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-11T04:09:41.701Z"
+}

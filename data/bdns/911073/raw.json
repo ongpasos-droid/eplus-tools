@@ -1,0 +1,68 @@
+{
+  "id": 1112634,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "POZUELO DE ALARCÓN",
+    "nivel3": "AYUNTAMIENTO DE POZUELO DE ALARCÓN"
+  },
+  "sedeElectronica": "https://sede.pozuelodealarcon.es/sede/main.action;jsessionid=FCBB957BE6CBAED1980F24C024C09334.sede2",
+  "codigoBDNS": "911073",
+  "fechaRecepcion": "2026-06-05",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 429000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DE SUBVENCIONES, A TRAVÉS DEL PROCEDIMIENTO DE CONCURRENCIA COMPETITIVA DE AYUDAS\nCOMPLEMENTARIAS DE EDUCACIÓN A LAS FAMILIAS PARA LA ADQUISICIÓN DE RECURSOS DIDÁCTICOS Y MATERIAL ESCOLAR PARA\nEL CURSO ESCOLAR 2026/2027",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Educación primaria",
+      "codigo": "85.2"
+    },
+    {
+      "descripcion": "Educación secundaria y educación postsecundaria no terciaria",
+      "codigo": "85.3"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES3 - COMUNIDAD DE MADRID"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Ordenanza General de Subvenciones de Pozuelo de Alarcón, publicada en el Boletín Oficial de la Comunidad de Madrid, número 294,\nde 10 de diciembre de 2012",
+  "urlBasesReguladoras": "https://www.pozuelodealarcon.org/tu-ayuntamiento/normativa/normativa-municipal/ordenanza-general-reguladora-de-subvenciones-del-ayuntamiento-de-pozuelo-de-alarcon",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "El día siguiente al de su publicación en el BOCM",
+  "textFin": "Hasta el 30 de septiembre de 2026 inclusive",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1470437,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Anuncio aprobación de la convocatoria.pdf",
+      "long": 1140290,
+      "datMod": "2026-06-05",
+      "datPublicacion": "2026-06-10"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

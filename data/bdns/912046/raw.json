@@ -1,0 +1,88 @@
+{
+  "id": 1113607,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "OROTAVA, LA",
+    "nivel3": "AYUNTAMIENTO DE OROTAVA, LA"
+  },
+  "sedeElectronica": "https://laorotava.sedelectronica.es/",
+  "codigoBDNS": "912046",
+  "fechaRecepcion": "2026-06-10",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 27000,
+  "mrr": false,
+  "descripcion": "Convocatoria para la concesión de subvenciones a las AMPA de los colegios sitos en el municipio de La Orotava, destinadas a la financiación del fomento del uso de bibliotecas en horario no lectivo, durante el curso escolar 2025/2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES709 - Tenerife"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Bases Reguladoras de subvenciones a las AMPAS destinadas a la financiación del fomento del uso de bibliotecas en horario no lectivo en el municipio de La Orotava, publicadas en el BOP, número 108, de 06/09/2019",
+  "urlBasesReguladoras": "https://laorotava.es/es/ayuntamiento/subvenciones",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Al día siguiente de la publicación del BOP ",
+  "textFin": "30 días naturales desde el día siguiente de la publicación de la convocatoria en el BOP",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1473195,
+      "descripcion": "Solicitud de Subvenciones a las Asociaciones de  Padres y Madres de Alumnado",
+      "nombreFic": "solicitud de subvenciones BIBLIOTECA.pdf",
+      "long": 887769,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1473197,
+      "descripcion": "Anexo de subvenciones BEP 2026",
+      "nombreFic": "2026-anexo-subvenciones.pdf",
+      "long": 451331,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1473204,
+      "descripcion": "Decreto nº2026-3338",
+      "nombreFic": "DECRETO 2026-3338 [Resolución PR_2026_2503 - Convocatoria. Fase A].pdf",
+      "long": 1369418,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1473194,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "publicacion-bop-aprobacion-definitiva-29-12-2025.pdf",
+      "long": 924729,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

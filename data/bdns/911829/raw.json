@@ -1,0 +1,80 @@
+{
+  "id": 1113390,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "VITORIA-GASTEIZ",
+    "nivel3": "AYUNTAMIENTO DE VITORIA-GASTEIZ"
+  },
+  "sedeElectronica": "https://sedeelectronica.vitoria-gasteiz.org",
+  "codigoBDNS": "911829",
+  "fechaRecepcion": "2026-06-10",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 25000,
+  "mrr": false,
+  "descripcion": "Ayudas para el transporte a los centros educativos que participan en los programas educativos del Servicio de Educación y/o del Centro de Estudios Ambientales del Ayuntamiento de Vitoria-Gasteiz, en el curso 2026-2027",
+  "descripcionLeng": "Vitoria-Gasteizko Udaleko Hezkuntza Zerbitzuak edota Ingurugiro Gaietarako Ikastegiak antolatutako hezkuntza-programetan parte hartzen duten ikastetxeentzako garraiorako dirulaguntzak, 2026-2027 ikasturtea",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Educación",
+      "codigo": "85"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES211 - Araba/Álava"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Ordenanza general de subvenciones del Ayuntamiento de Vitoria-Gasteiz",
+  "urlBasesReguladoras": "http://www.araba.eus/botha/Boletines/2023/088/2023_088_02293_C.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2027-06-25",
+  "textInicio": "A partir del día siguiente de la publicación en BOTHA",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472675,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "2026 JGL aprob SUBV Transporte.pdf",
+      "long": 3683628,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472677,
+      "descripcion": "Deialdiaren oinarriak",
+      "nombreFic": "Bases Subv transporte 2026-2027 eus.pdf",
+      "long": 346328,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472676,
+      "descripcion": "Bases convocatoria",
+      "nombreFic": "Bases Subv transporte 2026-2027 cast.pdf",
+      "long": 343516,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

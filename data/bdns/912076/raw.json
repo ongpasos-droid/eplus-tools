@@ -1,0 +1,78 @@
+{
+  "id": 1113637,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "VANDELLÒS I L'HOSPITALET DE L'INFANT",
+    "nivel3": "AYUNTAMIENTO DE VANDELLÒS I L'HOSPITALET DE I'INFANT"
+  },
+  "sedeElectronica": "https://vandellos-hospitalet.eadministracio.cat/info.0",
+  "codigoBDNS": "912076",
+  "fechaRecepcion": "2026-06-10",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 16000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA PARA  EL OTORGAMIENTO DE SUBVENCIONES A LA RECUPERACIÓN Y COMERCIALIZACIÓN DEL PRODUCTO AGRARIO, RAMADERO Y FORESTAL EN RÉGIMEN DE CONCURRENCIA COMPETITIVA (2026)",
+  "descripcionLeng": "CONVOCATÒRIA PER  A L’ATORGAMENT DE SUBVENCIONS A LA RECUPERACIÓ I COMERCIALITZACIÓ DEL PRODUCTE AGRARI, RAMADER I I FORESTAL EN RÈGIM DE CONCURRÈNCIA COMPETITIVA (2026)",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    },
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    },
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "AGRICULTURA, GANADERÍA, SILVICULTURA Y PESCA",
+      "codigo": "A"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES514 - Tarragona"
+    }
+  ],
+  "descripcionFinalidad": "Agricultura, Pesca y Alimentación",
+  "descripcionBasesReguladoras": "Bases per a la concessió de subvencions per a la recuperació i la comercialització de producte agrari, ramader i forestal.",
+  "urlBasesReguladoras": "https://www.dipta.cat/bopt/web/anunci/359785/modificacio-de-les-bases-reguladores-de-subvencions-per-a-la-recuperacio-i-comercialitzacio-del-producte-agrari-local-aprovacio-definitiva-ajuntament-vandellos-i-hospitalet-infant",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-09-30",
+  "textInicio": "des de l'endemà de la publicació de la convocatòria al BOPT",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1473293,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "CONVOCATÒRIA_Ajuts_producte_agrari_2026.pdf",
+      "long": 146793,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1473291,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "RECUPERACIÓN Y COMERCIALIZACIÓN DEL PRODUCTO AGRARIO_2026.pdf",
+      "long": 149775,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

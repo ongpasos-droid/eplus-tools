@@ -1,0 +1,100 @@
+{
+  "id": 1113192,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "ASTIGARRAGA",
+    "nivel3": "AYUNTAMIENTO DE ASTIGARRAGA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "911631",
+  "fechaRecepcion": "2026-06-09",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 20000,
+  "mrr": false,
+  "descripcion": "Ayudas para programas de cooperación al desarrollo",
+  "descripcionLeng": "Garapenerako Lankidetza Progamaren dirulaguntzak ",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    },
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES21 - PAIS VASCO"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Ayudas para programas de cooperación al desarrollo",
+  "urlBasesReguladoras": "https://www.astigarraga.eus/es/-/garapenerako-lankidetza-progamaren-dirulaguntzak-2026",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-11-30",
+  "textInicio": "Desde el día siguiente de la publicación de la convocatoria en el Boletín Oficial de Gipuzkoa (BOG)",
+  "textFin": "1 mes a partir del día siguiente al de la publicación en el BOG. En el caso de emergencia 30-11-2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472164,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Oinarriak_Garapenerako dirulaguntzak.pdf",
+      "long": 241897,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472165,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Oinarriak_Garapenerako dirulaguntzak.pdf",
+      "long": 241897,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472181,
+      "descripcion": "IMPRESO CUMPLIMIENTO CRITERIOS LINGÜISTICOS",
+      "nombreFic": "E097 HIZKUNTZA IRIZPIDEEN BETETZE MAILA.pdf",
+      "long": 165415,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472178,
+      "descripcion": "IMPRESO VALORACIÓN GENERO",
+      "nombreFic": "E036 GENEROA BALORATZEKO FITXA.pdf",
+      "long": 119420,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472172,
+      "descripcion": "SOLICITUD",
+      "nombreFic": "E047 eskaera_I eta II eranskinak.pdf",
+      "long": 189550,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-10"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

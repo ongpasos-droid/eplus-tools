@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "911732",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / ALMUÑÉCAR / AYUNTAMIENTO DE ALMUÑÉCAR",
+  "nuts_codes": [
+    "ES614"
+  ],
+  "nuts_primary": "ES614",
+  "title": "Acuerdo de Junta de Gobierno Local de 3 de junio de 2026 del Ayuntamiento de Almuñécar, por la que se convoca el XII Concurso de Fotografía “Nino Rodríguez, mi pequeño paraíso”.",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-06-10",
+  "open_date": "2026-07-30",
+  "deadline": "2026-08-07",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 1000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "90.1",
+      "descripcion": "Actividades de creación artística"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911732",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://bop.dipgra.es/publica/consulta-de-bops/",
+  "text_inicio": "30 de julio de 2026",
+  "text_fin": "7 de agosto de 2026",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-11T04:09:41.618Z"
+}

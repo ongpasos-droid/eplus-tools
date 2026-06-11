@@ -1,0 +1,100 @@
+{
+  "id": 1113313,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "MIRANDA DE EBRO",
+    "nivel3": "AYUNTAMIENTO DE MIRANDA DE EBRO"
+  },
+  "sedeElectronica": " https://sede.mirandadeebro.es/",
+  "codigoBDNS": "911752",
+  "fechaRecepcion": "2026-06-10",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 25000,
+  "mrr": false,
+  "descripcion": "IX Convocatoria de ayudas municipales para la creación y consolidación de iniciativas empresariales y generación de empleo en el Vivero de Empresas",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "COMERCIO AL POR MAYOR Y AL POR MENOR",
+      "codigo": "G"
+    },
+    {
+      "descripcion": "CONSTRUCCIÓN",
+      "codigo": "F"
+    },
+    {
+      "descripcion": "OTROS SERVICIOS",
+      "codigo": "T"
+    },
+    {
+      "descripcion": "TRANSPORTE Y ALMACENAMIENTO",
+      "codigo": "H"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES412 - Burgos"
+    }
+  ],
+  "descripcionFinalidad": "Fomento del Empleo",
+  "descripcionBasesReguladoras": "Ordenanza General de Subvenciones del Ayuntamiento de Miranda de Ebro",
+  "urlBasesReguladoras": "https://www.mirandadeebro.es/NdSite/OnLineCache/FMS/02/14/fe0c685c95de7dbf6f5eb37a39ea5ab5/Modificaci%F3n%20Ordenanza%20General%20de%20Subvenciones%20BOP%20186%20de%2029-09-21.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-09-01",
+  "textInicio": "A partir del día siguiente de la publicación de las Bases en el Boletín Oficial de la Provincia",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472525,
+      "descripcion": "Anexo II",
+      "nombreFic": "Anexo II VIVERO MODALIDADES DE AYUDA_Formulario.pdf",
+      "long": 94180,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472528,
+      "descripcion": "Anexo III",
+      "nombreFic": "Anexo III VIVERO AUTORIZACIÓN DE DATOS A CONSULTAR_form.pdf",
+      "long": 95607,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472520,
+      "descripcion": "Anexo I",
+      "nombreFic": "Anexo I VIVERO Declaración responsable_form.pdf",
+      "long": 109683,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472519,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Bases_IX_Convocatoria_de_ayudas_Vivero_de_Empresas (1).pdf",
+      "long": 265639,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

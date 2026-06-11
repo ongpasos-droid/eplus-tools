@@ -1,0 +1,77 @@
+{
+  "source": "bdns",
+  "source_id": "911837",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / SANT QUIRZE DEL VALLÈS / AYUNTAMIENTO DE SANT QUIRZE DEL VALLÈS",
+  "nuts_codes": [
+    "ES511"
+  ],
+  "nuts_primary": "ES511",
+  "title": "Convocatoria de ayudas para actividades de sensibilización 2026",
+  "title_lang": "es",
+  "summary": "Cooperación internacional para el desarrollo y cultural",
+  "status": "open",
+  "publication_date": "2026-06-10",
+  "open_date": "2026-06-11",
+  "deadline": "2026-07-09",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 2375,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "85.5",
+      "descripcion": "Otra educación"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911837",
+  "documents": [
+    {
+      "label": "Texto en otra lengua de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.santquirzevalles.cat/tramits-i-gestions/tramits/ajuts-sensibilitzacio/bases-ajuts-activitats-de-sensibilitzacio.pdf",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [
+    {
+      "numAnuncio": 214167,
+      "titulo": "Procedimiento Beta",
+      "tituloLeng": null,
+      "texto": "Procedimiento Beta",
+      "textoLeng": null,
+      "url": "https://bop.diba.cat/anunci/3955844/convocatoria-per-presentar-sol-licituds-per-a-la-concessio-d-ajuts-a-activitats-de-sensibilitzacio-al-municipi-promogudes-per-les-ong-i-entitats-solidaries-ajuntament-de-sant-quirze-del-valles",
+      "cve": null,
+      "desDiarioOficial": "B.O.P. DE BARCELONA",
+      "datPublicacion": "2026-06-10"
+    }
+  ],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-11T04:09:41.647Z"
+}

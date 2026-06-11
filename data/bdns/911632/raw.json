@@ -1,0 +1,96 @@
+{
+  "id": 1113193,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "ASTIGARRAGA",
+    "nivel3": "AYUNTAMIENTO DE ASTIGARRAGA"
+  },
+  "sedeElectronica": "Sede electrónica del Ayuntamiento de Astigarraga",
+  "codigoBDNS": "911632",
+  "fechaRecepcion": "2026-06-09",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 10000,
+  "mrr": false,
+  "descripcion": "Subvenciones para el fomento del desarrollo de actividades, proyectos y programas del ámbito de los Servicios Sociales en régimen de libre concurrencia para el año 2026.",
+  "descripcionLeng": "2026rako lehia askeko erregimeneko Gizarte Zerbitzu arloan garatuko diren jardueren, proiektuen eta programen garapena sustatzeko dirulaguntzak.",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades asociativas",
+      "codigo": "94"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES21 - PAIS VASCO"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Convocatoria de ayudas en régimen de concurrencia libre.",
+  "urlBasesReguladoras": "https://www.astigarraga.eus/es/-/gizarte-zerbitzu-arloan-garatuko-diren-jardueren-proiektuen-eta-programen-dirulaguntzak-2026",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Desde el día siguiente de la publicación de la convocatoria en el Boletín Oficial de Gipuzkoa (BOG)",
+  "textFin": "Un mes desde la publicación",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472592,
+      "descripcion": "Impreso cumplimiento criterios lingüísticos",
+      "nombreFic": "E097.pdf",
+      "long": 165295,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472585,
+      "descripcion": "Impreso valoración género",
+      "nombreFic": "E036.pdf",
+      "long": 119315,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472167,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Oinarriak_ Gizarte eremuko programen dirulaguntzak.pdf",
+      "long": 303080,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472173,
+      "descripcion": "Solicitud",
+      "nombreFic": "E024.pdf",
+      "long": 159335,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472166,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Oinarriak_ Gizarte eremuko programen dirulaguntzak.pdf",
+      "long": 303080,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-10"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

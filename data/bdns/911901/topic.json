@@ -1,0 +1,75 @@
+{
+  "source": "bdns",
+  "source_id": "911901",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / POBLA, SA / AYUNTAMIENTO DE POBLA, SA",
+  "nuts_codes": [],
+  "nuts_primary": null,
+  "title": "BASES DE SUBVENCIONES A CLUBES, ASOCIACIONES Y ENTIDADES DEPORTIVAS DEL MUNICIPIO DE SA POBLA. AÑO 2026",
+  "title_lang": "es",
+  "summary": "Otras actuaciones de carácter económico",
+  "status": "open",
+  "publication_date": "2026-06-10",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 26000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "S",
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911901",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en lengua cooficial",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.caib.es/eboibfront/pdf/es/2025/106/1198026",
+  "text_inicio": "(20) días naturales contados a partir del día siguiente al de la publicación en el BOIB",
+  "text_fin": "al 20º dia natural contados a partir del día siguiente al de la publicació en el BOIB",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [
+    {
+      "numAnuncio": 214205,
+      "titulo": "EXTRACTO DE LA APROBACIÓN DE LAS CONVOCATORIA DE SUBVENCIONES A DEPORTISTAS INDIVIDUALES DEL MUNICIPIO DE SA POBLA DEL AÑO 2026",
+      "tituloLeng": null,
+      "texto": "<p>Primero. Finalidad:</p><p>El objeto de estas bases es regular la concesión de subvenciones y ayudas económicas que otorga el ayuntamiento de sa Pobla con el fin de promocionar y fomentar la práctica del deporte en este municipio.</p><p> </p><p>Segundo. Beneficiarios:</p><p>Pueden ser solicitantes de las subvenciones objeto de esta convocatoria los clubes, asociaciones y entidades deportivas, legalmente constituidas y reconocidas, que figuren inscritas en el Registro Municipal de Asociaciones del municipio y que:</p><p>1.- Contemplen en los sus estatutos la práctica de la actividad física y deportiva.</p><p>2.- Estar al corriente en cuanto a las obligaciones tributarias, así como de las obligaciones con la TGSS, y no estar sometidas a ningún procedimiento sancionador incoado por este motivo.</p><p>3.- No pueden acogerse a la ayuda las entidades en las cuales concurra alguna de las prohibiciones establecidas en el apartado 2 del artículo 13 de la Ley 38/2003, de 17 de noviembre, General de Subvenciones, ni las entidades y asociaciones que no se encuentren legalmente constituidas.</p><p>4.- Cumplir con el resto de requisitos formales y materiales previstos en esta convocatoria y la normativa de subvenciones aplicable.</p><p>5.- Quedan excluidos expresamente de esta convocatoria:</p><p>a.Las sociedades anónimas deportivas, y los clubes que participen en ligas profesionales.</p><p>6.- Cada entidad únicamente puede presentar una solicitud para poder hacer frente a los diferentes gastos originados de la propia actividad deportiva.</p><p> </p><p>Tercero. Bases reguladoras:</p><p>https://sapobla.eadministracio.cat/transparency/</p><p> </p><p>Cuarto. Importe:</p><p>Durante el ejercicio presupuestario 2025, se destina la cantidad de 26.000,00 euros a las subvenciones objeto de esta convocatoria, con cargo a la aplicación presupuestaria 2026.01.3410.4890501.</p><p> </p><p>Quinto. Plazo de presentación de solicitudes:</p><p>El plazo para presentar las solicitudes es de veinte (20) días naturales contadores a partir del día siguiente al de la publicación de esta convocatoria en el BOIB. Si el último día de este plazo es sábado, domingo o festivo, se entenderá prorrogado hasta el primer día hábil siguiente. No se puede presentar ningún modelo de solicitud de subvención fuera del plazo establecido.</p>",
+      "textoLeng": null,
+      "url": null,
+      "cve": null,
+      "desDiarioOficial": "BOIB. B.O. DE LAS ISLAS BALEARES",
+      "datPublicacion": "2026-06-13"
+    }
+  ],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-11T04:09:41.660Z"
+}

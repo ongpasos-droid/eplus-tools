@@ -1,0 +1,76 @@
+{
+  "id": 1113617,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "PRINCIPADO DE ASTURIAS",
+    "nivel3": "SERVICIO PÚBLICO DE EMPLEO DEL PRINCIPADO DE ASTURIAS"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "912056",
+  "fechaRecepcion": "2026-06-10",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 5000000,
+  "mrr": false,
+  "descripcion": "SUBVENCIONAR A LOS AYUNTAMIENTOS DEL PRINCIPADO DE ASTURIAS POR LA CELEBRACION DE CONTRATOS DE TRABAJO EN PRACTICAS CONVOCATORIA 2026/2027",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Administración pública y de la política económica, social y medioambiental",
+      "codigo": "84.1"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES120 - Asturias"
+    }
+  ],
+  "descripcionFinalidad": "Fomento del Empleo",
+  "descripcionBasesReguladoras": "Bases reguladoras de la concesión de subvenciones a los ayuntamientos del Principado de Asturias con destino a la celebración de contratos formativos para la obtención de la práctica profesional adecuada al nivel de estudios",
+  "urlBasesReguladoras": "https://sede.asturias.es/bopa/2025/06/12/2025-04855.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "DIA SIGUIENTE PUBLICACION EXTRACTO EN BOPA",
+  "textFin": "10 DIAS HABILES TRAS PUBLICACION EXTRACTO EN BOPA",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [
+    {
+      "descripcion": "FSE - FONDO SOCIAL EUROPEO "
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1473241,
+      "descripcion": "Resolución corrección de Bases Reguladoras",
+      "nombreFic": "Resolucion 29092025 correccion BBRR Cont Form BOPA 07102025 (1).pdf",
+      "long": 333107,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1473240,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Resolucion_convocatoria_2026-2027_PLE_y_CF.pdf",
+      "long": 648009,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

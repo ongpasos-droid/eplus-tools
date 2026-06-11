@@ -1,0 +1,84 @@
+{
+  "id": 1113398,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SANT QUIRZE DEL VALLÈS",
+    "nivel3": "AYUNTAMIENTO DE SANT QUIRZE DEL VALLÈS"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "911837",
+  "fechaRecepcion": "2026-06-10",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 2375,
+  "mrr": false,
+  "descripcion": "Convocatoria de ayudas para actividades de sensibilización 2026",
+  "descripcionLeng": "Convocatòria d'ajuts per activitats de sensibilització 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Otra educación",
+      "codigo": "85.5"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES511 - Barcelona"
+    }
+  ],
+  "descripcionFinalidad": "Cooperación internacional para el desarrollo y cultural",
+  "descripcionBasesReguladoras": "Modificació de les bases particulars per a la concessió d'ajuts a activitats de sensibilització promogudes per les ONG i entitats solidaries de Sant Quirze del Vallès",
+  "urlBasesReguladoras": "https://www.santquirzevalles.cat/tramits-i-gestions/tramits/ajuts-sensibilitzacio/bases-ajuts-activitats-de-sensibilitzacio.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-11",
+  "fechaFinSolicitud": "2026-07-09",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472719,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "Anunci BOPB 100626.PDF",
+      "long": 103652,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472718,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Anunci BOPB 100626.PDF",
+      "long": 103652,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    }
+  ],
+  "anuncios": [
+    {
+      "numAnuncio": 214167,
+      "titulo": "Procedimiento Beta",
+      "tituloLeng": null,
+      "texto": "Procedimiento Beta",
+      "textoLeng": null,
+      "url": "https://bop.diba.cat/anunci/3955844/convocatoria-per-presentar-sol-licituds-per-a-la-concessio-d-ajuts-a-activitats-de-sensibilitzacio-al-municipi-promogudes-per-les-ong-i-entitats-solidaries-ajuntament-de-sant-quirze-del-valles",
+      "cve": null,
+      "desDiarioOficial": "B.O.P. DE BARCELONA",
+      "datPublicacion": "2026-06-10"
+    }
+  ],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

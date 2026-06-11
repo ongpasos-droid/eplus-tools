@@ -1,0 +1,80 @@
+{
+  "id": 1113428,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "TORIJA",
+    "nivel3": "AYUNTAMIENTO DE TORIJA"
+  },
+  "sedeElectronica": "https://torija.sedelectronica.es/info.0",
+  "codigoBDNS": "911867",
+  "fechaRecepcion": "2026-06-10",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 15000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA DE AYUDAS PARA BANCO DE LIBROS MUNICIPAL PARA EL ALUMNADO DE 2ºCICLO DE EDUCACIÓN INFANTIL Y 1º Y 2º CURSO DE EDUCACIÓN PRIMARIA 2026-2027",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Educación",
+      "codigo": "85"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES424 - Guadalajara"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Ordenanza General de Subvenciones del Ayuntamiento de Torija",
+  "urlBasesReguladoras": "https://boletin.dguadalajara.es/boletin/index.php/2-anuncios/62498-APROBACI%C3%93NDEFINITIVAORDENANZAGENERALDESUBVENCIONES",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "desde el día siguiente de la publicación de esta convocatoria en el BOP de Guadalajara",
+  "textFin": "ordinaria: 30/06/2026 - extraordinaria para nuevos alumnos admitidos en p. extraord: 30/09/2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472796,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "20260610_Resolución_CONVOCATORIA SUBVENCIÓN DE BANCO DE LIBROS MUNICIPAL.pdf",
+      "long": 282186,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472804,
+      "descripcion": "Anexo II Declaración jurada",
+      "nombreFic": "20260610_Otros_ANEXO II Declaración Jurada.docx",
+      "long": 74806,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472803,
+      "descripcion": "Anexo I Solicitud",
+      "nombreFic": "20260610_Otros_ANEXO I Solicitud.docx",
+      "long": 90594,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

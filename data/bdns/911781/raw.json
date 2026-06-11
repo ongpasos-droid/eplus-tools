@@ -1,0 +1,88 @@
+{
+  "id": 1113342,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "DIPUTACIÓN PROV. DE VALLADOLID",
+    "nivel3": "DIPUTACIÓN PROVINCIAL DE VALLADOLID"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "911781",
+  "fechaRecepcion": "2026-06-10",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 215000,
+  "mrr": false,
+  "descripcion": "Acuerdo de Pleno  nº 99 de 29 de mayo, por el que se aprueba convocatoria subv. para Aytos con menos de 20.000 hb. para el sostenimiento de escuelas infantiles de 0 a 3 años municipales, 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Prestación de servicios a la comunidad en general",
+      "codigo": "84.2"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES418 - Valladolid"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "BASE REGULADORA GENERAL - ORDENANZA GENERAL DE SUBVENCIONES",
+  "urlBasesReguladoras": "https://www.diputaciondevalladolid.es/documents/10181/1090769/ORDENANZA+GENERAL+DE+SUBVENCIONES/d5d6fb94-fd7a-444b-bb18-6c50ffec90e0",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir de las 00:00 horas del día siguiente a la publicación en el BOP",
+  "textFin": "20 días hábiles, contados desde las 00:00 horas del día siguiente a aquél en que aparezca publicado",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472581,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "1._Bases_Finales_Escuelas_Infantiles_2026_.pdf",
+      "long": 406766,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472582,
+      "descripcion": "Anexo I",
+      "nombreFic": "2._01Anexo_I_Instrucciones.pdf",
+      "long": 396931,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472583,
+      "descripcion": "Anexo II",
+      "nombreFic": "3._Anexo_II_Cuenta_justificativa.docx",
+      "long": 52341,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    },
+    {
+      "id": 1472584,
+      "descripcion": "Acuerdo aprobación bases",
+      "nombreFic": "Justificante_de_firma_de_Certif_Ac_099-26-Convo_subvención_escuelas_infantiles.pdf",
+      "long": 246304,
+      "datMod": "2026-06-10",
+      "datPublicacion": "2026-06-10"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}
