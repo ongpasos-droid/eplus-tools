@@ -1,0 +1,64 @@
+{
+  "id": 1113889,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "BAZA",
+    "nivel3": "AYUNTAMIENTO DE BAZA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "912328",
+  "fechaRecepcion": "2026-06-11",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 600,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA CONCURSO CARTEL ANUNCIADOR DE LA FERIA Y FIESTAS DE BAZA 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES61 - ANDALUCIA"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "Acuerdo de la JGL de 5/6/26 por el que se aprueban las bases reguladoras del Concurso del cartel anunciador de la feria y fiestas de Baza 2026",
+  "urlBasesReguladoras": "https://bop.dipgra.es/publica/buscador-anuncios/anuncio/APROBACION-DEFINITIVA-PRESUPUESTO-GENERAL-CONSOLIDADO-Y-PLANTILLA-DE-PERSONAL-PARA-EJERCICIO-2026/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-06-26",
+  "textInicio": "DÍA SIGUIENTE A SU PUBLICACION EN EL BOP ",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1474054,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "doc08680220260611134854.pdf",
+      "long": 494249,
+      "datMod": "2026-06-11",
+      "datPublicacion": "2026-06-11"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

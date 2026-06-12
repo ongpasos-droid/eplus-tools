@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "911820",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / DIPUTACIÓN PROV. DE ALMERÍA / DIPUTACIÓN PROVINCIAL DE ALMERÍA",
+  "nuts_codes": [
+    "ES611"
+  ],
+  "nuts_primary": "ES611",
+  "title": "BASES DEL CERTAMEN INTERNACIONAL DE CORTOMETRAJES. FICAL 2026. Decreto núm. 1353, de fecha 11 de junio de 2026.",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-06-10",
+  "open_date": null,
+  "deadline": "2026-08-14",
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 28600,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "90",
+      "descripcion": "Actividades de creación artística y artes escénicas"
+    }
+  ],
+  "apply_url": "www.dipalme.org",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911820",
+  "documents": [
+    {
+      "label": "Aprobación bases C. I. Cortometrajes. FICAL 2026",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://app.dipalme.org/bop/services/manager/edicto/2021/4757/4757-21p.pdf",
+  "text_inicio": "Al día siguiente a su publicación en el BOP de Almería",
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-12T04:08:39.668Z"
+}

@@ -1,0 +1,241 @@
+{
+  "id": 1113695,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "CASTILLA Y LEÓN",
+    "nivel3": "INSTITUTO PARA LA COMPETITIVIDAD EMPRESARIAL DE CASTILLA Y LEÓN"
+  },
+  "sedeElectronica": "https://www.tramitacastillayleon.jcyl.es",
+  "codigoBDNS": "912134",
+  "fechaRecepcion": "2026-06-11",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 12993998,
+  "mrr": false,
+  "descripcion": "Resolución de 10 de junio de 2026, de la Presidencia del ICECYL que aprueba la convocatoria de subvenciones para financiar proyectos de I+D en ámbitos de tecnologías fundamentales incluidos en el programa del Fondo de Transición Justa de España",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "GRAN EMPRESA"
+    },
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    },
+    {
+      "descripcion": "ACTIVIDADES DE EDICIÓN, RADIODIFUSIÓN Y PRODUCCIÓN Y DISTRIBUCIÓN DE CONTENIDOS",
+      "codigo": "J"
+    },
+    {
+      "descripcion": "ACTIVIDADES FINANCIERAS Y DE SEGUROS",
+      "codigo": "L"
+    },
+    {
+      "descripcion": "ACTIVIDADES INMOBILIARIAS",
+      "codigo": "M"
+    },
+    {
+      "descripcion": "ACTIVIDADES PROFESIONALES, CIENTÍFICAS Y TÉCNICAS",
+      "codigo": "N"
+    },
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    },
+    {
+      "descripcion": "ADMINISTRACIÓN PÚBLICA Y DEFENSA; SEGURIDAD SOCIAL OBLIGATORIA",
+      "codigo": "P"
+    },
+    {
+      "descripcion": "AGRICULTURA, GANADERÍA, SILVICULTURA Y PESCA",
+      "codigo": "A"
+    },
+    {
+      "descripcion": "Artes gráficas y reproducción de soportes grabados",
+      "codigo": "18"
+    },
+    {
+      "descripcion": "COMERCIO AL POR MAYOR Y AL POR MENOR",
+      "codigo": "G"
+    },
+    {
+      "descripcion": "Confección de prendas de vestir",
+      "codigo": "14"
+    },
+    {
+      "descripcion": "CONSTRUCCIÓN",
+      "codigo": "F"
+    },
+    {
+      "descripcion": "Coquerías y refino de petróleo",
+      "codigo": "19"
+    },
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    },
+    {
+      "descripcion": "Fabricación de bebidas",
+      "codigo": "11"
+    },
+    {
+      "descripcion": "Fabricación de maquinaria y equipo n.c.o.p.",
+      "codigo": "28"
+    },
+    {
+      "descripcion": "Fabricación de material y equipo eléctrico",
+      "codigo": "27"
+    },
+    {
+      "descripcion": "Fabricación de muebles",
+      "codigo": "31"
+    },
+    {
+      "descripcion": "Fabricación de otro material de transporte",
+      "codigo": "30"
+    },
+    {
+      "descripcion": "Fabricación de otros productos minerales no metálicos",
+      "codigo": "23"
+    },
+    {
+      "descripcion": "Fabricación de productos de caucho y plásticos",
+      "codigo": "22"
+    },
+    {
+      "descripcion": "Fabricación de productos farmacéuticos",
+      "codigo": "21"
+    },
+    {
+      "descripcion": "Fabricación de productos informáticos, electrónicos y ópticos",
+      "codigo": "26"
+    },
+    {
+      "descripcion": "Fabricación de productos metálicos, excepto maquinaria y equipo",
+      "codigo": "25"
+    },
+    {
+      "descripcion": "Fabricación de vehículos de motor, remolques y semirremolques",
+      "codigo": "29"
+    },
+    {
+      "descripcion": "HOSTELERÍA",
+      "codigo": "I"
+    },
+    {
+      "descripcion": "Industria alimentaria",
+      "codigo": "10"
+    },
+    {
+      "descripcion": "Industria de la madera y del corcho, excepto muebles; cestería y espartería",
+      "codigo": "16"
+    },
+    {
+      "descripcion": "Industria del cuero y productos relacionados de otros materiales",
+      "codigo": "15"
+    },
+    {
+      "descripcion": "Industria del papel",
+      "codigo": "17"
+    },
+    {
+      "descripcion": "Industria química",
+      "codigo": "20"
+    },
+    {
+      "descripcion": "Industria textil",
+      "codigo": "13"
+    },
+    {
+      "descripcion": "INDUSTRIAS EXTRACTIVAS",
+      "codigo": "B"
+    },
+    {
+      "descripcion": "Metalurgia",
+      "codigo": "24"
+    },
+    {
+      "descripcion": "Otras industrias manufactureras",
+      "codigo": "32"
+    },
+    {
+      "descripcion": "OTROS SERVICIOS",
+      "codigo": "T"
+    },
+    {
+      "descripcion": "Reparación, mantenimiento e instalación de maquinaria y equipos",
+      "codigo": "33"
+    },
+    {
+      "descripcion": "SUMINISTRO DE AGUA, ACTIVIDADES DE SANEAMIENTO, GESTIÓN DE RESIDUOS Y DESCONTAMINACIÓN",
+      "codigo": "E"
+    },
+    {
+      "descripcion": "SUMINISTRO DE ENERGIA ELECTRICA, GAS, VAPOR Y AIRE ACONDICIONADO",
+      "codigo": "D"
+    },
+    {
+      "descripcion": "TELECOMUNICACIONES, PROGRAMACIÓN INFORMÁTICA, CONSULTORÍA, INFRAESTRUCTURA INFORMÁTICA Y OTROS SERVICIOS DE INFORMACIÓN",
+      "codigo": "K"
+    },
+    {
+      "descripcion": "TRANSPORTE Y ALMACENAMIENTO",
+      "codigo": "H"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES413 - León"
+    },
+    {
+      "descripcion": "ES414 - Palencia"
+    }
+  ],
+  "descripcionFinalidad": "Investigación, desarrollo e innovación",
+  "descripcionBasesReguladoras": "ORDEN EYH/467/2025, de 6 de mayo, por la que se aprueban las bases reguladoras para la concesión de subvenciones dirigidas a financiar proyectos de I+D en ámbitos de tecnologías fundamentales en los territorios de la Comunidad de Castilla y León (provinci",
+  "urlBasesReguladoras": "https://bocyl.jcyl.es/boletines/2025/05/14/pdf/BOCYL-D-14052025-10.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2025-04-26",
+  "fechaFinSolicitud": "2028-06-30",
+  "textInicio": "Día siguiente a la publicación del extracto de la convocatoria en el BOCYL",
+  "textFin": "El 30 de junio de 2028 o el día de la publicación del cierre de la misma, si fuese anterior",
+  "ayudaEstado": "SA.119127",
+  "urlAyudaEstado": "https://competition-cases.ec.europa.eu/cases/SA.119127",
+  "fondos": [
+    {
+      "descripcion": "FTJ – FONDO DE TRANSICIÓN JUSTA"
+    }
+  ],
+  "reglamento": {
+    "descripcion": "REG (UE) 651/2014, DE 17 DE JUNIO, de exención de notificación",
+    "orden": null
+  },
+  "objetivos": [
+    {
+      "descripcion": "ART. 25 AYUDAS A PROYECTOS DE INVESTIGACIÓN Y DESARROLLO."
+    }
+  ],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1473477,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Resolución Convocatoria FTJ-I+D_FIRMADA.pdf",
+      "long": 486909,
+      "datMod": "2026-06-11",
+      "datPublicacion": "2026-06-11"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

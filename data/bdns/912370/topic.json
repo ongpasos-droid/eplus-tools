@@ -1,0 +1,68 @@
+{
+  "source": "bdns",
+  "source_id": "912370",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concesión directa - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / PRINCIPADO DE ASTURIAS / CONSEJERÍA DE MEDIO RURAL Y POLÍTICA AGRARIA",
+  "nuts_codes": [
+    "ES120"
+  ],
+  "nuts_primary": "ES120",
+  "title": "esolución de 10 de junio de 2026 de la Consejería de Medio Rural y Política Agraria por la que se convocan ayudas a las Agrupaciones de Defensa Sanitaria Ganadera (ADSG) reconocidas en el Principado de Asturias para el año 2026",
+  "title_lang": "es",
+  "summary": "Agricultura, Pesca y Alimentación",
+  "status": "open",
+  "publication_date": "2026-06-11",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 250000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "A",
+      "descripcion": "AGRICULTURA, GANADERÍA, SILVICULTURA Y PESCA"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912370",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-2049",
+  "text_inicio": "Día siguiente al de la publicación del extracto",
+  "text_fin": "20 días hábiles desde la publicación del extract",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": "SA.109897",
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "PRODUCCIÓN AGRÍCOLA PRIMARIA - REG (UE) 2022/2472, de 14 DE DICIEMBRE, de exención de notificación (vigente desde 01-01-2023)",
+    "orden": null
+  },
+  "objetivos": [
+    {
+      "descripcion": "ART. 26 AYUDAS DESTINADAS A LOS COSTES DE PREVENCIÓN, CONTROL Y ERRADICACIÓN DE ENFERMEDADES ANIMALES O PLAGAS VEGETALES Y AYUDAS DESTINADAS A REPARAR LOS DAÑOS CAUSADOS POR ENFERMEDADES ANIMALES O PLAGAS VEGETALES"
+    }
+  ],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-12T04:08:39.834Z"
+}

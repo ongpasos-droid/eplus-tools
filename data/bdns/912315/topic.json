@@ -1,0 +1,93 @@
+{
+  "source": "bdns",
+  "source_id": "912315",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / CABILDO INSULAR DE TENERIFE / CABILDO INSULAR DE TENERIFE",
+  "nuts_codes": [
+    "ES709"
+  ],
+  "nuts_primary": "ES709",
+  "title": "Subvenciones para el fomento de la Diversidad LGTBIQA+ (2026)",
+  "title_lang": "es",
+  "summary": "Educación",
+  "status": "open",
+  "publication_date": "2026-06-11",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 75000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "Q",
+      "descripcion": "EDUCACIÓN"
+    }
+  ],
+  "apply_url": "https://sede.tenerife.es ",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912315",
+  "documents": [
+    {
+      "label": "ANEXO IV: LIQUIDACIÓN DEL PRESUPUESTO DE INGRESOS Y GASTOS",
+      "url": null
+    },
+    {
+      "label": "ANEXO VII: CERTIFICADO DE LA SECRETARÍA SOBRE EL DESTINO DE LOS FONDOS PERCIBIDOS POR EL CABILDO INSULAR DE TENERIFE",
+      "url": null
+    },
+    {
+      "label": "ANEXO II: COMPROMISO DE COLABORACIÓN Y PARTICIPACIÓN",
+      "url": null
+    },
+    {
+      "label": "ANEXO III: MODELO DE FORMULACIÓN DE ALEGACIONES EN TRÁMITE DE AUDIENCIA",
+      "url": null
+    },
+    {
+      "label": "ANEXO VIII: DIFUSIÓN DE LA FINANCIACIÓN DEL PROYECTO",
+      "url": null
+    },
+    {
+      "label": "ANEXO V: RELACIÓN DESGLOSADA DE LOS INGRESOS",
+      "url": null
+    },
+    {
+      "label": "ANEXO VI: RELACIÓN DESGLOSADA DE LOS GASTOS",
+      "url": null
+    },
+    {
+      "label": "ANEXO I: PROYECTO A DESARROLLAR Y PRESUPUESTO",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.bopsantacruzdetenerife.es/boletines/2026/10-6-26/10-6-26.pdf",
+  "text_inicio": "Desde el día siguiente al de la publicación del extracto de la convocatoria en el BOP",
+  "text_fin": "20 días hábiles a contar desde la fecha de inicio",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-12T04:08:39.825Z"
+}

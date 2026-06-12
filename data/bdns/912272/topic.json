@@ -1,0 +1,77 @@
+{
+  "source": "bdns",
+  "source_id": "912272",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / ANDOAIN / AYUNTAMIENTO DE ANDOAIN",
+  "nuts_codes": [
+    "ES21"
+  ],
+  "nuts_primary": "ES21",
+  "title": "Bases reguladoras de la 38 edición del Premio de Periodismo Rikardo Arregi",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-06-11",
+  "open_date": "2026-06-11",
+  "deadline": "2026-09-20",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 18000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "T",
+      "descripcion": "OTROS SERVICIOS"
+    }
+  ],
+  "apply_url": "https://udal.egoitza.gipuzkoa.eus/WAS/AYTO/USCServicioCiudadanoVer15WEB/home.do?ayto=009&hizkuntza=EU",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912272",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en lengua cooficial",
+      "url": null
+    },
+    {
+      "label": "Eskaera",
+      "url": null
+    },
+    {
+      "label": "Bases",
+      "url": null
+    },
+    {
+      "label": "Resolución aprobación bases",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://egoitza.gipuzkoa.eus/gao-bog/castell/bog/2014/05/27/c1404879.htm",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-12T04:08:39.816Z"
+}

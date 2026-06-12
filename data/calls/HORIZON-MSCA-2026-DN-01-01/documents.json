@@ -35,6 +35,13 @@
     "is_downloadable": false
   },
   {
+    "section": "Specific conditions",
+    "label": "Call Information Event",
+    "url": "https://research-innovation-community.ec.europa.eu/events/2XY6YtKZvqh6A65ty9isjR/overview",
+    "ext": "",
+    "is_downloadable": false
+  },
+  {
     "section": "Application and evaluation forms and model grant agreement (MGA):",
     "label": "Standard application form (HE MSCA DN)",
     "url": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/horizon/temp-form/af/af_he-msca-dn_en.pdf",

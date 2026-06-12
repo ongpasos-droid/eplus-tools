@@ -1,0 +1,69 @@
+{
+  "source": "bdns",
+  "source_id": "912306",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / TALAYUELA / AYUNTAMIENTO DE TALAYUELA",
+  "nuts_codes": [
+    "ES432"
+  ],
+  "nuts_primary": "ES432",
+  "title": "CONVOCATORIA DE AYUDAS ECONÓMICAS PARA GARANTIZAR A LOS CIUDADANOS DEL MUNICIPIO DE TALAYUELA EL DERECHO AL ACCESO DE SUMINISTROS MÍNIMOS VITALES PARA EL AÑO 2026",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-06-11",
+  "open_date": null,
+  "deadline": "2026-12-01",
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 32586.16,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "96.9",
+      "descripcion": "Otros servicios personales"
+    }
+  ],
+  "apply_url": "https://talayuela.sedelectronica.es/",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912306",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "ANEXO II - Segunda y sucesivas solicitudes",
+      "url": null
+    },
+    {
+      "label": "ANEXO I - Solicitud inicial",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://talayuela.sedelectronica.es/",
+  "text_inicio": "Desde el día siguiente a la publicación del extracto en el Boletín Oficial de la Provincia",
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-12T04:08:39.822Z"
+}

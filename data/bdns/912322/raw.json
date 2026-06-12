@@ -1,0 +1,80 @@
+{
+  "id": 1113883,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SANTIAGO DE COMPOSTELA",
+    "nivel3": "AYUNTAMIENTO DE SANTIAGO DE COMPOSTELA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "912322",
+  "fechaRecepcion": "2026-06-11",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 30000,
+  "mrr": false,
+  "descripcion": "Subvenciones para programas de igualdad efectiva entre mujeres y hombres, apoyo al colectivo LGBTIQ+ y prevención y lucha contra las violencias machistas, año 2026",
+  "descripcionLeng": "Subvencións para programas de igualdade efectiva entre mulleres e homes, apoio ao colectivo LGBTIQ+ e prevención e loita contra as violencias machistas, ano 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Otras actividades de servicios sociales sin alojamiento",
+      "codigo": "88.9"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES11 - GALICIA"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Bases de ejecución del presupuesto municipal para el año 2026",
+  "urlBasesReguladoras": "https://santiagodecompostela.gal/es",
+  "sePublicaDiarioOficial": true,
+  "abierto": true,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "15 días naturales contados a partir del día siguiente al de publicación de la Convocatoria en el BOP",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1474048,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Bases y Convocatoria en castellano .PDF",
+      "long": 264271,
+      "datMod": "2026-06-11",
+      "datPublicacion": "2026-06-11"
+    },
+    {
+      "id": 1474050,
+      "descripcion": "Bases e Convocatoria de Subvención",
+      "nombreFic": "Bases e Convocatoria de Subvención.PDF",
+      "long": 242719,
+      "datMod": "2026-06-11",
+      "datPublicacion": "2026-06-11"
+    },
+    {
+      "id": 1474049,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "Bases e Convocatoria de Subvención.PDF",
+      "long": 242719,
+      "datMod": "2026-06-11",
+      "datPublicacion": "2026-06-11"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

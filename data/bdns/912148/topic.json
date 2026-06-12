@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "912148",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / DIPUTACIÓN PROV. DE SALAMANCA / DIPUTACIÓN DE SALAMANCA",
+  "nuts_codes": [
+    "ES415"
+  ],
+  "nuts_primary": "ES415",
+  "title": "SUBVENCION PARA COFINANCIAR LA CONTRATACIÓN EN PRÁCTICAS DE JOVENES EGRESADOS DE LA UNIVERSIDAD DE SALAMANCA Y DE LA UNIVERSIDAD PONTIFICIA DE SALAMANCA, POR PARTE DE LOS MUNICIPIOS EXCLUIDOS DEL PLAN DE EMPLEO JUVENIL UNIVERSITARIO 2025",
+  "title_lang": "es",
+  "summary": "Fomento del Empleo",
+  "status": "open",
+  "publication_date": "2026-06-11",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 230000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "84.1",
+      "descripcion": "Administración pública y de la política económica, social y medioambiental"
+    }
+  ],
+  "apply_url": "https://sede.diputaciondesalamanca.gob.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912148",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "http://www.lasalina.es/presidencia/informacion/normativa/ordenanzasyreglamentos/presidencia/index.html",
+  "text_inicio": "AL DIA SIGUIENTE DE LA PUBLICACION EN EL BOP",
+  "text_fin": "10 DIAS HABILES DESDE EL DIA SIGUIENTE A LA PUBLICACION EN EL BOP",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-12T04:08:39.778Z"
+}

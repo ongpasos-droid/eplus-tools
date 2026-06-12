@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "912111",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / COMARCA COMUNIDAD DE TERUEL / COMARCA DE COMUNIDAD DE TERUEL",
+  "nuts_codes": [
+    "ES242"
+  ],
+  "nuts_primary": "ES242",
+  "title": "CONVOCATORIA DE SUBVENCIONES PARA AYUNTAMIENTOS E INSTITUCIONES FERIALES MUNICIPALES DE LA COMARCA COMUNIDAD DE TERUEL, PARA LA CELEBRACIÓN DE FERIAS COMERCIALES Y AGROPECUARIAS DURANTE EL EJERCICIO 2026",
+  "title_lang": "es",
+  "summary": "Comercio, Turismo y Pymes",
+  "status": "open",
+  "publication_date": "2026-06-11",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 8000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "01",
+      "descripcion": "Agricultura, ganadería, caza y servicios relacionados con las mismas"
+    },
+    {
+      "codigo": "47",
+      "descripcion": "Comercio al por menor"
+    }
+  ],
+  "apply_url": "https://comarcateruel.sedelectronica.es/dossier.0",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912111",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "236ws.dpteruel.es/estatico/boletines/2025/30mayo.pdf",
+  "text_inicio": "Desde día siguiente de la publicación en BOPTE",
+  "text_fin": "15 días hábiles",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-12T04:08:39.764Z"
+}

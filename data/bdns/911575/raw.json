@@ -1,0 +1,76 @@
+{
+  "id": 1113136,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "POLLENÇA",
+    "nivel3": "AYUNTAMIENTO DE POLLENÇA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "911575",
+  "fechaRecepcion": "2026-06-09",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 7650,
+  "mrr": false,
+  "descripcion": "convocatoria para la concesión de ayudas económicas destinadas a fomentar la identificación y la esterilización de felinos domésticos por parte de sus propietarios",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "OTROS SERVICIOS",
+      "codigo": "T"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES532 - Mallorca"
+    }
+  ],
+  "descripcionFinalidad": "Otras Prestaciones económicas",
+  "descripcionBasesReguladoras": "bases reguladoras para la concesión de ayudas económicas destinadas a fomentar la identificación y la esterilización de felinos domésticos por parte de sus propietarios",
+  "urlBasesReguladoras": "www.ajpollenca.net",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-12-04",
+  "textInicio": "a partir publicación convocatoria",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1472067,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "20260608_Extracte Convocatòria català.docx",
+      "long": 14155,
+      "datMod": "2026-06-09",
+      "datPublicacion": "2026-06-11"
+    }
+  ],
+  "anuncios": [
+    {
+      "numAnuncio": 214055,
+      "titulo": "convocatoria para la concesión de ayudas económicas destinadas a fomentar la identificación y la esterilización de mustios domésticos por parte de sus propietarios",
+      "tituloLeng": null,
+      "texto": "<p>ObjetivoConstituye el objetivo de esta convocatoria de subvenciones , por un lado, la necesidad de fomentar entre la ciudadanía la responsabilidad en la tenencia de animales domésticos, especialmente en cuanto a la identificación y la esterilización de los mustios de propiedad particular; y , por otro lado, reducir el abandono, mejorar la salud pública y favorecer la convivencia en los espacios comunes.BeneficiariosPodrán ser beneficiarios de estas ayudas las personas físicas que cumplan los siguientes requisitos:• Ser mayores de edad o, en los casos de propietarios menores de edad no emancipados, el solicitante/beneficiario será el tutor.• Estar empadronados en el municipio de Pollença.• Ser propietarios legales del/s animal/s objete de la solicitud.Dotación económica y modalidades</p><p>El importe total destinado a esta convocatoria es de 7.650 euros.</p><p>Las cuantías máximas a otorgar por animal serán las siguientes:</p><p>• Implantación de microchip: hasta 35,00 €.• Esterilización quirúrgica:</p><p>&#9702; Hembra: hasta 100,00 €.&#9702; Macho: hasta 50,00 €.Bases reguladorasBases publicadas en el BOIB n.º 71, de 6 de junio de 2026.Presentación de solicitudesEl plazo para la presentación de las solicitudes será desde el día siguiente a la publicación de la convocatoria en el Boletín Oficial de las Islas Baleares hasta el 4 de diciembre de 2026.</p>",
+      "textoLeng": null,
+      "url": "https://www.caib.es/eboibfront/ca/2026/12286/716550/extracte-de-la-convocatoria-per-a-la-concessio-d-a",
+      "cve": null,
+      "desDiarioOficial": "BOIB. B.O. DE LAS ISLAS BALEARES",
+      "datPublicacion": "2026-06-11"
+    }
+  ],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

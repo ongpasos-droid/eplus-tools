@@ -1,0 +1,72 @@
+{
+  "id": 1113731,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "FRANQUESES DEL VALLÈS, LES",
+    "nivel3": "AYUNTAMIENTO DE FRANQUESES DEL VALLÈS, LES"
+  },
+  "sedeElectronica": "https://lesfranqueses.eadministracio.cat/dossier.0",
+  "codigoBDNS": "912170",
+  "fechaRecepcion": "2026-06-11",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 148036.04,
+  "mrr": false,
+  "descripcion": "Convocatoria de ayudas a la rehabilitación para edificios plurifamiliares de uso residencial de les Franqueses del Valles, año 2026",
+  "descripcionLeng": "Convocatòria d'ajudes a la rehabilitació per edificis plurifamiliars d'ús residencial de els Franqueses del Vallès, any 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "OTROS SERVICIOS",
+      "codigo": "T"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES511 - Barcelona"
+    }
+  ],
+  "descripcionFinalidad": "Otras Prestaciones económicas",
+  "descripcionBasesReguladoras": "Bases Reguladoras para la concesión de ayudas a la rehabilitación de edificiones plurifamiliares de uso residencial de les Franqueses del Vallès, año 2026",
+  "urlBasesReguladoras": "https://seu-e.cat/documents/2663179/20956123/Bases+reguladoras+y+convocatoria+Ayudas+Gastos+Vivienda+Habitual+2026+CAST.+Exp+2257-2026.pdf/00176c54-794d-43b6-900f-0d22c71e615e",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "El día siguiente a la publicación del extracto de esta convocatoria en el BOPB mediante la BDNS",
+  "textFin": "Cuatro meses desde publicación extracto convocatoria en BOPB por BDNS",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1473596,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Certificat d'acord JGL ajuts rehabilitació 2026.pdf",
+      "long": 2147791,
+      "datMod": "2026-06-11",
+      "datPublicacion": "2026-06-11"
+    },
+    {
+      "id": 1473595,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Certificado JGL ayudas rehabilitación 2026.pdf",
+      "long": 909238,
+      "datMod": "2026-06-11",
+      "datPublicacion": "2026-06-11"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

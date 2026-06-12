@@ -1,0 +1,69 @@
+{
+  "source": "bdns",
+  "source_id": "912122",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / MUROS / AYUNTAMIENTO DE MUROS",
+  "nuts_codes": [
+    "ES111"
+  ],
+  "nuts_primary": "ES111",
+  "title": "Subvenciones dirigidas a clubes deportivos del ayuntamiento de Muros, sin ánimo de lucro, con equipos o deportistas que participen en competiciones federadas de ámbito local, provincial o autonómico, y a entidades sin ánimo de lucro",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-06-11",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 21000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "S",
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO"
+    }
+  ],
+  "apply_url": "sede.muros.gal",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912122",
+  "documents": [
+    {
+      "label": "Formularios de solicitude",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en lengua cooficial",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://bop.dacoruna.gal/bopportal/publicado/2025/04/21/2025_0000002231.pdf",
+  "text_inicio": "Ao día seguinte da publicación da convocatoria no BOP",
+  "text_fin": "Un mes contado a partir do día seguinte á publicación da convocatoria no BOP",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-12T04:08:39.769Z"
+}

@@ -1,0 +1,66 @@
+{
+  "source": "bdns",
+  "source_id": "912222",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / QUINTANAR DE LA ORDEN / AYUNTAMIENTO DE QUINTANAR DE LA ORDEN",
+  "nuts_codes": [
+    "ES425"
+  ],
+  "nuts_primary": "ES425",
+  "title": "SUBVENCIONES POR CONCURRENCIA COMPETITIVA. APROBACIÓN DE LAS BASES Y CONVOCATORIA PARA LA CONCESIÓN DE SUBVENCIONES Y AYUDAS ECONÓMICAS A ASOCIACIONES PARA EL AÑO 2026",
+  "title_lang": "es",
+  "summary": "Otras actuaciones de carácter económico",
+  "status": "open",
+  "publication_date": "2026-06-11",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 72400,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA; PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "T",
+      "descripcion": "OTROS SERVICIOS"
+    }
+  ],
+  "apply_url": "https://quintanardelaorden.sedeelectronica.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912222",
+  "documents": [
+    {
+      "label": "Certificado de Acuerdo",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "L01451421",
+  "text_inicio": "PUBLICACIÓN EN EL BOP DE TOLEDO",
+  "text_fin": "20 DÍAS HÁBILES POSTERIORES A LA PUBLICACIÓN EN EL BOP DE TOLEDO",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-12T04:08:39.804Z"
+}

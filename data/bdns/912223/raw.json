@@ -1,0 +1,88 @@
+{
+  "id": 1113784,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "BETANZOS",
+    "nivel3": "AYUNTAMIENTO DE BETANZOS"
+  },
+  "sedeElectronica": "https://sede.betanzos.gal/sxc/es/",
+  "codigoBDNS": "912223",
+  "fechaRecepcion": "2026-06-11",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 70000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA Y APROBACIÓN BASES REGULADORAS DE SUVBENCIONES DIRIGIDAS A LAS ENTIDADES DEPORTIVAS PARA EL AÑO 2026 DEL AYUNTAMIENTO DE BETANZOS",
+  "descripcionLeng": "CONVOCATORIA E APROBACIÓN BASES REGULADORAS DE SUVBENCIÓNS DIRIXIDAS ÁS ENTIDADES DEPORTIVAS PARA O ANO 2026 DO CONCELLO DE BETANZOS",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES111 - A Coruña"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "CONVOCATORIA Y APROBACIÓN BASES REGULADORAS DE SUVBENCIONES DIRIGIDAS A LAS ENTIDADES DEPORTIVAS PARA EL AÑO 2026 DEL AYUNTAMIENTO DE BETANZOS",
+  "urlBasesReguladoras": "https://sede.betanzos.gal/sxc/es/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Desde el día siguiente a la publicación del extracto de la convocatoria en el BOP de A Coruña",
+  "textFin": "Quince días hábiles",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1473801,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "2026_A002_000004_bases entidades deportivas 2026 CASTELÁN.doc_687255.pdf",
+      "long": 146323,
+      "datMod": "2026-06-11",
+      "datPublicacion": "2026-06-11"
+    },
+    {
+      "id": 1473806,
+      "descripcion": "ANEXO DE JUSTIFICACIÓN",
+      "nombreFic": "2026_A002_000004_anexo xustificación (3).odt_687254.pdf",
+      "long": 120651,
+      "datMod": "2026-06-11",
+      "datPublicacion": "2026-06-11"
+    },
+    {
+      "id": 1473805,
+      "descripcion": "ANEXO DE SOLICITUD",
+      "nombreFic": "2026_A002_000004_anexo de solicitude (1).odt_687253.pdf",
+      "long": 123589,
+      "datMod": "2026-06-11",
+      "datPublicacion": "2026-06-11"
+    },
+    {
+      "id": 1473804,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "2026_A002_000004_bases entidades deportivas 2026 galego (1).doc_687251.pdf",
+      "long": 149031,
+      "datMod": "2026-06-11",
+      "datPublicacion": "2026-06-11"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}
