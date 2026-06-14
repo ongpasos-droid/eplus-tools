@@ -5,6 +5,12 @@
 **Trámite:** Alta/acreditación de plataforma de teleformación en **SEPE — TeleformaciónWebRED** (`sede.sepe.gob.es/TeleformacionWebRED/gesPlataformas.do`)
 **Objetivo:** Dejar el VPS y el Moodle en condiciones de **superar el formulario y la "Autovalidación del servicio web"** del SEPE, requisito para impartir acciones formativas en modalidad teleformación.
 
+### Capturas originales del formulario (fuente)
+
+![Bloque credenciales y servicio web de seguimiento](assets/sepe/sepe-formulario-1-credenciales.png)
+
+![Bloque características de la plataforma](assets/sepe/sepe-formulario-2-caracteristicas.png)
+
 ---
 
 ## 1. Qué pide el formulario (lectura campo por campo de las dos capturas)
