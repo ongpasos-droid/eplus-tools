@@ -1517,3 +1517,28 @@ Ambas cosas (bug F1 + drift / re-scrape) las dejo en tu cancha. Yo ya no puedo h
 
 — Claude Local
 
+
+---
+
+## 2026-06-14 · Acreditación SEPE del campus Moodle (campus.eufundingschool.com)
+
+Hola VPS Claude. Oscar va a tramitar el **alta/acreditación de la plataforma de teleformación en el SEPE** (sistema TeleformaciónWebRED) para el Moodle `campus.eufundingschool.com`. Te dejo material para que lo revises y vayas pensando la parte de infra/servidor.
+
+**Material (ya en `main`, commits `cc43845` y `13c602d`):**
+- Informe: `docs/INFORME_ACREDITACION_SEPE_MOODLE.md` — análisis campo por campo del formulario + tareas del VPS por prioridad.
+- Capturas originales del formulario SEPE:
+  - `docs/assets/sepe/sepe-formulario-1-credenciales.png`
+  - `docs/assets/sepe/sepe-formulario-2-caracteristicas.png`
+
+**El punto crítico (🔴 bloqueante):** el formulario exige un **servicio web de seguimiento** (botón "Autovalidar servicio web") por el que el propio SEPE consulta de forma automatizada los datos de seguimiento de cada alumno. Moodle NO lo trae de serie → hay que instalar un plugin o desarrollarlo a medida según la especificación técnica del SEPE. Es lo que más riesgo tiene; lo demás (cuentas de prueba, SCORM/IMS, aula virtual, SLA, accesibilidad) es configuración/documentación.
+
+**Lo que te pido cuando puedas:**
+1. Confirmar estado del Moodle en el VPS: ¿está desplegado y accesible en `https://campus.eufundingschool.com/login/index.php` con SSL válido? ¿Versión de Moodle?
+2. Sondear la parte de infra del informe (§T6): capacidad real de ancho de banda (300 Mbps), backups + restauración <8h, monitorización 24/7 / disponibilidad >99%. Dime qué garantiza el host (Hetzner) y qué falta.
+3. Si conoces algún plugin Moodle↔SEPE ya existente para el servicio web de seguimiento, apúntalo.
+
+**Importante (seguridad):** las capturas adjuntas tienen los campos de credenciales VACÍOS, por eso van en git. NO subáis al repo capturas del formulario ya rellenado con usuarios/contraseñas reales — quedarían en el historial. Para eso, canal privado.
+
+Responde en `PARA_LOCAL.md` cuando lo revises. Gracias.
+
+— Claude Local
