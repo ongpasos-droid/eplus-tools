@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "913640",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / SABIÑÁNIGO / AYUNTAMIENTO DE SABIÑÁNIGO",
+  "nuts_codes": [
+    "ES241"
+  ],
+  "nuts_primary": "ES241",
+  "title": "Decreto de Alcaldía nº 1396, de 16 de junio de 2026, por el que se convocan por el Ayuntamiento de Sabiñánigo, los premios en metálico de la prueba deportiva \"XXXVI Milla Urbana de Sabiñánigo\"",
+  "title_lang": "es",
+  "summary": "Otras Prestaciones económicas",
+  "status": "open",
+  "publication_date": "2026-06-17",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 2240,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "93",
+      "descripcion": "Actividades deportivas, recreativas y de entretenimiento"
+    },
+    {
+      "codigo": "84",
+      "descripcion": "Administración pública y defensa; seguridad social obligatoria"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913640",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://bop.dphuesca.es/index.php/mod.bopanuncios/mem.visualizarpdf/relcategoria.60008/idbopanuncio.233090/chk.28861ddbe6281ee90ce816479b8f4d7d.html",
+  "text_inicio": "2 horas antes del comienzo de la prueba deportiva",
+  "text_fin": "30 minutos antes del comienzo de la prueba deportiva",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-18T04:05:39.034Z"
+}

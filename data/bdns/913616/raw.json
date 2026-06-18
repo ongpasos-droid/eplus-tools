@@ -1,0 +1,82 @@
+{
+  "id": 1115177,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "CATALUÑA",
+    "nivel3": "INSTITUT CATALÀ DE LES EMPRESES CULTURALS (ICEC)"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "913616",
+  "fechaRecepcion": "2026-06-17",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 443401,
+  "mrr": false,
+  "descripcion": "Resolución de convocatoria para la concesión de subvenciones, en régimen de concurrencia no competitiva, para la promoción de largometrajes cinematográficos en versión original catalana u occitana, en su variante aranesa",
+  "descripcionLeng": "Resolució de convocatòria per a la concessió de subvencions, en règim de concurrència no competitiva, per a la promoció de llargmetratges cinematogràfics en versió original catalana o occitana, en la seva variant aranesa",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "GRAN EMPRESA"
+    },
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades cinematográficas, de vídeo y de programas de televisión",
+      "codigo": "59.1"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES51 - CATALUÑA"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "bases específicas que regirán la concesión de subvenciones para la promoción de largometrajes cinematográficos en versión original catalana u occitana, en su variante aranesa",
+  "urlBasesReguladoras": "https://portaldogc.gencat.cat/utilsEADOP/PDF/8128/1793466.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-26",
+  "fechaFinSolicitud": "2026-07-16",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": "SA.114910",
+  "urlAyudaEstado": "https://competition-cases.ec.europa.eu/cases/SA.114910",
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 651/2014, DE 17 DE JUNIO, de exención de notificación",
+    "orden": null
+  },
+  "objetivos": [
+    {
+      "descripcion": "ART. 54 REGÍMENES DE AYUDA PARA OBRAS AUDIOVISUALES"
+    }
+  ],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1477395,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Promoció cinema VOC_cast.pdf",
+      "long": 120239,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477396,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "Promoció cinema VOC_catsigned.pdf",
+      "long": 261695,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

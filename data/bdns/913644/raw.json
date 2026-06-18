@@ -1,0 +1,64 @@
+{
+  "id": 1115205,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "BIGUES I RIELLS",
+    "nivel3": "AYUNTAMIENTO DE BIGUES I RIELLS"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "913644",
+  "fechaRecepcion": "2026-06-17",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 8200,
+  "mrr": false,
+  "descripcion": "Convocatoria de subvenciones de concurrencia competitiva del Servicio de Cultura del Ayuntamiento de Bigues i Riells del Fai para el año 2026",
+  "descripcionLeng": "Convocatòria de subvencions de concurrència competitiva del Servei de Cultura de l`Ajuntament de Bigues i Riells del Fai per a l`any 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades de creación artística y artes escénicas",
+      "codigo": "90"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES511 - Barcelona"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "BASES ESPECÍFICAS DE SUBVENCIONES DEL SERVICIO DE CULTURA PARA EL AÑO 2026",
+  "urlBasesReguladoras": "http://bop.diba.cat/anuncio/3935381/bases-de-subvencions-de-concurrencia-competitiva-del-servei-de-cultura-any-2026-versio-en-catala-i-castella-ajuntament-de-bigues-i-riells-del-fai",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-01-01",
+  "fechaFinSolicitud": "2026-07-31",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1477452,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Convocatoria_CULT_26_castellano.pdf",
+      "long": 168624,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,75 @@
+{
+  "id": 1115343,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "ZAFRA",
+    "nivel3": "AYUNTAMIENTO DE ZAFRA"
+  },
+  "sedeElectronica": "https://zafra.sedelectronica.es",
+  "codigoBDNS": "913782",
+  "fechaRecepcion": "2026-06-17",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 72329.33,
+  "mrr": false,
+  "descripcion": "BASES ESPECÍFICAS Y CONVOCATORIA DEOL PROGRAMA DE COLABORACIÓN ECONÓMICA MUNICIPAL PARA SUMINISTROS DE MÍNIMOS VITALES DEL AYUNTAMIENTO DE ZAFRA PARA EL AÑO 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES431 - Badajoz"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "BASES ESPECÍFICAS Y CONVOCATORIA DEOL PROGRAMA DE COLABORACIÓN ECONÓMICA MUNICIPAL PARA SUMINISTROS DE MÍNIMOS VITALES DEL AYUNTAMIENTO DE ZAFRA PARA EL AÑO 2026",
+  "urlBasesReguladoras": "https://zafra.es/bases-especificas-y-convocatoria-del-programa-de-colaboracion-economica-municipal-para-suministros-minimos-vitales-2026/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Desde el día siguiente a la publicación del extracto de estas bases en el BOP de Badajoz",
+  "textFin": "01/12/2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1477761,
+      "descripcion": "RESOLUCIÓN DE ALCALDÍA",
+      "nombreFic": "RESOLUCION 2026-1610 [Resolución de Alcaldía.pdf",
+      "long": 210121,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477762,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Bases Suministros Mínimos 2026.pdf",
+      "long": 317040,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

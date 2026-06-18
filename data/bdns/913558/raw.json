@@ -1,0 +1,80 @@
+{
+  "id": 1115119,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SANTIAGO DE COMPOSTELA",
+    "nivel3": "AYUNTAMIENTO DE SANTIAGO DE COMPOSTELA"
+  },
+  "sedeElectronica": "https://sede.santiagodecompostela.gal/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=PTS_HOME&lang=GA",
+  "codigoBDNS": "913558",
+  "fechaRecepcion": "2026-06-17",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 15000,
+  "mrr": false,
+  "descripcion": "BASES DE LA CONVOCATORIA DE AYUDAS INDIVIDUALES PARA EL USO DEL SERVICIO DE TAXI COMO MEDIO ALTERNATIVO PARA LAS PERSONAS CON DIFICULTADES DE MOVILIDAD O QUE PRESENTAN LIMITACIONES PARA EL USO DEL TRANSPORTE COLECTIVO DEL AYUNTAMIENTO DE SANTIAGO 2026",
+  "descripcionLeng": "BASES DA CONVOCATORIA DE AXUDAS INDIVIDUAIS PARA O USO DO SERVIZO DE TAXI COMO MEDIO ALTERNATIVO PARA AS PERSOAS CON DIFICULTADES DE MOBILIDADE OU QUE PRESENTAN LIMITACIÓNS PARA O USO DO TRANSPORTE COLECTIVO DO CONCELLO DE SANTIAGO DE COMPOSTELA. ANO 202.",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades de servicios sociales sin alojamiento para personas mayores o con discapacidad",
+      "codigo": "88.1"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES111 - A Coruña"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "BASES DA CONVOCATORIA DE AXUDAS INDIVIDUAIS PARA O USO DO SERVIZO DE TAXI COMO MEDIO ALTERNATIVO PARA AS PERSOAS CON DIFICULTADES DE MOBILIDADE OU QUE PRESENTAN LIMITACIÓNS PARA O USO DO TRANSPORTE COLECTIVO DO CONCELLO DE SANTIAGO DE COMPOSTELA. ANO 2026",
+  "urlBasesReguladoras": "https://santiagodecompostela.gal",
+  "sePublicaDiarioOficial": true,
+  "abierto": true,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "ACTUACIONES SUBVENCIONABLES TRAS ANUNCIO NO BOP",
+  "textFin": "ACTUACIONES SUBVENCIONABLES 10 DÍAS HABILES TRAS PUBLICACIÓN NO BOP",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1477230,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "BASES DE LA CONVOCATORIA DE AYUDAS INDIVIDUALES PARA EL USO DEL SERVICIO DE TAXI COMO MEDIO ALTERNATIVO PARA LAS PERSONAS CON DIFICULTADES DE MOVILIDAD O QUE PRESENTAN LIMITACIONES PARA EL USO DEL TRANSPORTE COLECTIVO DEL AYUNTAMIENTO  SANTIAGO 2026.PDF",
+      "long": 401169,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477232,
+      "descripcion": "BASES CONVOCATORIA DE AXUDAS INDIVIDUAIS PARA O USO DO SERVIZO DE TAXI COMO MEDIO ALTERNATIVO PARA AS PERSOAS CON DIFICULTADES DE MOBILIDADE OU QUE PRESENTAN LIMITACIÓNS PARA O USO DO TRANSPORTE COLECTIVO DO CONCELLO DE SANTIAGO DE COMPOSTELA. 2026",
+      "nombreFic": "BASES CONVOCATORIA DE AXUDAS INDIVIDUAIS PARA O USO DO SERVIZO DE TAXI COMO MEDIO ALTERNATIVO PARA AS PERSOAS CON DIFICULTADES DE MOBILIDADE OU QUE PRESENTAN LIMITACIÓNS PARA O USO DO TRANSPORTE COLECTIVO DO CONCELLO DE SANTIAGO DE COMPOSTELA. 2026.PDF",
+      "long": 188353,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477231,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "BASES DA CONVOCATORIA DE AXUDAS INDIVIDUAIS PARA O USO DO SERVIZO DE TAXI COMO MEDIO ALTERNATIVO PARA AS PERSOAS CON DIFICULTADES DE MOBILIDADE OU QUE PRESENTAN LIMITACIÓNS PARA O USO DO TRANSPORTE COLECTIVO DO CONCELLO DE SANTIAGO . ANO 2026.PDF",
+      "long": 338859,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

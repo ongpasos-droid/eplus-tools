@@ -1,0 +1,104 @@
+{
+  "id": 1115090,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "BÉTERA",
+    "nivel3": "AYUNTAMIENTO DE BÉTERA"
+  },
+  "sedeElectronica": "https://betera.sedelectronica.es/info.14",
+  "codigoBDNS": "913529",
+  "fechaRecepcion": "2026-06-17",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 25525.5,
+  "mrr": false,
+  "descripcion": "Convocatoria de becas de formación para la realización de practicas formativas por jóvenes estudiantes \"Bétera et Beca\"  ejercicio 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades auxiliares a la educación",
+      "codigo": "85.6"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES523 - Valencia / València"
+    }
+  ],
+  "descripcionFinalidad": "Otras Prestaciones económicas",
+  "descripcionBasesReguladoras": "Bases reguladoras para la concesión de Becas de Formación  para la realización de prácticas formativas  por jóvenes estudiantes \"Bétera et Beca\" ejercicio 2026",
+  "urlBasesReguladoras": "https://gestiona-11.espublico.com/dossierh.49",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Desde el día siguiente a la publicación del extracto de la convocatoria en el BOP",
+  "textFin": "Durante los días días naturales siguientes al de la publicación del extracto de la convocatoria BOP",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1477146,
+      "descripcion": "ANEXO III HOJA AUTOBAREMACIÓN",
+      "nombreFic": "02.03 ANEXO III HOJA AUTOBAREMACION formulario2 (1).pdf",
+      "long": 1221008,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477147,
+      "descripcion": "ANEXO IV  JUSTIFICACIÓN",
+      "nombreFic": "02.04 ANEXO IV (JUSTIFICACION).pdf",
+      "long": 102088,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477145,
+      "descripcion": "ANEXO II FICHA MANTENIMIENTO TERCEROS",
+      "nombreFic": "02.02 ANEXO II MANTENIMIENTO TERCEROS formulario (1) (1).pdf",
+      "long": 52764,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477142,
+      "descripcion": "ANEXO 1 INSCRIPCIÓN",
+      "nombreFic": "02.01 ANEXO I (INSCRIPCION BETERA TE BECA) formulario2 (1).pdf",
+      "long": 302532,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477132,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "20260615_DECRETO 2026-1350  Aprobación Bases + convocatoria betera et beca 2026.pdf",
+      "long": 3927236,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477143,
+      "descripcion": "ANEXO 1 DECLARACIÓN RESPONSABLE",
+      "nombreFic": "02.01 ANEXO I DECLARACION RESPONSABLE.pdf",
+      "long": 978179,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,111 @@
+{
+  "id": 1115315,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "JACA",
+    "nivel3": "AYUNTAMIENTO DE JACA"
+  },
+  "sedeElectronica": "https://jaca.sedipualba.es/",
+  "codigoBDNS": "913754",
+  "fechaRecepcion": "2026-06-17",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 36000,
+  "mrr": false,
+  "descripcion": "Convocatoria de subvenciones a personas físicas, entidades y asociaciones sin ánimo de lucro del municipio de Jaca para la realización de actividades deportivas para la ciudad para el año 2026.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    },
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades deportivas",
+      "codigo": "93.1"
+    },
+    {
+      "descripcion": "Otras actividades recreativas y de entretenimiento",
+      "codigo": "93.2"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES241 - Huesca"
+    }
+  ],
+  "descripcionFinalidad": "Otras actuaciones de carácter económico",
+  "descripcionBasesReguladoras": "Ordenanza General Reguladora de la Concesión de Subvenciones en el Ayuntamiento de Jaca",
+  "urlBasesReguladoras": "https://jaca.sedelectronica.es/preview-document/015f786f-51b2-4565-b78a-7aea3033c8ec/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Desde la publicación del anuncio de la convocatoria en el BOPH.",
+  "textFin": "20 días naturales",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1477688,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Bases convocatoria de subvenciones concurrencia competitiva actividades deportivas Jaca 2026 - SEFYCU 6926199.pdf",
+      "long": 424607,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477689,
+      "descripcion": "Solicitud de subvención",
+      "nombreFic": "Anexo_I_Solicitud de Subvención.pdf",
+      "long": 87454,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477698,
+      "descripcion": "Declaración otras subvenciones",
+      "nombreFic": "Anexo_I.3_Declaración responsable otras subvenciones.pdf",
+      "long": 82217,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477693,
+      "descripcion": "Proyecto actividades extraordinarias",
+      "nombreFic": "Anexo I.1 b Proyecto para actividades extrordinarias.pdf",
+      "long": 57027,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477696,
+      "descripcion": "Presupuesto previsto",
+      "nombreFic": "Anexo_I.2_Presupuesto previsto.pdf",
+      "long": 95504,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477692,
+      "descripcion": "Proyecto actividades anuales",
+      "nombreFic": "Anexo_I.1a_Proyecto actividades anuales.pdf",
+      "long": 73930,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

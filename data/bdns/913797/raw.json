@@ -1,0 +1,107 @@
+{
+  "id": 1115358,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "CANTABRIA",
+    "nivel3": "CONSEJERÍA DE CULTURA, TURISMO Y DEPORTE"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "913797",
+  "fechaRecepcion": "2026-06-17",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 80000,
+  "mrr": false,
+  "descripcion": "Resolución del consejero de Cultura, Turismo y Deporte por la que se convocan subvenciones a profesionales, régimen de concurrencia competitiva, para la producción de obras y la realización de giras en materia de artes escénicas, modalidad danza",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades de creación artística y artes escénicas",
+      "codigo": "90"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES13 - CANTABRIA"
+    }
+  ],
+  "descripcionFinalidad": "Otras actuaciones de carácter económico",
+  "descripcionBasesReguladoras": "Orden UIC/6/2021, de 12 de marzo, se establecen las bases reguladoras para la concesión de subvenciones en régimen de concurrencia competitiva para la producción de obras y la realización de giras en materia de artes escénicas en la modalidad danza",
+  "urlBasesReguladoras": "https://boc.cantabria.es/boces/verAnuncioAction.do?idAnuBlob=359695",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Día siguiente a la publicación del extracto en BOC",
+  "textFin": "15 días hábiles desde la publicación del extracto",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1477839,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "01_00__convocatoria_danza_2026.report.pdf",
+      "long": 339325,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477840,
+      "descripcion": "Anexo I - convocatoria subv danza",
+      "nombreFic": "01_01_anexo_I_convoc_subv_danza_2026.report.pdf",
+      "long": 283622,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477844,
+      "descripcion": "Anexo V -  convocatoria subv danza",
+      "nombreFic": "01_05_anexo_V_subv_danza_2026.report.pdf",
+      "long": 229608,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477842,
+      "descripcion": "Anexo III - convocatoria subv danza",
+      "nombreFic": "01_03_anexo_III_convoc_subv_danza_2026.report.pdf",
+      "long": 230961,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477843,
+      "descripcion": "Anexo IV - convocatoria subv danza",
+      "nombreFic": "01_04_anexo_IV_convoc_subv_danza_2026.report.pdf",
+      "long": 231777,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477841,
+      "descripcion": "Anexo II - convocatoria subv danza",
+      "nombreFic": "01_02_anexo_II_convoc_danza_2026.report.pdf",
+      "long": 250638,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

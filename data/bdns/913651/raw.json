@@ -1,0 +1,112 @@
+{
+  "id": 1115212,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SANTA CRUZ DE LA PALMA",
+    "nivel3": "AYUNTAMIENTO DE SANTA CRUZ DE LA PALMA"
+  },
+  "sedeElectronica": "https://sede.santacruzdelapalma.es/home",
+  "codigoBDNS": "913651",
+  "fechaRecepcion": "2026-06-17",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 20000,
+  "mrr": false,
+  "descripcion": "Decreto de Alcaldía con número 1739/2026 de fecha 15 de junio de 2026 por el que se aprueba la convocatoria de la anualidad 2026 para la concesión de subvenciones destinadas Entidades Deportivas del municipio de Santa Cruz de La Palma",
+  "descripcionLeng": "Convocatoria pública, en régimen de concurrencia competitiva, para la concesión de las Subvenciones destinadas a Entidades Deportivas del municipio de Santa Cruz de La Palma correspondientes a la anualidad 2026 ",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades deportivas, recreativas y de entretenimiento",
+      "codigo": "93"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES707 - La Palma"
+    }
+  ],
+  "descripcionFinalidad": "Otras Prestaciones económicas",
+  "descripcionBasesReguladoras": "Decreto de Alcaldía con número 1739/2026 de fecha 15 de junio de 2026 por el que se aprueba la convocatoria de la anualidad 2026 para la concesión de subvenciones destinadas Entidades Deportivas del municipio de Santa Cruz de La Palma",
+  "urlBasesReguladoras": "http://www.bopsantacruzdetenerife.es/bopsc2/sumario.php?codigopub=1&fecha_mas_reciente=2024-08-26",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Al día siguiente a la publicación en el BOP de Santa Cruz de Tenerife",
+  "textFin": "Un mes desde el día siguiente a la publicación en el BOP de Santa Cruz de Tenerife",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1477463,
+      "descripcion": "3",
+      "nombreFic": "Anexo III.pdf",
+      "long": 373184,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477461,
+      "descripcion": "2",
+      "nombreFic": "Anexo II.pdf",
+      "long": 371672,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477459,
+      "descripcion": "1",
+      "nombreFic": "Anexo I.pdf",
+      "long": 379448,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477466,
+      "descripcion": "6",
+      "nombreFic": "Anexo VI.pdf",
+      "long": 378862,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477465,
+      "descripcion": "5",
+      "nombreFic": "Anexo V.pdf",
+      "long": 382882,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477464,
+      "descripcion": "4",
+      "nombreFic": "Anexo IV.pdf",
+      "long": 379848,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477473,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Decreto firmado.pdf",
+      "long": 995013,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

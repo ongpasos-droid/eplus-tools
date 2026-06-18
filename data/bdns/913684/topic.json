@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "913684",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / GALICIA / CONSELLERÍA DE CULTURA, LENGUA Y JUVENTUD",
+  "nuts_codes": [
+    "ES11"
+  ],
+  "nuts_primary": "ES11",
+  "title": "ORDEN de xx de junio de 2026 por la que se aprueban las bases reguladoras que regirán el concurso público de once becas de formación en proyectos de investigación que se están desarrollando en el Centro Ramón Piñeiro para la Investigación en Humanidades y",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-06-17",
+  "open_date": "2026-06-22",
+  "deadline": "2026-07-21",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 293261.76,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "72.2",
+      "descripcion": "Investigación y desarrollo experimental en ciencias sociales y humanidades"
+    }
+  ],
+  "apply_url": "https://sede.xunta.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913684",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.xunta.gal/dog/Publicados/2023/20231229/AnuncioC3B0-281223-0006_es.html",
+  "text_inicio": "Al día siguiente de su publicación en el DOG",
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-18T04:05:39.049Z"
+}

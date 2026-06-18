@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "913695",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / IRUN / AYUNTAMIENTO DE IRUN",
+  "nuts_codes": [
+    "ES212"
+  ],
+  "nuts_primary": "ES212",
+  "title": "Beca de investigación en materia de infancia, adolescencia y juventud \"GazteARTEan 2026\"",
+  "title_lang": "es",
+  "summary": "Investigación, desarrollo e innovación",
+  "status": "open",
+  "publication_date": "2026-06-17",
+  "open_date": null,
+  "deadline": "2026-10-05",
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 8000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "72",
+      "descripcion": "Investigación y desarrollo"
+    }
+  ],
+  "apply_url": "https://www.irun.org/es/sede",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913695",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://egoitza.gipuzkoa.eus/gao-bog/castell/bog/2017/06/29/c1704626.pdf",
+  "text_inicio": "Día siguiente a la publicación de la convocatoria",
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-18T04:05:39.051Z"
+}

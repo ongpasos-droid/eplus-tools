@@ -1,0 +1,68 @@
+{
+  "source": "bdns",
+  "source_id": "913782",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concesión directa - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / ZAFRA / AYUNTAMIENTO DE ZAFRA",
+  "nuts_codes": [
+    "ES431"
+  ],
+  "nuts_primary": "ES431",
+  "title": "BASES ESPECÍFICAS Y CONVOCATORIA DEOL PROGRAMA DE COLABORACIÓN ECONÓMICA MUNICIPAL PARA SUMINISTROS DE MÍNIMOS VITALES DEL AYUNTAMIENTO DE ZAFRA PARA EL AÑO 2026",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-06-17",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 72329.33,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "R",
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES"
+    }
+  ],
+  "apply_url": "https://zafra.sedelectronica.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913782",
+  "documents": [
+    {
+      "label": "RESOLUCIÓN DE ALCALDÍA",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://zafra.es/bases-especificas-y-convocatoria-del-programa-de-colaboracion-economica-municipal-para-suministros-minimos-vitales-2026/",
+  "text_inicio": "Desde el día siguiente a la publicación del extracto de estas bases en el BOP de Badajoz",
+  "text_fin": "01/12/2026",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-18T04:05:39.075Z"
+}

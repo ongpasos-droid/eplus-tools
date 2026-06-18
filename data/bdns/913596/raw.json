@@ -1,0 +1,72 @@
+{
+  "id": 1115157,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "ELORRIO",
+    "nivel3": "AYUNTAMIENTO DE ELORRIO"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "913596",
+  "fechaRecepcion": "2026-06-17",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 3000,
+  "mrr": false,
+  "descripcion": "Subvención del Ayuntamiento de Elorrio para la compra de material escolar. Curso 2026/2027.",
+  "descripcionLeng": "Elorrioko Udalaren dirulaguntza, 2026/2027 ikasturteko eskola-materiala erosteko. ",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES213 - Bizkaia"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Convocatoria y bases de subvención del Ayuntamiento de Elorrio para la compra de material escolar. curso 2026/2027",
+  "urlBasesReguladoras": "https://www.elorrio.eus/es-ES/Ayuntamiento/Secretaria/Subvenciones/Paginas/default.aspx",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir del día siguiente de la publicación del anuncio en el Boletín Oficial de Bizkaia (BOB).",
+  "textFin": "Hasta el 31 de octubre de 2026, inclusive",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1477345,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "13 2026 01497 BAO iragarkia.pdf",
+      "long": 644012,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    },
+    {
+      "id": 1477344,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "13 2026 01497 BAO iragarkia.pdf",
+      "long": 644012,
+      "datMod": "2026-06-17",
+      "datPublicacion": "2026-06-17"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}
