@@ -1,0 +1,70 @@
+{
+  "source": "bdns",
+  "source_id": "914272",
+  "source_lang": "es",
+  "level": "estado",
+  "programme": "Concesión directa - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "ESTADO / MINISTERIO DE POLÍTICA TERRITORIAL Y MEMORIA DEMOCRÁTICA / DIRECCIÓN GENERAL DE COOPERACIÓN AUTONÓMICA Y LOCAL",
+  "nuts_codes": [
+    "ES11",
+    "ES12",
+    "ES22",
+    "ES24",
+    "ES41",
+    "ES42",
+    "ES52",
+    "ES53",
+    "ES61",
+    "ES62"
+  ],
+  "nuts_primary": "ES11",
+  "title": "Resolución de 18 de junio de 2026 de Secretaría de Estado de Política Territorial que aprueba la convocatoria de subvenciones para recuperación daños en infraestructuras municipales y red viaria provincial e insular prevista ap 3º ACM 25/11/2025",
+  "title_lang": "es",
+  "summary": "Infraestructuras",
+  "status": "open",
+  "publication_date": "2026-06-19",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 19129735.17,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "F",
+      "descripcion": "CONSTRUCCIÓN"
+    }
+  ],
+  "apply_url": "Aplicación AURA: Sede electrónica MPTMD: https://mptmd.sede.gob.es (subvenciones - AURA). Enlace directo a AURA https://aura.redsara.es/index.php  ",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914272",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.boe.es/eli/es/o/2015/01/21/hap196",
+  "text_inicio": "9:00 horas día siguiente publicación anuncio BOE",
+  "text_fin": "15:00 horas del día 14 de julio de 2026",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-20T04:07:25.903Z"
+}

@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "914158",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / DIPUTACIÓN PROV. DE HUESCA / DIPUTACIÓN PROVINCIAL DE HUESCA",
+  "nuts_codes": [
+    "ES241"
+  ],
+  "nuts_primary": "ES241",
+  "title": "Convocatoria de subvenciones para el control y gestión de las colonias felinas en los cascos urbanos o periurbanos de los Ayuntamientos de la provincia de Huesca",
+  "title_lang": "es",
+  "summary": "Sanidad",
+  "status": "open",
+  "publication_date": "2026-06-19",
+  "open_date": "2026-06-23",
+  "deadline": "2026-07-21",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 120000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "01.7",
+      "descripcion": "Caza, captura de animales y servicios relacionados"
+    }
+  ],
+  "apply_url": "https://www.dphuesca.es/convocatoriasubvenciones",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914158",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "Ordenanza general por la que se aprueban las bases reguladoras para la concesión de subvenciones por la Diputación Provincial de Huesca",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-20T04:07:25.864Z"
+}

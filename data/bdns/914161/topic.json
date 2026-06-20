@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "914161",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / EXTREMADURA / DIRECCIÓN GENERAL DE FORMACIÓN PROFESIONAL, INNOVACIÓN E INCLUSIÓN EDUCATIVA",
+  "nuts_codes": [
+    "ES43"
+  ],
+  "nuts_primary": "ES43",
+  "title": "Ayudas curso 2026/2027 de la Modalidad A para realización de Programas de Aprendizaje a lo Largo de la Vida , según Resolución de 12 de junio de 2026.",
+  "title_lang": "es",
+  "summary": "Educación",
+  "status": "open",
+  "publication_date": "2026-06-19",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 747150,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "85.5",
+      "descripcion": "Otra educación"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914161",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "http://doe.juntaex.es/pdfs/doe/2015/640o/15040056.pdf",
+  "text_inicio": "A partir del día siguiente a la publicación en el Diario Oficial de Extremadura",
+  "text_fin": "10 días hábiles siguientes a la publicación",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-20T04:07:25.865Z"
+}

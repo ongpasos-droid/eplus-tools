@@ -1,0 +1,71 @@
+{
+  "source": "bdns",
+  "source_id": "914147",
+  "source_lang": "es",
+  "level": "estado",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "ESTADO / MINISTERIO DE DERECHOS SOCIALES, CONSUMO Y AGENDA 2030 / REAL PATRONATO SOBRE DISCAPACIDAD",
+  "nuts_codes": [],
+  "nuts_primary": null,
+  "title": "V edición del \"Programa Reina Letizia para la Inclusión\" para promover la mejora de las condiciones formativas y profesionales de las personas con discapacidad.",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-06-19",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 5225550,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "Q",
+      "descripcion": "EDUCACIÓN"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914147",
+  "documents": [
+    {
+      "label": "Anexo III",
+      "url": null
+    },
+    {
+      "label": "Anexo II",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "Anexo I",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.boe.es/eli/es/o/2022/10/04/dsa952",
+  "text_inicio": "Día siguiente al de la publicación del extracto de la convocatoria en el BOE.",
+  "text_fin": "Un mes a partir del día de inicio de presentación de las solicitudes",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-20T04:07:25.855Z"
+}

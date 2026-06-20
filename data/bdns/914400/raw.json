@@ -1,0 +1,95 @@
+{
+  "id": 1115961,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "COMUNITAT VALENCIANA",
+    "nivel3": "INSTITUT VALENCIÀ DE CULTURA (IVC)"
+  },
+  "sedeElectronica": "https://sede.ivc.gva.es/",
+  "codigoBDNS": "914400",
+  "fechaRecepcion": "2026-06-19",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 2600000,
+  "mrr": false,
+  "descripcion": "RESOLUCIÓN del director general del IVC por la que se convocan subvenciones destinadas al fomento de las artes escénicas para 2026, en las modalidades de producción profesional de un montaje escénico, gira de espectáculos, festivales y muestras y ESAL",
+  "descripcionLeng": "RESOLUCIÓ del director general de l’IVC per la qual es convoquen subvencions destinades al foment de les arts escèniques per a 2026, en les modalitats de producció professional d’un muntatge escènic, gira d’espectacles, festivals i mstres y ESAL",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES52 - COMUNIDAD VALENCIANA"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "RESOLUCIÓN de 15 de julio de 2025, por la que se aprueban las bases reguladoras para la concesión de subvenciones públicas en régimen de concurrencia competitiva destinadas al fomento de las artes escénicas de la Comunitat Valenciana.",
+  "urlBasesReguladoras": "https://dogv.gva.es/datos/2025/07/17/pdf/2025_27862_es.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "a partir del día siguiente de su publicación en el DOGV",
+  "textFin": "15 días hábiles desde el día siguiente de su publicación en el DOGV",
+  "ayudaEstado": "SA.114916",
+  "urlAyudaEstado": "https://competition-cases.ec.europa.eu/cases/SA.114916",
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 651/2014, DE 17 DE JUNIO, de exención de notificación",
+    "orden": null
+  },
+  "objetivos": [
+    {
+      "descripcion": "ART. 53 AYUDAS A LA CULTURA Y LA CONSERVACIÓN DEL PATRIMONIO"
+    }
+  ],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1479447,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "RESOLUCION CONVOCATORIA FAE PARCIAL 2026_CAS_firmado.pdf",
+      "long": 445119,
+      "datMod": "2026-06-19",
+      "datPublicacion": "2026-06-19"
+    },
+    {
+      "id": 1479450,
+      "descripcion": "domiciliación bancaria",
+      "nombreFic": "ANEXO II ANNEX II - Domiciliacion bancaria.pdf",
+      "long": 902995,
+      "datMod": "2026-06-19",
+      "datPublicacion": "2026-06-19"
+    },
+    {
+      "id": 1479449,
+      "descripcion": "solicitud ayuda ",
+      "nombreFic": "Anexo I - Solicitud FAE - 14564_BI.pdf",
+      "long": 981097,
+      "datMod": "2026-06-19",
+      "datPublicacion": "2026-06-19"
+    },
+    {
+      "id": 1479448,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "RESOLUCION CONVOCATORIA FAE PARCIAL 2026_CAS_26-005589_trad_VAL_firmado.pdf",
+      "long": 448283,
+      "datMod": "2026-06-19",
+      "datPublicacion": "2026-06-19"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

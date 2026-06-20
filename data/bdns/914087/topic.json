@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "914087",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / PUEBLA DE ALFINDÉN, LA / AYUNTAMIENTO DE PUEBLA DE ALFINDÉN, LA",
+  "nuts_codes": [
+    "ES243"
+  ],
+  "nuts_primary": "ES243",
+  "title": "Convocatoria del Premio Concurso Portadas Programa de Fiestas de Agosto 2026 de La Puebla de Alfindén",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-06-18",
+  "open_date": null,
+  "deadline": "2026-07-10",
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 800,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "90",
+      "descripcion": "Actividades de creación artística y artes escénicas"
+    }
+  ],
+  "apply_url": "https://lapuebladealfinden.sedelectronica.es/info.0",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914087",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "http://bop.dpz.es/BOPZ/UploadServlet?ruta=Boletines\\2021\\236\\Edictos\\bop_8536_2021.pdf",
+  "text_inicio": "a partir del día siguiente a la publicación en el BOA sección provincial ",
+  "text_fin": "hasta el 10 de julio ",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-20T04:07:25.839Z"
+}

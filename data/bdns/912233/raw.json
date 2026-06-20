@@ -1,0 +1,96 @@
+{
+  "id": 1113794,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "CABILDO INSULAR DE TENERIFE",
+    "nivel3": "CABILDO INSULAR DE TENERIFE"
+  },
+  "sedeElectronica": "https://sede.tenerife.es/es",
+  "codigoBDNS": "912233",
+  "fechaRecepcion": "2026-06-11",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 100000,
+  "mrr": false,
+  "descripcion": "Subvenciones a las Asociaciones de Mujeres y Federaciones de Asociaciones de Mujeres para la realización de proyectos que contribuyan al establecimiento de políticas efectivas de igualdad de género en el territorio insular, ejercicio 2026.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES709 - Tenerife"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Subvenciones a las Asociaciones de Mujeres y Federaciones de Asociaciones de Mujeres para la realización de proyectos que contribuyan al establecimiento de políticas efectivas de igualdad de género en el territorio insular, ejercicio 2026.",
+  "urlBasesReguladoras": "https://sede.tenerife.es/es",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Desde el día siguiente a la publicación de la convocatoria en el BOP.",
+  "textFin": "A contar 20 días naturales a partir del día siguiente a la publicación de la convocatoria en el BOP.",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1473810,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "AC0000027994_Acuerdo CGI Subv Asociaciones Mujeres 2026.report.pdf",
+      "long": 1079513,
+      "datMod": "2026-06-11",
+      "datPublicacion": "2026-06-19"
+    },
+    {
+      "id": 1473813,
+      "descripcion": "Anexo I. Solicitud.",
+      "nombreFic": "Anexo I. Solicitud.pdf",
+      "long": 120515,
+      "datMod": "2026-06-11",
+      "datPublicacion": "2026-06-19"
+    },
+    {
+      "id": 1473819,
+      "descripcion": "Anexo IV. Declaración responsable.",
+      "nombreFic": "Anexo IV. Declaración responsable.pdf",
+      "long": 220440,
+      "datMod": "2026-06-11",
+      "datPublicacion": "2026-06-19"
+    },
+    {
+      "id": 1473818,
+      "descripcion": "Anexo III. Estrategia colaborativa.",
+      "nombreFic": "Anexo III. Estrategia colaborativa.pdf",
+      "long": 230839,
+      "datMod": "2026-06-11",
+      "datPublicacion": "2026-06-19"
+    },
+    {
+      "id": 1473817,
+      "descripcion": "Anexo II. Memoria del Proyecto.",
+      "nombreFic": "Anexo II. Memoria del Proyecto.pdf",
+      "long": 435322,
+      "datMod": "2026-06-11",
+      "datPublicacion": "2026-06-19"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

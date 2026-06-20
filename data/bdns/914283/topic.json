@@ -1,0 +1,69 @@
+{
+  "source": "bdns",
+  "source_id": "914283",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / SANT JUST DESVERN / AYUNTAMIENTO DE SANT JUST DESVERN",
+  "nuts_codes": [
+    "ES51"
+  ],
+  "nuts_primary": "ES51",
+  "title": "APROBACIÓN DE LA CONVOCATORIA PARA LA CONCESIÓN DE AYUDAS DESTINADAS AL FOMENTO DE LA CREACIÓN ARTÍSTICA DEL AÑO 2026, DE ACUERDO CON LAS BASES APROBADAS POR EL PLENO MUNICIPAL DE FECHA 29 DE JUNIO DE 2021",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-06-19",
+  "open_date": "2026-06-20",
+  "deadline": "2026-07-19",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 10000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "90",
+      "descripcion": "Actividades de creación artística y artes escénicas"
+    }
+  ],
+  "apply_url": "https://santjust.cat/",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914283",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en lengua cooficial",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "http://bop.diba.cat/anunci/3100447/aprovacio-inicial-de-les-bases-per-a-l-atorgament-de-beques-per-al-foment-de-la-creacio-artistica-ajuntament-de-sant-just-desvern",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [
+    {
+      "descripcion": "FSE - FONDO SOCIAL EUROPEO "
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-20T04:07:25.907Z"
+}

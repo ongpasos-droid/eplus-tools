@@ -1,0 +1,72 @@
+{
+  "id": 1115948,
+  "organo": {
+    "nivel1": "OTROS",
+    "nivel2": "UNIVERSIDAD DE VIGO",
+    "nivel3": null
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "914387",
+  "fechaRecepcion": "2026-06-19",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 14400,
+  "mrr": false,
+  "descripcion": "Resolución Rectoral por la que se convocan Becas de colaboración en el Programa Colmea de Ideas de la Universidad de Vigo para el desarrollo de los trabajos fin de estudios en el curso 2026/2027.",
+  "descripcionLeng": "Resolución Reitoral pola que se convocan Bolsas de colaboración no Programa Colmea de Ideas da Universidade de Vigo para o desenvolvemento dos traballos fin de estudos no curso 2026/2027.",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES11 - GALICIA"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Resolución Rectoral por la que se convocan Becas de colaboración en el Programa Colmea de Ideas de la Universidad de Vigo para el desarrollo de los trabajos fin de estudios en el curso 2026/2027.",
+  "urlBasesReguladoras": "https://secretaria.uvigo.gal/uv/web/convocatoria/public/show/1884",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-22",
+  "fechaFinSolicitud": "2026-09-15",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1479353,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "20260619_convoc_TFG_TFM_colmea_d_ideas.pdf",
+      "long": 509666,
+      "datMod": "2026-06-19",
+      "datPublicacion": "2026-06-19"
+    },
+    {
+      "id": 1479349,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "convoc_TFG_TFM_colmea_d_ideas_castel.pdf",
+      "long": 469759,
+      "datMod": "2026-06-19",
+      "datPublicacion": "2026-06-19"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,77 @@
+{
+  "source": "bdns",
+  "source_id": "914297",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / ORTIGUEIRA / AYUNTAMIENTO DE ORTIGUEIRA",
+  "nuts_codes": [
+    "ES111"
+  ],
+  "nuts_primary": "ES111",
+  "title": "Bases reguladoras de ayudas al fomento de la natalidad y asentamiento poblacional del ayuntamiento de Ortigueira",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-06-19",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 12000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "G",
+      "descripcion": "COMERCIO AL POR MAYOR Y AL POR MENOR"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914297",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en lengua cooficial",
+      "url": null
+    },
+    {
+      "label": "Anexo III - Delegación de pago a subministradores",
+      "url": null
+    },
+    {
+      "label": "Anexo II - Declaracion responsable",
+      "url": null
+    },
+    {
+      "label": "Anexo I",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://ortigueira.sedelectronica.es/preview-document/14a5fcaf-9393-4bc1-bdc6-0fec9744059e/",
+  "text_inicio": "Al día siguiente de la publicación del extracto de la subvención en BOP",
+  "text_fin": "Un (1) mes contado a partir del día siguiente al de la publicación de este extracto en BOP",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-20T04:07:25.912Z"
+}

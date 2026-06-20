@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "914288",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / ALMERÍA / AYUNTAMIENTO DE ALMERÍA",
+  "nuts_codes": [
+    "ES611"
+  ],
+  "nuts_primary": "ES611",
+  "title": "CONVOCATORIA DE SUBVENCIONES EN MATERIA DE IGUALDAD DE LA DELEGACIÓN DE ÁREA DE FAMILIA, INCLUSIÓN E IGUALDAD DEL EXCMO. AYUNTAMIENTO DE ALMERÍA CORRESPONDIENTES AL AÑO 2026.",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-06-19",
+  "open_date": "2026-06-25",
+  "deadline": "2026-07-15",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 20000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "88.9",
+      "descripcion": "Otras actividades de servicios sociales sin alojamiento"
+    }
+  ],
+  "apply_url": "https://sede.aytoalmeria.es/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=PTS2_HOME",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914288",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://app.dipalme.org/pandora/results.vm?p=1&p=2024&p=1&p=07&p=1&p=24&p=0&l=15&t=%2Bcreation&g=b&g=00&g=01&g=02&g=03&s=0&c=1&lang=es&view=boletines",
+  "text_inicio": "AL DÍA SIGUIENTE HÁBIL DE LA PUBLICACIÓN DEL EXTRACTO DE LA CONVOCATORIA EN EL BOP DE ALMERÍA",
+  "text_fin": "15 DÍAS HÁBILES DESDE EL DÍA SIGUIENTE DE LA PUBLICACIÓN DEL EXTRACTO DE LA CONVOCATORIA",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-20T04:07:25.909Z"
+}

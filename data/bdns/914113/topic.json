@@ -1,0 +1,102 @@
+{
+  "source": "bdns",
+  "source_id": "914113",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / CANTABRIA / CONSEJERÍA DE INCLUSIÓN SOCIAL, JUVENTUD, FAMILIAS E IGUALDAD",
+  "nuts_codes": [
+    "ES130"
+  ],
+  "nuts_primary": "ES130",
+  "title": "Orden ISO/06/2026, de 19 de junio, por la que se establecen las bases reguladoras y la convocatoria para la concesión de subvenciones a entidades locales de la comunidad autónoma de Cantabria en el marco del Plan Corresponsables en 2026.",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-06-18",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 2865583.55,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA; PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "88",
+      "descripcion": "Actividades de servicios sociales sin alojamiento"
+    },
+    {
+      "codigo": "85",
+      "descripcion": "Educación"
+    }
+  ],
+  "apply_url": "https://www.cantabria.es/web/atencion-a-la-ciudadania/ayudas-y-subvenciones",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914113",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "Anexo II - Memoria explicativa proyectos Plan Corresponsables 2026 - copia",
+      "url": null
+    },
+    {
+      "label": "Anexo III - Relación de gastos",
+      "url": null
+    },
+    {
+      "label": "Anexo IX - Municipios rurales de Cantabria en 2025",
+      "url": null
+    },
+    {
+      "label": "Anexo V - Declaración responsable penales",
+      "url": null
+    },
+    {
+      "label": "Anexo VI - Declaración responsable principios",
+      "url": null
+    },
+    {
+      "label": "Anexo VII - Declaración responsable de tasas y precios públicos",
+      "url": null
+    },
+    {
+      "label": "Anexo VIII - Declaración responsable requisitos imagen y publicidad",
+      "url": null
+    },
+    {
+      "label": "Anexo I - Solicitud Plan Corresponsables 2026 - copia",
+      "url": null
+    },
+    {
+      "label": "Anexo IV - Memoria justificativa de proyectos",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.boe.es/boe/dias/2026/05/20/pdfs/BOE-A-2026-10875.pdf",
+  "text_inicio": "Día hábil siguiente a la publicación del extracto de la convocatoria en el B.O.C.",
+  "text_fin": "Pasados quince días hábiles siguientes a la publicación del extracto de la convocatoria en el B.O.C.",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-20T04:07:25.846Z"
+}

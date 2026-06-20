@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "914186",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concesión directa - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / SANT VICENÇ DE CASTELLET / AYUNTAMIENTO DE SANT VICENÇ DE CASTELLET",
+  "nuts_codes": [
+    "ES511"
+  ],
+  "nuts_primary": "ES511",
+  "title": "APROVACIÓ DE LA CONVOCATÒRIA PER A L¿ATORGAMENT DE  SUBVENCIONS DESTINADES A AUTONOMS/ES EN NOVA CONSTITUCIÓ DE  SANT VICENÇ DE CASTELLET A L¿EXERCICI 2026",
+  "title_lang": "es",
+  "summary": "Otras Prestaciones económicas",
+  "status": "open",
+  "publication_date": "2026-06-19",
+  "open_date": "2026-04-29",
+  "deadline": "2026-10-31",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 10000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "S",
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914186",
+  "documents": [
+    {
+      "label": "Texto en otra lengua de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://svc.cat/",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-20T04:07:25.878Z"
+}

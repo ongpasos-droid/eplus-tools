@@ -1,0 +1,96 @@
+{
+  "id": 1115858,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "ORTIGUEIRA",
+    "nivel3": "AYUNTAMIENTO DE ORTIGUEIRA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "914297",
+  "fechaRecepcion": "2026-06-19",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 12000,
+  "mrr": false,
+  "descripcion": "Bases reguladoras de ayudas al fomento de la natalidad y asentamiento poblacional del ayuntamiento de Ortigueira",
+  "descripcionLeng": "Bases reguladoras de axudas ao fomento da natalidade e asentamento poblacional do concello de Ortigueira",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "COMERCIO AL POR MAYOR Y AL POR MENOR",
+      "codigo": "G"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES111 - A Coruña"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Bases reguladoras de ayudas al fomento de la natalidad y asentamiento poblacional del ayuntamiento de Ortigueira",
+  "urlBasesReguladoras": "https://ortigueira.sedelectronica.es/preview-document/14a5fcaf-9393-4bc1-bdc6-0fec9744059e/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Al día siguiente de la publicación del extracto de la subvención en BOP",
+  "textFin": "Un (1) mes contado a partir del día siguiente al de la publicación de este extracto en BOP",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1479107,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Extracto de subvención para BDNS (Castellano).docx",
+      "long": 43828,
+      "datMod": "2026-06-19",
+      "datPublicacion": "2026-06-19"
+    },
+    {
+      "id": 1479109,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Extracto de subvención para BDNS (Galego).docx",
+      "long": 43864,
+      "datMod": "2026-06-19",
+      "datPublicacion": "2026-06-19"
+    },
+    {
+      "id": 1479115,
+      "descripcion": "Anexo III - Delegación de pago a subministradores",
+      "nombreFic": "Anexo III - Delegación de pago a subministradores.pdf",
+      "long": 604418,
+      "datMod": "2026-06-19",
+      "datPublicacion": "2026-06-19"
+    },
+    {
+      "id": 1479113,
+      "descripcion": "Anexo II - Declaracion responsable",
+      "nombreFic": "Anexo II - Declaración responsable.pdf",
+      "long": 604259,
+      "datMod": "2026-06-19",
+      "datPublicacion": "2026-06-19"
+    },
+    {
+      "id": 1479111,
+      "descripcion": "Anexo I",
+      "nombreFic": "Anexo I - Modelo de solicitud.pdf",
+      "long": 608362,
+      "datMod": "2026-06-19",
+      "datPublicacion": "2026-06-19"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

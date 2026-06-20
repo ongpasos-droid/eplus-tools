@@ -1,0 +1,59 @@
+{
+  "source": "bdns",
+  "source_id": "914260",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / ZARAGOZA / AYUNTAMIENTO DE ZARAGOZA",
+  "nuts_codes": [],
+  "nuts_primary": null,
+  "title": "BASES REGULADORAS COOPERACIÓN AL DE LA DESARROLLO CONVOCATORIA Y DE DE AYUDA SUBVENCIONES HUMANITARIA DE DEL AYUNTAMIENTO DE ZARAGOZA PARA 2026",
+  "title_lang": "es",
+  "summary": "Cooperación internacional para el desarrollo y cultural",
+  "status": "open",
+  "publication_date": "2026-06-19",
+  "open_date": "2026-06-25",
+  "deadline": "2026-07-23",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 280000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "99",
+      "descripcion": "Actividades de organizaciones y organismos extraterritoriales"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914260",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "http://bop.dpz.es/BOPZ/UploadServlet?ruta=Boletines\\2016\\236\\bop.pdf",
+  "text_inicio": "Desde el día siguiente de la publicación en el BOPZ ",
+  "text_fin": "20 días hábiles desde el día siguiente a la publicación en el BOPZ",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-20T04:07:25.902Z"
+}

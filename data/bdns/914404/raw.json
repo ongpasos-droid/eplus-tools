@@ -1,0 +1,72 @@
+{
+  "id": 1115965,
+  "organo": {
+    "nivel1": "OTROS",
+    "nivel2": "UNIVERSITAT DE VALÈNCIA (ESTUDI GENERAL)",
+    "nivel3": null
+  },
+  "sedeElectronica": "https://www.uv.es/seu-electronica/ca/electronica-uv.html",
+  "codigoBDNS": "914404",
+  "fechaRecepcion": "2026-06-19",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 3000,
+  "mrr": false,
+  "descripcion": "Ayudas a estudiantes para la difusión del conocimiento científico en el marco del programa de doctorado en Marketing del Departamento de Comercialización e Investigación de Mercados de la Universitat de València 2026",
+  "descripcionLeng": "Ajudes a estudiants per a la difusió del coneixement científic en el marc del programa de doctorat en màrqueting del departament de Comercialització i investigació de mercats de la Universitat de València 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Otra educación",
+      "codigo": "85.5"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES52 - COMUNIDAD VALENCIANA"
+    }
+  ],
+  "descripcionFinalidad": "Investigación, desarrollo e innovación",
+  "descripcionBasesReguladoras": "Resolución de la Univ. Valencia para concesión de ayudas a estudiantes para la difusión del conocimiento científico en el marco del programa de doctorado en Marketing del Departamento de Comercialización e Investigación de Mercados 2026",
+  "urlBasesReguladoras": "https://www.uv.es/mkdocs/convocatorias/convocatoria_castellano_2026.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir del dia siguiente de la publicación de la Convocatoria en el DOGV",
+  "textFin": "Finaliza el 15 de octubre de 2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1479408,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "resolucio_i_annex-val.pdf",
+      "long": 478994,
+      "datMod": "2026-06-19",
+      "datPublicacion": "2026-06-19"
+    },
+    {
+      "id": 1479407,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "resolucion_y_anexo-cas.pdf",
+      "long": 459655,
+      "datMod": "2026-06-19",
+      "datPublicacion": "2026-06-19"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

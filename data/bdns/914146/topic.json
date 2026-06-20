@@ -1,0 +1,69 @@
+{
+  "source": "bdns",
+  "source_id": "914146",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / LEIOA / AYUNTAMIENTO DE LEIOA",
+  "nuts_codes": [
+    "ES213"
+  ],
+  "nuts_primary": "ES213",
+  "title": "BASES REGULADORAS DE LA CONVOCATORIA DE SUBVENCIONES DE CARÁCTER ORDINARIO PARA LA ACOGIDA TEMPORAL DURANTE EL 2026 DE NIÑOS Y NIÑAS DE PAISES EN VÍAS DE DESARROLLO O QUE DE FORMA DIRECTA O INDIRECTA HAYAN SUFRIDO ALGÚN TIPO DE CATÁSTROFE",
+  "title_lang": "es",
+  "summary": "Servicios Sociales y Promoción Social",
+  "status": "open",
+  "publication_date": "2026-06-19",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 5000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "88",
+      "descripcion": "Actividades de servicios sociales sin alojamiento"
+    }
+  ],
+  "apply_url": "https://udaletxean.leioa.eus/",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914146",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Resolución",
+      "url": null
+    },
+    {
+      "label": "Texto en otra lengua de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://leioazabalik.net/plan-estrategico-de-subvenciones",
+  "text_inicio": "Desde la publicación en el Boletín Oficial de Bizkaia",
+  "text_fin": "30 días hábiles desde la publicación del extracto de la convocatoria en el Boletín Oficial de Bizkai",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-20T04:07:25.855Z"
+}

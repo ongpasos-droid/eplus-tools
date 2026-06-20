@@ -1,0 +1,80 @@
+{
+  "source": "bdns",
+  "source_id": "914400",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / COMUNITAT VALENCIANA / INSTITUT VALENCIÀ DE CULTURA (IVC)",
+  "nuts_codes": [
+    "ES52"
+  ],
+  "nuts_primary": "ES52",
+  "title": "RESOLUCIÓN del director general del IVC por la que se convocan subvenciones destinadas al fomento de las artes escénicas para 2026, en las modalidades de producción profesional de un montaje escénico, gira de espectáculos, festivales y muestras y ESAL",
+  "title_lang": "es",
+  "summary": "Cultura",
+  "status": "open",
+  "publication_date": "2026-06-19",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 2600000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "R",
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES"
+    }
+  ],
+  "apply_url": "https://sede.ivc.gva.es/",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914400",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "domiciliación bancaria",
+      "url": null
+    },
+    {
+      "label": "solicitud ayuda ",
+      "url": null
+    },
+    {
+      "label": "Texto en otra lengua de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://dogv.gva.es/datos/2025/07/17/pdf/2025_27862_es.pdf",
+  "text_inicio": "a partir del día siguiente de su publicación en el DOGV",
+  "text_fin": "15 días hábiles desde el día siguiente de su publicación en el DOGV",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": "SA.114916",
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 651/2014, DE 17 DE JUNIO, de exención de notificación",
+    "orden": null
+  },
+  "objetivos": [
+    {
+      "descripcion": "ART. 53 AYUDAS A LA CULTURA Y LA CONSERVACIÓN DEL PATRIMONIO"
+    }
+  ],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-20T04:07:25.943Z"
+}

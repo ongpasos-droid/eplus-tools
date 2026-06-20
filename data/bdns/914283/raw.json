@@ -1,0 +1,76 @@
+{
+  "id": 1115844,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SANT JUST DESVERN",
+    "nivel3": "AYUNTAMIENTO DE SANT JUST DESVERN"
+  },
+  "sedeElectronica": "https://santjust.cat/",
+  "codigoBDNS": "914283",
+  "fechaRecepcion": "2026-06-19",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 10000,
+  "mrr": false,
+  "descripcion": "APROBACIÓN DE LA CONVOCATORIA PARA LA CONCESIÓN DE AYUDAS DESTINADAS AL FOMENTO DE LA CREACIÓN ARTÍSTICA DEL AÑO 2026, DE ACUERDO CON LAS BASES APROBADAS POR EL PLENO MUNICIPAL DE FECHA 29 DE JUNIO DE 2021",
+  "descripcionLeng": "APROVACIÓ DE LA CONVOCATÒRIA PER A LA CONCESSIÓ D’AJUTS DESTINATS AL FOMENT DE LA CREACIÓ ARTÍSTICA DE L’ANY 2026, D’ACORD AMB LES BASES APROVADES PEL PLE MUNICIPAL DE DATA 29 DE JUNY DE 2021",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades de creación artística y artes escénicas",
+      "codigo": "90"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES51 - CATALUÑA"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "APROBACIÓ DE LES BASES PER A L'ATORGAMENT D'AJUTS PER AL FOMENT DE LA CREACIÓ ARTÍSTICA",
+  "urlBasesReguladoras": "http://bop.diba.cat/anunci/3100447/aprovacio-inicial-de-les-bases-per-a-l-atorgament-de-beques-per-al-foment-de-la-creacio-artistica-ajuntament-de-sant-just-desvern",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-20",
+  "fechaFinSolicitud": "2026-07-19",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [
+    {
+      "descripcion": "FSE - FONDO SOCIAL EUROPEO "
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1479095,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "decret convocatoria.pdf",
+      "long": 155140,
+      "datMod": "2026-06-19",
+      "datPublicacion": "2026-06-19"
+    },
+    {
+      "id": 1479093,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "decreto convocatoria.pdf",
+      "long": 215474,
+      "datMod": "2026-06-19",
+      "datPublicacion": "2026-06-19"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}
