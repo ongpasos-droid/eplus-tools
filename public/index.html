@@ -62,7 +62,7 @@ tailwind.config = {
      Si tocas estilos aquí, replícalos en
      web/wordpress/astra-eufunding/style.css (sección "TOP BAR común"). ═══ -->
 <style>
-.efs-topbar { position: fixed; top: 0; left: 0; right: 0; height: 48px; z-index: 50;
+.efs-topbar { position: fixed; top: 0; left: 0; right: 0; height: 64px; z-index: 50;
   background: #1b1464; color: #fff; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500;
   border-bottom: 1px solid rgba(255,255,255,0.08); }
 .efs-topbar__inner { max-width: 1280px; height: 100%; margin: 0 auto; padding: 0 1.25rem;
@@ -70,7 +70,7 @@ tailwind.config = {
 .efs-topbar__brand { display: inline-flex; align-items: center; gap: .5rem;
   color: #fff; text-decoration: none; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; }
 .efs-topbar__brand:hover { color: #fbff12; }
-.efs-topbar__logo { width: 22px; height: 22px; background: #fbff12; border-radius: 4px; flex: 0 0 auto; display: inline-block; }
+.efs-topbar__logo { height: 44px; width: auto; flex: 0 0 auto; display: block; }
 .efs-topbar__nav { flex: 1; display: flex; }
 .efs-topbar__menu { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.5rem; }
 .efs-topbar__menu a { color: rgba(255,255,255,0.78); text-decoration: none;
@@ -90,7 +90,7 @@ tailwind.config = {
   .efs-topbar__inner { gap: .5rem; padding: 0 .75rem; }
   .efs-topbar__brand .efs-topbar__name { display: none; }
   .efs-topbar__toggle { display: inline-flex; align-items: center; }
-  .efs-topbar__nav { position: absolute; top: 48px; left: 0; right: 0; flex: none; display: none;
+  .efs-topbar__nav { position: absolute; top: 64px; left: 0; right: 0; flex: none; display: none;
     background: #1b1464; border-bottom: 1px solid rgba(255,255,255,0.08);
     box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
   .efs-topbar__nav.is-open { display: block; }
@@ -109,8 +109,7 @@ tailwind.config = {
 <header class="efs-topbar" role="banner">
   <div class="efs-topbar__inner">
     <a class="efs-topbar__brand" href="https://eufundingschool.com/" aria-label="EU Funding School — Inicio">
-      <span class="efs-topbar__logo" aria-hidden="true"></span>
-      <span class="efs-topbar__name">EU Funding School</span>
+      <img class="efs-topbar__logo" src="/img/logo-efs-white.png" alt="EU Funding School" width="600" height="169">
     </a>
     <nav class="efs-topbar__nav" id="efs-topbar-nav" aria-label="Primary">
       <ul class="efs-topbar__menu">
@@ -171,7 +170,7 @@ tailwind.config = {
   <div class="fixed top-0 right-0 w-[50vw] h-[512px] bg-gradient-to-bl from-secondary-fixed/5 to-transparent blur-3xl pointer-events-none -z-[1]"></div>
   <div class="fixed bottom-0 left-0 w-[50vw] h-[512px] bg-gradient-to-tr from-primary-container/5 to-transparent blur-3xl pointer-events-none -z-[1]"></div>
 
-  <div class="min-h-screen pt-12 flex items-center justify-center px-4">
+  <div class="min-h-screen pt-16 flex items-center justify-center px-4">
     <div class="w-full max-w-md">
 
       <!-- Logo -->
@@ -355,7 +354,7 @@ tailwind.config = {
   <div id="sidebar-overlay"></div>
 
   <!-- Sidebar (offset 48px abajo del top bar) -->
-  <aside id="sidebar" class="fixed top-12 left-0 bottom-0 w-60 bg-primary-container z-40 flex flex-col transition-all duration-300">
+  <aside id="sidebar" class="fixed top-16 left-0 bottom-0 w-60 bg-primary-container z-40 flex flex-col transition-all duration-300">
 
     <!-- Logo -->
     <div class="h-16 flex items-center gap-2 px-5 border-b border-white/10">
@@ -486,7 +485,7 @@ tailwind.config = {
   </aside>
 
   <!-- Main content area (offset by sidebar width + top bar height) -->
-  <div class="lg:ml-60 pt-12 min-h-screen transition-all duration-300" id="main-wrapper">
+  <div class="lg:ml-60 pt-16 min-h-screen transition-all duration-300" id="main-wrapper">
 
     <!-- Top bar -->
     <header class="sticky top-0 z-30 h-16 flex items-center gap-4 px-4 lg:px-8 bg-white/80 backdrop-blur-md border-b border-primary-container/10">
@@ -2901,7 +2900,7 @@ tailwind.config = {
 <div id="org-project-drawer-overlay" class="hidden fixed inset-0 z-40">
   <div id="org-project-drawer-backdrop" class="absolute inset-0 bg-primary/30 backdrop-blur-sm"></div>
   <aside id="org-project-drawer-panel"
-    class="absolute right-0 top-12 bottom-0 w-full max-w-3xl bg-white shadow-2xl overflow-y-auto
+    class="absolute right-0 top-16 bottom-0 w-full max-w-3xl bg-white shadow-2xl overflow-y-auto
            transform transition-transform duration-300">
     <button id="org-project-drawer-close" type="button"
       class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors">
@@ -2915,7 +2914,7 @@ tailwind.config = {
 <div id="convocatorias-drawer-overlay" class="hidden fixed inset-0 z-40">
   <div id="convocatorias-drawer-backdrop" class="absolute inset-0 bg-primary/30 backdrop-blur-sm"></div>
   <aside id="convocatorias-drawer-panel"
-    class="absolute right-0 top-12 bottom-0 w-full max-w-3xl bg-white shadow-2xl overflow-y-auto
+    class="absolute right-0 top-16 bottom-0 w-full max-w-3xl bg-white shadow-2xl overflow-y-auto
            transform transition-transform duration-300">
     <button id="convocatorias-drawer-close" type="button"
       class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors">
@@ -2949,7 +2948,7 @@ tailwind.config = {
 <div id="movilidades-drawer-overlay" class="hidden fixed inset-0 z-40">
   <div id="movilidades-drawer-backdrop" class="absolute inset-0 bg-primary/30 backdrop-blur-sm"></div>
   <aside id="movilidades-drawer-panel"
-    class="absolute right-0 top-12 bottom-0 w-full max-w-3xl bg-white shadow-2xl overflow-y-auto
+    class="absolute right-0 top-16 bottom-0 w-full max-w-3xl bg-white shadow-2xl overflow-y-auto
            transform transition-transform duration-300">
     <button id="movilidades-drawer-close" type="button"
       class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors">
