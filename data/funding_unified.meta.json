@@ -1,25 +1,25 @@
 {
-  "generatedAt": "2026-06-21T04:07:13.829Z",
-  "total": 6806,
+  "generatedAt": "2026-06-22T04:06:03.549Z",
+  "total": 6802,
   "bySource": {
-    "sedia": 740,
+    "sedia": 741,
     "bdns": 5982,
-    "salto": 84
+    "salto": 79
   },
   "byCategory": {
-    "call_for_proposals": 6722,
-    "training": 84
+    "call_for_proposals": 6723,
+    "training": 79
   },
   "byLevel": {
-    "eu": 824,
+    "eu": 820,
     "ccaa": 1339,
     "estado": 215,
     "local": 3890,
     "otros": 538
   },
   "byStatus": {
-    "open": 6520,
-    "forthcoming": 281,
+    "open": 6515,
+    "forthcoming": 282,
     "closed": 5
   },
   "byProgramme": {
@@ -42,11 +42,11 @@
     "ESF+": 4,
     "EUBA": 3,
     "ISF": 4,
-    "Pilot Projects": 7,
+    "Pilot Projects": 8,
     "European Defence Fund": 38,
-    "Erasmus+ Youth (SALTO)": 84,
     "EaSI / SOCPL": 2,
     "CERV": 4,
+    "Erasmus+ Youth (SALTO)": 79,
     "Connecting Europe Facility": 13,
     "ERDFTA": 2,
     "EMFAF": 1,
@@ -56,6 +56,6 @@
     "I3": 2
   },
   "curatedEnrichmentCount": 1,
-  "sumBudgetEur": 296312370649.47,
-  "summaryEsPendingCount": 824
+  "sumBudgetEur": 296316310649.47,
+  "summaryEsPendingCount": 820
 }
