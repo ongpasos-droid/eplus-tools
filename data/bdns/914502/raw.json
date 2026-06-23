@@ -1,0 +1,112 @@
+{
+  "id": 1116063,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "COMUNIDAD DE MADRID",
+    "nivel3": "CONSEJERÍA ECONOMÍA, HACIENDA Y EMPLEO"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "914502",
+  "fechaRecepcion": "2026-06-22",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 6500000,
+  "mrr": false,
+  "descripcion": "SUBVENCION FORMACION DESEMPLEADOS EELL 2026_FDA Certificados",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Otra educación",
+      "codigo": "85.5"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES30 - COMUNIDAD DE MADRID"
+    }
+  ],
+  "descripcionFinalidad": "Fomento del Empleo",
+  "descripcionBasesReguladoras": "ORDEN EFP/942/2022, DE 23 DE SEPTIEMBRE, POR LA QUE SE REGULA LA OFERTA FORMATIVA DEL SISTEMA DE FORMACIÓN PORFESIONAL EN EL ÁMBITO LABORAL ASOCIADA AL CATÁLOGO NACIONAL DE CUALIFICACIONES PROFESIONALES EFECTUADA POR LAS ADMINISTRACIONES COMPETENTE",
+  "urlBasesReguladoras": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2022-16196",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "DESDE EL DIA SIGUIENTE A LA PUBLICACIÓN DEL EXTRACTO EN EL BOCM",
+  "textFin": "15 DIAS HABILES A CONTAR DESDE EL DIA SIGUIENTE AL DE LA PUBLICACION DEL EXTRACTO EN EL BOCM",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1479681,
+      "descripcion": "Anexos  04. ANEXO III ANTICIPO FDAC",
+      "nombreFic": "Anexos  04. ANEXO III ANTICIPO FDAC.pdf",
+      "long": 212797,
+      "datMod": "2026-06-22",
+      "datPublicacion": "2026-06-22"
+    },
+    {
+      "id": 1479683,
+      "descripcion": "Anexos  06. ANEXO V ACREDITACION ART 13 3 BIS FDAC 2026",
+      "nombreFic": "Anexos  06. ANEXO V ACREDITACION ART 13 3 BIS FDAC 2026.pdf",
+      "long": 146089,
+      "datMod": "2026-06-22",
+      "datPublicacion": "2026-06-22"
+    },
+    {
+      "id": 1479682,
+      "descripcion": "Anexos  05. ANEXO IV LIQUIDACION FDAC",
+      "nombreFic": "Anexos  05. ANEXO IV LIQUIDACION FDAC.pdf",
+      "long": 253170,
+      "datMod": "2026-06-22",
+      "datPublicacion": "2026-06-22"
+    },
+    {
+      "id": 1479684,
+      "descripcion": "Anexos  07. ANEXO VI RENUNCIA FDAC",
+      "nombreFic": "Anexos  07. ANEXO VI RENUNCIA FDAC.pdf",
+      "long": 154443,
+      "datMod": "2026-06-22",
+      "datPublicacion": "2026-06-22"
+    },
+    {
+      "id": 1479680,
+      "descripcion": "Anexos  03. ANEXO II C FDAC",
+      "nombreFic": "Anexos  03. ANEXO II C FDAC.pdf",
+      "long": 386138,
+      "datMod": "2026-06-22",
+      "datPublicacion": "2026-06-22"
+    },
+    {
+      "id": 1479679,
+      "descripcion": "Anexos  01. SOLICITUD FDAC 2026",
+      "nombreFic": "Anexos  01. SOLICITUD FDAC 2026.pdf",
+      "long": 219284,
+      "datMod": "2026-06-22",
+      "datPublicacion": "2026-06-22"
+    },
+    {
+      "id": 1479678,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Texto Convocatoria BDNS  Orden ENTIDADES LOCALES CERTIFICADOS PROFESIONALES 2026_61050292.pdf",
+      "long": 596315,
+      "datMod": "2026-06-22",
+      "datPublicacion": "2026-06-22"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

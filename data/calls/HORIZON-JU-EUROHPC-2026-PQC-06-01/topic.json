@@ -10,7 +10,7 @@
   "status": "open",
   "statusCode": "31094502",
   "opening": "2026-06-02",
-  "deadline": "2027-01-26",
+  "deadline": "2026-09-30",
   "deadlineModel": "single-stage",
   "actionType": "HORIZON JU Research and Innovation Actions",
   "actionCode": "HORIZON-JU-RIA",
@@ -404,5 +404,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-06-22T04:02:46.870Z"
+  "fetchedAt": "2026-06-23T04:03:10.746Z"
 }

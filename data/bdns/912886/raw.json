@@ -1,0 +1,76 @@
+{
+  "id": 1114447,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "GUADALAJARA",
+    "nivel3": "AYUNTAMIENTO DE GUADALAJARA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "912886",
+  "fechaRecepcion": "2026-06-15",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 6000,
+  "mrr": false,
+  "descripcion": "BASES Y CONVOCATORIA DE LA 42º EDICIÓN DEL PREMIO DE TEATRO CIUDAD DE GUADALAJARA 2026\n“ANTONIO BUERO VALLEJO",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+      "codigo": "S"
+    },
+    {
+      "descripcion": "ADMINISTRACIÓN PÚBLICA Y DEFENSA; SEGURIDAD SOCIAL OBLIGATORIA",
+      "codigo": "P"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES42 - CASTILLA LA MANCHA"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "BASES Y CONVOCATORIA DE LA 42º EDICIÓN DEL PREMIO DE TEATRO CIUDAD DE GUADALAJARA 2026 “ANTONIO BUERO VALLEJO",
+  "urlBasesReguladoras": "https://www.guadalajara.es/recursos/doc/portal/2017/08/30/2016-ordenanza-general-de-subvenciones-publicas-del-ayuntamiento-de-guadalajara-.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-16",
+  "fechaFinSolicitud": "2026-09-15",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1475440,
+      "descripcion": "Decreto de la Concejalía",
+      "nombreFic": "DECRETO 2026-6478 [Resolución PR_2026_797 - CR260 CULTURA. Premios].pdf",
+      "long": 680017,
+      "datMod": "2026-06-15",
+      "datPublicacion": "2026-06-22"
+    },
+    {
+      "id": 1475422,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Bases Convocatoria Premio de Teatro Antonio Buero Vallejo 2026.pdf",
+      "long": 276133,
+      "datMod": "2026-06-15",
+      "datPublicacion": "2026-06-22"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

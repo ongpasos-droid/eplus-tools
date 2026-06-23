@@ -1,0 +1,81 @@
+{
+  "source": "bdns",
+  "source_id": "914534",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / DIPUTACIÓN PROV. DE SORIA / DIPUTACIÓN PROVINCIAL DE SORIA",
+  "nuts_codes": [
+    "ES417"
+  ],
+  "nuts_primary": "ES417",
+  "title": "CONVOCATORIA DE SUBVENCIONES PARA LA CONTRATACIÓN DE DESEMPLEADOS POR LOS AYUNTAMIENTOS Y LAS ENTIDADES LOCALES MENORES PARA LA REALIZACIÓN DE OBRAS Y SERVICIOS DE INTERÉS GENERAL Y SOCIAL, FONDOS DIPUTACIÓN DE SORIA\n2026\n",
+  "title_lang": "es",
+  "summary": "Fomento del Empleo",
+  "status": "open",
+  "publication_date": "2026-06-22",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 1000000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "P",
+      "descripcion": "ADMINISTRACIÓN PÚBLICA Y DEFENSA; SEGURIDAD SOCIAL OBLIGATORIA"
+    }
+  ],
+  "apply_url": "https://portaltramitador.dipsoria.es/web/inicioWebc.do?opcion=noreg",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914534",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "ACUERDO JUNTA DE GOBIERNO QUE APRUEBA LA CONVOCATORIA",
+      "url": null
+    },
+    {
+      "label": "SOLICITUD",
+      "url": null
+    },
+    {
+      "label": "ANEXO",
+      "url": null
+    },
+    {
+      "label": "ANEXO JUSTIFICACIÓN",
+      "url": null
+    },
+    {
+      "label": "EXTRACTO DE LA CONVOCATORIA",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.dipsoria.es/sites/dipsoria/files/public/paginas/archivos/ordenanza_general_reguladora_de_la_concesion_de_subvenciones.pdf",
+  "text_inicio": "día de publicación del extracto en el BOP de Soria",
+  "text_fin": "décimo quinto día hábil siguiente a la publicación",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-23T04:06:32.485Z"
+}

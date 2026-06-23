@@ -1,0 +1,72 @@
+{
+  "id": 1116096,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "VALL D'UIXÓ, LA",
+    "nivel3": "AYUNTAMIENTO DE VALL D'UIXÓ, LA"
+  },
+  "sedeElectronica": "https://sede.lavallduixo.es/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=CATALOGO&DETALLE=6269006484943389207121",
+  "codigoBDNS": "914535",
+  "fechaRecepcion": "2026-06-22",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 30000,
+  "mrr": false,
+  "descripcion": "Convocatoria de subvención, en régimen de concesión directa, destinada al transporte de personas universitarias de la localidad para el curso 2025-2026",
+  "descripcionLeng": "Convocatòria de subvenció, en règim de concessió directa, destinada al transport de persones universitàries de la localitat per al curs 2025-2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Educación",
+      "codigo": "85"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES522 - Castellón / Castelló"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "ORDENANZA REGULADORA DEL OTORGAMIENTO DE SUBVENCIONES Y AYUDAS PARA ACTIVIDADES EN DIVERSOS ÁMBITOS DE LA VALL D’UIXÓ",
+  "urlBasesReguladoras": "https://www.lavallduixo.es/sites/L01121264/files/2023-07/ORDENANZA%20DEL%20OTORGAMIENTO%20DE%20SUBVENCIONES%20_0.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir de la publicación del extracto de la convocatoria en el Boletín Oficial de la Província",
+  "textFin": "20 días hábiles siguientes al de la publicación del extracto de la convocatoria en el BOP",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1479801,
+      "descripcion": "Texto en otra lengua de la convocatoria",
+      "nombreFic": "Convocatòria (valencià).PDF",
+      "long": 113699,
+      "datMod": "2026-06-22",
+      "datPublicacion": "2026-06-22"
+    },
+    {
+      "id": 1479800,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Convocatoria (castellano).PDF",
+      "long": 114032,
+      "datMod": "2026-06-22",
+      "datPublicacion": "2026-06-22"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

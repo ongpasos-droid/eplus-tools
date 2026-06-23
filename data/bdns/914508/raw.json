@@ -1,0 +1,139 @@
+{
+  "id": 1116069,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "COMUNIDAD DE MADRID",
+    "nivel3": "CONSEJERÍA ECONOMÍA, HACIENDA Y EMPLEO"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "914508",
+  "fechaRecepcion": "2026-06-22",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 66000000,
+  "mrr": false,
+  "descripcion": "SUBVENCION FORMACION DESEMPLEADOS 2026_FDE Certificados Línea General",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "GRAN EMPRESA"
+    },
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Otra educación",
+      "codigo": "85.5"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES30 - COMUNIDAD DE MADRID"
+    }
+  ],
+  "descripcionFinalidad": "Fomento del Empleo",
+  "descripcionBasesReguladoras": "ORDEN EFP/942/2022, DE 23 DE SEPTIEMBRE, POR LA QUE SE REGULA LA OFERTA FORMATIVA DEL SISTEMA DE FORMACIÓN PORFESIONAL EN EL ÁMBITO LABORAL ASOCIADA AL CATÁLOGO NACIONAL DE CUALIFICACIONES PROFESIONALES EFECTUADA POR LAS ADMINISTRACIONES COMPETENTE",
+  "urlBasesReguladoras": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2022-16196",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "DESDE EL DIA SIGUIENTE A LA PUBLICACION DEL EXTRACTO EN EL BOCM",
+  "textFin": "15 DIAS DESDE EL DIA SIGUIENTE A LA PUBLICACION DEL EXTRACTO EN EL BOCM",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1479700,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Texto Convocatoria BDNS  Orden ENTIDADES DE FORMACION CERTIFICADOS PROFESIONALES 2026_61050244.pdf",
+      "long": 594051,
+      "datMod": "2026-06-22",
+      "datPublicacion": "2026-06-22"
+    },
+    {
+      "id": 1479701,
+      "descripcion": "Anexos  01. SOLICITUD",
+      "nombreFic": "Anexos  01. SOLICITUD.pdf",
+      "long": 219646,
+      "datMod": "2026-06-22",
+      "datPublicacion": "2026-06-22"
+    },
+    {
+      "id": 1479702,
+      "descripcion": "Anexos  03. ANEXO II C LINEA 1 GENERAL FDEC",
+      "nombreFic": "Anexos  03. ANEXO II C LINEA 1 GENERAL FDEC.pdf",
+      "long": 388656,
+      "datMod": "2026-06-22",
+      "datPublicacion": "2026-06-22"
+    },
+    {
+      "id": 1479703,
+      "descripcion": "Anexos  04. ANEXO III ANTICIPO FDEC",
+      "nombreFic": "Anexos  04. ANEXO III ANTICIPO FDEC.pdf",
+      "long": 212757,
+      "datMod": "2026-06-22",
+      "datPublicacion": "2026-06-22"
+    },
+    {
+      "id": 1479709,
+      "descripcion": "Anexos  10. ANEXO VIII RENUNCIA",
+      "nombreFic": "Anexos  10. ANEXO VIII RENUNCIA.pdf",
+      "long": 154510,
+      "datMod": "2026-06-22",
+      "datPublicacion": "2026-06-22"
+    },
+    {
+      "id": 1479705,
+      "descripcion": "Anexos  06. ANEXO IV F RELACIÓN DE FORMADORES SENIOR",
+      "nombreFic": "Anexos  06. ANEXO IV F RELACIÓN DE FORMADORES SENIOR.pdf",
+      "long": 183213,
+      "datMod": "2026-06-22",
+      "datPublicacion": "2026-06-22"
+    },
+    {
+      "id": 1479706,
+      "descripcion": "Anexos  07. ANEXO V VALORACION EXPERIENCIA FDEC",
+      "nombreFic": "Anexos  07. ANEXO V VALORACION EXPERIENCIA FDEC.pdf",
+      "long": 189982,
+      "datMod": "2026-06-22",
+      "datPublicacion": "2026-06-22"
+    },
+    {
+      "id": 1479707,
+      "descripcion": "Anexos  08. ANEXO VI DR EXPERIENCIA EDUCACION FDEC",
+      "nombreFic": "Anexos  08. ANEXO VI DR EXPERIENCIA EDUCACION FDEC.pdf",
+      "long": 105024,
+      "datMod": "2026-06-22",
+      "datPublicacion": "2026-06-22"
+    },
+    {
+      "id": 1479708,
+      "descripcion": "Anexos  09. ANEXO VII ACREDITACION ART 13 3 BIS FDEC",
+      "nombreFic": "Anexos  09. ANEXO VII ACREDITACION ART 13 3 BIS FDEC.pdf",
+      "long": 149976,
+      "datMod": "2026-06-22",
+      "datPublicacion": "2026-06-22"
+    },
+    {
+      "id": 1479704,
+      "descripcion": "Anexos  05. ANEXO IV LIQUIDACION FDEC",
+      "nombreFic": "Anexos  05. ANEXO IV LIQUIDACION FDEC.pdf",
+      "long": 256435,
+      "datMod": "2026-06-22",
+      "datPublicacion": "2026-06-22"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

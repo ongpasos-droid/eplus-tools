@@ -1,0 +1,98 @@
+{
+  "source": "bdns",
+  "source_id": "914508",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / COMUNIDAD DE MADRID / CONSEJERÍA ECONOMÍA, HACIENDA Y EMPLEO",
+  "nuts_codes": [
+    "ES30"
+  ],
+  "nuts_primary": "ES30",
+  "title": "SUBVENCION FORMACION DESEMPLEADOS 2026_FDE Certificados Línea General",
+  "title_lang": "es",
+  "summary": "Fomento del Empleo",
+  "status": "open",
+  "publication_date": "2026-06-22",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 66000000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "GRAN EMPRESA; PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "GRAN EMPRESA",
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "85.5",
+      "descripcion": "Otra educación"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914508",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Anexos  01. SOLICITUD",
+      "url": null
+    },
+    {
+      "label": "Anexos  03. ANEXO II C LINEA 1 GENERAL FDEC",
+      "url": null
+    },
+    {
+      "label": "Anexos  04. ANEXO III ANTICIPO FDEC",
+      "url": null
+    },
+    {
+      "label": "Anexos  10. ANEXO VIII RENUNCIA",
+      "url": null
+    },
+    {
+      "label": "Anexos  06. ANEXO IV F RELACIÓN DE FORMADORES SENIOR",
+      "url": null
+    },
+    {
+      "label": "Anexos  07. ANEXO V VALORACION EXPERIENCIA FDEC",
+      "url": null
+    },
+    {
+      "label": "Anexos  08. ANEXO VI DR EXPERIENCIA EDUCACION FDEC",
+      "url": null
+    },
+    {
+      "label": "Anexos  09. ANEXO VII ACREDITACION ART 13 3 BIS FDEC",
+      "url": null
+    },
+    {
+      "label": "Anexos  05. ANEXO IV LIQUIDACION FDEC",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2022-16196",
+  "text_inicio": "DESDE EL DIA SIGUIENTE A LA PUBLICACION DEL EXTRACTO EN EL BOCM",
+  "text_fin": "15 DIAS DESDE EL DIA SIGUIENTE A LA PUBLICACION DEL EXTRACTO EN EL BOCM",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-23T04:06:32.476Z"
+}
