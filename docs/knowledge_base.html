@@ -59,6 +59,33 @@
   .hint{font-size:11.5px;color:var(--soft);margin-left:auto}
   .count-shown{font-weight:700;color:var(--navy)}
   footer{padding:18px 28px;color:var(--soft);font-size:11.5px;border-top:1px solid var(--line);background:#fff}
+  /* tabs */
+  .tabs{display:flex;gap:4px;padding:0 28px;background:var(--navy)}
+  .tab{background:transparent;border:none;color:#c9c6ea;padding:12px 18px;font:inherit;font-size:13.5px;font-weight:500;cursor:pointer;border-bottom:3px solid transparent}
+  .tab:hover{color:#fff}
+  .tab.on{color:#fff;border-bottom-color:var(--yellow)}
+  .dot.tenemos{background:var(--green)} .dot.parcial{background:var(--amber)} .dot.crear{background:var(--blue)}
+  /* currículo */
+  .cur-head{padding:18px 28px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+  .cur-counters{display:flex;flex-wrap:wrap;gap:10px}
+  .cur-note{margin:12px 0 0;font-size:12.5px;color:var(--ink);max-width:960px;line-height:1.55;background:var(--lav2);padding:11px 15px;border-radius:8px;border-left:3px solid var(--navy)}
+  .cur-sec{margin:26px 28px 6px;font-size:15.5px;color:var(--navy)}
+  .cur-sec small{color:var(--soft);font-weight:400;font-size:12.5px}
+  .modcard{background:#fff;margin:10px 28px;border-radius:12px;border:1px solid var(--line);overflow:hidden;box-shadow:0 1px 3px rgba(27,20,100,.05)}
+  .modcard h3{margin:0;padding:12px 16px;background:var(--lav2);font-size:14px;color:var(--navy);font-weight:600;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+  .mc-code{background:var(--navy);color:#fff;border-radius:6px;padding:2px 9px;font-size:12px}
+  .mc-bloque{font-size:11px;color:var(--soft);font-weight:500;text-transform:uppercase;letter-spacing:.5px}
+  .mc-nivel{margin-left:auto;background:var(--lav);color:#5b3fb0;border-radius:30px;padding:2px 10px;font-size:11px;font-weight:600}
+  .lesson{display:flex;gap:12px;padding:10px 16px;border-top:1px solid var(--lav2);align-items:flex-start}
+  .lesson:first-of-type{border-top:none}
+  .lstatus{flex-shrink:0;border-radius:30px;padding:4px 10px;font-size:10.5px;font-weight:700;color:#fff;white-space:nowrap;min-width:120px;text-align:center}
+  .lstatus.tenemos{background:var(--green)} .lstatus.parcial{background:var(--amber)} .lstatus.crear{background:var(--blue)}
+  .lmeta{display:flex;flex-direction:column;gap:3px}
+  .lt{font-weight:500;font-size:13px}
+  .ln{font-size:11.5px;color:var(--soft);font-style:italic}
+  .lsrcs{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
+  .lsrc{background:var(--lav);color:var(--navy);border-radius:5px;padding:1px 7px;font-size:10.5px;font-weight:600;cursor:pointer;font-family:monospace}
+  .lsrc:hover{background:var(--yellow)}
 </style>
 </head>
 <body>
@@ -67,6 +94,12 @@
   <p>Trabajo interno de investigación. Mapa de qué existe sobre cómo escribir proyectos Erasmus+ para decidir qué <b>copiamos / mejoramos / creamos / descartamos</b>. Haz clic en el <b>estado</b> de cada fila para cambiarlo (se guarda en tu navegador); luego pulsa <b>Exportar</b> para pasarme tus decisiones. Sin universidades / Educación Superior / Jean Monnet.</p>
 </header>
 
+<nav class="tabs">
+  <button class="tab on" data-view="catalogo">📚 Catálogo de fuentes</button>
+  <button class="tab" data-view="curriculo">🎓 Currículo / Plan formativo</button>
+</nav>
+
+<div id="view-catalogo">
 <div class="counters" id="counters"></div>
 
 <div class="toolbar">
@@ -91,6 +124,12 @@
     <tbody id="rows"></tbody>
   </table>
   <div class="empty" id="empty" style="display:none">Ninguna fuente coincide con los filtros.</div>
+</div>
+</div><!-- /view-catalogo -->
+
+<div id="view-curriculo" style="display:none">
+  <div class="cur-head" id="cur-head"></div>
+  <div id="cur-body"></div>
 </div>
 
 <footer>Generado 2026-06-23 · 116 fuentes · fuente: <code>docs/KNOWLEDGE_BASE_E+.md</code> · El estado editado se guarda localmente (localStorage); exporta para no perderlo.</footer>
@@ -321,6 +360,168 @@ function renderCounters(){
   if(counts.sin)add("Sin decidir","",counts.sin);
 }
 render();
+
+/* ===================== CURRÍCULO / PLAN FORMATIVO ===================== */
+const CURRICULUM = {
+ nota:"Los módulos del TRONCO COMÚN se reutilizan en todos los cursos. Un curso = tronco común (completo o un subconjunto, según el nivel) + 1 itinerario de especialidad. Lección con estado «A crear» = no existe buena fuente: es contenido propio a producir (vuestro valor diferenciador, sobre todo en español). Haz clic en un código kb-XXXX para ver esa fuente en el Catálogo.",
+ tronco:[
+  {c:"M1",t:"Fundamentos: ¿Qué es Erasmus+?",b:"A,B",nivel:"Iniciación",ls:[
+   {t:"¿Qué es Erasmus+? El programa en 10 minutos",s:"tenemos",src:["kb-0001","kb-0003"]},
+   {t:"KA1, KA2, KA3: el mapa de acciones",s:"tenemos",src:["kb-0003"]},
+   {t:"Las 4 prioridades horizontales (inclusión, digital, verde, participación)",s:"tenemos",src:["kb-0004","kb-0005"]},
+   {t:"Quién es quién: Comisión, EACEA y Agencias Nacionales",s:"tenemos",src:["kb-0006","kb-0007"]},
+   {t:"Glosario esencial del solicitante (versión cercana)",s:"parcial",src:["kb-0016"],n:"Tenemos el glosario oficial; hay que reescribirlo accesible."}
+  ]},
+  {c:"M2",t:"Prepara tu organización",b:"B,C",nivel:"Iniciación",ls:[
+   {t:"Registro en ORS y obtención del OID, paso a paso",s:"tenemos",src:["kb-0008","kb-0009","kb-0010"]},
+   {t:"Buscar socios: Otlas, EPALE y eTwinning",s:"tenemos",src:["kb-0029","kb-0031","kb-0032"]},
+   {t:"Cómo elegir buenos socios (criterios y señales de alarma)",s:"crear"},
+   {t:"La acreditación Erasmus: ¿me conviene?",s:"tenemos",src:["kb-0069","kb-0074"]}
+  ]},
+  {c:"M3",t:"De la idea al proyecto",b:"C",nivel:"Intermedio",ls:[
+   {t:"Análisis de necesidades: del problema real al proyecto",s:"parcial",src:["kb-0011","kb-0027"],n:"Hay base, falta método propio."},
+   {t:"Teoría del cambio / lógica de intervención",s:"crear",n:"Hueco premium: la Comisión no lo publica como método."},
+   {t:"Convertir una idea difusa en objetivos claros",s:"crear"},
+   {t:"Diseñar el consorcio y repartir roles",s:"parcial",src:["kb-0077"]}
+  ]},
+  {c:"M4",t:"Anatomía del formulario",b:"D",nivel:"Intermedio",ls:[
+   {t:"El Application Form / Part B por dentro",s:"tenemos",src:["kb-0017","kb-0079"]},
+   {t:"Secciones EACEA y límites de caracteres",s:"tenemos",src:["kb-0014","kb-0017"]},
+   {t:"eForm de Agencia Nacional vs portal EACEA (SEDIA)",s:"tenemos",src:["kb-0023","kb-0024"]},
+   {t:"Recorrido por un formulario comentado (SEPIE)",s:"tenemos",src:["kb-0037","kb-0040","kb-0041"]}
+  ]},
+  {c:"M5",t:"Cómo te evalúan",b:"E",nivel:"Intermedio",ls:[
+   {t:"Los 4 criterios y los umbrales de puntuación",s:"tenemos",src:["kb-0078","kb-0080","kb-0025"]},
+   {t:"La rúbrica del evaluador por dentro (Guide for Experts)",s:"tenemos",src:["kb-0095","kb-0096"]},
+   {t:"Escribe para el evaluador: qué busca en cada criterio",s:"crear",src:["kb-0090","kb-0101"],n:"Apoyo en fuentes, pero el contenido es propio."}
+  ]},
+  {c:"M6",t:"Redacción ganadora",b:"F",nivel:"Avanzado",ls:[
+   {t:"Objetivos SMART e indicadores medibles",s:"crear",src:["kb-0097"]},
+   {t:"Evidencia vs afirmación: demostrar lo que dices",s:"crear"},
+   {t:"Work packages: la columna vertebral del proyecto",s:"parcial",src:["kb-0018","kb-0100"]},
+   {t:"Los errores de redacción más comunes (y cómo evitarlos)",s:"parcial",src:["kb-0104","kb-0105","kb-0115"]}
+  ]},
+  {c:"M7",t:"El presupuesto sin miedo",b:"G",nivel:"Intermedio",ls:[
+   {t:"Lump sums: qué son y por qué lo cambian todo",s:"tenemos",src:["kb-0019"]},
+   {t:"El modelo de financiación KA2 a fondo (Handbook KA2 lump sums)",s:"crear",src:["kb-0018","kb-0052"],n:"⭐ Tu marca: fuente kb-0018 demasiado técnica → unidad didáctica accesible paso a paso."},
+   {t:"Coherencia actividad ↔ coste",s:"tenemos",src:["kb-0022","kb-0018"]},
+   {t:"Cómo justificar el tramo de presupuesto",s:"crear"}
+  ]},
+  {c:"M8",t:"Impacto, difusión y sostenibilidad",b:"H",nivel:"Intermedio",ls:[
+   {t:"DEOR: difusión y explotación de resultados",s:"parcial",src:["kb-0026","kb-0033"]},
+   {t:"El impacto: distinguir resultados de beneficios reales",s:"crear",n:"Hueco premium: lo peor desarrollado en las solicitudes."},
+   {t:"Reconocimiento del aprendizaje (Youthpass)",s:"tenemos",src:["kb-0030","kb-0076"]}
+  ]},
+  {c:"M9",t:"Después del «sí»: gestión",b:"I",nivel:"Avanzado",ls:[
+   {t:"Beneficiary Module e informes",s:"tenemos",src:["kb-0020","kb-0021"]},
+   {t:"Calidad en la ejecución del proyecto",s:"parcial",src:["kb-0028"]}
+  ]},
+  {c:"M10",t:"Aprender de los errores",b:"J",nivel:"Avanzado",ls:[
+   {t:"Catálogo de errores que tumban una solicitud",s:"crear",n:"Activo defensible: a partir de cartas de evaluador reales (módulo Diagnose)."},
+   {t:"Casos reales comentados",s:"crear",src:["kb-0090"]}
+  ]}
+ ],
+ esp:[
+  {c:"S1",t:"KA1 Juventud",esp:"1",ls:[
+   {t:"Intercambios juveniles",s:"tenemos",src:["kb-0065"]},
+   {t:"Movilidad de youth workers",s:"tenemos",src:["kb-0066"]},
+   {t:"Participación juvenil y DiscoverEU",s:"tenemos",src:["kb-0067","kb-0068"]},
+   {t:"Acreditación en juventud (KA150/KA151)",s:"tenemos",src:["kb-0069","kb-0070"]},
+   {t:"Redactar un KA1 de juventud en español",s:"crear"}
+  ]},
+  {c:"S2",t:"KA1 Educación de Adultos",esp:"2",ls:[
+   {t:"Movilidad en educación de adultos",s:"tenemos",src:["kb-0071"]},
+   {t:"Convocatoria y formulario comentado (SEPIE)",s:"tenemos",src:["kb-0036"]},
+   {t:"Particularidades de redacción en adultos (ES)",s:"crear"}
+  ]},
+  {c:"S3",t:"KA1 Educación Escolar",esp:"3",ls:[
+   {t:"Movilidad de alumnado y personal escolar",s:"tenemos",src:["kb-0072"]},
+   {t:"KA122-SCH: proyecto corto paso a paso",s:"tenemos",src:["kb-0075","kb-0039","kb-0034"]},
+   {t:"Criterios y errores en la solicitud escolar (ES)",s:"crear"}
+  ]},
+  {c:"S4",t:"KA1 FP / VET",esp:"4",ls:[
+   {t:"Movilidad en FP, incluido ErasmusPro",s:"parcial",src:["kb-0073"],n:"ErasmusPro (90-365 días) apenas cubierto → ampliar/crear."},
+   {t:"Formularios comentados KA121/KA122-VET",s:"tenemos",src:["kb-0037","kb-0038","kb-0035"]},
+   {t:"Rol de organizaciones de apoyo/intermediarias",s:"crear"}
+  ]},
+  {c:"S5",t:"KA2 Cooperation Partnerships (KA220)",esp:"5",ls:[
+   {t:"Qué es una Cooperation Partnership",s:"tenemos",src:["kb-0078","kb-0077"]},
+   {t:"La plantilla Part B de KA220",s:"tenemos",src:["kb-0079","kb-0040"]},
+   {t:"WPs y presupuesto lump sum en KA220",s:"parcial",src:["kb-0018","kb-0052","kb-0100"]},
+   {t:"Redacción ganadora de un KA220 (ES)",s:"crear"}
+  ]},
+  {c:"S6",t:"KA2 Small-scale Partnerships (KA210)",esp:"6",ls:[
+   {t:"Qué es una Small-scale Partnership",s:"tenemos",src:["kb-0080"]},
+   {t:"Part B de KA210 y criterios",s:"tenemos",src:["kb-0081","kb-0041","kb-0112"]},
+   {t:"Justificar el tramo lump sum (30k/60k)",s:"crear",src:["kb-0106","kb-0111"]}
+  ]},
+  {c:"S7",t:"KA3 / Apoyo a políticas",esp:"7",ls:[
+   {t:"El mapa de acciones KA3",s:"tenemos",src:["kb-0083"]},
+   {t:"European Youth Together paso a paso",s:"tenemos",src:["kb-0084","kb-0085"]},
+   {t:"Redactar acciones EACEA en español",s:"crear",n:"Hueco: todo el material canónico está en inglés."}
+  ]},
+  {c:"S8",t:"Capacity Building (Youth/VET)",esp:"8",ls:[
+   {t:"CB Youth: regiones, criterios, presupuesto",s:"tenemos",src:["kb-0087"]},
+   {t:"CB VET: cómo se solicita (EACEA)",s:"tenemos",src:["kb-0088","kb-0089"]},
+   {t:"Tips del evaluador CB-VET aplicados",s:"tenemos",src:["kb-0090"]},
+   {t:"Material de Capacity Building en español",s:"crear",n:"Hueco: SEPIE/INJUVE no gestionan estas acciones EACEA."}
+  ]},
+  {c:"S9",t:"Deporte (Sport)",esp:"9",ls:[
+   {t:"Not-for-profit European Sport Events",s:"tenemos",src:["kb-0092"]},
+   {t:"Cooperation / Small-scale en deporte",s:"tenemos",src:["kb-0093","kb-0094"]},
+   {t:"Redactar un proyecto de deporte (ES)",s:"crear",n:"Hueco: sin fuente española verificable."}
+  ]}
+ ]
+};
+const ST_LABEL={tenemos:"Tenemos material",parcial:"Parcial",crear:"A crear"};
+
+function switchView(v){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.view===v));
+  document.getElementById('view-catalogo').style.display=v==='catalogo'?'':'none';
+  document.getElementById('view-curriculo').style.display=v==='curriculo'?'':'none';
+}
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>switchView(t.dataset.view));
+
+function lessonRow(l){
+  const chips=(l.src||[]).map(id=>`<span class="lsrc" data-id="${id}">${id}</span>`).join('');
+  return `<div class="lesson">
+    <span class="lstatus ${l.s}">${ST_LABEL[l.s]}</span>
+    <div class="lmeta"><span class="lt">${l.t}</span>${l.n?`<span class="ln">${l.n}</span>`:''}${chips?`<span class="lsrcs">${chips}</span>`:''}</div>
+  </div>`;
+}
+function modCard(m){
+  const tag=m.b?`Bloque ${m.b}`:`Especialidad ${m.esp} · ${ESP[m.esp]||''}`;
+  return `<div class="modcard">
+    <h3><span class="mc-code">${m.c}</span> ${m.t} <span class="mc-bloque">${tag}</span>${m.nivel?`<span class="mc-nivel">${m.nivel}</span>`:''}</h3>
+    ${m.ls.map(lessonRow).join('')}
+  </div>`;
+}
+function renderCurriculo(){
+  const all=[...CURRICULUM.tronco,...CURRICULUM.esp];
+  let nLes=0,nTen=0,nPar=0,nCre=0;
+  all.forEach(m=>m.ls.forEach(l=>{nLes++;l.s==='tenemos'?nTen++:l.s==='parcial'?nPar++:nCre++;}));
+  document.getElementById('cur-head').innerHTML=`
+    <div class="cur-counters">
+      <span class="pill"><b>${all.length}</b> módulos</span>
+      <span class="pill"><b>${nLes}</b> lecciones</span>
+      <span class="pill"><span class="dot tenemos"></span>Tenemos material <b>${nTen}</b></span>
+      <span class="pill"><span class="dot parcial"></span>Parcial <b>${nPar}</b></span>
+      <span class="pill"><span class="dot crear"></span>A crear <b>${nCre}</b></span>
+    </div>
+    <p class="cur-note">${CURRICULUM.nota}</p>`;
+  document.getElementById('cur-body').innerHTML=`
+    <h2 class="cur-sec">🧱 Tronco común <small>— reutilizable en todos los cursos</small></h2>
+    ${CURRICULUM.tronco.map(modCard).join('')}
+    <h2 class="cur-sec">🎯 Itinerarios de especialidad <small>— se acoplan al tronco común</small></h2>
+    ${CURRICULUM.esp.map(modCard).join('')}`;
+  document.querySelectorAll('#cur-body .lsrc').forEach(el=>el.onclick=()=>{
+    switchView('catalogo');
+    const id=el.dataset.id;
+    document.getElementById('q').value=id;filters.q=id.toLowerCase();render();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+}
+renderCurriculo();
 </script>
 </body>
 </html>
