@@ -1,0 +1,64 @@
+{
+  "source": "bdns",
+  "source_id": "915189",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / MADRID / ÁREA DE GOBIERNO DE ECONOMÍA, INNOVACIÓN Y HACIENDA",
+  "nuts_codes": [
+    "ES300"
+  ],
+  "nuts_primary": "ES300",
+  "title": "Decreto de 23 de junio de 2026 de la Delegada del Área de Gobierno de Economía, Innovación y Hacienda por el que se aprueba la convocatoria pública para la concesión de subvenciones a personas afiliadas al Régimen Especial de Trabajadores por Cuenta Propi",
+  "title_lang": "es",
+  "summary": "Otras actuaciones de carácter económico",
+  "status": "open",
+  "publication_date": "2026-06-24",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 2000000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "T",
+      "descripcion": "OTROS SERVICIOS"
+    }
+  ],
+  "apply_url": "https://sede.madrid.es/portal/site/tramites/menuitem.c61bb691882ed9d32e202e2084f1a5a0/?vgnextoid=5a9d5d53be9a0210VgnVCM100000171f5a0aRCRD&vgnextchannel=5a9d5d53be9a0210VgnVCM100000171f5a0aRCRD&vgnextfmt=default",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/915189",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.bocm.es/boletin/CM_Orden_BOCM/2013/11/22/BOCM-20131122-34.PDF",
+  "text_inicio": "DESDE EL DÍA SIGUIENTE A LA PUBLICACIÓN DE LA CONVOCATORIA EN EL BOCM",
+  "text_fin": "VEINTE DÍAS NATURALES DESDE EL DÍA SIGUIENTE A LA FECHA DE PUBLICACIÓN EN EL BOCM",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-25T04:09:39.083Z"
+}

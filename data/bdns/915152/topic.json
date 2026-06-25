@@ -1,0 +1,61 @@
+{
+  "source": "bdns",
+  "source_id": "915152",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / CABILDO INSULAR DE LANZAROTE / CABILDO INSULAR DE LANZAROTE",
+  "nuts_codes": [
+    "ES708"
+  ],
+  "nuts_primary": "ES708",
+  "title": "CONVOCATORIA DE SUBVENCIONES PARA GASTOS DE FUNCIONAMIENTO EN EXPLOTACIONES GANADERAS (LÍNEA 2), ANUALIDAD 2026",
+  "title_lang": "es",
+  "summary": "Agricultura, Pesca y Alimentación",
+  "status": "open",
+  "publication_date": "2026-06-24",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 50000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "A",
+      "descripcion": "AGRICULTURA, GANADERÍA, SILVICULTURA Y PESCA"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/915152",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.boplaspalmas.net/boletines/2024/27-09-24/27-09-24.pdf",
+  "text_inicio": "Al día siguiente de la publicación del extracto de la convocatoria en el Bop-Las Palmas",
+  "text_fin": "Transcurridos 15 días hábiles ",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-25T04:09:39.071Z"
+}

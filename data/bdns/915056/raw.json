@@ -1,0 +1,64 @@
+{
+  "id": 1116617,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "LA RIOJA",
+    "nivel3": "INSTITUTO DE ESTUDIOS RIOJANOS"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "915056",
+  "fechaRecepcion": "2026-06-23",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 3000,
+  "mrr": false,
+  "descripcion": "PREMIO RAFAEL AZCONA 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Investigación y desarrollo",
+      "codigo": "72"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES230 - La Rioja"
+    }
+  ],
+  "descripcionFinalidad": "Investigación, desarrollo e innovación",
+  "descripcionBasesReguladoras": "Orden por la que se aprueban las Bases reguladoras  del premio de investigación \"Rafael Azcona\" para proyectos relacionados con el cine y la fotografía del instituto de Estudios Riojanos",
+  "urlBasesReguladoras": "https://ias1.larioja.org/boletin/Bor_Boletin_visor_Servlet?referencia=40542774-1-PDF-577485",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Día siguiente a la publicación de la Convocatoria en el BOR",
+  "textFin": "1 mes desde la publicación de la Convocatoria en el BOR",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1481069,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Resolucion_Nº_18_Convocatoria_y_Aprobacion_del_Gasto_Premio_Rafael_Azcona_2026.pdf",
+      "long": 210716,
+      "datMod": "2026-06-23",
+      "datPublicacion": "2026-06-24"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

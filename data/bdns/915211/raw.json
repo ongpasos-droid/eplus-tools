@@ -1,0 +1,113 @@
+{
+  "id": 1116772,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "CABILDO INSULAR DE TENERIFE",
+    "nivel3": "CABILDO INSULAR DE TENERIFE"
+  },
+  "sedeElectronica": "https://sede.tenerife.es",
+  "codigoBDNS": "915211",
+  "fechaRecepcion": "2026-06-24",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 150000,
+  "mrr": false,
+  "descripcion": "Convocatoria de las subvenciones \"Tenerife Joven en Acción - Impulso a Iniciativas Juveniles de Empresas, Asociaciones y Agrupaciones 2026”",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "GRAN EMPRESA"
+    },
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    },
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    },
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Otras actividades asociativas",
+      "codigo": "94.9"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES709 - Tenerife"
+    }
+  ],
+  "descripcionFinalidad": "Otras actuaciones de carácter económico",
+  "descripcionBasesReguladoras": "Bases y convocatoria de las subvenciones \"Tenerife Joven en Acción - Impulso a Iniciativas Juveniles de Empresas, Asociaciones y Agrupaciones 2026”",
+  "urlBasesReguladoras": "Pendiente de publicación",
+  "sePublicaDiarioOficial": true,
+  "abierto": true,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "10 días hábiles a contar desde el siguiente a la publicación en el BOP S/C",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1481515,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "AC0000027982 Aprobación de las bases y de la convocatoria de las subvenciones Tenerife Joven en Acción.pdf",
+      "long": 1294060,
+      "datMod": "2026-06-24",
+      "datPublicacion": "2026-06-24"
+    },
+    {
+      "id": 1481516,
+      "descripcion": "Anexo I",
+      "nombreFic": "Anexo I.pdf",
+      "long": 399071,
+      "datMod": "2026-06-24",
+      "datPublicacion": "2026-06-24"
+    },
+    {
+      "id": 1481520,
+      "descripcion": "Documento contable",
+      "nombreFic": "A_2026005268_SUBVENCION_TENERIFE_JOVEN_EN_ACCION_.pdf",
+      "long": 58814,
+      "datMod": "2026-06-24",
+      "datPublicacion": "2026-06-24"
+    },
+    {
+      "id": 1481517,
+      "descripcion": "Anexo II",
+      "nombreFic": "Anexo II.pdf",
+      "long": 323969,
+      "datMod": "2026-06-24",
+      "datPublicacion": "2026-06-24"
+    },
+    {
+      "id": 1481519,
+      "descripcion": "Línea de la subvención 2026-000931",
+      "nombreFic": "18-05-26_Subvenc_Transf_concedida_.pdf",
+      "long": 59397,
+      "datMod": "2026-06-24",
+      "datPublicacion": "2026-06-24"
+    },
+    {
+      "id": 1481518,
+      "descripcion": "Anexo III",
+      "nombreFic": "Anexo III.pdf",
+      "long": 645130,
+      "datMod": "2026-06-24",
+      "datPublicacion": "2026-06-24"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

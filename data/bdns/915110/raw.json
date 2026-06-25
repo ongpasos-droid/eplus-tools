@@ -1,0 +1,74 @@
+{
+  "id": 1116671,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "ANDALUCÍA",
+    "nivel3": "CENTRO ANDALUZ DE ARTE CONTEMPORÁNEO"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "915110",
+  "fechaRecepcion": "2026-06-24",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 85000,
+  "mrr": false,
+  "descripcion": "Resolución de 22 de junio de 2026, por la que se convocan Subvenciones para residenias artísticas en el Centro de Creación Contemporánea de Andalucía, en Córdoba, para el ejercicio 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    },
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    },
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades de bibliotecas, archivos, museos y otras actividades culturales",
+      "codigo": "91"
+    },
+    {
+      "descripcion": "Actividades de creación artística y artes escénicas",
+      "codigo": "90"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES61 - ANDALUCIA"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "Orden de 6 de julio de 2021, por la que se establecen las b.r. de concesión de subvenciones, en régimen de conc.comp.para residencias artísticas en el Centro de Creación Contemporánea de Andalucía en Córdoba",
+  "urlBasesReguladoras": "https://juntadeandalucia.es/boja/2021/135/BOJA21-135-00020-11907-01_00195736.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Al dia siguiente al de publicación de la convocatoria",
+  "textFin": "un mes",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1481288,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "TextoConvocatoria.pdf",
+      "long": 112961,
+      "datMod": "2026-06-24",
+      "datPublicacion": "2026-06-24"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

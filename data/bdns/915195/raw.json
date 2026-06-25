@@ -1,0 +1,80 @@
+{
+  "id": 1116756,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "DIPUTACIÓN PROV. DE HUELVA",
+    "nivel3": "DIPUTACIÓN PROVINCIAL DE HUELVA"
+  },
+  "sedeElectronica": "https://sede.diphuelva.es/opencms/opencms/sede/index.html",
+  "codigoBDNS": "915195",
+  "fechaRecepcion": "2026-06-24",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 147500,
+  "mrr": false,
+  "descripcion": "Convocatoria de tramitación anticipada de Subvenciones de la Diputación Provincial de Huelva para personas jurídicas sin ánimo de lucro del ámbito de la Prevención Social de la provincia de Huelva “La Diputación Previene 2026”",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES615 - Huelva"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Ordenanza General de subvenciones de la Diputación Provincial de Huelva (BOP n.º 136 de 18 de julio de 2016)",
+  "urlBasesReguladoras": "http://s2.diphuelva.es/portalweb/bop/boletines/20160718-1.pdf#page=3",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-06-26",
+  "fechaFinSolicitud": "2026-07-27",
+  "textInicio": "Al día siguiente de la publicación del extracto de la convocatoria en el BOP",
+  "textFin": "20 días hábiles después",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1481505,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "3.1.CONVO_PREVIENE 2026_borrador_US130526.dfn.fda.pdf",
+      "long": 562222,
+      "datMod": "2026-06-24",
+      "datPublicacion": "2026-06-24"
+    },
+    {
+      "id": 1481504,
+      "descripcion": "ANEXO VII  FORMULARIO DE AUTORIZACIÓN/OPOSICIÓN A LA VERIFICACIÓN DE DATOS MEDIANTE EL USO DE SISTEMAS DE INTERMEDIACIÓN",
+      "nombreFic": "ANEXO VII. FORMULARIO INTERMEDIACIÓN.pdf",
+      "long": 151642,
+      "datMod": "2026-06-24",
+      "datPublicacion": "2026-06-24"
+    },
+    {
+      "id": 1481502,
+      "descripcion": "RESOLUCIÓN APROBACIÓN_Convocatoria de tramitación anticipada de Subvenciones de la Diputación Provincial de Huelva para personas jurídicas sin ánimo de lucro del ámbito de la Prevención Social de la provincia de Huelva “La Diputación Previene 2026”",
+      "nombreFic": "resolucion_1895_2026_APROBACION CONVOCATORIA_DIPUTACION PREVIENE 2026.pdf",
+      "long": 97857,
+      "datMod": "2026-06-24",
+      "datPublicacion": "2026-06-24"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}
