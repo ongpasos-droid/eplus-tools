@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 339500000,
+    "total_eur": 35000000,
     "by_year": {
-      "2027": 339500000
+      "2027": 35000000
     },
-    "expected_grants": 9,
-    "min_contribution_eur": 40000000,
-    "max_contribution_eur": 40000000
+    "expected_grants": 6,
+    "min_contribution_eur": 6000000,
+    "max_contribution_eur": 6000000
   },
   "keywords": [
     "HORIZON-INFRA-2027-SERV-01-02",
@@ -227,5 +227,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:26.937Z"
+  "fetchedAt": "2026-06-27T12:50:06.719Z"
 }

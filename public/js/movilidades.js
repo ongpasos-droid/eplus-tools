@@ -104,6 +104,8 @@ const Movilidades = (() => {
   }
 
   function openDetail(saltoId) {
+    // Muro de login: explorar el listado es libre; abrir el detalle exige cuenta.
+    if (typeof App !== 'undefined' && App.requireLogin && !App.requireLogin({ what: 'el detalle de esta movilidad' })) return;
     const item = allItems.find(i => String(i.salto_id) === String(saltoId));
     if (!item) return;
     const overlay = document.getElementById('movilidades-drawer-overlay');

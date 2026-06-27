@@ -895,7 +895,10 @@ const Convocatorias = (() => {
     }
   }
 
-  function openDetail(callId) {
+  async function openDetail(callId) {
+    // Muro de login: el teaser deja explorar las cards, pero abrir el
+    // detalle de una call exige cuenta (lead-gen).
+    if (typeof App !== 'undefined' && App.requireLogin && !App.requireLogin({ what: 'el detalle de esta convocatoria' })) return;
     const item = allItems.find(i => String(i.call_id) === String(callId));
     if (!item) return;
     const overlay = document.getElementById('convocatorias-drawer-overlay');
@@ -928,6 +931,24 @@ const Convocatorias = (() => {
         openChat(btn.dataset.sourceId, btn.dataset.title);
       }
     });
+
+    // Blindaje: si la lista se cargó en modo teaser (la petición salió sin
+    // sesión válida), la tarjeta NO trae el detalle (FAQ, actividades, costes…)
+    // y el drawer saldría incompleto en silencio. Re-pedimos el detalle
+    // completo —ya con sesión— y re-renderizamos. Solo una vez por card.
+    if (item.teaser && !item._detailFetched) {
+      try {
+        const res  = await API.get('/convocatorias/' + encodeURIComponent(item.call_id));
+        const full = (res && res.data) || res;
+        if (full && typeof full === 'object') {
+          Object.assign(item, full);
+          item.teaser = false;
+          item._detailFetched = true;
+          // Re-render solo si el drawer sigue mostrando ESTA card.
+          if (!overlay.classList.contains('hidden')) content.innerHTML = renderDetail(item);
+        }
+      } catch (_) { /* dejamos el teaser ya pintado; no degradamos a error */ }
+    }
   }
 
   function closeDetail() {

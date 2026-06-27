@@ -16,13 +16,13 @@
   "actionCode": "HORIZON-RIA",
   "mgaCode": "HORIZON-AG-LS",
   "budget": {
-    "total_eur": 210000000,
+    "total_eur": 8000000,
     "by_year": {
-      "2026": 210000000
+      "2026": 8000000
     },
-    "expected_grants": 3,
-    "min_contribution_eur": 10000000,
-    "max_contribution_eur": 10000000
+    "expected_grants": 2,
+    "min_contribution_eur": 4000000,
+    "max_contribution_eur": 4000000
   },
   "keywords": [
     "HORIZON-CL6-2026-01-CIRCBIO-10",
@@ -187,5 +187,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:27.968Z"
+  "fetchedAt": "2026-06-27T12:50:06.477Z"
 }

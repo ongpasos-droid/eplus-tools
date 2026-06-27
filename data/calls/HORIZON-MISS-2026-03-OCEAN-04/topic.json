@@ -16,13 +16,13 @@
   "actionCode": "HORIZON-CSA",
   "mgaCode": "HORIZON-AG",
   "budget": {
-    "total_eur": 115300000,
+    "total_eur": 2900000,
     "by_year": {
-      "2026": 115300000
+      "2026": 2900000
     },
-    "expected_grants": 4,
-    "min_contribution_eur": 7000000,
-    "max_contribution_eur": 7750000
+    "expected_grants": 1,
+    "min_contribution_eur": 2500000,
+    "max_contribution_eur": 2900000
   },
   "keywords": [
     "HORIZON-MISS-2026-03-OCEAN-04",
@@ -156,5 +156,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:27.008Z"
+  "fetchedAt": "2026-06-27T12:50:07.080Z"
 }

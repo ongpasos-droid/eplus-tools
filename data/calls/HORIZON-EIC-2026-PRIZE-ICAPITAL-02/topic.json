@@ -16,13 +16,13 @@
   "actionCode": "HORIZON-RPr",
   "mgaCode": "HORIZON-PR",
   "budget": {
-    "total_eur": 3600000,
+    "total_eur": 1800000,
     "by_year": {
-      "2026": 3600000
+      "2026": 1800000
     },
     "expected_grants": 3,
-    "min_contribution_eur": 100000,
-    "max_contribution_eur": 1000000
+    "min_contribution_eur": 50000,
+    "max_contribution_eur": 500000
   },
   "keywords": [
     "HORIZON-EIC-2026-PRIZE-ICAPITAL-02",
@@ -153,5 +153,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:27.805Z"
+  "fetchedAt": "2026-06-27T12:50:05.033Z"
 }

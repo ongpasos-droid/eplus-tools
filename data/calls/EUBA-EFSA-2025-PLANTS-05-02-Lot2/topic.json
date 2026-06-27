@@ -16,9 +16,9 @@
   "actionCode": "EUBA",
   "mgaCode": "EUBA",
   "budget": {
-    "total_eur": 1500000,
+    "total_eur": 750000,
     "by_year": {
-      "2026": 1500000
+      "2026": 750000
     },
     "expected_grants": null,
     "min_contribution_eur": null,

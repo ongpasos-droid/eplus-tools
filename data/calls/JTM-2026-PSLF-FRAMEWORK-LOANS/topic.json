@@ -16,9 +16,9 @@
   "actionCode": "JTM-LS",
   "mgaCode": "JTM-AG-LS",
   "budget": {
-    "total_eur": 1260000000,
+    "total_eur": 630000000,
     "by_year": {
-      "2025": 1260000000
+      "2025": 630000000
     },
     "expected_grants": null,
     "min_contribution_eur": null,
@@ -132,5 +132,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:25.569Z"
+  "fetchedAt": "2026-06-27T12:50:07.705Z"
 }

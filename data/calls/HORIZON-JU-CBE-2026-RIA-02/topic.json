@@ -16,13 +16,13 @@
   "actionCode": "HORIZON-JU-RIA",
   "mgaCode": "HORIZON-AG",
   "budget": {
-    "total_eur": 2219889087,
+    "total_eur": 170760699,
     "by_year": {
-      "2026": 2219889087
+      "2026": 170760699
     },
     "expected_grants": 2,
-    "min_contribution_eur": 20000000,
-    "max_contribution_eur": 20000000
+    "min_contribution_eur": 3250000,
+    "max_contribution_eur": 3250000
   },
   "keywords": [
     "HORIZON-JU-CBE-2026-RIA-02",
@@ -153,5 +153,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:27.403Z"
+  "fetchedAt": "2026-06-27T12:50:05.097Z"
 }

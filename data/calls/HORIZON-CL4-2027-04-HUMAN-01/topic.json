@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 272000000,
+    "total_eur": 39000000,
     "by_year": {
-      "2027": 272000000
+      "2027": 39000000
     },
     "expected_grants": 8,
-    "min_contribution_eur": 44000000,
-    "max_contribution_eur": 44000000
+    "min_contribution_eur": 4800000,
+    "max_contribution_eur": 5600000
   },
   "keywords": [
     "HORIZON-CL4-2027-04-HUMAN-01",
@@ -154,5 +154,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:24.285Z"
+  "fetchedAt": "2026-06-27T12:50:05.013Z"
 }

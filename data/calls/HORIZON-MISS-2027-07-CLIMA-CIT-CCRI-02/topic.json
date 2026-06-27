@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 68500000,
+    "total_eur": 28500000,
     "by_year": {
-      "2027": 68500000
+      "2027": 28500000
     },
-    "expected_grants": 4,
-    "min_contribution_eur": 10000000,
-    "max_contribution_eur": 10000000
+    "expected_grants": 3,
+    "min_contribution_eur": 9500000,
+    "max_contribution_eur": 9500000
   },
   "keywords": [
     "HORIZON-MISS-2027-07-CLIMA-CIT-CCRI-02",
@@ -166,5 +166,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:26.193Z"
+  "fetchedAt": "2026-06-27T12:50:06.809Z"
 }

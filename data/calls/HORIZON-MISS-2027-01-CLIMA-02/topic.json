@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 84323812.37,
+    "total_eur": 12000000,
     "by_year": {
-      "2027": 84323812.37
+      "2027": 12000000
     },
-    "expected_grants": 5,
-    "min_contribution_eur": 10000000,
-    "max_contribution_eur": 15000000
+    "expected_grants": 4,
+    "min_contribution_eur": 3000000,
+    "max_contribution_eur": 3000000
   },
   "keywords": [
     "HORIZON-MISS-2027-01-CLIMA-02",
@@ -170,5 +170,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:26.450Z"
+  "fetchedAt": "2026-06-27T12:50:06.881Z"
 }

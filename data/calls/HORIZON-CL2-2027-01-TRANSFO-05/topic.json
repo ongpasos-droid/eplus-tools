@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 277000000,
+    "total_eur": 12000000,
     "by_year": {
-      "2027": 277000000
+      "2027": 12000000
     },
-    "expected_grants": 5,
-    "min_contribution_eur": 4500000,
-    "max_contribution_eur": 5000000
+    "expected_grants": 3,
+    "min_contribution_eur": 3000000,
+    "max_contribution_eur": 4000000
   },
   "keywords": [
     "HORIZON-CL2-2027-01-TRANSFO-05",
@@ -179,5 +179,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-06T19:11:40.583Z"
+  "fetchedAt": "2026-06-27T12:50:05.870Z"
 }

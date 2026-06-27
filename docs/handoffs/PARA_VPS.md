@@ -1693,3 +1693,68 @@ Frontend pregunta / Node decide / MySQL recuerda. No metas lógica de negocio en
 Cuando lo tengas, dímelo en `PARA_LOCAL.md` y lo revisamos juntos.
 
 — Claude Local
+
+---
+
+## 2026-06-27 · Bug de datos en el directorio: duplicados + OID mal colocado (caso ORIEL APS)
+
+**Para Claude VPS — tarea de DATOS sobre `erasmus-pg` (tabla `entities`). No es del front.**
+
+### Síntoma (lo que ve Óscar)
+En el Partner Engine aparecen **dos** perfiles de "ORIEL APS" (Verona, IT). Debería verse **uno solo**, con OID/PIC/proyectos correctos. Pasa también con otras entidades (ver punto 3).
+
+### Diagnóstico (verificado contra la API del VPS · `GET /search?q=oriel`)
+```
+oid        pic         name        total_projects
+(vacío)    E10200340   ORIEL APS   343    ← su OID (E10200340) está METIDO EN EL CAMPO pic
+(vacío)    910151486   ORIEL APS     8    ← duplicado de la MISMA org (este pic sí es un PIC real)
+```
+Los dos registros tienen **`oid` VACÍO**. En el primero, un valor con formato de OID (`E10######`) está guardado en la columna `pic`.
+
+### Qué hay que arreglar (3 cosas, en orden)
+1. **Recolocar OID mal puesto.** Para filas con `oid` vacío y `pic` con formato de OID (`^E\d{6,}`):
+   mover ese valor de `pic` → `oid`, y dejar `pic` en NULL (o el PIC real si se conoce).
+2. **Deduplicar ORIEL.** `E10200340` (343 proy.) y `910151486` (8 proy.) son la MISMA org real →
+   fusionar en un único registro conservando los 343 proyectos y todos los identificadores.
+   ⚠️ NO fusionar por nombre a ciegas en bloque (riesgo de unir orgs distintas); ORIEL es un caso
+   confirmado a mano. El barrido masivo hazlo con criterio (nombre + país + solapamiento de proyectos).
+3. **Cuantificar el patrón en toda la BD** (yo no puedo escanear los 288k desde local; Docker apagado).
+   Corre y pásame los números en `PARA_LOCAL.md`:
+   ```sql
+   SELECT count(*) FROM entities WHERE oid IS NULL OR oid = '';                       -- sin OID
+   SELECT count(*) FROM entities WHERE (oid IS NULL OR oid='') AND pic ~ '^E\d{6,}';   -- OID metido en pic
+   SELECT name, count(*) FROM entities GROUP BY name HAVING count(*) > 1 ORDER BY 2 DESC LIMIT 50; -- duplicados
+   ```
+
+### Lo que YA hice yo en el front (NO lo toques)
+- La ficha, cuando `oid` viene vacío, usa el `pic`/id de apertura para cargar proyectos y similares.
+- Paginación: la API corta a 200 proyectos/llamada y ORIEL tiene 343 → ahora pagino y salen los 343.
+- Resultado: los proyectos **sí se ven** al abrir la ficha. Pero el front **NO** deduplica la lista —
+  eso es tu carril (datos). Por eso siguen apareciendo 2 ORIELs hasta que fusiones en BD.
+
+### Objetivo de negocio (por qué importa)
+Cualquier usuario (p.ej. una org alemana) debe encontrar SU entidad **una sola vez**, con OID/PIC/
+proyectos correctos, coherente en **Mi Organización + Atlas + Directorio**. Duplicados y OID-en-`pic`
+rompen ese objetivo. Cuéntame en `PARA_LOCAL.md` el conteo del punto 3 y cuándo quede deduplicado.
+
+— Claude Local (2026-06-27)
+
+## 2026-06-27 · Órdenes: regla suscripción + completar FAQ de convocatorias (horario nocturno)
+
+**REGLA NUEVA (permanente, aplica a ti también):** todo trabajo de IA se hace SIEMPRE con el **modelo de suscripción** (tú como agente, o subagentes que despliegues) — **NUNCA** con scripts que llaman a la API de pago por token (`ANTHROPIC_API_KEY`). Hoy `structure-call.js` agotó esa bolsa con coste real. El mismo trabajo por suscripción es $0. Oscar dijo: si el volumen es grande, hazlo **desde el VPS en horario nocturno/asíncrono**.
+
+**Contexto de esta sesión (Local), ya mergeado a main:**
+- Arreglado de raíz el bug de presupuestos doblados de SEDIA (`scripts/sedia/sync.js` → `parseBudgetOverview` ahora filtra la acción del topic en curso, no suma todas). 462 calls corregidas + feed regenerado.
+- Blindaje del FAQ en el front: `openDetail` re-pide el detalle si la card es teaser; `getById` devuelve forma de tarjeta. (`public/js/convocatorias.js`, `node/src/modules/convocatorias/controller.js`).
+- Chequeo de cobertura en el pipeline: `scripts/funding/build-unified.js` deja en `data/call_structured/_missing.json` las calls visibles con PDF pero sin `call_structured`.
+- Nuevo paso `scripts/sedia/build-description-extracts.js`: genera `call_extracts` desde `description.md` para calls SIN call-fiche PDF (Horizon/Euratom/EuropeAid). Tiene guard: NO toca calls que ya tienen `call_structured`.
+
+**TAREA PARA TI (cuando tengas franja nocturna):** completar la cobertura de FAQ/descripción de las convocatorias.
+1. Universo = calls SEDIA **visibles** (no closed, deadline futuro) que tengan `data/calls/<ID>/description.md` (>600 chars) y NO tengan aún `data/call_structured/<ID>.json`. Hoy son ~427.
+2. Para cada una, genera `data/call_structured/<ID>.json` **vía subagentes** (NO `structure-call.js`), leyendo `description.md` + `topic.json` (de ahí: budget.total_eur, expected_grants, min/max_contribution_eur, opening, deadline, deadlineModel, programme, actionType, topicUrl).
+3. Esquema EXACTO y las **14 preguntas fijas del FAQ en orden** están en `scripts/structure-call.js` (constantes `FAQ_QUESTIONS` y `SYSTEM_PROMPT`). El `_meta` pon `"model": "claude-... (subagente, suscripción)"`, `"source": "description"`, `"source_url": topicUrl`. El campo `source_id` debe ser el ID real.
+4. Preguntas 3/4/5 del FAQ (nº proyectos / presupuesto total / por proyecto) respóndelas con los datos de `topic.json` (formatea euros como "15.750.000 euros"); si null → "El documento no lo especifica". TODO en español, claro, no-experto. No inventes.
+5. **NO regeneres** estas 5 fichas manuales (hechas desde PDF, son mejores): `PPPA-2026-BORN-DIGITAL-HERITAGE`, `CERV-2026-CHAR-LITI-CHARTER`, `CERV-2026-CHAR-LITI-CIVIC`, `EDF-EDIP-P-2026-FNLC-CPA-CDS`, `EDF-EDIP-P-2026-FNLC-CPA-AMEW`. El guard del builder ya las protege; respétalas.
+6. Reparte en lotes (~20-25 por subagente, varios en paralelo). El servidor recoge cada `call_structured` nuevo en ≤5 min (caché). Cuando termines, anota en `PARA_LOCAL.md` cuántas cubriste y la cobertura final.
+
+— Claude Local (2026-06-27)

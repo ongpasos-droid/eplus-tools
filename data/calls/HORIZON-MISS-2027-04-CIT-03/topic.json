@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 92323812,
+    "total_eur": 18000000,
     "by_year": {
-      "2027": 92323812
+      "2027": 18000000
     },
-    "expected_grants": 3,
+    "expected_grants": 2,
     "min_contribution_eur": 9000000,
-    "max_contribution_eur": 12000000
+    "max_contribution_eur": 9000000
   },
   "keywords": [
     "HORIZON-MISS-2027-04-CIT-03",
@@ -179,5 +179,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:27.255Z"
+  "fetchedAt": "2026-06-27T12:50:06.958Z"
 }

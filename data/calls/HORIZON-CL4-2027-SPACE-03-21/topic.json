@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 66160000,
+    "total_eur": 980000,
     "by_year": {
-      "2027": 66160000
+      "2027": 980000
     },
-    "expected_grants": 4,
-    "min_contribution_eur": 14000000,
-    "max_contribution_eur": 15000000
+    "expected_grants": 1,
+    "min_contribution_eur": 800000,
+    "max_contribution_eur": 1000000
   },
   "keywords": [
     "HORIZON-CL4-2027-SPACE-03-21",
@@ -184,5 +184,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:25.119Z"
+  "fetchedAt": "2026-06-27T12:50:05.893Z"
 }

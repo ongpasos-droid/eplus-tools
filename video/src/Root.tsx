@@ -10,6 +10,8 @@ import { exampleLesson } from "./lessons/example-ka2";
 import { kaLinesLesson } from "./lessons/ka-lines";
 import { ka3QueEsLesson } from "./lessons/ka3-que-es";
 import { ka3QueEsEnLesson } from "./lessons/ka3-que-es-en";
+import { m1L1Lesson } from "./lessons/m1-l1";
+import m1L1Manifest from "./audio/m1-l1/manifest.json";
 import { assignBankImages } from "./lessons/assignImages";
 import { CtaOutro, calculateCtaFrames } from "./compositions/CtaOutro";
 import { LessonWithCta } from "./compositions/LessonWithCta";
@@ -40,6 +42,15 @@ export const RemotionRoot: React.FC = () => {
     FPS
   );
   const ka3QueEsFrames = calculateTotalFrames(ka3QueEsData, FPS, ka3QueEsManifest);
+
+  // ── Módulo 1 · Lección 1 ──
+  const m1L1Data = assignBankImages(
+    m1L1Lesson,
+    imageBank as Record<string, string[]>,
+    m1L1Manifest,
+    FPS
+  );
+  const m1L1Frames = calculateTotalFrames(m1L1Data, FPS, m1L1Manifest);
 
   // Reusable CTA outro: varied background mix + ~17s VO
   const bank = imageBank as Record<string, string[]>;
@@ -112,6 +123,21 @@ export const RemotionRoot: React.FC = () => {
       />
 
       {/* ── LECCIONES (horizontal 1920x1080) ── */}
+      <Composition
+        id="M1-L1"
+        component={Lesson}
+        durationInFrames={m1L1Frames}
+        fps={FPS}
+        width={VIDEO.width}
+        height={VIDEO.height}
+        defaultProps={{
+          data: m1L1Data,
+          audioFolder: "m1-l1",
+          audioManifest: m1L1Manifest,
+          sfxTransition: "sfx/whoosh.wav",
+        }}
+      />
+
       <Composition
         id="KA-Lines"
         component={Lesson}

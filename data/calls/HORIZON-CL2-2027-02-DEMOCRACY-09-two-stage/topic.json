@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 58000000,
+    "total_eur": 22000000,
     "by_year": {
-      "2027": 58000000
+      "2027": 22000000
     },
     "expected_grants": 6,
-    "min_contribution_eur": 3200000,
-    "max_contribution_eur": 4000000
+    "min_contribution_eur": 2000000,
+    "max_contribution_eur": 3700000
   },
   "keywords": [
     "HORIZON-CL2-2027-02-DEMOCRACY-09-two-stage",
@@ -189,5 +189,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:25.615Z"
+  "fetchedAt": "2026-06-27T12:50:06.644Z"
 }

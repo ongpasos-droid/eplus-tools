@@ -117,6 +117,7 @@ tailwind.config = {
         <li><a href="https://campus.eufundingschool.com" target="_top">Academia</a></li>
         <li><a href="https://eufundingschool.com/academia/" target="_top">Servicios y precios</a></li>
         <li class="is-current"><a href="#my-projects">Proyectos</a></li>
+        <li><a href="#my-org">Entidades</a></li>
         <li><a href="#convocatorias">Convocatorias</a></li>
         <li><a href="#movilidades">Movilidades</a></li>
       </ul>
@@ -172,6 +173,13 @@ tailwind.config = {
 
   <div class="min-h-screen pt-16 flex items-center justify-center px-4">
     <div class="w-full max-w-md">
+
+      <!-- Volver al modo exploración (visitantes anónimos) -->
+      <button type="button" id="auth-back-explore"
+        class="mb-6 inline-flex items-center gap-1.5 text-sm font-semibold text-on-surface-variant hover:text-primary transition-colors">
+        <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+        Seguir explorando sin cuenta
+      </button>
 
       <!-- Logo -->
       <div class="text-center mb-10">
@@ -364,104 +372,111 @@ tailwind.config = {
 
     <!-- Nav links -->
     <nav class="flex-1 py-4 px-3 space-y-1 overflow-y-auto" id="sidebar-nav">
-      <a href="#my-projects"
-        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
-        data-route="my-projects">
-        <span class="material-symbols-outlined text-[20px]">folder_shared</span>
-        Mis Proyectos
-      </a>
-      <a href="#my-evaluations"
-        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
-        data-route="my-evaluations">
-        <span class="material-symbols-outlined text-[20px]">fact_check</span>
-        Mis Evaluaciones
-      </a>
-      <a href="#import-proposal"
-        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
-        data-route="import-proposal">
-        <span class="material-symbols-outlined text-[20px]" style="color:#22c55e">upload_file</span>
-        Importar proyecto
-      </a>
 
-      <!-- Active project phases (rendered contextually by app.js when a project is open) -->
-      <div id="sidebar-project-section" class="hidden">
-        <div class="mt-3 mb-1 px-3 text-[10px] font-semibold tracking-[.2em] uppercase text-white/30">Proyecto activo</div>
-        <div id="sidebar-project-name" class="px-3 mb-2 text-xs font-bold text-white truncate"></div>
-        <a href="#intake"
+      <!-- ═══ WORKSPACE: PROYECTOS ═══ -->
+      <div id="sidebar-group-proyectos">
+        <a href="#my-projects"
           class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
-          data-route="intake">
-          <span class="material-symbols-outlined text-[20px]" style="color:#60a5fa">architecture</span>
-          Diseñar
+          data-route="my-projects">
+          <span class="material-symbols-outlined text-[20px]">folder_shared</span>
+          Mis Proyectos
         </a>
-        <a href="#developer"
+        <a href="#my-evaluations"
           class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
-          data-route="developer">
-          <span class="material-symbols-outlined text-[20px]" style="color:#a78bfa">edit_document</span>
-          Escribir
+          data-route="my-evaluations">
+          <span class="material-symbols-outlined text-[20px]">fact_check</span>
+          Mis Evaluaciones
         </a>
-        <a href="#diagnose"
+        <a href="#import-proposal"
           class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
-          data-route="diagnose">
-          <span class="material-symbols-outlined text-[20px]" style="color:#16A34A">monitoring</span>
-          Diagnóstico
+          data-route="import-proposal">
+          <span class="material-symbols-outlined text-[20px]" style="color:#22c55e">upload_file</span>
+          Importar proyecto
         </a>
-        <a href="#evaluator"
+
+        <!-- Active project phases (rendered contextually by app.js when a project is open) -->
+        <div id="sidebar-project-section" class="hidden">
+          <div class="mt-3 mb-1 px-3 text-[10px] font-semibold tracking-[.2em] uppercase text-white/30">Proyecto activo</div>
+          <div id="sidebar-project-name" class="px-3 mb-2 text-xs font-bold text-white truncate"></div>
+          <a href="#intake"
+            class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
+            data-route="intake">
+            <span class="material-symbols-outlined text-[20px]" style="color:#60a5fa">architecture</span>
+            Diseñar
+          </a>
+          <a href="#developer"
+            class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
+            data-route="developer">
+            <span class="material-symbols-outlined text-[20px]" style="color:#a78bfa">edit_document</span>
+            Escribir
+          </a>
+          <a href="#diagnose"
+            class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
+            data-route="diagnose">
+            <span class="material-symbols-outlined text-[20px]" style="color:#16A34A">monitoring</span>
+            Diagnóstico
+          </a>
+          <a href="#evaluator"
+            class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
+            data-route="evaluator">
+            <span class="material-symbols-outlined text-[20px]" style="color:#4ade80">verified</span>
+            Evaluar
+          </a>
+        </div>
+
+        <!-- Library -->
+        <div class="mt-3 mb-1 px-3 text-[10px] font-semibold tracking-[.2em] uppercase text-white/30">Library</div>
+        <a href="#my-documents"
           class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
-          data-route="evaluator">
-          <span class="material-symbols-outlined text-[20px]" style="color:#4ade80">verified</span>
-          Evaluar
+          data-route="my-documents">
+          <span class="material-symbols-outlined text-[20px]">folder_open</span>
+          My Documents
         </a>
+        <a href="#research"
+          class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
+          data-route="research">
+          <span class="material-symbols-outlined text-[20px]">science</span>
+          Research
+        </a>
+
+        <!-- Admin — solo visible para role=admin -->
+        <div id="admin-nav-item" class="hidden">
+          <div class="mt-3 mb-1 px-3 text-[10px] font-semibold tracking-[.2em] uppercase text-white/30">Admin</div>
+          <a href="#admin"
+            class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
+            data-route="admin">
+            <span class="material-symbols-outlined text-[20px]">admin_panel_settings</span>
+            Data E+
+          </a>
+        </div>
       </div>
-      <!-- Organization -->
-      <div class="mt-3 mb-1 px-3 text-[10px] font-semibold tracking-[.2em] uppercase text-white/30">Organization</div>
-      <a href="#my-org"
-        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
-        data-route="my-org">
-        <span class="material-symbols-outlined text-[20px]">apartment</span>
-        Mi Organización
-      </a>
-      <a href="#organizations"
-        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
-        data-route="organizations">
-        <span class="material-symbols-outlined text-[20px]">corporate_fare</span>
-        Directorio
-      </a>
-      <a href="#shortlists"
-        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
-        data-route="shortlists">
-        <span class="material-symbols-outlined text-[20px]">favorite</span>
-        Mi Pool
-      </a>
-      <a href="#atlas-stats"
-        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
-        data-route="atlas-stats">
-        <span class="material-symbols-outlined text-[20px]">insights</span>
-        Atlas Stats
-      </a>
 
-      <!-- Library -->
-      <div class="mt-3 mb-1 px-3 text-[10px] font-semibold tracking-[.2em] uppercase text-white/30">Library</div>
-      <a href="#my-documents"
-        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
-        data-route="my-documents">
-        <span class="material-symbols-outlined text-[20px]">folder_open</span>
-        My Documents
-      </a>
-      <a href="#research"
-        class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
-        data-route="research">
-        <span class="material-symbols-outlined text-[20px]">science</span>
-        Research
-      </a>
-
-      <!-- Admin — solo visible para role=admin -->
-      <div id="admin-nav-item" class="hidden">
-        <div class="mt-3 mb-1 px-3 text-[10px] font-semibold tracking-[.2em] uppercase text-white/30">Admin</div>
-        <a href="#admin"
+      <!-- ═══ WORKSPACE: ENTIDADES ═══ -->
+      <div id="sidebar-group-entidades" class="hidden">
+        <div class="mt-1 mb-1 px-3 text-[10px] font-semibold tracking-[.2em] uppercase text-white/30">Entidades</div>
+        <a href="#my-org"
           class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
-          data-route="admin">
-          <span class="material-symbols-outlined text-[20px]">admin_panel_settings</span>
-          Data E+
+          data-route="my-org">
+          <span class="material-symbols-outlined text-[20px]">apartment</span>
+          Mi Organización
+        </a>
+        <a href="#organizations"
+          class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
+          data-route="organizations">
+          <span class="material-symbols-outlined text-[20px]">corporate_fare</span>
+          Directorio
+        </a>
+        <a href="#shortlists"
+          class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
+          data-route="shortlists">
+          <span class="material-symbols-outlined text-[20px]">favorite</span>
+          Mi Pool
+        </a>
+        <a href="#atlas-stats"
+          class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 transition-colors text-sm font-medium"
+          data-route="atlas-stats">
+          <span class="material-symbols-outlined text-[20px]">insights</span>
+          Atlas
         </a>
       </div>
     </nav>
@@ -1473,6 +1488,11 @@ tailwind.config = {
           </div>
 
         </div>
+      </section>
+
+      <!-- ══ PANEL EMBUDO INVITADO (secciones de cuenta sin sesión) ══ -->
+      <section id="panel-guest-funnel" class="panel">
+        <div id="guest-funnel-content"></div>
       </section>
 
       <!-- ══ PANEL CONVOCATORIAS (funding_unified.json — SEDIA + SALTO + BDNS) ══ -->
@@ -2549,17 +2569,21 @@ tailwind.config = {
                       <th class="px-3 py-2 text-left">ID Contrato</th>
                       <th class="px-3 py-2 text-left w-24">Rol</th>
                       <th class="px-3 py-2 text-left">Título</th>
+                      <th class="px-3 py-2 text-right w-28">Importe</th>
                       <th class="px-3 py-2 text-right w-28">Acciones</th>
                     </tr>
                   </thead>
                   <tbody id="org-projects-unified-tbody">
-                    <tr><td colspan="6" class="py-4 text-center text-on-surface-variant text-sm">Cargando proyectos…</td></tr>
+                    <tr><td colspan="7" class="py-4 text-center text-on-surface-variant text-sm">Cargando proyectos…</td></tr>
                   </tbody>
                   <!-- Tabla manual legacy oculta (los handlers de edición existentes la siguen leyendo) -->
                   <tbody id="org-eu-projects-tbody" class="hidden"></tbody>
                 </table>
               </div>
             </div>
+
+            <!-- Estadística visual: proyectos por tipo + importes -->
+            <div id="org-projects-stats" class="mt-4"></div>
           </div>
 
           <!-- TAB: Accreditations -->
@@ -2969,11 +2993,11 @@ tailwind.config = {
 <script src="/js/my-projects.js"></script>
 <script src="/js/my-evaluations.js"></script>
 <script src="/js/create.js"></script>
-<script src="/js/intake.js?v=20260413b"></script>
+<script src="/js/intake.js?v=20260627a"></script>
 <script src="/js/admin.js"></script>
-<script src="/js/calculator.js?v=20260413b"></script>
-<script src="/js/organizations.js?v=20260426f"></script>
-<script src="/js/entities.js?v=20260426k"></script>
+<script src="/js/calculator.js?v=20260627a"></script>
+<script src="/js/organizations.js?v=20260627a"></script>
+<script src="/js/entities.js?v=20260627a"></script>
 <script src="/js/shortlists.js?v=20260426b"></script>
 <script src="/js/atlas-stats.js?v=20260426k"></script>
 <script src="/js/documents.js"></script>

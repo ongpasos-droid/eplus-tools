@@ -16,9 +16,9 @@
   "actionCode": "EDF-DA",
   "mgaCode": "EDF-AG",
   "budget": {
-    "total_eur": 4642000000,
+    "total_eur": 422000000,
     "by_year": {
-      "2026": 4642000000
+      "2026": 422000000
     },
     "expected_grants": null,
     "min_contribution_eur": null,

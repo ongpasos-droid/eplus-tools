@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 272000000,
+    "total_eur": 18000000,
     "by_year": {
-      "2027": 272000000
+      "2027": 18000000
     },
-    "expected_grants": 8,
-    "min_contribution_eur": 44000000,
-    "max_contribution_eur": 44000000
+    "expected_grants": 1,
+    "min_contribution_eur": 18000000,
+    "max_contribution_eur": 18000000
   },
   "keywords": [
     "HORIZON-CL4-2027-04-DIGITAL-EMERGING-05",
@@ -175,5 +175,5 @@
       "is_downloadable": true
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:24.108Z"
+  "fetchedAt": "2026-06-27T12:50:05.017Z"
 }

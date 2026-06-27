@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 339500000,
+    "total_eur": 30000000,
     "by_year": {
-      "2027": 339500000
+      "2027": 30000000
     },
-    "expected_grants": 9,
-    "min_contribution_eur": 40000000,
-    "max_contribution_eur": 40000000
+    "expected_grants": 3,
+    "min_contribution_eur": 7000000,
+    "max_contribution_eur": 12000000
   },
   "keywords": [
     "HORIZON-INFRA-2027-TECH-01-02",
@@ -219,5 +219,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:26.282Z"
+  "fetchedAt": "2026-06-27T12:50:06.606Z"
 }

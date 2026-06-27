@@ -16,9 +16,9 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 600000,
+    "total_eur": 300000,
     "by_year": {
-      "2026": 600000
+      "2026": 300000
     },
     "expected_grants": null,
     "min_contribution_eur": null,

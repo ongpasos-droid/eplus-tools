@@ -449,6 +449,48 @@ async function main() {
     console.log(`summary_es pending (translation backfill): ${stats.summaryEsPendingCount}`);
     console.log(`sum_budget_eur (declared): ${stats.sumBudgetEur.toLocaleString()} €`);
   }
+
+  // Coverage check — calls SEDIA visibles con PDF de convocatoria pero SIN
+  // extracción estructurada (data/call_structured/<source_id>.json). Sin ella la
+  // card no muestra FAQ ni campos enriquecidos (fue el bug de born-digital y de las
+  // 4 calls CERV/EDF). No rompe el build: avisa y deja la lista en _missing.json.
+  const STRUCTURED_DIR = path.join(REPO_ROOT, 'data', 'call_structured');
+  const haveStructured = new Set(
+    (fs.existsSync(STRUCTURED_DIR) ? fs.readdirSync(STRUCTURED_DIR) : [])
+      .filter((f) => f.endsWith('.json') && !f.startsWith('_'))
+      .map((f) => f.replace(/\.json$/, ''))
+  );
+  const todayISO = new Date().toISOString().slice(0, 10);
+  const hasCallDocPdf = (r) =>
+    (r.documents || []).some((d) => {
+      const url = String(d.url || '');
+      const label = String(d.label || '');
+      return /call.?fiche|call-fiche|call_document/i.test(url) ||
+        (/call document/i.test(label) && /\.pdf/i.test(url));
+    });
+  const missingStructured = output
+    .filter((r) =>
+      r.source === 'sedia' &&
+      String(r.status || '').toLowerCase() !== 'closed' &&
+      !(r.deadline && String(r.deadline) < todayISO) &&
+      hasCallDocPdf(r) &&
+      !haveStructured.has(r.source_id))
+    .map((r) => r.source_id);
+
+  if (fs.existsSync(STRUCTURED_DIR)) {
+    await fsp.writeFile(
+      path.join(STRUCTURED_DIR, '_missing.json'),
+      JSON.stringify(missingStructured, null, 2),
+    );
+  }
+  if (missingStructured.length) {
+    console.warn(`\n[unify] ⚠️  ${missingStructured.length} call(s) visibles con PDF de convocatoria pero SIN call_structured (no mostrarán FAQ):`);
+    for (const id of missingStructured.slice(0, 20)) console.warn(`   - ${id}`);
+    if (missingStructured.length > 20) console.warn(`   … y ${missingStructured.length - 20} más (lista completa en data/call_structured/_missing.json)`);
+    console.warn('   Regenera las que falten con: node scripts/structure-call.js --only=<source_id> --force');
+  } else {
+    console.log('\n[unify] ✓ Cobertura call_structured: 0 calls visibles con PDF sin extracción.');
+  }
 }
 
 main().catch((err) => {

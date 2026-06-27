@@ -53,6 +53,7 @@ const dir = require('../../utils/directory-api');
 const mysqlModel = require('./model');
 const overrides = require('./overrides');
 const scores = require('./scores');
+const registry = require('./registry');
 const localOrgs = require('./local-orgs');
 
 /* ── Mapping de la respuesta de /search a la shape MySQL {rows, meta} ── */
@@ -190,13 +191,13 @@ async function getEntityById(oid) {
     const ent = await localOrgs.getLocalEntityByOid(oid);
     if (!ent) return null;
     const overridden = await overrides.applyToEntity(ent);
-    return scores.attachToEntity(overridden);
+    return registry.attachToEntity(await scores.attachToEntity(overridden));
   }
   try {
     const full = await dir.getEntityFull(oid);
     const flat = flattenEntityFull(full);
     const overridden = await overrides.applyToEntity(flat);
-    return scores.attachToEntity(overridden);
+    return registry.attachToEntity(await scores.attachToEntity(overridden));
   } catch (e) {
     if (e.status === 404) return null;
     throw e;

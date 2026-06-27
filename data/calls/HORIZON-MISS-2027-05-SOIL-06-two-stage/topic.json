@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 94800000,
+    "total_eur": 7000000,
     "by_year": {
-      "2027": 94800000
+      "2027": 7000000
     },
-    "expected_grants": 2,
-    "min_contribution_eur": 12000000,
-    "max_contribution_eur": 12000000
+    "expected_grants": 1,
+    "min_contribution_eur": 7000000,
+    "max_contribution_eur": 7000000
   },
   "keywords": [
     "HORIZON-MISS-2027-05-SOIL-06-two-stage",
@@ -178,5 +178,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:26.436Z"
+  "fetchedAt": "2026-06-27T12:50:06.865Z"
 }

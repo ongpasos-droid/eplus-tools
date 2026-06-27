@@ -16,13 +16,13 @@
   "actionCode": "HORIZON-RIA",
   "mgaCode": "HORIZON-AG-LS",
   "budget": {
-    "total_eur": 131000000,
+    "total_eur": 4000000,
     "by_year": {
-      "2026": 131000000
+      "2026": 4000000
     },
-    "expected_grants": 2,
-    "min_contribution_eur": 6000000,
-    "max_contribution_eur": 6000000
+    "expected_grants": 1,
+    "min_contribution_eur": 4000000,
+    "max_contribution_eur": 4000000
   },
   "keywords": [
     "HORIZON-CL3-2026-01-INFRA-02",
@@ -180,5 +180,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:27.540Z"
+  "fetchedAt": "2026-06-27T12:50:06.037Z"
 }

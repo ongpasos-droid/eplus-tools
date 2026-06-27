@@ -57,6 +57,13 @@
   },
   {
     "section": "Call document and annexes:",
+    "label": "Business Plan Financial Spreadsheet (CEF-E)",
+    "url": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/cef/temp-form/af/business-plan-financial-spreadsheet_cef-e_en.xlsx",
+    "ext": ".xlsx",
+    "is_downloadable": true
+  },
+  {
+    "section": "Call document and annexes:",
     "label": "CEF MGA",
     "url": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/cef/agr-contr/mga_cef_en.pdf",
     "ext": ".pdf",

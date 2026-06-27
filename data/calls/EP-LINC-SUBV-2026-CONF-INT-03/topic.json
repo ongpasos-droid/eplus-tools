@@ -16,9 +16,9 @@
   "actionCode": "EP-PJG",
   "mgaCode": "EP-AG",
   "budget": {
-    "total_eur": 750000,
+    "total_eur": 150000,
     "by_year": {
-      "2026": 750000
+      "2026": 150000
     },
     "expected_grants": null,
     "min_contribution_eur": null,

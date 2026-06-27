@@ -16,9 +16,9 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 81500000,
+    "total_eur": 39300000,
     "by_year": {
-      "2027": 81500000
+      "2027": 39300000
     },
     "expected_grants": 4,
     "min_contribution_eur": 10000000,

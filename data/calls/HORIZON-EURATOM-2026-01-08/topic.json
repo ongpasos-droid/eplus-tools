@@ -16,12 +16,12 @@
   "actionCode": "EURATOM-COFUND",
   "mgaCode": "EURATOM-AG",
   "budget": {
-    "total_eur": 74500000,
+    "total_eur": 15000000,
     "by_year": {
-      "2026": 35750000,
-      "2027": 38750000
+      "2026": 7500000,
+      "2027": 7500000
     },
-    "expected_grants": 5,
+    "expected_grants": 1,
     "min_contribution_eur": 15000000,
     "max_contribution_eur": 15000000
   },
@@ -140,5 +140,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:28.299Z"
+  "fetchedAt": "2026-06-27T12:50:05.962Z"
 }

@@ -107,7 +107,13 @@ async function searchLocalAsEntities({ q, country, limit = 50 } = {}) {
   await loadCountryMaps();
 
   const params = [];
-  let where = "WHERE o.active=1 AND o.is_public=1";
+  // Solo sintetizamos orgs que NO existen en el directorio público.
+  // Si la org ya tiene un OID real (E…), su representación canónica es la
+  // entidad scrapeada del VPS (con sus proyectos/scores) + la capa de
+  // overrides (nombre/logo/descripción que el dueño editó). Sintetizar
+  // además una card local con total_projects=0 crearía un duplicado
+  // "newcomer" que pisa a la entidad real. Ver overrides.applyToList.
+  let where = "WHERE o.active=1 AND o.is_public=1 AND (o.oid IS NULL OR o.oid = '')";
 
   if (q) {
     const like = `%${q}%`;

@@ -16,9 +16,9 @@
   "actionCode": "LIFE-PJG",
   "mgaCode": "LIFE-AG",
   "budget": {
-    "total_eur": 163000000,
+    "total_eur": 58000000,
     "by_year": {
-      "2026": 163000000
+      "2026": 58000000
     },
     "expected_grants": null,
     "min_contribution_eur": null,
@@ -160,5 +160,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T11:30:51.678Z"
+  "fetchedAt": "2026-06-27T12:50:07.014Z"
 }

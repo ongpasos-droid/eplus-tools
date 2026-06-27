@@ -1,8 +1,8 @@
 /* ── Movilidades Routes — /v1/movilidades/* ─────────────────────────── */
 const router = require('express').Router();
-const { requireAuth } = require('../../middleware/auth');
+const { optionalAuth } = require('../../middleware/auth');
 const ctrl = require('./controller');
 
-router.get('/', requireAuth, ctrl.list);
+router.get('/', optionalAuth, ctrl.list);
 
 module.exports = router;

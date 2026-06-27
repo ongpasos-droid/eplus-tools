@@ -16,9 +16,9 @@
   "actionCode": "CEF-INFRA",
   "mgaCode": "CEF-AG",
   "budget": {
-    "total_eur": 1200000000,
+    "total_eur": 600000000,
     "by_year": {
-      "2026": 1200000000
+      "2026": 600000000
     },
     "expected_grants": null,
     "min_contribution_eur": null,
@@ -90,6 +90,13 @@
       "label": "TEN-E compliance form",
       "url": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/cef/temp-form/af/ten-e-compliance-form_cef-e_en.docx",
       "ext": ".docx",
+      "is_downloadable": true
+    },
+    {
+      "section": "Call document and annexes:",
+      "label": "Business Plan Financial Spreadsheet (CEF-E)",
+      "url": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/cef/temp-form/af/business-plan-financial-spreadsheet_cef-e_en.xlsx",
+      "ext": ".xlsx",
       "is_downloadable": true
     },
     {
@@ -177,5 +184,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:27.660Z"
+  "fetchedAt": "2026-06-27T12:50:07.423Z"
 }

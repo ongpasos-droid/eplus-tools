@@ -16,13 +16,13 @@
   "actionCode": "HORIZON-IA",
   "mgaCode": "HORIZON-AG-LS",
   "budget": {
-    "total_eur": 85500000,
+    "total_eur": 47500000,
     "by_year": {
-      "2026": 85500000
+      "2026": 47500000
     },
     "expected_grants": 5,
-    "min_contribution_eur": 10000000,
-    "max_contribution_eur": 10000000
+    "min_contribution_eur": 9500000,
+    "max_contribution_eur": 9500000
   },
   "keywords": [
     "HORIZON-MISS-2026-04-CIT-NEB-B4P-CCRI-03",
@@ -177,5 +177,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:27.024Z"
+  "fetchedAt": "2026-06-27T12:50:07.109Z"
 }

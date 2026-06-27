@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 100400000,
+    "total_eur": 15900000,
     "by_year": {
-      "2027": 100400000
+      "2027": 15900000
     },
     "expected_grants": 4,
-    "min_contribution_eur": 8000000,
-    "max_contribution_eur": 8925000
+    "min_contribution_eur": 3500000,
+    "max_contribution_eur": 3975000
   },
   "keywords": [
     "HORIZON-MISS-2027-03-OCEAN-05",
@@ -165,5 +165,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:26.414Z"
+  "fetchedAt": "2026-06-27T12:50:06.901Z"
 }
