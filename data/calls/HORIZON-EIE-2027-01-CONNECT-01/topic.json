@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 34000000,
+    "total_eur": 18000000,
     "by_year": {
-      "2027": 34000000
+      "2027": 18000000
     },
     "expected_grants": 9,
-    "min_contribution_eur": 10000000,
-    "max_contribution_eur": 10000000
+    "min_contribution_eur": 2000000,
+    "max_contribution_eur": 2000000
   },
   "keywords": [
     "HORIZON-EIE-2027-01-CONNECT-01",
@@ -215,5 +215,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:24.705Z"
+  "fetchedAt": "2026-06-27T12:50:05.087Z"
 }

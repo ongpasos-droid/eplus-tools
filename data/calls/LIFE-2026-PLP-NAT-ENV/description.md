@@ -19,4 +19,4 @@ The lists of LIFE-2026-PLP-NAT-ENV specific priorities are:
 - Preserving primary and old-growth forest in critical regions of Europe through mapping and awareness raising
 - Development and implementation of analytical methodology to distinguish between virgin and recycled polymers at custom controls
 - Support for reducing discharges into marine waters from exhaust gas cleaning systems (scrubbers) installed onboard ships
-- Capacity-building of authorities in Montenegro and North Macedonia
+- Capacity-building of authorities in Montenegro and Moldova

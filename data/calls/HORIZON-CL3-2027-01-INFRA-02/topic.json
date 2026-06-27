@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 129503000,
+    "total_eur": 7670000,
     "by_year": {
-      "2027": 129503000
+      "2027": 7670000
     },
-    "expected_grants": 4,
-    "min_contribution_eur": 7833000,
-    "max_contribution_eur": 7833000
+    "expected_grants": 2,
+    "min_contribution_eur": 3835000,
+    "max_contribution_eur": 3835000
   },
   "keywords": [
     "HORIZON-CL3-2027-01-INFRA-02",
@@ -580,5 +580,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:25.255Z"
+  "fetchedAt": "2026-06-27T12:50:06.408Z"
 }

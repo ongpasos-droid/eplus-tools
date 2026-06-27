@@ -16,13 +16,13 @@
   "actionCode": "HORIZON-PCP",
   "mgaCode": "HORIZON-AG",
   "budget": {
-    "total_eur": 131000000,
+    "total_eur": 5830000,
     "by_year": {
-      "2026": 131000000
+      "2026": 5830000
     },
-    "expected_grants": 2,
-    "min_contribution_eur": 6000000,
-    "max_contribution_eur": 6000000
+    "expected_grants": 1,
+    "min_contribution_eur": 5830000,
+    "max_contribution_eur": 5830000
   },
   "keywords": [
     "HORIZON-CL3-2026-01-SSRI-02",
@@ -171,5 +171,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:27.564Z"
+  "fetchedAt": "2026-06-27T12:50:06.132Z"
 }

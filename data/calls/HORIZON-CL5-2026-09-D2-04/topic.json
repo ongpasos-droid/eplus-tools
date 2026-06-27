@@ -16,11 +16,11 @@
   "actionCode": "HORIZON-IA",
   "mgaCode": "HORIZON-AG",
   "budget": {
-    "total_eur": 223200000,
+    "total_eur": 9400000,
     "by_year": {
-      "2026": 223200000
+      "2026": 9400000
     },
-    "expected_grants": 4,
+    "expected_grants": 1,
     "min_contribution_eur": 93000000,
     "max_contribution_eur": 93000000
   },

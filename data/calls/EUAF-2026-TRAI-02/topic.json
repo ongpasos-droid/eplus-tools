@@ -16,9 +16,9 @@
   "actionCode": "EUAF-PJG",
   "mgaCode": "EUAF-AG",
   "budget": {
-    "total_eur": 4000000,
+    "total_eur": 1000000,
     "by_year": {
-      "2026": 4000000
+      "2026": 1000000
     },
     "expected_grants": null,
     "min_contribution_eur": null,

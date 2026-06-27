@@ -16,13 +16,13 @@
   "actionCode": "HORIZON-RIA",
   "mgaCode": "HORIZON-AG-LS",
   "budget": {
-    "total_eur": 33000000,
+    "total_eur": 14000000,
     "by_year": {
-      "2026": 33000000
+      "2026": 14000000
     },
     "expected_grants": 2,
-    "min_contribution_eur": 9000000,
-    "max_contribution_eur": 9000000
+    "min_contribution_eur": 7000000,
+    "max_contribution_eur": 7000000
   },
   "keywords": [
     "HORIZON-MISS-2026-05-SOIL-02",
@@ -174,5 +174,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:27.083Z"
+  "fetchedAt": "2026-06-27T12:50:07.042Z"
 }

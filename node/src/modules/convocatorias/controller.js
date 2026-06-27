@@ -116,6 +116,25 @@ function toCard(c, structured) {
   };
 }
 
+/* Teaser shape para visitantes NO logueados: solo los campos que pinta
+   la tarjeta del grid. Se omite todo el detalle (objetivo, actividades,
+   costes, outcomes, FAQ, enlaces de solicitud) — eso exige cuenta.
+   El frontend además bloquea openDetail() con el popup de login, así
+   que el anónimo nunca ve el detalle ni en red ni en pantalla. */
+const TEASER_FIELDS = [
+  'call_id', 'source', 'source_id', 'level', 'category', 'programme', 'sub_programme',
+  'title', 'title_lang', 'summary_en', 'summary_es', 'has_ai_summary', 'status',
+  'open_date', 'publication_date', 'deadline', 'deadline_model',
+  'budget_total_eur', 'budget_per_project_min_eur', 'budget_per_project_max_eur',
+  'expected_grants', 'cofinancing_pct', 'duration_months', 'available_in_efs',
+  'eligible_countries', 'crossCuttingPriorities', 'keywords',
+];
+function toTeaserCard(card) {
+  const out = { teaser: true };
+  for (const k of TEASER_FIELDS) if (k in card) out[k] = card[k];
+  return out;
+}
+
 exports.list = async (req, res, next) => {
   try {
     const all = loadData();
@@ -157,6 +176,7 @@ exports.list = async (req, res, next) => {
     }
 
     const structured = loadStructured();
+    const loggedIn = !!req.user;
     const total = rows.length;
     const items = rows.slice(offset, offset + limit).map(c => {
       const card = toCard(c, structured);
@@ -165,6 +185,8 @@ exports.list = async (req, res, next) => {
       if (admin) card.curation = curationMap[c.source_id] || null;
       return card;
     });
+    // Teaser público: el anónimo recibe solo campos de tarjeta.
+    const out = loggedIn ? items : items.map(toTeaserCard);
 
     res.json({
       ok: true,
@@ -172,7 +194,7 @@ exports.list = async (req, res, next) => {
         total,
         offset,
         limit,
-        items,
+        items: out,
         meta: metaCache ? { generatedAt: metaCache.generatedAt, total: metaCache.total, byStatus: metaCache.byStatus, bySource: metaCache.bySource } : null,
       },
     });
@@ -187,8 +209,13 @@ exports.getById = (req, res, next) => {
     const id  = String(req.params.id || '');
     const row = all.find(r => r.call_id === id || r.source_id === id);
     if (!row) return res.status(404).json({ ok: false, error: 'not_found' });
-    const structured = loadStructured().get(row.source_id) || null;
-    res.json({ ok: true, data: { ...row, structured } });
+    // Devolvemos la MISMA forma de tarjeta que la lista (faq y demás campos
+    // aplanados), para que el drawer pueda re-pedir el detalle completo y
+    // renderizarlo idéntico cuando la lista se cargó en modo teaser (sin sesión).
+    // requireAuth garantiza que aquí siempre va el detalle completo.
+    const card = toCard(row, loadStructured());
+    card.documents = row.documents || [];
+    res.json({ ok: true, data: card });
   } catch (err) {
     next(err);
   }

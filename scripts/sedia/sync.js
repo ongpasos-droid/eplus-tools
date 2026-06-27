@@ -179,7 +179,7 @@ function firstDateOf(v) {
   return Number.isNaN(d.getTime()) ? null : d.toISOString().slice(0, 10);
 }
 
-function parseBudgetOverview(raw) {
+function parseBudgetOverview(raw, identifier) {
   const s = asString(raw);
   if (!s) return null;
   let bo;
@@ -193,16 +193,29 @@ function parseBudgetOverview(raw) {
   let minContribution = 0;
   let maxContribution = 0;
   const byYear = {};
-  for (const actions of Object.values(bo.budgetTopicActionMap || {})) {
-    for (const a of actions) {
-      expectedGrants = Math.max(expectedGrants, a.expectedGrants || 0);
-      minContribution = Math.max(minContribution, a.minContribution || 0);
-      maxContribution = Math.max(maxContribution, a.maxContribution || 0);
-      for (const [y, v] of Object.entries(a.budgetYearMap || {})) {
-        const n = Number(v) || 0;
-        byYear[y] = (byYear[y] || 0) + n;
-        total += n;
-      }
+  // budgetTopicActionMap está cacheado por convocatoria (no por topic): lista UNA
+  // acción por cada topic de la call, y SEDIA repite en cada línea el presupuesto
+  // total de la convocatoria. Sumar todas las líneas multiplica el total por el nº
+  // de topics (p. ej. 26M+26M=52M). Cada acción se etiqueta con su topic
+  // ("<IDENTIFIER> - ..."), así que filtramos a la del topic en curso; el reparto
+  // fino por topic no lo expone esta API (solo el PDF / call_structured).
+  let entries = Object.values(bo.budgetTopicActionMap || {}).flat();
+  if (identifier) {
+    const idU = String(identifier).toUpperCase();
+    const matched = entries.filter(a => {
+      const act = String(a.action || '').toUpperCase().trim();
+      return act === idU || act.startsWith(idU + ' ');
+    });
+    if (matched.length) entries = matched;
+  }
+  for (const a of entries) {
+    expectedGrants = Math.max(expectedGrants, a.expectedGrants || 0);
+    minContribution = Math.max(minContribution, a.minContribution || 0);
+    maxContribution = Math.max(maxContribution, a.maxContribution || 0);
+    for (const [y, v] of Object.entries(a.budgetYearMap || {})) {
+      const n = Number(v) || 0;
+      byYear[y] = (byYear[y] || 0) + n;
+      total += n;
     }
   }
   return {
@@ -324,7 +337,7 @@ function parseRecord(rec) {
     actionType: asString(m.typesOfAction),
     actionCode,
     mgaCode,
-    budget: parseBudgetOverview(m.budgetOverview),
+    budget: parseBudgetOverview(m.budgetOverview, identifier),
     keywords: Array.isArray(m.keywords) ? m.keywords : [],
     crossCuttingPriorities: Array.isArray(m.crossCuttingPriorities) ? m.crossCuttingPriorities : [],
     supportInfoText: htmlToMarkdown(asString(m.supportInfo)).slice(0, 4000),

@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 182850000,
+    "total_eur": 7800000,
     "by_year": {
-      "2027": 182850000
+      "2027": 7800000
     },
-    "expected_grants": 3,
-    "min_contribution_eur": 11000000,
-    "max_contribution_eur": 11000000
+    "expected_grants": 1,
+    "min_contribution_eur": 7800000,
+    "max_contribution_eur": 7800000
   },
   "keywords": [
     "HORIZON-CL6-2027-02-FARM2FORK-08",
@@ -156,5 +156,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T11:30:50.785Z"
+  "fetchedAt": "2026-06-27T12:50:05.994Z"
 }

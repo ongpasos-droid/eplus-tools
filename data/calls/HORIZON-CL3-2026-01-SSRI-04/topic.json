@@ -16,13 +16,13 @@
   "actionCode": "HORIZON-IA",
   "mgaCode": "HORIZON-AG-LS",
   "budget": {
-    "total_eur": 131000000,
+    "total_eur": 3000000,
     "by_year": {
-      "2026": 131000000
+      "2026": 3000000
     },
-    "expected_grants": 2,
-    "min_contribution_eur": 6000000,
-    "max_contribution_eur": 6000000
+    "expected_grants": 1,
+    "min_contribution_eur": 3000000,
+    "max_contribution_eur": 3000000
   },
   "keywords": [
     "HORIZON-CL3-2026-01-SSRI-04",
@@ -183,5 +183,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:28.235Z"
+  "fetchedAt": "2026-06-27T12:50:05.847Z"
 }

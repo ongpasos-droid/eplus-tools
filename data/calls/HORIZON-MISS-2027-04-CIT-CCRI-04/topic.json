@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 92323812,
+    "total_eur": 22500000,
     "by_year": {
-      "2027": 92323812
+      "2027": 22500000
     },
     "expected_grants": 3,
-    "min_contribution_eur": 9000000,
-    "max_contribution_eur": 12000000
+    "min_contribution_eur": 7500000,
+    "max_contribution_eur": 7500000
   },
   "keywords": [
     "HORIZON-MISS-2027-04-CIT-CCRI-04",
@@ -177,5 +177,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:26.187Z"
+  "fetchedAt": "2026-06-27T12:50:06.770Z"
 }

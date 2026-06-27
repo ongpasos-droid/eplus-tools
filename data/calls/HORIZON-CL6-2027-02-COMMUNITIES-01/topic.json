@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 182850000,
+    "total_eur": 15000000,
     "by_year": {
-      "2027": 182850000
+      "2027": 15000000
     },
     "expected_grants": 3,
-    "min_contribution_eur": 11000000,
-    "max_contribution_eur": 11000000
+    "min_contribution_eur": 5000000,
+    "max_contribution_eur": 5000000
   },
   "keywords": [
     "HORIZON-CL6-2027-02-COMMUNITIES-01",
@@ -182,5 +182,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:25.552Z"
+  "fetchedAt": "2026-06-27T12:50:06.307Z"
 }

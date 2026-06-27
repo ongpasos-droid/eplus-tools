@@ -362,9 +362,18 @@ const Organizations = (() => {
     let autoError = null;
     if (myOrg.oid) {
       try {
-        const res = await API.get(`/entities/${encodeURIComponent(myOrg.oid)}/projects?limit=500`);
-        const data = (res && res.data) || res || {};
-        auto = data.projects || [];
+        // El directorio limita a 200 por llamada; paginamos para orgs con
+        // muchos proyectos (algunas superan 300).
+        const PAGE = 200;
+        let offset = 0;
+        while (offset < 4000) {
+          const res = await API.get(`/entities/${encodeURIComponent(myOrg.oid)}/projects?limit=${PAGE}&offset=${offset}`);
+          const data = (res && res.data) || res || {};
+          const batch = data.projects || [];
+          auto.push(...batch);
+          if (batch.length < PAGE) break;
+          offset += batch.length;
+        }
       } catch (e) {
         autoError = e.message || 'error desconocido';
         console.warn('loadAllProjects:auto', autoError);
@@ -417,7 +426,7 @@ const Organizations = (() => {
       const hint = /404|not found/i.test(autoError)
         ? 'El servidor todavía no tiene el endpoint /v1/entities/:oid/projects. Reinicia node server.js para que cargue las rutas nuevas.'
         : `Detalle: ${autoError}`;
-      errorBanner = `<tr><td colspan="6" class="px-4 py-3 bg-amber-50 border-b border-amber-200 text-sm text-amber-900">
+      errorBanner = `<tr><td colspan="7" class="px-4 py-3 bg-amber-50 border-b border-amber-200 text-sm text-amber-900">
         <span class="material-symbols-outlined text-[16px] align-middle mr-1">warning</span>
         No se pudo cargar el directorio Erasmus+ para OID ${esc(myOrg.oid)}. ${esc(hint)}
       </td></tr>`;
@@ -427,12 +436,14 @@ const Organizations = (() => {
       const hint = myOrg.oid
         ? 'No hay proyectos. Pulsa "+ Añadir extra" para registrar uno manualmente.'
         : 'Todavía no hemos resuelto el OID de tu organización en el directorio Erasmus+. Guarda los datos generales para que el sistema lo resuelva automáticamente, o pulsa "+ Añadir extra" para registrar proyectos a mano.';
-      tbody.innerHTML = `${errorBanner}<tr><td colspan="6" class="py-4 text-center text-on-surface-variant text-sm italic">${esc(hint)}</td></tr>`;
+      tbody.innerHTML = `${errorBanner}<tr><td colspan="7" class="py-4 text-center text-on-surface-variant text-sm italic">${esc(hint)}</td></tr>`;
+      renderProjectsStats([]);
       return;
     }
 
     tbody.innerHTML = errorBanner + unified.map((p, i) => renderUnifiedProjectRow(p, i)).join('');
     bindUnifiedProjectActions(tbody);
+    renderProjectsStats(unified);
   }
 
   function renderUnifiedProjectRow(p, idx) {
@@ -442,6 +453,7 @@ const Organizations = (() => {
                   :                          'bg-gray-100 text-gray-700';
     const isManual = p.kind === 'manual';
     const title    = p.title || '(sin título)';
+    const grant    = isManual ? null : fmtMoney(p.raw && p.raw.eu_grant_eur);
 
     const actions = isManual
       ? `<button data-action="view"   data-idx="${idx}" class="text-on-surface-variant hover:text-primary p-1 rounded hover:bg-primary/10 transition-colors" title="Ver"><span class="material-symbols-outlined text-[18px]">visibility</span></button>
@@ -461,6 +473,7 @@ const Organizations = (() => {
           <span title="${esc(title)}">${esc(title)}</span>
           ${isManual ? `<span class="ml-2 inline-flex items-center text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-surface-container border border-outline-variant/30 text-on-surface-variant">Manual</span>` : ''}
         </td>
+        <td class="px-3 py-2.5 text-sm text-right font-semibold whitespace-nowrap ${grant ? 'text-on-surface' : 'text-on-surface-variant/40'}">${grant || '—'}</td>
         <td class="px-3 py-2 text-right whitespace-nowrap">${actions}</td>
       </tr>`;
   }
@@ -501,6 +514,126 @@ const Organizations = (() => {
     const d = new Date(iso);
     if (isNaN(d.getTime())) return iso;
     return d.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
+  }
+
+  /* ── Estadística por tipo de proyecto ─────────────────────────
+     Clasifica cada proyecto en una familia (KA1/KA2/KA3/CB/Deporte…)
+     a partir del código de acción del contrato (KA153, KA220…) y,
+     como fallback, del action_type textual del directorio. */
+  const FAMILY_META = {
+    KA1:   { label: 'KA1 · Movilidad',     color: '#2563eb', icon: 'flight_takeoff' },
+    KA2:   { label: 'KA2 · Cooperación',   color: '#7c3aed', icon: 'handshake' },
+    KA3:   { label: 'KA3 · Apoyo político',color: '#0d9488', icon: 'policy' },
+    CB:    { label: 'Capacity Building',   color: '#059669', icon: 'public' },
+    Sport: { label: 'Deporte',             color: '#ea580c', icon: 'sports_soccer' },
+    ESC:   { label: 'Cuerpo Solidaridad',  color: '#e11d48', icon: 'volunteer_activism' },
+    JM:    { label: 'Jean Monnet',         color: '#4f46e5', icon: 'school' },
+    Otros: { label: 'Otros',               color: '#6b7280', icon: 'category' },
+  };
+  const FAMILY_ORDER = ['KA1', 'KA2', 'KA3', 'CB', 'Sport', 'ESC', 'JM', 'Otros'];
+
+  function projectFamily(p) {
+    const id = String(p.contract_id || '');
+    const at = String((p.raw && p.raw.action_type) || '');
+    const m = id.match(/KA(\d)\d{2}/i) || at.match(/KA(\d)\d{2}/i);
+    if (m) return 'KA' + m[1];
+    if (/capacity building/i.test(at))             return 'CB';
+    if (/sport/i.test(at))                          return 'Sport';
+    if (/jean monnet/i.test(at))                    return 'JM';
+    if (/youth together|policy|peer learning/i.test(at)) return 'KA3';
+    if (/solidarity|^ESC/i.test(at) || /^ESC/i.test(id)) return 'ESC';
+    return 'Otros';
+  }
+
+  function renderProjectsStats(unified) {
+    const host = document.getElementById('org-projects-stats');
+    if (!host) return;
+    if (!unified || !unified.length) { host.innerHTML = ''; return; }
+
+    const fams = {};
+    let totalAmount = 0;
+    let coordAmount = 0, coordCount = 0;
+    for (const p of unified) {
+      const fam = projectFamily(p);
+      const amt = p.kind === 'manual' ? 0 : (Number(p.raw && p.raw.eu_grant_eur) || 0);
+      if (!fams[fam]) fams[fam] = { count: 0, amount: 0 };
+      fams[fam].count += 1;
+      fams[fam].amount += amt;
+      totalAmount += amt;
+      if (String(p.role || '').toLowerCase() === 'coordinator') {
+        coordAmount += amt;
+        coordCount += 1;
+      }
+    }
+    const totalCount = unified.length;
+    // El resto (partner + cualquier otro rol) se agrupa como "socio" para
+    // que coordinador + socio sumen siempre el total movilizado.
+    const partnerAmount = totalAmount - coordAmount;
+    const partnerCount  = totalCount - coordCount;
+    const present = FAMILY_ORDER.filter(k => fams[k]);
+
+    // Barra apilada por nº de proyectos
+    const segments = present.map(k => {
+      const pct = (fams[k].count / totalCount) * 100;
+      const meta = FAMILY_META[k];
+      return `<div title="${esc(meta.label)}: ${fams[k].count}" style="width:${pct}%;background:${meta.color}"></div>`;
+    }).join('');
+
+    // Tarjetas por familia
+    const maxCount = Math.max(...present.map(k => fams[k].count));
+    const cards = present.map(k => {
+      const meta = FAMILY_META[k];
+      const f = fams[k];
+      const money = fmtMoney(f.amount);
+      const barPct = maxCount ? (f.count / maxCount) * 100 : 0;
+      return `
+        <div class="bg-white rounded-xl border border-outline-variant/30 p-3 flex flex-col">
+          <div class="flex items-center gap-1.5 mb-1.5">
+            <span class="material-symbols-outlined text-[18px]" style="color:${meta.color}">${meta.icon}</span>
+            <span class="text-[11px] font-bold text-on-surface leading-tight">${esc(meta.label)}</span>
+          </div>
+          <div class="flex items-baseline gap-1">
+            <span class="text-2xl font-extrabold text-primary">${f.count}</span>
+            <span class="text-[11px] font-semibold text-on-surface-variant">proyecto${f.count === 1 ? '' : 's'}</span>
+          </div>
+          <div class="text-[12px] font-semibold ${money ? 'text-on-surface-variant' : 'text-on-surface-variant/40'}">${money || '—'}</div>
+          <div class="mt-2 h-1.5 rounded-full bg-surface-container overflow-hidden">
+            <div class="h-full rounded-full" style="width:${barPct}%;background:${meta.color}"></div>
+          </div>
+        </div>`;
+    }).join('');
+
+    host.innerHTML = `
+      <div class="rounded-2xl p-5 text-white" style="background:linear-gradient(135deg,#1b1464,#2d1f8f)">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <div class="text-[11px] font-bold uppercase tracking-wider text-white/55">Experiencia Erasmus+</div>
+            <div class="text-3xl font-extrabold leading-none mt-1">${totalCount} <span class="text-base font-semibold text-white/70">proyectos</span></div>
+          </div>
+          <div class="text-right">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-white/55">Financiación total movilizada</div>
+            <div class="text-3xl font-extrabold leading-none mt-1" style="color:#fbff12">${fmtMoney(totalAmount) || '0 €'}</div>
+          </div>
+        </div>
+        <div class="mt-4 flex h-2.5 rounded-full overflow-hidden bg-white/15">${segments}</div>
+        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="rounded-xl bg-white/10 px-3.5 py-2.5">
+            <div class="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-white/55">
+              <span class="material-symbols-outlined text-[15px]" style="color:#fbff12">military_tech</span> Fondos gestionados como coordinador
+            </div>
+            <div class="text-xl font-extrabold leading-tight mt-1">${fmtMoney(coordAmount) || '0 €'}</div>
+            <div class="text-[11px] text-white/60">${coordCount} proyecto${coordCount === 1 ? '' : 's'} liderado${coordCount === 1 ? '' : 's'}</div>
+          </div>
+          <div class="rounded-xl bg-white/10 px-3.5 py-2.5">
+            <div class="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-white/55">
+              <span class="material-symbols-outlined text-[15px] text-white/80">handshake</span> Fondos como socio en consorcios
+            </div>
+            <div class="text-xl font-extrabold leading-tight mt-1">${fmtMoney(partnerAmount) || '0 €'}</div>
+            <div class="text-[11px] text-white/60">${partnerCount} proyecto${partnerCount === 1 ? '' : 's'} como socio</div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mt-3">${cards}</div>`;
   }
 
   function renderProjectDetailHtml(p) {

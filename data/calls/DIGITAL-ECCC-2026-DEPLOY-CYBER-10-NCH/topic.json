@@ -16,9 +16,9 @@
   "actionCode": "DIGITAL-JU-SIMPLE",
   "mgaCode": "DIGITAL-AG",
   "budget": {
-    "total_eur": 4000000,
+    "total_eur": 2000000,
     "by_year": {
-      "2025": 4000000
+      "2025": 2000000
     },
     "expected_grants": 1,
     "min_contribution_eur": null,

@@ -117,6 +117,7 @@ app.use('/v1/subscribers', require('./node/src/modules/subscribers/routes'));
 app.use('/v1/vps',         require('./node/src/modules/vps/routes'));
 app.use('/v1/master',      require('./node/src/modules/master/routes'));
 app.use('/v1/diagnose',    require('./node/src/modules/diagnose/routes'));
+app.use('/v1/academy',     require('./node/src/modules/academy/routes'));
 
 /* ── SPA fallback — serve index.html for all non-API routes ─── */
 app.get('*', (req, res) => {

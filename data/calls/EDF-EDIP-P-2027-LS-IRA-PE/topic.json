@@ -7,18 +7,18 @@
   "programme": "European Defence Fund",
   "programmeCode": "44181033",
   "programmePeriod": "2021 - 2027",
-  "status": "forthcoming",
-  "statusCode": "31094501",
+  "status": "open",
+  "statusCode": "31094502",
   "opening": "2026-06-17",
   "deadline": "2027-02-16",
   "deadlineModel": "single-stage",
   "actionType": "EDF Lump Sum Grants",
-  "actionCode": null,
-  "mgaCode": null,
+  "actionCode": "EDF-LS",
+  "mgaCode": "EDF-AG-LS",
   "budget": {
-    "total_eur": 564300000,
+    "total_eur": 282150000,
     "by_year": {
-      "2027": 564300000
+      "2027": 282150000
     },
     "expected_grants": null,
     "min_contribution_eur": null,
@@ -30,9 +30,16 @@
   ],
   "crossCuttingPriorities": [],
   "supportInfoText": "For help related to this call, please contact DEFIS-EDIP-PROPOSALS@ec.europa.eu\n\nUseful resources and documents, such as guidance and video tutorials on call contents and proposal preparation\n\nFunding & Tenders Portal FAQ – Submission of proposals.\n\nIT Helpdesk – Contact the IT helpdesk for questions such as forgotten passwords, access rights and roles, technical aspects of submission of proposals, etc.\n\nOnline Manual – Step-by-step online guide through the Portal processes from proposal preparation and evaluation to reporting on your ongoing project. Valid for all 2021-2027 programmes.",
-  "submissionUrl": null,
+  "submissionUrl": "https://ec.europa.eu/research/participants/submission/manage/screen/submission/create-draft/44853?topic=EDF-EDIP-P-2027-LS-IRA-PE",
   "topicUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/EDF-EDIP-P-2027-LS-IRA-PE",
   "documents": [
+    {
+      "section": "1. Admissibility conditions: Proposal page limit and layout",
+      "label": "call document",
+      "url": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/edf/wp-call/2027/call-fiche_edf-edip-p-2027-ls-ira_en.pdf",
+      "ext": ".pdf",
+      "is_downloadable": true
+    },
     {
       "section": "5a. Evaluation and award: Submission and evaluation processes",
       "label": "Online Manual",
@@ -146,5 +153,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:27.700Z"
+  "fetchedAt": "2026-06-27T12:50:07.277Z"
 }

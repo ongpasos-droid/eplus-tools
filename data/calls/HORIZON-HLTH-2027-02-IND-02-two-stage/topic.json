@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 186600000,
+    "total_eur": 39300000,
     "by_year": {
-      "2027": 186600000
+      "2027": 39300000
     },
-    "expected_grants": 8,
-    "min_contribution_eur": 10000000,
-    "max_contribution_eur": 10000000
+    "expected_grants": 6,
+    "min_contribution_eur": 5000000,
+    "max_contribution_eur": 7000000
   },
   "keywords": [
     "HORIZON-HLTH-2027-02-IND-02-two-stage",
@@ -203,5 +203,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:26.342Z"
+  "fetchedAt": "2026-06-27T12:50:06.818Z"
 }

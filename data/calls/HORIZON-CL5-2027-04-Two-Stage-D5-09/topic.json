@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 53000000,
+    "total_eur": 5000000,
     "by_year": {
-      "2027": 53000000
+      "2027": 5000000
     },
-    "expected_grants": 10,
-    "min_contribution_eur": 4800000,
-    "max_contribution_eur": 4800000
+    "expected_grants": 2,
+    "min_contribution_eur": 2500000,
+    "max_contribution_eur": 2500000
   },
   "keywords": [
     "HORIZON-CL5-2027-04-Two-Stage-D5-09",
@@ -170,5 +170,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:24.663Z"
+  "fetchedAt": "2026-06-27T12:50:05.109Z"
 }

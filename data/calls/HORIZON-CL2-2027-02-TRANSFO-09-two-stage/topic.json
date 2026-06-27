@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 58000000,
+    "total_eur": 16000000,
     "by_year": {
-      "2027": 58000000
+      "2027": 16000000
     },
-    "expected_grants": 6,
+    "expected_grants": 5,
     "min_contribution_eur": 3200000,
-    "max_contribution_eur": 4000000
+    "max_contribution_eur": 3200000
   },
   "keywords": [
     "HORIZON-CL2-2027-02-TRANSFO-09-two-stage",
@@ -188,5 +188,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:25.625Z"
+  "fetchedAt": "2026-06-27T12:50:06.796Z"
 }

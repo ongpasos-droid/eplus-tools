@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 224000000,
+    "total_eur": 16000000,
     "by_year": {
-      "2027": 224000000
+      "2027": 16000000
     },
-    "expected_grants": 25,
-    "min_contribution_eur": 10000000,
-    "max_contribution_eur": 12500000
+    "expected_grants": 3,
+    "min_contribution_eur": 4000000,
+    "max_contribution_eur": 6000000
   },
   "keywords": [
     "HORIZON-CL4-2027-01-MAT-PROD-08",
@@ -206,5 +206,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:24.725Z"
+  "fetchedAt": "2026-06-27T12:50:04.883Z"
 }

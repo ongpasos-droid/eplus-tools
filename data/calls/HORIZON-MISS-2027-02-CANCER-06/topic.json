@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 115323812,
+    "total_eur": 3000000,
     "by_year": {
-      "2027": 115323812
+      "2027": 3000000
     },
-    "expected_grants": 4,
-    "min_contribution_eur": 8000000,
-    "max_contribution_eur": 10000000
+    "expected_grants": 1,
+    "min_contribution_eur": 3000000,
+    "max_contribution_eur": 3000000
   },
   "keywords": [
     "HORIZON-MISS-2027-02-CANCER-06",
@@ -176,5 +176,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:25.691Z"
+  "fetchedAt": "2026-06-27T12:50:06.804Z"
 }

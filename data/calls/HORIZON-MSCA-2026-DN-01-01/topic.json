@@ -7,14 +7,14 @@
   "programme": "Horizon Europe",
   "programmeCode": "43108390",
   "programmePeriod": "2021 - 2027",
-  "status": "forthcoming",
-  "statusCode": "31094501",
+  "status": "open",
+  "statusCode": "31094502",
   "opening": "2026-05-28",
   "deadline": "2026-11-24",
   "deadlineModel": "single-stage",
   "actionType": "HORIZON TMA MSCA Doctoral Networks - Joint DoctoratesHORIZON TMA MSCA Doctoral Networks - Industrial DoctoratesHORIZON TMA MSCA Doctoral Networks",
-  "actionCode": null,
-  "mgaCode": null,
+  "actionCode": "HORIZON-TMA-MSCA-DN-ID",
+  "mgaCode": "HORIZON-AG-UN",
   "budget": {
     "total_eur": 1779101538,
     "by_year": {
@@ -30,7 +30,7 @@
   ],
   "crossCuttingPriorities": [],
   "supportInfoText": "Online Manual is your guide on the procedures from proposal submission to managing your grant.\n\nHorizon Europe Programme Guide contains the detailed guidance to the structure, budget and political priorities of Horizon Europe.\n\nFunding & Tenders Portal FAQ – find the answers to most frequently asked questions on submission of proposals, evaluation and grant management.\n\nResearch Enquiry Service – ask questions about any aspect of European research in general and the EU Research Framework Programmes in particular.\n\nNational Contact Points (NCPs) – get guidance, practical information and assistance on participation in Horizon Europe. There are also NCPs in many non-EU and non-associated countries (‘third-countries’).\n\nEnterprise Europe Network – contact your EEN national contact for advice to businesses with special focus on SMEs. The support includes guidance on the EU research funding.\n\nIT Helpdesk – contact the Funding & Tenders Portal IT helpdesk for questions such as forgotten passwords, access rights and roles, technical aspects of submission of proposals, etc.\n\nEuropean IPR Helpdesk assists you on intellectual property issues.\n\nCEN-CENELEC Research Helpdesk and ETSI Research Helpdesk – the European Standards Organisations advise you how to tackle standardisation in your project proposal.\n\nThe European Charter for Researchers and the Code of Conduct for their recruitment – consult the general principles and requirements specifying the roles, responsibilities and entitlements of researchers, employers and funders of researchers.\n\nPartner Search help you find a partner organisation for your proposal.",
-  "submissionUrl": null,
+  "submissionUrl": "https://ec.europa.eu/research/participants/submission/manage/screen/submission/create-draft/44351?topic=HORIZON-MSCA-2026-DN-01-01",
   "topicUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-MSCA-2026-DN-01-01",
   "documents": [
     {
@@ -69,6 +69,27 @@
       "is_downloadable": false
     },
     {
+      "section": "Specific conditions",
+      "label": "recording",
+      "url": "https://www.youtube.com/watch?v=FRmrrqWUN_4",
+      "ext": "",
+      "is_downloadable": false
+    },
+    {
+      "section": "Specific conditions",
+      "label": "Presentation",
+      "url": "https://circabc.europa.eu/ui/group/0d6109dc-828d-4995-b5ac-e28e88ec5d49/library/e5133bba-6db8-482b-959e-71650c25087a/details",
+      "ext": "",
+      "is_downloadable": false
+    },
+    {
+      "section": "Specific conditions",
+      "label": "Frequently Asked Questions",
+      "url": "https://circabc.europa.eu/ui/group/0d6109dc-828d-4995-b5ac-e28e88ec5d49/library/08b10e0d-1dfd-41ae-9ab7-c1becbbafbc4/details",
+      "ext": "",
+      "is_downloadable": false
+    },
+    {
       "section": "Application and evaluation forms and model grant agreement (MGA):",
       "label": "Standard application form (HE MSCA DN)",
       "url": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/horizon/temp-form/af/af_he-msca-dn_en.pdf",
@@ -88,6 +109,13 @@
       "url": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/horizon/agr-contr/unit-mga_he_en.pdf",
       "ext": ".pdf",
       "is_downloadable": true
+    },
+    {
+      "section": "Application and evaluation forms and model grant agreement (MGA):",
+      "label": "HE MSCA DN Guide for Applicants",
+      "url": "https://circabc.europa.eu/ui/group/0d6109dc-828d-4995-b5ac-e28e88ec5d49/library/ff7724fd-0246-41e3-8079-d7574552decf/details",
+      "ext": "",
+      "is_downloadable": false
     },
     {
       "section": "Additional documents:",
@@ -174,5 +202,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:23.891Z"
+  "fetchedAt": "2026-06-27T12:50:07.472Z"
 }

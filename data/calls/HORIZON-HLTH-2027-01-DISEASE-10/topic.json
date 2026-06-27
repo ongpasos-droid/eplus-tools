@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 341600000,
+    "total_eur": 11800000,
     "by_year": {
-      "2027": 341600000
+      "2027": 11800000
     },
-    "expected_grants": 5,
-    "min_contribution_eur": 10000000,
-    "max_contribution_eur": 11000000
+    "expected_grants": 3,
+    "min_contribution_eur": 3000000,
+    "max_contribution_eur": 4000000
   },
   "keywords": [
     "HORIZON-HLTH-2027-01-DISEASE-10",
@@ -200,5 +200,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:26.324Z"
+  "fetchedAt": "2026-06-27T12:50:06.814Z"
 }

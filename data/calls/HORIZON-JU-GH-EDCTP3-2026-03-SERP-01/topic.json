@@ -16,13 +16,13 @@
   "actionCode": "HORIZON-JU-CSA",
   "mgaCode": "HORIZON-AG-LS",
   "budget": {
-    "total_eur": 33000000,
+    "total_eur": 15000000,
     "by_year": {
-      "2026": 33000000
+      "2026": 15000000
     },
     "expected_grants": 10,
-    "min_contribution_eur": 2250000,
-    "max_contribution_eur": 2250000
+    "min_contribution_eur": 1500000,
+    "max_contribution_eur": 1500000
   },
   "keywords": [
     "HORIZON-JU-GH-EDCTP3-2026-03-SERP-01",
@@ -243,5 +243,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:26.046Z"
+  "fetchedAt": "2026-06-27T12:50:06.496Z"
 }

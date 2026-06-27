@@ -16,9 +16,9 @@
   "actionCode": "EDF-RA",
   "mgaCode": "EDF-AG",
   "budget": {
-    "total_eur": 770000000,
+    "total_eur": 110000000,
     "by_year": {
-      "2026": 770000000
+      "2026": 110000000
     },
     "expected_grants": null,
     "min_contribution_eur": null,
@@ -181,5 +181,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-06T19:11:40.268Z"
+  "fetchedAt": "2026-06-27T12:50:05.800Z"
 }

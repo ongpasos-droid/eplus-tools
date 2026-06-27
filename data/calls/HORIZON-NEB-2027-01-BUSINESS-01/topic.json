@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 93760000,
+    "total_eur": 10000000,
     "by_year": {
-      "2027": 93760000
+      "2027": 10000000
     },
-    "expected_grants": 4,
-    "min_contribution_eur": 5500000,
-    "max_contribution_eur": 5500000
+    "expected_grants": 2,
+    "min_contribution_eur": 5000000,
+    "max_contribution_eur": 5000000
   },
   "keywords": [
     "HORIZON-NEB-2027-01-BUSINESS-01",
@@ -189,5 +189,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:25.850Z"
+  "fetchedAt": "2026-06-27T12:50:06.241Z"
 }

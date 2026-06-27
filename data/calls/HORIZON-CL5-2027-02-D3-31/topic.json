@@ -16,13 +16,13 @@
   "actionCode": null,
   "mgaCode": null,
   "budget": {
-    "total_eur": 227600000,
+    "total_eur": 5000000,
     "by_year": {
-      "2027": 227600000
+      "2027": 5000000
     },
-    "expected_grants": 3,
-    "min_contribution_eur": 43000000,
-    "max_contribution_eur": 43000000
+    "expected_grants": 1,
+    "min_contribution_eur": 5000000,
+    "max_contribution_eur": 5000000
   },
   "keywords": [
     "HORIZON-CL5-2027-02-D3-31",
@@ -170,5 +170,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:24.481Z"
+  "fetchedAt": "2026-06-27T12:50:07.720Z"
 }

@@ -7,18 +7,18 @@
   "programme": "CERV",
   "programmeCode": "43251589",
   "programmePeriod": "2021 - 2027",
-  "status": "forthcoming",
-  "statusCode": "31094501",
+  "status": "open",
+  "statusCode": "31094502",
   "opening": "2026-05-20",
   "deadline": "2026-09-15",
   "deadlineModel": "single-stage",
   "actionType": "CERV Project Grants",
-  "actionCode": null,
-  "mgaCode": null,
+  "actionCode": "CERV-PJG",
+  "mgaCode": "CERV-AG",
   "budget": {
-    "total_eur": 52000000,
+    "total_eur": 26000000,
     "by_year": {
-      "2026": 52000000
+      "2026": 26000000
     },
     "expected_grants": null,
     "min_contribution_eur": null,
@@ -29,11 +29,11 @@
     "CERV-2026-CHAR-LITI"
   ],
   "crossCuttingPriorities": [
-    "DigitalAgenda",
-    "AI"
+    "AI",
+    "DigitalAgenda"
   ],
   "supportInfoText": "Funding & Tenders Portal FAQ – Submission of proposals.\n\nIT Helpdesk – Contact the IT helpdesk for questions such as forgotten passwords, access rights and roles, technical aspects of submission of proposals, etc.\n\nOnline Manual – Step-by-step online guide through the Portal processes from proposal preparation and evaluation to reporting on your ongoing project. Valid for all 2021-2027 programmes.\n\nPlease consult the Q&A on the Topic page for call-specific questions.\n\nPlease also consult the Topic page regularly, since we will use it to publish call updates, including invitations to info sessions for applicants (if any) after the opening of the call.\n\nNon-IT related questions should be sent to the following email address: the CERV National Contact Point of your country (if established) or otherwise EACEA-CERV@ec.europa.eu. Please indicate clearly in the subject of the email the reference of the call: \"CERV-2026-CHAR-LITI\".",
-  "submissionUrl": null,
+  "submissionUrl": "https://ec.europa.eu/research/participants/submission/manage/screen/submission/create-draft/44212?topic=CERV-2026-CHAR-LITI-CHARTER",
   "topicUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/CERV-2026-CHAR-LITI-CHARTER",
   "documents": [
     {
@@ -114,5 +114,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:27.631Z"
+  "fetchedAt": "2026-06-27T12:50:07.345Z"
 }

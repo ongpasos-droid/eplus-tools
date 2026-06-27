@@ -16,11 +16,11 @@
   "actionCode": "DIGITAL-CSA",
   "mgaCode": "DIGITAL-AG",
   "budget": {
-    "total_eur": 37500000,
+    "total_eur": 12500000,
     "by_year": {
-      "2026": 37500000
+      "2026": 12500000
     },
-    "expected_grants": 2,
+    "expected_grants": 1,
     "min_contribution_eur": null,
     "max_contribution_eur": null
   },
@@ -133,5 +133,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:26.862Z"
+  "fetchedAt": "2026-06-27T12:50:06.861Z"
 }

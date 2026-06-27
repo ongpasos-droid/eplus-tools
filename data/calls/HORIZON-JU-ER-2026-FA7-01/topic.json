@@ -16,9 +16,9 @@
   "actionCode": "HORIZON-JU-RIA",
   "mgaCode": "HORIZON-AG-LS",
   "budget": {
-    "total_eur": 6100000,
+    "total_eur": 3000000,
     "by_year": {
-      "2026": 6100000
+      "2026": 3000000
     },
     "expected_grants": 1,
     "min_contribution_eur": 3100000,

@@ -16,9 +16,9 @@
   "actionCode": "EDF-LS",
   "mgaCode": "EDF-AG-LS",
   "budget": {
-    "total_eur": 60000000,
+    "total_eur": 30000000,
     "by_year": {
-      "2026": 60000000
+      "2026": 30000000
     },
     "expected_grants": null,
     "min_contribution_eur": null,
@@ -181,5 +181,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-05-07T12:03:23.977Z"
+  "fetchedAt": "2026-06-27T12:50:05.812Z"
 }

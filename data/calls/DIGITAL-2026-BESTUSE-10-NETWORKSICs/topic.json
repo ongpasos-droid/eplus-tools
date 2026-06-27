@@ -16,9 +16,9 @@
   "actionCode": "DIGITAL-SIMPLE",
   "mgaCode": "DIGITAL-AG",
   "budget": {
-    "total_eur": 48800000,
+    "total_eur": 24400000,
     "by_year": {
-      "2026": 48800000
+      "2026": 24400000
     },
     "expected_grants": 15,
     "min_contribution_eur": null,
