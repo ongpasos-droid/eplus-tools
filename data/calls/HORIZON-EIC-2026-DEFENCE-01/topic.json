@@ -2,7 +2,7 @@
   "identifier": "HORIZON-EIC-2026-DEFENCE-01",
   "ccm2Id": "51572985",
   "callIdentifier": "HORIZON-EIC-2026-STEP-DEFENCE-01",
-  "callTitle": "EIC STEP DEFENCE 01",
+  "callTitle": "EIC STEP Scale Up Defence",
   "title": "EIC defence call",
   "programme": "Horizon Europe",
   "programmeCode": "43108390",
@@ -83,5 +83,5 @@
       "is_downloadable": false
     }
   ],
-  "fetchedAt": "2026-06-26T04:02:07.835Z"
+  "fetchedAt": "2026-06-27T04:05:32.166Z"
 }

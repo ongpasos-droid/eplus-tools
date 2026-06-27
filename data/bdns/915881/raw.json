@@ -1,0 +1,64 @@
+{
+  "id": 1117442,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "EXTREMADURA",
+    "nivel3": "DIRECCIÓN GENERAL DE PLANIFICACIÓN, FORMACIÓN Y CALIDAD SANITARIAS Y SOCIOSANITARIAS"
+  },
+  "sedeElectronica": "https://www.juntaex.es/w/0722925",
+  "codigoBDNS": "915881",
+  "fechaRecepcion": "2026-06-26",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 324321,
+  "mrr": false,
+  "descripcion": "Subv. 2026 a proyectos de Entidades de personas afectadas por Enfermedades Crónicas , según Resolución  de 22 de junio de 2026 de la Secretaria General",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Otras actividades sanitarias",
+      "codigo": "86.9"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES43 - EXTREMADURA"
+    }
+  ],
+  "descripcionFinalidad": "Sanidad",
+  "descripcionBasesReguladoras": "Orden de 29 de junio de 2020 de bases reguladoras de las subvenciones a otorgar por la Consejería de Sanidad y Servicios Sociales en materia de participación comunitaria en salud",
+  "urlBasesReguladoras": "http://doe.gobex.es/pdfs/doe/2020/1290o/20050125.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Desde día siguiente publicación DOE",
+  "textFin": "10 días hábiles, a contar del día siguiente publicación DOE",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1483373,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Subv_ 2026 a proyectos de Entidades de personas por Enfermedades Crónicas , según Resolución  de 22 de junio de 2026 de la Secretaria General.PDF",
+      "long": 347265,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,64 @@
+{
+  "id": 1117335,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "TERRASSA",
+    "nivel3": "AJUNTAMENT DE TERRASSA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "915774",
+  "fechaRecepcion": "2026-06-26",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 2500,
+  "mrr": false,
+  "descripcion": "Decreto número 20901/2026, del 16 de junio, de la Tenencia de Alcaldía del Área de Acción Social, Participación y Calidad Democrática, por la que se convocan becas del Plan de Formación en el tiempo libre, dirigidas a la formación de educadores y educa",
+  "descripcionLeng": "Decret número 20901/2026, del 16 de juny, de la tinència d’alcaldia de l’Àrea d’Acció Social, Participació i Qualitat Democràtica, pel que s’obre la convocatòria per a la concessió de beques adreçades a la formació d’educadors i educadores en el lleure ",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES511 - Barcelona"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Bases especificas para el otorgamiento de subvenciones, en régimen de concurrencia competitiva para la realización de proyectos y actividades de utilidad publica o interés social.",
+  "urlBasesReguladoras": "https://bop.diba.cat/anunci/3869710/aprovacio-de-les-bases-especifiques-d-atorgament-de-subvencions-per-a-la-realitzacio-de-projectes-i-activitats-d-utilitat-publica-o-interes-social-ajuntament-de-terrassa",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir del día siguiente de la publicación de esta convocatoria en el BOP",
+  "textFin": "Será de 20 días hábiles a partir del día siguiente de la publicación de esta convocatoria en el BOP",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1483129,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "BDNS_Convocatoria19Cast.pdf",
+      "long": 100263,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,88 @@
+{
+  "id": 1117314,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "ESCATRÓN",
+    "nivel3": "AYUNTAMIENTO DE ESCATRÓN"
+  },
+  "sedeElectronica": "https://escatron.sedelectronica.es",
+  "codigoBDNS": "915753",
+  "fechaRecepcion": "2026-06-26",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 7400,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA COMPLEMENTARIA SUBVENCIONES PARA ESTUDIANTES CURSO 2025/2026.",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES243 - Zaragoza"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "ORDENANZA GENERAL DE SUBVENCIONES DEL AYUNTAMIENTO DE ESCATRÓN.",
+  "urlBasesReguladoras": "http://bop.dpz.es/BOPZ/UploadServlet?ruta=Boletines\\2015\\142\\bop.pdf#page=11",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "El día siguiente de la publicación de la convocatoria en el Boletín Oficial Provincia Zaragoza",
+  "textFin": "20 días naturales desde la publicación de la convocatoria en el BOPZ",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1483038,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Bases Convocatoria complementaria subvenciones Formación 2025_2026.pdf",
+      "long": 258693,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    },
+    {
+      "id": 1483065,
+      "descripcion": "Anexo III Declaración otras subvenciones",
+      "nombreFic": "Anexo III Declaración otras subvenciones.docx",
+      "long": 32641,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    },
+    {
+      "id": 1483062,
+      "descripcion": "Anexo II Declaración responsable",
+      "nombreFic": "Anexo II Declaración responsable Complementaria Educación.docx",
+      "long": 32634,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    },
+    {
+      "id": 1483058,
+      "descripcion": "Anexo I Solicitud",
+      "nombreFic": "Anexo I. Complementaria Educación.docx",
+      "long": 35858,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

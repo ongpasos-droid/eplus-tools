@@ -1,0 +1,59 @@
+{
+  "source": "bdns",
+  "source_id": "915702",
+  "source_lang": "es",
+  "level": "estado",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "ESTADO / MINISTERIO DE TRABAJO Y ECONOMÍA SOCIAL / DIRECCIÓN GENERAL DE LA ECONOMÍA SOCIAL Y DE LA RESPONSABILIDAD SOCIAL DE LAS EMPRESAS",
+  "nuts_codes": [],
+  "nuts_primary": null,
+  "title": "Resolución de 25 de junio de 2026 de la Secretaría de Estado de Economía Social, por la que se aprueba la convocatoria para la concesión de subvenciones a proyectos de economía social y de RSE y para gastos de funcionamiento",
+  "title_lang": "es",
+  "summary": "Fomento del Empleo",
+  "status": "open",
+  "publication_date": "2026-06-26",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 7943380,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "94.9",
+      "descripcion": "Otras actividades asociativas"
+    }
+  ],
+  "apply_url": "https://sede.mites.gob.es/inicio/listado/materia/Subvenciones",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/915702",
+  "documents": [
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.boe.es/boe/dias/2026/06/06/pdfs/BOE-A-2026-12275.pdf",
+  "text_inicio": "al día siguiente a la publicación del extracto",
+  "text_fin": "15 días hábiles",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-06-27T04:08:51.961Z"
+}

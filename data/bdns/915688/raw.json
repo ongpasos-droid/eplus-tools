@@ -1,0 +1,72 @@
+{
+  "id": 1117249,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "BENAVENTE",
+    "nivel3": "AYUNTAMIENTO DE BENAVENTE"
+  },
+  "sedeElectronica": "aytobenavente.org",
+  "codigoBDNS": "915688",
+  "fechaRecepcion": "2026-06-26",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 15000,
+  "mrr": false,
+  "descripcion": "BASES REGULADORAS PARA LA CONCESIÓN DE PRESTACIONES ECONÓMICAS DESTINADAS A LA ATENCIÓN DE NECESIDADES BÁSICAS DE SUBSISTENCIA- AYUDA LUZ Y GAS 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES41 - CASTILLA Y LEON"
+    }
+  ],
+  "descripcionFinalidad": "Otras Prestaciones económicas",
+  "descripcionBasesReguladoras": "BASES REGULADORAS PARA LA CONCESIÓN DE PRESTACIONES ECONÓMICAS DESTINADAS A LA ATENCIÓN DE NECESIDADES BÁSICAS DE SUBSISTENCIA- AYUDA LUZ Y GAS 2026",
+  "urlBasesReguladoras": "https://benavente.es/ayuntamiento/portal-de-transparencia/#subvenciones",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir del día siguiente de la publicación de la convocatoria en el B.O.P. Zamora",
+  "textFin": "20 días hábiles contados a partir del día siguiente publicación de la convocatoria en el BOP Zamora",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1482863,
+      "descripcion": "DECRETO APROBACIÓN BASES",
+      "nombreFic": "DECRETO FIRMADO LUZ Y GAS.pdf",
+      "long": 166652,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    },
+    {
+      "id": 1482862,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "BASES FIRMADASLUZ Y GAS .pdf",
+      "long": 346271,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

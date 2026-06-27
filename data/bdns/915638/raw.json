@@ -1,0 +1,104 @@
+{
+  "id": 1117199,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "BENITACHELL/POBLE NOU DE BENITATXELL, EL",
+    "nivel3": "AYUNTAMIENTO DE BENITACHELL/POBLE NOU DE BENITATXELL, EL"
+  },
+  "sedeElectronica": "https://benitatxell.sedelectronica.es/info.0",
+  "codigoBDNS": "915638",
+  "fechaRecepcion": "2026-06-26",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 30000,
+  "mrr": false,
+  "descripcion": "BASES AYUDAS PARA AUTONOMOS Y EMPRESAS AFECTADOS POR LAS OBRAS REALIZADAS EN LAS CALLES MAYOR Y PAU.",
+  "descripcionLeng": "BASES AYUDAS PARA AUTONOMOS Y EMPRESAS AFECTADOS POR LAS OBRAS REALIZADAS EN LAS CALLES MAYOR Y PAU.",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "COMERCIO AL POR MAYOR Y AL POR MENOR",
+      "codigo": "G"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES521 - Alicante / Alacant"
+    }
+  ],
+  "descripcionFinalidad": "Comercio, Turismo y Pymes",
+  "descripcionBasesReguladoras": "BASES AYUDAS PARA AUTONOMOS Y EMPRESAS AFECTADOS POR LAS OBRAS REALIZADAS EN LAS CALLES MAYOR Y PAU.",
+  "urlBasesReguladoras": "https://benitatxell.sedelectronica.es/info.0",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "El plazo será de 10 días hábiles a partir del día siguiente a la publicación en el BOP de Alicante",
+  "textFin": "El plazo será de 10 días hábiles a partir del día siguiente a la publicación en el BOP de Alicante",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1482745,
+      "descripcion": "ANEXO III",
+      "nombreFic": "ANEXO III IMPRESO MANTENIMIENTO TERCEROS.docx",
+      "long": 33852,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    },
+    {
+      "id": 1482744,
+      "descripcion": "ANEXO II",
+      "nombreFic": "20220829_anexo II modelo solicitud comercios afectados obras.docx",
+      "long": 40423,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    },
+    {
+      "id": 1482742,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "20260623_Otros_bases ayudas comerciantes calles pau y mayor.pdf",
+      "long": 267136,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    },
+    {
+      "id": 1482743,
+      "descripcion": "ANEXO I",
+      "nombreFic": "ANEXO I MODELO AUTORIZACIÓN REPRESENTACIÓN.docx",
+      "long": 30821,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    },
+    {
+      "id": 1482747,
+      "descripcion": "ANEXO V",
+      "nombreFic": "anexo V gastos.docx",
+      "long": 25071,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    },
+    {
+      "id": 1482746,
+      "descripcion": "ANEXO IV",
+      "nombreFic": "anexo IV declaracion.docx",
+      "long": 26078,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

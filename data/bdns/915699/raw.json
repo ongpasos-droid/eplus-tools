@@ -1,0 +1,156 @@
+{
+  "id": 1117260,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "ANDOAIN",
+    "nivel3": "AYUNTAMIENTO DE ANDOAIN"
+  },
+  "sedeElectronica": "https://udal.egoitza.gipuzkoa.eus/WAS/AYTO/USCServicioCiudadanoVer15WEB/home.do?ayto=9&dUsu=N",
+  "codigoBDNS": "915699",
+  "fechaRecepcion": "2026-06-26",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concesión directa - canónica",
+  "presupuestoTotal": 70000,
+  "mrr": false,
+  "descripcion": "Convocatoria 2026 para la concesión de ayudas para el fomento del empleo, el emprendimiento y la modernización y consolidación de negocios en Andoain",
+  "descripcionLeng": "Andoainen enplegua, ekintzailetza eta negozioak modernizatzea eta sendotzea sustatzeko dirulaguntzen 2026ko deialdia ",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES PROFESIONALES, CIENTÍFICAS Y TÉCNICAS",
+      "codigo": "N"
+    },
+    {
+      "descripcion": "COMERCIO AL POR MAYOR Y AL POR MENOR",
+      "codigo": "G"
+    },
+    {
+      "descripcion": "HOSTELERÍA",
+      "codigo": "I"
+    },
+    {
+      "descripcion": "OTROS SERVICIOS",
+      "codigo": "T"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES212 - Gipuzkoa"
+    }
+  ],
+  "descripcionFinalidad": "Comercio, Turismo y Pymes",
+  "descripcionBasesReguladoras": "Ordenanza Municipal Reguladora de la Concesión de Subvenciones",
+  "urlBasesReguladoras": "https://egoitza.gipuzkoa.eus/gao-bog/castell/bog/2014/05/27/c1404879.htm",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-10-31",
+  "textInicio": "Una vez publicado el anuncio de la convocatoria en el Boletín Oficial de Gipuzkoa ",
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1482864,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Deialdsinatuta.pdf",
+      "long": 267450,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    },
+    {
+      "id": 1482865,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Deialdsinatuta.pdf",
+      "long": 267450,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    },
+    {
+      "id": 1482867,
+      "descripcion": "Ebazpena dirulaguntzak onartuz",
+      "nombreFic": "EbazpDeialdia_sinatuta.pdf",
+      "long": 413929,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    },
+    {
+      "id": 1482868,
+      "descripcion": "E105 ESKAERA EU",
+      "nombreFic": "E105 Eskaera eus.pdf",
+      "long": 1022831,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    },
+    {
+      "id": 1482872,
+      "descripcion": "E002 REPRESENTACIÓN",
+      "nombreFic": "E002-Ordezkaritza_ELEB.pdf",
+      "long": 1183479,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    },
+    {
+      "id": 1482881,
+      "descripcion": "E013 PLAN DE DE NEGOCIO MODELO",
+      "nombreFic": "E013-Mod PlanNegocio.pdf",
+      "long": 844840,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    },
+    {
+      "id": 1482883,
+      "descripcion": "E106 JUSTIFICACION SUBVENCION",
+      "nombreFic": "E106-Dirulag_Zuriketa ELEB.pdf",
+      "long": 1093550,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    },
+    {
+      "id": 1482873,
+      "descripcion": "E011 REPRESENTACIÓN CB",
+      "nombreFic": "E011Ordezkaritza CB-ELEB.pdf",
+      "long": 565561,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    },
+    {
+      "id": 1482879,
+      "descripcion": "E013 BIDERAGARRITASUN PLANA EREDUA",
+      "nombreFic": "E013-Bideragarri Plana.pdf",
+      "long": 839383,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    },
+    {
+      "id": 1482882,
+      "descripcion": "E106 DIRULAGUNTZA ZURIKETA",
+      "nombreFic": "E106-Dirulag-Zuriketa EUS.pdf",
+      "long": 1057477,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    },
+    {
+      "id": 1482870,
+      "descripcion": "E105 SOLICITUD",
+      "nombreFic": "E105 Solicitud.pdf",
+      "long": 1107636,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

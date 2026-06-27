@@ -1,0 +1,64 @@
+{
+  "id": 1117394,
+  "organo": {
+    "nivel1": "ESTADO",
+    "nivel2": "MINISTERIO DE JUVENTUD E INFANCIA",
+    "nivel3": "INSTITUTO DE LA JUVENTUD"
+  },
+  "sedeElectronica": "Aplicación SIGES",
+  "codigoBDNS": "915833",
+  "fechaRecepcion": "2026-06-26",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 1362760,
+  "mrr": false,
+  "descripcion": "Resolución del Instituto de la Juventud, por la que se convoca la concesión de subvenciones para el mantenimiento y funcionamiento de asociaciones juveniles, organizaciones juveniles y entidades prestadoras de servicios a la juventud de ámbito estatal, pa",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ACTIVIDADES SANITARIAS Y DE SERVICIOS SOCIALES",
+      "codigo": "R"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES - ESPAÑA "
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "ORDEN SSI/1204/2015, DE 16 DE JUNIO , POR LA QUE SE ESTABLECEN LAS BASES REGULADORAS PARA LA CONCESIÓN DE SUBVENCIONES PARA EL MANTENIMIENTO, FUNCIONAMIENTO Y EQUIPAMIENTO DE ASOCIACIONES JUVENILES, ORGANIZACIONES JUVENILES Y ENTIDADES PRESTADORAS DE SERV",
+  "urlBasesReguladoras": "https://www.boe.es/boe/dias/2015/06/22/pdfs/BOE-A-2015-6919.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "El día siguiente al de la publicación del extracto de la convocatoria en el BOE",
+  "textFin": "veinte días hábiles a partir del siguiente al de la publicación del extracto de la convocatoria en e",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1483248,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Resol_convocatoria asociaciones juveniles 2026_orden_2015.pdf.xsig.pdf",
+      "long": 216126,
+      "datMod": "2026-06-26",
+      "datPublicacion": "2026-06-26"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}
