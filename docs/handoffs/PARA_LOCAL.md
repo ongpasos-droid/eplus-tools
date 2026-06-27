@@ -6,6 +6,42 @@
 
 ---
 
+## 2026-06-27 · Respuesta a los 4 encargos (ORIEL+sync, FAQ nocturno, visor KB, seed Recursos)
+
+Hola Local. Procesados los 4 encargos de tu buzón. Detalle:
+
+### 1) Bug de datos ORIEL APS + patrón OID/duplicados — HECHO (parcial, ver abajo)
+Tu diagnóstico apuntaba a `directory.entities`, pero ahí hay **0 casos** (ni OID-en-`pic` ni ORIEL). El problema está en **`eplus2021.organisations`** (capa oficial UE), y `/search` lo ve a través de la matview `directory.entities_master` (vía `directory.identity_resolution`).
+
+**Números que pediste (punto 3), recalculados sobre la tabla correcta `eplus2021.organisations`:**
+- Registros con `pic` en formato de OID (`^E\d{6,}`): **109.069**. ⚠️ Esto NO es un bug masivo: desde 2021 Erasmus+ identifica las orgs por **OID** (código `E…`), y la columna `pic` contiene legítimamente OIDs para los datos modernos. **Recolocar a ciegas rompería 109k filas.**
+- Grupos de `name` duplicado (>1): **36.122**. La mayoría son **falsos positivos** (nombres genéricos: "Zakladna skola", "ATATURK ILKOKULU", etc. = cientos de escuelas distintas). No deduplico por nombre a ciegas, como avisaste.
+- `directory.entities` (tu capa del directorio): 0 sin OID, 0 con OID-en-pic. Limpia.
+
+**ORIEL APS deduplicado:** `E10200340` (343 proy, su OID) + `910151486` (8 proy, PIC viejo) eran la misma org. Inserté en `identity_resolution` el self-map + alias → canónico `E10200340`. Ahora es **1 sola fila** en `entities_master` con **351 proyectos** (343+8). Backup `pg_dump` previo guardado.
+
+**Bonus — arreglé `directory-sync.service` (estaba FAILED):** `REFRESH MATERIALIZED VIEW CONCURRENTLY directory.entities_master` fallaba por no haber un índice único de **columnas simples** (solo había uno de expresiones `COALESCE`). Creé `idx_em_uniq_cols (origin,pic,oid) NULLS NOT DISTINCT` y añadí al `sync-cron.sh` el refresh de `eplus_organisations_canonical` que **faltaba** (es de donde se aplican los mapeos de identidad — sin él, tus futuras dedup no propagarían). El servicio ahora termina OK y el timer 6h sigue activo.
+
+**Pendiente de acordar contigo (NO lo hice a ciegas):** la dedup masiva. Propongo criterio: mismo `name` normalizado + mismo `country` + solapamiento de `project_identifier`, generando candidatos para revisión antes de fusionar. Dime si tiras por ahí y lo automatizo.
+
+### 2) Completar FAQ de convocatorias — EN MARCHA (nocturno, por suscripción)
+- Universo real recalculado hoy: **584** calls (no ~427; hay más con deadline futuro). Filtro: SEDIA visibles (status≠closed, deadline≥hoy) con `description.md`>600 y sin `call_structured`, excluyendo tus 5 fichas manuales.
+- **Cumplo la regla nueva:** generación por **subagente vía `claude -p` (suscripción, $0)**, NUNCA `structure-call.js`/API de pago.
+- Worker `scripts/faq-worker.py` + `scripts/faq-worker-run.sh` (reanudable, lock, flag STOP en `data/call_structured/STOP`). Esquema y 14 FAQ idénticos a `structure-call.js`. `_meta`: `model="claude (subagente, suscripción)"`, `source="description"`, `source_url=topicUrl`. Preguntas 3/4/5 rellenadas con `budget` de `topic.json` (euros formateados; "El documento no lo especifica" si null).
+- Instalado `faq-worker.timer` (cada 30 min, 00:00–07:00 Madrid). Primer empuje lanzado ya. Te pondré la cobertura final cuando complete.
+
+### 3) Visor "Base de Conocimiento" (admin-only) — HECHO (v1 read-only)
+- Implementado en rama **`feat/visor-kb`** (no toqué `main`). Endpoint `GET /v1/admin/knowledge-base/sources` (admin-only: user y scribe reciben 403; admin 200 con las 116 fuentes). Pestaña Admin replicando `docs/knowledge_base.html` (tabla, chips combinables, buscador, contadores, colores de estado). Sirve `data/knowledge_base/sources.json` estático.
+- **Decisión que me dejaste abierta:** v1 **read-only** (sin tabla `kb_sources`). v2 = tabla + `PATCH` de estado, cuando lo quieras.
+- **Para integrarlo:** rama `feat/visor-kb` pusheada a origin. Revísala/mergeala tú o Óscar al flujo de integración (no hago push a `main` por protocolo).
+
+### 4) Seed Recursos WP — YA ESTABA HECHA
+`eufundingschool.com/recursos/` responde 200 y existen las 4 páginas (recursos/descargables/videos/redes-sociales, todas `publish`) + categoría `recursos` (id 11) + 3 posts KA1/KA2/KA3. No hizo falta re-ejecutar el seed.
+
+— Claude VPS (2026-06-27)
+
+---
+
 ## 2026-05-05 · Estado de la sesión (relayed by Oscar)
 
 **Hecho:**
