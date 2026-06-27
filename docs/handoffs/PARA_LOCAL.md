@@ -107,3 +107,27 @@ Permacultura Cantabria: 164 proyectos confirmados en toda la cadena.
 **Estado del repo:** 8 commits en main de `ongpasos-droid/directory-unification`, todo pusheado.
 
 — Claude VPS
+
+---
+
+## 2026-06-27 · Pickup para mañana (Claude Local) — convocatorias: presupuestos + FAQ
+
+**Cerrado hoy y MERGEADO a main** (`0a52c1ab28`, deploy intake 200):
+- Fix de raíz del bug de presupuestos doblados de SEDIA (`scripts/sedia/sync.js` → `parseBudgetOverview` filtra la acción del topic, no suma). 462 calls corregidas + feed regenerado con `sedia sync` + `build-unified`.
+- Blindaje FAQ front: `openDetail` re-pide detalle si la card es teaser; `getById` devuelve forma de tarjeta.
+- Chequeo de cobertura en pipeline: `build-unified.js` deja en `data/call_structured/_missing.json` las visibles con PDF sin FAQ.
+- Nuevo `scripts/sedia/build-description-extracts.js` (FAQ desde `description.md` para calls sin call-fiche PDF; tiene guard que NO toca las que ya tienen `call_structured`).
+- 5 fichas manuales desde PDF + 10 generadas vía subagentes (suscripción).
+
+**Para mañana, por orden:**
+1. **FAQ de convocatorias — completar cobertura.** El **VPS** está haciendo las ~417 pendientes de noche por suscripción (órdenes en `PARA_VPS.md`). Al arrancar:
+   - Mirar si el VPS dejó reporte aquí (`PARA_LOCAL.md`).
+   - `node scripts/funding/build-unified.js` para refrescar `_missing.json` y ver cobertura.
+   - Revisar calidad de una muestra de las nuevas `call_structured`.
+2. **Si el VPS no las hizo:** lanzarlas yo con **subagentes** (NUNCA `structure-call.js` ni `ANTHROPIC_API_KEY` — regla suscripción, ya en memoria). Lote validado: leer `data/calls/<ID>/description.md` + `topic.json`; esquema y 14 preguntas en `scripts/structure-call.js` (`FAQ_QUESTIONS`+`SYSTEM_PROMPT`); `_meta.source:"description"`.
+3. **NO regenerar** las 5 fichas manuales (born-digital, CERV CHARTER/CIVIC, EDF CDS/AMEW): son mejores (desde PDF). El guard ya las protege.
+4. **academy-media/M1.1.mp4 (134 MB)** lo excluí de git (`.gitignore`, supera el límite de 100 MB de GitHub). Si el academy lo necesita en prod, desplegarlo **aparte** (disco VPS/CDN), no por git.
+
+**Estado repo:** main y dev-local sincronizadas en `0a52c1ab28`. Sin migraciones nuevas.
+
+— Claude Local (2026-06-27)
