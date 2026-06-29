@@ -1,0 +1,31 @@
+## Expected Impact
+
+The developed solutions should demonstrate their potential in concrete terms through the execution of a first roll-out stage during the project life-cycle, with a strong uptake strategy guiding their future adoption after the end of the project. The sustainability of the results and their continued benefits to users is a key ambition of this call for proposals.
+
+The project is furthermore expected to make a strong impact for the wider ecosystem of European decentralised social media. The insights gained on youth needs and desires on mental-health and inclusivity friendly social media should benefit the wider community of stakeholders in this space, and wherever possible developed technology should contribute to the software stacks of the ActivityPub and ATProtocol communities.
+
+Finally, the project should generate insights on the opportunities and challenges for decentralised social media as a genuine and widely used alternative to non-decentralised services, and contribute to the understanding of the key factors that would allow EU tech start-ups in the space to scale and succeed. Through the specific focus on youth audiences, the project may also provide use cases for how an alternative business and platform development model may contribute to maximising benefits for youth from the use of digital tools whilst also reducing risks, providing insights for societal debates on youth social media usage.
+
+## Objective
+
+This call for proposal seeks to fund a project that achieves the following general objective:
+
+Through co-creation under youth participation, design and test a Fediverse based/Authenticated Transfer (AT) Protocol-based social media platform that is targeted specifically at young EU citizens and is focused on user well-being, and adapt a roll-out strategy based on market research and stakeholder consultation.
+
+In order to achieve this objective, proposals should furthermore address the following specific objectives:
+- Involve young citizens from a wide variety of backgrounds and from at least eight Member States, including young persons with disabilities or neurodevelopmental conditions, in the conceptualisation of key aspects of the platform, mapping their needs and preferences in platform design and characteristics, with expert support provided by professionals from relevant fields such as mental health, cognitive science or software development, as well as civil society organisations;
+- Based on the results of the youth participation process and in-depth research, analyse the market conditions for alternative and inclusive social media services in a decentralised ecosystem, and design a corresponding uptake and sustainability strategy that maximises chances of an effective roll-out and uptake, in particular through mapping key stakeholders that can support uptake and sustainability and involving them in the development of the uptake strategy;
+- Create at least one functioning prototype or upgrade at least two existing services for a social media platform based on the ActivityPub or AT protocols, incorporating insights on minimising risks to mental health;
+- Test and refine the prototype, with a focus on safety, user-friendliness, and mental health, identifying in particular key usability barriers, systematically comparing features of the prototype to features of other relevant social media platforms, and exploring the responsible use of AI to support safer, more trustworthy and engaging social media services, including through better content discovery, moderation, verification and new user-centred experiences, in line with European values and fundamental rights;
+- Promote the prototype across EU countries to identified potential user audiences as well as to key stakeholder communities such as content creators, media organisations or funding partners, implementing at minimum the first step of the uptake strategy
+- Drawing on the results of specific objectives 1, 2, 3, 4 and 5, document and share lessons learnt, including in at least one report that highlights the opportunities and remaining challenges for European decentralised social media, recommendations for future public funding, and wherever possible by publishing and open sourcing results and developed software.
+
+## Scope
+
+The core ambition of the project is the availability, refinement and ambitious roll-out of at least one protocol-based service that is actively centred around the needs of young user audiences, and relies on a decentralised data management, intrinsically in line with European values such as being protective of users’ privacy, autonomy and wellbeing.
+
+With regards to the involvement of young citizens, proposals should present a detailed plan on their outreach and co-creation plans. Co-creation processes should be carried out with youth participants from at least eight Member States, with geographic balance between North, East, West and South. A diversity of backgrounds, including gender balance, social background, different levels of media and digital literacy, as well as an emphasis on inclusivity for disabled and neurodivergent participants are furthermore essential. With support from experts from relevant disciplines, the participants should explore the plethora of benefits, advantages, harms, threats and concerns experienced by young users on their current social media and collect and synthesise their ideas, desires, and concrete needs and expected features related to the design of alternative platforms.
+
+Importantly, amongst other subjects, the role of artificial intelligence, both with regards to posed challenges as well as a potential tool for mitigation of harms or creating benefits and attractive experiences for users should be prominently explored.
+
+Moreover, besides technical features, the look and feel of the services’ user interface and its appeal to young audiences should also play an important role in the co-creation and strongly inform the interface and graphical design of the project’s developed products.
