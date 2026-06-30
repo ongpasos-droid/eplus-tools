@@ -413,7 +413,7 @@ async function upsertEvalQuestion(data, id) {
       code: 'code', title: 'title', description: 'description',
       general_context: 'general_context', connects_from: 'connects_from',
       connects_to: 'connects_to', global_rule: 'global_rule',
-      word_limit: 'word_limit', page_limit: 'page_limit',
+      word_limit: 'word_limit', page_limit: 'page_limit', char_limit: 'char_limit',
       writing_guidance: 'writing_guidance', scoring_logic: 'scoring_logic',
       weight: 'weight', max_score: 'max_score', threshold: 'threshold',
       sort_order: 'sort_order'

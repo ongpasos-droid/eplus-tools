@@ -1931,6 +1931,12 @@ const Admin = (() => {
       <p><strong>Leave empty</strong> if the call doesn't specify a word limit for this particular question. Some calls use page limits instead.</p>
       <p><strong>Where to find it:</strong> In the application form (eForm) itself, each text field usually shows a character or word counter.</p>` },
 
+    q_char_limit: { title: 'Límite de caracteres',
+      text: `<p>Número máximo de <strong>caracteres</strong> permitidos para la respuesta, tal como aparece al final de cada pregunta en los formularios de Agencia Nacional (copy-paste al eForm).</p>
+      <p>Estos formularios (KA220/KA210) miden en caracteres, no en palabras. El redactor IA respeta este límite al generar el texto.</p>
+      <div class="tip-example">Valores comunes: 4000, 3000, 2000, 500 caracteres</div>
+      <p><strong>Dónde encontrarlo:</strong> al final del enunciado de cada pregunta del formulario (p. ej. "...involved in this project? 4000").</p>` },
+
     q_page_limit: { title: 'Page limit',
       text: `<p>Maximum number of pages allowed for this answer. Some calls (especially older formats or annexes) use pages instead of words.</p>
       <p>Use decimals for half pages (e.g., 1.5). Leave empty if the call uses word limits instead.</p>
@@ -2610,6 +2616,16 @@ KEY EVALUATOR FOCUS:
         </div>
 
         <div class="grid grid-cols-2 gap-3 mb-3">
+          ${q.char_limit != null ? `
+          <div class="flex flex-col gap-1">
+            <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">L\u00edmite de caracteres ${fieldInfo('q_char_limit')}</label>
+            <input type="number" id="eq-char-limit" value="${q.char_limit || ''}" min="0" class="w-full px-3 py-2 rounded-lg border border-outline-variant text-sm focus:border-primary outline-none text-center" placeholder="\u2014">
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">Word limit (auto) ${fieldInfo('q_word_limit')}</label>
+            <input type="number" id="eq-word-limit-ro" value="${q.word_limit || ''}" disabled class="w-full px-3 py-2 rounded-lg border border-outline-variant/40 bg-surface-container text-sm text-on-surface-variant/60 outline-none text-center" placeholder="\u2014" title="Derivado del l\u00edmite de caracteres (\u2248 caracteres / 7)">
+          </div>
+          ` : `
           <div class="flex flex-col gap-1">
             <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">Word limit ${fieldInfo('q_word_limit')}</label>
             <input type="number" id="eq-word-limit" value="${q.word_limit || ''}" min="0" class="w-full px-3 py-2 rounded-lg border border-outline-variant text-sm focus:border-primary outline-none text-center" placeholder="\u2014">
@@ -2618,6 +2634,7 @@ KEY EVALUATOR FOCUS:
             <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant flex items-center">Page limit ${fieldInfo('q_page_limit')}</label>
             <input type="number" id="eq-page-limit" value="${q.page_limit || ''}" step="0.5" min="0" class="w-full px-3 py-2 rounded-lg border border-outline-variant text-sm focus:border-primary outline-none text-center" placeholder="\u2014">
           </div>
+          `}
         </div>
         <div class="grid grid-cols-2 gap-3 mb-3">
           <div class="flex flex-col gap-1">
@@ -2689,7 +2706,7 @@ KEY EVALUATOR FOCUS:
     // Save question
     document.getElementById('eq-save')?.addEventListener('click', async () => {
       try {
-        await API.patch('/admin/data/eval/questions/' + q.id, {
+        const payload = {
           code: document.getElementById('eq-code').value,
           title: document.getElementById('eq-title').value,
           description: document.getElementById('eq-description').value,
@@ -2697,11 +2714,20 @@ KEY EVALUATOR FOCUS:
           connects_from: document.getElementById('eq-connects-from').value || null,
           connects_to: document.getElementById('eq-connects-to').value || null,
           global_rule: document.getElementById('eq-global-rule').value || null,
-          word_limit: parseInt(document.getElementById('eq-word-limit').value) || null,
-          page_limit: parseFloat(document.getElementById('eq-page-limit').value) || null,
           writing_guidance: document.getElementById('eq-writing-guidance').value,
           scoring_logic: document.getElementById('eq-scoring-logic').value
-        });
+        };
+        const charEl = document.getElementById('eq-char-limit');
+        if (charEl) {
+          // Character-based form (National Agency): char_limit is the source, word_limit derived
+          const cv = parseInt(charEl.value) || null;
+          payload.char_limit = cv;
+          payload.word_limit = cv ? Math.floor(cv / 7) : null;
+        } else {
+          payload.word_limit = parseInt(document.getElementById('eq-word-limit').value) || null;
+          payload.page_limit = parseFloat(document.getElementById('eq-page-limit').value) || null;
+        }
+        await API.patch('/admin/data/eval/questions/' + q.id, payload);
         await evalReload();
         Toast.show('Saved', 'ok');
       } catch (e) { Toast.show('Error: ' + e.message, 'error'); }
