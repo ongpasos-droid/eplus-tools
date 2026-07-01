@@ -1,0 +1,80 @@
+{
+  "id": 1117860,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "SANT SALVADOR DE GUARDIOLA",
+    "nivel3": "AYUNTAMIENTO DE SANT SALVADOR DE GUARDIOLA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "916299",
+  "fechaRecepcion": "2026-06-30",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 2000,
+  "mrr": false,
+  "descripcion": "Convocatoria de subvención en especies mediates sorteo de vales de compra en el marco de la campanya de apoyo al comercio local \" ¡compra de aquí, compra en casa!\"",
+  "descripcionLeng": "Convocatòria de subvenció en espècies mitjançant sorteig de vals de compra, en el marc de la campanya de suport al comerç local \"compra d'aquí, compra a casa!\"",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Comercio al por menor",
+      "codigo": "47"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES511 - Barcelona"
+    }
+  ],
+  "descripcionFinalidad": "Comercio, Turismo y Pymes",
+  "descripcionBasesReguladoras": "Bases reguladoras de la subvenciones de la campaña de apoyo al comercio local de Sant Salvador de Guardiola consistente en el sorteo de vales de compra intercambiables en comercios y establimientos de servicio locales",
+  "urlBasesReguladoras": "http://bop.diba.cat/anunci/3605019/aprovacio-de-les-bases-reguladores-de-les-subvencions-de-la-campanya-de-suport-al-comerc-local-consistent-en-el-sorteig-de-vals-de-compra-bescanviables-en-comercos-i-establiments-de-serveis-locals-versio-en-catala-i-cast",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-07-01",
+  "fechaFinSolicitud": "2026-07-25",
+  "textInicio": "el dia siguiente a la publicación en el BOPB",
+  "textFin": "el 25 de juliol de 2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1484642,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "CONVOCATORIA COMERCIO.pdf",
+      "long": 147240,
+      "datMod": "2026-06-30",
+      "datPublicacion": "2026-06-30"
+    },
+    {
+      "id": 1484643,
+      "descripcion": "Decreto de alcaldia",
+      "nombreFic": "DECRET 2026-0359 convocatoria suport al comerç.pdf",
+      "long": 1138884,
+      "datMod": "2026-06-30",
+      "datPublicacion": "2026-06-30"
+    },
+    {
+      "id": 1484641,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "CONVOCATÒRIA COMERÇ.pdf",
+      "long": 240495,
+      "datMod": "2026-06-30",
+      "datPublicacion": "2026-06-30"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

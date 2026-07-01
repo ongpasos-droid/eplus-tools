@@ -1,0 +1,65 @@
+{
+  "source": "bdns",
+  "source_id": "916303",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concesión directa - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / ROZAS DE MADRID, LAS / AYUNTAMIENTO DE ROZAS DE MADRID, LAS",
+  "nuts_codes": [
+    "ES300"
+  ],
+  "nuts_primary": "ES300",
+  "title": "APROBACIÓN DE LA MODIFICACIÓN DE LAS BASES DE SUBVENCIONES PARA EJECUCIÓN DE OBRAS DE MEJORA O REHABILITACIÓN DE EDIFICIOS DE USO RESIDENCIAL Y DE VIVIENDA PREVISTAS EN EL PROGRAMA DE AYUDA A LAS ACTUACIONES DE REHABILITACIÓN  BARRIO LAS VIRGENES",
+  "title_lang": "es",
+  "summary": "Infraestructuras",
+  "status": "open",
+  "publication_date": "2026-06-30",
+  "open_date": "2026-12-31",
+  "deadline": "2028-06-30",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 1284000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "F",
+      "descripcion": "CONSTRUCCIÓN"
+    }
+  ],
+  "apply_url": "sede.lasrozas.es",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/916303",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://transparencia.lasrozas.es/normativa-patrimonio-servicios-y-participacion/informacion-publica-3/",
+  "text_inicio": null,
+  "text_fin": null,
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [
+    {
+      "descripcion": "MRR - MECANISMO DE RECUPERACIÓN Y RESILIENCIA"
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": true,
+  "fetchedAt": "2026-07-01T04:09:08.691Z"
+}

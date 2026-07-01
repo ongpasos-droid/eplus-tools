@@ -1,0 +1,76 @@
+{
+  "id": 1117708,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "PINO, O",
+    "nivel3": "AYUNTAMIENTO DE PINO, O"
+  },
+  "sedeElectronica": "opino.sedelectronica.gal",
+  "codigoBDNS": "916147",
+  "fechaRecepcion": "2026-06-30",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 2000,
+  "mrr": false,
+  "descripcion": "BASES REGULADORAS II CONCURSO DE MURALES DEL AYUNTAMIENTO DE O PINO 2026",
+  "descripcionLeng": "BASES REGULADORAS II CONCURSO DE MURAIS DO CONCELLO DE O PINO 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades de bibliotecas, archivos, museos y otras actividades culturales",
+      "codigo": "91"
+    },
+    {
+      "descripcion": "Actividades de creación artística y artes escénicas",
+      "codigo": "90"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES111 - A Coruña"
+    }
+  ],
+  "descripcionFinalidad": "Cultura",
+  "descripcionBasesReguladoras": "BASES REGULADORAS II CONCURSO DE MURALES DEL AYUNTAMIENTO DE O PINO 2026",
+  "urlBasesReguladoras": "https://traductor.dacoruna.gal/fron-trad/urlTranslate.php?direccion3=gl-es&inurl=https://bop.dacoruna.gal/bopportal/publicado/2026/06/30/2026_0000004273.html",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Desde el día siguiente a la publicación del extracto de la convocatoria en el BOP de A Coruña",
+  "textFin": "10 días hábiles contados a partir del día siguiente al de la publicación del extracto en el BOP ",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1484268,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "BASES REGULADORAS DO II CONCURSO DE MURAIS DO CONCELLO  DE O PINO - 2026 (gal).docx",
+      "long": 6699127,
+      "datMod": "2026-06-30",
+      "datPublicacion": "2026-06-30"
+    },
+    {
+      "id": 1484267,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "BASES REGULADORAS DO II CONCURSO DE MURAIS DO CONCELLO  DE O PINO - 2026 (spa).docx",
+      "long": 6699349,
+      "datMod": "2026-06-30",
+      "datPublicacion": "2026-06-30"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

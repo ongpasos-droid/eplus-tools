@@ -1,0 +1,64 @@
+{
+  "id": 1117667,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "LENA",
+    "nivel3": "AYUNTAMIENTO DE LENA"
+  },
+  "sedeElectronica": "SEDE ELECTRÓNICA DEL AYUNTAMIENTO DE LENA",
+  "codigoBDNS": "916106",
+  "fechaRecepcion": "2026-06-30",
+  "instrumentos": [
+    {
+      "descripcion": "OTROS INSTRUMENTOS DE AYUDA"
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 2250,
+  "mrr": false,
+  "descripcion": "Convocatoria de subvenciones municipales a entidades que desarrollen actividades dirigidas a la promoción de la mujer en el concejo de Lena ejercicio 2026",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "OTROS SERVICIOS",
+      "codigo": "T"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES12 - PRINCIPADO DE ASTURIAS"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Convocatoria subvenciones a entidades que realicen actividades dirigidas a la promoción de la mujer en el concejo de Lena. Ejercicio 2026.",
+  "urlBasesReguladoras": "https://miprincipado.asturias.es/ast/bopa/disposiciones?p_p_id=pa_sede_bopa_web_portlet_SedeBopaDispositionWeb&p_p_lifecycle=0&_pa_sede_bopa_web_portlet_SedeBopaDispositionWeb_mvcRenderCommandName=%2Fdisposition%2Fdetail&p_r_p_dispositionText=2026-04432&p",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir del día siguiente al de la publicación de este anuncio en BOPA",
+  "textFin": "A los diez días hábiles a contar desde el día siguiente al de la publicación de este anuncio en BOPA",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1484163,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "RESOLUCION ALCALDIA APROBACION DEFINITIVA SOS-2026-91.pdf",
+      "long": 295810,
+      "datMod": "2026-06-30",
+      "datPublicacion": "2026-06-30"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,55 @@
+{
+  "id": 1117926,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "VIGO",
+    "nivel3": "AYUNTAMIENTO DE VIGO"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "916365",
+  "fechaRecepcion": "2026-06-30",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 50000,
+  "mrr": false,
+  "descripcion": "CONVOCATORIA ESPECÍFICA DE AYUDAS PARA DEPORTISTAS DE ALTO NIVEL DE LA CIUDAD DE VIGO 2026",
+  "descripcionLeng": "CONVOCATORIA ESPECÍFICA DE AXUDAS PARA DEPORTISTAS DE ALTO NIVEL DA CIDADE DE VIGO 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades deportivas",
+      "codigo": "93.1"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES114 - Pontevedra"
+    }
+  ],
+  "descripcionFinalidad": "Otras actuaciones de carácter económico",
+  "descripcionBasesReguladoras": "CONVOCATORIA ESPECÍFICA DE AYUDAS PARA DEPORTISTAS DE ALTO NIVEL DE LA CIUDAD DE VIGO 2026",
+  "urlBasesReguladoras": "https://sede.vigo.org/expedientes//avisos/index.jsp?id=0&lang=es",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "DÍA SIGUIENTE A LA PUBLICACIÓN DEL EXTRACTO DE LA CONVOCATORIA EN EL BOPPO",
+  "textFin": "15 DÍAS HÁBILES TRAS LA PRESENTACIÓN DEL EXTRACTO DE LA CONVOCATORIA EN EL BOPPO",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

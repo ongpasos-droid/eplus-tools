@@ -1,0 +1,76 @@
+{
+  "id": 1117850,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "BARBADÁS",
+    "nivel3": "AYUNTAMIENTO DE BARBADÁS"
+  },
+  "sedeElectronica": "https://barbadas.sedelectronica.gal",
+  "codigoBDNS": "916289",
+  "fechaRecepcion": "2026-06-30",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 50000,
+  "mrr": false,
+  "descripcion": "Ayudas económicas destinadas a familias en cuyo ámbito existan uno o más  enfermos celíacos o intolerantes  a la lactosa para el año 2026",
+  "descripcionLeng": "Axudas económicas destinadas a familias en cuxo ámbito existan un ou máis  enfermos celíacos ou intolerantes  á lactosa para o ano 2026",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "COMERCIO AL POR MAYOR Y AL POR MENOR",
+      "codigo": "G"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES113 - Ourense"
+    }
+  ],
+  "descripcionFinalidad": "Servicios Sociales y Promoción Social",
+  "descripcionBasesReguladoras": "Bases reguladoras de la concesión de subvenciones denominadas :Ayudas económicas destinadas a familias en cuyo ámbito existan uno o más  enfermos celíacos o intolerantes  a la lactosa para el año 2026",
+  "urlBasesReguladoras": "https://barbadas.sedelectronica.gal/?x=srkr5CeA96Htxey13I457w",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "Al día siguiente de la publicación del anuncio en el Boletín Oficial de la Provincia de Ourense",
+  "textFin": "Un mes contado a partir del día siguiente al de la publicación.",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [
+    {
+      "descripcion": "FSE - FONDO SOCIAL EUROPEO "
+    }
+  ],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1484650,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "Bases reguladoras - GAL.pdf",
+      "long": 343756,
+      "datMod": "2026-06-30",
+      "datPublicacion": "2026-06-30"
+    },
+    {
+      "id": 1484648,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Bases reguladoras - CAS.pdf",
+      "long": 346552,
+      "datMod": "2026-06-30",
+      "datPublicacion": "2026-06-30"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

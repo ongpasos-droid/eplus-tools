@@ -1,0 +1,72 @@
+{
+  "id": 1117723,
+  "organo": {
+    "nivel1": "LOCAL",
+    "nivel2": "GUILS DE CERDANYA",
+    "nivel3": "AYUNTAMIENTO DE GUILS DE CERDANYA"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "916162",
+  "fechaRecepcion": "2026-06-30",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 10000,
+  "mrr": false,
+  "descripcion": "Ayudas escolares para el curso 2025-2026 para los alumnos empadronados en el municipio de Guils de Cerdanya",
+  "descripcionLeng": "Ajuts escolars per al curs 2025-2026 per als alumnes empadronats al municipi de Guils de Cerdanya",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "EDUCACIÓN",
+      "codigo": "Q"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES512 - Girona"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Ayudas escolares para el curso 2025-2026 para los alumnos empadronados en el municipio de Guils de Cerdanya",
+  "urlBasesReguladoras": "https://guils.cat/convocatoria-para-la-concesion-de-las-ayudas-escolares-para-el-curso-2025-2026-para-los-alumnos-empadronados-en-el-municipio-de-guils-de-cerdanya/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": "2026-07-30",
+  "textInicio": "El dia siguiente al de la publicación de este anuncio en el Boletín Oficial de la Provincia ",
+  "textFin": "30 de julio de 2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1484296,
+      "descripcion": "Documento de la convocatoria en lengua cooficial",
+      "nombreFic": "sig_BASES_CONVOCATORIA_AJUTS_ESCOLARS_2025-2026_Catala.pdf",
+      "long": 185066,
+      "datMod": "2026-06-30",
+      "datPublicacion": "2026-06-30"
+    },
+    {
+      "id": 1484295,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "sig_Bases_convocatoria_Ayudas_escolares_Castellano.pdf",
+      "long": 184528,
+      "datMod": "2026-06-30",
+      "datPublicacion": "2026-06-30"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,91 @@
+{
+  "id": 1117256,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "COMUNITAT VALENCIANA",
+    "nivel3": "SECRETARIA AUTONÓMICA DE INDUSTRIA, COMERCIO Y CONSUMO"
+  },
+  "sedeElectronica": "https://www.gva.es/es/inicio/procedimientos?id_proc=G95950",
+  "codigoBDNS": "915695",
+  "fechaRecepcion": "2026-06-26",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 2005618.13,
+  "mrr": false,
+  "descripcion": "RESOLUCIÓN de 23 de junio de 2026, por la que se efectúa la convocatoria de subvenciones para personas emprendedoras y pymes en apoyo al inicio y consolidación de su proyecto empresarial, para el ejercicio 2026. EMPYME 2026.",
+  "descripcionLeng": "RESOLUCIÓ de 23 de juny de 2026, per la qual s’efectua la convocatòria de subvencions per a persones emprenedores i pimes en suport a l’inici i la consolidació del seu projecte empresarial, per a l’exercici 2026. EMPYME 2026.",
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "ADMINISTRACIÓN PÚBLICA Y DEFENSA; SEGURIDAD SOCIAL OBLIGATORIA",
+      "codigo": "P"
+    },
+    {
+      "descripcion": "HOSTELERÍA",
+      "codigo": "I"
+    },
+    {
+      "descripcion": "INDUSTRIA MANUFACTURERA",
+      "codigo": "C"
+    },
+    {
+      "descripcion": "INDUSTRIAS EXTRACTIVAS",
+      "codigo": "B"
+    },
+    {
+      "descripcion": "TELECOMUNICACIONES, PROGRAMACIÓN INFORMÁTICA, CONSULTORÍA, INFRAESTRUCTURA INFORMÁTICA Y OTROS SERVICIOS DE INFORMACIÓN",
+      "codigo": "K"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES52 - COMUNIDAD VALENCIANA"
+    }
+  ],
+  "descripcionFinalidad": "Otras actuaciones de carácter económico",
+  "descripcionBasesReguladoras": "ORDEN 2/2024, de 29 de febrero, de la Conselleria de Innovación, Industria, Comercio y Turismo, por la que se establecen las bases reguladoras para la concesión de ayudas dirigidas a fomentar el ecosistema de emprendimiento de la Comunitat Valenciana",
+  "urlBasesReguladoras": "https://dogv.gva.es/datos/2024/03/01/pdf/2024_1846.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-07-01",
+  "fechaFinSolicitud": "2026-07-31",
+  "textInicio": "01/07/2026",
+  "textFin": "31/07/2026",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1484179,
+      "descripcion": "Orden de Bases",
+      "nombreFic": "Orden 2 2024, 29 de febrero.pdf",
+      "long": 813466,
+      "datMod": "2026-06-30",
+      "datPublicacion": "2026-06-30"
+    },
+    {
+      "id": 1484178,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "2026_06_23 CONVOCATORIA EMPYME_firmada.pdf",
+      "long": 439016,
+      "datMod": "2026-06-30",
+      "datPublicacion": "2026-06-30"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

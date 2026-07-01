@@ -1,0 +1,115 @@
+{
+  "id": 1117816,
+  "organo": {
+    "nivel1": "OTROS",
+    "nivel2": "CÁMARA DE COMERCIO DE CÓRDOBA",
+    "nivel3": null
+  },
+  "sedeElectronica": "https://sede.camara.es/sede/cordoba",
+  "codigoBDNS": "916255",
+  "fechaRecepcion": "2026-06-30",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 3900.15,
+  "mrr": false,
+  "descripcion": "Convocatoria Programa Pyme Global 2026 - Visita a la feria FOOD INGREDIENTS EUROPE (Alemania) para empresas de la provincia de Córdoba",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Comercio al por mayor de materias primas agrarias y de animales vivos",
+      "codigo": "46.2"
+    },
+    {
+      "descripcion": "Comercio al por mayor de productos alimenticios, bebidas y tabaco",
+      "codigo": "46.3"
+    },
+    {
+      "descripcion": "Fabricación de bebidas",
+      "codigo": "11"
+    },
+    {
+      "descripcion": "Industria alimentaria",
+      "codigo": "10"
+    },
+    {
+      "descripcion": "Intermediarios del comercio al por mayor",
+      "codigo": "46.1"
+    },
+    {
+      "descripcion": "Otras industrias manufactureras",
+      "codigo": "32"
+    },
+    {
+      "descripcion": "Servicios de alojamiento",
+      "codigo": "55"
+    },
+    {
+      "descripcion": "Servicios de comidas y bebidas",
+      "codigo": "56"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES613 - Córdoba"
+    }
+  ],
+  "descripcionFinalidad": "Otras actuaciones de carácter económico",
+  "descripcionBasesReguladoras": "Convocatoria Programa Pyme Global 2026",
+  "urlBasesReguladoras": "https://camaracordoba.com/visita-a-la-feria-food-ingredients-europe-2026-apertura-de-convocatoria/",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-07-08",
+  "fechaFinSolicitud": "2026-07-20",
+  "textInicio": "A las 10:00 horas",
+  "textFin": "A las 14:00 horas",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [
+    {
+      "descripcion": "FEDER - FONDO EUROPEO DE DESARROLLO REGIONAL"
+    }
+  ],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1484532,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Convocatoria pública de ayudas - FI EUROPE 2026_signed.pdf",
+      "long": 1296517,
+      "datMod": "2026-06-30",
+      "datPublicacion": "2026-06-30"
+    },
+    {
+      "id": 1484540,
+      "descripcion": "Anexo II. Declaraciones responsables",
+      "nombreFic": "Anexo II. Declaraciones responsables - FI EUROPE 2026.pdf",
+      "long": 1499845,
+      "datMod": "2026-06-30",
+      "datPublicacion": "2026-06-30"
+    },
+    {
+      "id": 1484538,
+      "descripcion": "Anexo I. Tipología de gastos elegibles y justificación",
+      "nombreFic": "Anexo I. Tipología Gastos Elegibles y Justificación - FI EUROPE 2026.pdf",
+      "long": 1093233,
+      "datMod": "2026-06-30",
+      "datPublicacion": "2026-06-30"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

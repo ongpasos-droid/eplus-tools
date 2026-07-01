@@ -1,0 +1,56 @@
+{
+  "source": "bdns",
+  "source_id": "916366",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / ILLES BALEARS / DIRECCIÓN GENERAL DE FORMACIÓN PROFESIONAL Y FORMACIÓN DEL PROFESORADO",
+  "nuts_codes": [
+    "ES53"
+  ],
+  "nuts_primary": "ES53",
+  "title": "Convocatoria de Premios Extraordinarios de FP de Grado Superior en el ámbito de la Comunidad Autónoma de las Illes Balears para el curso académico 2025-2026",
+  "title_lang": "es",
+  "summary": "Educación",
+  "status": "open",
+  "publication_date": "2026-07-01",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 20000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "85",
+      "descripcion": "Educación"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/916366",
+  "documents": [],
+  "bases_reguladoras_url": "https://www.caib.es/eboibfront/eli/es-ib/o/2025/07/12/20/dof/spa/html",
+  "text_inicio": "Quinze dies naturals des de l'endemà de la publicació de la resolució en el BOIB",
+  "text_fin": "Quinze dies naturals des de l'endemà de la publicació de la resolució en el BOIB",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-07-01T04:09:08.705Z"
+}

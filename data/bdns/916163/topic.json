@@ -1,0 +1,373 @@
+{
+  "source": "bdns",
+  "source_id": "916163",
+  "source_lang": "es",
+  "level": "ccaa",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "AUTONOMICA / REGIÓN DE MURCIA / INSTITUTO DE FOMENTO DE LA REGIÓN DE MURCIA (INFO)",
+  "nuts_codes": [
+    "ES620"
+  ],
+  "nuts_primary": "ES620",
+  "title": "Extracto de la Resolución de 17 de junio de 2026, del Director del Instituto de Fomento de la Región de Murcia,  de la convocatoria de tramitación anticipada de ayudas destinadas a fomentar la I+D empresarial en el marco de la Estrategia RIS4 R. de Murcia",
+  "title_lang": "es",
+  "summary": "Investigación, desarrollo e innovación",
+  "status": "open",
+  "publication_date": "2026-06-30",
+  "open_date": null,
+  "deadline": null,
+  "deadline_model": "continuous",
+  "deadlines_extra": null,
+  "budget_total_eur": 3000000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "GRAN EMPRESA; PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "GRAN EMPRESA",
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "13.3",
+      "descripcion": "Acabado de textiles"
+    },
+    {
+      "codigo": "82.1",
+      "descripcion": "Actividades administrativas y auxiliares de oficina"
+    },
+    {
+      "codigo": "79",
+      "descripcion": "Actividades de agencias de viajes, operadores turísticos, servicios de reservas y actividades relacionadas "
+    },
+    {
+      "codigo": "91",
+      "descripcion": "Actividades de bibliotecas, archivos, museos y otras actividades culturales"
+    },
+    {
+      "codigo": "43",
+      "descripcion": "Actividades de construcción especializada"
+    },
+    {
+      "codigo": "90",
+      "descripcion": "Actividades de creación artística y artes escénicas"
+    },
+    {
+      "codigo": "39",
+      "descripcion": "Actividades de descontaminación y otros servicios de gestión de residuos"
+    },
+    {
+      "codigo": "82.2",
+      "descripcion": "Actividades de los centros de llamadas"
+    },
+    {
+      "codigo": "60",
+      "descripcion": "Actividades de programación, radiodifusión, agencias de noticias y otras actividades de distribución de contenidos"
+    },
+    {
+      "codigo": "73",
+      "descripcion": "Actividades de publicidad, estudios de mercado y relaciones públicas "
+    },
+    {
+      "codigo": "38",
+      "descripcion": "Actividades de recogida, tratamiento y eliminación de residuos "
+    },
+    {
+      "codigo": "88",
+      "descripcion": "Actividades de servicios sociales sin alojamiento"
+    },
+    {
+      "codigo": "93",
+      "descripcion": "Actividades deportivas, recreativas y de entretenimiento"
+    },
+    {
+      "codigo": "69",
+      "descripcion": "Actividades jurídicas y de contabilidad"
+    },
+    {
+      "codigo": "86",
+      "descripcion": "Actividades sanitarias"
+    },
+    {
+      "codigo": "A",
+      "descripcion": "AGRICULTURA, GANADERÍA, SILVICULTURA Y PESCA"
+    },
+    {
+      "codigo": "77.3",
+      "descripcion": "Alquiler de otra maquinaria, equipos y bienes tangibles"
+    },
+    {
+      "codigo": "77.1",
+      "descripcion": "Alquiler de vehículos de motor"
+    },
+    {
+      "codigo": "77.4",
+      "descripcion": "Arrendamiento de la propiedad intelectual y productos similares, excepto obras protegidas por derechos de autor"
+    },
+    {
+      "codigo": "18",
+      "descripcion": "Artes gráficas y reproducción de soportes grabados"
+    },
+    {
+      "codigo": "87",
+      "descripcion": "Asistencia en establecimientos residenciales"
+    },
+    {
+      "codigo": "36",
+      "descripcion": "Captación, depuración y distribución de agua"
+    },
+    {
+      "codigo": "14",
+      "descripcion": "Confección de prendas de vestir"
+    },
+    {
+      "codigo": "41",
+      "descripcion": "Construcción de edificios"
+    },
+    {
+      "codigo": "30.1",
+      "descripcion": "Construcción naval"
+    },
+    {
+      "codigo": "52",
+      "descripcion": "Depósito, almacenamiento y actividades auxiliares del transporte "
+    },
+    {
+      "codigo": "58.2",
+      "descripcion": "Edición de programas informáticos"
+    },
+    {
+      "codigo": "32.3",
+      "descripcion": "Fabricación de artículos de deporte"
+    },
+    {
+      "codigo": "11",
+      "descripcion": "Fabricación de bebidas"
+    },
+    {
+      "codigo": "29.2",
+      "descripcion": "Fabricación de carrocerías para vehículos de motor; fabricación de remolques y semirremolques"
+    },
+    {
+      "codigo": "25.2",
+      "descripcion": "Fabricación de cisternas, grandes depósitos y contenedores de metal"
+    },
+    {
+      "codigo": "25.1",
+      "descripcion": "Fabricación de elementos metálicos para la construcción"
+    },
+    {
+      "codigo": "32.5",
+      "descripcion": "Fabricación de instrumentos y suministros médicos y odontológicos"
+    },
+    {
+      "codigo": "32.4",
+      "descripcion": "Fabricación de juegos y juguetes"
+    },
+    {
+      "codigo": "28",
+      "descripcion": "Fabricación de maquinaria y equipo n.c.o.p."
+    },
+    {
+      "codigo": "27",
+      "descripcion": "Fabricación de material y equipo eléctrico"
+    },
+    {
+      "codigo": "31",
+      "descripcion": "Fabricación de muebles"
+    },
+    {
+      "codigo": "25.9",
+      "descripcion": "Fabricación de otros productos metálicos"
+    },
+    {
+      "codigo": "23",
+      "descripcion": "Fabricación de otros productos minerales no metálicos"
+    },
+    {
+      "codigo": "13.9",
+      "descripcion": "Fabricación de otros productos textiles"
+    },
+    {
+      "codigo": "24.1",
+      "descripcion": "Fabricación de productos básicos de hierro, acero y ferroaleaciones"
+    },
+    {
+      "codigo": "22",
+      "descripcion": "Fabricación de productos de caucho y plásticos"
+    },
+    {
+      "codigo": "21",
+      "descripcion": "Fabricación de productos farmacéuticos"
+    },
+    {
+      "codigo": "26",
+      "descripcion": "Fabricación de productos informáticos, electrónicos y ópticos"
+    },
+    {
+      "codigo": "13.2",
+      "descripcion": "Fabricación de tejidos textiles"
+    },
+    {
+      "codigo": "24.2",
+      "descripcion": "Fabricación de tubos, tuberías, perfiles huecos y sus accesorios, de acero"
+    },
+    {
+      "codigo": "10",
+      "descripcion": "Industria alimentaria"
+    },
+    {
+      "codigo": "16",
+      "descripcion": "Industria de la madera y del corcho, excepto muebles; cestería y espartería"
+    },
+    {
+      "codigo": "15",
+      "descripcion": "Industria del cuero y productos relacionados de otros materiales"
+    },
+    {
+      "codigo": "17",
+      "descripcion": "Industria del papel"
+    },
+    {
+      "codigo": "20",
+      "descripcion": "Industria química"
+    },
+    {
+      "codigo": "32.9",
+      "descripcion": "Industrias manufactureras n.c.o.p."
+    },
+    {
+      "codigo": "63",
+      "descripcion": "Infraestructura informática, tratamiento de datos, alojamiento de datos y otras actividades de servicios de información"
+    },
+    {
+      "codigo": "42",
+      "descripcion": "Ingeniería civil"
+    },
+    {
+      "codigo": "72",
+      "descripcion": "Investigación y desarrollo"
+    },
+    {
+      "codigo": "82.3",
+      "descripcion": "Organización de convenciones y ferias de muestras"
+    },
+    {
+      "codigo": "82.9",
+      "descripcion": "Otras actividades de apoyo a las empresas n.c.o.p."
+    },
+    {
+      "codigo": "74",
+      "descripcion": "Otras actividades profesionales, científicas y técnicas"
+    },
+    {
+      "codigo": "13.1",
+      "descripcion": "Preparación e hilado de fibras textiles"
+    },
+    {
+      "codigo": "59",
+      "descripcion": "Producción cinematográfica, de vídeo y de programas de televisión, grabación de sonido y edición musical"
+    },
+    {
+      "codigo": "62",
+      "descripcion": "Programación, consultoría y otras actividades relacionadas con la informática"
+    },
+    {
+      "codigo": "37",
+      "descripcion": "Recogida y tratamiento de aguas residuales"
+    },
+    {
+      "codigo": "33",
+      "descripcion": "Reparación, mantenimiento e instalación de maquinaria y equipos"
+    },
+    {
+      "codigo": "95.1",
+      "descripcion": "Reparación y mantenimiento de ordenadores y equipos de comunicación"
+    },
+    {
+      "codigo": "81",
+      "descripcion": "Servicios a edificios y actividades de jardinería"
+    },
+    {
+      "codigo": "55",
+      "descripcion": "Servicios de alojamiento"
+    },
+    {
+      "codigo": "56",
+      "descripcion": "Servicios de comidas y bebidas"
+    },
+    {
+      "codigo": "80",
+      "descripcion": "Servicios de investigación y seguridad"
+    },
+    {
+      "codigo": "71",
+      "descripcion": "Servicios técnicos de arquitectura e ingeniería; ensayos y análisis técnicos"
+    },
+    {
+      "codigo": "35",
+      "descripcion": "Suministro de energía eléctrica, gas, vapor y aire acondicionado"
+    },
+    {
+      "codigo": "61",
+      "descripcion": "Telecomunicaciones"
+    },
+    {
+      "codigo": "51",
+      "descripcion": "Transporte aéreo"
+    },
+    {
+      "codigo": "50",
+      "descripcion": "Transporte marítimo y por vías navegables interiores"
+    },
+    {
+      "codigo": "49",
+      "descripcion": "Transporte terrestre y por tubería"
+    },
+    {
+      "codigo": "25.5",
+      "descripcion": "Tratamiento, revestimiento y mecanizado de metales"
+    }
+  ],
+  "apply_url": "https://sede.institutofomentomurcia.es/infodirecto",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/916163",
+  "documents": [
+    {
+      "label": "BB.RR.",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://borm.es/services/anuncio/ano/2026/numero/1821/pdf?id=842503",
+  "text_inicio": "Desde las 9 horas del día siguiente de la publicación del extracto en el BORM.",
+  "text_fin": "Hasta las 14:00 del 18 de septiembre de 2026.",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": "SA.00000",
+  "fondos": [
+    {
+      "descripcion": "FEDER - FONDO EUROPEO DE DESARROLLO REGIONAL"
+    }
+  ],
+  "reglamento": {
+    "descripcion": "REG (UE) 651/2014, DE 17 DE JUNIO, de exención de notificación",
+    "orden": null
+  },
+  "objetivos": [
+    {
+      "descripcion": "ART. 25 AYUDAS A PROYECTOS DE INVESTIGACIÓN Y DESARROLLO."
+    }
+  ],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-07-01T04:09:08.634Z"
+}

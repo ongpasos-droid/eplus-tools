@@ -1,0 +1,124 @@
+{
+  "source": "bdns",
+  "source_id": "916115",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / DIPUTACIÓN FORAL DE BIZKAIA / DIPUTACIÓN FORAL DE BIZKAIA",
+  "nuts_codes": [
+    "ES213"
+  ],
+  "nuts_primary": "ES213",
+  "title": "OF 4595/2026, de 25 de junio, de la DFB, por la que se aprueban las segundas convocatorias de las áreas 1, 2, 3 y 4 del programa de subvenciones Creación de Empresas Innovadoras para el año 2026. Área 3: Dinamización del ecosistema de emprendimiento.",
+  "title_lang": "es",
+  "summary": "Industria y Energía",
+  "status": "open",
+  "publication_date": "2026-06-30",
+  "open_date": "2026-07-13",
+  "deadline": "2026-09-11",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 209400,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "J",
+      "descripcion": "ACTIVIDADES DE EDICIÓN, RADIODIFUSIÓN Y PRODUCCIÓN Y DISTRIBUCIÓN DE CONTENIDOS"
+    },
+    {
+      "codigo": "73",
+      "descripcion": "Actividades de publicidad, estudios de mercado y relaciones públicas "
+    },
+    {
+      "codigo": "69",
+      "descripcion": "Actividades jurídicas y de contabilidad"
+    },
+    {
+      "codigo": "75",
+      "descripcion": "Actividades veterinarias"
+    },
+    {
+      "codigo": "A",
+      "descripcion": "AGRICULTURA, GANADERÍA, SILVICULTURA Y PESCA"
+    },
+    {
+      "codigo": "F",
+      "descripcion": "CONSTRUCCIÓN"
+    },
+    {
+      "codigo": "C",
+      "descripcion": "INDUSTRIA MANUFACTURERA"
+    },
+    {
+      "codigo": "63",
+      "descripcion": "Infraestructura informática, tratamiento de datos, alojamiento de datos y otras actividades de servicios de información"
+    },
+    {
+      "codigo": "72",
+      "descripcion": "Investigación y desarrollo"
+    },
+    {
+      "codigo": "74",
+      "descripcion": "Otras actividades profesionales, científicas y técnicas"
+    },
+    {
+      "codigo": "71",
+      "descripcion": "Servicios técnicos de arquitectura e ingeniería; ensayos y análisis técnicos"
+    },
+    {
+      "codigo": "E",
+      "descripcion": "SUMINISTRO DE AGUA, ACTIVIDADES DE SANEAMIENTO, GESTIÓN DE RESIDUOS Y DESCONTAMINACIÓN"
+    },
+    {
+      "codigo": "D",
+      "descripcion": "SUMINISTRO DE ENERGIA ELECTRICA, GAS, VAPOR Y AIRE ACONDICIONADO"
+    },
+    {
+      "codigo": "61",
+      "descripcion": "Telecomunicaciones"
+    },
+    {
+      "codigo": "H",
+      "descripcion": "TRANSPORTE Y ALMACENAMIENTO"
+    }
+  ],
+  "apply_url": "https://www.ebizkaia.eus/es/catalogo-de-tramites-y-servicios",
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/916115",
+  "documents": [
+    {
+      "label": "Texto en otra lengua de la convocatoria",
+      "url": null
+    },
+    {
+      "label": "Texto en castellano de la convocatoria",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "https://www.bizkaia.eus/es/bob",
+  "text_inicio": "Desde las 08:30 horas del 13 de julio de 2026.",
+  "text_fin": "Hasta las 13:30 horas del 11 de septiembre de 2026.",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": {
+    "descripcion": "REG (UE) 2023/2831 de minimis, General",
+    "orden": null
+  },
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-07-01T04:09:08.626Z"
+}

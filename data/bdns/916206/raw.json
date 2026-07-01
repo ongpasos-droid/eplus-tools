@@ -1,0 +1,80 @@
+{
+  "id": 1117767,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "CASTILLA Y LEÓN",
+    "nivel3": "CONSEJERÍA DE CULTURA, TURISMO Y DEPORTE"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "916206",
+  "fechaRecepcion": "2026-06-30",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 1500000,
+  "mrr": false,
+  "descripcion": "Orden 29 junio 2026, de la Consejería de Cultura, Turismo y Deporte, por la que se convocan subv. destinadas a Entidades Locales con población de menos de 20.000 hb. para financiar proyectos de interés turístico regional y mejora de la señalización",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades de agencias de viajes y operadores turísticos",
+      "codigo": "79.1"
+    },
+    {
+      "descripcion": "Campings y aparcamientos para caravanas",
+      "codigo": "55.3"
+    },
+    {
+      "descripcion": "Hoteles y alojamientos similares",
+      "codigo": "55.1"
+    },
+    {
+      "descripcion": "Restaurantes y puestos de comidas",
+      "codigo": "56.1"
+    },
+    {
+      "descripcion": "Servicios de bebidas",
+      "codigo": "56.3"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES41 - CASTILLA Y LEON"
+    }
+  ],
+  "descripcionFinalidad": "Comercio, Turismo y Pymes",
+  "descripcionBasesReguladoras": "Orden CYT/1151/2023, d 29 d septiembre, por la que se establecen las BBRR para la concesión de subvenciones destinadas a entidades locales con población inferior a 20 000 hab. y Orden CYT/419/2025, de 24 de abril, por la que se modifica dicha Orden d BBRR",
+  "urlBasesReguladoras": "https://bocyl.jcyl.es/boletines/2023/10/04/pdf/BOCYL-D-04102023-4.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": null,
+  "fechaFinSolicitud": null,
+  "textInicio": "A partir del día siguiente de la publicación en el Bocyl",
+  "textFin": "Al finalizar los 20 días hábiles a contar desde del dia siguiente de su publicación en el Bocyl",
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1484377,
+      "descripcion": "Documento de la convocatoria en español",
+      "nombreFic": "Orden de Convocatoria ELL.pdf",
+      "long": 767359,
+      "datMod": "2026-06-30",
+      "datPublicacion": "2026-06-30"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

@@ -1,0 +1,69 @@
+{
+  "source": "bdns",
+  "source_id": "916299",
+  "source_lang": "es",
+  "level": "local",
+  "programme": "Concurrencia competitiva - canónica",
+  "sub_programme": null,
+  "publishing_authority_code": "LOCAL / SANT SALVADOR DE GUARDIOLA / AYUNTAMIENTO DE SANT SALVADOR DE GUARDIOLA",
+  "nuts_codes": [
+    "ES511"
+  ],
+  "nuts_primary": "ES511",
+  "title": "Convocatoria de subvención en especies mediates sorteo de vales de compra en el marco de la campanya de apoyo al comercio local \" ¡compra de aquí, compra en casa!\"",
+  "title_lang": "es",
+  "summary": "Comercio, Turismo y Pymes",
+  "status": "open",
+  "publication_date": "2026-06-30",
+  "open_date": "2026-07-01",
+  "deadline": "2026-07-25",
+  "deadline_model": "single-stage",
+  "deadlines_extra": null,
+  "budget_total_eur": 2000,
+  "budget_per_project_min_eur": null,
+  "budget_per_project_max_eur": null,
+  "expected_grants": null,
+  "cofinancing_pct": null,
+  "duration_months": null,
+  "audience": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+  "eligible_orgs": [
+    "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+  ],
+  "eligible_countries": [
+    "ES"
+  ],
+  "sectores": [
+    {
+      "codigo": "47",
+      "descripcion": "Comercio al por menor"
+    }
+  ],
+  "apply_url": null,
+  "details_url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/916299",
+  "documents": [
+    {
+      "label": "Documento de la convocatoria en español",
+      "url": null
+    },
+    {
+      "label": "Decreto de alcaldia",
+      "url": null
+    },
+    {
+      "label": "Documento de la convocatoria en lengua cooficial",
+      "url": null
+    }
+  ],
+  "bases_reguladoras_url": "http://bop.diba.cat/anunci/3605019/aprovacio-de-les-bases-reguladores-de-les-subvencions-de-la-campanya-de-suport-al-comerc-local-consistent-en-el-sorteig-de-vals-de-compra-bescanviables-en-comercos-i-establiments-de-serveis-locals-versio-en-catala-i-cast",
+  "text_inicio": "el dia siguiente a la publicación en el BOPB",
+  "text_fin": "el 25 de juliol de 2026",
+  "se_publica_diario_oficial": true,
+  "ayuda_estado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectores_productos": [],
+  "anuncios": [],
+  "mrr_flag": false,
+  "fetchedAt": "2026-07-01T04:09:08.688Z"
+}

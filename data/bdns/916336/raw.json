@@ -1,0 +1,64 @@
+{
+  "id": 1117897,
+  "organo": {
+    "nivel1": "AUTONOMICA",
+    "nivel2": "PRINCIPADO DE ASTURIAS",
+    "nivel3": "CONSEJERÍA DE EDUCACIÓN"
+  },
+  "sedeElectronica": null,
+  "codigoBDNS": "916336",
+  "fechaRecepcion": "2026-06-30",
+  "instrumentos": [
+    {
+      "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN "
+    }
+  ],
+  "tipoConvocatoria": "Concurrencia competitiva - canónica",
+  "presupuestoTotal": 75240,
+  "mrr": false,
+  "descripcion": "Subv. a entidades locales para escuelas de música y/o danza y escuales de música tradicional asturiana de titularidad municipal",
+  "descripcionLeng": null,
+  "tiposBeneficiarios": [
+    {
+      "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA"
+    }
+  ],
+  "sectores": [
+    {
+      "descripcion": "Actividades deportivas",
+      "codigo": "93.1"
+    }
+  ],
+  "regiones": [
+    {
+      "descripcion": "ES12 - PRINCIPADO DE ASTURIAS"
+    }
+  ],
+  "descripcionFinalidad": "Educación",
+  "descripcionBasesReguladoras": "Resolución de 25 de septiembre de 2024, de la Consejería de Educación, por la que se aprueban las bases reguladoras para la concesión de subvenciones de la Consejería de Educacion a escuelas de musica y/o danza y escuelas de musica tradicional asturiana",
+  "urlBasesReguladoras": "https://sede.asturias.es/bopa/2024/10/02/2024-08397.pdf",
+  "sePublicaDiarioOficial": true,
+  "abierto": false,
+  "fechaInicioSolicitud": "2026-08-17",
+  "fechaFinSolicitud": "2026-09-18",
+  "textInicio": null,
+  "textFin": null,
+  "ayudaEstado": null,
+  "urlAyudaEstado": null,
+  "fondos": [],
+  "reglamento": null,
+  "objetivos": [],
+  "sectoresProductos": [],
+  "documentos": [
+    {
+      "id": 1484811,
+      "descripcion": "Texto en castellano de la convocatoria",
+      "nombreFic": "Resolucion_Escuelas musica_danza y escuelas musica tradicional 2026.pdf",
+      "long": 307198,
+      "datMod": "2026-06-30",
+      "datPublicacion": "2026-06-30"
+    }
+  ],
+  "anuncios": [],
+  "advertencia": "La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública."
+}

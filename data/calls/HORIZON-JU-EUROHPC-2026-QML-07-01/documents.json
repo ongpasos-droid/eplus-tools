@@ -2,6 +2,13 @@
   {
     "section": "1. Admissibility conditions: Proposal page limit and layout",
     "label": "Annex A",
+    "url": "http://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/horizon/wp-call/2026-2027/wp-15-general-annexes_horizon-2026-2027_en.pdf",
+    "ext": ".pdf",
+    "is_downloadable": true
+  },
+  {
+    "section": "1. Admissibility conditions: Proposal page limit and layout",
+    "label": "Annex A",
     "url": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/horizon/wp-call/2026-2027/wp-15-general-annexes_horizon-2026-2027_en.pdf",
     "ext": ".pdf",
     "is_downloadable": true
@@ -12,6 +19,20 @@
     "url": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/horizon/guidance/programme-guide_horizon_en.pdf",
     "ext": ".pdf",
     "is_downloadable": true
+  },
+  {
+    "section": "3. Other Eligibility Conditions",
+    "label": "list-3rd-country-participation_horizon-euratom_en.pdf",
+    "url": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/common/guidance/list-3rd-country-participation_horizon-euratom_en.pdf",
+    "ext": ".pdf",
+    "is_downloadable": true
+  },
+  {
+    "section": "5a. Evaluation and award: Award criteria, scoring and thresholds",
+    "label": "https://strategic-technologies.europa.eu/about/step-seal_en",
+    "url": "https://strategic-technologies.europa.eu/about/step-seal_en",
+    "ext": "",
+    "is_downloadable": false
   },
   {
     "section": "5b. Evaluation and award: Submission and evaluation processes",
